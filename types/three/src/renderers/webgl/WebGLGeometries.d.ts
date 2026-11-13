@@ -1,8 +1,8 @@
-import { WebGLAttributes } from './WebGLAttributes';
-import { WebGLInfo } from './WebGLInfo';
-import { BufferAttribute } from '../../core/BufferAttribute';
-import { BufferGeometry } from '../../core/BufferGeometry';
-import { Object3D } from '../../core/Object3D';
+import { BufferAttribute } from "../../core/BufferAttribute.js";
+import { BufferGeometry } from "../../core/BufferGeometry.js";
+import { Object3D } from "../../core/Object3D.js";
+import { WebGLAttributes } from "./WebGLAttributes.js";
+import { WebGLInfo } from "./WebGLInfo.js";
 
 export class WebGLGeometries {
     constructor(gl: WebGLRenderingContext, attributes: WebGLAttributes, info: WebGLInfo);
@@ -10,4 +10,5 @@ export class WebGLGeometries {
     get(object: Object3D, geometry: BufferGeometry): BufferGeometry;
     update(geometry: BufferGeometry): void;
     getWireframeAttribute(geometry: BufferGeometry): BufferAttribute;
+    dispose(): void;
 }

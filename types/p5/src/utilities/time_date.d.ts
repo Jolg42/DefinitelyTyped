@@ -1,6 +1,6 @@
 // This file was auto-generated. Please do not edit it.
 
-import * as p5 from '../../index';
+import p5 = require("../../index");
 
 declare module '../../index' {
     interface p5InstanceExtensions {
@@ -30,11 +30,11 @@ declare module '../../index' {
 
         /**
          *   Returns the number of milliseconds (thousandths of
-         *   a second) since starting the program. This
-         *   information is often used for timing events and
-         *   animation sequences.
+         *   a second) since starting the sketch (when setup()
+         *   is called). This information is often used for
+         *   timing events and animation sequences.
          *   @return the number of milliseconds since starting
-         *   the program
+         *   the sketch
          */
         millis(): number;
 

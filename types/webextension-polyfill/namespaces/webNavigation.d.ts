@@ -1,18 +1,12 @@
-/**
- * Namespace: browser.webNavigation
- * Generated from Mozilla sources. Do not manually edit!
- *
- * Use the <code>browser.webNavigation</code> API to receive notifications about the status of navigation requests
- * in-flight.
- * Permissions: "webNavigation"
- *
- * Comments found in source JSON schema files:
- * Copyright (c) 2012 The Chromium Authors. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be
- * found in the LICENSE file.
- */
+//////////////////////////////////////////////////////
+// BEWARE: DO NOT EDIT MANUALLY! Changes will be lost!
+//////////////////////////////////////////////////////
+
 import { Events } from "./events";
 
+/**
+ * Namespace: browser.webNavigation
+ */
 export namespace WebNavigation {
     /**
      * Cause of the navigation. The same transition types as defined in the history API are used.
@@ -43,9 +37,10 @@ export namespace WebNavigation {
      */
     interface GetFrameDetailsType {
         /**
-         * The ID of the tab in which the frame is.
+         * The ID of the tab in which the frame is. Must be specified if documentId is not set.
+         * Optional.
          */
-        tabId: number;
+        tabId?: number;
 
         /**
          * The ID of the process runs the renderer for this tab.
@@ -54,9 +49,17 @@ export namespace WebNavigation {
         processId?: number;
 
         /**
-         * The ID of the frame in the given tab.
+         * The ID of the frame in the given tab. Must be specified if documentId is not set.
+         * Optional.
          */
-        frameId: number;
+        frameId?: number;
+
+        /**
+         * The UUID of the document. If provided, tabId and frameId are optional. If all are provided,
+         * the frame is only returned if all properties match.
+         * Optional.
+         */
+        documentId?: string;
     }
 
     /**
@@ -89,6 +92,17 @@ export namespace WebNavigation {
          * ID of frame that wraps the frame. Set to -1 of no parent frame exists.
          */
         parentFrameId: number;
+
+        /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
     }
 
     /**
@@ -124,6 +138,17 @@ export namespace WebNavigation {
         parentFrameId: number;
 
         /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
          * The URL currently associated with this frame.
          */
         url: string;
@@ -149,6 +174,12 @@ export namespace WebNavigation {
         parentFrameId: number;
 
         /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
          * The time when the browser was about to start the navigation, in milliseconds since the epoch.
          */
         timeStamp: number;
@@ -167,6 +198,27 @@ export namespace WebNavigation {
          * Frame IDs are unique within a tab.
          */
         frameId: number;
+
+        /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
+         * Cause of the navigation.
+         */
+        transitionType: TransitionType;
+
+        /**
+         * A list of transition qualifiers.
+         */
+        transitionQualifiers: TransitionQualifier[];
 
         /**
          * The time when the navigation was committed, in milliseconds since the epoch.
@@ -189,6 +241,17 @@ export namespace WebNavigation {
         frameId: number;
 
         /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
          * The time when the page's DOM was fully constructed, in milliseconds since the epoch.
          */
         timeStamp: number;
@@ -209,6 +272,17 @@ export namespace WebNavigation {
         frameId: number;
 
         /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
          * The time when the document finished loading, in milliseconds since the epoch.
          */
         timeStamp: number;
@@ -227,6 +301,17 @@ export namespace WebNavigation {
          * Frame IDs are unique within a tab.
          */
         frameId: number;
+
+        /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
 
         /**
          * The time when the error occurred, in milliseconds since the epoch.
@@ -281,6 +366,27 @@ export namespace WebNavigation {
         frameId: number;
 
         /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
+         * Cause of the navigation.
+         */
+        transitionType: TransitionType;
+
+        /**
+         * A list of transition qualifiers.
+         */
+        transitionQualifiers: TransitionQualifier[];
+
+        /**
          * The time when the navigation was committed, in milliseconds since the epoch.
          */
         timeStamp: number;
@@ -318,6 +424,27 @@ export namespace WebNavigation {
         frameId: number;
 
         /**
+         * A UUID of the document loaded.
+         */
+        documentId: string;
+
+        /**
+         * A UUID of the parent document owning this frame. This is not set if there is no parent.
+         * Optional.
+         */
+        parentDocumentId?: string;
+
+        /**
+         * Cause of the navigation.
+         */
+        transitionType: TransitionType;
+
+        /**
+         * A list of transition qualifiers.
+         */
+        transitionQualifiers: TransitionQualifier[];
+
+        /**
          * The time when the navigation was committed, in milliseconds since the epoch.
          */
         timeStamp: number;
@@ -326,7 +453,7 @@ export namespace WebNavigation {
     /**
      * Fired when a navigation is about to occur.
      */
-    interface onBeforeNavigateEvent extends Events.Event<(details: OnBeforeNavigateDetailsType) => void> {
+    interface OnBeforeNavigateEvent extends Events.Event<(details: OnBeforeNavigateDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -342,7 +469,7 @@ export namespace WebNavigation {
      * might still be downloading, but at least part of the document has been received from the server and the browser has
      * decided to switch to the new document.
      */
-    interface onCommittedEvent extends Events.Event<(details: OnCommittedDetailsType) => void> {
+    interface OnCommittedEvent extends Events.Event<(details: OnCommittedDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -356,7 +483,7 @@ export namespace WebNavigation {
     /**
      * Fired when the page's DOM is fully constructed, but the referenced resources may not finish loading.
      */
-    interface onDOMContentLoadedEvent extends Events.Event<(details: OnDOMContentLoadedDetailsType) => void> {
+    interface OnDOMContentLoadedEvent extends Events.Event<(details: OnDOMContentLoadedDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -370,7 +497,7 @@ export namespace WebNavigation {
     /**
      * Fired when a document, including the resources it refers to, is completely loaded and initialized.
      */
-    interface onCompletedEvent extends Events.Event<(details: OnCompletedDetailsType) => void> {
+    interface OnCompletedEvent extends Events.Event<(details: OnCompletedDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -385,7 +512,7 @@ export namespace WebNavigation {
      * Fired when an error occurs and the navigation is aborted. This can happen if either a network error occurred,
      * or the user aborted the navigation.
      */
-    interface onErrorOccurredEvent extends Events.Event<(details: OnErrorOccurredDetailsType) => void> {
+    interface OnErrorOccurredEvent extends Events.Event<(details: OnErrorOccurredDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -399,8 +526,9 @@ export namespace WebNavigation {
     /**
      * Fired when a new window, or a new tab in an existing window, is created to host a navigation.
      */
-    interface onCreatedNavigationTargetEvent
-        extends Events.Event<(details: OnCreatedNavigationTargetDetailsType) => void> {
+    interface OnCreatedNavigationTargetEvent
+        extends Events.Event<(details: OnCreatedNavigationTargetDetailsType) => void>
+    {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -414,8 +542,9 @@ export namespace WebNavigation {
     /**
      * Fired when the reference fragment of a frame was updated. All future events for that frame will use the updated URL.
      */
-    interface onReferenceFragmentUpdatedEvent
-        extends Events.Event<(details: OnReferenceFragmentUpdatedDetailsType) => void> {
+    interface OnReferenceFragmentUpdatedEvent
+        extends Events.Event<(details: OnReferenceFragmentUpdatedDetailsType) => void>
+    {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -425,14 +554,14 @@ export namespace WebNavigation {
          */
         addListener(
             callback: (details: OnReferenceFragmentUpdatedDetailsType) => void,
-            filters?: EventUrlFilters
+            filters?: EventUrlFilters,
         ): void;
     }
 
     /**
      * Fired when the frame's history was updated to a new URL. All future events for that frame will use the updated URL.
      */
-    interface onHistoryStateUpdatedEvent extends Events.Event<(details: OnHistoryStateUpdatedDetailsType) => void> {
+    interface OnHistoryStateUpdatedEvent extends Events.Event<(details: OnHistoryStateUpdatedDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
@@ -446,67 +575,65 @@ export namespace WebNavigation {
     interface Static {
         /**
          * Retrieves information about the given frame. A frame refers to an &lt;iframe&gt; or a &lt;frame&gt; of a web page and is
-         * identified by a tab ID and a frame ID.
+         * identified by a tab ID and a frame ID, or by its document ID.
          *
          * @param details Information about the frame to retrieve information about.
          */
-        getFrame(details: GetFrameDetailsType): Promise<GetFrameCallbackDetailsType>;
+        getFrame(details: GetFrameDetailsType): Promise<GetFrameCallbackDetailsType | null>;
 
         /**
          * Retrieves information about all frames of a given tab.
          *
          * @param details Information about the tab to retrieve all frames from.
          */
-        getAllFrames(details: GetAllFramesDetailsType): Promise<GetAllFramesCallbackDetailsItemType[]>;
+        getAllFrames(details: GetAllFramesDetailsType): Promise<GetAllFramesCallbackDetailsItemType[] | null>;
 
         /**
          * Fired when a navigation is about to occur.
          */
-        onBeforeNavigate: onBeforeNavigateEvent;
+        onBeforeNavigate: OnBeforeNavigateEvent;
 
         /**
          * Fired when a navigation is committed. The document (and the resources it refers to, such as images and subframes)
          * might still be downloading, but at least part of the document has been received from the server and the browser has
          * decided to switch to the new document.
          */
-        onCommitted: onCommittedEvent;
+        onCommitted: OnCommittedEvent;
 
         /**
          * Fired when the page's DOM is fully constructed, but the referenced resources may not finish loading.
          */
-        onDOMContentLoaded: onDOMContentLoadedEvent;
+        onDOMContentLoaded: OnDOMContentLoadedEvent;
 
         /**
          * Fired when a document, including the resources it refers to, is completely loaded and initialized.
          */
-        onCompleted: onCompletedEvent;
+        onCompleted: OnCompletedEvent;
 
         /**
          * Fired when an error occurs and the navigation is aborted. This can happen if either a network error occurred,
          * or the user aborted the navigation.
          */
-        onErrorOccurred: onErrorOccurredEvent;
+        onErrorOccurred: OnErrorOccurredEvent;
 
         /**
          * Fired when a new window, or a new tab in an existing window, is created to host a navigation.
          */
-        onCreatedNavigationTarget: onCreatedNavigationTargetEvent;
+        onCreatedNavigationTarget: OnCreatedNavigationTargetEvent;
 
         /**
          * Fired when the reference fragment of a frame was updated. All future events for that frame will use the updated URL.
          */
-        onReferenceFragmentUpdated: onReferenceFragmentUpdatedEvent;
+        onReferenceFragmentUpdated: OnReferenceFragmentUpdatedEvent;
 
         /**
          * Fired when the contents of the tab is replaced by a different (usually previously pre-rendered) tab.
-         *
-         * @param details
          */
         onTabReplaced: Events.Event<(details: OnTabReplacedDetailsType) => void>;
 
         /**
          * Fired when the frame's history was updated to a new URL. All future events for that frame will use the updated URL.
          */
-        onHistoryStateUpdated: onHistoryStateUpdatedEvent;
+        onHistoryStateUpdated: OnHistoryStateUpdatedEvent;
     }
 }

@@ -1,6 +1,6 @@
-import { BufferGeometry } from '../../../src/Three';
+import { BufferGeometry } from "three";
 
 export class SimplifyModifier {
     constructor();
-    modify(geometry: BufferGeometry, count: number): BufferGeometry;
+    modify(geometry: BufferGeometry, count: number): Promise<BufferGeometry>;
 }

@@ -4,11 +4,8 @@ declare class DatabaseSchema {
     constructor(database?: Database);
     private database_;
     private dbType_;
-    private timestampRegExp_;
-    private timestampZoneRegExp_;
     private logger_;
     database: Database;
-    private nativeTypeToDataType_;
     private formatColumnDataTypeDef_;
     private formatColumnDef_;
     private formatTableNamesFilter_;
@@ -134,11 +131,17 @@ declare namespace DatabaseSchema {
         IndexDef,
     };
 }
+declare function registerObserver(observer: import('./DatabaseSchemaObserver')): void;
+declare function deregisterObserver(observer: import('./DatabaseSchemaObserver')): void;
 type Database = import('../database/Database');
 interface TableInfo {
     name: string;
     primaryKey: string[];
     tablespace: string;
+}
+interface ViewInfo {
+    name: string;
+    definition: string;
 }
 interface ColumnInfo {
     name: string;
@@ -171,10 +174,6 @@ interface TriggerInfo {
     actionStatement: string;
     enabled: boolean;
 }
-interface ViewInfo {
-    name: string;
-    definition: string;
-}
 interface ColumnDef {
     name: string;
     dataType: string;
@@ -195,5 +194,3 @@ interface IndexDef {
     tablespace?: string;
     compressed?: boolean;
 }
-declare function registerObserver(observer: import('./DatabaseSchemaObserver')): void;
-declare function deregisterObserver(observer: import('./DatabaseSchemaObserver')): void;

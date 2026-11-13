@@ -1,0 +1,46 @@
+{
+    "private": true,
+    "name": "@types/chrome",
+    "version": "0.3.9999",
+    "nonNpm": "conflict",
+    "nonNpmDescription": "The complete reference to all APIs made available to Chrome Extensions",
+    "projects": [
+        "https://developer.chrome.com/docs/extensions"
+    ],
+    "dependencies": {
+        "@types/har-format": "*"
+    },
+    "devDependencies": {
+        "@types/chrome": "workspace:."
+    },
+    "owners": [
+        {
+            "name": "MatCarlson",
+            "githubUsername": "MatCarlson"
+        },
+        {
+            "name": "Jason Xian",
+            "githubUsername": "JasonXian"
+        },
+        {
+            "name": "userTim",
+            "githubUsername": "usertim"
+        },
+        {
+            "name": "Nicolas Rodriguez",
+            "githubUsername": "nicolas377"
+        },
+        {
+            "name": "Ido Salomon",
+            "githubUsername": "idosal"
+        },
+        {
+            "name": "Federico Brigante",
+            "githubUsername": "fregante"
+        },
+        {
+            "name": "Erwan Jugand",
+            "githubUsername": "erwanjugand"
+        }
+    ]
+}

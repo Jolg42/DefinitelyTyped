@@ -9,7 +9,6 @@ namespace Module {
     declare const options: conventionalChangelogCore.Options;
     declare const parserOpts: conventionalChangelogCore.ParserOptions;
     declare const writerOpts: conventionalChangelogCore.WriterOptions;
-
     // $ExpectType Readable
     conventionalChangelogCore();
     // $ExpectType Readable

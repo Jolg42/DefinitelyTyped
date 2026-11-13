@@ -8,7 +8,7 @@ export interface SQLInsertParams {
 
 declare function prepSQLInsertParams<T extends Record<string, SQLValue>>(
     params: T,
-    columns: Array<{ key: keyof T }>,
+    columns: Array<{ key: keyof T | string }>,
 ): SQLInsertParams;
 
 export default prepSQLInsertParams;

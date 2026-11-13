@@ -1,4 +1,10 @@
-import BaseComponent, { GetInstanceFactory, GetOrCreateInstanceFactory } from './base-component';
+import BaseComponent, { GetInstanceFactory, GetOrCreateInstanceFactory } from "./base-component";
+
+declare global {
+    interface JQuery {
+        toast: Toast.jQueryInterface;
+    }
+}
 
 declare class Toast extends BaseComponent {
     /**
@@ -36,6 +42,11 @@ declare class Toast extends BaseComponent {
      * You have to manually call this method if you made autohide to false.
      */
     hide(): void;
+
+    /**
+     * Returns a boolean according to toast’s visibility state.
+     */
+    isShown(): boolean;
 }
 
 declare namespace Toast {
@@ -43,24 +54,24 @@ declare namespace Toast {
         /**
          * This event fires immediately when the show instance method is called.
          */
-        show = 'show.bs.toast',
+        show = "show.bs.toast",
 
         /**
          * This event is fired when the toast has been made visible to the user.
          */
-        shown = 'shown.bs.toast',
+        shown = "shown.bs.toast",
 
         /**
          * This event is fired immediately when the hide instance method has
          * been called.
          */
-        hide = 'hide.bs.toast',
+        hide = "hide.bs.toast",
 
         /**
          * This event is fired when the toast has finished being hidden from the
          * user.
          */
-        hidden = 'hidden.bs.toast',
+        hidden = "hidden.bs.toast",
     }
 
     interface Options {
@@ -86,7 +97,7 @@ declare namespace Toast {
         delay: number;
     }
 
-    type jQueryInterface = (config?: Partial<Options> | 'show' | 'hide' | 'dispose') => void;
+    type jQueryInterface = (config?: Partial<Options> | "show" | "hide" | "dispose") => JQuery;
 }
 
 export default Toast;

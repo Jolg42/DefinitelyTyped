@@ -1,6 +1,54 @@
 {
     "private": true,
+    "name": "@types/sinon",
+    "version": "22.0.9999",
+    "projects": [
+        "https://sinonjs.org"
+    ],
     "dependencies": {
-        "@sinonjs/fake-timers": "^7.1.0"
-    }
+        "@sinonjs/fake-timers": "^15.4.0"
+    },
+    "devDependencies": {
+        "@types/sinon": "workspace:."
+    },
+    "exports": {
+        ".": {
+            "import": "./index.d.mts",
+            "require": "./index.d.ts"
+        }
+    },
+    "owners": [
+        {
+            "name": "William Sears",
+            "githubUsername": "mrbigdog2u"
+        },
+        {
+            "name": "Nico Jansen",
+            "githubUsername": "nicojs"
+        },
+        {
+            "name": "James Garbutt",
+            "githubUsername": "43081j"
+        },
+        {
+            "name": "Greg Jednaszewski",
+            "githubUsername": "gjednaszewski"
+        },
+        {
+            "name": "John Wood",
+            "githubUsername": "johnjesse"
+        },
+        {
+            "name": "Alec Flett",
+            "githubUsername": "alecf"
+        },
+        {
+            "name": "Simon Schick",
+            "githubUsername": "SimonSchick"
+        },
+        {
+            "name": "Mathias Schreck",
+            "githubUsername": "lo1tuma"
+        }
+    ]
 }

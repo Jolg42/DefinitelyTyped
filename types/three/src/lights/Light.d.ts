@@ -1,69 +1,50 @@
-import { Color } from './../math/Color';
-import { LightShadow } from './LightShadow';
-import { Object3D } from './../core/Object3D';
+import { JSONMeta, Object3D, Object3DJSON } from "../core/Object3D.js";
+import { Color, ColorRepresentation } from "../math/Color.js";
+import AnalyticLightNode from "../nodes/lighting/AnalyticLightNode.js";
 
-// Lights //////////////////////////////////////////////////////////////////////////////////
+export interface LightJSON extends Object3DJSON {
+    color: number;
+    intensity: number;
+}
 
 /**
- * Abstract base class for lights.
+ * Abstract base class for lights - all other light types inherit the
+ * properties and methods described here.
  */
-export class Light extends Object3D {
-    constructor(hex?: number | string, intensity?: number);
-
+export abstract class Light extends Object3D {
     /**
-     * @default 'Light'
+     * Registers the node class that `WebGPURenderer` uses to shade lights of this type.
+     *
+     * @param {AnalyticLightNode.constructor} lightNodeClass - The light node class.
      */
-    type: string;
-
-    color: Color;
-
+    static registerNode<TLight extends Light>(this: {
+        new(...args: any[]): TLight;
+    }, lightNodeClass: {
+        new(light: TLight): AnalyticLightNode<TLight>;
+    }): void;
     /**
+     * Constructs a new light.
+     *
+     * @param {(number|Color|string)} [color=0xffffff] - The light's color.
+     * @param {number} [intensity=1] - The light's strength/intensity.
+     */
+    constructor(color?: ColorRepresentation, intensity?: number);
+    /**
+     * This flag can be used for type testing.
+     *
+     * @default true
+     */
+    readonly isLight: boolean;
+    /**
+     * The light's color.
+     */
+    color: Color;
+    /**
+     * The light's intensity.
+     *
      * @default 1
      */
     intensity: number;
-    readonly isLight: true;
-
-    shadow: LightShadow;
-    /**
-     * @deprecated Use shadow.camera.fov instead.
-     */
-    shadowCameraFov: any;
-    /**
-     * @deprecated Use shadow.camera.left instead.
-     */
-    shadowCameraLeft: any;
-    /**
-     * @deprecated Use shadow.camera.right instead.
-     */
-    shadowCameraRight: any;
-    /**
-     * @deprecated Use shadow.camera.top instead.
-     */
-    shadowCameraTop: any;
-    /**
-     * @deprecated Use shadow.camera.bottom instead.
-     */
-    shadowCameraBottom: any;
-    /**
-     * @deprecated Use shadow.camera.near instead.
-     */
-    shadowCameraNear: any;
-    /**
-     * @deprecated Use shadow.camera.far instead.
-     */
-    shadowCameraFar: any;
-    /**
-     * @deprecated Use shadow.bias instead.
-     */
-    shadowBias: any;
-    /**
-     * @deprecated Use shadow.mapSize.width instead.
-     */
-    shadowMapWidth: any;
-    /**
-     * @deprecated Use shadow.mapSize.height instead.
-     */
-    shadowMapHeight: any;
-
-    dispose(): void;
+    copy(source: Light, recursive?: boolean): this;
+    toJSON(meta?: JSONMeta): LightJSON;
 }

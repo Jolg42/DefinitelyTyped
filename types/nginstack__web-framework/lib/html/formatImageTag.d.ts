@@ -1,14 +1,14 @@
 export = formatImageTag;
 declare function formatImageTag(
     uri: number | string,
-    opt_options?: {
+    options?: {
         style?: string;
         id?: string;
         cssClass?: string;
-        mailObject?: Mail;
-    }
+        mailObject?: Email;
+    },
 ): string;
 declare namespace formatImageTag {
-    export { Mail };
+    export { Email };
 }
-type Mail = import('@nginstack/engine/lib/mail/Mail');
+type Email = import("@nginstack/engine/lib/email/Email");

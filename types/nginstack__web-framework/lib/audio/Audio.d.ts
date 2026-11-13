@@ -1,8 +1,8 @@
 export = Audio;
-declare function Audio(process: any): void;
+declare function Audio(process: Process): void;
 declare class Audio {
-    constructor(process: any);
-    process: any;
+    constructor(process: Process);
+    process: import("../process/Process");
     sources: any[];
     autoplay: boolean;
     preload: string;
@@ -11,6 +11,8 @@ declare class Audio {
     id: string;
     write(): void;
     play(): void;
-    private _formatAudioVariable;
-    private _createId;
 }
+declare namespace Audio {
+    export { Process };
+}
+type Process = import("../process/Process");

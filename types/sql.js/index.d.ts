@@ -1,48 +1,49 @@
-// Type definitions for sql.js 1.4
-// Project: https://github.com/sql-js/sql.js
-// Definitions by: Florian Imdahl <https://github.com/ffflorian>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
-/// <reference types="node" />
 /// <reference types="emscripten" />
 
-export type SqlValue = number | string | Uint8Array | null;
-export type ParamsObject = Record<string, SqlValue>;
-export type ParamsCallback = (obj: ParamsObject) => void;
-export type SqlJsConfig = Partial<EmscriptenModule>;
-export type BindParams = SqlValue[] | ParamsObject | null;
+type SqlValue = number | string | Uint8Array | null;
+type ParamsObject = Record<string, SqlValue>;
+type ParamsCallback = (obj: ParamsObject) => void;
+type SqlJsConfig = Partial<EmscriptenModule>;
+type BindParams = SqlValue[] | ParamsObject | null;
 
-export interface QueryExecResult {
+type UpdateHookOperation = "insert" | "update" | "delete";
+type UpdateHookCallback = (
+    operation: UpdateHookOperation,
+    database: string,
+    table: string,
+    rowId: number,
+) => void;
+
+interface QueryExecResult {
     columns: string[];
     values: SqlValue[][];
 }
 
-export interface StatementIteratorResult {
+interface StatementIteratorResult {
     /** `true` if there are no more available statements */
     done: boolean;
     /** the next available Statement (as returned by `Database.prepare`) */
     value: Statement;
 }
 
-export interface SqlJsStatic {
+interface SqlJsStatic {
     Database: typeof Database;
     Statement: typeof Statement;
 }
 
-export interface InitSqlJsStatic extends Function {
+interface InitSqlJsStatic {
     (config?: SqlJsConfig): Promise<SqlJsStatic>;
     readonly default: this;
 }
 
-export declare class Database {
+declare class Database {
     /**
      * Represents an SQLite database
      * @see [https://sql.js.org/documentation/Database.html#Database](https://sql.js.org/documentation/Database.html#Database)
      *
      * @param data An array of bytes representing an SQLite database file
      */
-    constructor(data?: ArrayLike<number> | Buffer | null);
+    constructor(data?: ArrayLike<number> | null);
 
     /**
      * Close the database, and all associated prepared statements. The
@@ -155,9 +156,39 @@ export declare class Database {
      * `;`). This limitation does not apply to params as an object.
      */
     run(sql: string, params?: BindParams): Database;
+
+    /** Registers an update hook with SQLite.
+     *
+     * Every time a row is changed by whatever means, the callback is called
+     * once with the change (`'insert'`, `'update'` or `'delete'`), the database
+     * name and table name where the change happened and the
+     * [rowid](https://www.sqlite.org/rowidtable.html)
+     * of the row that has been changed.
+     *
+     * The rowid is cast to a plain number. If it exceeds
+     * `Number.MAX_SAFE_INTEGER` (2^53 - 1), an error will be thrown.
+     *
+     * **Important notes:**
+     * - The callback **MUST NOT** modify the database in any way
+     * - Only a single callback can be registered at a time
+     * - Unregister the callback by passing `null`
+     * - Not called for some updates like `ON REPLACE CONFLICT` and `TRUNCATE`
+     *   (a `DELETE FROM` without a `WHERE` clause)
+     *
+     * See SQLite documentation on
+     * [sqlite3_update_hook](https://www.sqlite.org/c3ref/update_hook.html)
+     * for more details
+     *
+     * @param callback
+     * - Callback to be executed when a row changes. Takes the type of change,
+     *   the name of the database, the name of the table, and the row id of the
+     *   changed row.
+     * - Set to `null` to unregister.
+     */
+    updateHook(callback: UpdateHookCallback | null): Database;
 }
 
-export declare class Statement {
+declare class Statement {
     /**
      * Bind values to the parameters, after having reseted the statement. If
      * values is null, do nothing and return true.
@@ -268,13 +299,13 @@ export declare class Statement {
  * object in order to create a statement iterator
  * @see [https://sql.js.org/documentation/StatementIterator.html#StatementIterator](https://sql.js.org/documentation/StatementIterator.html#StatementIterator)
  */
-export declare class StatementIterator implements Iterator<Statement>, Iterable<Statement> {
+declare class StatementIterator implements Iterator<Statement>, Iterable<Statement> {
     [Symbol.iterator](): Iterator<Statement>;
     /**
      * Get any un-executed portions remaining of the original SQL string
      * @see [https://sql.js.org/documentation/StatementIterator.html#["getRemainingSQL"]](https://sql.js.org/documentation/StatementIterator.html#%5B%22getRemainingSQL%22%5D)
      */
-    getRemainingSql(): string;
+    getRemainingSQL(): string;
 
     /**
      * Prepare the next available SQL statement
@@ -283,8 +314,30 @@ export declare class StatementIterator implements Iterator<Statement>, Iterable<
     next(): StatementIteratorResult;
 }
 
-declare global {
-    let SqlJs: InitSqlJsStatic;
+declare namespace initSqlJs {
+    export {
+        BindParams,
+        InitSqlJsStatic,
+        ParamsCallback,
+        ParamsObject,
+        // interfaces
+        QueryExecResult,
+        SqlJsConfig,
+        SqlJsStatic,
+        // types
+        SqlValue,
+        StatementIteratorResult,
+        UpdateHookCallback,
+    };
+
+    // classes
+    type _Database = Database;
+    type _Statement = Statement;
+    type _StatementIterator = StatementIterator;
+    export { _Database as Database, _Statement as Statement, _StatementIterator as StatementIterator };
 }
 
-export default SqlJs;
+declare var initSqlJs: InitSqlJsStatic;
+
+export = initSqlJs;
+export as namespace initSqlJs;

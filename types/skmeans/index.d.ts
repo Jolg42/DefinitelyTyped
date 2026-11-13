@@ -1,16 +1,16 @@
-// Type definitions for skmeans 0.11
-// Project: https://github.com/solzimer/skmeans
-// Definitions by:  Adam Zerella <https://github.com/adamzerella>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+type CentroidValues<TPoint extends number | number[]> = TPoint[] | "kmrand" | "kmpp";
 
-type CentroidValues = number[] | number[][] | 'kmrand' | 'kmpp' | null;
+interface TestResult<TPoint> {
+    idx: number;
+    centroid: TPoint;
+}
 
-interface Data {
+interface DataResult<TPoint extends number | number[]> {
     it: number;
     k: number;
-    centroids: number[] | number[][];
+    centroids: TPoint[];
     idxs: number[];
-    test: (x: number, point?: (x1: number, x2: number) => number) => void;
+    test: (x: TPoint, distance?: (x: TPoint, y: TPoint) => number) => TestResult<TPoint>;
 }
 
 /**
@@ -22,12 +22,12 @@ interface Data {
  * @param iterations Maximum number of iterations. If not provided, it will be set to 10000.
  * @param distance Custom distance function. Takes two points as arguments and returns a scalar number.
  */
-declare function skmeans(
-    data: number[] | number[][],
+declare function skmeans<TPoint extends number | number[]>(
+    data: TPoint[],
     k: number,
-    centroids?: CentroidValues,
+    centroids?: CentroidValues<TPoint> | null,
     iterations?: number | null,
-    distance?: (x: number, y: number) => number
-): Data;
+    distance?: (x: TPoint, y: TPoint) => number | null,
+): DataResult<TPoint>;
 
 export = skmeans;

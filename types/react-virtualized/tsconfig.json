@@ -1,15 +1,11 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "node16",
         "lib": [
             "es6",
             "dom"
         ],
         "jsx": "react",
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
         "noImplicitAny": true,
         "noImplicitThis": true,
         "strictNullChecks": true,
@@ -17,7 +13,7 @@
         "types": [],
         "noEmit": true,
         "forceConsistentCasingInFileNames": true,
-        "target": "es5"
+        "target": "es6"
     },
     "files": [
         "index.d.ts",

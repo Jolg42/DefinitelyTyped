@@ -1,21 +1,17 @@
-import Ember from 'ember';
-
-declare global {
-    interface Function extends Ember.FunctionPrototypeExtensions {}
-}
+import Ember from "ember";
 
 Ember.Object.extend({
-    foo: '',
+    foo: "",
 
-    arr: function () {
+    arr: function() {
         return [];
     }.property(),
 
-    alias: function (this: any) {
-        return this.get('foo');
-    }.property('foo', 'bar.@each.baz'),
+    alias: function(this: any) {
+        return this.get("foo");
+    }.property("foo", "bar.@each.baz"),
 
-    observer: function () {}.observes('foo', 'bar'),
+    observer: function() {}.observes("foo", "bar"),
 
-    on: function () {}.on('foo', 'bar'),
+    on: function() {}.on("foo", "bar"),
 });

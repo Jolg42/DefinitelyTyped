@@ -1,18 +1,9 @@
-// Type definitions for D3JS d3-shape module 3.0
-// Project: https://github.com/d3/d3-shape/, https://d3js.org/d3-shape
-// Definitions by: Tom Wanzek <https://github.com/tomwanzek>
-//                 Alex Ford <https://github.com/gustavderdrache>
-//                 Boris Yankov <https://github.com/borisyankov>
-//                 denisname <https://github.com/denisname>
-//                 Nathan Bierema <https://github.com/Methuselah96>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+// Last module patch version validated against: 3.1.0
 
-// Last module patch version validated against: 3.0.1
-
-import { Path } from 'd3-path';
+import { Path } from "d3-path";
 
 declare global {
-    interface CanvasRenderingContext2D {} // tslint:disable-line no-empty-interface
+    interface CanvasRenderingContext2D {} // eslint-disable-line @typescript-eslint/no-empty-interface
 }
 
 // -----------------------------------------------------------------------------------
@@ -29,7 +20,16 @@ export interface CanvasPath_D3Shape {
     arcTo(x1: number, y1: number, x2: number, y2: number, radius: number): void;
     bezierCurveTo(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number): void;
     closePath(): void;
-    ellipse(x: number, y: number, radiusX: number, radiusY: number, rotation: number, startAngle: number, endAngle: number, anticlockwise?: boolean): void;
+    ellipse(
+        x: number,
+        y: number,
+        radiusX: number,
+        radiusY: number,
+        rotation: number,
+        startAngle: number,
+        endAngle: number,
+        anticlockwise?: boolean,
+    ): void;
     lineTo(x: number, y: number): void;
     moveTo(x: number, y: number): void;
     quadraticCurveTo(cpx: number, cpy: number, x: number, y: number): void;
@@ -317,6 +317,20 @@ export interface Arc<This, Datum> {
      * If context is not specified, returns the current context, which defaults to null.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this arc generator.
+     *
+     * This option only applies when the associated context is null, as when this arc generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 }
 
 /**
@@ -334,7 +348,7 @@ export function arc(): Arc<any, DefaultArcObject>;
  *
  * The generic corresponds to the datum type representing a arc.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function arc<Datum>(): Arc<any, Datum>;
 /**
  * Constructs a new arc generator with the default settings.
@@ -346,7 +360,7 @@ export function arc<Datum>(): Arc<any, Datum>;
  *
  * The second generic corresponds to the datum type representing a arc.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function arc<This, Datum>(): Arc<This, Datum>;
 
 // -----------------------------------------------------------------------------------
@@ -589,7 +603,7 @@ export function pie(): Pie<any, number | { valueOf(): number }>;
  *
  * The generic refers to the data type of an element in the input array passed into the Pie generator.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function pie<Datum>(): Pie<any, Datum>;
 /**
  * Constructs a new pie generator with the default settings.
@@ -601,7 +615,7 @@ export function pie<Datum>(): Pie<any, Datum>;
  *
  * The second generic refers to the data type of an element in the input array passed into the Pie generator.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function pie<This, Datum>(): Pie<This, Datum>;
 
 // -----------------------------------------------------------------------------------
@@ -733,7 +747,7 @@ export interface Line<Datum> {
      *
      * The generic allows to cast the curve factory to a specific type, if known.
      */
-    // tslint:disable-next-line:no-unnecessary-generics
+    // eslint-disable-next-line @definitelytyped/no-unnecessary-generics
     curve<C extends CurveFactory | CurveFactoryLineOnly>(): C;
     /**
      * Sets the curve factory and returns this line generator.
@@ -750,6 +764,20 @@ export interface Line<Datum> {
      * Sets the context and returns this line generator.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this line generator.
+     *
+     * This option only applies when the associated context is null, as when this line generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 }
 
 /**
@@ -764,7 +792,7 @@ export interface Line<Datum> {
  */
 export function line<Datum = [number, number]>(
     x?: number | ((d: Datum, index: number, data: Datum[]) => number),
-    y?: number | ((d: Datum, index: number, data: Datum[]) => number)
+    y?: number | ((d: Datum, index: number, data: Datum[]) => number),
 ): Line<Datum>;
 
 /**
@@ -895,7 +923,7 @@ export interface LineRadial<Datum> {
      *
      * The generic allows to cast the curve factory to a specific type, if known.
      */
-    // tslint:disable-next-line:no-unnecessary-generics
+    // eslint-disable-next-line @definitelytyped/no-unnecessary-generics
     curve<C extends CurveFactory | CurveFactoryLineOnly>(): C;
     /**
      * Sets the curve factory and returns this radial line generator.
@@ -915,6 +943,20 @@ export interface LineRadial<Datum> {
      * Equivalent to line.context.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this radial line generator.
+     *
+     * This option only applies when the associated context is null, as when this radial line generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 }
 
 /**
@@ -932,7 +974,7 @@ export function lineRadial(): LineRadial<[number, number]>;
  *
  * The generic refers to the data type of an element in the input array passed into the radial line generator.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function lineRadial<Datum>(): LineRadial<Datum>;
 
 /**
@@ -947,7 +989,7 @@ export function radialLine(): RadialLine<[number, number]>;
 /**
  * @deprecated Use lineRadial<Datum>()
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function radialLine<Datum>(): RadialLine<Datum>;
 
 // -----------------------------------------------------------------------------------
@@ -1165,7 +1207,7 @@ export interface Area<Datum> {
      *
      * The generic allows to cast the curve factory to a specific type, if known.
      */
-    // tslint:disable-next-line:no-unnecessary-generics
+    // eslint-disable-next-line @definitelytyped/no-unnecessary-generics
     curve<C extends CurveFactory>(): C;
     /**
      * Sets the curve factory and returns this area generator.
@@ -1182,6 +1224,20 @@ export interface Area<Datum> {
      * Sets the context and returns this area generator.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this area generator.
+     *
+     * This option only applies when the associated context is null, as when this area generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 
     /**
      * Returns a new line generator that has this area generator’s current defined accessor, curve and context.
@@ -1220,7 +1276,7 @@ export interface Area<Datum> {
 export function area<Datum = [number, number]>(
     x?: number | ((d: Datum, index: number, data: Datum[]) => number),
     y0?: number | ((d: Datum, index: number, data: Datum[]) => number),
-    y1?: number | ((d: Datum, index: number, data: Datum[]) => number)
+    y1?: number | ((d: Datum, index: number, data: Datum[]) => number),
 ): Area<Datum>;
 
 /**
@@ -1438,7 +1494,7 @@ export interface AreaRadial<Datum> {
      *
      * The generic allows to cast the curve factory to a specific type, if known.
      */
-    // tslint:disable-next-line:no-unnecessary-generics
+    // eslint-disable-next-line @definitelytyped/no-unnecessary-generics
     curve<C extends CurveFactory>(): C;
     /**
      * Sets the curve factory and returns this radial area generator.
@@ -1457,6 +1513,20 @@ export interface AreaRadial<Datum> {
      * Equivalent to line.context.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this radial area generator.
+     *
+     * This option only applies when the associated context is null, as when this radial area generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 
     /**
      * Returns a new radial line generator that has this radial area generator’s current defined accessor, curve and context.
@@ -1498,7 +1568,7 @@ export function areaRadial(): AreaRadial<[number, number]>;
  *
  * The generic refers to the data type of an element in the input array passed into the radial area generator.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function areaRadial<Datum>(): AreaRadial<Datum>;
 
 /**
@@ -1513,7 +1583,7 @@ export function radialArea(): RadialArea<[number, number]>;
 /**
  * @deprecated Use areaRadial<Datum>()
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function radialArea<Datum>(): RadialArea<Datum>;
 
 // -----------------------------------------------------------------------------------
@@ -1931,18 +2001,63 @@ export interface Link<This, LinkDatum, NodeDatum> {
      * Sets the context and returns this link generator.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this link generator.
+     *
+     * This option only applies when the associated context is null, as when this link generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 }
 
 /**
- * Constructs a new default link generator with horizontal tangents, for example, to visualize links in a tree diagram
- * rooted on the left edge of the display.
+ * Returns a new link generator using the specified curve. For example, to visualize links in a tree diagram rooted on the top edge of the display
+ *
+ * With the default settings the link generator accepts a link object conforming to the DefaultLinkObject interface.
+ */
+export function link(curve: CurveFactory): Link<any, DefaultLinkObject, [number, number]>;
+/**
+ * Returns a new link generator using the specified curve. For example, to visualize links in a tree diagram rooted on the top edge of the display
+ *
+ * Important: Ensure that the accessor functions are configured to work with the link and node datum types
+ * specified in the generics.
+ *
+ * The first generic corresponds to the datum type of the link object for which the link is to be generated.
+ *
+ * The second generic corresponds to the datum type of the source/target node contained in the link object.
+ */
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
+export function link<LinkDatum, NodeDatum>(curve: CurveFactory): Link<any, LinkDatum, NodeDatum>;
+/**
+ * Returns a new link generator using the specified curve. For example, to visualize links in a tree diagram rooted on the top edge of the display
+ *
+ * Important: Ensure that the accessor functions are configured to work with the link and node datum types
+ * specified in the generics.
+ *
+ * The first generic corresponds to the type of the "this" context within which the link generator and its accessor functions will be invoked.
+ *
+ * The second generic corresponds to the datum type of the link object for which the link is to be generated.
+ *
+ * The third generic corresponds to the datum type of the source/target node contained in the link object.
+ */
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
+export function link<This, LinkDatum, NodeDatum>(curve: CurveFactory): Link<This, LinkDatum, NodeDatum>;
+
+/**
+ * Shorthand for d3.link with d3.curveBumpX; suitable for visualizing links in a tree diagram rooted on the left edge of the display.
  *
  * With the default settings the link generator accepts a link object conforming to the DefaultLinkObject interface.
  */
 export function linkHorizontal(): Link<any, DefaultLinkObject, [number, number]>;
 /**
- * Constructs a new link generator with horizontal tangents, for example, to visualize links in a tree diagram
- * rooted on the left edge of the display.
+ * Shorthand for d3.link with d3.curveBumpX; suitable for visualizing links in a tree diagram rooted on the left edge of the display.
  *
  * Important: Ensure that the accessor functions are configured to work with the link and node datum types
  * specified in the generics.
@@ -1951,11 +2066,10 @@ export function linkHorizontal(): Link<any, DefaultLinkObject, [number, number]>
  *
  * The second generic corresponds to the datum type of the source/target node contained in the link object.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function linkHorizontal<LinkDatum, NodeDatum>(): Link<any, LinkDatum, NodeDatum>;
 /**
- * Constructs a new link generator with horizontal tangents, for example, to visualize links in a tree diagram
- * rooted on the left edge of the display.
+ * Shorthand for d3.link with d3.curveBumpX; suitable for visualizing links in a tree diagram rooted on the left edge of the display.
  *
  * Important: Ensure that the accessor functions are configured to work with the link and node datum types
  * specified in the generics.
@@ -1966,19 +2080,17 @@ export function linkHorizontal<LinkDatum, NodeDatum>(): Link<any, LinkDatum, Nod
  *
  * The third generic corresponds to the datum type of the source/target node contained in the link object.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function linkHorizontal<This, LinkDatum, NodeDatum>(): Link<This, LinkDatum, NodeDatum>;
 
 /**
- * Constructs a new default link generator with vertical tangents, for example, to visualize links in a tree diagram
- * rooted on the top edge of the display.
+ * Shorthand for d3.link with d3.curveBumpX; suitable for visualizing links in a tree diagram rooted on the left edge of the display.
  *
  * With the default settings the link generator accepts a link object conforming to the DefaultLinkObject interface.
  */
 export function linkVertical(): Link<any, DefaultLinkObject, [number, number]>;
 /**
- * Constructs a new link generator with vertical tangents, for example, to visualize links in a tree diagram
- * rooted on the top edge of the display.
+ * Shorthand for d3.link with d3.curveBumpY; suitable for visualizing links in a tree diagram rooted on the top edge of the display.
  *
  * Important: Ensure that the accessor functions are configured to work with the link and node datum types
  * specified in the generics.
@@ -1987,11 +2099,10 @@ export function linkVertical(): Link<any, DefaultLinkObject, [number, number]>;
  *
  * The second generic corresponds to the datum type of the source/target node contained in the link object.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function linkVertical<LinkDatum, NodeDatum>(): Link<any, LinkDatum, NodeDatum>;
 /**
- * Constructs a new link generator with vertical tangents, for example, to visualize links in a tree diagram
- * rooted on the top edge of the display.
+ * Shorthand for d3.link with d3.curveBumpY; suitable for visualizing links in a tree diagram rooted on the top edge of the display.
  *
  * Important: Ensure that the accessor functions are configured to work with the link and node datum types
  * specified in the generics.
@@ -2002,12 +2113,11 @@ export function linkVertical<LinkDatum, NodeDatum>(): Link<any, LinkDatum, NodeD
  *
  * The third generic corresponds to the datum type of the source/target node contained in the link object.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function linkVertical<This, LinkDatum, NodeDatum>(): Link<This, LinkDatum, NodeDatum>;
 
 /**
- * A link generator for a radial coordinate system. The link shape generates a smooth cubic Bézier curve from a
- * source point to a target point. The tangents of the curve at the start and end are radial.
+ * Shorthand for d3.link with d3.curveBumpY; suitable for visualizing links in a tree diagram rooted on the top edge of the display.
  *
  * The first generic corresponds to the type of the "this" context within which the radial link generator and its accessor functions will be invoked.
  *
@@ -2103,6 +2213,20 @@ export interface LinkRadial<This, LinkDatum, NodeDatum> {
      * Sets the context and returns this link generator.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this radial link generator.
+     *
+     * This option only applies when the associated context is null, as when this radial link generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 }
 
 /**
@@ -2128,7 +2252,7 @@ export function linkRadial(): LinkRadial<any, DefaultLinkObject, [number, number
  *
  * The second generic corresponds to the datum type of the source/target node contained in the link object.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function linkRadial<LinkDatum, NodeDatum>(): LinkRadial<any, LinkDatum, NodeDatum>;
 /**
  * Constructs a new link generator with radial tangents, for example, to visualize links in a tree diagram
@@ -2143,7 +2267,7 @@ export function linkRadial<LinkDatum, NodeDatum>(): LinkRadial<any, LinkDatum, N
  *
  * The third generic corresponds to the datum type of the source/target node contained in the link object.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function linkRadial<This, LinkDatum, NodeDatum>(): LinkRadial<This, LinkDatum, NodeDatum>;
 
 // -----------------------------------------------------------------------------------
@@ -2254,6 +2378,20 @@ export interface Symbol<This, Datum> {
      * Sets the context and returns this symbol generator.
      */
     context(context: CanvasRenderingContext2D | null): this;
+
+    /**
+     * Returns the maximum number of digits after the decimal separator, which defaults to 3.
+     */
+    digits(): number | null;
+    /**
+     * Sets the maximum number of digits after the decimal separator and returns this symbol generator.
+     *
+     * This option only applies when the associated context is null, as when this symbol generator is used
+     * to produce path data.
+     *
+     * @param digits The maximum number of digits after the decimal separator, or null for full precision.
+     */
+    digits(digits: number | null): this;
 }
 
 /**
@@ -2268,7 +2406,7 @@ export interface Symbol<This, Datum> {
  */
 export function symbol<Datum = any>(
     type?: SymbolType | ((this: any, d: Datum, ...args: any[]) => SymbolType),
-    size?: number | ((this: any, d: Datum, ...args: any[]) => number)
+    size?: number | ((this: any, d: Datum, ...args: any[]) => number),
 ): Symbol<any, Datum>;
 
 /**
@@ -2283,49 +2421,95 @@ export function symbol<Datum = any>(
  */
 export function symbol<This, Datum>(
     type?: SymbolType | ((this: This, d: Datum, ...args: any[]) => SymbolType),
-    size?: number | ((this: This, d: Datum, ...args: any[]) => number)
+    size?: number | ((this: This, d: Datum, ...args: any[]) => number),
 ): Symbol<This, Datum>;
 
 /**
- * An array containing the set of all built-in symbol types: circle, cross, diamond, square, star, triangle, and wye.
+ * An array containing a set of symbol types designed for filling: circle, cross, diamond, square, star, triangle, and wye.
  * Useful for constructing the range of an ordinal scale should you wish to use a shape encoding for categorical data.
+ */
+export const symbolsFill: SymbolType[];
+
+/**
+ * An array containing a set of symbol types designed for stroking: circle, plus, x, triangle2, asterisk, square2, and diamond2.
+ * Useful for constructing the range of an ordinal scale should you wish to use a shape encoding for categorical data.
+ */
+export const symbolsStroke: SymbolType[];
+
+/**
+ * @deprecated Use symbolsFill
  */
 export const symbols: SymbolType[];
 
 /**
- * The circle symbol type.
+ * The asterisk symbol type; intended for stroking.
+ */
+export const symbolAsterisk: SymbolType;
+
+/**
+ * The circle symbol type; intended for either filling or stroking.
  */
 export const symbolCircle: SymbolType;
 
 /**
- * The Greek cross symbol type, with arms of equal length.
+ * The Greek cross symbol type, with arms of equal length; intended for filling.
  */
 export const symbolCross: SymbolType;
 
 /**
- * The rhombus symbol type.
+ * The rhombus symbol type; intended for filling.
  */
 export const symbolDiamond: SymbolType;
 
 /**
- * The square symbol type.
+ * The rotated square symbol type; intended for stroking.
+ */
+export const symbolDiamond2: SymbolType;
+
+/**
+ * The plus symbol type; intended for stroking.
+ */
+export const symbolPlus: SymbolType;
+
+/**
+ * The square symbol type; intended for filling.
  */
 export const symbolSquare: SymbolType;
 
 /**
- * The pentagonal star (pentagram) symbol type.
+ * The square2 symbol type; intended for stroking.
+ */
+export const symbolSquare2: SymbolType;
+
+/**
+ * The pentagonal star (pentagram) symbol type; intended for filling.
  */
 export const symbolStar: SymbolType;
 
 /**
- * The up-pointing triangle symbol type.
+ * The up-pointing triangle symbol type; intended for filling.
  */
 export const symbolTriangle: SymbolType;
 
 /**
- * The Y-shape symbol type.
+ * The up-pointing triangle symbol type; intended for stroking.
+ */
+export const symbolTriangle2: SymbolType;
+
+/**
+ * The Y-shape symbol type; intended for filling.
  */
 export const symbolWye: SymbolType;
+
+/**
+ * The X-shape symbol type; intended for stroking.
+ */
+export const symbolX: SymbolType;
+
+/**
+ * The X-shape symbol type; intended for stroking.
+ */
+export const symbolTimes: SymbolType;
 
 // -----------------------------------------------------------------------------------
 // pointRadial
@@ -2467,7 +2651,7 @@ export interface Stack<This, Datum, Key> {
     /**
      * Returns the current offset accessor, which defaults to stackOffsetNone; this uses a zero baseline.
      */
-    offset(): (series: Series<Datum, Key>, order: number[]) => void;
+    offset(): (series: Series<Datum, Key>[], order: number[]) => void;
     /**
      * Reset the offset to use stackOffsetNone; this uses a zero baseline.
      *
@@ -2480,7 +2664,7 @@ export interface Stack<This, Datum, Key> {
      * @param offset A function which is passed the generated series array and the order index array;
      *               it is then responsible for updating the lower and upper values in the series array.
      */
-    offset(offset: (series: Series<Datum, Key>, order: number[]) => void): this;
+    offset(offset: (series: Series<Datum, Key>[], order: number[]) => void): this;
 }
 
 /**
@@ -2496,7 +2680,7 @@ export function stack(): Stack<any, { [key: string]: number }, string>;
  *
  * The generic corresponds to the data type of an element in the data array passed into the stack generator.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function stack<Datum>(): Stack<any, Datum, string>;
 /**
  * Constructs a new stack generator with the default settings.
@@ -2507,7 +2691,7 @@ export function stack<Datum>(): Stack<any, Datum, string>;
  *
  * The second generic corresponds to the data type of key used to identify a series.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function stack<Datum, Key>(): Stack<any, Datum, Key>;
 /**
  * Constructs a new stack generator with the default settings.
@@ -2520,7 +2704,7 @@ export function stack<Datum, Key>(): Stack<any, Datum, Key>;
  *
  * The third generic corresponds to the data type of key used to identify a series.
  */
-// tslint:disable-next-line:no-unnecessary-generics
+// eslint-disable-next-line @definitelytyped/no-unnecessary-generics
 export function stack<This, Datum, Key>(): Stack<This, Datum, Key>;
 
 /**
@@ -2569,40 +2753,40 @@ export function stackOrderReverse(series: Series<any, any>): number[];
 /**
  * Applies a zero baseline and normalizes the values for each point such that the topline is always one.
  *
- * @param series A series generated by a stack generator.
+ * @param series A series array generated by a stack generator.
  * @param order An array of numeric indexes representing the stack order.
  */
-export function stackOffsetExpand(series: Series<any, any>, order: Iterable<number>): void;
+export function stackOffsetExpand(series: Series<any, any>[], order: Iterable<number>): void;
 
 /**
  * Positive values are stacked above zero, while negative values are stacked below zero.
  *
- * @param series A series generated by a stack generator.
+ * @param series A series array generated by a stack generator.
  * @param order An array of numeric indexes representing the stack order.
  */
-export function stackOffsetDiverging(series: Series<any, any>, order: Iterable<number>): void;
+export function stackOffsetDiverging(series: Series<any, any>[], order: Iterable<number>): void;
 
 /**
  * Applies a zero baseline.
  *
- * @param series A series generated by a stack generator.
+ * @param series A series array generated by a stack generator.
  * @param order An array of numeric indexes representing the stack order.
  */
-export function stackOffsetNone(series: Series<any, any>, order: Iterable<number>): void;
+export function stackOffsetNone(series: Series<any, any>[], order: Iterable<number>): void;
 
 /**
  * Shifts the baseline down such that the center of the streamgraph is always at zero.
  *
- * @param series A series generated by a stack generator.
+ * @param series A series array generated by a stack generator.
  * @param order An array of numeric indexes representing the stack order.
  */
-export function stackOffsetSilhouette(series: Series<any, any>, order: Iterable<number>): void;
+export function stackOffsetSilhouette(series: Series<any, any>[], order: Iterable<number>): void;
 
 /**
  * Shifts the baseline so as to minimize the weighted wiggle of layers. This offset is recommended for streamgraphs in conjunction with the inside-out order.
  * See Stacked Graphs—Geometry & Aesthetics by Bryon & Wattenberg for more information.
  *
- * @param series A series generated by a stack generator.
+ * @param series A series array generated by a stack generator.
  * @param order An array of numeric indexes representing the stack order.
  */
-export function stackOffsetWiggle(series: Series<any, any>, order: Iterable<number>): void;
+export function stackOffsetWiggle(series: Series<any, any>[], order: Iterable<number>): void;

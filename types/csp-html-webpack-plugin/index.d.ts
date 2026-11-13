@@ -1,24 +1,19 @@
-// Type definitions for csp-html-webpack-plugin 3.0
-// Project: https://github.com/slackhq/csp-html-webpack-plugin
-// Definitions by: Porama Ruengrairatanaroj <https://github.com/Seally>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.7
-
-import { Compiler as WebpackCompiler } from 'webpack';
-import { AsyncSeriesWaterfallHook } from 'tapable';
-import HtmlWebpackPlugin = require('html-webpack-plugin');
+import { CheerioAPI } from "cheerio";
+import { AsyncSeriesWaterfallHook } from "tapable";
+import { compilation, Compiler as WebpackCompiler } from "webpack";
+import HtmlWebpackPlugin = require("html-webpack-plugin");
 
 export = CspHtmlWebpackPlugin;
 
 declare class CspHtmlWebpackPlugin {
     /**
      * Setup for our plugin
-     * @param policy - the policy object
-     * @param additionalOpts - additional config options
+     * @param policy a flat object which defines your CSP policy. Valid keys and values can be found on the [MDN CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy) page. Values can either be a string, or an array of strings.
+     * @param additionalOpts a flat object with the optional configuration options
      */
     constructor(
         policy?: CspHtmlWebpackPlugin.Policy,
-        additionalOpts?: CspHtmlWebpackPlugin.AdditionalOptions
+        additionalOpts?: CspHtmlWebpackPlugin.AdditionalOptions,
     );
 
     apply(compiler: WebpackCompiler): void;
@@ -44,11 +39,7 @@ declare namespace CspHtmlWebpackPlugin {
         [directive: string]: string | string[];
     }
 
-    // HtmlWebpackPlugin v3 and v4 use different hook interfaces. Figure out
-    // which we're using and infer the generic type variable inside.
-    type HtmlPluginData
-        = HtmlWebpackPlugin.Hooks extends HtmlPluginDataHookV3<infer T> ? T
-        : HtmlWebpackPlugin.Hooks extends HtmlPluginDataHookV4<infer U> ? U
+    type HtmlPluginData = HtmlWebpackPlugin.Hooks extends HtmlPluginDataHookV4<infer U> ? U
         : any; // Fallback when nothing works.
 
     /**
@@ -84,7 +75,7 @@ declare namespace CspHtmlWebpackPlugin {
          * The hashing method. Your node version must also accept this hashing
          * method.
          */
-        hashingMethod?: 'sha256' | 'sha384' | 'sha512' | undefined;
+        hashingMethod?: "sha256" | "sha384" | "sha512" | undefined;
         /**
          * A `<string, boolean>` entry for which policy rules are allowed to
          * include hashes.
@@ -95,21 +86,31 @@ declare namespace CspHtmlWebpackPlugin {
          * include nonces.
          */
         nonceEnabled?: { [directive: string]: boolean } | undefined;
+        /**
+         * Allows the developer to overwrite the default method of what happens to the CSP after it has been created.
+         *
+         * @param builtPolicy A string containing the completed policy
+         * @param htmlPluginData The `HtmlWebpackPlugin` object
+         * @param $ The `cheerio` object of the html file currently being processed
+         * @param compilation Internal webpack object to manipulate the build
+         */
+        processFn?(
+            builtPolicy: string,
+            htmlPluginData: HtmlPluginData,
+            $: CheerioAPI,
+            compilation: compilation.Compilation,
+        ): void;
     }
 }
 
-declare module 'html-webpack-plugin' {
+declare module "html-webpack-plugin" {
     interface Options {
-        cspPlugin?: CspHtmlWebpackPlugin.AdditionalOptions & {
-            policy?: CspHtmlWebpackPlugin.Policy | undefined
-        } | undefined;
+        cspPlugin?:
+            | CspHtmlWebpackPlugin.AdditionalOptions & {
+                policy?: CspHtmlWebpackPlugin.Policy | undefined;
+            }
+            | undefined;
     }
-}
-
-// Helpers for extracting the relevant generic types from
-// HtmlWebpackPlugin.Hooks.
-interface HtmlPluginDataHookV3<T> {
-    htmlWebpackPluginAfterHtmlProcessing: AsyncSeriesWaterfallHook<T>;
 }
 
 interface HtmlPluginDataHookV4<T> {

@@ -1,97 +1,124 @@
-import * as Plotly from 'plotly.js/lib/core';
-import { Datum, ScatterData, Layout, newPlot, PlotData, ViolinData, CandlestickData, PieData } from 'plotly.js/lib/core';
+import * as Plotly from "plotly.js/lib/core";
+import {
+    CandlestickData,
+    Datum,
+    Layout,
+    newPlot,
+    PieData,
+    PlotData,
+    SankeyData,
+    ScatterData,
+    ViolinData,
+} from "plotly.js/lib/core";
 
-const graphDiv = '#test';
+const graphDiv = "#test";
+const trace1 = {
+    x: [1999, 2000, 2001, 2002],
+    y: [10, 15, 13, 17],
+    customdata: [1, 2, 3],
+    type: "scatter",
+} as ScatterData;
+const trace2 = {
+    x: [1999, 2000, 2001, 2002],
+    y: [16, 5, 11, 9],
+    customdata: [
+        [1, "a"],
+        [2, "b"],
+        [3, "c"],
+    ],
+    type: "scatter",
+} as ScatterData;
+const trace3 = {
+    x0: 1999,
+    dx: 1,
+    y0: 0,
+    dy: 5,
+    z: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12]],
+    type: "heatmap",
+} as PlotData;
+const data = [trace1, trace2, trace3];
+const tickangle: "auto" = "auto";
+const layout = {
+    title: {
+        text: "Sales Growth",
+        subtitle: "Annual sales growth between 1999 and 2002",
+    },
+    xaxis: {
+        title: {
+            text: "Year",
+        },
+        showgrid: false,
+        zeroline: false,
+        tickangle,
+        scaleanchor: false,
+    },
+    yaxis: {
+        title: {
+            text: "Percent",
+        },
+        showline: false,
+    },
+    uirevision: "true",
+    datarevision: 0,
+    editrevision: 0,
+    selectionrevision: 0,
+    hoversubplots: "overlaying",
+} satisfies Partial<Layout>;
 
 //////////////////////////////////////////////////////////////////////
 // Plotly.newPlot
 (() => {
-    const trace1 = {
-        x: [1999, 2000, 2001, 2002],
-        y: [10, 15, 13, 17],
-        customdata: [1, 2, 3],
-        type: 'scatter',
-    } as ScatterData;
-    const trace2 = {
-        x: [1999, 2000, 2001, 2002],
-        y: [16, 5, 11, 9],
-        customdata: [
-            [1, 'a'],
-            [2, 'b'],
-            [3, 'c'],
-        ],
-        type: 'scatter',
-    } as ScatterData;
-    const data = [trace1, trace2];
-    const tickangle: "auto" = "auto";
-    const layout = {
-        title: 'Sales Growth',
-        xaxis: {
-            title: 'Year',
-            showgrid: false,
-            zeroline: false,
-            tickangle
-        },
-        yaxis: {
-            title: 'Percent',
-            showline: false,
-        },
-        uirevision: 'true',
-        datarevision: 0,
-        editrevision: 0,
-        selectionrevision: 0
-    };
     Plotly.newPlot(graphDiv, data, layout);
 
     const violinTrace = {
-        name: 'Values',
-        type: 'violin',
+        name: "Values",
+        type: "violin",
         y: [10, 15, 13, 17],
-        points: 'all',
+        points: "all",
         pointpos: -1,
         marker: { opacity: 0.6 },
         box: {
             visible: true,
-            fillcolor: 'yellow',
+            fillcolor: "yellow",
         },
-        line: { color: 'black' },
+        line: { color: "black" },
         opacity: 0.6,
         meanline: { visible: true },
     } as ViolinData;
-    Plotly.newPlot(graphDiv, [violinTrace], { title: 'Sales growth' });
+    Plotly.newPlot(graphDiv, [violinTrace], { title: { text: "Sales growth" } });
 
     const candlestickTrace: Partial<CandlestickData> = {
         x: [
-            '2017-01-04',
-            '2017-01-05',
-            '2017-01-06',
-            '2017-01-09',
-            '2017-01-10',
-            '2017-01-11',
-            '2017-01-12',
-            '2017-01-13',
-            '2017-01-17',
-            '2017-01-18',
-            '2017-01-19',
-            '2017-01-20',
-            '2017-01-23',
-            '2017-01-24',
-            '2017-01-25',
-            '2017-01-26',
-            '2017-01-27',
-            '2017-01-30',
-            '2017-01-31',
-            '2017-02-01',
-            '2017-02-02',
-            '2017-02-03',
-            '2017-02-06',
-            '2017-02-07',
-            '2017-02-08',
-            '2017-02-09',
-            '2017-02-10',
-            '2017-02-13',
-            '2017-02-14',
-            '2017-02-15',
+            "2017-01-04",
+            "2017-01-05",
+            "2017-01-06",
+            "2017-01-09",
+            "2017-01-10",
+            "2017-01-11",
+            "2017-01-12",
+            "2017-01-13",
+            "2017-01-17",
+            "2017-01-18",
+            "2017-01-19",
+            "2017-01-20",
+            "2017-01-23",
+            "2017-01-24",
+            "2017-01-25",
+            "2017-01-26",
+            "2017-01-27",
+            "2017-01-30",
+            "2017-01-31",
+            "2017-02-01",
+            "2017-02-02",
+            "2017-02-03",
+            "2017-02-06",
+            "2017-02-07",
+            "2017-02-08",
+            "2017-02-09",
+            "2017-02-10",
+            "2017-02-13",
+            "2017-02-14",
+            "2017-02-15",
         ],
         close: [
             116.019997,
@@ -127,7 +154,7 @@ const graphDiv = '#test';
         ],
         decreasing: {
             line: {
-                color: '#7F7F7F',
+                color: "#7F7F7F",
             },
         },
         high: [
@@ -164,7 +191,7 @@ const graphDiv = '#test';
         ],
         increasing: {
             line: {
-                color: '#17BECF',
+                color: "#17BECF",
             },
         },
         low: [
@@ -231,10 +258,42 @@ const graphDiv = '#test';
             133.470001,
             135.520004,
         ],
-        type: 'candlestick',
-        xaxis: 'x',
+        type: "candlestick",
+        xaxis: "x",
     };
-    Plotly.newPlot(graphDiv, [candlestickTrace], { title: 'Stock price' });
+    Plotly.newPlot(graphDiv, [candlestickTrace], { title: { text: "Stock price" } });
+})();
+(() => {
+    const data: Array<Partial<SankeyData>> = [
+        {
+            type: "sankey",
+            orientation: "h",
+            node: {
+                pad: 15,
+                thickness: 30,
+                line: {
+                    color: "black",
+                    width: 0.5,
+                },
+                label: ["A1", "A2", "B1", "B2", "C1", "C2"],
+                color: ["blue", "blue", "blue", "blue", "blue", "blue"],
+            },
+            link: {
+                source: [0, 1, 0, 2, 3, 3],
+                target: [2, 3, 3, 4, 4, 5],
+                value: [8, 4, 2, 8, 4, 2],
+            },
+        },
+    ];
+    const layout = {
+        title: {
+            text: "Basic Sankey",
+        },
+        font: {
+            size: 10,
+        },
+    };
+    Plotly.newPlot(graphDiv, data, layout);
 })();
 (() => {
     // deprecated: calling plot again will add new trace(s) to the plot,
@@ -243,10 +302,10 @@ const graphDiv = '#test';
         {
             x: [1999, 2000, 2001, 2002],
             y: [10, 9, 8, 7],
-            type: 'scatter',
+            type: "scatter",
         } as ScatterData,
     ];
-    const layout2 = { title: 'Revenue' };
+    const layout2 = { title: { text: "Revenue" } };
     Plotly.newPlot(graphDiv, data2, layout2);
 })();
 
@@ -255,9 +314,9 @@ const graphDiv = '#test';
     const data: Array<Partial<PieData>> = [
         {
             values: [19, 26, 55],
-            labels: ['Residential', 'Non-Residential', 'Utility'],
-            type: 'pie',
-            direction: 'counterclockwise',
+            labels: ["Residential", "Non-Residential", "Utility"],
+            type: "pie",
+            direction: "counterclockwise",
         },
     ];
     const layout = {
@@ -268,7 +327,7 @@ const graphDiv = '#test';
 })();
 
 (() => {
-    const allLabels = ['1st', '2nd', '3rd', '4th', '5th'];
+    const allLabels = ["1st", "2nd", "3rd", "4th", "5th"];
 
     const allValues = [
         [38, 27, 18, 10, 7],
@@ -278,18 +337,18 @@ const graphDiv = '#test';
     ];
 
     const ultimateColors = [
-        ['rgb(56, 75, 126)', 'rgb(18, 36, 37)', 'rgb(34, 53, 101)', 'rgb(36, 55, 57)', 'rgb(6, 4, 4)'],
-        ['rgb(177, 127, 38)', 'rgb(205, 152, 36)', 'rgb(99, 79, 37)', 'rgb(129, 180, 179)', 'rgb(124, 103, 37)'],
-        ['rgb(33, 75, 99)', 'rgb(79, 129, 102)', 'rgb(151, 179, 100)', 'rgb(175, 49, 35)', 'rgb(36, 73, 147)'],
-        ['rgb(146, 123, 21)', 'rgb(177, 180, 34)', 'rgb(206, 206, 40)', 'rgb(175, 51, 21)', 'rgb(35, 36, 21)'],
+        ["rgb(56, 75, 126)", "rgb(18, 36, 37)", "rgb(34, 53, 101)", "rgb(36, 55, 57)", "rgb(6, 4, 4)"],
+        ["rgb(177, 127, 38)", "rgb(205, 152, 36)", "rgb(99, 79, 37)", "rgb(129, 180, 179)", "rgb(124, 103, 37)"],
+        ["rgb(33, 75, 99)", "rgb(79, 129, 102)", "rgb(151, 179, 100)", "rgb(175, 49, 35)", "rgb(36, 73, 147)"],
+        ["rgb(146, 123, 21)", "rgb(177, 180, 34)", "rgb(206, 206, 40)", "rgb(175, 51, 21)", "rgb(35, 36, 21)"],
     ];
 
     const data: Array<Partial<PieData>> = [
         {
             values: allValues[0],
             labels: allLabels,
-            type: 'pie',
-            name: 'Starry Night',
+            type: "pie",
+            name: "Starry Night",
             marker: {
                 colors: ultimateColors[0],
             },
@@ -297,14 +356,14 @@ const graphDiv = '#test';
                 row: 0,
                 column: 0,
             },
-            hoverinfo: 'label+percent+name',
-            textinfo: 'none',
+            hoverinfo: "label+percent+name",
+            textinfo: "none",
         },
         {
             values: allValues[1],
             labels: allLabels,
-            type: 'pie',
-            name: 'Sunflowers',
+            type: "pie",
+            name: "Sunflowers",
             marker: {
                 colors: ultimateColors[1],
             },
@@ -312,14 +371,14 @@ const graphDiv = '#test';
                 row: 1,
                 column: 0,
             },
-            hoverinfo: 'label+percent+name',
-            textinfo: 'none',
+            hoverinfo: "label+percent+name",
+            textinfo: "none",
         },
         {
             values: allValues[2],
             labels: allLabels,
-            type: 'pie',
-            name: 'Irises',
+            type: "pie",
+            name: "Irises",
             marker: {
                 colors: ultimateColors[2],
             },
@@ -327,14 +386,14 @@ const graphDiv = '#test';
                 row: 0,
                 column: 1,
             },
-            hoverinfo: 'label+percent+name',
-            textinfo: 'none',
+            hoverinfo: "label+percent+name",
+            textinfo: "none",
         },
         {
             values: allValues[3],
             labels: allLabels,
-            type: 'pie',
-            name: 'The Night Cafe',
+            type: "pie",
+            name: "The Night Cafe",
             marker: {
                 colors: ultimateColors[3],
             },
@@ -342,15 +401,15 @@ const graphDiv = '#test';
                 x: [0.52, 1],
                 y: [0, 0.48],
             },
-            hoverinfo: 'label+percent+name',
-            textinfo: 'none',
-        }
+            hoverinfo: "label+percent+name",
+            textinfo: "none",
+        },
     ];
 
     const layout = {
         height: 400,
         width: 500,
-        grid: {rows: 2, columns: 2},
+        grid: { rows: 2, columns: 2 },
     };
 
     Plotly.newPlot(graphDiv, data, layout);
@@ -360,35 +419,37 @@ const graphDiv = '#test';
     const data: Array<Partial<PieData>> = [
         {
             values: [16, 15, 12, 6, 5, 4, 42],
-            labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World'],
-            domain: {column: 0},
-            name: 'GHG Emissions',
-            hoverinfo: 'label+percent+name',
-            hole: .4,
-            type: 'pie',
+            labels: ["US", "China", "European Union", "Russian Federation", "Brazil", "India", "Rest of World"],
+            domain: { column: 0 },
+            name: "GHG Emissions",
+            hoverinfo: "label+percent+name",
+            hole: 0.4,
+            type: "pie",
         },
         {
             values: [27, 11, 25, 8, 1, 3, 25],
-            labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World'],
-            text: 'CO2',
-            textposition: 'inside',
-            domain: {column: 1},
-            name: 'CO2 Emissions',
-            hoverinfo: 'label+percent+name',
-            hole: .4,
-            type: 'pie',
-        }
+            labels: ["US", "China", "European Union", "Russian Federation", "Brazil", "India", "Rest of World"],
+            text: "CO2",
+            textposition: "inside",
+            domain: { column: 1 },
+            name: "CO2 Emissions",
+            hoverinfo: "label+percent+name",
+            hole: 0.4,
+            type: "pie",
+        },
     ];
 
     const layout = {
-        title: 'Global Emissions 1990-2011',
+        title: {
+            text: "Global Emissions 1990-2011",
+        },
         annotations: [
             {
                 font: {
                     size: 20,
                 },
                 showarrow: false,
-                text: 'GHG',
+                text: "GHG",
                 x: 0.17,
                 y: 0.5,
             },
@@ -397,7 +458,7 @@ const graphDiv = '#test';
                     size: 20,
                 },
                 showarrow: false,
-                text: 'CO2',
+                text: "CO2",
                 x: 0.82,
                 y: 0.5,
             },
@@ -405,47 +466,118 @@ const graphDiv = '#test';
         height: 400,
         width: 600,
         showlegend: false,
-        grid: {rows: 1, columns: 2},
+        grid: { rows: 1, columns: 2 },
+        griddash: "solid",
     };
 
-    Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot("myDiv", data, layout);
 })();
 
 (() => {
-    const data: Array<Partial<PieData>> = [{
-        type: "pie",
-        values: [2, 3, 4, 4],
-        labels: ["Wages", "Operating expenses", "Cost of sales", "Insurance"],
-        textinfo: "label+percent",
-        textposition: "outside",
-        automargin: true,
-    }];
+    const data: Array<Partial<PieData>> = [
+        {
+            type: "pie",
+            values: [2, 3, 4, 4],
+            labels: ["Wages", "Operating expenses", "Cost of sales", "Insurance"],
+            textinfo: "label+percent",
+            textposition: "outside",
+            automargin: true,
+        },
+    ];
 
     const layout = {
         height: 400,
         width: 400,
-        margin: {t: 0, b: 0, l: 0, r: 0},
+        margin: { t: 0, b: 0, l: 0, r: 0 },
         showlegend: false,
     };
 
-    Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot("myDiv", data, layout);
 })();
 
 (() => {
-    const data: Array<Partial<PieData>> = [{
-        type: "pie",
-        values: [2, 3, 4, 4],
-        labels: ["Wages", "Operating expenses", "Cost of sales", "Insurance"],
-        textinfo: "label+percent",
-        insidetextorientation: "radial",
-    }];
+    const data: Array<Partial<PieData>> = [
+        {
+            type: "pie",
+            values: [2, 3, 4, 4],
+            labels: ["Wages", "Operating expenses", "Cost of sales", "Insurance"],
+            textinfo: "label+percent",
+            insidetextorientation: "radial",
+        },
+    ];
 
     const layout = {
         height: 700,
         width: 700,
     };
 
-    Plotly.newPlot('myDiv', data, layout);
+    Plotly.newPlot("myDiv", data, layout);
+})();
+
+(() => {
+    const data: Array<Partial<PlotData>> = [
+        {
+            type: "treemap",
+            labels: ["Eve", "Cain", "Seth", "Enos", "Noam", "Abel", "Awan", "Enoch", "Azura"],
+            parents: ["", "Eve", "Eve", "Seth", "Seth", "Eve", "Eve", "Awan", "Eve"],
+            maxdepth: 1,
+        },
+    ];
+
+    const layout = {
+        height: 700,
+        width: 700,
+    };
+
+    Plotly.newPlot("myDiv", data, layout);
+})();
+
+// Plotly.newPlot (second axis)
+(() => {
+    const data: Array<Partial<PlotData>> = [
+        {
+            x: [1, 2, 3, 4, 5],
+            y: [0.45803057, 0.51208141, 0.29845217, 0.09788102, 0.2866858],
+            type: "scatter",
+            yaxis: "y",
+            fill: "none",
+            fillcolor: "#000000",
+            fillpattern: {
+                shape: ["+", "-"],
+                path: "",
+                fillmode: "replace",
+                bgcolor: ["#ffffff"],
+                fgcolor: ["#ff0000"],
+                fgopacity: 0.5,
+                size: 1,
+                solidity: [0, 0.5],
+            },
+        },
+        {
+            x: [1, 2, 3, 4, 5],
+            y: [150.36977661, 641.21444452, 39.2096064, 546.90053751, 97.10039431],
+            type: "scatter",
+            yaxis: "y2",
+            fill: "none",
+            fillcolor: "#000000",
+            fillpattern: {
+                shape: ["+", "-"],
+                path: "",
+                fillmode: "replace",
+                bgcolor: ["#ffffff"],
+                fgcolor: ["#ff0000"],
+                fgopacity: 0.5,
+                size: 1,
+                solidity: [0, 0.5],
+            },
+        },
+    ];
+    const layout: Partial<Layout> = {
+        yaxis: { side: "left" },
+        yaxis2: { side: "right", overlaying: "y", tickmode: "sync" },
+    };
+
+    Plotly.newPlot("myDiv", data, layout);
 })();
 //////////////////////////////////////////////////////////////////////
 
@@ -455,7 +587,7 @@ const graphDiv = '#test';
 (() => {
     const update = {
         opacity: 0.4,
-        'marker.color': 'red',
+        "marker.color": "red",
     };
     Plotly.restyle(graphDiv, update, 0);
 })();
@@ -464,14 +596,14 @@ const graphDiv = '#test';
 (() => {
     const update = {
         opacity: 0.4,
-        'marker.color': 'red',
+        "marker.color": "red",
     };
     Plotly.restyle(graphDiv, update);
 })();
 // restyle the first trace's marker color 'red' and the second's 'green'
 (() => {
     const update = {
-        'marker.color': ['red', 'green'],
+        "marker.color": ["red", "green"],
     };
     Plotly.restyle(graphDiv, update, [0, 1]);
 })();
@@ -479,7 +611,7 @@ const graphDiv = '#test';
 // alternate between red and green for all traces (note omission of traces)
 (() => {
     const update = {
-        'marker.color': ['red', 'green'],
+        "marker.color": ["red", "green"],
     };
     Plotly.restyle(graphDiv, update);
 })();
@@ -488,7 +620,7 @@ const graphDiv = '#test';
 (() => {
     const update = {
         opacity: 0.4,
-        'marker.color': 'red',
+        "marker.color": "red",
     };
     Plotly.restyle(graphDiv, update, [1, 2]);
 })();
@@ -497,7 +629,7 @@ const graphDiv = '#test';
 // have different colors
 (() => {
     const update = {
-        'marker.color': [['red', 'green']],
+        "marker.color": [["red", "green"]],
     };
     Plotly.restyle(graphDiv, update, [0]);
 })();
@@ -524,7 +656,7 @@ const graphDiv = '#test';
 // replace the entire marker object with the one provided
 (() => {
     const update = {
-        marker: { color: 'red' },
+        marker: { color: "red" },
     };
     Plotly.restyle(graphDiv, update, [0]);
 })();
@@ -534,7 +666,7 @@ const graphDiv = '#test';
     Plotly.restyle(
         graphDiv,
         {
-            'line.color': ['red', null, undefined],
+            "line.color": ["red", null, undefined],
         },
         [0, 1, 2],
     );
@@ -546,19 +678,23 @@ const graphDiv = '#test';
 // update only values within nested objects
 (() => {
     const update: Partial<Layout> = {
-        title: 'some new title', // updates the title
-        'xaxis.range': [0, 5], // updates the xaxis range
-        'yaxis.range[1]': 15, // updates the end of the yaxis range
+        title: { // updates the title
+            text: "some new title",
+        },
+        "xaxis.range": [0, 5], // updates the xaxis range
+        "yaxis.range[1]": 15, // updates the end of the yaxis range
     };
     Plotly.relayout(graphDiv, update);
 })();
 
 (() => {
     const data_update = {
-        marker: { color: 'red' },
+        marker: { color: "red" },
     };
     const layout_update = {
-        title: 'some new title', // updates the title
+        title: { // updates the title
+            text: "some new title",
+        },
     };
     Plotly.update(graphDiv, data_update, layout_update);
 })();
@@ -568,13 +704,15 @@ const graphDiv = '#test';
 // Plotly.update
 (() => {
     const data_update: Partial<PlotData> = {
-        marker: { color: 'red' },
-        type: 'bar',
+        marker: { color: "red" },
+        type: "bar",
     };
     const layout_update: Partial<Layout> = {
-        title: 'some new title', // updates the title
-        barmode: 'stack',
-        barnorm: 'fraction',
+        title: { // updates the title
+            text: "some new title",
+        },
+        barmode: "stack",
+        barnorm: "fraction",
         bargap: 0,
         bargroupgap: 0,
     };
@@ -663,18 +801,38 @@ function rand() {
 (() => {
     // Plotly.toImage will turn the plot in the given div into a data URL string
     // toImage takes the div as the first argument and an object specifying image properties as the other
-    Plotly.toImage(graphDiv, { format: 'png', width: 800, height: 600 }).then(dataUrl => {
-        // use the dataUrl
+    // No option
+    Plotly.toImage(graphDiv);
+    // Empty option
+    Plotly.toImage(graphDiv, {});
+    // Option with format, width, and height
+    Plotly.toImage(graphDiv, { format: "png", width: 800, height: 600 });
+    // Options with null dimensions
+    Plotly.toImage(graphDiv, { format: "png", width: null, height: null, scale: 2 });
+    // Full option
+    Plotly.toImage(graphDiv, {
+        format: "png",
+        width: 800,
+        height: 600,
+        scale: 2,
+        imageDataOnly: false,
+        setBackground: "opaque",
+    }).then(dataUrl => {
+        // dataUrl.startsWith("data:image/png;base64,"); // use the dataUrl
+    });
+    // Option for JSON export
+    Plotly.toImage(graphDiv, { format: "full-json", imageDataOnly: true }).then(dataUrl => {
+        // JSON.parse(dataUrl); // use the dataUrl
     });
 })();
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
-// Plotly.toImage + scale parameter
+// Plotly.toImage raw data input
 (() => {
-    // Plotly.toImage will turn the plot in the given div into a data URL string
-    // toImage takes the div as the first argument and an object specifying image properties as the other
-    Plotly.toImage(graphDiv, { format: 'png', width: 800, height: 600, scale: 2 }).then(dataUrl => {
+    // Plotly.toImage will turn the plot data into a data URL string
+    // toImage takes the data as the first argument and an object specifying image properties as the other
+    Plotly.toImage({ data, layout }, { format: "png", width: 800, height: 600, scale: 2 }).then(dataUrl => {
         // use the dataUrl
     });
 })();
@@ -684,7 +842,25 @@ function rand() {
 // Plotly.downloadImage
 (() => {
     // downloadImage will accept the div as the first argument and an object specifying image properties as the other
-    Plotly.downloadImage(graphDiv, { format: 'png', width: 800, height: 600, filename: 'newplot' });
+    // No option
+    Plotly.downloadImage(graphDiv);
+    // Empty option
+    Plotly.downloadImage(graphDiv, {});
+    // Option with format, width, height, and filename
+    Plotly.downloadImage(graphDiv, { format: "png", width: 800, height: 600, filename: "newplot" });
+    // Option with null dimensions
+    Plotly.downloadImage(graphDiv, { format: "png", width: null, height: null, filename: "newplot" });
+    // Full option
+    Plotly.downloadImage(graphDiv, {
+        format: "png",
+        width: 800,
+        height: 600,
+        filename: "newplot",
+        scale: 2,
+        setBackground: "opaque",
+    });
+    // Option for JSON export
+    Plotly.downloadImage(graphDiv, { format: "full-json" });
 })();
 //////////////////////////////////////////////////////////////////////
 
@@ -693,9 +869,9 @@ function rand() {
 (() => {
     const n = 100;
     const frames = [
-        { name: 'sine', data: [{ x: new Array<number>(100), y: new Array<number>(n) }] },
-        { name: 'cosine', data: [{ x: new Array<number>(100), y: new Array<number>(n) }] },
-        { name: 'circle', data: [{ x: new Array<number>(100), y: new Array<number>(n) }] },
+        { name: "sine", data: [{ x: new Array<number>(100), y: new Array<number>(n) }] },
+        { name: "cosine", data: [{ x: new Array<number>(100), y: new Array<number>(n) }] },
+        { name: "circle", data: [{ x: new Array<number>(100), y: new Array<number>(n) }] },
     ];
 
     for (let i = 0; i < n; i++) {
@@ -720,16 +896,61 @@ function rand() {
 //////////////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////////////
+// Plotly.validate
+(() => {
+    const validateResult = Plotly.validate(data, layout);
+    for (let res of validateResult) {
+        console.log(res.code, res.msg);
+    }
+})();
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Plotly.setPlotConfig
+(() => {
+    Plotly.setPlotConfig({
+        locale: "en",
+        logging: 1,
+    });
+})();
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Plotly.makeTemplate with div ID
+(() => {
+    Plotly.makeTemplate(graphDiv);
+})();
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Plotly.makeTemplate with {data, layout}
+(() => {
+    Plotly.makeTemplate({ data: data, layout: layout });
+})();
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Plotly.validateTemplate
+(() => {
+    const tmpl = Plotly.makeTemplate({ data: data, layout: layout });
+    const validateResult = Plotly.validateTemplate(graphDiv, tmpl);
+    for (const res of validateResult) {
+        console.log(res.code, res.msg);
+    }
+})();
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
 // Using events
 (async () => {
     const myPlot = await newPlot(graphDiv, [
         {
             x: [1999, 2000, 2001, 2002],
             y: [10, 9, 8, 7],
-            type: 'scatter',
+            type: "scatter",
         },
     ]);
-    myPlot.on('plotly_click', data => {
+    myPlot.on("plotly_click", data => {
         let pn = 0;
         let tn = 0;
         let colors = [] as string[];
@@ -738,13 +959,13 @@ function rand() {
             tn = pt.curveNumber;
             colors = pt.data.marker.color as string[];
         }
-        colors[pn] = '#C54C82';
+        colors[pn] = "#C54C82";
 
         const update = { marker: { color: colors, size: 16 } };
-        Plotly.restyle('myDiv', update, [tn]);
+        Plotly.restyle("myDiv", update, [tn]);
     });
 
-    myPlot.on('plotly_hover', data => {
+    myPlot.on("plotly_hover", data => {
         let pn = 0;
         let tn = 0;
         let colors = [] as string[];
@@ -753,13 +974,13 @@ function rand() {
             tn = pt.curveNumber;
             colors = pt.data.marker.color as string[];
         }
-        colors[pn] = '#C54C82';
+        colors[pn] = "#C54C82";
 
         const update = { marker: { color: colors, size: 16 } };
-        Plotly.restyle('myDiv', update, [tn]);
+        Plotly.restyle("myDiv", update, [tn]);
     });
 
-    myPlot.on('plotly_unhover', data => {
+    myPlot.on("plotly_unhover", data => {
         let pn = 0;
         let tn = 0;
         let colors = [] as string[];
@@ -768,18 +989,18 @@ function rand() {
             tn = pt.curveNumber;
             colors = pt.data.marker.color as string[];
         }
-        colors[pn] = '#00000';
+        colors[pn] = "#00000";
 
         const update = { marker: { color: colors, size: 16 } };
-        Plotly.restyle('myDiv', update, [tn]);
+        Plotly.restyle("myDiv", update, [tn]);
     });
 
-    myPlot.on('plotly_selected', data => {
+    myPlot.on("plotly_selected", data => {
         const x = [] as Datum[];
         const y = [] as Datum[];
         const N = 1000;
-        const color1 = '#7b3294';
-        const color1Light = '#c2a5cf';
+        const color1 = "#7b3294";
+        const color1Light = "#c2a5cf";
 
         const colors = [] as string[];
         for (let i = 0; i < N; i++) colors.push(color1Light);
@@ -801,86 +1022,86 @@ function rand() {
         Plotly.restyle(
             myPlot,
             {
-                'marker.color': [colors],
+                "marker.color": [colors],
             },
             [0],
         );
     });
 
-    myPlot.on('plotly_restyle', data => {
-        console.log('restyling');
+    myPlot.on("plotly_restyle", data => {
+        console.log("restyling");
     });
 
-    myPlot.on('plotly_doubleclick', () => {
-        const orgColors = ['#00000', '#00000', '#00000', '#00000', '#00000', '#00000'];
+    myPlot.on("plotly_doubleclick", () => {
+        const orgColors = ["#00000", "#00000", "#00000", "#00000", "#00000", "#00000"];
         const update = { marker: { color: orgColors, size: 16 } };
-        Plotly.restyle('myDiv', update);
+        Plotly.restyle("myDiv", update);
     });
 
-    myPlot.on('plotly_beforeplot', event => {
-        console.log('plotting');
+    myPlot.on("plotly_beforeplot", event => {
+        console.log("plotting");
         const okToPlot = true;
         return okToPlot;
     });
 
-    myPlot.on('plotly_afterplot', () => {
-        console.log('done plotting');
+    myPlot.on("plotly_afterplot", () => {
+        console.log("done plotting");
     });
 
-    myPlot.on('plotly_animatingframe', event => {
+    myPlot.on("plotly_animatingframe", event => {
         console.log(`animating ${event.frame.name} with ${event.animation.transition.easing}`);
     });
 
-    myPlot.on('plotly_legendclick', event => {
-        console.log('clicked on legend');
+    myPlot.on("plotly_legendclick", event => {
+        console.log("clicked on legend");
         const clickVal = true;
         return clickVal;
     });
 
-    myPlot.on('plotly_legenddoubleclick', event => {
-        console.log('dbl clicked on legend');
+    myPlot.on("plotly_legenddoubleclick", event => {
+        console.log("dbl clicked on legend");
         const dblClickVal = true;
         return dblClickVal;
     });
 
-    myPlot.on('plotly_sliderchange', event => {
+    myPlot.on("plotly_sliderchange", event => {
         console.log(`Slider at [${event.slider.x},${event.slider.y} with ${event.step.method}`);
     });
 
-    myPlot.on('plotly_sliderstart', event => {
+    myPlot.on("plotly_sliderstart", event => {
         console.log(`Slider at [${event.slider.x},${event.slider.y}`);
     });
 
-    myPlot.on('plotly_sliderend', event => {
+    myPlot.on("plotly_sliderend", event => {
         console.log(`Slider at [${event.slider.x},${event.slider.y} with ${event.step.method}`);
     });
 
-    myPlot.on('plotly_beforeexport', () => {
-        console.log('starting export');
+    myPlot.on("plotly_beforeexport", () => {
+        console.log("starting export");
     });
 
-    myPlot.on('plotly_afterexport', () => {
-        console.log('done exporting');
+    myPlot.on("plotly_afterexport", () => {
+        console.log("done exporting");
     });
 
-    myPlot.on('plotly_animated', () => {
-        console.log('done animation');
+    myPlot.on("plotly_animated", () => {
+        console.log("done animation");
     });
 
-    myPlot.on('plotly_animationinterrupted', () => {
-        console.log('animation interrupted');
+    myPlot.on("plotly_animationinterrupted", () => {
+        console.log("animation interrupted");
     });
 
-    myPlot.on('plotly_framework', () => {
-        console.log('framework');
+    myPlot.on("plotly_framework", () => {
+        console.log("framework");
     });
 
-    myPlot.on('plotly_transitioning', () => {
-        console.log('starting transition');
+    myPlot.on("plotly_transitioning", () => {
+        console.log("starting transition");
     });
 
-    myPlot.on('plotly_transitioninterrupted', () => {
-        console.log('transition interrupted');
+    myPlot.on("plotly_transitioninterrupted", () => {
+        console.log("transition interrupted");
     });
 })();
 //////////////////////////////////////////////////////////////////////

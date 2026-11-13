@@ -1,27 +1,35 @@
 export = Label;
-declare function Label(process: any): void;
+declare function Label(process: Process): void;
 declare class Label {
-    constructor(process: any);
-    private _changedProperties;
-    process: any;
+    constructor(process: Process);
+    layout: LayoutConfig;
+    private changedProperties_;
+    process: import("../process/Process");
     private logger_;
-    private _changed;
+    private changed_;
     private written_;
     private toString;
-    private getChanges;
+    private getChanges_;
     private _clearChangedProperties;
     private resetProperties;
     name: string;
     width: string;
     height: string;
     fontSize: string;
+    size: string;
     border: string;
     color: string;
     backgroundColor: string;
     align: string;
     visible: boolean;
     css: string;
+    cssClass: string;
     text: string;
     autoSanitize: boolean;
     write(): void;
 }
+declare namespace Label {
+    export { Process };
+}
+import LayoutConfig = require("../process/LayoutConfig.js");
+type Process = import("../process/Process");

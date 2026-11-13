@@ -1,11 +1,9 @@
-// Type definitions for react-native-side-menu 1.1
-// Project: https://github.com/react-native-community/react-native-side-menu#readme
-// Definitions by: Jules Samuel Randolph <https://github.com/jsamr>
-//                 Matt Pawley <https://github.com/toughdeveloper>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
+import { Component, ReactNode } from "react";
+import { Animated, GestureResponderEvent, PanResponderGestureState, ViewStyle } from "react-native";
 
-import { ReactNode, Component } from 'react';
-import { GestureResponderEvent, PanResponderGestureState, Animated, ViewStyle } from 'react-native';
+// Removed from react-native's bundled type exports; matches the shape Animated
+// timing/spring callbacks receive.
+export type EndCallback = (result: { finished: boolean }) => void;
 
 export interface ReactNativeSideMenuProps {
     /**
@@ -62,13 +60,13 @@ export interface ReactNativeSideMenuProps {
     /**
      * @default left
      */
-    menuPosition?: 'left' | 'right' | undefined;
+    menuPosition?: "left" | "right" | undefined;
     animationFunction?: ((prop: Animated.Value, value: number) => Animated.CompositeAnimation) | undefined;
     animationStyle?: ((value: number) => ViewStyle) | undefined;
     /**
      * Callback when menu animation has completed.
      */
-    onAnimationComplete?: ((event: Animated.EndCallback) => void) | undefined;
+    onAnimationComplete?: ((event: EndCallback) => void) | undefined;
     /**
      * When true, content view will bounce back to openMenuOffset when dragged further
      * @default true

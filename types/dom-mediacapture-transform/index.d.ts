@@ -1,9 +1,3 @@
-// Type definitions for non-npm package MediaStreamTrack Insertable Media Processing using Streams 0.1
-// Project: https://w3c.github.io/mediacapture-transform/
-// Definitions by: Ben Wagner <https://github.com/dogben>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// Minimum TypeScript Version: 3.9
-
 // In general, these types are only available behind a command line flag or an origin trial in
 // Chrome 90+.
 
@@ -41,21 +35,28 @@ interface MediaStream {
  * A track sink that is capable of exposing the unencoded frames from the track to a
  * ReadableStream, and exposes a control channel for signals going in the oppposite direction.
  */
-interface MediaStreamTrackProcessor<T extends AudioFrame | VideoFrame> {
+interface MediaStreamTrackProcessor<T extends AudioData | VideoFrame> {
     /**
      * Allows reading the frames flowing through the MediaStreamTrack provided to the constructor.
      */
     readonly readable: ReadableStream<T>;
     /** Allows sending control signals to the MediaStreamTrack provided to the constructor. */
     readonly writableControl: WritableStream<MediaStreamTrackSignal>;
+    /** The number of frames discarded by this MediaStreamTrackProcessor. */
+    readonly discardedFrames: number;
+    /**
+     * The number of frames received by this MediaStreamTrackProcessor including
+     * discarded frames.
+     */
+    readonly totalFrames: number;
 }
 
 declare var MediaStreamTrackProcessor: {
     prototype: MediaStreamTrackProcessor<any>;
 
     /** Constructor overrides based on the type of track. */
-    new (init: MediaStreamTrackProcessorInit & { track: MediaStreamAudioTrack }): MediaStreamTrackProcessor<AudioFrame>;
-    new (init: MediaStreamTrackProcessorInit & { track: MediaStreamVideoTrack }): MediaStreamTrackProcessor<VideoFrame>;
+    new(init: MediaStreamTrackProcessorInit & { track: MediaStreamAudioTrack }): MediaStreamTrackProcessor<AudioData>;
+    new(init: MediaStreamTrackProcessorInit & { track: MediaStreamVideoTrack }): MediaStreamTrackProcessor<VideoFrame>;
 };
 
 interface MediaStreamTrackProcessorInit {
@@ -72,7 +73,7 @@ interface MediaStreamTrackProcessorInit {
 /**
  * Takes video frames as input, and emits control signals that result from subsequent processing.
  */
-interface MediaStreamTrackGenerator<T extends AudioFrame | VideoFrame> extends MediaStreamTrack {
+interface MediaStreamTrackGenerator<T extends AudioData | VideoFrame> extends MediaStreamTrack {
     /**
      * Allows writing media frames to the MediaStreamTrackGenerator, which is itself a
      * MediaStreamTrack. When a frame is written to writable, the frame’s close() method is
@@ -87,15 +88,19 @@ interface MediaStreamTrackGenerator<T extends AudioFrame | VideoFrame> extends M
     readonly readableControl: ReadableStream<MediaStreamTrackSignal>;
 }
 
-type MediaStreamAudioTrackGenerator = MediaStreamTrackGenerator<AudioFrame> & MediaStreamAudioTrack;
+type MediaStreamAudioTrackGenerator = MediaStreamTrackGenerator<AudioData> & MediaStreamAudioTrack;
 type MediaStreamVideoTrackGenerator = MediaStreamTrackGenerator<VideoFrame> & MediaStreamVideoTrack;
 
 declare var MediaStreamTrackGenerator: {
     prototype: MediaStreamTrackGenerator<any>;
 
     /** Constructor overrides based on the type of track. */
-    new (init: MediaStreamTrackGeneratorInit & { kind: "audio", signalTarget?: MediaStreamAudioTrack | undefined }): MediaStreamAudioTrackGenerator;
-    new (init: MediaStreamTrackGeneratorInit & { kind: "video", signalTarget?: MediaStreamVideoTrack | undefined }): MediaStreamVideoTrackGenerator;
+    new(
+        init: MediaStreamTrackGeneratorInit & { kind: "audio"; signalTarget?: MediaStreamAudioTrack | undefined },
+    ): MediaStreamAudioTrackGenerator;
+    new(
+        init: MediaStreamTrackGeneratorInit & { kind: "video"; signalTarget?: MediaStreamVideoTrack | undefined },
+    ): MediaStreamVideoTrackGenerator;
 };
 
 interface MediaStreamTrackGeneratorInit {

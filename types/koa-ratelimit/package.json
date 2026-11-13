@@ -1,0 +1,26 @@
+{
+    "private": true,
+    "name": "@types/koa-ratelimit",
+    "version": "6.0.9999",
+    "projects": [
+        "https://github.com/koajs/ratelimit#readme"
+    ],
+    "dependencies": {
+        "ioredis": "^5.6.1",
+        "@types/koa": "*",
+        "@types/node": "*"
+    },
+    "devDependencies": {
+        "@types/koa-ratelimit": "workspace:."
+    },
+    "owners": [
+        {
+            "name": "Ben Watkins",
+            "githubUsername": "OutdatedVersion"
+        },
+        {
+            "name": "Patrick Muff",
+            "githubUsername": "dislick"
+        }
+    ]
+}

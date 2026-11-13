@@ -1,4 +1,4 @@
-import { Loader, LoadingManager, Material, Object3D } from '../../../src/Three';
+import { Loader, LoadingManager, Material, Object3D } from "three";
 
 export interface LWO {
     materials: Material[];
@@ -12,15 +12,14 @@ export interface LWOLoaderParameters {
     resourcePath?: string;
 }
 
-export class LWOLoader extends Loader {
+/**
+ * @deprecated The loader has been deprecated and will be removed with r195. Export your LWO files to glTF before using them on the web.
+ */
+export class LWOLoader extends Loader<LWO> {
+    /**
+     * @deprecated The loader has been deprecated and will be removed with r195. Export your LWO files to glTF before using them on the web.
+     */
     constructor(manager?: LoadingManager, parameters?: LWOLoaderParameters);
 
-    load(
-        url: string,
-        onLoad: (lwo: LWO) => void,
-        onProgress?: (event: ProgressEvent) => void,
-        onError?: (event: ErrorEvent) => void,
-    ): void;
-    loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<LWO>;
     parse(data: ArrayBuffer, path: string, modelName: string): LWO;
 }

@@ -41,6 +41,7 @@ declare class Classes {
     formatToMessage(classKey: number): string;
     hasCachedData(classKey: number): boolean;
     getLevel(classKey: number): number;
+    getAncestors(classKey: number): number[];
     checkClassPath(classKey: number): void;
     getOrphans(): number[];
     getTabularHierarchy(
@@ -52,9 +53,12 @@ declare class Classes {
         }
     ): DataSet;
     getCommonAncestor(classA: number, classB: number): number;
-    getRemoteChildren(classKey: number, database: any): string;
+    getRemoteChildren(classKey: number, database: Database): string;
+    hasChildren(classKey: number): boolean;
 }
 declare namespace Classes {
-    function getInstance(): Classes;
+    export { getInstance, Database };
 }
 import DataSet = require('../dataset/DataSet.js');
+declare function getInstance(): Classes;
+type Database = import('./Database');

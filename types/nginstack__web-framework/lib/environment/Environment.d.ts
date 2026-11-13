@@ -1,18 +1,19 @@
 export = Environment;
 declare function Environment(): void;
 declare class Environment {
-    private _ctrlChannel;
-    alert(message: string): any;
+    private ctrlChannel_;
+    sessionToken: string;
+    exiting: boolean;
     prompt(
         label: string,
-        options: any[],
-        opt_verticalAlign?: boolean,
-        opt_defaultOptionIndex?: number,
-        opt_escapeIndex?: number
+        answers: any[][],
+        options: import("../process/Process.js").PromptOptions,
     ): any;
-    confirm(msg: string, opt_negativeDefaultAnswer?: boolean): boolean;
-    exiting: boolean;
+    confirm(message: string, noAsDefault?: boolean): boolean;
+    alert(message: string): void;
     exit(uri?: string): void;
+    lockScreen(): boolean;
+    restrictSystemAccess: any;
 }
 declare namespace Environment {
     function getInstance(): Environment;

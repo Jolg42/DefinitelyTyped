@@ -1,3 +1,6 @@
+export interface TransposeMdiv {
+    [xmlId: string]: string;
+}
 export interface EngravingDefaults {
     arrowShaftThickness: number;
     barlineSeparation: number;
@@ -34,14 +37,14 @@ export interface VerovioOptions {
      **********************/
 
     /**
-     * Select input format from: "abc", "darms", "humdrum", "mei", "pae", "xml" (musicxml)
+     * Select input format from: "abc", "cmme.xml", "darms", "esac", "humdrum", "mei", "pae", "volpiano", "xml" (musicxml), "musicxml-hum" (musicxml via humdrum)
      *
      * default: "mei"
      */
     inputFrom?: string;
 
     /**
-     * (int) Scale of the output in percent
+     * (int) Scale of the output in percent (100 is normal size)
      *
      * default: 100
      *
@@ -56,15 +59,15 @@ export interface VerovioOptions {
      *
      * default: 0
      *
-     * max: 0
+     * max: 2147483647
      *
      * min: 0
      */
     xmlIdSeed?: number;
 
-    /*********************************
-     * Input and page layout options *
-     *********************************/
+    /****************************************
+     * Input and page configuration options *
+     ****************************************/
 
     /**
      * Adjust the page height to the height of the content
@@ -113,6 +116,13 @@ export interface VerovioOptions {
     condenseFirstPage?: boolean;
 
     /**
+     * When condensing a score never condense the last system
+     *
+     * default: false
+     */
+    condenseNotLastSystem?: boolean;
+
+    /**
      * When condensing a score also condense pages with a tempo change
      *
      * default: false
@@ -120,7 +130,7 @@ export interface VerovioOptions {
     condenseTempoPages?: boolean;
 
     /**
-     * Specify the linear spacing factor
+     * Align notes and rests without adding duration based space
      *
      * default: false
      */
@@ -155,6 +165,13 @@ export interface VerovioOptions {
     humType?: boolean;
 
     /**
+     * Read <incip> elements as data input
+     *
+     * default: false
+     */
+    incip?: boolean;
+
+    /**
      * Justify spacing vertically to fill the page
      *
      * default: false
@@ -162,25 +179,11 @@ export interface VerovioOptions {
     justifyVertically?: boolean;
 
     /**
-     * The landscape paper orientation flag
+     * Swap the values for page height and page width
      *
      * default: false
      */
     landscape?: boolean;
-
-    /**
-     * Render ligatures as bracket instead of original notation
-     *
-     * default: false
-     */
-    ligatureAsBracket?: boolean;
-
-    /**
-     * Convert mensural sections to measure-based MEI
-     *
-     * default: false
-     */
-    mensuralToMeasure?: boolean;
 
     /**
      * (double) The last system is only justified if the unjustified width is greater than this percent
@@ -199,6 +202,20 @@ export interface VerovioOptions {
      * default: false
      */
     mmOutput?: boolean;
+
+    /**
+     * Move score definition (clef, keySig, meterSig, etc.) from scoreDef to staffDef
+     *
+     * default: false
+     */
+    moveScoreDefinitionToStaff?: boolean;
+
+    /**
+     * Render neumes as note heads instead of original notation
+     *
+     * default: false
+     */
+    neumeAsNote?: boolean;
 
     /**
      * Do not justify the system
@@ -306,11 +323,18 @@ export interface VerovioOptions {
      *
      * default: 2100
      *
-     * max: 60000
+     * max: 100000
      *
      * min: 100
      */
     pageWidth?: number;
+
+    /**
+     * The global pedal style
+     *
+     * default: "auto"
+     */
+    pedalStyle?: "auto" | "line" | "pedstar" | "altpedstar";
 
     /**
      * Preserves the analytical markup in MEI
@@ -327,11 +351,53 @@ export interface VerovioOptions {
     removeIds?: boolean;
 
     /**
+     * Scale the content within the page instead of scaling the page itself
+     *
+     * default: false
+     */
+    scaleToPageSize?: boolean;
+
+    /**
+     * Changes the global locale to C (this is not thread-safe)
+     *
+     * default: false
+     */
+    setLocale?: boolean;
+
+    /**
+     * Display the total runtime on command-line
+     *
+     * default: false
+     */
+    showRuntime?: boolean;
+
+    /**
      * Scale down page content to fit the page height if needed
      *
      * default: false
      */
     shrinkToFit?: boolean;
+
+    /**
+     * Specify if the smufl text font is embedded, linked, or ignored
+     *
+     * default: "embedded"
+     */
+    smuflTextFont?: "embedded" | "linked" | "none";
+
+    /**
+     * Align staccato and staccatissimo articulations with center of the note
+     *
+     * default: false
+     */
+    staccatoCenter?: boolean;
+
+    /**
+     * Add additional attribute for graphical elements in SVG as "data-*", for example, "note@pname" would add a "data-pname" to all note elements
+     *
+     * default: []
+     */
+    svgAdditionalAttribute?: string[];
 
     /**
      * Include bounding boxes in SVG output
@@ -341,21 +407,28 @@ export interface VerovioOptions {
     svgBoundingBoxes?: boolean;
 
     /**
-     * Writes SVG out with no line indenting or non-content newlines.
+     * CSS (as a string) to be added to the SVG output
+     *
+     * default: ""
+     */
+    svgCss?: string;
+
+    /**
+     * Writes SVG out with no line indenting or non-content newlines
      *
      * default: false
      */
     svgFormatRaw?: boolean;
 
     /**
-     * Write data-id and data-class attributes for JS usage and id clash avoidance.
+     * Write data-id and data-class attributes for JS usage and id clash avoidance
      *
      * default: false
      */
     svgHtml5?: boolean;
 
     /**
-     * Removes the xlink: prefix on href attributes for compatibility with some newer browsers.
+     * Removes the xlink: prefix on href attributes for compatibility with some newer browsers
      *
      * default: false
      */
@@ -369,13 +442,13 @@ export interface VerovioOptions {
     svgViewBox?: boolean;
 
     /**
-     * (int) The MEI unit (1⁄2 of the distance between the staff lines)
+     * (double) The MEI unit (1⁄2 of the distance between the staff lines)
      *
      * default: 9
      *
-     * max: 20
+     * max: 12
      *
-     * min: 6
+     * min: 4.5
      */
     unit?: number;
 
@@ -407,6 +480,13 @@ export interface VerovioOptions {
      */
     usePgHeaderForAll?: boolean;
 
+    /**
+     * Seed the generator for XML IDs using the checksum of the input data
+     *
+     * default: false
+     */
+    xmlIdChecksum?: boolean;
+
     /**************************
      * General layout options *
      **************************/
@@ -423,7 +503,7 @@ export interface VerovioOptions {
     barLineSeparation?: number;
 
     /**
-     * (double) The barLine width
+     * (double) The barline width
      *
      * default: 0.3
      *
@@ -434,26 +514,40 @@ export interface VerovioOptions {
     barLineWidth?: number;
 
     /**
+     * For notes in beams, stems will stop at first outermost sub-beam without crossing it
+     *
+     * default: false
+     */
+    beamFrenchStyle?: boolean;
+
+    /**
      * (int) The maximum beam slope
      *
      * default: 10
      *
      * max: 20
      *
-     * min: 1
+     * min: 0
      */
     beamMaxSlope?: number;
 
     /**
-     * (int) The minimum beam slope
+     * Mixed beams will be drawn even if there is not enough space
      *
-     * default: 0
-     *
-     * max: 0
-     *
-     * min: 0
+     * default: false
      */
-    beamMinSlope?: number;
+    beamMixedPreserve?: boolean;
+
+    /**
+     * (double) The minimal stem length in MEI units used to draw mixed beams
+     *
+     * default: 3.5
+     *
+     * max: 8
+     *
+     * min: 1
+     */
+    beamMixedStemMin?: number;
 
     /**
      * (double) The thickness of the system bracket
@@ -474,15 +568,26 @@ export interface VerovioOptions {
     breaksNoWidow?: boolean;
 
     /**
-     * (double) Set the ratio of normal clefs to changing clefs
+     * (double) The dash length of dashed barlines
      *
-     * default: 0.66
+     * default: 1.14
      *
-     * max: 1
+     * max: 5
      *
-     * min: 0.25
+     * min: 0.1
      */
-    clefChangeFactor?: number;
+    dashedBarLineDashLength?: number;
+
+    /**
+     * (double) The gap length of dashed barlines
+     *
+     * default: 1.14
+     *
+     * max: 5
+     *
+     * min: 0.1
+     */
+    dashedBarLineGapLength?: number;
 
     /**
      * (double) The default distance from the staff for dynamic marks
@@ -496,9 +601,38 @@ export interface VerovioOptions {
     dynamDist?: number;
 
     /**
+     * Don't use SMuFL's predefined dynamics glyph combinations
+     *
+     * default: false
+     */
+    dynamSingleGlyphs?: boolean;
+
+    /**
      * Json describing defaults for engraving SMuFL elements
      */
     engravingDefaults?: EngravingDefaults;
+
+    /**
+     * (double) Minimum space required for extender line to be drawn
+     *
+     * default: 1.5
+     *
+     * max: 10
+     *
+     * min: 1.5
+     */
+    extenderLineMinSpace?: number;
+
+    /**
+     * (double) The scale of fingering font compared to default font size
+     *
+     * default: 0.75
+     *
+     * max: 1
+     *
+     * min: 0.25
+     */
+    fingeringScale?: number;
 
     /**
      * Set the music font
@@ -506,6 +640,27 @@ export interface VerovioOptions {
      * default: "Leipzig"
      */
     font?: string;
+
+    /**
+     * Add a custom music font as zip file
+     *
+     * default: []
+     */
+    fontAddCustom?: string[];
+
+    /**
+     * The music font fallback for missing glyphs
+     *
+     * default: "Leipzig"
+     */
+    fontFallback?: "Leipzig" | "Bravura";
+
+    /**
+     * Load all music fonts
+     *
+     * default: false
+     */
+    fontLoadAll?: boolean;
 
     /**
      * (double) The grace size ratio numerator
@@ -555,6 +710,13 @@ export interface VerovioOptions {
     hairpinThickness?: number;
 
     /**
+     * Fonts that emulate hand writing and require special handling
+     *
+     * default: []
+     */
+    handwrittenFont?: string[];
+
+    /**
      * (double) The default distance from the staff of harmonic indications
      *
      * default: 1
@@ -586,6 +748,17 @@ export interface VerovioOptions {
      * min: 0
      */
     justificationBracketGroup?: number;
+
+    /**
+     * (double) Maximum ratio of justifiable height to page height that can be used for the vertical justification
+     *
+     * default: 0.2
+     *
+     * max: 1
+     *
+     * min: 0
+     */
+    justificationMaxVertical?: number;
 
     /**
      * (double) The staff justification
@@ -632,15 +805,22 @@ export interface VerovioOptions {
     ledgerLineThickness?: number;
 
     /**
-     * (double) The lyric hyphen and dash length
+     * The lyric elision width
      *
-     * default: 1.2
-     *
-     * max: 3
-     *
-     * min: 0.5
+     * default: "regular"
      */
-    lyricHyphenLength?: number;
+    lyricElision?: "unicode" | "narrow" | "regular" | "wide";
+
+    /**
+     * (double) The lyric verse line height factor
+     *
+     * default: 1
+     *
+     * max: 20
+     *
+     * min: 1
+     */
+    lyricHeightFactor?: number;
 
     /**
      * (double) The lyric extender line thickness
@@ -694,22 +874,11 @@ export interface VerovioOptions {
      *
      * default: 1.2
      *
-     * max: 3
+     * max: 10
      *
-     * min: 0.5
+     * min: 0
      */
     lyricWordSpace?: number;
-
-    /**
-     * (double) The MIDI tempo adjustment factor
-     *
-     * default: 1
-     *
-     * max: 4
-     *
-     * min: 0.2
-     */
-    midiTempoAdjustment?: number;
 
     /**
      * (int) The minimal measure width in MEI units
@@ -720,7 +889,7 @@ export interface VerovioOptions {
      *
      * min: 1
      */
-    minMeasureWidth?: number;
+    measureMinWidth?: number;
 
     /**
      * (int) How frequently to place measure numbers
@@ -741,6 +910,17 @@ export interface VerovioOptions {
     multiRestStyle?: "auto" | "default" | "block" | "symbols";
 
     /**
+     * (double) The thickness of the multi rest in MEI units
+     *
+     * default: 2
+     *
+     * max: 6
+     *
+     * min: 0.5
+     */
+    multiRestThickness?: number;
+
+    /**
      * Use alternative symbols for displaying octaves
      *
      * default: false
@@ -759,6 +939,13 @@ export interface VerovioOptions {
     octaveLineThickness?: number;
 
     /**
+     * Do not enclose octaves that are spanning over systems with parentheses.
+     *
+     * default: false
+     */
+    octaveNoSpanningParentheses?: boolean;
+
+    /**
      * (double) The thickness of the line used for piano pedaling
      *
      * default: 0.2
@@ -772,7 +959,7 @@ export interface VerovioOptions {
     /**
      * (double) The default horizontal distance between the dots and the inner barline of a repeat barline
      *
-     * default: 0.3
+     * default: 0.36
      *
      * max: 1
      *
@@ -792,29 +979,29 @@ export interface VerovioOptions {
     repeatEndingLineThickness?: number;
 
     /**
-     * (int) Slur control points - higher value means more curved at the end
+     * (double) Slur curve factor - high value means rounder slurs
      *
-     * default: 5
+     * default: 1
      *
-     * max: 10
+     * max: 5
      *
-     * min: 1
-     */
-    slurControlPoints?: number;
-
-    /**
-     * (int) Slur curve factor - high value means rounder slurs
-     *
-     * default: 10
-     *
-     * max: 100
-     *
-     * min: 1
+     * min: 0.2
      */
     slurCurveFactor?: number;
 
     /**
-     * (double) The Endpoint slur thickness in MEI units
+     * (double) Slur endpoint flexibility - allow more endpoint movement during adjustment
+     *
+     * default: 0
+     *
+     * max: 1
+     *
+     * min: 0
+     */
+    slurEndpointFlexibility?: number;
+
+    /**
+     * (double) The endpoint slur thickness in MEI units
      *
      * default: 0.1
      *
@@ -825,35 +1012,24 @@ export interface VerovioOptions {
     slurEndpointThickness?: number;
 
     /**
-     * (int) Slur height factor -  high value means flatter slurs
+     * (double) Slur safety distance in MEI units to obstacles
      *
-     * default: 5
+     * default: 1
      *
-     * max: 100
+     * max: 4
      *
-     * min: 1
+     * min: 0.1
      */
-    slurHeightFactor?: number;
-
-    /**
-     * (double) The maximum slur height in MEI units
-     *
-     * default: 3
-     *
-     * max: 6
-     *
-     * min: 2
-     */
-    slurMaxHeight?: number;
+    slurMargin?: number;
 
     /**
      * (int) The maximum slur slope in degrees
      *
-     * default: 20
+     * default: 60
      *
-     * max: 60
+     * max: 85
      *
-     * min: 0
+     * min: 30
      */
     slurMaxSlope?: number;
 
@@ -869,15 +1045,15 @@ export interface VerovioOptions {
     slurMidpointThickness?: number;
 
     /**
-     * (double) The minimum slur height in MEI units
+     * (double) Slur symmetry - high value means more symmetric slurs
      *
-     * default: 1.2
+     * default: 0
      *
-     * max: 2
+     * max: 1
      *
-     * min: 0.3
+     * min: 0
      */
-    slurMinHeight?: number;
+    slurSymmetry?: number;
 
     /**
      * (int) Minimum space between staves inside a braced group in MEI units
@@ -944,7 +1120,7 @@ export interface VerovioOptions {
     /**
      * (int) The system minimal spacing in MEI units
      *
-     * default: 12
+     * default: 4
      *
      * max: 48
      *
@@ -953,7 +1129,7 @@ export interface VerovioOptions {
     spacingSystem?: number;
 
     /**
-     * (double) The staff line width in unit
+     * (double) The staff line width in MEI units
      *
      * default: 0.15
      *
@@ -993,7 +1169,7 @@ export interface VerovioOptions {
     systemDivider?: "none" | "auto" | "left" | "left-right";
 
     /**
-     * (int) Maximun number of systems per page
+     * (int) Maximum number of systems per page
      *
      * default: 0
      *
@@ -1048,6 +1224,24 @@ export interface VerovioOptions {
     tieMidpointThickness?: number;
 
     /**
+     * (double) The minimum length of tie in MEI units
+     *
+     * default: 2
+     *
+     * max: 10
+     *
+     * min: 0
+     */
+    tieMinLength?: number;
+
+    /**
+     * Tuplet brackets angled on beams only
+     *
+     * default: false
+     */
+    tupletAngledOnBeams?: boolean;
+
+    /**
      * (double) The thickness of the tuplet bracket
      *
      * default: 0.2
@@ -1084,6 +1278,20 @@ export interface VerovioOptions {
     choiceXPathQuery?: string[];
 
     /**
+     * Load only the selected mdiv; the content of the other is skipped
+     *
+     * default: false
+     */
+    loadSelectedMdivOnly?: boolean;
+
+    /**
+     * Load and render all <mdiv> elements in the MEI files
+     *
+     * default: false
+     */
+    mdivAll?: boolean;
+
+    /**
      * Set the xPath query for selecting the <mdiv> to be rendered; only one <mdiv> can be rendered
      *
      * default: ""
@@ -1098,11 +1306,16 @@ export interface VerovioOptions {
     substXPathQuery?: string[];
 
     /**
-     * SUMMARY
+     * Transpose the entire content
      *
      * default: ""
      */
     transpose?: string;
+
+    /**
+     * Json mapping the mdiv ids to the corresponding transposition
+     */
+    transposeMdiv?: TransposeMdiv;
 
     /**
      * Transpose only the selected content and ignore unselected editorial content
@@ -1110,6 +1323,13 @@ export interface VerovioOptions {
      * default: false
      */
     transposeSelectedOnly?: boolean;
+
+    /**
+     * Transpose to sounding pitch by evaluating @trans.semi
+     *
+     * default: false
+     */
+    transposeToSoundingPitch?: boolean;
 
     /*******************
      * Element margins *
@@ -1140,13 +1360,24 @@ export interface VerovioOptions {
     /**
      * (double) The margin for header in MEI units
      *
-     * default: 8
+     * default: 2
      *
      * max: 24
      *
      * min: 0
      */
     bottomMarginHeader?: number;
+
+    /**
+     * (double) The margin for octave in MEI units
+     *
+     * default: 1
+     *
+     * max: 10
+     *
+     * min: 0
+     */
+    bottomMarginOctave?: number;
 
     /**
      * (double) The default bottom margin
@@ -1382,7 +1613,7 @@ export interface VerovioOptions {
     /**
      * (double) The right margin for accid in MEI units
      *
-     * default: 0
+     * default: 0.5
      *
      * max: 2
      *
@@ -1587,4 +1818,94 @@ export interface VerovioOptions {
      * min: 0
      */
     topMarginHarm?: number;
+
+    /**
+     * (double) The margin for footer in MEI units
+     *
+     * default: 2
+     *
+     * max: 24
+     *
+     * min: 0
+     */
+    topMarginPgFooter?: number;
+
+    /****************
+     * Midi options *
+     ****************/
+
+    /**
+     * Skip cue notes in MIDI output
+     *
+     * default: false
+     */
+    midiNoCue?: boolean;
+
+    /**
+     * (double) The MIDI tempo adjustment factor
+     *
+     * default: 1
+     *
+     * max: 4
+     *
+     * min: 0.2
+     */
+    midiTempoAdjustment?: number;
+
+    /*****************************
+     * Mensural notation options *
+     *****************************/
+
+    /**
+     * The mensural duration equivalence
+     *
+     * default: "brevis"
+     */
+    durationEquivalence?: "brevis" | "semibrevis" | "minima";
+
+    /**
+     * Render ligatures as bracket instead of original notation
+     *
+     * default: false
+     */
+    ligatureAsBracket?: boolean;
+
+    /**
+     * Ligature oblique shape
+     *
+     * default: "auto"
+     */
+    ligatureOblique?: "auto" | "straight" | "curved";
+
+    /**
+     * Convert mensural content to a more responsive view reduced to the seleceted markup
+     *
+     * default: false
+     */
+    mensuralResponsiveView?: boolean;
+
+    /**
+     * Score up the mensural voices by providing a dur.quality to the notes
+     *
+     * default: false
+     */
+    mensuralScoreUp?: boolean;
+
+    /**
+     * Convert mensural sections to CMN measure-based MEI
+     *
+     * default: false
+     */
+    mensuralToCmn?: boolean;
+
+    /********************************************
+     * Method JSON options for the command-line *
+     ********************************************/
+
+    /**
+     * The JSON options to be passed when producing the timemap
+     *
+     * default: "{}"
+     */
+    timemapOptions?: string;
 }

@@ -1,18 +1,39 @@
-import { Loader, LoadingManager, BufferGeometry } from '../../../src/Three';
+import { BufferGeometry, Loader, LoadingManager } from "three";
 
-export class DRACOLoader extends Loader {
+interface DecoderPaths {
+    js: string;
+    wasm: string;
+}
+
+declare const DRACO_GLTF_CONFIG: DecoderPaths;
+
+declare class DRACOLoader extends Loader<BufferGeometry> {
     constructor(manager?: LoadingManager);
+
+    setDecoderPath(path: string | DecoderPaths): this;
+
+    /**
+     * @deprecated setDecoderConfig to has been deprecated and will be removed in r194.
+     */
+    setDecoderConfig(config: object): this;
+
+    setWorkerLimit(workerLimit: number): this;
 
     load(
         url: string,
-        onLoad: (geometry: BufferGeometry) => void,
+        onLoad?: (data: BufferGeometry) => void,
         onProgress?: (event: ProgressEvent) => void,
-        onError?: (event: ErrorEvent) => void,
+        onError?: (err: unknown) => void,
     ): void;
-    loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<BufferGeometry>;
-    setDecoderPath(path: string): DRACOLoader;
-    setDecoderConfig(config: object): DRACOLoader;
-    setWorkerLimit(workerLimit: number): DRACOLoader;
-    preload(): DRACOLoader;
-    dispose(): DRACOLoader;
+
+    parse(
+        buffer: ArrayBuffer,
+        onLoad?: (geometry: BufferGeometry) => void,
+        onError?: (err: unknown) => void,
+    ): void;
+
+    preload(): this;
+    dispose(): this;
 }
+
+export { DRACO_GLTF_CONFIG, DRACOLoader };

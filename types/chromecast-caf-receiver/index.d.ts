@@ -1,45 +1,39 @@
-// Type definitions for non-npm package chromecast-caf-receiver 6.0
-// Project: https://github.com/googlecast
-// Definitions by: Sergio Arbeo <https://github.com/Serabe>
-//                 Brandon Risell <https://github.com/brandonrisell>
-//                 Marco Reni <https://github.com/marcoreni>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 3.1
-
 /// <reference path="./cast.debug.d.ts" />
 /// <reference path="./cast.framework.d.ts" />
 /// <reference path="./cast.framework.breaks.d.ts" />
 /// <reference path="./cast.framework.events.d.ts" />
 /// <reference path="./cast.framework.messages.d.ts" />
+/// <reference path="./cast.framework.stats.d.ts" />
 /// <reference path="./cast.framework.system.d.ts" />
 /// <reference path="./cast.framework.ui.d.ts" />
 
-import * as debugNs from './cast.debug';
-import * as frameworkNs from './cast.framework';
-import { PlayerDataChangedEvent } from './cast.framework.ui';
-import { Event as SystemEvent } from './cast.framework.system';
+import * as debugNs from "./cast.debug";
+import * as frameworkNs from "./cast.framework";
 import {
-    Event,
-    Id3Event,
-    ErrorEvent,
-    MediaElementEvent,
-    MediaPauseEvent,
     BitrateChangedEvent,
     BreaksEvent,
     BufferingEvent,
     CacheItemEvent,
     CacheLoadedEvent,
     ClipEndedEvent,
-    EmsgEvent,
-    MediaStatusEvent,
     CustomStateEvent,
-    MediaInformationChangedEvent,
-    MediaFinishedEvent,
-    LoadEvent,
-    SegmentDownloadedEvent,
-    RequestEvent,
+    EmsgEvent,
+    ErrorEvent,
+    Event,
+    Id3Event,
     LiveStatusEvent,
-} from './cast.framework.events';
+    LoadEvent,
+    MediaElementEvent,
+    MediaFinishedEvent,
+    MediaInformationChangedEvent,
+    MediaPauseEvent,
+    MediaStatusEvent,
+    RequestEvent,
+    SegmentDownloadedEvent,
+    TimedMetadataEvent,
+} from "./cast.framework.events";
+import { Event as SystemEvent, Message as SystemMessage } from "./cast.framework.system";
+import { PlayerDataChangedEvent } from "./cast.framework.ui";
 
 export namespace cast {
     const debug: typeof debugNs;
@@ -56,6 +50,7 @@ declare global {
 
     type EventHandler = (event: Event) => void;
     type SystemEventHandler = (event: SystemEvent) => void;
+    type CustomMessageHandler = (event: SystemMessage) => void;
     type Id3EventHandler = (event: Id3Event) => void;
     type ErrorEventHandler = (event: ErrorEvent) => void;
     type MediaElementEventHandler = (event: MediaElementEvent) => void;
@@ -75,7 +70,18 @@ declare global {
     type SegmentDownloadedEventHandler = (event: SegmentDownloadedEvent) => void;
     type RequestEventHandler = (event: RequestEvent) => void;
     type LiveStatusEventHandler = (event: LiveStatusEvent) => void;
+    type TimedMetadataEventHandler = (event: TimedMetadataEvent) => void;
     type PlayerDataChangedEventHandler = (event: PlayerDataChangedEvent) => void;
     type RequestHandler = (request: framework.NetworkRequestInfo) => void;
-    type BinaryHandler = (data: Uint8Array) => Uint8Array | Promise<Uint8Array>;
+    /**
+     * Processes response data, such as a segment or a license, and returns the
+     * modified data. The last parameter is the original Shaka Player request
+     * (shaka.extern.Request) which gave rise to this response, and is undefined
+     * if Shaka Player is not being used.
+     */
+    type BinaryHandler = (
+        data: Uint8Array,
+        responseInfo: framework.NetworkResponseInfo,
+        request?: { [key: string]: any },
+    ) => Uint8Array | Promise<Uint8Array>;
 }

@@ -1,14 +1,7 @@
-// Type definitions for Selectize 0.12.14
-// Project: https://github.com/brianreavis/selectize.js
-// Definitions by: Adi Dahiya <https://github.com/adidahiya>, Natalie Bausch <https://github.com/naBausch>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
 declare namespace Selectize {
     // see https://github.com/brianreavis/selectize.js/blob/master/docs/usage.md
     // option identifiers are parameterized by T; data is parameterized by U
     interface IOptions<T, U> {
-
         // General
         // ------------------------------------------------------------------------------------------------------------
 
@@ -16,7 +9,7 @@ declare namespace Selectize {
          * An array of the initial selected values. By default this is populated from the original input element.
          */
         items?: T[] | undefined;
-        
+
         /**
          * The placeholder of the control (displayed when nothing is selected / typed).
          * Defaults to input element's placeholder, unless this one is specified.
@@ -143,7 +136,7 @@ declare namespace Selectize {
          *
          * Default: false
          */
-        preload?: boolean | 'focus' | undefined;
+        preload?: boolean | "focus" | undefined;
 
         /**
          * The element the dropdown menu is appended to. This should be "body" or null.
@@ -254,7 +247,7 @@ declare namespace Selectize {
          *
          * Default: "$order"
          */
-        sortField?: string | { field: string, direction?: 'asc' | 'desc' | undefined }[] | undefined;
+        sortField?: string | Array<{ field: string; direction?: "asc" | "desc" | undefined }> | undefined;
 
         /**
          * An array of property names to analyze when filtering options.
@@ -414,6 +407,16 @@ declare namespace Selectize {
     // see https://github.com/brianreavis/selectize.js/blob/master/docs/api.md
     interface IApi<T, U> {
         /**
+         * The original input element the control was created from.
+         */
+        $input: JQuery;
+
+        /**
+         * The settings the control was initialized with, merged with the defaults.
+         */
+        settings: IOptions<T, U>;
+
+        /**
          * An array of selected values.
          */
         items: T[];
@@ -441,12 +444,12 @@ declare namespace Selectize {
         /**
          * Removes the option identified by the given value.
          */
-        removeOption(value: T): void;
+        removeOption(value: T, silent?: boolean): void;
 
         /**
          * Removes all options from the control.
          */
-        clearOptions(): void;
+        clearOptions(silent?: boolean): void;
 
         /**
          * Retrieves the jQuery element for the option identified by the given value.
@@ -483,6 +486,11 @@ declare namespace Selectize {
         addItem(value: T, silent?: boolean): void;
 
         /**
+         * "Selects" multiple items at once. Adds them to the list at the current caret position.
+         */
+        addItems(values: T | T[], silent?: boolean): void;
+
+        /**
          * Removes the selected item matching the provided value.
          */
         removeItem(value: T, silent?: boolean): void;
@@ -496,7 +504,7 @@ declare namespace Selectize {
         /**
          * Re-renders the selected item lists.
          */
-        refreshItems(): void;
+        refreshItems(silent?: boolean): void;
 
         // Optgroups
         // ------------------------------------------------------------------------------------------------------------
@@ -506,6 +514,16 @@ declare namespace Selectize {
          * The "id" argument refers to a value of the property in option identified by the "optgroupField" setting.
          */
         addOptionGroup(id: string, data: U): void;
+
+        /**
+         * Removes the existing optgroup identified by the given id.
+         */
+        removeOptionGroup(id: string): void;
+
+        /**
+         * Removes all existing optgroups from the control.
+         */
+        clearOptionGroups(): void;
 
         // Events
         // ------------------------------------------------------------------------------------------------------------

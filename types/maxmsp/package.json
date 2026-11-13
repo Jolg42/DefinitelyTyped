@@ -1,0 +1,31 @@
+{
+    "private": true,
+    "name": "@types/maxmsp",
+    "version": "1.0.9999",
+    "types": "index",
+    "typesVersions": {
+        "<=6.0": {
+            "*": [
+                "ts6.0/*"
+            ]
+        }
+    },
+    "nonNpm": true,
+    "nonNpmDescription": "maxmsp",
+    "projects": [
+        "https://docs.cycling74.com/max8/vignettes/javascript_usage_topic"
+    ],
+    "devDependencies": {
+        "@types/maxmsp": "workspace:."
+    },
+    "owners": [
+        {
+            "name": "TomW",
+            "githubUsername": "twhiston"
+        },
+        {
+            "name": "FrancescElies",
+            "githubUsername": "FrancescElies"
+        }
+    ]
+}

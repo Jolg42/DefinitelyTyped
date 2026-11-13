@@ -1,17 +1,12 @@
-/**
- * Namespace: browser.contextualIdentities
- * Generated from Mozilla sources. Do not manually edit!
- *
- * Use the <code>browser.contextualIdentities</code> API to query and modify contextual identity, also called as containers.
- * Permissions: "contextualIdentities"
- *
- * Comments found in source JSON schema files:
- * This Source Code Form is subject to the terms of the Mozilla Public
- * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.
- */
+//////////////////////////////////////////////////////
+// BEWARE: DO NOT EDIT MANUALLY! Changes will be lost!
+//////////////////////////////////////////////////////
+
 import { Events } from "./events";
 
+/**
+ * Namespace: browser.contextualIdentities
+ */
 export namespace ContextualIdentities {
     /**
      * Represents information about a contextual identity.
@@ -49,6 +44,21 @@ export namespace ContextualIdentities {
     }
 
     /**
+     * Represents the association between a site and a contextual identity.
+     */
+    interface SiteAssociation {
+        /**
+         * The associated host, normalized to lower case and encoded as ASCII.
+         */
+        site: string;
+
+        /**
+         * The cookie store ID of the contextual identity the host is associated with.
+         */
+        cookieStoreId: string;
+    }
+
+    /**
      * Information to filter the contextual identities being retrieved.
      */
     interface QueryDetailsType {
@@ -57,6 +67,30 @@ export namespace ContextualIdentities {
          * Optional.
          */
         name?: string;
+    }
+
+    interface GetSupportedColorsCallbackColorsItemType {
+        /**
+         * The color name, as accepted by the color property of create and update.
+         */
+        color: string;
+
+        /**
+         * The color hash for this color name.
+         */
+        colorCode: string;
+    }
+
+    interface GetSupportedIconsCallbackIconsItemType {
+        /**
+         * The icon name, as accepted by the icon property of create and update.
+         */
+        icon: string;
+
+        /**
+         * The icon url for this icon name.
+         */
+        iconUrl: string;
     }
 
     /**
@@ -102,6 +136,52 @@ export namespace ContextualIdentities {
         icon?: string;
     }
 
+    /**
+     * Details about the site association.
+     */
+    interface SetSiteAssociationDetailsType {
+        /**
+         * The host to associate with the container (matched as an exact host).
+         */
+        site: string;
+
+        /**
+         * The cookie store ID of the container to associate the site with.
+         */
+        cookieStoreId: string;
+    }
+
+    /**
+     * Details about the site association to remove.
+     */
+    interface RemoveSiteAssociationDetailsType {
+        /**
+         * The host whose container association should be removed.
+         */
+        site: string;
+    }
+
+    /**
+     * Details about the site to look up.
+     */
+    interface GetSiteAssociationDetailsType {
+        /**
+         * The host to look up.
+         */
+        site: string;
+    }
+
+    /**
+     * Information to filter the associations being retrieved.
+     */
+    interface QuerySiteAssociationsDetailsType {
+        /**
+         * If provided, only associations for this container are returned.
+         * Optional.
+         */
+        cookieStoreId?: string;
+    }
+
     interface OnUpdatedChangeInfoType {
         /**
          * Contextual identity that has been updated
@@ -123,6 +203,19 @@ export namespace ContextualIdentities {
         contextualIdentity: ContextualIdentity;
     }
 
+    interface OnSiteAssociationChangedChangeInfoType {
+        /**
+         * The host whose association changed.
+         */
+        site: string;
+
+        /**
+         * The cookie store ID of the now-associated container, or omitted if the association was removed.
+         * Optional.
+         */
+        cookieStoreId?: string;
+    }
+
     interface Static {
         /**
          * Retrieves information about a single contextual identity.
@@ -137,6 +230,16 @@ export namespace ContextualIdentities {
          * @param details Information to filter the contextual identities being retrieved.
          */
         query(details: QueryDetailsType): Promise<ContextualIdentity[]>;
+
+        /**
+         * Retrieves the list of colors supported by contextual identities.
+         */
+        getSupportedColors(): Promise<GetSupportedColorsCallbackColorsItemType[]>;
+
+        /**
+         * Retrieves the list of icons supported by contextual identities.
+         */
+        getSupportedIcons(): Promise<GetSupportedIconsCallbackIconsItemType[]>;
 
         /**
          * Creates a contextual identity with the given data.
@@ -154,31 +257,66 @@ export namespace ContextualIdentities {
         update(cookieStoreId: string, details: UpdateDetailsType): Promise<ContextualIdentity>;
 
         /**
-         * Deletes a contetual identity by its cookie Store ID.
+         * Reorder one or more contextual identities by their cookieStoreIDs to a given position.
+         *
+         * @param cookieStoreIds The ID or list of IDs of the contextual identity cookie stores.
+         * @param position The position the contextual identity should move to.
+         */
+        move(cookieStoreIds: string | string[], position: number): Promise<void>;
+
+        /**
+         * Deletes a contextual identity by its cookie Store ID.
          *
          * @param cookieStoreId The ID of the contextual identity cookie store.
          */
         remove(cookieStoreId: string): Promise<ContextualIdentity>;
 
         /**
-         * Fired when a container is updated.
+         * Associates a site with a container. Top-level navigations to that site will load in the given container.
          *
-         * @param changeInfo
+         * @param details Details about the site association.
+         */
+        setSiteAssociation(details: SetSiteAssociationDetailsType): Promise<void>;
+
+        /**
+         * Removes the container association for a site.
+         *
+         * @param details Details about the site association to remove.
+         */
+        removeSiteAssociation(details: RemoveSiteAssociationDetailsType): Promise<void>;
+
+        /**
+         * Retrieves the association of a site, or null if the site is not associated with any container.
+         *
+         * @param details Details about the site to look up.
+         */
+        getSiteAssociation(details: GetSiteAssociationDetailsType): Promise<SiteAssociation | undefined>;
+
+        /**
+         * Retrieves the list of site-to-container associations.
+         *
+         * @param details Information to filter the associations being retrieved.
+         */
+        querySiteAssociations(details: QuerySiteAssociationsDetailsType): Promise<SiteAssociation[]>;
+
+        /**
+         * Fired when a container is updated.
          */
         onUpdated: Events.Event<(changeInfo: OnUpdatedChangeInfoType) => void>;
 
         /**
          * Fired when a new container is created.
-         *
-         * @param changeInfo
          */
         onCreated: Events.Event<(changeInfo: OnCreatedChangeInfoType) => void>;
 
         /**
          * Fired when a container is removed.
-         *
-         * @param changeInfo
          */
         onRemoved: Events.Event<(changeInfo: OnRemovedChangeInfoType) => void>;
+
+        /**
+         * Fired when a site-to-container association is added, changed, or removed.
+         */
+        onSiteAssociationChanged: Events.Event<(changeInfo: OnSiteAssociationChangedChangeInfoType) => void>;
     }
 }

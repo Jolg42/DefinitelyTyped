@@ -1,8 +1,8 @@
-navigator.serial.addEventListener('connect', event => {
+navigator.serial.addEventListener("connect", event => {
     console.log(event.target);
 });
 
-navigator.serial.addEventListener('disconnect', event => {
+navigator.serial.addEventListener("disconnect", event => {
     console.log(event.target);
 });
 
@@ -16,7 +16,7 @@ async function connect() {
     });
     await port.open({
         baudRate: 9600,
-        parity: 'none',
+        parity: "none",
         bufferSize: 128,
     });
 
@@ -25,10 +25,12 @@ async function connect() {
 
     const info = port.getInfo();
     const vendor = info.vendor;
-    port.writable.getWriter();
-    port.readable.getReader();
+    port.writable?.getWriter();
+    port.readable?.getReader();
 
     await port.close();
+
+    await port.forget();
 }
 
 navigator.serial.requestPort().then(port => {

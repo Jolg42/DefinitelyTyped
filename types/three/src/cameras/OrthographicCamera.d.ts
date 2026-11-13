@@ -1,38 +1,16 @@
-import { Camera } from './Camera';
+import { JSONMeta, Object3DJSON, Object3DJSONObject } from "../core/Object3D.js";
+import { Camera } from "./Camera.js";
 
-/**
- * Camera with orthographic projection
- *
- * see {@link https://github.com/mrdoob/three.js/blob/master/src/cameras/OrthographicCamera.js|src/cameras/OrthographicCamera.js}
- *
- * @example
- * const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
- * scene.add( camera );
- */
-export class OrthographicCamera extends Camera {
-    /**
-     * @param left Camera frustum left plane.
-     * @param right Camera frustum right plane.
-     * @param top Camera frustum top plane.
-     * @param bottom Camera frustum bottom plane.
-     * @param [near=0.1] Camera frustum near plane.
-     * @param [far=2000] Camera frustum far plane.
-     */
-    constructor(left: number, right: number, top: number, bottom: number, near?: number, far?: number);
-
-    type: 'OrthographicCamera';
-
-    readonly isOrthographicCamera: true;
-
-    /**
-     * @default 1
-     */
+export interface OrthographicCameraJSONObject extends Object3DJSONObject {
     zoom: number;
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+    near: number;
+    far: number;
 
-    /**
-     * @default null
-     */
-    view: null | {
+    view?: {
         enabled: boolean;
         fullWidth: number;
         fullHeight: number;
@@ -41,55 +19,126 @@ export class OrthographicCamera extends Camera {
         width: number;
         height: number;
     };
+}
 
+export interface OrthographicCameraJSON extends Object3DJSON {
+    object: OrthographicCameraJSONObject;
+}
+
+/**
+ * Camera that uses [orthographic projection](https://en.wikipedia.org/wiki/Orthographic_projection).
+ *
+ * In this projection mode, an object's size in the rendered image stays
+ * constant regardless of its distance from the camera. This can be useful
+ * for rendering 2D scenes and UI elements, amongst other things.
+ *
+ * ```js
+ * const camera = new THREE.OrthographicCamera( width / - 2, width / 2, height / 2, height / - 2, 1, 1000 );
+ * scene.add( camera );
+ * ```
+ */
+export class OrthographicCamera extends Camera {
     /**
-     * Camera frustum left plane.
+     * Constructs a new orthographic camera.
+     *
+     * @param {number} [left=-1] - The left plane of the camera's frustum.
+     * @param {number} [right=1] - The right plane of the camera's frustum.
+     * @param {number} [top=1] - The top plane of the camera's frustum.
+     * @param {number} [bottom=-1] - The bottom plane of the camera's frustum.
+     * @param {number} [near=0.1] - The camera's near plane.
+     * @param {number} [far=2000] - The camera's far plane.
+     */
+    constructor(left?: number, right?: number, top?: number, bottom?: number, near?: number, far?: number);
+    /**
+     * This flag can be used for type testing.
+     *
+     * @default true
+     */
+    readonly isOrthographicCamera: boolean;
+    /**
+     * The zoom factor of the camera.
+     *
+     * @default 1
+     */
+    zoom: number;
+    /**
+     * Represents the frustum window specification. This property should not be edited
+     * directly but via {@link PerspectiveCamera#setViewOffset} and {@link PerspectiveCamera#clearViewOffset}.
+     *
+     * @default null
+     */
+    view: {
+        enabled: boolean;
+        fullWidth: number;
+        fullHeight: number;
+        offsetX: number;
+        offsetY: number;
+        width: number;
+        height: number;
+    } | null;
+    /**
+     * The left plane of the camera's frustum.
+     *
      * @default -1
      */
     left: number;
-
     /**
-     * Camera frustum right plane.
+     * The right plane of the camera's frustum.
+     *
      * @default 1
      */
     right: number;
-
     /**
-     * Camera frustum top plane.
+     * The top plane of the camera's frustum.
+     *
      * @default 1
      */
     top: number;
-
     /**
-     * Camera frustum bottom plane.
+     * The bottom plane of the camera's frustum.
+     *
      * @default -1
      */
     bottom: number;
-
     /**
-     * Camera frustum near plane.
+     * The camera's near plane. The valid range is greater than `0`
+     * and less than the current value of {@link OrthographicCamera#far}.
+     *
+     * Note that, unlike for the {@link PerspectiveCamera}, `0` is a
+     * valid value for an orthographic camera's near plane.
+     *
      * @default 0.1
      */
     near: number;
-
     /**
-     * Camera frustum far plane.
+     * The camera's far plane. Must be greater than the
+     * current value of {@link OrthographicCamera#near}.
+     *
      * @default 2000
      */
     far: number;
-
+    copy(source: OrthographicCamera, recursive?: boolean): this;
     /**
-     * Updates the camera projection matrix. Must be called after change of parameters.
+     * Sets an offset in a larger frustum. This is useful for multi-window or
+     * multi-monitor/multi-machine setups.
+     *
+     * @param {number} fullWidth - The full width of multiview setup.
+     * @param {number} fullHeight - The full height of multiview setup.
+     * @param {number} x - The horizontal offset of the subcamera.
+     * @param {number} y - The vertical offset of the subcamera.
+     * @param {number} width - The width of subcamera.
+     * @param {number} height - The height of subcamera.
+     * @see {@link PerspectiveCamera#setViewOffset}
+     */
+    setViewOffset(fullWidth: number, fullHeight: number, x: number, y: number, width: number, height: number): void;
+    /**
+     * Removes the view offset from the projection matrix.
+     */
+    clearViewOffset(): void;
+    /**
+     * Updates the camera's projection matrix. Must be called after any change of
+     * camera properties.
      */
     updateProjectionMatrix(): void;
-    setViewOffset(
-        fullWidth: number,
-        fullHeight: number,
-        offsetX: number,
-        offsetY: number,
-        width: number,
-        height: number,
-    ): void;
-    clearViewOffset(): void;
-    toJSON(meta?: any): any;
+    toJSON(meta?: JSONMeta): OrthographicCameraJSON;
 }

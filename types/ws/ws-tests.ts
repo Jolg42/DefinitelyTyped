@@ -1,6 +1,7 @@
 import WebSocket = require("ws");
 import * as http from "http";
 import * as https from "https";
+import * as net from "net";
 import * as url from "url";
 import * as wslib from "ws";
 
@@ -8,6 +9,20 @@ import * as wslib from "ws";
     const ws = new WebSocket("ws://www.host.com/path");
     ws.on("open", () => ws.send("something"));
     ws.on("message", data => {});
+    // @ts-expect-error
+    ws.send({ hello: "world" });
+
+    ws.send(new Uint8Array([]));
+
+    const Any = null as any;
+
+    ws.send(Any as number);
+    ws.send(Any as ArrayBufferView);
+    ws.send(new Blob([]));
+    ws.send(Any as { valueOf(): ArrayBuffer });
+    ws.send(Any as Uint8Array);
+    ws.send(Any as { valueOf(): Uint8Array });
+    ws.send(Any as { valueOf(): string });
 }
 
 {
@@ -47,7 +62,7 @@ import * as wslib from "ws";
 {
     const wss = new WebSocket.Server({ port: 8082 });
 
-    const broadcast = (data: any) => {
+    const broadcast = (data: string) => {
         wss.clients.forEach(ws => ws.send(data));
     };
 }
@@ -75,17 +90,12 @@ import * as wslib from "ws";
 }
 
 {
-    const verifyClient = (
-        info: { origin: string; secure: boolean; req: http.IncomingMessage },
-        callback: (res: boolean) => void,
-    ): void => {
-        callback(true);
-    };
-
     const wsv = new WebSocket.Server({
         server: http.createServer(),
         clientTracking: true,
         perMessageDeflate: true,
+        maxBufferedChunks: 4096,
+        maxFragments: 1024,
     });
 
     wsv.on("connection", function connection(ws) {
@@ -99,7 +109,7 @@ import * as wslib from "ws";
     wss.addListener("connection", (client, request) => {
         request.socket.remoteAddress;
 
-        // $ExpectError
+        // @ts-expect-error
         request.aborted === 10;
 
         client.terminate();
@@ -107,6 +117,13 @@ import * as wslib from "ws";
     });
 
     wss.close();
+
+    const addr = wss.address();
+
+    if (addr === null) {
+        // $ExpectType null
+        addr;
+    }
 }
 
 {
@@ -137,6 +154,8 @@ import * as wslib from "ws";
         verifyClient: (info: any, cb: any) => {
             cb(true, 123, "message", { Upgrade: "websocket" });
         },
+        allowSynchronousEvents: false,
+        autoPong: false,
     });
 }
 
@@ -144,6 +163,8 @@ import * as wslib from "ws";
     const ws = new WebSocket("ws://www.host.com/path", {
         timeout: 5000,
         maxPayload: 10 * 1024 * 1024,
+        maxBufferedChunks: 4096,
+        maxFragments: 1024,
     });
     ws.on("open", () => ws.send("something assume to be really long"));
 }
@@ -186,19 +207,40 @@ import * as wslib from "ws";
 
 {
     const ws = new WebSocket("ws://www.host.com/path");
-    // $ExpectError
+    // @ts-expect-error
     ws.addEventListener("other", () => {});
+    // @ts-expect-error
+    ws.removeEventListener("other", () => {});
 }
 
 {
     const ws = new WebSocket("ws://www.host.com/path");
-    ws.addEventListener(
-        "message",
-        (event: WebSocket.MessageEvent) => {
-            console.log(event.data, event.target, event.type);
+
+    const listenerFn = (event: WebSocket.MessageEvent) => console.log(event.data, event.target, event.type);
+    ws.addEventListener("message", listenerFn, { once: true });
+    ws.removeEventListener("message", listenerFn);
+
+    ws.addEventListener("open" as "open" | "close" | "error" | "message", console.log);
+    ws.removeEventListener("open" as "open" | "close" | "error" | "message", console.log);
+
+    const listenerObj = {
+        handleEvent(event: WebSocket.MessageEvent) {
+            console.log(this, event);
         },
-        { once: true },
-    );
+    };
+    ws.addEventListener("message", listenerObj);
+    ws.removeEventListener("message", listenerObj);
+}
+
+{
+    const ws = new WebSocket("ws://www.host.com/path");
+
+    ws.addListener("redirect", (url, request) => {
+        // $ExpectType string
+        url;
+        // $ExpectType ClientRequest
+        request;
+    });
 }
 
 {
@@ -214,17 +256,17 @@ import * as wslib from "ws";
 function f() {
     const ws = new WebSocket("ws://www.host.com/path");
 
-    // $ExpectError
+    // @ts-expect-error
     const a: 5 = ws.readyState;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.readyState = ws.OPEN;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.readyState = !ws.OPEN;
 
     if (ws.readyState === ws.OPEN) {
-        // $ExpectError
+        // @ts-expect-error
         const a: 2 = ws.readyState;
         const x: 1 = ws.readyState;
         return;
@@ -249,16 +291,16 @@ function f() {
 {
     const ws = new WebSocket("ws://www.host.com/path");
 
-    // $ExpectError
+    // @ts-expect-error
     ws.CONNECTING = 123;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.OPEN = 123;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.CLOSING = 123;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.CLOSED = 123;
 }
 
@@ -269,11 +311,11 @@ function f() {
     ws.binaryType = "fragments";
     ws.binaryType = "nodebuffer";
 
-    // $ExpectError
+    // @ts-expect-error
     ws.binaryType = "";
-    // $ExpectError
+    // @ts-expect-error
     ws.binaryType = true;
-    // $ExpectError
+    // @ts-expect-error
     ws.binaryType = "invalid-value";
 }
 
@@ -287,18 +329,203 @@ function f() {
     // $ExpectType string
     ws.protocol;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.bufferedAmount = 1;
-    // $ExpectError
+    // @ts-expect-error
     ws.bufferedAmount = true;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.extensions = "a-value";
-    // $ExpectError
+    // @ts-expect-error
     ws.extensions = true;
 
-    // $ExpectError
+    // @ts-expect-error
     ws.protocol = "a-value";
-    // $ExpectError
+    // @ts-expect-error
     ws.protocol = true;
+}
+
+{
+    const webSocketServer = new WebSocket.WebSocketServer();
+    const server = new http.Server();
+    server.on("upgrade", (request, socket, head) => {
+        if (request.url === "/path") {
+            webSocketServer.handleUpgrade(request, socket, head, (ws) => {
+                webSocketServer.emit("connection", ws, request);
+            });
+        }
+    });
+}
+
+declare module "ws" {
+    interface Server {
+        getWebSocketId(): string;
+    }
+}
+
+{
+    class MyWebSocket extends WebSocket {
+        id?: string;
+    }
+    const server = new wslib.WebSocketServer({ WebSocket: MyWebSocket });
+
+    server.on("connection", (ws) => {
+        // $ExpectType string | undefined
+        ws.id;
+
+        ws.id = server.getWebSocketId();
+    });
+}
+
+{
+    const ws = new WebSocket("ws://www.host.com/path", {
+        generateMask: (mask) => {},
+        skipUTF8Validation: true,
+    });
+}
+
+{
+    class CustomWebSocket extends WebSocket.WebSocket {
+        foo(): "foo" {
+            return "foo";
+        }
+    }
+    const server = new http.Server();
+    const webSocketServer = new WebSocket.WebSocketServer({ WebSocket: CustomWebSocket, noServer: true });
+    webSocketServer.on("connection", (ws) => {
+        // $ExpectType CustomWebSocket
+        ws;
+        // $ExpectType "foo"
+        ws.foo();
+    });
+    Array.from(webSocketServer.clients).forEach((ws) => {
+        // $ExpectType CustomWebSocket
+        ws;
+        // $ExpectType "foo"
+        ws.foo();
+    });
+    server.on("upgrade", (request, socket, head) => {
+        if (request.url === "/path") {
+            webSocketServer.handleUpgrade(request, socket, head, (ws) => {
+                // $ExpectType CustomWebSocket
+                ws;
+                // $ExpectType "foo"
+                ws.foo();
+            });
+        }
+    });
+}
+
+{
+    const ws = new WebSocket("ws://www.host.com/path");
+
+    if (ws.isPaused) {
+        ws.resume();
+    } else {
+        ws.pause();
+    }
+
+    // @ts-expect-error
+    ws.isPaused = true;
+
+    ws.onopen = null;
+    ws.onerror = null;
+    ws.onclose = null;
+    ws.onmessage = null;
+}
+
+{
+    class Request extends http.IncomingMessage {}
+    class MyWebsocket extends WebSocket {}
+    const server = http.createServer({ IncomingMessage: Request });
+    const wss = new WebSocket.WebSocketServer({ WebSocket: MyWebsocket, server });
+
+    wss.on("connection", (ws, req) => {
+        // $ExpectType MyWebsocket
+        ws;
+        // $ExpectType Request
+        req;
+    });
+    wss.once("connection", (ws, req) => {
+        // $ExpectType MyWebsocket
+        ws;
+        // $ExpectType Request
+        req;
+    });
+    wss.off("connection", (ws, req) => {
+        // $ExpectType MyWebsocket
+        ws;
+        // $ExpectType Request
+        req;
+    });
+    wss.addListener("connection", (ws, req) => {
+        // $ExpectType MyWebsocket
+        ws;
+        // $ExpectType Request
+        req;
+    });
+    wss.removeListener("connection", (ws, req) => {
+        // $ExpectType MyWebsocket
+        ws;
+        // $ExpectType Request
+        req;
+    });
+
+    wss.on("headers", (_headers, req) => {
+        // $ExpectType Request
+        req;
+    });
+    wss.once("headers", (_headers, req) => {
+        // $ExpectType Request
+        req;
+    });
+    wss.off("headers", (_headers, req) => {
+        // $ExpectType Request
+        req;
+    });
+    wss.addListener("headers", (_headers, req) => {
+        // $ExpectType Request
+        req;
+    });
+    wss.removeListener("headers", (_headers, req) => {
+        // $ExpectType Request
+        req;
+    });
+
+    wss.on("wsClientError", (error, socket, req) => {
+        // $ExpectType Error
+        error;
+        // $ExpectType Duplex
+        socket;
+        // $ExpectType Request
+        req;
+    });
+    wss.off("wsClientError", (error, socket, req) => {
+        // $ExpectType Error
+        error;
+        // $ExpectType Duplex
+        socket;
+        // $ExpectType Request
+        req;
+    });
+
+    Array.from(wss.clients).forEach(client => {
+        // $ExpectType MyWebsocket
+        client;
+    });
+}
+
+{
+    const ws = new WebSocket("ws://www.host.com/path", {
+        allowSynchronousEvents: false,
+        autoPong: false,
+        createConnection: net.createConnection,
+        finishRequest: (req, socket) => {
+            // $ExpectType ClientRequest
+            req;
+
+            // $ExpectType WebSocket
+            socket;
+        },
+    });
 }

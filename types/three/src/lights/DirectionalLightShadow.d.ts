@@ -1,7 +1,18 @@
-import { OrthographicCamera } from './../cameras/OrthographicCamera';
-import { LightShadow } from './LightShadow';
+import { OrthographicCamera } from "../cameras/OrthographicCamera.js";
+import { LightShadow } from "./LightShadow.js";
 
-export class DirectionalLightShadow extends LightShadow {
-    camera: OrthographicCamera;
-    readonly isDirectionalLightShadow: true;
+/**
+ * Represents the shadow configuration of directional lights.
+ */
+export class DirectionalLightShadow extends LightShadow<OrthographicCamera> {
+    /**
+     * Constructs a new directional light shadow.
+     */
+    constructor();
+    /**
+     * This flag can be used for type testing.
+     *
+     * @default true
+     */
+    readonly isDirectionalLightShadow: boolean;
 }

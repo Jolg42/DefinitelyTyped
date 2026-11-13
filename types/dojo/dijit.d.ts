@@ -1,11 +1,6 @@
-// Type definitions for Dojo v1.9
-// Project: http://dojotoolkit.org
-// Definitions by: Michael Van Sickle <https://github.com/vansimke>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="dojo" />
 
-declare module dijit {
+declare namespace dijit {
     /**
      * Permalink: http://dojotoolkit.org/api/1.9/dijit/_BidiSupport.html
      *
@@ -26,7 +21,7 @@ declare module dijit {
      * @param node     
      */
     interface BackgroundIframe{(node: HTMLElement): void}
-    module BackgroundIframe {
+    namespace BackgroundIframe {
         /**
          * destroy the iframe
          * 
@@ -619,7 +614,7 @@ declare module dijit {
          */
         connect(obj: any, event: any, method: any): any;
     }
-    module _OnDijitClickMixin {
+    namespace _OnDijitClickMixin {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_OnDijitClickMixin.a11yclick.html
          *
@@ -744,7 +739,7 @@ declare module dijit {
          */
         onChange(value: String): void;
     }
-    module _PaletteMixin {
+    namespace _PaletteMixin {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_PaletteMixin.__Dye.html
          *
@@ -823,7 +818,7 @@ declare module dijit {
          */
         getCachedTemplate(templateString: String, alwaysUseString: boolean, doc?: HTMLDocument): any;
     }
-    module _TemplatedMixin {
+    namespace _TemplatedMixin {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_TemplatedMixin._templateCache.html
          *
@@ -4268,7 +4263,7 @@ declare module dijit {
          */
         onUnhover(node: HTMLElement): void;
     }
-    module _TimePicker {
+    namespace _TimePicker {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_TimePicker.__Constraints.html
          *
@@ -5111,7 +5106,7 @@ declare module dijit {
          */
         onChange(date: Date): void;
     }
-    module CalendarLite {
+    namespace CalendarLite {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/CalendarLite._MonthWidget.html
          *
@@ -7519,7 +7514,7 @@ declare module dijit {
          */
         onValueSelected(date: Date): void;
     }
-    module Calendar {
+    namespace Calendar {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/Calendar._MonthDropDown.html
          *
@@ -13835,7 +13830,7 @@ declare module dijit {
          */
         onValidStateChange(isValid: boolean): void;
     }
-    module Dialog {
+    namespace Dialog {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/Dialog._DialogBase.html
          *
@@ -15020,7 +15015,7 @@ declare module dijit {
          */
         onShow(): void;
     }
-    module ColorPalette {
+    namespace ColorPalette {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/ColorPalette._Color.html
          *
@@ -19317,7 +19312,7 @@ declare module dijit {
          */
         onShow(): void;
     }
-    module InlineEditBox {
+    namespace InlineEditBox {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/InlineEditBox._InlineEditor.html
          *
@@ -24824,7 +24819,7 @@ declare module dijit {
          */
         onShow(): void;
     }
-    module MenuBarItem {
+    namespace MenuBarItem {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/MenuBarItem._MenuBarItemMixin.html
          *
@@ -30265,7 +30260,7 @@ declare module dijit {
          */
         onShow(target?: any, position?: any): void;
     }
-    module Tooltip {
+    namespace Tooltip {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/Tooltip._MasterTooltip.html
          *
@@ -35574,7 +35569,7 @@ declare module dijit {
          */
         onShow(): void;
     }
-    module Tree {
+    namespace Tree {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/Tree._TreeNode.html
          *
@@ -36549,7 +36544,7 @@ declare module dijit {
         }
     }
 
-    module _editor {
+    namespace _editor {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_editor/_Plugin.html
          *
@@ -36704,7 +36699,7 @@ declare module dijit {
              */
             updateState(): void;
         }
-        module _Plugin {
+        namespace _Plugin {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/_editor/_Plugin.registry.html
              *
@@ -37991,7 +37986,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module plugins {
+        namespace plugins {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/_editor/plugins/AlwaysShowToolbar.html
              *
@@ -38310,7 +38305,7 @@ declare module dijit {
                  */
                 updateState(): void;
             }
-            module FontChoice {
+            namespace FontChoice {
                 /**
                  * Permalink: http://dojotoolkit.org/api/1.9/dijit/_editor/plugins/FontChoice._FontDropDown.html
                  *
@@ -42320,7 +42315,7 @@ declare module dijit {
                  */
                 updateState(): void;
             }
-            module LinkDialog {
+            namespace LinkDialog {
                 /**
                  * Permalink: http://dojotoolkit.org/api/1.9/dijit/_editor/plugins/LinkDialog.ImgLinkDialog.html
                  *
@@ -43510,7 +43505,7 @@ declare module dijit {
              */
             W3CRange(): void;
         }
-        module range {
+        namespace range {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/_editor/range.W3CRange.html
              *
@@ -43720,7 +43715,7 @@ declare module dijit {
         }
     }
 
-    module _tree {
+    namespace _tree {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_tree/dndSource.html
          *
@@ -43731,7 +43726,7 @@ declare module dijit {
         }
     }
 
-    module form {
+    namespace form {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/_ButtonMixin.html
          *
@@ -46446,7 +46441,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module _DateTimeTextBox {
+        namespace _DateTimeTextBox {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/_DateTimeTextBox.__Constraints.html
              *
@@ -47663,7 +47658,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module _FormSelectWidget {
+        namespace _FormSelectWidget {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/_FormSelectWidget.__SelectOption.html
              *
@@ -67255,7 +67250,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module HorizontalSlider {
+        namespace HorizontalSlider {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/HorizontalSlider._Mover.html
              *
@@ -68563,7 +68558,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module NumberTextBox {
+        namespace NumberTextBox {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/NumberTextBox.__Constraints.html
              *
@@ -73315,7 +73310,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module RangeBoundTextBox {
+        namespace RangeBoundTextBox {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/RangeBoundTextBox.__Constraints.html
              *
@@ -75771,7 +75766,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module Select {
+        namespace Select {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/form/Select._Menu.html
              *
@@ -84193,7 +84188,7 @@ declare module dijit {
         }
     }
 
-    module layout {
+    namespace layout {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/_ContentPaneResizeMixin.html
          *
@@ -85953,7 +85948,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module AccordionContainer {
+        namespace AccordionContainer {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/AccordionContainer._InnerContainer.html
              *
@@ -89391,7 +89386,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module BorderContainer {
+        namespace BorderContainer {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/BorderContainer._Gutter.html
              *
@@ -92987,7 +92982,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module LayoutContainer {
+        namespace LayoutContainer {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/LayoutContainer.ChildWidgetProperties.html
              *
@@ -97013,7 +97008,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module SplitContainer {
+        namespace SplitContainer {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/SplitContainer.ChildWidgetProperties.html
              *
@@ -97925,7 +97920,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module StackContainer {
+        namespace StackContainer {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/StackContainer.ChildWidgetProperties.html
              *
@@ -98824,7 +98819,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module StackController {
+        namespace StackController {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/StackController.StackButton.html
              *
@@ -101655,7 +101650,7 @@ declare module dijit {
              */
             onShow(): void;
         }
-        module TabController {
+        namespace TabController {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/layout/TabController.TabButton.html
              *
@@ -102667,13 +102662,13 @@ declare module dijit {
         }
     }
 
-    module robot {
+    namespace robot {
     }
 
-    module robotx {
+    namespace robotx {
     }
 
-    module tree {
+    namespace tree {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/tree/_dndContainer.html
          *
@@ -103045,7 +103040,7 @@ declare module dijit {
              */
             onMouseOver(widget: dijit.Tree._TreeNode, evt: Event): void;
         }
-        module dndSource {
+        namespace dndSource {
             /**
              * Permalink: http://dojotoolkit.org/api/1.9/dijit/tree/dndSource.__Item.html
              *
@@ -103846,7 +103841,7 @@ declare module dijit {
      */
     interface _base {
     }
-    module _base {
+    namespace _base {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/_base/focus.html
          *
@@ -104656,7 +104651,7 @@ declare module dijit {
          */
         unregisterWin(handle: Object): void;
     }
-    module main {
+    namespace main {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/main._Calendar.html
          *
@@ -105885,7 +105880,7 @@ declare module dijit {
          */
         at(node: HTMLElement, pos: dijit.place.__Position, corners: String[], padding: dijit.place.__Position, layoutNode: any): any;
     }
-    module place {
+    namespace place {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/place.__Position.html
          *
@@ -106004,7 +105999,7 @@ declare module dijit {
          */
         toArray(): any[];
     }
-    module registry {
+    namespace registry {
         /**
          * Permalink: http://dojotoolkit.org/api/1.9/dijit/registry._hash.html
          *

@@ -1,18 +1,7 @@
-// Type definitions for ShellJS 0.8
-// Project: http://shelljs.org, http://github.com/shelljs/shelljs
-// Definitions by: Niklas Mollenhauer <https://github.com/nikeee>
-//                 Vojtech Jasny <https://github.com/voy>
-//                 George Kalpakas <https://github.com/gkalpak>
-//                 Paul Huynh <https://github.com/pheromonez>
-//                 Alexander Futász <https://github.com/aldafu>
-//                 ExE Boss <https://github.com/ExE-Boss>
-//                 Mirco Sanguineti <https://github.com/msanguineti>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node"/>
 
 import child = require("child_process");
-import glob = require("glob");
+import glob = require("fast-glob");
 
 /**
  * Changes the current working directory dir for the duration of the script.
@@ -292,18 +281,8 @@ export interface SedFunction {
      * @param files       The files to process.
      * @return            The new string after replacement.
      */
-    (
-        options: string,
-        searchRegex: string | RegExp,
-        replacement: string,
-        files: string[]
-    ): ShellString;
-    (
-        options: string,
-        searchRegex: string | RegExp,
-        replacement: string,
-        ...files: string[]
-    ): ShellString;
+    (options: string, searchRegex: string | RegExp, replacement: string, files: string[]): ShellString;
+    (options: string, searchRegex: string | RegExp, replacement: string, ...files: string[]): ShellString;
 
     /**
      * Reads an input string from file and performs a JavaScript `replace()`
@@ -314,16 +293,8 @@ export interface SedFunction {
      * @param files       The files to process.
      * @return            The new string after replacement.
      */
-    (
-        searchRegex: string | RegExp,
-        replacement: string,
-        files: string[]
-    ): ShellString;
-    (
-        searchRegex: string | RegExp,
-        replacement: string,
-        ...files: string[]
-    ): ShellString;
+    (searchRegex: string | RegExp, replacement: string, files: string[]): ShellString;
+    (searchRegex: string | RegExp, replacement: string, ...files: string[]): ShellString;
 }
 
 /**
@@ -352,16 +323,8 @@ export interface GrepFunction {
      * @param files The files to process.
      * @return Returns a string containing all lines of the file that match the given regex_filter.
      */
-    (
-        options: string,
-        regex_filter: string | RegExp,
-        files: string[]
-    ): ShellString;
-    (
-        options: string,
-        regex_filter: string | RegExp,
-        ...files: string[]
-    ): ShellString;
+    (options: string, regex_filter: string | RegExp, files: string[]): ShellString;
+    (options: string, regex_filter: string | RegExp, ...files: string[]): ShellString;
 
     /**
      * Reads input string from given files and returns a string containing all lines
@@ -393,9 +356,9 @@ export const grep: GrepFunction;
  * Searches for command in the system's PATH. On Windows looks for .exe, .cmd, and .bat extensions.
  *
  * @param command The command to search for.
- * @return        Returns string containing the absolute path to the command.
+ * @return        Returns string containing the absolute path to the command or `null` if it couldn't be found.
  */
-export function which(command: string): ShellString;
+export function which(command: string): ShellString | null;
 
 export interface EchoFunction {
     /**
@@ -768,10 +731,7 @@ export interface ExecFunction {
      * @return        Returns an object containing the return code and output as string,
      *                or if `{async: true}` was passed, a `ChildProcess`.
      */
-    (
-        command: string,
-        options: ExecOptions & { async: true }
-    ): child.ChildProcess;
+    (command: string, options: ExecOptions & { async: true }): child.ChildProcess;
 
     /**
      * Executes the given command.
@@ -790,11 +750,7 @@ export interface ExecFunction {
      * @param options Silence and synchronous options.
      * @param callback Receives code and output asynchronously.
      */
-    (
-        command: string,
-        options: ExecOptions,
-        callback: ExecCallback
-    ): child.ChildProcess;
+    (command: string, options: ExecOptions, callback: ExecCallback): child.ChildProcess;
 
     /**
      * Executes the given command synchronously.
@@ -819,12 +775,10 @@ export const exec: ExecFunction;
 export type ExecCallback = (
     /** The process exit code. */
     code: number,
-
     /** The process standard output. */
     stdout: string,
-
     /** The process standard error output. */
-    stderr: string
+    stderr: string,
 ) => any;
 
 export interface ExecOptions extends child.ExecOptions {
@@ -871,6 +825,53 @@ export interface ExecOutputReturnValue {
 
     /** The process standard error output. */
     stderr: string;
+}
+
+/**
+ * Executes the given command synchronously. This is intended as an easier
+ * alternative for `exec()`], with better security around globbing, comamnd
+ * injection, and variable expansion. This is guaranteed to only run one
+ * external command, and won't give special treatment for any shell characters
+ * (ex. this treats `|` as a literal character, not as a shell pipeline).
+ *
+ * By default, this performs globbing on all platforms, but you can disable this
+ * with `set('-f')`.
+ *
+ * This **does not** support asynchronous mode. If you need asynchronous
+ * command execution, check out [execa](https://www.npmjs.com/package/execa) or
+ * the node builtin `child_process.execFile()` instead.
+ *
+ * @param arg1 Command to run.
+ * @param args Any number of arguments of arguments. If the last argument given
+ * 	           is an object, it will be created as a `CmdOptions` object.
+ */
+export const cmd: CmdFunction;
+
+export interface CmdFunction {
+    (arg1: string, ...args: [...string[], string | CmdOptions]): ShellString;
+}
+
+export interface CmdOptions {
+    /**
+     * Change the current working directory only for this `cmd()` invocation.
+     *
+     * @default process.cwd()
+     */
+    cwd?: string;
+
+    /**
+     * Raise or decrease the default buffer size for stdout/stderr.
+     *
+     * @default 20,971,520 (or 20 * 1024 * 1024)
+     */
+    maxBuffer?: number;
+
+    /**
+     * Change the default timeout.
+     *
+     * @default 0
+     */
+    timeout?: number;
 }
 
 export interface ShellReturnValue extends ExecOutputReturnValue {
@@ -1101,14 +1102,8 @@ export interface TouchOptionsArray {
 }
 
 export interface TouchFunction {
-    (
-        options: TouchOptionsLiteral | TouchOptionsArray,
-        files: string[]
-    ): ShellString;
-    (
-        options: TouchOptionsLiteral | TouchOptionsArray,
-        ...files: string[]
-    ): ShellString;
+    (options: TouchOptionsLiteral | TouchOptionsArray, files: string[]): ShellString;
+    (options: TouchOptionsLiteral | TouchOptionsArray, ...files: string[]): ShellString;
 
     (files: string[]): ShellString;
     (...files: string[]): ShellString;
@@ -1245,7 +1240,7 @@ export interface ShellConfig {
     /**
      * Passed to glob.sync() instead of the default options ({}).
      */
-    globOptions: glob.IOptions;
+    globOptions: glob.Options;
 
     /**
      * Absolute path of the Node binary. Default is null (inferred).

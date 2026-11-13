@@ -1,6 +1,20 @@
+// 2D Graphing Calculator
+// —————————————————————————————————————————————————————————————————————
+
 const elt = document.getElementById("calculator") as HTMLDivElement;
 const calculator = Desmos.GraphingCalculator(elt);
-calculator.setExpression({ id: "graph1", latex: "y=x^2" });
+
+// Set expression
+calculator.setExpression({ id: "graph1", type: "expression", latex: "y=x^2" });
+// Set note
+calculator.setExpression({ id: "graph2", type: "text", text: "Desmos is cool!" });
+// Set table
+calculator.setExpression({ id: "graph3", type: "table", columns: [] });
+
+// Readonly expressions
+calculator.setExpression({ id: "readonly1", readonly: true, type: "expression", latex: "y=x^2" });
+calculator.setExpression({ id: "readonly2", readonly: true, type: "text", text: "Desmos is cool!" });
+calculator.setExpression({ id: "readonly3", readonly: true, type: "table", columns: [] });
 
 // Save the current state of a calculator instance
 const state = calculator.getState();
@@ -65,7 +79,7 @@ calculator.asyncScreenshot(
         height: 300,
         mathBounds: { left: -5, right: 5 },
     },
-    setImageSrc
+    setImageSrc,
 );
 
 // Use the smallest bounding box containing the current viewport and preserve the aspect ratio
@@ -73,7 +87,9 @@ calculator.asyncScreenshot(setImageSrc);
 
 // Preserve the aspect ratio if the axes are square, otherwise show the exact region
 const opts = {
-    mode: calculator.isProjectionUniform() ? "contain" as const : "stretch" as const,
+    mode: calculator.isProjectionUniform()
+        ? ("contain" as const)
+        : ("stretch" as const),
     width: 500,
     height: 300,
     mathBounds: { left: -5, right: 5, bottom: -20, top: 0 },
@@ -93,10 +109,15 @@ calculator.setExpression({ id: "m", latex: "m=3" });
 // Inequality to shade a circle at the origin
 calculator.setExpression({ id: "circle1", latex: "x^2 + y^2 < 1" });
 
-// Restrict the slider for the m variable to the integers from 1 to 10
+// Set slider bounds
 calculator.setExpression({
     id: "m",
     sliderBounds: { min: 1, max: 10, step: 1 },
+});
+// Omit slider step
+calculator.setExpression({
+    id: "m",
+    sliderBounds: { min: 1, max: 10 },
 });
 
 // Table with three columns. Note that the first two columns have explicitly
@@ -114,6 +135,19 @@ calculator.setExpression({
             dragMode: Desmos.DragModes.XY,
         },
     ],
+});
+
+// Observe helper expressions
+var a = calculator.HelperExpression({ latex: "a" });
+
+a.observe("numericValue", function() {
+    console.log(a.numericValue);
+});
+
+var L = calculator.HelperExpression({ latex: "L" });
+
+L.observe("listValue", function() {
+    console.log(L.listValue);
 });
 
 // Set the x axis to have arrows on both ends
@@ -161,7 +195,15 @@ document.addEventListener("mousemove", (evt) => {
     );
 });
 
-// Add three different observers to the 'xAxisLabel' property
+// Observe change
+calculator.observeEvent("change", function(eventName, event) {
+    console.log("Change occurred");
+    if (event.isUserInitiated) {
+        // throttledSave();
+    }
+});
+
+// Add three different observers to the "xAxisLabel" property
 calculator.settings.observe("xAxisLabel.foo", () => {});
 calculator.settings.observe("xAxisLabel.bar", () => {});
 calculator.settings.observe("xAxisLabel.baz", () => {});
@@ -232,29 +274,63 @@ calculator.updateSettings({ fontSize: Desmos.FontSizes.LARGE });
 calculator.updateSettings({ fontSize: 11 });
 
 // Inspect available languages
-Desmos.supportedLanguages; // ['es', 'fr']
+Desmos.supportedLanguages; // ["es", "fr"]
 
 // Set a calculator instance to French
 calculator.updateSettings({ language: "fr" });
 
 // All features enabled
-Desmos.enabledFeatures ===
-    {
-        GraphingCalculator: true,
-        FourFunctionCalculator: true,
-        ScientificCalculator: true,
-    };
+// $ExpectType boolean
+Desmos.enabledFeatures.Calculator3D
+    && Desmos.enabledFeatures.FourFunctionCalculator
+    && Desmos.enabledFeatures.GeometryCalculator
+    && Desmos.enabledFeatures.GraphingCalculator
+    && Desmos.enabledFeatures.ScientificCalculator;
 
 // Only graphing calculator enabled
-Desmos.enabledFeatures ===
-    {
-        GraphingCalculator: true,
-        FourFunctionCalculator: false,
-        ScientificCalculator: false,
-    };
+// $ExpectType boolean
+Desmos.enabledFeatures.GraphingCalculator
+    && !Desmos.enabledFeatures.Calculator3D
+    && !Desmos.enabledFeatures.FourFunctionCalculator
+    && !Desmos.enabledFeatures.GeometryCalculator
+    && !Desmos.enabledFeatures.ScientificCalculator;
 
-const elt1 = document.getElementById("four-function-calculator") as HTMLDivElement;
-const calculator1 = Desmos.FourFunctionCalculator(elt1);
+// Four-Function Calculator
+// —————————————————————————————————————————————————————————————————————
+
+const elt1 = document.getElementById(
+    "four-function-calculator",
+) as HTMLDivElement;
+const fourFunctionCalculator = Desmos.FourFunctionCalculator(elt1);
+
+// Scientific Calculator
+// —————————————————————————————————————————————————————————————————————
 
 const elt2 = document.getElementById("scientific-calculator") as HTMLDivElement;
-const calculator2 = Desmos.ScientificCalculator(elt2);
+const scientificCalculator = Desmos.ScientificCalculator(elt2);
+
+// 3D Graphing Calculator
+// —————————————————————————————————————————————————————————————————————
+
+const elt3 = document.getElementById("calculator-3d") as HTMLDivElement;
+const calculator3d = Desmos.Calculator3D(elt3);
+
+calculator3d.setExpression({
+    id: "1",
+    latex: "y=x",
+    color: Desmos.Colors.BLUE,
+});
+
+// Geometry Calculator
+// —————————————————————————————————————————————————————————————————————
+
+const eltGeometry = document.getElementById(
+    "calculator-geometry",
+) as HTMLDivElement;
+const geometryCalculator = Desmos.Geometry(eltGeometry);
+
+geometryCalculator.setExpression({
+    id: "1",
+    latex: "y=x",
+    color: Desmos.Colors.BLUE,
+});

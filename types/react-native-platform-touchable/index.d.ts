@@ -1,12 +1,20 @@
-// Type definitions for react-native-platform-touchable 1.1
-// Project: https://github.com/react-native-community/react-native-platform-touchable
-// Definitions by: Toni Granados <https://github.com/tngranados>
-//                 Joel Nordström <https://github.com/iwikal>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
 import * as React from "react";
-import { BackgroundPropType, RippleBackgroundPropType, ThemeAttributeBackgroundPropType, TouchableWithoutFeedbackProps } from "react-native";
+import { TouchableWithoutFeedbackProps } from "react-native";
+
+// These were removed from react-native's bundled types; they mirror the
+// TouchableNativeFeedback background values this library accepts and returns.
+export interface ThemeAttributeBackgroundPropType {
+    type: "ThemeAttrAndroid";
+    attribute: "selectableItemBackground" | "selectableItemBackgroundBorderless";
+}
+
+export interface RippleBackgroundPropType {
+    type: "RippleAndroid";
+    color?: number | null | undefined;
+    borderless?: boolean | undefined;
+}
+
+export type BackgroundPropType = ThemeAttributeBackgroundPropType | RippleBackgroundPropType;
 
 export interface PlatformTouchableProps extends TouchableWithoutFeedbackProps {
     // TouchableOpacity (default iOS)

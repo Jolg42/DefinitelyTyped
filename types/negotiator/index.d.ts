@@ -1,8 +1,3 @@
-// Type definitions for negotiator 0.6
-// Project: https://github.com/jshttp/negotiator#readme
-// Definitions by: BendingBender <https://github.com/BendingBender>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 export = Negotiator;
 
 declare class Negotiator {
@@ -17,7 +12,7 @@ declare class Negotiator {
      * @param [availableMediaTypes] When provided, returns the most preferred media type
      * from a list of available media types.
      */
-    mediaType(availableMediaTypes?: string[]): string | undefined;
+    mediaType(availableMediaTypes?: readonly string[]): string | undefined;
 
     /**
      * Returns an array of preferred media types ordered by the client preference
@@ -25,7 +20,7 @@ declare class Negotiator {
      * @param [availableMediaTypes] When provided, returns an array of preferred media
      * types ordered by priority from a list of available media types.
      */
-    mediaTypes(availableMediaTypes?: string[]): string[];
+    mediaTypes(availableMediaTypes?: readonly string[]): string[];
 
     /**
      * Returns the most preferred language from the client.
@@ -33,7 +28,7 @@ declare class Negotiator {
      * @param [availableLanguages] When provided, returns the most preferred language
      * from a list of available languages.
      */
-    language(availableLanguages?: string[]): string | undefined;
+    language(availableLanguages?: readonly string[]): string | undefined;
 
     /**
      * Returns an array of preferred languages ordered by the client preference.
@@ -41,7 +36,7 @@ declare class Negotiator {
      * @param [availableLanguages] When provided, returns an array of preferred languages
      * ordered by priority from a list of available languages.
      */
-    languages(availableLanguages?: string[]): string[];
+    languages(availableLanguages?: readonly string[]): string[];
 
     /**
      * Returns the most preferred charset from the client.
@@ -49,7 +44,7 @@ declare class Negotiator {
      * @param [availableCharsets] When provided, returns the most preferred charset
      * from a list of available charsets.
      */
-    charset(availableCharsets?: string[]): string | undefined;
+    charset(availableCharsets?: readonly string[]): string | undefined;
 
     /**
      * Returns an array of preferred charsets ordered by the client preference.
@@ -57,7 +52,7 @@ declare class Negotiator {
      * @param [availableCharsets] When provided, returns an array of preferred charsets
      * ordered by priority from a list of available charsets.
      */
-    charsets(availableCharsets?: string[]): string[];
+    charsets(availableCharsets?: readonly string[]): string[];
 
     /**
      * Returns the most preferred encoding from the client.
@@ -65,7 +60,7 @@ declare class Negotiator {
      * @param [availableEncodings] When provided, returns the most preferred encoding
      * from a list of available encodings.
      */
-    encoding(availableEncodings?: string[]): string | undefined;
+    encoding(availableEncodings?: readonly string[]): string | undefined;
 
     /**
      * Returns an array of preferred encodings ordered by the client preference.
@@ -73,11 +68,11 @@ declare class Negotiator {
      * @param [availableEncodings] When provided, returns an array of preferred encodings
      * ordered by priority from a list of available encodings.
      */
-    encodings(availableEncodings?: string[]): string[];
+    encodings(availableEncodings?: readonly string[]): string[];
 }
 
 declare namespace Negotiator {
     interface Headers {
-        [key: string]: string | string[] | undefined;
+        readonly [key: string]: string | (readonly string[]) | undefined;
     }
 }

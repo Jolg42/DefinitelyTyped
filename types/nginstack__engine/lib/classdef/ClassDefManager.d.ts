@@ -2,8 +2,8 @@ export = ClassDefManager;
 declare function ClassDefManager(
     opt_options?:
         | {
-              vfs: any;
-              classes: any;
+              vfs: DataSet;
+              classes: DataSet;
           }
         | Record<any, any>,
     ...args: any[]
@@ -12,15 +12,15 @@ declare class ClassDefManager {
     constructor(
         opt_options?:
             | {
-                  vfs: any;
-                  classes: any;
+                  vfs: DataSet;
+                  classes: DataSet;
               }
             | Record<any, any>,
         ...args: any[]
     );
     vfs: any;
     classes: any;
-    cache: {};
+    private cache_;
     private masterDetailFieldsToValidate_;
     strictMode: boolean;
     protected runStartupScripts(): void;
@@ -29,30 +29,29 @@ declare class ClassDefManager {
     private strictEvaluator_;
     private validateFields_;
     private getDef_;
+    private hasModelDefCache_;
     getModelDef(
         classKey: number,
-        opt_options?:
-            | Record<any, any>
-            | {
-                  ignoredFileKeys: number[];
-                  forceStrictMode: boolean;
-              }
+        options?: {
+            ignoredFileKeys?: number[];
+            forceStrictMode?: boolean;
+        }
     ): ModelDef;
     getViewDef(
         classKey: number,
         opt_options?:
-            | Record<any, any>
             | {
                   ignoredFileKeys: number[];
               }
-    ): ModelDef;
+            | Record<any, any>
+    ): ViewDef;
     getConfig(
         classKey: number,
         opt_options?:
-            | Record<any, any>
             | {
                   ignoredFileKeys: number[];
               }
+            | Record<any, any>
     ): ConfigDef;
     getClassDef(classKey: number, opt_ignoredClassKeys?: number[]): ModelDef;
     getModelDefBySource(src: string, parent: number, opt_classKey?: number): ModelDef;
@@ -68,23 +67,37 @@ declare class ClassDefManager {
     clearCache(): void;
     hasOwnViewDef(classKey: number): boolean;
     hasOwnModelDef(classKey: number): boolean;
+    getJustToGroupChildren(classKey: number): string;
 }
 declare namespace ClassDefManager {
-    const protectedFieldProperties: string[];
-    const protectedFieldEvents: string[];
-    const protectedModelDefProperties: string[];
-    const protectedModelDefEvents: string[];
-    namespace constructors {
-        export { ModelDef as VIEW };
-        export { ModelDef as MODEL };
-        export { ConfigDef as CONFIG };
-        export { ModelDef as NON_STRICT_MODEL };
-    }
-    function getParentClass(classKey: number | DBKey): number;
-    function getClassVersion(classKey: number | DBKey): number;
-    function getInstance(): ClassDefManager;
+    export {
+        protectedFieldProperties,
+        protectedFieldEvents,
+        protectedModelDefProperties,
+        protectedModelDefEvents,
+        constructors,
+        getParentClass,
+        getClassVersion,
+        getInstance,
+        DataSet,
+        ViewDef,
+    };
 }
-declare const classes: import('../database/Classes.js');
 import ModelDef = require('./ModelDef.js');
 import ConfigDef = require('./ConfigDef.js');
+declare let protectedFieldProperties: string[];
+declare let protectedFieldEvents: string[];
+declare let protectedModelDefProperties: string[];
+declare let protectedModelDefEvents: string[];
+declare namespace constructors {
+    export { ModelDef as VIEW };
+    export { ModelDef as MODEL };
+    export { ConfigDef as CONFIG };
+    export { ModelDef as NON_STRICT_MODEL };
+}
+declare function getParentClass(classKey: number | DBKey): number;
+declare function getClassVersion(classKey: number | DBKey): number;
+declare function getInstance(): ClassDefManager;
+type DataSet = import('../dataset/DataSet');
+type ViewDef = ModelDef;
 import DBKey = require('../dbkey/DBKey.js');

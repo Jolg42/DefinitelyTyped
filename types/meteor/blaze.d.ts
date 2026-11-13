@@ -1,9 +1,9 @@
-import * as $ from 'jquery';
+import $ = require("jquery");
 
 import { Tracker } from 'meteor/tracker';
 import { Meteor } from 'meteor/meteor';
 declare module 'meteor/blaze' {
-    module Blaze {
+    namespace Blaze {
         var View: ViewStatic;
 
         interface ViewStatic {

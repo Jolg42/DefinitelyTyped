@@ -1,52 +1,17 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import * as ReactDOMServer from 'react-dom/server';
-import * as ReactDOMNodeStream from 'react-dom/node-stream';
-import * as ReactTestUtils from 'react-dom/test-utils';
+import React from "react";
+import * as ReactDOM from "react-dom";
+import * as ReactDOMClient from "react-dom/client";
+import * as ReactDOMServer from "react-dom/server";
+import * as ReactDOMStatic from "react-dom/static";
+import * as ReactTestUtils from "react-dom/test-utils";
 
 declare function describe(desc: string, f: () => void): void;
 declare function it(desc: string, f: () => void): void;
 
-class TestComponent extends React.Component<{x: string}> { }
-
-describe('ReactDOM', () => {
-    it('render', () => {
-        const rootElement = document.createElement('div');
-        ReactDOM.render(React.createElement('div'), rootElement);
-        ReactDOM.render(React.createElement('div'), document.createDocumentFragment());
-        ReactDOM.render(React.createElement('div'), document);
-    });
-
-    it('hydrate', () => {
-        const rootElement = document.createElement('div');
-        ReactDOM.hydrate(React.createElement('div'), rootElement);
-        ReactDOM.hydrate(React.createElement('div'), document.createDocumentFragment());
-        ReactDOM.hydrate(React.createElement('div'), document);
-    });
-
-    it('unmounts', () => {
-        const rootElement = document.createElement('div');
-        ReactDOM.render(React.createElement('div'), rootElement);
-        ReactDOM.unmountComponentAtNode(rootElement);
-    });
-
-    it('works with document fragments', () => {
-        const fragment = document.createDocumentFragment();
-        ReactDOM.render(React.createElement('div'), fragment);
-        ReactDOM.unmountComponentAtNode(fragment);
-    });
-
-    it('find dom node', () => {
-        const rootElement = document.createElement('div');
-        ReactDOM.render(React.createElement('div'), rootElement);
-        ReactDOM.findDOMNode(rootElement);
-        ReactDOM.findDOMNode(null);
-        ReactDOM.findDOMNode(undefined);
-    });
-
-    it('createPortal', () => {
-        const rootElement = document.createElement('div');
-        const portalTarget = document.createElement('div');
+describe("ReactDOM", () => {
+    it("createPortal", () => {
+        const rootElement = document.createElement("div");
+        const portalTarget = document.createElement("div");
 
         class ClassComponent extends React.Component {
             render() {
@@ -54,186 +19,890 @@ describe('ReactDOM', () => {
             }
         }
 
-        ReactDOM.createPortal(<div />, document.createElement('div'));
-        ReactDOM.createPortal(<div />, document.createElement('div'), null);
-        ReactDOM.createPortal(<div />, document.createElement('div'), 'key');
+        ReactDOM.createPortal(<div />, document.createElement("div"));
+        ReactDOM.createPortal(<div />, document.createElement("div"), null);
+        ReactDOM.createPortal(<div />, document.createElement("div"), "key");
 
-        ReactDOM.createPortal(React.createElement('div'), document.createElement('div'));
-        ReactDOM.createPortal(React.createElement('div'), document.createElement('div'), null);
-        ReactDOM.createPortal(React.createElement('div'), document.createElement('div'), 'key');
-
-        ReactDOM.render(<ClassComponent />, rootElement);
+        ReactDOM.createPortal(React.createElement("div"), document.createElement("div"));
+        ReactDOM.createPortal(React.createElement("div"), document.createElement("div"), null);
+        ReactDOM.createPortal(React.createElement("div"), document.createElement("div"), "key");
+        ReactDOM.createPortal(React.createElement("div"), document.createDocumentFragment());
     });
 
-    it('flushSync', () => {
+    it("flushSync", () => {
         // $ExpectType void
         ReactDOM.flushSync(() => {});
         // $ExpectType number
         ReactDOM.flushSync(() => 42);
-        // $ExpectType number
-        ReactDOM.flushSync(() => 42, 'not used');
-        // $ExpectType number
-        ReactDOM.flushSync((a: string) => 42, 'not used');
-        // $ExpectError
+        // @ts-expect-error
+        ReactDOM.flushSync(() => 42, "not used");
+        // @ts-expect-error
+        ReactDOM.flushSync((a: string) => 42, "not used");
+        // @ts-expect-error
         ReactDOM.flushSync((a: string) => 42);
-        // $ExpectError
+        // @ts-expect-error
         ReactDOM.flushSync((a: string) => 42, 100);
     });
 });
 
-describe('ReactDOMServer', () => {
-    it('renderToString', () => {
-        const content: string = ReactDOMServer.renderToString(React.createElement('div'));
+const importMap: ReactDOMStatic.ReactImportMap = {
+    imports: {
+        "moduleA": "/modules/moduleA.v1.0.0.js",
+    },
+    scopes: {
+        "/modules/": {
+            "moduleB": "/modules/moduleB.v1.0.0.js",
+        },
+    },
+};
+
+describe("ReactDOMServer", () => {
+    it("renderToString", () => {
+        const content: string = ReactDOMServer.renderToString(React.createElement("div"));
+        ReactDOMServer.renderToString(React.createElement("div"), {
+            identifierPrefix: "react-18-app",
+        });
     });
 
-    it('renderToStaticMarkup', () => {
-        const content: string = ReactDOMServer.renderToStaticMarkup(React.createElement('div'));
+    it("renderToStaticMarkup", () => {
+        const content: string = ReactDOMServer.renderToStaticMarkup(React.createElement("div"));
+        ReactDOMServer.renderToStaticMarkup(React.createElement("div"), {
+            identifierPrefix: "react-18-app",
+        });
     });
 });
 
-describe('ReactDOMNodeStream', () => {
-    it('renderToStream', () => {
-        const content: any = ReactDOMNodeStream.renderToStream(React.createElement('div'));
+declare const children: React.ReactNode;
+describe("ReactDOMStatic", () => {
+    it("prerender", async () => {
+        const prerenderController = new AbortController();
+        setTimeout(prerenderController.abort, 1);
+        const { prelude, postponed } = await ReactDOMStatic.prerender(children, { signal: prerenderController.signal });
+
+        let stream: ReadableStream<Uint8Array>;
+        if (postponed !== null) {
+            const resumeController = new AbortController();
+            const reactStream = await ReactDOMServer.resume(children, postponed, {
+                nonce: "nonce",
+                signal: resumeController.signal,
+                onError(error) {
+                    return (error as { digest?: string | undefined }).digest;
+                },
+            });
+            await reactStream.allReady;
+            // In a real app you'd also have to flush the prelude first
+            stream = reactStream;
+        } else {
+            stream = prelude;
+        }
+
+        await ReactDOMServer.resume(
+            children,
+            // @ts-expect-error Requires the opaque postponed state
+            {},
+        );
     });
 
-    it('renderToStaticStream', () => {
-        const content: any = ReactDOMNodeStream.renderToStaticStream(React.createElement('div'));
+    it("prerenderToNodeStream", async () => {
+        const prelude: NodeJS.ReadableStream =
+            (await ReactDOMStatic.prerenderToNodeStream(React.createElement("div"))).prelude;
+        ReactDOMStatic.prerenderToNodeStream(React.createElement("div"), {
+            bootstrapScripts: ["./my-script.js"],
+            maxHeadersLength: 4000,
+            importMap,
+            onHeaders(headers) {
+                // $ExpectType Headers
+                headers;
+            },
+        });
+    });
+
+    it("resumeToPipeableStream", async () => {
+        const { postponed } = await ReactDOMStatic.prerenderToNodeStream(children);
+        if (postponed !== null) {
+            ReactDOMServer.resumeToPipeableStream(children, postponed, {
+                nonce: { script: "script-nonce", style: "style-nonce" },
+                onShellReady() {},
+                onShellError(error) {
+                    console.error(error);
+                },
+                onAllReady() {},
+                onError(error, errorInfo) {
+                    // $ExpectType ErrorInfo
+                    errorInfo;
+                    return (error as { digest?: string | undefined }).digest;
+                },
+            });
+            ReactDOMServer.resumeToPipeableStream(children, postponed, {
+                // @ts-expect-error The Node.js stream variant does not support an abort signal
+                signal: new AbortController().signal,
+            });
+        }
     });
 });
 
-describe('React dom test utils', () => {
-    it('Simulate', () => {
-        const element = document.createElement('div');
-        const dom = ReactDOM.render(
-            React.createElement('input', { type: 'text' }),
-            element
-        ) as Element;
-        const node = ReactDOM.findDOMNode(dom) as HTMLInputElement;
-
-        node.value = 'giraffe';
-        ReactTestUtils.Simulate.change(node);
-        ReactTestUtils.Simulate.keyDown(node, { key: "Enter", keyCode: 13, which: 13 });
-    });
-
-    it('renderIntoDocument', () => {
-        const element = React.createElement('input', { type: 'text' });
-        ReactTestUtils.renderIntoDocument(element);
-    });
-
-    it('mockComponent', () => {
-        ReactTestUtils.mockComponent(TestComponent, 'div');
-    });
-
-    it('isElement', () => {
-        const element = React.createElement(TestComponent);
-        const isReactElement: boolean = ReactTestUtils.isElement(element);
-    });
-
-    it('isElementOfType', () => {
-        const element = React.createElement(TestComponent);
-        const isReactElement: boolean = ReactTestUtils.isElementOfType(element, TestComponent);
-    });
-
-    it('isDOMComponent', () => {
-        const element = React.createElement('div');
-        const instance = ReactTestUtils.renderIntoDocument(element) as HTMLDivElement;
-        const isDOMElement: boolean = ReactTestUtils.isDOMComponent(instance);
-    });
-
-    it('isCompositeComponent', () => {
-        const element = React.createElement(TestComponent);
-        const instance: TestComponent = ReactTestUtils.renderIntoDocument(element);
-        const isCompositeComponent: boolean = ReactTestUtils.isCompositeComponent(instance);
-    });
-
-    it('isCompositeComponentWithType', () => {
-        const element = React.createElement(TestComponent);
-        const instance: TestComponent = ReactTestUtils.renderIntoDocument(element);
-        const isCompositeComponent: boolean = ReactTestUtils.isCompositeComponentWithType(instance, TestComponent);
-    });
-
-    it('findAllInRenderedTree', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.findAllInRenderedTree(component, (i: React.ReactInstance) => true);
-    });
-
-    it('scryRenderedDOMComponentsWithClass', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.scryRenderedDOMComponentsWithClass(component, 'class');
-    });
-
-    it('findRenderedDOMComponentWithClass', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.findRenderedDOMComponentWithClass(component, 'class');
-    });
-
-    it('scryRenderedDOMComponentsWithTag', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
-    });
-
-    it('findRenderedDOMComponentWithTag', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.findRenderedDOMComponentWithTag(component, 'tag');
-    });
-
-    it('scryRenderedComponentsWithType', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.scryRenderedComponentsWithType(component, TestComponent);
-    });
-
-    it('findRenderedComponentWithType', () => {
-        const component = ReactTestUtils.renderIntoDocument(React.createElement(TestComponent));
-        ReactTestUtils.findRenderedComponentWithType(component, TestComponent);
-    });
-
-    describe('Shallow Rendering', () => {
-        it('createRenderer', () => {
-            const component = React.createElement(TestComponent);
-            const shallowRenderer = ReactTestUtils.createRenderer();
-        });
-
-        it('shallowRenderer.render', () => {
-            const component = React.createElement(TestComponent);
-            const shallowRenderer = ReactTestUtils.createRenderer();
-            shallowRenderer.render(component);
-        });
-
-        it('shallowRenderer.getRenderOutput', () => {
-            const component = React.createElement(TestComponent);
-            const shallowRenderer = ReactTestUtils.createRenderer();
-            shallowRenderer.getRenderOutput();
-        });
-    });
-
-    describe('act', () => {
-        describe('with sync callback', () => {
-            it('accepts a callback that is void', () => {
+describe("React dom test utils", () => {
+    describe("act", () => {
+        describe("with sync callback", () => {
+            it("accepts a callback that is void", () => {
                 ReactTestUtils.act(() => {});
             });
-            it('rejects a callback that returns null', () => {
-                // $ExpectError
-                ReactTestUtils.act(() => null);
+            it("accepts a callback that returns a value", () => {
+                const result = ReactTestUtils.act(() => "value");
+                result.then(x => {});
             });
-            it('returns a type that is not Promise-like', () => {
+            it("returns void", () => {
                 // tslint:disable-next-line no-void-expression
                 const result = ReactTestUtils.act(() => {});
-                // $ExpectError
-                result.then((x) => {});
+                // @ts-expect-error
+                result.then;
             });
         });
-        describe('with async callback', () => {
-            it('accepts a callback that is void', async () => {
+        describe("with async callback", () => {
+            it("accepts a callback that is void", async () => {
                 await ReactTestUtils.act(async () => {});
             });
-            it('rejects a callback that returns a value', async () => {
-                // $ExpectError
+            it("a callback that returns null", async () => {
                 await ReactTestUtils.act(async () => null);
             });
-            it('returns a Promise-like', () => {
+            it("a callback that returns a value", async () => {
+                await ReactTestUtils.act(async () => "value");
+            });
+            it("returns a Promise-like", () => {
                 const result = ReactTestUtils.act(async () => {});
-                result.then((x) => {});
+                result.then(x => {});
             });
         });
     });
 });
+
+async function batchTests() {
+    // $ExpectType string
+    const output1 = ReactDOM.unstable_batchedUpdates(input => {
+        // $ExpectType number
+        input;
+        return "hi";
+    }, 1);
+}
+
+function createRoot(validContainer: Element | DocumentFragment | Document) {
+    const root = ReactDOMClient.createRoot(document.documentElement);
+
+    root.render(<div>initial render</div>);
+    root.render(false);
+
+    ReactDOMClient.createRoot(document, {
+        onUncaughtError: (error, errorInfo) => {
+            // $ExpectType unknown
+            error;
+            // $ExpectType string | undefined
+            errorInfo.componentStack;
+            // @ts-expect-error -- only on onRecoverableError
+            errorInfo.digest;
+            // @ts-expect-error -- only on onCaughtError
+            errorInfo.errorBoundary;
+        },
+        onCaughtError: (error, errorInfo) => {
+            // $ExpectType unknown
+            error;
+            // $ExpectType string | undefined
+            errorInfo.componentStack;
+            // @ts-expect-error -- only on onRecoverableError
+            errorInfo.digest;
+            // $ExpectType Component<unknown, {}, any> | undefined
+            errorInfo.errorBoundary;
+        },
+    });
+
+    ReactDOMClient.createRoot(document);
+    ReactDOMClient.createRoot(validContainer);
+}
+
+function hydrateRoot() {
+    const hydrateable = ReactDOMClient.hydrateRoot(document, <div>initial render</div>, {
+        identifierPrefix: "react-18-app",
+        onRecoverableError: (error, errorInfo) => {
+            console.error(error);
+            console.info(errorInfo.componentStack);
+        },
+    });
+    hydrateable.render(<div>render update</div>);
+    ReactDOMClient.hydrateRoot(document, {
+        // Forgot `initialChildren`
+        // @ts-expect-error
+        identifierPrefix: "react-18-app",
+    });
+
+    ReactDOMClient.hydrateRoot(document.getElementById("root")!, false);
+
+    ReactDOMClient.hydrateRoot(document.body, null, {
+        onUncaughtError: (error, errorInfo) => {
+            // $ExpectType unknown
+            error;
+            // $ExpectType string | undefined
+            errorInfo.componentStack;
+            // @ts-expect-error -- only on onRecoverableError
+            errorInfo.digest;
+            // @ts-expect-error -- only on onCaughtError
+            errorInfo.errorBoundary;
+        },
+        onCaughtError: (error, errorInfo) => {
+            // $ExpectType unknown
+            error;
+            // $ExpectType string | undefined
+            errorInfo.componentStack;
+            // @ts-expect-error -- only on onRecoverableError
+            errorInfo.digest;
+            // $ExpectType Component<unknown, {}, any> | undefined
+            errorInfo.errorBoundary;
+        },
+    });
+}
+
+/**
+ * source: https://react.dev/reference/react-dom/server/renderToPipeableStream
+ */
+function pipeableStreamDocumentedExample() {
+    function App() {
+        return null;
+    }
+
+    interface Response extends NodeJS.WritableStream {
+        send(content: string): void;
+        setHeader(key: string, value: unknown): void;
+        statusCode: number;
+    }
+
+    let didError = false;
+    const response: Response = {} as any;
+    const { pipe, abort } = ReactDOMServer.renderToPipeableStream(<App />, {
+        bootstrapScripts: ["/main.js"],
+        maxHeadersLength: 4000,
+        importMap,
+        onHeaders(headers) {
+            // $ExpectType HeadersDescriptor
+            headers;
+        },
+        onShellReady() {
+            response.statusCode = didError ? 500 : 200;
+            response.setHeader("content-type", "text/html");
+            pipe(response);
+        },
+        onShellError(error) {
+            response.statusCode = 500;
+            response.setHeader("content-type", "text/html");
+            response.send("<h1>Something went wrong</h1>");
+        },
+        onAllReady() {},
+        onError(err) {
+            didError = true;
+            console.error(err);
+        },
+        formState: [1, "", "", 0] as unknown as ReactDOMClient.ReactFormState,
+    });
+
+    setTimeout(() => {
+        // $ExpectType void
+        abort();
+    }, 1000);
+
+    setTimeout(() => {
+        // $ExpectType void
+        abort("timeout");
+    }, 1000);
+}
+
+/**
+ * source: https://react.dev/reference/react-dom/server/renderToPipeableStream
+ */
+function pipeableStreamDocumentedStringExample() {
+    function App() {
+        return null;
+    }
+
+    interface Response extends NodeJS.WritableStream {
+        send(content: string): void;
+        setHeader(key: string, value: unknown): void;
+        statusCode: number;
+    }
+
+    let didError = false;
+    const response: Response = {} as any;
+    const { pipe, abort } = ReactDOMServer.renderToPipeableStream("app", {
+        bootstrapScripts: ["/main.js"],
+        maxHeadersLength: 4000,
+        importMap,
+        onHeaders(headers) {
+            // $ExpectType HeadersDescriptor
+            headers;
+        },
+        onShellReady() {
+            response.statusCode = didError ? 500 : 200;
+            response.setHeader("content-type", "text/html");
+            pipe(response);
+        },
+        onShellError(error) {
+            response.statusCode = 500;
+            response.setHeader("content-type", "text/html");
+            response.send("<h1>Something went wrong</h1>");
+        },
+        onAllReady() {},
+        onError(err) {
+            didError = true;
+            console.error(err);
+        },
+        formState: [1, "", "", 0] as unknown as ReactDOMClient.ReactFormState,
+    });
+
+    setTimeout(() => {
+        // $ExpectType void
+        abort();
+    }, 1000);
+
+    setTimeout(() => {
+        // $ExpectType void
+        abort("timeout");
+    }, 1000);
+}
+
+/**
+ * source: https://react.dev/reference/react-dom/server/renderToReadableStream
+ */
+async function readableStreamDocumentedExample() {
+    const controller = new AbortController();
+    let didError = false;
+    try {
+        const stream = await ReactDOMServer.renderToReadableStream(
+            <html>
+                <body>Success</body>
+            </html>,
+            {
+                maxHeadersLength: 4000,
+                importMap,
+                signal: controller.signal,
+                onError(error) {
+                    didError = true;
+                    console.error(error);
+                },
+                onHeaders(headers) {
+                    // $ExpectType Headers
+                    headers;
+                },
+            },
+        );
+
+        await stream.allReady;
+
+        return new Response(stream, {
+            status: didError ? 500 : 200,
+            headers: { "Content-Type": "text/html" },
+        });
+    } catch (error) {
+        return new Response("<!doctype html><p>Loading...</p><script src=\"clientrender.js\"></script>", {
+            status: 500,
+            headers: { "Content-Type": "text/html" },
+        });
+    }
+}
+
+/**
+ * source: https://react.dev/reference/react-dom/server/renderToReadableStream
+ */
+async function readableStreamDocumentedStringExample() {
+    const controller = new AbortController();
+    let didError = false;
+    try {
+        const stream = await ReactDOMServer.renderToReadableStream(
+            "app",
+            {
+                maxHeadersLength: 4000,
+                importMap,
+                signal: controller.signal,
+                onError(error) {
+                    didError = true;
+                    console.error(error);
+                },
+                onHeaders(headers) {
+                    // $ExpectType Headers
+                    headers;
+                },
+            },
+        );
+
+        await stream.allReady;
+
+        return new Response(stream, {
+            status: didError ? 500 : 200,
+            headers: { "Content-Type": "text/html" },
+        });
+    } catch (error) {
+        return new Response("<!doctype html><p>Loading...</p><script src=\"clientrender.js\"></script>", {
+            status: 500,
+            headers: { "Content-Type": "text/html" },
+        });
+    }
+}
+
+const useFormState = ReactDOM.useFormState;
+const useFormStatus = ReactDOM.useFormStatus;
+
+function Status() {
+    const status = useFormStatus();
+    if (!status.pending) {
+        return <div>No pending action</div>;
+    } else {
+        const { action, data, method } = status;
+        const foo = data.get("foo");
+        return (
+            <div>
+                {`Pending action ${
+                    typeof action === "string" ? action : action.name
+                }: foo is ${foo}, method is ${method}`}
+            </div>
+        );
+    }
+}
+
+// Keep in sync with React.useActionState tests
+function formTest() {
+    function Page1() {
+        async function action(state: number) {
+            return state + 1;
+        }
+
+        const [
+            // $ExpectType number
+            state,
+            dispatch,
+            // $ExpectType boolean
+            isPending,
+        ] = useFormState(action, 1);
+
+        function actionExpectingPromiseState(state: Promise<number>) {
+            return state.then((s) => s + 1);
+        }
+
+        useFormState(
+            // @ts-expect-error
+            actionExpectingPromiseState,
+            Promise.resolve(1),
+        );
+        useFormState(
+            action,
+            // @ts-expect-error
+            Promise.resolve(1),
+        );
+        // $ExpectType number
+        useFormState<Promise<number>>(action, 1)[0];
+
+        useFormState(
+            async (
+                prevState: // only needed in TypeScript 4.9
+                    // 5.0 infers `number` whereas 4.9 infers `0`
+                    number,
+            ) => prevState + 1,
+            0,
+        )[0];
+        // $ExpectType number
+        useFormState(
+            async (prevState) => prevState + 1,
+            // @ts-expect-error
+            Promise.resolve(0),
+        )[0];
+
+        const [
+            state2,
+            action2,
+            // $ExpectType boolean
+            isPending2,
+        ] = useFormState(
+            async (state: React.ReactNode, payload: FormData): Promise<React.ReactNode> => {
+                return state;
+            },
+            (
+                <button>
+                    New Project
+                </button>
+            ),
+        );
+
+        return (
+            <button
+                onClick={() => {
+                    dispatch();
+                }}
+            >
+                count: {state}
+            </button>
+        );
+    }
+
+    function Page2() {
+        async function action(state: number) {
+            return state + 1;
+        }
+
+        const [
+            // $ExpectType number
+            state,
+            dispatch,
+        ] = useFormState(action, 1, "/permalink");
+        return (
+            <form action={dispatch}>
+                <span>Count: {state}</span>
+                <input type="text" name="incrementAmount" defaultValue="5" />
+            </form>
+        );
+    }
+
+    function Page3() {
+        function actionSync(state: number, type: "increment" | "decrement") {
+            return state + (type === "increment" ? 1 : -1);
+        }
+
+        const [
+            // $ExpectType number
+            state,
+            dispatch,
+        ] = useFormState(actionSync, 1, "/permalink");
+        return (
+            <button
+                onClick={() => {
+                    dispatch("decrement");
+                }}
+            >
+                count: {state}
+            </button>
+        );
+    }
+
+    function Page4() {
+        async function action(state: number, type: "increment" | "decrement") {
+            return state + (type === "increment" ? 1 : -1);
+        }
+
+        const [
+            // $ExpectType number
+            state,
+            dispatch,
+        ] = useFormState(action, 1, "/permalink");
+        return (
+            <button
+                onClick={() => {
+                    dispatch("decrement");
+                }}
+            >
+                count: {state}
+            </button>
+        );
+    }
+
+    const formState = [1, "", "", 0] as unknown as ReactDOMClient.ReactFormState;
+    ReactDOMClient.hydrateRoot(document.body, <Page1 />, { formState });
+}
+
+function preloadTest() {
+    function Component() {
+        ReactDOM.preload("foo", { as: "style", fetchPriority: "high", integrity: "sad" });
+        ReactDOM.preload("bar", {
+            as: "font",
+            type: "font/woff2",
+            // @ts-expect-error Unknown fetch priority
+            fetchPriority: "unknown",
+        });
+        ReactDOM.preload("baz", { as: "script", crossOrigin: "use-credentials" });
+        ReactDOM.preload("baz", {
+            // @ts-expect-error
+            as: "title",
+        });
+        ReactDOM.preload("bar", {
+            as: "font",
+            nonce: "0xeac1",
+        });
+        ReactDOM.preload("foo", {
+            as: "image",
+            imageSrcSet: "fooset",
+            imageSizes: "foosizes",
+            referrerPolicy: "no-referrer",
+            media: "(max-width: 600px)",
+        });
+        ReactDOM.preload("foo", {
+            as: "image",
+            // @ts-expect-error Not specified in https://w3c.github.io/webappsec-referrer-policy/#referrer-policy
+            referrerPolicy: "unknown-policy",
+        });
+        ReactDOM.preload("foo", {
+            as: "script",
+            // Undesired. Should not typecheck.
+            imageSrcSet: "fooset",
+            imageSizes: "foosizes",
+        });
+
+        ReactDOM.preinit("foo", {
+            as: "style",
+            crossOrigin: "anonymous",
+            fetchPriority: "high",
+            precedence: "high",
+            integrity: "sad",
+            nonce: "0xeac1",
+        });
+        ReactDOM.preinit("bar", {
+            // @ts-expect-error Only available in preload
+            as: "font",
+        });
+        ReactDOM.preinit("baz", {
+            as: "script",
+            // @ts-expect-error Unknown fetch priority
+            fetchPriority: "unknown",
+        });
+        ReactDOM.preinit("baz", {
+            // @ts-expect-error
+            as: "title",
+        });
+        ReactDOM.preinit("baz", {
+            as: "script",
+            nonce: "0xeac1",
+        });
+
+        // @ts-expect-error
+        ReactDOM.preconnect();
+        ReactDOM.preconnect("foo");
+        ReactDOM.preconnect("bar", { crossOrigin: "anonymous" });
+
+        // @ts-expect-error
+        ReactDOM.prefetchDNS();
+        ReactDOM.prefetchDNS("foo");
+        ReactDOM.prefetchDNS(
+            "bar", // @ts-expect-error prefetchDNS does not accept any options at the moment
+            {},
+        );
+
+        // @ts-expect-error
+        ReactDOM.preloadModule();
+        ReactDOM.preloadModule("browserdefault");
+        ReactDOM.preloadModule("browserdefault", {
+            as: "script",
+            crossOrigin: "use-credentials",
+            integrity: "0xeac1",
+            nonce: "secret",
+        });
+        ReactDOM.preloadModule("worker", { as: "worker" });
+        ReactDOM.preloadModule("worker", {
+            // @ts-expect-error Unknown request destination
+            as: "serviceworker",
+        });
+
+        // @ts-expect-error
+        ReactDOM.preinitModule();
+        ReactDOM.preinitModule("browserdefault");
+        ReactDOM.preinitModule("browserdefault", { as: "script", crossOrigin: "use-credentials", integrity: "0xeac1" });
+        ReactDOM.preinitModule("data", {
+            // @ts-expect-error Not supported (yet)
+            as: "json",
+        });
+    }
+}
+
+function requestFormResetTest(form: HTMLFormElement, button: HTMLButtonElement) {
+    ReactDOM.requestFormReset(form);
+    // @ts-expect-error
+    ReactDOM.requestFormReset(button);
+    // @ts-expect-error
+    ReactDOM.requestFormReset(null);
+}
+
+function cacheSignalTest() {
+    const cacheSignal = React.cacheSignal;
+
+    const signal = cacheSignal();
+    if (signal !== null) {
+        // $ExpectType CacheSignal
+        signal;
+        if (signal.aborted) {
+            console.error(signal.reason);
+        }
+    }
+}
+
+function formrelatedEventTests() {
+    React.createElement("textarea", {
+        value: "5",
+        onChange: event => {
+            // createElement is not inferring props for textarea. JSX works though.
+            // $ExpectType EventTarget & HTMLElement
+            event.target;
+            // @ts-expect-error
+            event.target.value;
+        },
+    });
+
+    React.createElement("input", {
+        onChange: event => {
+            // $ExpectType EventTarget & HTMLInputElement
+            event.target;
+            // $ExpectType string
+            event.target.value;
+        },
+    });
+
+    <div
+        onChange={event => {
+            // Should be EventTarget since we don't know from where the change event bubbled.
+            // $ExpectType EventTarget & HTMLDivElement
+            event.target;
+        }}
+    />;
+    <input
+        onChange={event => {
+            // $ExpectType EventTarget & HTMLInputElement
+            event.target;
+            // $ExpectType string
+            event.target.value;
+        }}
+    />;
+    <select
+        onChange={event => {
+            // $ExpectType EventTarget & HTMLSelectElement
+            event.target;
+            // $ExpectType string
+            event.target.value;
+        }}
+    />;
+    <textarea
+        onChange={event => {
+            // $ExpectType EventTarget & HTMLTextAreaElement
+            event.target;
+            // $ExpectType string
+            event.target.value;
+        }}
+    />;
+
+    <form
+        onSubmit={event => {
+            // $ExpectType HTMLElement | null
+            event.submitter;
+            // $ExpectType EventTarget & HTMLFormElement
+            event.target;
+        }}
+    />;
+}
+
+function browserUsableTests() {
+    // browser() returns an opaque, renderer-specific Usable that React.use accepts
+    // $ExpectType unknown
+    React.use(ReactDOM.browser());
+
+    // The reason can be a string or a lazy initializer whose return value an
+    // SSR renderer uses as the cause of the recoverable error.
+    // $ExpectType BrowserUsable
+    ReactDOM.browser("Only render this content in a browser");
+    // $ExpectType BrowserUsable
+    ReactDOM.browser(() => new Error("Only render this content in a browser"));
+
+    // @ts-expect-error -- the reason is a string or a zero-arg initializer, not an arbitrary value
+    ReactDOM.browser(new Error("Only render this content in a browser"));
+}
+
+function browserBailoutTests() {
+    const onBrowserBailout = (error: unknown, errorInfo: ReactDOMClient.ErrorInfo) => {};
+
+    ReactDOMServer.renderToPipeableStream(React.createElement("div"), { onBrowserBailout });
+    ReactDOMServer.renderToReadableStream(React.createElement("div"), { onBrowserBailout });
+    ReactDOMServer.resume(React.createElement("div"), null as any, { onBrowserBailout });
+    ReactDOMServer.resumeToPipeableStream(React.createElement("div"), null as any, { onBrowserBailout });
+    ReactDOMStatic.prerender(React.createElement("div"), { onBrowserBailout });
+    ReactDOMStatic.resumeAndPrerender(React.createElement("div"), null, { onBrowserBailout });
+}
+
+function viewTransitionTests() {
+    const ViewTransition = React.ViewTransition;
+
+    <ViewTransition
+        ref={current => {
+            if (current !== null) {
+                // $ExpectType string
+                current.name;
+
+                // $ExpectType ViewTransitionPseudoElement
+                current.group;
+                // $ExpectType ViewTransitionPseudoElement
+                current.imagePair;
+                // $ExpectType ViewTransitionPseudoElement
+                current.old;
+                // $ExpectType ViewTransitionPseudoElement
+                current.new;
+
+                // $ExpectType CSSStyleDeclaration
+                current.old.getComputedStyle();
+                // @ts-expect-error -- Implemented on the pseudo elements.
+                current.getComputedStyle();
+            }
+        }}
+    >
+        <div />
+    </ViewTransition>;
+}
+
+function fragmentRefTest() {
+    <React.Fragment
+        ref={maybeInstance => {
+            // $ExpectType FragmentInstance | null
+            maybeInstance;
+
+            // See https://github.com/DefinitelyTyped/DefinitelyTyped/pull/69022/commits/57825689c7abb50a79395d1266226cfa1b31a4e1
+            const instance = maybeInstance!;
+
+            instance.focus();
+            instance.blur();
+            instance.focusLast();
+            instance.observeUsing(new IntersectionObserver(() => {}));
+            instance.unobserveUsing(new IntersectionObserver(() => {}));
+            instance.observeUsing(new ResizeObserver(() => {}));
+            instance.unobserveUsing(new ResizeObserver(() => {}));
+            instance.getClientRects();
+            instance.getRootNode();
+            instance.getRootNode({ composed: true });
+            instance.addEventListener("click", () => {});
+            instance.addEventListener("click", () => {}, true);
+            instance.addEventListener("click", () => {}, { capture: true });
+            instance.addEventListener("click", () => {}, true);
+            instance.removeEventListener("click", () => {});
+            instance.removeEventListener("click", () => {}, { capture: true });
+            instance.removeEventListener("click", () => {}, true);
+            instance.addEventListener("click", () => {}, { passive: true });
+            instance.addEventListener("click", () => {}, { once: true });
+            instance.addEventListener("click", () => {}, { signal: new AbortController().signal });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal() });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal(), once: true });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal(), passive: true });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal(), capture: true });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal(), capture: true, once: true });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal(), capture: true, passive: true });
+            instance.addEventListener("click", () => {}, { signal: new AbortSignal(), once: true, passive: true });
+            instance.addEventListener("click", () => {}, {
+                signal: new AbortSignal(),
+                capture: true,
+                once: true,
+                passive: true,
+            });
+            instance.removeEventListener("click", () => {}, { capture: true });
+            instance.removeEventListener("click", () => {}, true);
+            instance.removeEventListener("click", () => {}, {
+                // @ts-expect-error -- Not the same options as addEventListener
+                passive: true,
+            });
+            instance.scrollIntoView(false);
+            instance.scrollIntoView(true);
+            instance.scrollIntoView(undefined);
+
+            instance.scrollIntoView(
+                // @ts-expect-error -- options are not supported yet
+                {},
+            );
+            return () => {};
+        }}
+    >
+        <div />
+        <div />
+    </React.Fragment>;
+}

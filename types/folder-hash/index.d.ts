@@ -1,13 +1,13 @@
-// Type definitions for folder-hash 4.0
-// Project: https://github.com/marc136/node-folder-hash#readme
-// Definitions by: Kevin Brown <https://github.com/thekevinbrown>
-//                 Piotr Błażejewicz <https://github.com/peterblazejewicz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-export type PathGlobFunction = () => string[];
+/**
+ * Receives an element's basename or path, as `matchBasename` and `matchPath` select; returns
+ * whether the rule matches it.
+ */
+export type PathGlobFunction = (path: string) => boolean;
 
 export interface FolderAndFileOptions {
+    /** Glob patterns, or a function that returns true if the passed file is excluded. */
     exclude?: string[] | PathGlobFunction | undefined;
+    /** Glob patterns, or a function that returns true if the passed file is included. */
     include?: string[] | PathGlobFunction | undefined;
     matchBasename?: boolean | undefined;
     matchPath?: boolean | undefined;
@@ -26,7 +26,7 @@ export interface HashElementOptions {
     // Defaults to 'sha1'.
     algo?: string | undefined;
     // Defaults to 'base64'
-    encoding?: "base64" | "hex" | "binary" | undefined;
+    encoding?: "base64" | "base64url" | "hex" | "binary" | undefined;
     files?: FolderAndFileOptions | undefined;
     folders?: FolderAndFileOptions | undefined;
     symbolicLinks?: SymbolicLinkOptions | undefined;

@@ -9,13 +9,10 @@
         "noImplicitThis": true,
         "strictNullChecks": true,
         "strictFunctionTypes": true,
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
         "types": [],
         "noEmit": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "esModuleInterop": true
     },
     "files": [
         "index.d.ts",
@@ -56,7 +53,7 @@
         "test/addon/lint/lint.ts",
         "test/addon/lint/yaml-lint.ts",
         "test/addon/merge/merge.ts",
-        "test/addon/mode/loadMode.ts",
+        "test/addon/mode/loadmode.ts",
         "test/addon/mode/multiplex.ts",
         "test/addon/mode/overlay.ts",
         "test/addon/mode/simple.ts",

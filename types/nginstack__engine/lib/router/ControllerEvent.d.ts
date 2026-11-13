@@ -3,13 +3,15 @@ declare function ControllerEvent(...args: any[]): void;
 declare class ControllerEvent {
     constructor(...args: any[]);
     action: string;
-    controller: any;
+    controller: Controller;
     request: Request;
     response: Response;
-    result: any;
+    result: RouteResult;
 }
 declare namespace ControllerEvent {
-    export { Response, Request };
+    export { Response, Request, Controller, RouteResult };
 }
-type Request = import('../http/Request');
 type Response = import('../http/Response');
+type Request = import('../http/Request');
+type Controller = import('./Controller');
+type RouteResult = import('./RouteResult');

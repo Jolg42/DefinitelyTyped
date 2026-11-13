@@ -1,11 +1,4 @@
-// Type definitions for react-hammerjs 1.0
-// Project: https://github.com/JedWatson/react-hammerjs#readme
-// Definitions by: Jason Unger <https://github.com/jsonunger>
-//                 Cecchi MacNaughton <https://github.com/cecchi>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
-import * as Hammer from "hammerjs";
+import Hammer = require("hammerjs");
 import * as React from "react";
 
 type Omit<T, K> = Pick<T, Exclude<keyof T, K>>;
@@ -25,7 +18,8 @@ declare namespace ReactHammer {
             | "DIRECTION_DOWN"
             | "DIRECTION_HORIZONTAL"
             | "DIRECTION_VERTICAL"
-            | "DIRECTION_ALL" | undefined;
+            | "DIRECTION_ALL"
+            | undefined;
         options?: HammerOptionsWithRecognizers | undefined;
         recognizeWith?: { [gesture: string]: Recognizer | string } | undefined;
         vertical?: boolean | undefined;
@@ -49,6 +43,10 @@ declare namespace ReactHammer {
         onRotateMove?: HammerListener | undefined;
         onRotateStart?: HammerListener | undefined;
         onSwipe?: HammerListener | undefined;
+        onSwipeRight?: HammerListener | undefined;
+        onSwipeLeft?: HammerListener | undefined;
+        onSwipeUp?: HammerListener | undefined;
+        onSwipeDown?: HammerListener | undefined;
         onTap?: HammerListener | undefined;
     }
 }

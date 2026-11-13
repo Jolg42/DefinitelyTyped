@@ -1,17 +1,21 @@
-// Type definitions for polylabel 1.0
-// Project: https://github.com/mapbox/polylabel
-// Definitions by: Denis Carriere <https://github.com/DenisCarriere>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /**
- * Polylabel returns the pole of inaccessibility coordinate in [x, y] format.
+ * Returns the pole of inaccessibility for a polygon — the most distant internal
+ * point from the polygon outline — as a `[x, y]` coordinate pair. The
+ * `distance` property on the returned array holds the distance from the pole to
+ * the nearest polygon edge (the "pole radius").
  *
- * @param polygon - Given polygon coordinates in GeoJSON-like format
- * @param precision - Precision (1.0 by default)
- * @param debug - Debugging for Console
+ * @param polygon - Polygon rings: outer ring first, holes (if any) following.
+ *   Each ring is an array of `[x, y]` coordinate pairs.
+ * @param precision - Precision of the result in the same units as the polygon
+ *   coordinates. Defaults to `1.0`.
+ * @param debug - When `true`, logs progress to the console.
  * @example
- * var p = polylabel(polygon, 1.0);
+ * const [x, y] = polylabel(polygon, 1.0);
  */
-declare function polylabel(polygon: number[][][], precision?: number, debug?: boolean): number[];
+declare function polylabel(
+    polygon: Array<Array<[number, number]>>,
+    precision?: number,
+    debug?: boolean,
+): [number, number] & { distance: number };
 declare namespace polylabel {}
 export default polylabel;

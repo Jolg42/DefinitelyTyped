@@ -1,24 +1,3 @@
-// Type definitions for Jasmine 3.10
-// Project: http://jasmine.github.io
-// Definitions by: Boris Yankov <https://github.com/borisyankov>
-//                 Theodore Brown <https://github.com/theodorejb>
-//                 David Pärsson <https://github.com/davidparsson>
-//                 Lukas Zech <https://github.com/lukas-zech-software>
-//                 Boris Breuer <https://github.com/Engineer2B>
-//                 Chris Yungmann <https://github.com/cyungmann>
-//                 Giles Roadnight <https://github.com/Roaders>
-//                 Yaroslav Admin <https://github.com/devoto13>
-//                 Domas Trijonis <https://github.com/fdim>
-//                 Moshe Kolodny <https://github.com/kolodny>
-//                 Stephen Farrar <https://github.com/stephenfarrar>
-//                 Dominik Ehrenberg <https://github.com/djungowski>
-//                 Chives <https://github.com/chivesrs>
-//                 kirjs <https://github.com/kirjs>
-//                 Md. Enzam Hossain <https://github.com/ienzam>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
-// For ddescribe / iit use : https://github.com/DefinitelyTyped/DefinitelyTyped/blob/master/karma-jasmine/karma-jasmine.d.ts
-
 /**
  * @deprecated Use {@link jasmine.ImplementationCallback} instead.
  */
@@ -73,9 +52,19 @@ declare function xit(expectation: string, assertion?: jasmine.ImplementationCall
 /**
  * Mark a spec as pending, expectation results will be ignored.
  * If you call the function pending anywhere in the spec body, no matter the expectations, the spec will be marked pending.
- * @param reason Reason the spec is pending.
+ * @param reason Reason why the spec is pending.
  */
 declare function pending(reason?: string): void;
+
+/**
+ * Mark a spec as not applicable. This is similar to {@link pending} except
+ * that the spec is never expected to pass in the current environment.
+ *
+ * If you call the function notApplicable anywhere in the spec body, no matter the expectations, the spec will be marked not applicable.
+ * @since 7.0.0
+ * @param reason Reason why the spec is not applicable.
+ */
+declare function notApplicable(reason: string): void;
 
 /**
  * Sets a user-defined property that will be provided to reporters as
@@ -114,7 +103,7 @@ declare function afterEach(action: jasmine.ImplementationCallback, timeout?: num
 declare function beforeAll(action: jasmine.ImplementationCallback, timeout?: number): void;
 
 /**
- * Run some shared teardown once before all of the specs in the describe are run.
+ * Run some shared teardown once after all of the specs in the describe are run.
  * Note: Be careful, sharing the teardown from a afterAll makes it easy to accidentally leak state between your specs so that they erroneously pass or fail.
  * @param action Function that contains the code to teardown your specs.
  * @param timeout Custom timeout for an async afterAll
@@ -127,6 +116,13 @@ declare function afterAll(action: jasmine.ImplementationCallback, timeout?: numb
  * @param spy
  */
 declare function expect<T extends jasmine.Func>(spy: T | jasmine.Spy<T>): jasmine.FunctionMatchers<T>;
+
+/**
+ * Create an expectation for a spec.
+ * @checkReturnValue see https://tsetse.info/check-return-value
+ * @param actual Actual computed value to test expectations against.
+ */
+declare function expect(actual: string): jasmine.Matchers<string>;
 
 /**
  * Create an expectation for a spec.
@@ -182,7 +178,7 @@ declare function spyOn<T, K extends keyof T = keyof T>(
     object: T,
     method: T[K] extends Function ? K : never,
 ): jasmine.Spy<
-    T[K] extends jasmine.Func ? T[K] : T[K] extends { new (...args: infer A): infer V } ? (...args: A) => V : never
+    T[K] extends jasmine.Func ? T[K] : T[K] extends { new(...args: infer A): infer V } ? (...args: A) => V : never
 >;
 
 /**
@@ -191,7 +187,64 @@ declare function spyOn<T, K extends keyof T = keyof T>(
  * @param property The name of the property to replace with a `Spy`.
  * @param accessType The access type (get|set) of the property to `Spy` on.
  */
-declare function spyOnProperty<T>(object: T, property: keyof T, accessType?: "get" | "set"): jasmine.Spy;
+declare function spyOnProperty<T, K extends keyof T = keyof T>(
+    object: T,
+    property: K,
+    accessType?: "get",
+): jasmine.Spy<(this: T) => T[K]>;
+declare function spyOnProperty<T, K extends keyof T = keyof T>(
+    object: T,
+    property: K,
+    accessType: "set",
+): jasmine.Spy<(this: T, value: T[K]) => void>;
+
+interface ThrowUnlessFailure {
+    /**
+     * The name of the matcher that was executed for this expectation.
+     */
+    matcherName: string;
+    /**
+     * The failure message for the expectation.
+     */
+    message: string;
+    /**
+     * Whether the expectation passed or failed.
+     */
+    passed: boolean;
+    /**
+     * Deprecated. If the expectation failed, what was the expected value.
+     * @deprecated The expected and actual properties are deprecated and may be removed in a future release.
+     */
+    expected: any;
+    /**
+     * Deprecated. If the expectation failed, what actual value was produced.
+     * @deprecated The expected and actual properties are deprecated and may be removed in a future release.
+     */
+    actual: any;
+}
+/**
+ * Create an expectation for a spec and throw an error if it fails.
+ * @checkReturnValue see https://tsetse.info/check-return-value
+ * @param spy
+ */
+declare function throwUnless<T extends jasmine.Func>(spy: T | jasmine.Spy<T>): jasmine.FunctionMatchers<T>;
+/**
+ * Create an expectation for a spec and throw an error if it fails.
+ * @checkReturnValue see https://tsetse.info/check-return-value
+ * @param actual Actual computed value to test expectations against.
+ */
+declare function throwUnless<T>(actual: ArrayLike<T>): jasmine.ArrayLikeMatchers<T>;
+/**
+ * Create an expectation for a spec and throw an error if it fails.
+ * @checkReturnValue see https://tsetse.info/check-return-value
+ * @param actual Actual computed value to test expectations against.
+ */
+declare function throwUnless<T>(actual: T): jasmine.Matchers<T>;
+/**
+ * Create an asynchronous expectation for a spec and throw an error if it fails.
+ * @param actual Actual computed value to test expectations against.
+ */
+declare function throwUnlessAsync<T, U>(actual: T | PromiseLike<T>): jasmine.AsyncMatchers<T, U>;
 
 /**
  * Installs spies on all writable and configurable properties of an object.
@@ -214,8 +267,8 @@ declare namespace jasmine {
         | ObjectContaining<T>
         | AsymmetricMatcher<any>
         | {
-              [K in keyof T]: ExpectedRecursive<T[K]> | Any;
-          };
+            [K in keyof T]: ExpectedRecursive<T[K]> | Any;
+        };
     type Expected<T> =
         | T
         | ObjectContaining<T>
@@ -223,14 +276,19 @@ declare namespace jasmine {
         | Any
         | Spy
         | {
-              [K in keyof T]: ExpectedRecursive<T[K]>;
-          };
-    type SpyObjMethodNames<T = undefined> = T extends undefined
-        ? ReadonlyArray<string> | { [methodName: string]: any }
-        : ReadonlyArray<keyof T> | { [P in keyof T]?: T[P] extends Func ? ReturnType<T[P]> : any };
+            [K in keyof T]: ExpectedRecursive<T[K]>;
+        };
+    type SpyObjMethodNames<T = undefined> = T extends undefined ? readonly string[] | { [methodName: string]: any }
+        : (
+            | ReadonlyArray<keyof T>
+            | {
+                [P in keyof T]?:
+                    // Value should be the return type (unless this is a method on Object.prototype, since all object literals contain those methods)
+                    T[P] extends Func ? (ReturnType<T[P]> | (P extends keyof Object ? Object[P] : never)) : any;
+            }
+        );
 
-    type SpyObjPropertyNames<T = undefined> = T extends undefined
-        ? ReadonlyArray<string> | { [propertyName: string]: any }
+    type SpyObjPropertyNames<T = undefined> = T extends undefined ? readonly string[] | { [propertyName: string]: any }
         : ReadonlyArray<keyof T> | { [P in keyof T]?: T[P] };
 
     /**
@@ -252,17 +310,19 @@ declare namespace jasmine {
         seed?: number | string | null | undefined;
         /**
          * Whether to stop execution of the suite after the first spec failure
-         * @since 3.3.0
-         * @default false
-         * @deprecated Use the `stopOnSpecFailure` config property instead.
-         */
-        failFast?: boolean | undefined;
-        /**
-         * Whether to stop execution of the suite after the first spec failure
          * @since 3.9.0
          * @default false
          */
         stopOnSpecFailure?: boolean | undefined;
+        /**
+         * Whether to forbid duplicate spec or suite names. If set to true, using
+         * the same name multiple times in the same immediate parent suite is an
+         * error.
+         * @deprecated Deprecated in jasmine 7.
+         * @since 5.5.0
+         * @default true
+         */
+        forbidDuplicateNames?: boolean | undefined;
         /**
          * Whether to fail the spec if it ran no expectations. By default
          * a spec that ran no expectations is reported as passed. Setting this
@@ -271,13 +331,6 @@ declare namespace jasmine {
          * @default false
          */
         failSpecWithNoExpectations?: boolean | undefined;
-        /**
-         * Whether to cause specs to only have one expectation failure.
-         * @since 3.3.0
-         * @default false
-         * @deprecated Use the `stopSpecOnExpectationFailure` config property instead.
-         */
-        oneFailurePerSpec?: boolean | undefined;
         /**
          * Whether to cause specs to only have one expectation failure.
          * @since 3.3.0
@@ -317,10 +370,23 @@ declare namespace jasmine {
     /** @deprecated Please use `Configuration` instead of `EnvConfiguration`. */
     type EnvConfiguration = Configuration;
 
+    /**
+     * Get the currently booted mock {Clock} for this Jasmine environment.
+     * @name jasmine.clock
+     * @since 2.0.0
+     * @returns {Clock}
+     */
     function clock(): Clock;
-    function DiffBuilder(): DiffBuilder;
 
-    var matchersUtil: MatchersUtil;
+    /**
+     * Formats a value for display, taking into account the current set of
+     * custom object formatters.
+     *
+     * @since 6.0.0
+     * @param value The value to pretty-print
+     * @returns The pretty-printed value
+     */
+    function pp(value: any): string;
 
     /**
      * That will succeed if the actual value being compared is an instance of the specified class/constructor.
@@ -356,28 +422,198 @@ declare namespace jasmine {
      */
     function notEmpty(): AsymmetricMatcher<any>;
 
+    /**
+     * Get an AsymmetricMatcher, usable in any matcher
+     * that passes if the actual value is the same as the sample as determined
+     * by the `===` operator.
+     * @param sample The value to compare the actual to.
+     * @since 4.2.0
+     */
+    function is(sample: any): AsymmetricMatcher<any>;
+
+    /**
+     * Get an {@link AsymmetricEqualityTester} that will succeed if the actual
+     * value is an `Array` that contains at least the elements in the sample.
+     * @since 2.2.0
+     * @param sample
+     */
     function arrayContaining<T>(sample: ArrayLike<T>): ArrayContaining<T>;
+    /**
+     * Get an {@link AsymmetricEqualityTester} that will succeed if the actual
+     * value is an `Array` that contains all of the elements in the sample in
+     * any order.
+     * @since 2.8.0
+     * @param sample
+     */
     function arrayWithExactContents<T>(sample: ArrayLike<T>): ArrayContaining<T>;
+
+    /**
+     * Get an {@link AsymmetricEqualityTester} that will succeed if the actual
+     * value being compared contains at least the specified keys and values.
+     * @since 1.3.0
+     * @param sample - The subset of properties that _must_ be in the actual.
+     */
     function objectContaining<T>(sample: { [K in keyof T]?: ExpectedRecursive<T[K]> }): ObjectContaining<T>;
+    /**
+     * Get an {@link AsymmetricEqualityTester} that will succeed if every
+     * key/value pair in the sample passes the deep equality comparison
+     * with at least one key/value pair in the actual value being compared
+     * @since 3.5.0
+     * @param sample - The subset of items that _must_ be in the actual.
+     */
     function mapContaining<K, V>(sample: Map<K, V>): AsymmetricMatcher<Map<K, V>>;
+    /**
+     * Get an {@link AsymmetricEqualityTester} that will succeed if every item
+     * in the sample passes the deep equality comparison
+     * with at least one item in the actual value being compared
+     * @since 3.5.0
+     * @param sample - The subset of items that _must_ be in the actual.
+     */
     function setContaining<T>(sample: Set<T>): AsymmetricMatcher<Set<T>>;
 
+    /**
+     * Set the default spy strategy for the current scope of specs.
+     *
+     * _Note:_ This is only callable from within a {@link beforeEach}, {@link it}, or {@link beforeAll}.
+     * @param defaultStrategyFn - a function that assigns a strategy
+     * @example
+     * beforeEach(function() {
+     *   jasmine.setDefaultSpyStrategy(and => and.returnValue(true));
+     * });
+     */
     function setDefaultSpyStrategy<Fn extends Func = Func>(fn?: (and: SpyAnd<Fn>) => void): void;
+
+    /**
+     * Replaces Jasmine's global error handling with a spy. This prevents Jasmine
+     * from treating uncaught exceptions and unhandled promise rejections
+     * as spec failures and allows them to be inspected using the spy's
+     * {@link Spy#calls|calls property} and related matchers such as
+     * {@link matchers#toHaveBeenCalledWith|toHaveBeenCalledWith}.
+     *
+     * After installing the spy, spyOnGlobalErrorsAsync immediately calls its
+     * argument, which must be an async or promise-returning function. The spy
+     * will be passed as the first argument to that callback. Normal error
+     * handling will be restored when the promise returned from the callback is
+     * settled.
+     *
+     * When the JavaScript runtime reports an uncaught error or unhandled rejection,
+     * the spy will be called with a single parameter representing Jasmine's best
+     * effort at describing the error. This parameter may be of any type, because
+     * JavaScript allows anything to be thrown or used as the reason for a
+     * rejected promise, but Error instances and strings are most common.
+     *
+     * Note: The JavaScript runtime may deliver uncaught error events and unhandled
+     * rejection events asynchronously, especially in browsers. If the event
+     * occurs after the promise returned from the callback is settled, it won't
+     * be routed to the spy even if the underlying error occurred previously.
+     * It's up to you to ensure that all of the error/rejection events that you
+     * want to handle have occurred before you resolve the promise returned from
+     * the callback.
+     *
+     * You must ensure that the `it`/`beforeEach`/etc fn that called
+     * `spyOnGlobalErrorsAsync` does not signal completion until after the
+     * promise returned by `spyOnGlobalErrorsAsync` is resolved. Normally this is
+     * done by `await`ing the returned promise. Leaving the global error spy
+     * installed after the `it`/`beforeEach`/etc fn that installed it signals
+     * completion is likely to cause problems and is not supported.
+     * @param fn - A function to run, during which the global error spy will be effective
+     * @example
+     * it('demonstrates global error spies', async function() {
+     *   await jasmine.spyOnGlobalErrorsAsync(async function(globalErrorSpy) {
+     *     setTimeout(function() {
+     *       throw new Error('the expected error');
+     *     });
+     *     await new Promise(function(resolve) {
+     *       setTimeout(resolve);
+     *     });
+     *     const expected = new Error('the expected error');
+     *     expect(globalErrorSpy).toHaveBeenCalledWith(expected);
+     *   });
+     * });
+     */
+    function spyOnGlobalErrorsAsync(fn?: (globalErrorSpy: Spy<(error: Error) => void>) => Promise<void>): Promise<void>;
+    /**
+     * Add a custom spy strategy for the current scope of specs.
+     *
+     * _Note:_ This is only callable from within a {@link beforeEach}, {@link it}, or {@link beforeAll}.
+     * @since 3.5.0
+     * @param name - The name of the strategy (i.e. what you call from `and`)
+     * @param factory - Factory function that returns the plan to be executed.
+     */
     function addSpyStrategy<Fn extends Func = Func>(name: string, factory: Fn): void;
+    /**
+     * Create a bare {@link Spy} object. This won't be installed anywhere and will not have any implementation behind it.
+     * @since 1.3.0
+     * @param name - Name to give the spy. This will be displayed in failure messages.
+     * @param originalFn - The "real" function. This will
+     * be used for subsequent calls to the spy after you call
+     * `mySpy.and.callThrough()`. In most cases you should omit this parameter.
+     * The usual way to supply an original function is to call {@link spyOn}
+     * instead of createSpy.
+     */
     function createSpy<Fn extends Func>(name?: string, originalFn?: Fn): Spy<Fn>;
+    /**
+     * Create an object with multiple {@link Spy}s as its members.
+     * @since 1.3.0
+     * @param baseName - Base name for the spies in the object.
+     * @param methodNames - Array of method names to create spies for, or Object whose keys will be method names and values the {@link Spy#and#returnValue|returnValue}.
+     * @param propertyNames - Array of property names to create spies for, or Object whose keys will be propertynames and values the {@link Spy#and#returnValue|returnValue}.
+     */
     function createSpyObj(baseName: string, methodNames: SpyObjMethodNames, propertyNames?: SpyObjPropertyNames): any;
+    /**
+     * Create an object with multiple {@link Spy}s as its members.
+     * @since 1.3.0
+     * @param baseName - Base name for the spies in the object.
+     * @param methodNames - Array of method names to create spies for, or Object whose keys will be method names and values the {@link Spy#and#returnValue|returnValue}.
+     * @param propertyNames - Array of property names to create spies for, or Object whose keys will be propertynames and values the {@link Spy#and#returnValue|returnValue}.
+     */
     function createSpyObj<T>(
         baseName: string,
         methodNames: SpyObjMethodNames<T>,
         propertyNames?: SpyObjPropertyNames<T>,
     ): SpyObj<T>;
+    /**
+     * Create an object with multiple {@link Spy}s as its members.
+     * @since 1.3.0
+     * @param baseName - Base name for the spies in the object.
+     * @param methodNames - Array of method names to create spies for, or Object whose keys will be method names and values the {@link Spy#and#returnValue|returnValue}.
+     * @param propertyNames - Array of property names to create spies for, or Object whose keys will be propertynames and values the {@link Spy#and#returnValue|returnValue}.
+     */
     function createSpyObj(methodNames: SpyObjMethodNames, propertyNames?: SpyObjPropertyNames): any;
+    /**
+     * Create an object with multiple {@link Spy}s as its members.
+     * @since 1.3.0
+     * @param baseName - Base name for the spies in the object.
+     * @param methodNames - Array of method names to create spies for, or Object whose keys will be method names and values the {@link Spy#and#returnValue|returnValue}.
+     * @param propertyNames - Array of property names to create spies for, or Object whose keys will be propertynames and values the {@link Spy#and#returnValue|returnValue}.
+     */
     function createSpyObj<T>(methodNames: SpyObjMethodNames<T>, propertyNames?: SpyObjPropertyNames<T>): SpyObj<T>;
 
-    function pp(value: any): string;
-
+    /**
+     * Get the currently booted Jasmine Environment.
+     *
+     * @since 1.3.0
+     */
     function getEnv(): Env;
+    /**
+     * Logs a message for use in debugging. If the spec fails, trace messages
+     * will be included in the {@link SpecDoneEvent|result} passed to the
+     * reporter's specDone method.
+     *
+     * This method should be called only when a spec (including any associated
+     * beforeEach or afterEach functions) is running.
+     * @since 4.0.0
+     * @param msg - The message to log
+     */
+    function debugLog(msg: string): void;
 
+    /**
+     * Add a custom equality tester for the current scope of specs.
+     *
+     * _Note:_ This is only callable from within a {@link beforeEach}, {@link it}, or {@link beforeAll}.
+     * @since 2.0.0
+     * @param tester - A function which takes two arguments to compare and returns a `true` or `false` comparison result if it knows how to compare them, and `undefined` otherwise.
+     */
     function addCustomEqualityTester(equalityTester: CustomEqualityTester): void;
 
     /**
@@ -388,28 +624,47 @@ declare namespace jasmine {
      */
     function addCustomObjectFormatter(formatter: CustomObjectFormatter): void;
 
+    /**
+     * Add custom matchers for the current scope of specs.
+     *
+     * _Note:_ This is only callable from within a {@link beforeEach}, {@link it}, or {@link beforeAll}.
+     * @since 2.0.0
+     * @param matchers - Keys from this object will be the new matcher names.
+     */
     function addMatchers(matchers: CustomMatcherFactories): void;
+    /**
+     * Add custom async matchers for the current scope of specs.
+     *
+     * _Note:_ This is only callable from within a {@link beforeEach}, {@link it}, or {@link beforeAll}.
+     * @since 3.5.0
+     * @param matchers - Keys from this object will be the new async matcher names.
+     */
     function addAsyncMatchers(matchers: CustomAsyncMatcherFactories): void;
 
-    function stringMatching(str: string | RegExp): AsymmetricMatcher<string>;
-
-    function stringContaining(str: string | RegExp): AsymmetricMatcher<string>;
     /**
-     * @deprecated Private method that may be changed or removed in the future
+     * Get an {@link AsymmetricEqualityTester} that will succeed if the actual
+     * value is a `String` that matches the `RegExp` or `String`.
+     * @since 2.2.0
+     * @param expected
      */
-    function formatErrorMsg(domain: string, usage: string): (msg: string) => string;
+    function stringMatching(expected: string | RegExp): AsymmetricMatcher<string>;
+
+    /**
+     * Get an {@link AsymmetricEqualityTester} that will succeed if the actual
+     * value is a `String` that contains the specified `String`.
+     * @since 3.10.0
+     * @param expected
+     */
+    function stringContaining(expected: string): AsymmetricMatcher<string>;
 
     interface Any extends AsymmetricMatcher<any> {
-        new (expectedClass: any): any;
-        jasmineToString(prettyPrint: typeof pp): string;
+        new(expectedClass: any): any;
+        jasmineToString(prettyPrint: (value: any) => string): string;
     }
 
     interface AsymmetricMatcher<TValue> {
-        /**
-         * customTesters are deprecated and will be replaced with matcherUtils in the future.
-         */
-        asymmetricMatch(other: TValue, matchersUtil?: MatchersUtil | ReadonlyArray<CustomEqualityTester>): boolean;
-        jasmineToString?(prettyPrint: typeof pp): string;
+        asymmetricMatch(other: TValue, matchersUtil?: MatchersUtil): boolean;
+        jasmineToString?(prettyPrint: (value: any) => string): string;
     }
 
     // taken from TypeScript lib.core.es6.d.ts, applicable to CustomMatchers.contains()
@@ -420,16 +675,17 @@ declare namespace jasmine {
 
     interface ArrayContaining<T> extends AsymmetricMatcher<any> {
         new?(sample: ArrayLike<T>): ArrayLike<T>;
-        jasmineToString(prettyPrint: typeof pp): string;
+        jasmineToString(prettyPrint: (value: any) => string): string;
     }
 
     interface ObjectContaining<T> extends AsymmetricMatcher<T> {
         new?(sample: { [K in keyof T]?: any }): { [K in keyof T]?: any };
 
-        jasmineToString?(prettyPrint: typeof pp): string;
+        jasmineToString?(prettyPrint: (value: any) => string): string;
     }
 
     interface Clock {
+        autoTick(): void;
         install(): Clock;
         uninstall(): void;
         /** Calls to any registered callback are triggered when the clock is ticked forward via the jasmine.clock().tick function, which takes a number of milliseconds. */
@@ -438,6 +694,7 @@ declare namespace jasmine {
         withMock(func: () => void): void;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
     type CustomEqualityTester = (first: any, second: any) => boolean | void;
 
     type CustomObjectFormatter = (value: unknown) => string | undefined;
@@ -456,15 +713,9 @@ declare namespace jasmine {
         negativeCompare?(actual: any, ...expected: any[]): PromiseLike<CustomMatcherResult>;
     }
 
-    type CustomMatcherFactory = (
-        util: MatchersUtil,
-        customEqualityTesters: ReadonlyArray<CustomEqualityTester>,
-    ) => CustomMatcher;
+    type CustomMatcherFactory = (util: MatchersUtil) => CustomMatcher;
 
-    type CustomAsyncMatcherFactory = (
-        util: MatchersUtil,
-        customEqualityTesters: ReadonlyArray<CustomEqualityTester>,
-    ) => CustomAsyncMatcher;
+    type CustomAsyncMatcherFactory = (util: MatchersUtil) => CustomAsyncMatcher;
 
     interface CustomMatcherFactories {
         [name: string]: CustomMatcherFactory;
@@ -479,20 +730,15 @@ declare namespace jasmine {
         message?: string | undefined;
     }
 
-    interface DiffBuilder {
-        setRoots(actual: any, expected: any): void;
-        recordMismatch(formatter?: (actual: any, expected: any, path?: any, prettyPrinter?: any) => string): void;
-        withPath(pathComponent: string, block: () => void): void;
-        getMessage(): string;
-    }
-
     interface MatchersUtil {
-        equals(a: any, b: any, customTesters?: ReadonlyArray<CustomEqualityTester>, diffBuilder?: DiffBuilder): boolean;
+        equals(a: any, b: any): boolean;
         contains<T>(
             haystack: ArrayLike<T> | string,
             needle: any,
-            customTesters?: ReadonlyArray<CustomEqualityTester>,
         ): boolean;
+        /**
+         * @deprecated Private method that may be changed or removed in the future
+         */
         buildFailureMessage(matcherName: string, isNot: boolean, actual: any, ...expected: any[]): string;
 
         /**
@@ -503,39 +749,25 @@ declare namespace jasmine {
          * @param value The value to pretty-print
          * @return The pretty-printed value
          */
-        pp: typeof pp;
+        pp(value: any): string;
     }
 
     interface Env {
         addReporter(reporter: CustomReporter): void;
+        /**
+         * Configures whether Jasmine should allow the same function to be spied on
+         * more than once during the execution of a spec. By default, spying on
+         * a function that is already a spy will cause an error.
+         * @name Env#allowRespy
+         * @since 2.5.0
+         * @param allow Whether to allow respying
+         */
         allowRespy(allow: boolean): void;
         clearReporters(): void;
         configuration(): Configuration;
         configure(configuration: Configuration): void;
-        execute(runnablesToRun: Suite[] | null | undefined, onComplete: Func): void;
-        /** @async */
-        execute(runnablesToRun?: Suite[]): PromiseLike<void>;
-        /**
-         * @deprecated Use hideDisabled option in {@link jasmine.Env.configure} instead.
-         */
-        hideDisabled(value: boolean): void;
-        /**
-         * @deprecated Check hideDisabled option in {@link jasmine.Env.configuration} instead.
-         */
-        hidingDisabled(): boolean;
+        execute(runnablesToRun?: Suite[]): Promise<JasmineDoneInfo>;
         provideFallbackReporter(reporter: CustomReporter): void;
-        /**
-         * @deprecated Check random option in {@link jasmine.Env.configuration} instead.
-         */
-        randomTests(): boolean;
-        /**
-         * @deprecated Use random option in {@link jasmine.Env.configure} instead.
-         */
-        randomizeTests(value: boolean): void;
-        /**
-         * @deprecated Use seed option in {@link jasmine.Env.configure} instead.
-         */
-        seed(value?: number | string): number | string;
         /**
          * Sets a user-defined property that will be provided to reporters as
          * part of the properties field of SpecResult.
@@ -549,34 +781,12 @@ declare namespace jasmine {
          */
         setSuiteProperty: typeof setSuiteProperty;
         /**
-         * @deprecated Use specFilter option in {@link jasmine.Env.configure} instead.
+         * Provides the root suite, through which all suites and specs can be
+         * accessed.
+         * @return the root suite
+         * @since 2.0.0
          */
-        specFilter(spec: Spec): boolean;
-        /**
-         * @deprecated Use failFast option in {@link jasmine.Env.configure} instead.
-         */
-        stopOnSpecFailure(value: boolean): void;
-        /**
-         * @deprecated Check failFast option in {@link jasmine.Env.configuration} instead.
-         */
-        stoppingOnSpecFailure(): boolean;
-        /**
-         * @deprecated Use oneFailurePerSpec option in {@link jasmine.Env.configure} instead.
-         */
-        throwOnExpectationFailure(value: boolean): void;
-        /**
-         * @deprecated Check oneFailurePerSpec option in {@link jasmine.Env.configuration} instead.
-         */
-        throwingExpectationFailures(): boolean;
         topSuite(): Suite;
-    }
-
-    interface HtmlReporter {
-        new (): any;
-    }
-
-    interface HtmlSpecFilter {
-        new (): any;
     }
 
     interface Result {
@@ -584,11 +794,31 @@ declare namespace jasmine {
     }
 
     interface ExpectationResult extends Result {
+        /**
+         * The name of the matcher that was executed for this expectation.
+         */
         matcherName: string;
+        /**
+         * The failure message for the expectation.
+         */
         message: string;
+        /**
+         * The stack trace for the failure if available.
+         */
         stack: string;
+        /**
+         * Whether the expectation passed or failed.
+         */
         passed: boolean;
+        /**
+         * Deprecated. If the expectation failed, what was the expected value.
+         * @deprecated The expected and actual properties are deprecated and may be removed in a future release.
+         */
         expected: any;
+        /**
+         * Deprecated. If the expectation failed, what actual value was produced.
+         * @deprecated The expected and actual properties are deprecated and may be removed in a future release.
+         */
         actual: any;
     }
 
@@ -598,7 +828,7 @@ declare namespace jasmine {
     }
 
     interface Order {
-        new (options: { random: boolean; seed: number | string }): any;
+        new(options: { random: boolean; seed: number | string }): any;
         random: boolean;
         seed: number | string;
         sort<T>(items: T[]): T[];
@@ -654,25 +884,57 @@ declare namespace jasmine {
         // tslint:disable-next-line unified-signatures
         toMatch(expected: string | RegExp, expectationFailOutput: any): void;
 
+        /**
+         * {@link expect} the actual value to be defined. (Not `undefined`)
+         * @name matchers#toBeDefined
+         * @since 1.3.0
+         * @example
+         * expect(result).toBeDefined();
+         */
         toBeDefined(): void;
         /**
          * @deprecated expectationFailOutput is deprecated. Use withContext instead.
          */
         // tslint:disable-next-line unified-signatures
         toBeDefined(expectationFailOutput: any): void;
+        /**
+         * {@link expect} the actual value to be `undefined`.
+         * @since 1.3.0
+         * @example
+         * expect(result).toBeUndefined():
+         */
         toBeUndefined(): void;
         /**
          * @deprecated expectationFailOutput is deprecated. Use withContext instead.
          */
         // tslint:disable-next-line unified-signatures
         toBeUndefined(expectationFailOutput: any): void;
+        /**
+         * {@link expect} the actual value to be `null`.
+         * @since 1.3.0
+         * @example
+         * expect(result).toBeNull();
+         */
         toBeNull(): void;
         /**
          * @deprecated expectationFailOutput is deprecated. Use withContext instead.
          */
         // tslint:disable-next-line unified-signatures
         toBeNull(expectationFailOutput: any): void;
+        /**
+         * {@link expect} the actual value to be `NaN` (Not a Number).
+         * @since 1.3.0
+         * @example
+         * expect(thing).toBeNaN();
+         */
         toBeNaN(): void;
+
+        /**
+         * {@link expect} the actual value to be truthy.
+         * @since 2.0.0
+         * @example
+         * expect(thing).toBeTruthy();
+         */
         toBeTruthy(): void;
         /**
          * @deprecated expectationFailOutput is deprecated. Use withContext instead.
@@ -687,10 +949,45 @@ declare namespace jasmine {
         toBeFalsy(expectationFailOutput: any): void;
         toBeTrue(): void;
         toBeFalse(): void;
+        /**
+         * {@link expect} the actual (a {@link Spy}) to have been called.
+         * @since 1.3.0
+         * @example
+         * expect(mySpy).toHaveBeenCalled();
+         * expect(mySpy).not.toHaveBeenCalled();
+         */
         toHaveBeenCalled(): void;
+        /**
+         * {@link expect} the actual value (a {@link Spy}) to have been called before another {@link Spy}.
+         * @since 2.6.0
+         * @param expected - {@link Spy} that should have been called after the `actual` {@link Spy}.
+         * @example
+         * expect(mySpy).toHaveBeenCalledBefore(otherSpy);
+         */
         toHaveBeenCalledBefore(expected: Func): void;
+        /**
+         * {@link expect} the actual (a {@link Spy}) to have been called with particular arguments at least once.
+         * @since 1.3.0
+         * @param params - The arguments to look for
+         * @example
+         * expect(mySpy).toHaveBeenCalledWith('foo', 'bar', 2);
+         */
         toHaveBeenCalledWith(...params: any[]): void;
+        /**
+         * {@link expect} the actual (a {@link Spy}) to have been called exactly once, and exactly with the particular arguments.
+         * @since 3.6.0
+         * @param params - The arguments to look for
+         * @example
+         * expect(mySpy).toHaveBeenCalledOnceWith('foo', 'bar', 2);
+         */
         toHaveBeenCalledOnceWith(...params: any[]): void;
+        /**
+         * {@link expect} the actual (a {@link Spy}) to have been called the specified number of times.
+         * @since 2.4.0
+         * @param expected - The number of invocations to look for.
+         * @example
+         * expect(mySpy).toHaveBeenCalledTimes(3);
+         */
         toHaveBeenCalledTimes(expected: number): void;
         toContain(expected: any): void;
         /**
@@ -730,7 +1027,7 @@ declare namespace jasmine {
         toBeCloseTo(expected: number, precision: any, expectationFailOutput: any): void;
         toThrow(expected?: any): void;
         toThrowError(message?: string | RegExp): void;
-        toThrowError(expected?: new (...args: any[]) => Error, message?: string | RegExp): void;
+        toThrowError(expected?: new(...args: any[]) => Error, message?: string | RegExp): void;
         toThrowMatching(predicate: (thrown: any) => boolean): void;
         toBeNegativeInfinity(): void;
         /**
@@ -772,6 +1069,15 @@ declare namespace jasmine {
          * expect(array).toHaveSize(2);
          */
         toHaveSize(expected: number): void;
+
+        /**
+         * {@link expect} the actual (a {@link SpyObj}) spies to have been called.
+         * @since 4.1.0
+         * @example
+         * expect(mySpyObj).toHaveSpyInteractions();
+         * expect(mySpyObj).not.toHaveSpyInteractions();
+         */
+        toHaveSpyInteractions(): void;
 
         /**
          * Add some context for an expect.
@@ -914,7 +1220,7 @@ declare namespace jasmine {
          * @param expected Error constructor the object that was thrown needs to be an instance of. If not provided, Error will be used.
          * @param message The message that should be set on the thrown Error.
          */
-        toBeRejectedWithError(expected?: new (...args: any[]) => Error, message?: string | RegExp): PromiseLike<void>;
+        toBeRejectedWithError(expected?: new(...args: any[]) => Error, message?: string | RegExp): PromiseLike<void>;
 
         /**
          * Expect a promise to be rejected with a value matched to the expected.
@@ -980,6 +1286,11 @@ declare namespace jasmine {
         fullName: string;
 
         /**
+         * The name of the file the suite was defined in.
+         */
+        filename: string;
+
+        /**
          * The list of expectations that failed during execution of this spec.
          */
         failedExpectations: FailedExpectation[];
@@ -992,7 +1303,7 @@ declare namespace jasmine {
         /**
          * Once the spec has completed, this string represents the pass/fail status of this spec.
          */
-        status: string;
+        status: "excluded" | "pending" | "notApplicable" | "failed" | "passed";
 
         /**
          * The time in ms used by the spec execution, including any before/afterEach.
@@ -1000,7 +1311,7 @@ declare namespace jasmine {
         duration: number | null;
 
         /**
-         * User-supplied properties, if any, that were set using {@link Env.setSpecProperty}
+         * User-supplied properties, if any, that were set using {@link Env.setSuiteProperty}
          */
         properties: { [key: string]: unknown } | null;
     }
@@ -1015,10 +1326,27 @@ declare namespace jasmine {
          * If the spec is pending, this will be the reason.
          */
         pendingReason: string;
+
+        /**
+         * If the spec is not applicable, this will be the reason.
+         */
+        notApplicableReason: string;
+
+        debugLogs: DebugLogEntry[] | null;
+
+        /**
+         * User-supplied properties, if any, that were set using {@link Env.setSpecProperty}
+         */
+        properties: { [key: string]: unknown } | null;
+    }
+
+    interface DebugLogEntry {
+        message: String;
+        timestamp: number;
     }
 
     interface JasmineDoneInfo {
-        overallStatus: string;
+        overallStatus: "incomplete" | "failed" | "passed";
         totalTime: number;
         incompleteReason: string;
         order: Order;
@@ -1056,9 +1384,9 @@ declare namespace jasmine {
     type SpecFunction = (spec?: Spec) => void;
 
     interface Spec {
-        new (attrs: any): any;
+        new(attrs: any): any;
 
-        readonly id: number;
+        readonly id: string;
         env: Env;
         readonly description: string;
         getFullName(): string;
@@ -1077,8 +1405,9 @@ declare namespace jasmine {
         withArgs(...args: MatchableArgs<Fn>): Spy<Fn>;
     }
 
-    type SpyObj<T> = T &
-        {
+    type SpyObj<T> =
+        & T
+        & {
             [K in keyof T]: T[K] extends Func ? T[K] & Spy<T[K]> : T[K];
         };
 
@@ -1098,15 +1427,13 @@ declare namespace jasmine {
     /**
      * Obtains the promised type that a promise-returning function resolves to.
      */
-    type PromisedReturnType<Fn extends Func> = Fn extends (...args: any[]) => PromiseLike<infer TResult>
-        ? TResult
-        : never;
+    type PromisedResolveType<T> = T extends PromiseLike<infer TResult> ? TResult : never;
 
     /**
      * Obtains the type that a promise-returning function can be rejected with.
      * This is so we can use .and.rejectWith() only for functions that return a promise.
      */
-    type PromisedRejectType<Fn extends Function> = Fn extends (...args: any[]) => PromiseLike<unknown> ? any : never;
+    type PromisedRejectType<T> = T extends PromiseLike<unknown> ? any : never;
 
     interface SpyAnd<Fn extends Func> {
         identity: string;
@@ -1120,9 +1447,9 @@ declare namespace jasmine {
         /** By chaining the spy with and.callFake, all calls to the spy will delegate to the supplied function. */
         callFake(fn: Fn): Spy<Fn>;
         /** Tell the spy to return a promise resolving to the specified value when invoked. */
-        resolveTo(val?: PromisedReturnType<Fn>): Spy<Fn>;
+        resolveTo(val?: PromisedResolveType<ReturnType<Fn>>): Spy<Fn>;
         /** Tell the spy to return a promise rejecting with the specified value when invoked. */
-        rejectWith(val?: PromisedRejectType<Fn>): Spy<Fn>;
+        rejectWith(val?: PromisedRejectType<ReturnType<Fn>>): Spy<Fn>;
         /** By chaining the spy with and.throwError, all calls to the spy will throw the specified value. */
         throwError(msg: string | Error): Spy;
         /** When a calling strategy is used for a spy, the original stubbing behavior can be returned at any time with and.stub. */
@@ -1149,12 +1476,12 @@ declare namespace jasmine {
         /** Set this spy to do a shallow clone of arguments passed to each invocation. */
         saveArgumentsByValue(): void;
         /** Get the "this" object that was passed to a specific invocation of this spy. */
-        thisFor(index: number): any;
+        thisFor(index: number): ThisType<Fn>;
     }
 
     interface CallInfo<Fn extends Func> {
         /** The context (the this) for the call */
-        object: any;
+        object: ThisType<Fn>;
         /** All arguments passed to the call */
         args: Parameters<Fn>;
         /** The return value of the call */
@@ -1169,29 +1496,11 @@ declare namespace jasmine {
         extend(destination: any, source: any): any;
     }
 
-    interface JsApiReporter extends CustomReporter {
-        new (): any;
-
-        started: boolean;
-        finished: boolean;
-        runDetails: JasmineDoneInfo;
-
-        status(): string;
-        suiteResults(index: number, length: number): SuiteResult[];
-        specResults(index: number, length: number): SpecResult[];
-        suites(): { [id: string]: SuiteResult };
-        specs(): SpecResult[];
-        executionTime(): number;
-    }
-
     interface Jasmine {
         Spec: Spec;
         clock: Clock;
         util: Util;
     }
-
-    var HtmlReporter: HtmlReporter;
-    var HtmlSpecFilter: HtmlSpecFilter;
 
     /**
      * Default number of milliseconds Jasmine will wait for an asynchronous spec to complete.
@@ -1292,10 +1601,6 @@ declare module "jasmine" {
         /**
          * @deprecated Private property that may be changed or removed in the future
          */
-        completionReporter: jasmine.CustomReporter;
-        /**
-         * @deprecated Private property that may be changed or removed in the future
-         */
         reporter: jasmine.CustomReporter;
         /**
          * @deprecated Private property that may be changed or removed in the future
@@ -1324,13 +1629,9 @@ declare module "jasmine" {
         /**
          * @deprecated Private property that may be changed or removed in the future
          */
-        onCompleteCallbackAdded: boolean;
-        /**
-         * @deprecated Private property that may be changed or removed in the future
-         */
         defaultReporterConfigured: boolean;
 
-        constructor(options: jasmine.JasmineOptions);
+        constructor(options?: jasmine.JasmineOptions);
         addMatchers(matchers: jasmine.CustomMatcherFactories): void;
         /**
          * Add a custom reporter to the Jasmine environment.
@@ -1340,16 +1641,8 @@ declare module "jasmine" {
          * Adds a spec file to the list that will be loaded when the suite is executed.
          */
         addSpecFile(filePath: string): void;
-        /**
-         * @deprecated Use addMatchingSpecFiles, loadConfig, or loadConfigFile instead
-         */
-        addSpecFiles(files: string[]): void;
         addMatchingSpecFiles(patterns: string[]): void;
         addHelperFile(filePath: string): void;
-        /**
-         * @deprecated Use addMatchingHelperFiles, loadConfig, or loadConfigFile instead
-         */
-        addHelperFiles(files: string[]): void;
         addMatchingHelperFiles(patterns: string[]): void;
         /**
          * @deprecated Private method that may be changed or removed in the future
@@ -1360,10 +1653,6 @@ declare module "jasmine" {
          */
         configureDefaultReporter(options: jasmine.DefaultReporterOptions): void;
         execute(files?: string[], filterString?: string): Promise<jasmine.JasmineDoneInfo>;
-        /**
-         * @deprecated Private property that may be changed or removed in the future
-         */
-        exitCodeCompletion(passed: boolean): void;
         exitOnCompletion: boolean;
         loadConfig(config: jasmine.JasmineConfig): void;
         loadConfigFile(configFilePath?: string): void;
@@ -1380,11 +1669,6 @@ declare module "jasmine" {
          */
         loadRequires(): void;
 
-        /**
-         * @deprecated set exitOnCompletion to false and use the promise returned
-         * from execute() instead.
-         */
-        onComplete(onCompleteCallback: (passed: boolean) => void): void;
         /**
          * Provide a fallback reporter if no other reporters have been specified.
          */

@@ -1,58 +1,35 @@
-// Type definitions for @xmpp/xml 0.6
-// Project: https://github.com/xmppjs/xmpp.js/tree/master/packages/xml
-// Definitions by: BendingBender <https://github.com/BendingBender>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.2
+export default xml;
 
-/// <reference types="node" />
+import * as ltx from "ltx";
 
-export = xml;
+declare function xml(...args: Parameters<typeof ltx.createElement>): ReturnType<typeof ltx.createElement>;
 
-import * as ltx from 'ltx';
-import * as escape from 'ltx/lib/escape';
-import { EventEmitter } from 'events';
+type Element = ltx.Element;
+type Node = ltx.Node;
 
-declare function xml(
-    name: string,
-    attrs?: string | { [key: string]: any },
-    ...children: xml.ElementChild[]
-): xml.Element;
+declare const Element: typeof ltx.Element;
+declare const createElement: typeof ltx.createElement;
 
-declare namespace xml {
-    function x(
-        name: string,
-        attrs?: string | { [key: string]: any },
-        ...children: ElementChild[]
-    ): Element;
+declare const escapeXML: typeof ltx.escapeXML;
+declare const unescapeXML: typeof ltx.unescapeXML;
+declare const escapeXMLText: typeof ltx.escapeXMLText;
+declare const unescapeXMLText: typeof ltx.unescapeXMLText;
 
-    const escapeXML: typeof escape.escapeXML;
-    const unescapeXML: typeof escape.unescapeXML;
-    const escapeXMLText: typeof escape.escapeXMLText;
-    const unescapeXMLText: typeof escape.unescapeXMLText;
+export { createElement, Element, escapeXML, escapeXMLText, Node, unescapeXML, unescapeXMLText };
 
-    class Element extends ltx.Element {
-        attrs: { [key: string]: any };
-        append(nodes: ElementChild): Element;
-        prepend(nodes: ElementChild): Element;
-    }
-    type ElementChild = Element | Element[] | string | number | boolean;
+export class Parser extends ltx.Parser {
+    static readonly XMLError: typeof XMLError;
+    readonly parser: ltx.Parser;
+    root: Element | null;
+    cursor: Element | null;
 
-    class Parser extends EventEmitter {
-        readonly XMLError: typeof XMLError;
-        readonly parser: ltx.Parser;
-        root: Element | null;
-        cursor: Element | null;
-
-        onStartElement(name: string, attrs?: string | { [attrName: string]: any }): void;
-        onEndElement(name: string): void;
-        onText(str: string): void;
-        write(data: Buffer): void;
-        end(data: Buffer): void;
-    }
+    onStartElement(name: string, attrs?: string | { [attrName: string]: any }): void;
+    onEndElement(name: string): void;
+    onText(str: string): void;
 }
 
-declare class XMLError extends Error {
-    readonly name: 'XMLError';
+export class XMLError extends Error {
+    readonly name: "XMLError";
 }
 
 declare global {
@@ -61,6 +38,6 @@ declare global {
             [elemName: string]: any;
         }
 
-        type Element = xml.Element;
+        type Element = ltx.Element;
     }
 }

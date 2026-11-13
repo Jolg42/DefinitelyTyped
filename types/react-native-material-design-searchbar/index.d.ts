@@ -1,22 +1,10 @@
-// Type definitions for react-native-material-design-searchbar 1.1
-// Project: https://github.com/ananddayalan/react-native-material-design-searchbar
-// Definitions by: Kyle Roach <https://github.com/iRoachie>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.8
-
-import * as React from 'react';
-import {
-    TextInputProps,
-    ReturnKeyType,
-    ReturnKeyTypeAndroid,
-    TextStyle,
-    ReturnKeyTypeIOS,
-} from 'react-native';
+import * as React from "react";
+import { ReturnKeyTypeOptions, TextInputProps, TextStyle } from "react-native";
 
 export interface SearchBarProps {
     height: number;
     autoCorrect?: boolean | undefined;
-    returnKeyType?: ReturnKeyType | ReturnKeyTypeAndroid | ReturnKeyTypeIOS | undefined;
+    returnKeyType?: ReturnKeyTypeOptions | undefined;
     placeholder?: string | undefined;
     padding?: number | undefined;
     inputStyle?: TextStyle | undefined;

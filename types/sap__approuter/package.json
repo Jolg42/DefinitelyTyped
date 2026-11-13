@@ -1,0 +1,28 @@
+{
+    "private": true,
+    "name": "@types/sap__approuter",
+    "version": "23.0.9999",
+    "projects": [
+        "https://www.npmjs.com/package/@sap/approuter"
+    ],
+    "devDependencies": {
+        "@types/sap__approuter": "workspace:."
+    },
+    "owners": [
+        {
+            "name": "Nico Blum",
+            "githubUsername": "nbblum"
+        },
+        {
+            "name": "Laurens von Assel",
+            "githubUsername": "biolauri"
+        },
+        {
+            "name": "StenCalDabran",
+            "githubUsername": "StenCalDabran"
+        }
+    ],
+    "dependencies": {
+        "@types/node": "*"
+    }
+}

@@ -1,11 +1,3 @@
-// Type definitions for D3JS d3-random module 3.0
-// Project: https://github.com/d3/d3-random/, https://d3js.org/d3-random
-// Definitions by: Tom Wanzek <https://github.com/tomwanzek>
-//                 Alex Ford <https://github.com/gustavderdrache>
-//                 Boris Yankov <https://github.com/borisyankov>
-//                 Nathan Bierema <https://github.com/Methuselah96>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 // Last module patch version validated against: 3.0.1
 
 export interface RandomNumberGenerationSource {
@@ -199,12 +191,13 @@ export const randomGeometric: RandomGeometric;
  */
 export interface RandomBinomial extends RandomNumberGenerationSource {
     /**
-     * Returns a function for generating numbers with a geometric distribution with success probability p.
-     * The value p is in the range (0, 1].
+     * Returns a function for generating random numbers with a binomial distribution with n the number of trials and p the success probability.
+     * The value p is in the range [0, 1].
      *
+     * @param n Number of trials
      * @param p Success probability
      */
-    (p: number): () => number;
+    (n: number, p: number): () => number;
 }
 
 export const randomBinomial: RandomBinomial;

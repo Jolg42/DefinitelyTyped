@@ -1,5 +1,4 @@
-// Type definitions for autosuggest-highlight 3.1
-// Project: https://github.com/moroshko/autosuggest-highlight#readme
-// Definitions by: Artur Sianiuk <https://github.com/senukartur>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
+// Despite not having any definitions, this file must exist on DefinitelyTyped.
+// Currently, the tooling assumes that this file exists and performs extra lints,
+// as well as using it to figure out where things are.
+export {};

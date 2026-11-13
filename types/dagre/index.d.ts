@@ -1,22 +1,14 @@
-// Type definitions for dagre 0.7
-// Project: https://github.com/dagrejs/dagre
-// Definitions by: Qinfeng Chen <https://github.com/qinfchen>
-//                 Lisa Vallfors <https://github.com/Frankrike>
-//                 Pete Vilter <https://github.com/vilterp>
-//                 David Newell <https://github.com/rustedgrail>
-//                 Graham Lea <https://github.com/GrahamLea>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.2
-
 export as namespace dagre;
 
 export namespace graphlib {
     class Graph<T = {}> {
-        constructor(opt?: { directed?: boolean | undefined; multigraph?: boolean | undefined; compound?: boolean | undefined });
+        constructor(
+            opt?: { directed?: boolean | undefined; multigraph?: boolean | undefined; compound?: boolean | undefined },
+        );
 
         graph(): GraphLabel;
         isDirected(): boolean;
-        isMultiGraph(): boolean;
+        isMultigraph(): boolean;
         setGraph(label: GraphLabel): Graph<T>;
 
         edge(edgeObj: Edge): GraphEdge;
@@ -27,7 +19,7 @@ export namespace graphlib {
         hasEdge(outNodeName: string, inNodeName: string, name?: string): boolean;
         inEdges(inNodeName: string, outNodeName?: string): Edge[] | undefined;
         outEdges(outNodeName: string, inNodeName?: string): Edge[] | undefined;
-        removeEdge(outNodeName: string, inNodeName: string): Graph<T>;
+        removeEdge(outNodeName: string, inNodeName: string, name?: string): Graph<T>;
         setDefaultEdgeLabel(callback: string | ((v: string, w: string, name?: string) => string | Label)): Graph<T>;
         setEdge(params: Edge, value?: string | { [key: string]: any }): Graph<T>;
         setEdge(sourceId: string, targetId: string, value?: string | Label, name?: string): Graph<T>;
@@ -45,9 +37,9 @@ export namespace graphlib {
         setDefaultNodeLabel(callback: string | ((nodeId: string) => string | Label)): Graph<T>;
         setNode(name: string, label: string | Label): Graph<T>;
         setParent(childName: string, parentName: string): void;
-        sinks(): Array<Node<T>>;
-        sources(): Array<Node<T>>;
-        successors(name: string): Array<Node<T>> | undefined;
+        sinks(): string[];
+        sources(): string[];
+        successors(name: string): string[] | undefined;
     }
 
     namespace json {
@@ -57,10 +49,23 @@ export namespace graphlib {
 
     namespace alg {
         function components(graph: Graph): string[][];
-        function dijkstra(graph: Graph, source: string, weightFn?: WeightFn, edgeFn?: EdgeFn): any;
-        function dijkstraAll(graph: Graph, weightFn?: WeightFn, edgeFn?: EdgeFn): any;
+        function dijkstra(
+            graph: Graph,
+            source: string,
+            weightFn?: WeightFn,
+            edgeFn?: EdgeFn,
+        ): Record<string, { distance: number; predecessor?: string }>;
+        function dijkstraAll(
+            graph: Graph,
+            weightFn?: WeightFn,
+            edgeFn?: EdgeFn,
+        ): Record<string, Record<string, { distance: number; predecessor?: string }>>;
         function findCycles(graph: Graph): string[][];
-        function floydWarchall(graph: Graph, weightFn?: WeightFn, edgeFn?: EdgeFn): any;
+        function floydWarshall(
+            graph: Graph,
+            weightFn?: WeightFn,
+            edgeFn?: EdgeFn,
+        ): Record<string, Record<string, { distance: number; predecessor?: string }>>;
         function isAcyclic(graph: Graph): boolean;
         function postorder(graph: Graph, nodeNames: string | string[]): string[];
         function preorder(graph: Graph, nodeNames: string | string[]): string[];
@@ -101,7 +106,7 @@ export interface EdgeConfig {
     weight?: number | undefined;
     width?: number | undefined;
     height?: number | undefined;
-    lablepos?: 'l' | 'c' | 'r' | undefined;
+    lablepos?: "l" | "c" | "r" | undefined;
     labeloffest?: number | undefined;
 }
 

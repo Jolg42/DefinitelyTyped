@@ -1,9 +1,3 @@
-// Type definitions for non-npm package LibreOffice 5.3
-// Project: https://api.libreoffice.org/
-// Definitions by: Zev Spitz <https://github.com/zspitz>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.6
-
 /// <reference types="activex-interop" />
 
 declare class type {
@@ -50,7 +44,7 @@ declare namespace com.sun.star {
          * @see XAccessibleContext
          * @since OOo 1.1.2
          */
-        interface AccessibleContext extends XAccessibleContext, XAccessibleEventBroadcaster { }
+        interface AccessibleContext extends XAccessibleContext, XAccessibleEventBroadcaster {}
 
         /**
          * this struct describes an accessible event, that is broadcasted from the {@link XAccessibleEventBroadcaster} and notified to {@link
@@ -681,7 +675,11 @@ declare namespace com.sun.star {
              * @returns Returns a flag that indicates whether the operation has been executed successfully.
              * @throws com::sun::star::lang::IndexOutOfBoundsException if the indices are invalid
              */
-            setAttributes(nStartIndex: number, nEndIndex: number, aAttributeSet: LibreOffice.SeqEquiv<beans.PropertyValue>): boolean;
+            setAttributes(
+                nStartIndex: number,
+                nEndIndex: number,
+                aAttributeSet: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): boolean;
 
             /**
              * Replaces the whole text with the given text.
@@ -1561,7 +1559,10 @@ declare namespace com.sun.star {
              * @returns Returns the explicitly or implicitly (empty aRequestedAttributes argument) requested attributes of the specified character. Each attribute is rep
              * @throws com::sun::star::lang::IndexOutOfBoundsException if the index is invalid
              */
-            getCharacterAttributes(nIndex: number, aRequestedAttributes: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyValue>;
+            getCharacterAttributes(
+                nIndex: number,
+                aRequestedAttributes: LibreOffice.SeqEquiv<string>,
+            ): SafeArray<beans.PropertyValue>;
 
             /**
              * Return the bounding box of the specified position.
@@ -1790,7 +1791,10 @@ declare namespace com.sun.star {
              * @returns Returns the requested attributes of the specified character. Each attribute is represented by a {@link com.sun.star.beans.PropertyValue} object.
              * @throws com::sun::star::lang::IndexOutOfBoundsException if the index is invalid
              */
-            getRunAttributes(Index: number, RequestedAttributes: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyValue>;
+            getRunAttributes(
+                Index: number,
+                RequestedAttributes: LibreOffice.SeqEquiv<string>,
+            ): SafeArray<beans.PropertyValue>;
         }
 
         /**
@@ -2568,7 +2572,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XParallelTimeContainer extends XTimeContainer, container.XEnumerationAccess { }
+        interface XParallelTimeContainer extends XTimeContainer, container.XEnumerationAccess {}
 
         /**
          * Supported modules BasicInlineTimingEventTimingFillDefaultMultiArcTimingRepeatTiming ** The deprecated repeat is not supported.
@@ -3087,7 +3091,11 @@ declare namespace com.sun.star {
              * @param TargetHost the host name associated with the target principal.
              * @returns the newly created initiator context.
              */
-            createInitiatorContext(SourcePrincipal: string, TargetPrincipal: string, TargetHost: string): XSSOInitiatorContext;
+            createInitiatorContext(
+                SourcePrincipal: string,
+                TargetPrincipal: string,
+                TargetHost: string,
+            ): XSSOInitiatorContext;
 
             /**
              * retrieves the mechanism name of all security contexts created using this manager.
@@ -3394,15 +3402,31 @@ declare namespace com.sun.star {
          * specifies accessibility support for a button.
          * @since OOo 1.1.2
          */
-        interface AccessibleButton extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText, accessibility.XAccessibleAction, accessibility.XAccessibleValue { }
+        interface AccessibleButton
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleValue
+        {}
 
         /**
          * specifies accessibility support for a check box.
          * @since OOo 1.1.2
          */
-        interface AccessibleCheckBox extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText, accessibility.XAccessibleAction, accessibility.XAccessibleValue { }
+        interface AccessibleCheckBox
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleValue
+        {}
 
         /**
          * specifies accessibility support for a combo box.
@@ -3411,7 +3435,12 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleExtendedComponent
          * @since OOo 1.1.2
          */
-        interface AccessibleComboBox extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleComboBox
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a dropdown combo box.
@@ -3421,8 +3450,13 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleAction
          * @since OOo 1.1.2
          */
-        interface AccessibleDropDownComboBox extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent,
-            accessibility.XAccessibleAction { }
+        interface AccessibleDropDownComboBox
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleAction
+        {}
 
         /**
          * specifies accessibility support for a dropdown list box.
@@ -3432,22 +3466,40 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleAction
          * @since OOo 1.1.2
          */
-        interface AccessibleDropDownListBox extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent,
-            accessibility.XAccessibleAction { }
+        interface AccessibleDropDownListBox
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleAction
+        {}
 
         /**
          * specifies accessibility support for an edit.
          * @since OOo 1.1.2
          */
-        interface AccessibleEdit extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText, accessibility.XAccessibleEditableText { }
+        interface AccessibleEdit
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleEditableText
+        {}
 
         /**
          * specifies accessibility support for a fixed text.
          * @since OOo 1.1.2
          */
-        interface AccessibleFixedText extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText { }
+        interface AccessibleFixedText
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText
+        {}
 
         /**
          * specifies accessibility support for an icon choice control.
@@ -3455,7 +3507,12 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleComponent
          * @since OOo 1.1.2
          */
-        interface AccessibleIconChoiceControl extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleSelection { }
+        interface AccessibleIconChoiceControl
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for an icon choice control entry.
@@ -3464,7 +3521,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleText
          * @since OOo 1.1.2
          */
-        interface AccessibleIconChoiceControlEntry extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText { }
+        interface AccessibleIconChoiceControlEntry
+            extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText
+        {}
 
         /**
          * Accessible lists are used by combo boxes as container for the list items.
@@ -3474,8 +3533,14 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleSelection
          * @since OOo 1.1.2
          */
-        interface AccessibleList extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent,
-            accessibility.XAccessible, accessibility.XAccessibleSelection { }
+        interface AccessibleList
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessible,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a list box.
@@ -3484,7 +3549,12 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleExtendedComponent
          * @since OOo 1.1.2
          */
-        interface AccessibleListBox extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleListBox
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a list item.
@@ -3493,106 +3563,195 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleText
          * @since OOo 1.1.2
          */
-        interface AccessibleListItem extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText { }
+        interface AccessibleListItem
+            extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText
+        {}
 
         /**
          * specifies accessibility support for a menu.
          * @since OOo 1.1.2
          */
-        interface AccessibleMenu extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText, accessibility.XAccessibleAction, accessibility.XAccessibleValue,
-            accessibility.XAccessibleSelection { }
+        interface AccessibleMenu
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleValue,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a menu bar.
          * @since OOo 1.1.2
          */
-        interface AccessibleMenuBar extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleSelection { }
+        interface AccessibleMenuBar
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a menu item.
          * @since OOo 1.1.2
          */
-        interface AccessibleMenuItem extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText, accessibility.XAccessibleAction, accessibility.XAccessibleValue { }
+        interface AccessibleMenuItem
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleValue
+        {}
 
         /**
          * specifies accessibility support for a menu separator.
          * @since OOo 1.1.2
          */
-        interface AccessibleMenuSeparator extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleMenuSeparator
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a pop-up menu.
          * @since OOo 1.1.2
          */
-        interface AccessiblePopupMenu extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleSelection { }
+        interface AccessiblePopupMenu
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a radio button.
          * @since OOo 1.1.2
          */
-        interface AccessibleRadioButton extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText, accessibility.XAccessibleAction, accessibility.XAccessibleValue { }
+        interface AccessibleRadioButton
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleValue
+        {}
 
         /**
          * specifies accessibility support for a scroll bar.
          * @since OOo 1.1.2
          */
-        interface AccessibleScrollBar extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleAction, accessibility.XAccessibleValue { }
+        interface AccessibleScrollBar
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleValue
+        {}
 
         /**
          * specifies accessibility support for a status bar.
          * @since OOo 1.1.2
          */
-        interface AccessibleStatusBar extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleStatusBar
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a status bar item.
          * @since OOo 1.1.2
          */
-        interface AccessibleStatusBarItem extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText { }
+        interface AccessibleStatusBarItem
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText
+        {}
 
         /**
          * specifies accessibility support for a tabbar.
          * @since OOo 1.1.2
          */
-        interface AccessibleTabBar extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleTabBar
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a tabbar page.
          * @since OOo 1.1.2
          */
-        interface AccessibleTabBarPage extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleTabBarPage
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a tabbar page list.
          * @since OOo 1.1.2
          */
-        interface AccessibleTabBarPageList extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleSelection { }
+        interface AccessibleTabBarPageList
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a tab control.
          * @since OOo 1.1.2
          */
-        interface AccessibleTabControl extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleSelection { }
+        interface AccessibleTabControl
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a tab page.
          * @since OOo 1.1.2
          */
-        interface AccessibleTabPage extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent, accessibility.XAccessibleText { }
+        interface AccessibleTabPage
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleText
+        {}
 
         /**
          * Text fields are like edit fields as described by the {@link AccessibleEdit} service but without the ability to edit the text.
@@ -3602,8 +3761,13 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleText
          * @since OOo 1.1.2
          */
-        interface AccessibleTextField extends accessibility.AccessibleContext, accessibility.XAccessibleText, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleTextField
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a tool box.
@@ -3612,7 +3776,12 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleExtendedComponent
          * @since OOo 1.1.2
          */
-        interface AccessibleToolBox extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleToolBox
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * specifies accessibility support for a tool box item.
@@ -3624,8 +3793,15 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleValue
          * @since OOo 1.1.2
          */
-        interface AccessibleToolBoxItem extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleExtendedComponent,
-            accessibility.XAccessibleAction, accessibility.XAccessibleText, accessibility.XAccessibleValue { }
+        interface AccessibleToolBoxItem
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleValue
+        {}
 
         /**
          * specifies accessibility support for a tree list box.
@@ -3634,7 +3810,12 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleSelection
          * @since OOo 1.1.2
          */
-        interface AccessibleTreeListBox extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleSelection { }
+        interface AccessibleTreeListBox
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * specifies accessibility support for a treelistbox entry.
@@ -3644,15 +3825,26 @@ declare namespace com.sun.star {
          * @see com.sun.star.accessibility.XAccessibleText
          * @since OOo 1.1.2
          */
-        interface AccessibleTreeListBoxEntry extends accessibility.AccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleAction,
-            accessibility.XAccessibleSelection, accessibility.XAccessibleText { }
+        interface AccessibleTreeListBoxEntry
+            extends
+                accessibility.AccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleAction,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleText
+        {}
 
         /**
          * specifies accessibility support for a window.
          * @since OOo 1.1.2
          */
-        interface AccessibleWindow extends accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleWindow
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * a semantic event which indicates that a component-defined action occurred.
@@ -3681,13 +3873,13 @@ declare namespace com.sun.star {
          * is the default control used for an {@link AnimatedImagesControlModel} , displayed a series of images.
          * @since OOo 3.4
          */
-        interface AnimatedImagesControl extends UnoControl, XAnimation { }
+        interface AnimatedImagesControl extends UnoControl, XAnimation {}
 
         /**
          * describes the model for a control displaying a series of images
          * @since OOo 3.4
          */
-        interface AnimatedImagesControlModel extends UnoControlModel, XAnimatedImages { }
+        interface AnimatedImagesControlModel extends UnoControlModel, XAnimatedImages {}
 
         /** contains information about a device. */
         interface DeviceInfo {
@@ -3728,7 +3920,12 @@ declare namespace com.sun.star {
         /** Specifies a provider for dialogs implementing the {@link com.sun.star.awt.XDialog} interface. */
         interface DialogProvider extends XDialogProvider {
             createWithModel(Model: frame.XModel): void;
-            createWithModelAndScripting(Model: frame.XModel, InStream: io.XInputStream, DialogLib: container.XNameContainer, ScriptListener: script.XScriptListener): void;
+            createWithModelAndScripting(
+                Model: frame.XModel,
+                InStream: io.XInputStream,
+                DialogLib: container.XNameContainer,
+                ScriptListener: script.XScriptListener,
+            ): void;
         }
 
         /** data returned by docking handler */
@@ -4250,7 +4447,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a standard tab controller model. */
-        interface TabControllerModel extends XTabControllerModel, io.XPersistObject { }
+        interface TabControllerModel extends XTabControllerModel, io.XPersistObject {}
 
         /** specifies a text event. */
         interface TextEvent extends lang.EventObject {
@@ -4270,10 +4467,10 @@ declare namespace com.sun.star {
          *
          * The change of data directly at the control may not affect the model data. To ensure this behavior, modify the data of the model.
          */
-        interface UnoControl extends lang.XComponent, XControl, XWindow, XView, accessibility.XAccessible { }
+        interface UnoControl extends lang.XComponent, XControl, XWindow, XView, accessibility.XAccessible {}
 
         /** specifies a button control. */
-        interface UnoControlButton extends UnoControl, XButton, XLayoutConstrains { }
+        interface UnoControlButton extends UnoControl, XButton, XLayoutConstrains {}
 
         /** specifies the standard model of an {@link UnoControlButton} . */
         interface UnoControlButtonModel extends UnoControlModel {
@@ -4418,7 +4615,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a check box control. */
-        interface UnoControlCheckBox extends UnoControl, XCheckBox, XLayoutConstrains { }
+        interface UnoControlCheckBox extends UnoControl, XCheckBox, XLayoutConstrains {}
 
         /** specifies the standard model of an {@link UnoControlCheckBox} . */
         interface UnoControlCheckBoxModel extends UnoControlModel {
@@ -4530,7 +4727,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a combo box control. */
-        interface UnoControlComboBox extends UnoControlEdit, XComboBox { }
+        interface UnoControlComboBox extends UnoControlEdit, XComboBox {}
 
         /** specifies the standard model of an {@link UnoControlComboBox} . */
         interface UnoControlComboBoxModel extends UnoControlModel, XItemList {
@@ -4638,7 +4835,9 @@ declare namespace com.sun.star {
         }
 
         /** specifies an abstract control which contains other controls. */
-        interface UnoControlContainer extends UnoControl, XUnoControlContainer, XControlContainer, container.XContainer { }
+        interface UnoControlContainer
+            extends UnoControl, XUnoControlContainer, XControlContainer, container.XContainer
+        {}
 
         /** specifies the standard model of an {@link UnoControlContainer} . */
         interface UnoControlContainerModel extends UnoControlModel {
@@ -4681,7 +4880,7 @@ declare namespace com.sun.star {
          *
          * A currency field makes it possible to enter, display and edit currency values.
          */
-        interface UnoControlCurrencyField extends UnoControlEdit, XSpinField, XCurrencyField { }
+        interface UnoControlCurrencyField extends UnoControlEdit, XSpinField, XCurrencyField {}
 
         /** specifies the standard model of an {@link UnoControlCurrencyField} . */
         interface UnoControlCurrencyFieldModel extends UnoControlModel {
@@ -4816,7 +5015,7 @@ declare namespace com.sun.star {
          *
          * A date field makes it possible to enter, display and edit date values.
          */
-        interface UnoControlDateField extends UnoControlEdit, XSpinField, XDateField { }
+        interface UnoControlDateField extends UnoControlEdit, XSpinField, XDateField {}
 
         /** specifies the standard model of an {@link UnoControlDateField} . */
         interface UnoControlDateFieldModel extends UnoControlModel {
@@ -4979,7 +5178,9 @@ declare namespace com.sun.star {
         }
 
         /** specifies the standard model of an {@link UnoControlDialog} . */
-        interface UnoControlDialogModel extends UnoControlModel, lang.XMultiServiceFactory, container.XContainer, container.XNameContainer {
+        interface UnoControlDialogModel
+            extends UnoControlModel, lang.XMultiServiceFactory, container.XContainer, container.XNameContainer
+        {
             /** specifies the background color (RGB) of the dialog. */
             BackgroundColor: util.Color;
 
@@ -5269,7 +5470,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a control for displaying fixed hyperlink. */
-        interface UnoControlFixedHyperlink extends UnoControl, XFixedHyperlink, XLayoutConstrains { }
+        interface UnoControlFixedHyperlink extends UnoControl, XFixedHyperlink, XLayoutConstrains {}
 
         /** specifies the standard model of an {@link UnoControlFixedHyperlink} . */
         interface UnoControlFixedHyperlinkModel extends UnoControlModel {
@@ -5382,7 +5583,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a control for displaying fixed text. */
-        interface UnoControlFixedText extends UnoControl, XFixedText, XLayoutConstrains { }
+        interface UnoControlFixedText extends UnoControl, XFixedText, XLayoutConstrains {}
 
         /** specifies the standard model of an {@link UnoControlFixedText} . */
         interface UnoControlFixedTextModel extends UnoControlModel {
@@ -5458,7 +5659,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a formatted field control. */
-        interface UnoControlFormattedField extends UnoControlEdit, XSpinField { }
+        interface UnoControlFormattedField extends UnoControlEdit, XSpinField {}
 
         /** specifies the standard model of an {@link UnoControlFormattedField} . */
         interface UnoControlFormattedFieldModel extends UnoControlModel {
@@ -5669,7 +5870,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a control for displaying an image. */
-        interface UnoControlImageControl extends UnoControl, XLayoutConstrains { }
+        interface UnoControlImageControl extends UnoControl, XLayoutConstrains {}
 
         /** specifies the standard model of an {@link UnoControlImageControl} . */
         interface UnoControlImageControlModel extends UnoControlModel {
@@ -5855,8 +6056,16 @@ declare namespace com.sun.star {
          * The interfaces {@link com.sun.star.beans.XPropertySet} and {@link com.sun.star.beans.XMultiPropertySet} need access to the model data from the
          * embedding environment. The control and the model can specify additional interfaces to exchange data or export more functionality from the model.
          */
-        interface UnoControlModel extends UnoControlDialogElement, XControlModel, lang.XComponent, beans.XPropertySet, beans.XMultiPropertySet, io.XPersistObject,
-            util.XCloneable {
+        interface UnoControlModel
+            extends
+                UnoControlDialogElement,
+                XControlModel,
+                lang.XComponent,
+                beans.XPropertySet,
+                beans.XMultiPropertySet,
+                io.XPersistObject,
+                util.XCloneable
+        {
             /** specifies the service name of the default control for this model. */
             DefaultControl: string;
         }
@@ -5866,7 +6075,7 @@ declare namespace com.sun.star {
          *
          * A numeric field makes it possible to enter, display and edit formatted numeric values.
          */
-        interface UnoControlNumericField extends UnoControlEdit, XSpinField, XNumericField { }
+        interface UnoControlNumericField extends UnoControlEdit, XSpinField, XNumericField {}
 
         /** specifies the standard model of an {@link UnoControlNumericField} . */
         interface UnoControlNumericFieldModel extends UnoControlModel {
@@ -5995,7 +6204,7 @@ declare namespace com.sun.star {
          *
          * A pattern field makes it possible to enter, display and edit text which conforms to a specified pattern.
          */
-        interface UnoControlPatternField extends UnoControlEdit, XSpinField, XPatternField { }
+        interface UnoControlPatternField extends UnoControlEdit, XSpinField, XPatternField {}
 
         /** specifies the standard model of an {@link UnoControlPatternField} . */
         interface UnoControlPatternFieldModel extends UnoControlModel {
@@ -6095,7 +6304,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a progress bar control. */
-        interface UnoControlProgressBar extends UnoControl, XProgressBar { }
+        interface UnoControlProgressBar extends UnoControl, XProgressBar {}
 
         /** specifies the standard model of an {@link UnoControlProgressBar} . */
         interface UnoControlProgressBarModel extends UnoControlModel {
@@ -6143,7 +6352,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a radio button control. */
-        interface UnoControlRadioButton extends UnoControl, XRadioButton, XLayoutConstrains { }
+        interface UnoControlRadioButton extends UnoControl, XRadioButton, XLayoutConstrains {}
 
         /** specifies the standard model of an {@link UnoControlRadioButton} . */
         interface UnoControlRadioButtonModel extends UnoControlModel {
@@ -6260,7 +6469,7 @@ declare namespace com.sun.star {
          * indicating incompleteness.Interactive: When activating a {@link RoadmapItem} (see {@link RoadmapItem} ) the information about which Item has been
          * selected is passed over when an itemlistener has been registered at the control.
          */
-        interface UnoControlRoadmap extends UnoControl, XItemEventBroadcaster { }
+        interface UnoControlRoadmap extends UnoControl, XItemEventBroadcaster {}
 
         /** specifies the standard model of an {@link UnoControlContainer} . */
         interface UnoControlRoadmapModel extends UnoControlModel, container.XIndexContainer {
@@ -6320,7 +6529,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a scroll bar control. */
-        interface UnoControlScrollBar extends UnoControl, XScrollBar { }
+        interface UnoControlScrollBar extends UnoControl, XScrollBar {}
 
         /** specifies the standard model of an {@link UnoControlScrollBar} . */
         interface UnoControlScrollBarModel extends UnoControlModel {
@@ -6419,7 +6628,7 @@ declare namespace com.sun.star {
          *
          * The model of an {@link UnoControlSpinButton} control must support the {@link UnoControlSpinButtonModel} service.
          */
-        interface UnoControlSpinButton extends UnoControl, XSpinValue { }
+        interface UnoControlSpinButton extends UnoControl, XSpinValue {}
 
         /**
          * specifies the standard model of an {@link UnoControlSpinButton} .
@@ -6505,7 +6714,7 @@ declare namespace com.sun.star {
          *
          * A time field makes it possible to enter, display, and edit time values.
          */
-        interface UnoControlTimeField extends UnoControlEdit, XSpinField, XTimeField { }
+        interface UnoControlTimeField extends UnoControlEdit, XSpinField, XTimeField {}
 
         /** specifies the standard model of an {@link UnoControlTimeField} . */
         interface UnoControlTimeFieldModel extends UnoControlModel {
@@ -7015,7 +7224,12 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.XContainerWindowEventHandler
              * @throws com::sun::star::lang::IllegalArgumentException if no window for the given URL is found or if the URL is invalid or xParent is null.
              */
-            createContainerWindow(URL: string, WindowType: string, xParent: XWindowPeer, xHandler: uno.XInterface): XWindow;
+            createContainerWindow(
+                URL: string,
+                WindowType: string,
+                xParent: XWindowPeer,
+                xHandler: uno.XInterface,
+            ): XWindow;
         }
 
         /**
@@ -7814,7 +8028,11 @@ declare namespace com.sun.star {
             getFontMetric(): SimpleFontMetric;
 
             /** queries the kerning pair table. */
-            getKernPairs(Chars1: [LibreOffice.SeqEquiv<string>], Chars2: [LibreOffice.SeqEquiv<string>], Kerns: [LibreOffice.SeqEquiv<number>]): void;
+            getKernPairs(
+                Chars1: [LibreOffice.SeqEquiv<string>],
+                Chars2: [LibreOffice.SeqEquiv<string>],
+                Kerns: [LibreOffice.SeqEquiv<number>],
+            ): void;
 
             /**
              * returns the string width.
@@ -7847,23 +8065,61 @@ declare namespace com.sun.star {
         /** provides the basic output operation of a device. */
         interface XGraphics extends uno.XInterface {
             /** copies a rectangle of pixels from another device into this one. */
-            copy(xSource: XDevice, nSourceX: number, nSourceY: number, nSourceWidth: number, nSourceHeight: number, nDestX: number, nDestY: number, nDestWidth: number, nDestHeight: number): void;
+            copy(
+                xSource: XDevice,
+                nSourceX: number,
+                nSourceY: number,
+                nSourceWidth: number,
+                nSourceHeight: number,
+                nDestX: number,
+                nDestY: number,
+                nDestWidth: number,
+                nDestHeight: number,
+            ): void;
 
             /** returns the device of this graphics. */
             readonly Device: XDevice;
 
             /** draws a part of the specified bitmap to the output device. */
-            draw(xBitmapHandle: XDisplayBitmap, SourceX: number, SourceY: number, SourceWidth: number, SourceHeight: number, DestX: number, DestY: number, DestWidth: number, DestHeight: number): void;
+            draw(
+                xBitmapHandle: XDisplayBitmap,
+                SourceX: number,
+                SourceY: number,
+                SourceWidth: number,
+                SourceHeight: number,
+                DestX: number,
+                DestY: number,
+                DestWidth: number,
+                DestHeight: number,
+            ): void;
 
             /** draws an arc (part of a circle) in the output device. */
-            drawArc(X: number, Y: number, Width: number, Height: number, X1: number, Y1: number, X2: number, Y2: number): void;
+            drawArc(
+                X: number,
+                Y: number,
+                Width: number,
+                Height: number,
+                X1: number,
+                Y1: number,
+                X2: number,
+                Y2: number,
+            ): void;
 
             /**
              * draws a chord of a circular area in the output device.
              *
              * A chord is a segment of a circle. You get two chords from a circle if you intersect the circle with a straight line joining two points on the circle.
              */
-            drawChord(nX: number, nY: number, nWidth: number, nHeight: number, nX1: number, nY1: number, nX2: number, nY2: number): void;
+            drawChord(
+                nX: number,
+                nY: number,
+                nWidth: number,
+                nHeight: number,
+                nX1: number,
+                nY1: number,
+                nX2: number,
+                nY2: number,
+            ): void;
 
             /** draws an ellipse in the output device. */
             drawEllipse(X: number, Y: number, Width: number, Height: number): void;
@@ -7875,7 +8131,16 @@ declare namespace com.sun.star {
             drawLine(X1: number, Y1: number, X2: number, Y2: number): void;
 
             /** draws a circular area in the output device. */
-            drawPie(X: number, Y: number, Width: number, Height: number, X1: number, Y1: number, X2: number, Y2: number): void;
+            drawPie(
+                X: number,
+                Y: number,
+                Width: number,
+                Height: number,
+                X1: number,
+                Y1: number,
+                X2: number,
+                Y2: number,
+            ): void;
 
             /** sets a single pixel in the output device. */
             drawPixel(X: number, Y: number): void;
@@ -7887,13 +8152,23 @@ declare namespace com.sun.star {
             drawPolyLine(DataX: LibreOffice.SeqEquiv<number>, DataY: LibreOffice.SeqEquiv<number>): void;
 
             /** draws multiple polygons in the output device at once. */
-            drawPolyPolygon(DataX: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<number>>, DataY: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<number>>): void;
+            drawPolyPolygon(
+                DataX: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<number>>,
+                DataY: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<number>>,
+            ): void;
 
             /** draws a rectangle in the output device. */
             drawRect(X: number, Y: number, Width: number, Height: number): void;
 
             /** draws a rectangle with rounded corners in the output device. */
-            drawRoundedRect(X: number, Y: number, Width: number, Height: number, nHorzRound: number, nVertRound: number): void;
+            drawRoundedRect(
+                X: number,
+                Y: number,
+                Width: number,
+                Height: number,
+                nHorzRound: number,
+                nVertRound: number,
+            ): void;
 
             /** draws text in the output device. */
             drawText(X: number, Y: number, Text: string): void;
@@ -7968,7 +8243,14 @@ declare namespace com.sun.star {
              * @param aGraphic the {@link com.sun.star.graphic.XGraphic} to be drawn onto the device
              * @since LibreOffice 4.1
              */
-            drawImage(nX: number, nY: number, nWidth: number, nHeight: number, nStyle: number, aGraphic: graphic.XGraphic): void;
+            drawImage(
+                nX: number,
+                nY: number,
+                nWidth: number,
+                nHeight: number,
+                nStyle: number,
+                aGraphic: graphic.XGraphic,
+            ): void;
         }
 
         /** makes it possible to register for action events of an image button and sets the action command. */
@@ -8003,7 +8285,14 @@ declare namespace com.sun.star {
             init(Width: number, Height: number): void;
 
             /** changes color model for next pixels typically called once after initialization. */
-            setColorModel(BitCount: number, RGBAPal: LibreOffice.SeqEquiv<number>, RedMask: number, GreenMask: number, BlueMask: number, AlphaMask: number): void;
+            setColorModel(
+                BitCount: number,
+                RGBAPal: LibreOffice.SeqEquiv<number>,
+                RedMask: number,
+                GreenMask: number,
+                BlueMask: number,
+                AlphaMask: number,
+            ): void;
 
             /**
              * delivers a chunk of pixels as `long` values.
@@ -8012,7 +8301,15 @@ declare namespace com.sun.star {
              * pixels that are contained in the array of pixels. The specified color model object should be used to convert the pixels into their corresponding color
              * and alpha components. Pixel (m,n) is stored in the pixels array at index (n * **nScanSize**m + nOffset).
              */
-            setPixelsByBytes(nX: number, nY: number, nWidth: number, nHeight: number, aProducerData: LibreOffice.SeqEquiv<number>, nOffset: number, nScanSize: number): void;
+            setPixelsByBytes(
+                nX: number,
+                nY: number,
+                nWidth: number,
+                nHeight: number,
+                aProducerData: LibreOffice.SeqEquiv<number>,
+                nOffset: number,
+                nScanSize: number,
+            ): void;
 
             /**
              * delivers a chunk of pixels as `byte` values.
@@ -8021,7 +8318,15 @@ declare namespace com.sun.star {
              * pixels that are contained in the array of pixels. The specified color model object should be used to convert the pixels into their corresponding color
              * and alpha components. Pixel (m,n) is stored in the pixels array at index (n * **nScanSize**m + nOffset).
              */
-            setPixelsByLongs(nX: number, nY: number, nWidth: number, nHeight: number, aProducerData: LibreOffice.SeqEquiv<number>, nOffset: number, nScanSize: number): void;
+            setPixelsByLongs(
+                nX: number,
+                nY: number,
+                nWidth: number,
+                nHeight: number,
+                aProducerData: LibreOffice.SeqEquiv<number>,
+                nOffset: number,
+                nScanSize: number,
+            ): void;
         }
 
         /** specifies a source for an image. */
@@ -8608,7 +8913,13 @@ declare namespace com.sun.star {
              * @param sMessage specifies text which will be shown by the message box. Line-breaks must be added using 'CR' or 'CR+LF'.
              * @returns the created message box or a null reference if it cannot be created.
              */
-            createMessageBox(aParent: XWindowPeer, eType: MessageBoxType, nButtons: number, sTitle: string, sMessage: string): XMessageBox;
+            createMessageBox(
+                aParent: XWindowPeer,
+                eType: MessageBoxType,
+                nButtons: number,
+                sTitle: string,
+                sMessage: string,
+            ): XMessageBox;
         }
 
         /** gives access to the value and formatting of a metric field. */
@@ -9835,7 +10146,15 @@ declare namespace com.sun.star {
          * Provides a unified interface for the new-style service {@link Toolkit} to implement.
          * @since LibreOffice 4.0
          */
-        interface XToolkit2 extends XToolkit, XDataTransferProviderAccess, XSystemChildFactory, XMessageBoxFactory, XExtendedToolkit, XReschedule { }
+        interface XToolkit2
+            extends
+                XToolkit,
+                XDataTransferProviderAccess,
+                XSystemChildFactory,
+                XMessageBoxFactory,
+                XExtendedToolkit,
+                XReschedule
+        {}
 
         /** Work in progress, don't use unless you know what you are doing. */
         interface XToolkitExperimental extends XToolkit2 {
@@ -9997,7 +10316,7 @@ declare namespace com.sun.star {
          * our code needs.
          * @since LibreOffice 4.2
          */
-        interface XUnoControlDialog extends XControlContainer, XControl, XWindow, XTopWindow, XDialog2 { }
+        interface XUnoControlDialog extends XControlContainer, XControl, XWindow, XTopWindow, XDialog2 {}
 
         /**
          * Interface to add handlers for key and mouse events. A handler is not a passive listener, it can even consume the event.
@@ -10075,7 +10394,11 @@ declare namespace com.sun.star {
             setGroup(Windows: LibreOffice.SeqEquiv<XWindow>): void;
 
             /** sets the tab order. */
-            setTabOrder(WindowOrder: LibreOffice.SeqEquiv<XWindow>, Tabs: LibreOffice.SeqEquiv, GroupControl: boolean): void;
+            setTabOrder(
+                WindowOrder: LibreOffice.SeqEquiv<XWindow>,
+                Tabs: LibreOffice.SeqEquiv,
+                GroupControl: boolean,
+            ): void;
         }
 
         /**
@@ -10090,7 +10413,12 @@ declare namespace com.sun.star {
             getProperty(PropertyName: string): any;
 
             /** returns the font, foreground and background color for the specified type. */
-            getStyles(nType: number, Font: [FontDescriptor], ForegroundColor: [util.Color], BackgroundColor: [util.Color]): void;
+            getStyles(
+                nType: number,
+                Font: [FontDescriptor],
+                ForegroundColor: [util.Color],
+                BackgroundColor: [util.Color],
+            ): void;
 
             /** returns `TRUE` if the window peer is a child, `FALSE` otherwise. */
             isChild(Peer: XWindowPeer): boolean;
@@ -10660,7 +10988,7 @@ declare namespace com.sun.star {
              * XGridRowSelection.addSelectionListener()} . You than will be notified for any selection change.
              * @since OOo 3.3
              */
-            interface UnoControlGrid extends UnoControl, XGridControl, XGridRowSelection { }
+            interface UnoControlGrid extends UnoControl, XGridControl, XGridRowSelection {}
 
             /**
              * specifies the standard model of a {@link UnoControlGrid} control.
@@ -11280,7 +11608,11 @@ declare namespace com.sun.star {
                  * @throws com::sun::star::lang::IllegalArgumentException if `Titles` and `Data` are of different length.
                  * @throws com::sun::star::lang::IndexOutOfBoundsException if `Index` is smaller than `0` or greater than the number of rows in the model.
                  */
-                insertRows(Index: number, Headings: LibreOffice.SeqEquiv, Data: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv>): void;
+                insertRows(
+                    Index: number,
+                    Headings: LibreOffice.SeqEquiv,
+                    Data: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv>,
+                ): void;
 
                 /** Removes all rows from the model. */
                 removeAllRows(): void;
@@ -11324,7 +11656,11 @@ declare namespace com.sun.star {
                  * @throws com::sun::star::lang::IndexOutOfBoundsException if one of the row indexes or the column index is invalid
                  * @throws com::sun::star::lang::IllegalArgumentException if the lengths of the `ColumnIndexes` and `Values` sequences are not equal.
                  */
-                updateRowData(ColumnIndexes: LibreOffice.SeqEquiv<number>, RowIndex: number, Values: LibreOffice.SeqEquiv): void;
+                updateRowData(
+                    ColumnIndexes: LibreOffice.SeqEquiv<number>,
+                    RowIndex: number,
+                    Values: LibreOffice.SeqEquiv,
+                ): void;
 
                 /**
                  * sets a new title for a given row.
@@ -11369,7 +11705,7 @@ declare namespace com.sun.star {
             }
 
             /** describes a grid control data model whose data can be modified and sorted. */
-            interface XSortableMutableGridDataModel extends XMutableGridDataModel, XSortableGridData { }
+            interface XSortableMutableGridDataModel extends XMutableGridDataModel, XSortableGridData {}
         }
 
         namespace ImageAlign {
@@ -11826,19 +12162,19 @@ declare namespace com.sun.star {
              * specifies a TabPage control.
              * @since OOo 3.4
              */
-            interface UnoControlTabPage extends UnoControlContainer, XTabPage { }
+            interface UnoControlTabPage extends UnoControlContainer, XTabPage {}
 
             /**
              * specifies a TabPageContainer control.
              * @since OOo 3.4
              */
-            interface UnoControlTabPageContainer extends UnoControl, XTabPageContainer { }
+            interface UnoControlTabPageContainer extends UnoControl, XTabPageContainer {}
 
             /**
              * specifies a model for a {@link UnoControlTabPageContainer} control.
              * @since OOo 3.4
              */
-            interface UnoControlTabPageContainerModel extends UnoControlModel, XTabPageContainerModel { }
+            interface UnoControlTabPageContainerModel extends UnoControlModel, XTabPageContainerModel {}
 
             /**
              * An interface to a control that displays tab pages.
@@ -12749,7 +13085,7 @@ declare namespace com.sun.star {
          * This structure is used as the type of interface attributes corresponding to instances of {@link com.sun.star.beans.Property} that have the {@link
          * com.sun.star.beans.PropertyAttribute.MAYBEAMBIGUOUS} .
          */
-        interface Ambiguous< T > {
+        interface Ambiguous<T> {
             /** Marks this structure instance as ambiguous. */
             IsAmbiguous: boolean;
 
@@ -12768,7 +13104,7 @@ declare namespace com.sun.star {
          * This structure is used as the type of interface attributes corresponding to instances of {@link com.sun.star.beans.Property} that have the {@link
          * com.sun.star.beans.PropertyAttribute.MAYBEDEFAULT} .
          */
-        interface Defaulted< T > {
+        interface Defaulted<T> {
             /** Marks this structure instance as defaulted. */
             IsDefaulted: boolean;
 
@@ -12833,7 +13169,7 @@ declare namespace com.sun.star {
          * This structure is used as the type of interface attributes corresponding to instances of {@link com.sun.star.beans.Property} that have the {@link
          * com.sun.star.beans.PropertyAttribute.MAYBEVOID} . It might also be useful in other situations, for example as the return type of an interface method.
          */
-        interface Optional< T > {
+        interface Optional<T> {
             /** Marks this structure instance as having an actual value. */
             IsPresent: boolean;
 
@@ -12852,7 +13188,7 @@ declare namespace com.sun.star {
          * This structure allows for conveniently packing together two values of any type, and could be useful as the result type of methods.
          * @since OOo 3.0
          */
-        interface Pair< T, U > {
+        interface Pair<T, U> {
             First: T;
             Second: U;
         }
@@ -12897,7 +13233,11 @@ declare namespace com.sun.star {
          */
         interface PropertyBag extends XPropertyBag {
             createDefault(): void;
-            createWithTypes(AllowedTypes: LibreOffice.SeqEquiv<type>, AllowEmptyPropertyName: boolean, AutomaticAddition: boolean): void;
+            createWithTypes(
+                AllowedTypes: LibreOffice.SeqEquiv<type>,
+                AllowEmptyPropertyName: boolean,
+                AutomaticAddition: boolean,
+            ): void;
         }
 
         /**
@@ -12935,7 +13275,9 @@ declare namespace com.sun.star {
          *
          * It specifies several, mostly optional ways to access properties.
          */
-        interface PropertySet extends XPropertySet, XFastPropertySet, XMultiPropertySet, XPropertyAccess, XPropertyState {
+        interface PropertySet
+            extends XPropertySet, XFastPropertySet, XMultiPropertySet, XPropertyAccess, XPropertyState
+        {
             getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
             getPropertyValues(): SafeArray<PropertyValue>;
             setPropertyValues(aProps: LibreOffice.SeqEquiv<PropertyValue> | LibreOffice.SeqEquiv<string>): void;
@@ -13185,8 +13527,6 @@ declare namespace com.sun.star {
              * properties of the object and so are not included in the property list offered by {@link com.sun.star.beans.XIntrospectionAccess.getProperties()} .
              * {@link com.sun.star.container.XNameAccess} items have to be accessed separately by com::sun::star::beans::XIntrospectionAccess::getNameAccess().
              *
-             *
-             *
              * In addition, the inspect method identifies all listener access methods in the form `add...Listener` / `remove...Listener` (except methods of interface
              * {@link XPropertySet} ) where "..." stands for the listener type.
              *
@@ -13209,8 +13549,8 @@ declare namespace com.sun.star {
          * com.sun.star.container.XNameAccess} interface or {@link XPropertySet} .
          *
          * The {@link XMaterialHolder} interface has to be supported to give access to the inspected object.
-         * @@see XPropertySet
-         * @@see com::sun::star::beans::XExactName
+         * @see XPropertySet
+         * @see com::sun::star::beans::XExactName
          */
         interface XIntrospectionAccess extends uno.XInterface {
             /**
@@ -13418,7 +13758,10 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if one of the values is not a legal value for the corresponding property or if one of the names is
              * @throws com::sun::star::lang::WrappedTargetException if the implementation has an internal reason for the exception. In this case the original exception
              */
-            setHierarchicalPropertyValues(aHierarchicalPropertyNames: LibreOffice.SeqEquiv<string>, Values: LibreOffice.SeqEquiv): void;
+            setHierarchicalPropertyValues(
+                aHierarchicalPropertyNames: LibreOffice.SeqEquiv<string>,
+                Values: LibreOffice.SeqEquiv,
+            ): void;
         }
 
         /** provides access to multiple properties with a single call. */
@@ -13433,14 +13776,20 @@ declare namespace com.sun.star {
              * @param xListener contains the listener for the property change events.
              * @see removePropertiesChangeListener
              */
-            addPropertiesChangeListener(aPropertyNames: LibreOffice.SeqEquiv<string>, xListener: XPropertiesChangeListener): void;
+            addPropertiesChangeListener(
+                aPropertyNames: LibreOffice.SeqEquiv<string>,
+                xListener: XPropertiesChangeListener,
+            ): void;
 
             /**
              * fires a sequence of PropertyChangeEvents to the specified listener.
              * @param aPropertyNames specifies the sorted names of the properties.
              * @param xListener contains the listener for the property change events.
              */
-            firePropertiesChangeEvent(aPropertyNames: LibreOffice.SeqEquiv<string>, xListener: XPropertiesChangeListener): void;
+            firePropertiesChangeEvent(
+                aPropertyNames: LibreOffice.SeqEquiv<string>,
+                xListener: XPropertiesChangeListener,
+            ): void;
 
             /**
              * @returns the {@link XPropertySetInfo} interface, which describes all properties of the object to which this interface belongs. NULL is returned if the obj
@@ -13539,10 +13888,16 @@ declare namespace com.sun.star {
          */
         interface XPropertiesChangeNotifier extends uno.XInterface {
             /** adds an {@link XPropertiesChangeListener} to the specified properties with the specified names. */
-            addPropertiesChangeListener(PropertyNames: LibreOffice.SeqEquiv<string>, Listener: XPropertiesChangeListener): void;
+            addPropertiesChangeListener(
+                PropertyNames: LibreOffice.SeqEquiv<string>,
+                Listener: XPropertiesChangeListener,
+            ): void;
 
             /** removes an {@link XPropertiesChangeListener} from the listener list. */
-            removePropertiesChangeListener(PropertyNames: LibreOffice.SeqEquiv<string>, Listener: XPropertiesChangeListener): void;
+            removePropertiesChangeListener(
+                PropertyNames: LibreOffice.SeqEquiv<string>,
+                Listener: XPropertiesChangeListener,
+            ): void;
         }
 
         /**
@@ -13583,7 +13938,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XPropertyBag extends XPropertySet, XPropertyContainer, XPropertyAccess { }
+        interface XPropertyBag extends XPropertySet, XPropertyContainer, XPropertyAccess {}
 
         /** is used to receive PropertyChangeEvents whenever a bound property is changed. */
         interface XPropertyChangeListener extends lang.XEventListener {
@@ -13844,7 +14199,7 @@ declare namespace com.sun.star {
              *
              * The value depends on the implementation of this interface. If this is a bound property, the value changes before the change events are fired. If this
              * is a constrained property, the vetoable event is fired before the property value changes.
-             * @@throws com::sun::star::lang::WrappedTargetException    if the implementation has an internal reason for the exception.      In this case the original ex
+             * @throws com::sun::star::lang::WrappedTargetException    if the implementation has an internal reason for the exception.      In this case the original ex
              */
             setToDefaultAsProperty(): void;
 
@@ -13871,7 +14226,9 @@ declare namespace com.sun.star {
              * @param aPropertyNames specifies the names of the properties. The property names must be sorted ascending.  If the names are not sorted the behaviour of
              * @returns a sequence of type {@link com.sun.star.beans.GetDirectPropertyTolerantResult} but only for those properties supplied whoms state is com::sun::sta
              */
-            getDirectPropertyValuesTolerant(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray<GetDirectPropertyTolerantResult>;
+            getDirectPropertyValuesTolerant(
+                aPropertyNames: LibreOffice.SeqEquiv<string>,
+            ): SafeArray<GetDirectPropertyTolerantResult>;
 
             /**
              * retrieve the values of the specified properties
@@ -13880,7 +14237,9 @@ declare namespace com.sun.star {
              * @param aPropertyNames specifies the names of the properties. The property names must be sorted ascending.  If the names are not sorted the behaviour of
              * @returns a sequence of type {@link com.sun.star.beans.GetPropertyTolerantResult} for each of the properties listed in **aPropertyNames** .
              */
-            getPropertyValuesTolerant(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray<GetPropertyTolerantResult>;
+            getPropertyValuesTolerant(
+                aPropertyNames: LibreOffice.SeqEquiv<string>,
+            ): SafeArray<GetPropertyTolerantResult>;
 
             /**
              * sets the values to the properties with the specified names.
@@ -13889,7 +14248,10 @@ declare namespace com.sun.star {
              * @returns An empty sequence if all properties are successful set. Otherwise for every property value that could not successfully be set an entry of the {@l
              * @throws IllegalArgumentException if the number of property names and values do not match.
              */
-            setPropertyValuesTolerant(aPropertyNames: LibreOffice.SeqEquiv<string>, aValues: LibreOffice.SeqEquiv): SafeArray<SetPropertyTolerantFailed>;
+            setPropertyValuesTolerant(
+                aPropertyNames: LibreOffice.SeqEquiv<string>,
+                aValues: LibreOffice.SeqEquiv,
+            ): SafeArray<SetPropertyTolerantFailed>;
         }
 
         /**
@@ -14052,7 +14414,7 @@ declare namespace com.sun.star {
          * (e.g.: `com.sun.star.bridge.UrpBridge` would be correct servicename for the "urp" protocol). However, the protocol names are compared case
          * insensitive. If there exist two services supporting the same protocol, it is arbitrary which one is chosen, so this should be omitted.
          */
-        interface Bridge extends lang.XInitialization, XBridge, lang.XComponent { }
+        interface Bridge extends lang.XInitialization, XBridge, lang.XComponent {}
 
         /**
          * Concrete service of the meta service {@link Bridge} for iiop.
@@ -14060,7 +14422,7 @@ declare namespace com.sun.star {
          * This bridge works with the iiop protocol.
          * @see com.sun.star.bridge.Bridge
          */
-        interface IiopBridge extends lang.XInitialization, XBridge, lang.XComponent { }
+        interface IiopBridge extends lang.XInitialization, XBridge, lang.XComponent {}
 
         /**
          * Indicates, that a requested property change could not be executed by the remote counterpart.
@@ -14086,7 +14448,7 @@ declare namespace com.sun.star {
          * This bridge works with the urp protocol.
          * @see com.sun.star.bridge.Bridge
          */
-        interface UrpBridge extends lang.XInitialization, XBridge, lang.XComponent { }
+        interface UrpBridge extends lang.XInitialization, XBridge, lang.XComponent {}
 
         /** main interface for an interprocess bridge. */
         interface XBridge extends uno.XInterface {
@@ -14123,7 +14485,12 @@ declare namespace com.sun.star {
              * @throws BridgeExistsException There is already a bridge registered with this name. Use getBridge instead.
              * @throws IllegalArgumentException The protocol is unknown or the connection is null.
              */
-            createBridge(sName: string, sProtocol: string, aConnection: connection.XConnection, anInstanceProvider: XInstanceProvider): XBridge;
+            createBridge(
+                sName: string,
+                sProtocol: string,
+                aConnection: connection.XConnection,
+                anInstanceProvider: XInstanceProvider,
+            ): XBridge;
 
             /** returns the sequence of all named and unnamed UNO interprocess bridges that are instantiated at the time the call is made. */
             readonly ExistingBridges: SafeArray<XBridge>;
@@ -14144,7 +14511,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the {@link BridgeFactory} service to implement.
          * @since LibreOffice 4.0
          */
-        interface XBridgeFactory2 extends XBridgeFactory, lang.XComponent { }
+        interface XBridgeFactory2 extends XBridgeFactory, lang.XComponent {}
 
         /**
          * defines the interface for creating bridges to other object models.
@@ -14165,8 +14532,6 @@ declare namespace com.sun.star {
          *
          * **CORBA:  **: not yet specified.
          *
-         *
-         *
          * Any implementation can supply its own bridges to other object models by implementing this interface and returning the bridge when the method is called
          * with itself as the first parameter.
          * @deprecated Deprecated
@@ -14174,7 +14539,13 @@ declare namespace com.sun.star {
          */
         interface XBridgeSupplier extends uno.XInterface {
             /** creates a bridge to provide an object of one object model with another. */
-            createBridge(modelDepObject: any, MachineId: uno.Uik, ProcessId: number, sourceModelType: number, destModelType: number): any;
+            createBridge(
+                modelDepObject: any,
+                MachineId: uno.Uik,
+                ProcessId: number,
+                sourceModelType: number,
+                destModelType: number,
+            ): any;
         }
 
         /**
@@ -14205,15 +14576,18 @@ declare namespace com.sun.star {
          *
          * **CORBA:  **: not specified yet.
          *
-         *
-         *
          * Any implementation can supply its own bridges to other object models by implementing this interface and returning the bridge when the method {@link
          * XBridgeSupplier2.createBridge()} is called with itself as the first parameter.
          * @see com.sun.star.bridge.OleBridgeSupplier2
          */
         interface XBridgeSupplier2 extends uno.XInterface {
             /** creates a bridge to provide an object of one object model with another. */
-            createBridge(aModelDepObject: any, aProcessId: LibreOffice.SeqEquiv<number>, nSourceModelType: number, nDestModelType: number): any;
+            createBridge(
+                aModelDepObject: any,
+                aProcessId: LibreOffice.SeqEquiv<number>,
+                nSourceModelType: number,
+                nDestModelType: number,
+            ): any;
         }
 
         /**
@@ -14594,8 +14968,6 @@ declare namespace com.sun.star {
              *
              * of setting this value.</p>
              *
-             *
-             *
              * displays no regression curve.
              */
             NONE = 0,
@@ -14625,8 +14997,6 @@ declare namespace com.sun.star {
              * ChartDocument::HasLegend to `FALSE` instead
              *
              * of setting this value.</p>
-             *
-             *
              *
              * displays no regression curve.
              */
@@ -14684,8 +15054,6 @@ declare namespace com.sun.star {
              *
              * of setting this value.</p>
              *
-             *
-             *
              * displays no regression curve.
              */
             NONE = 0,
@@ -14734,8 +15102,6 @@ declare namespace com.sun.star {
              *
              * of setting this value.</p>
              *
-             *
-             *
              * displays no regression curve.
              */
             NONE = 0,
@@ -14760,7 +15126,9 @@ declare namespace com.sun.star {
          * the structure of the accessibility representation tree as simple as possible and provide as much relevant information as possible.
          * @since OOo 1.1.2
          */
-        interface AccessibleChartDocumentView extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent { }
+        interface AccessibleChartDocumentView
+            extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent
+        {}
 
         /**
          * This service is supported by all components that are contained in the view of a chart document that are controlled by the chart. Shapes added by a
@@ -14773,14 +15141,37 @@ declare namespace com.sun.star {
          * The {@link com.sun.star.accessibility.XAccessibleExtendedComponent} is supported by all chart elements.
          * @since OOo 1.1.2
          */
-        interface AccessibleChartElement extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleChartElement
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /** This is a service for area diagrams. */
-        interface AreaDiagram extends Diagram, ChartStatistics, ChartAxisXSupplier, ChartTwoAxisYSupplier, ChartAxisZSupplier, Dim3DDiagram, StackableDiagram { }
+        interface AreaDiagram
+            extends
+                Diagram,
+                ChartStatistics,
+                ChartAxisXSupplier,
+                ChartTwoAxisYSupplier,
+                ChartAxisZSupplier,
+                Dim3DDiagram,
+                StackableDiagram
+        {}
 
         /** This is a service for bar and column diagrams. */
-        interface BarDiagram extends Diagram, ChartStatistics, ChartAxisXSupplier, ChartTwoAxisYSupplier, ChartAxisZSupplier, Dim3DDiagram, StackableDiagram {
+        interface BarDiagram
+            extends
+                Diagram,
+                ChartStatistics,
+                ChartAxisXSupplier,
+                ChartTwoAxisYSupplier,
+                ChartAxisZSupplier,
+                Dim3DDiagram,
+                StackableDiagram
+        {
             /**
              * If `TRUE` , determines that in a three-dimensional bar chart the bars of each series are arranged behind each other in the z-direction. If `FALSE` the
              * arrangement of bars is like in two-dimensional bar charts.
@@ -14824,7 +15215,7 @@ declare namespace com.sun.star {
          * a service for bubble diagrams.
          * @since OOo 3.2
          */
-        interface BubbleDiagram extends Diagram, ChartAxisXSupplier, ChartTwoAxisYSupplier, ChartStatistics { }
+        interface BubbleDiagram extends Diagram, ChartAxisXSupplier, ChartTwoAxisYSupplier, ChartStatistics {}
 
         /**
          * Specifies all the properties for the graphic object of a data point in a three-dimensional bar diagram.
@@ -14839,14 +15230,27 @@ declare namespace com.sun.star {
         }
 
         /** Specifies the area elements of a chart, e.g. the background area, the diagram wall, and the diagram floor of three-dimensional charts. */
-        interface ChartArea extends drawing.FillProperties, drawing.LineProperties, xml.UserDefinedAttributesSupplier, beans.XPropertySet { }
+        interface ChartArea
+            extends
+                drawing.FillProperties,
+                drawing.LineProperties,
+                xml.UserDefinedAttributesSupplier,
+                beans.XPropertySet
+        {}
 
         /**
          * Specifies the axes in a diagram.
          *
          * Note: The text properties correlate to all axis description elements, not to just a single text element.
          */
-        interface ChartAxis extends drawing.LineProperties, style.CharacterProperties, xml.UserDefinedAttributesSupplier, XAxis, beans.XPropertySet {
+        interface ChartAxis
+            extends
+                drawing.LineProperties,
+                style.CharacterProperties,
+                xml.UserDefinedAttributesSupplier,
+                XAxis,
+                beans.XPropertySet
+        {
             /** The axis description may be arranged in a special order for a better placement. */
             ArrangeOrder: ChartAxisArrangeOrderType;
 
@@ -15067,7 +15471,7 @@ declare namespace com.sun.star {
          *
          * It contains the data values as well as the descriptions for each row and column.
          */
-        interface ChartDataArray extends ChartData, XChartDataArray { }
+        interface ChartDataArray extends ChartData, XChartDataArray {}
 
         /** describes a change that was applied to the data. */
         interface ChartDataChangeEvent extends lang.EventObject {
@@ -15094,8 +15498,15 @@ declare namespace com.sun.star {
          * ChartDataRowProperties} for the properties of whole data rows.
          * @see ChartDataRowProperties
          */
-        interface ChartDataPointProperties extends drawing.FillProperties, drawing.LineProperties, style.CharacterProperties, xml.UserDefinedAttributesSupplier,
-            Chart3DBarProperties, beans.XPropertySet {
+        interface ChartDataPointProperties
+            extends
+                drawing.FillProperties,
+                drawing.LineProperties,
+                style.CharacterProperties,
+                xml.UserDefinedAttributesSupplier,
+                Chart3DBarProperties,
+                beans.XPropertySet
+        {
             /**
              * specifies how the captions of data points are displayed.
              * @see ChartDataCaption
@@ -15163,7 +15574,9 @@ declare namespace com.sun.star {
          * serve as a template; thus, when changing a data point property afterwards
          * @see ChartDataPointProperties
          */
-        interface ChartDataRowProperties extends ChartDataPointProperties, ChartStatistics, xml.UserDefinedAttributesSupplier, beans.XPropertySet {
+        interface ChartDataRowProperties
+            extends ChartDataPointProperties, ChartStatistics, xml.UserDefinedAttributesSupplier, beans.XPropertySet
+        {
             /**
              * determines to which axis the data row is assigned.
              *
@@ -15222,7 +15635,9 @@ declare namespace com.sun.star {
          * @see ChartTitle
          * @see ChartDataArray
          */
-        interface ChartDocument extends xml.UserDefinedAttributesSupplier, XChartDocument, beans.XPropertySet, drawing.XDrawPageSupplier {
+        interface ChartDocument
+            extends xml.UserDefinedAttributesSupplier, XChartDocument, beans.XPropertySet, drawing.XDrawPageSupplier
+        {
             /** determines if the legend is shown or hidden. */
             HasLegend: boolean;
 
@@ -15239,7 +15654,7 @@ declare namespace com.sun.star {
          * The distance between the grid lines depends on the distance of the help or main tick marks, which may be set in {@link ChartAxis} .
          * @see ChartAxis
          */
-        interface ChartGrid extends drawing.LineProperties, xml.UserDefinedAttributesSupplier, beans.XPropertySet { }
+        interface ChartGrid extends drawing.LineProperties, xml.UserDefinedAttributesSupplier, beans.XPropertySet {}
 
         /**
          * specifies the legend of a chart.
@@ -15258,7 +15673,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies line elements in a chart (regression lines, etc.). */
-        interface ChartLine extends drawing.LineProperties, beans.XPropertySet { }
+        interface ChartLine extends drawing.LineProperties, beans.XPropertySet {}
 
         /**
          * specifies all the properties for the graphic object of a pie segment.
@@ -15478,7 +15893,15 @@ declare namespace com.sun.star {
          * Different {@link Diagram} Types, e.g., {@link PieDiagram} or {@link LineDiagram} , can be instantiated by the {@link
          * com.sun.star.lang.XMultiServiceFactory} of the {@link XChartDocument} .
          */
-        interface Diagram extends XDiagram, XAxisSupplier, XSecondAxisTitleSupplier, XDiagramPositioning, beans.XPropertySet, xml.UserDefinedAttributesSupplier {
+        interface Diagram
+            extends
+                XDiagram,
+                XAxisSupplier,
+                XSecondAxisTitleSupplier,
+                XDiagramPositioning,
+                beans.XPropertySet,
+                xml.UserDefinedAttributesSupplier
+        {
             /**
              * If this property is `TRUE` the position is calculated by the application automatically. Setting this property to false will have no effect. Instead
              * use the interface {@link com.sun.star.drawing.XShape} to set a concrete position (note {@link com.sun.star.chart.XDiagram} is derived from {@link
@@ -15532,10 +15955,19 @@ declare namespace com.sun.star {
          * specifies filled net diagrams.
          * @since OOo 3.2  Net diagrams are also known as radar diagrams.
          */
-        interface FilledNetDiagram extends Diagram, ChartAxisXSupplier, ChartAxisYSupplier, StackableDiagram { }
+        interface FilledNetDiagram extends Diagram, ChartAxisXSupplier, ChartAxisYSupplier, StackableDiagram {}
 
         /** specifies line, spline and symbol diagrams. */
-        interface LineDiagram extends Diagram, ChartStatistics, ChartAxisXSupplier, ChartTwoAxisYSupplier, ChartAxisZSupplier, Dim3DDiagram, StackableDiagram {
+        interface LineDiagram
+            extends
+                Diagram,
+                ChartStatistics,
+                ChartAxisXSupplier,
+                ChartTwoAxisYSupplier,
+                ChartAxisZSupplier,
+                Dim3DDiagram,
+                StackableDiagram
+        {
             /** determines if the chart type has lines connecting the data points or contains just symbols. */
             Lines: boolean;
 
@@ -15586,10 +16018,10 @@ declare namespace com.sun.star {
          *
          * Net diagrams are also known as radar diagrams.
          */
-        interface NetDiagram extends Diagram, StackableDiagram, ChartAxisYSupplier { }
+        interface NetDiagram extends Diagram, StackableDiagram, ChartAxisYSupplier {}
 
         /** a service for pie diagrams. */
-        interface PieDiagram extends Diagram, Dim3DDiagram { }
+        interface PieDiagram extends Diagram, Dim3DDiagram {}
 
         /** a helper service for stackable chart types (e.g., charts in which the data rows may be displayed stacked on each other or in percent relation). */
         interface StackableDiagram {
@@ -15618,7 +16050,9 @@ declare namespace com.sun.star {
          *
          * **StockDiagram::Volume is TRUEStockDiagram::UpDown is TRUE**{{table here, see documentation}}
          */
-        interface StockDiagram extends XStatisticDisplay, ChartStatistics, Diagram, ChartAxisXSupplier, ChartTwoAxisYSupplier {
+        interface StockDiagram
+            extends XStatisticDisplay, ChartStatistics, Diagram, ChartAxisXSupplier, ChartTwoAxisYSupplier
+        {
             /**
              * indicates if a stock chart contains data representing the value of stocks on the opening and closing date.
              *
@@ -16402,7 +16836,7 @@ declare namespace com.sun.star {
          * The special thing about X/Y diagrams is that the first series of data contains **x** -values. The other series contain **y** -values. Together both
          * form two-dimensional coordinates, at which data points are placed.
          */
-        interface XYDiagram extends Diagram, ChartStatistics, ChartAxisXSupplier, ChartTwoAxisYSupplier, LineDiagram { }
+        interface XYDiagram extends Diagram, ChartStatistics, ChartAxisXSupplier, ChartTwoAxisYSupplier, LineDiagram {}
 
         namespace ChartAxisAssign {
             const enum Constants {
@@ -16745,8 +17179,16 @@ declare namespace com.sun.star {
             NONE = 0,
         }
 
-        interface Axis extends drawing.LineProperties, style.CharacterProperties, beans.PropertySet, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex,
-            XAxis, XTitled {
+        interface Axis
+            extends
+                drawing.LineProperties,
+                style.CharacterProperties,
+                beans.PropertySet,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                XAxis,
+                XTitled
+        {
             /** Determines how to stagger the labels at the axis (side by side, even, odd, auto ) */
             ArrangeOrder: chart.ChartAxisArrangeOrderType;
 
@@ -16873,22 +17315,36 @@ declare namespace com.sun.star {
             WhiteDay: beans.XPropertySet;
         }
 
-        interface ChartDocument extends XChartDocument, data.XDataReceiver, XTitled, style.XStyleFamiliesSupplier, util.XNumberFormatsSupplier, lang.XInitialization { }
+        interface ChartDocument
+            extends
+                XChartDocument,
+                data.XDataReceiver,
+                XTitled,
+                style.XStyleFamiliesSupplier,
+                util.XNumberFormatsSupplier,
+                lang.XInitialization
+        {}
 
         /**
          * A component that implements the {@link com.sun.star.chart.ChartDocument} service and is initialized with a {@link com.sun.star.chart2.ChartDocument}
          * via the {@link com.sun.star.uno.XAggregation} interface.
          */
-        interface ChartDocumentWrapper extends chart.ChartDocument, uno.XAggregation { }
+        interface ChartDocumentWrapper extends chart.ChartDocument, uno.XAggregation {}
 
         /** {@link ChartType} service */
-        interface ChartType extends XChartType, XDataSeriesContainer, beans.XPropertySet { }
+        interface ChartType extends XChartType, XDataSeriesContainer, beans.XPropertySet {}
 
         interface CoordinateSystem extends XCoordinateSystem, XChartTypeContainer, util.XCloneable {
             SwapXAndYAxis: boolean;
         }
 
-        interface DataPoint extends DataPointProperties, style.CharacterProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex {
+        interface DataPoint
+            extends
+                DataPointProperties,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex
+        {
             /**
              * this property handles the style. This property must support the service {@link com.sun.star.style.Style} .
              *
@@ -17135,7 +17591,15 @@ declare namespace com.sun.star {
          * It combines one or more DataSequences which are interpreted by evaluating their role-string.
          * @see DataSequenceRole
          */
-        interface DataSeries extends beans.PropertySet, DataPointProperties, XDataSeries, data.XDataSink, data.XDataSource, XRegressionCurveContainer {
+        interface DataSeries
+            extends
+                beans.PropertySet,
+                DataPointProperties,
+                XDataSeries,
+                data.XDataSink,
+                data.XDataSource,
+                XRegressionCurveContainer
+        {
             /**
              * This property describes whether the series should be shown at the main value axis or at the secondary value axis. Having this property not set or
              * setting it to 0 means that this data series will be scaled at the primary y-axis ( of the coordinate system in which this series is hosted ).
@@ -17413,13 +17877,15 @@ declare namespace com.sun.star {
             LogicTargetModels: SafeArray<beans.XPropertySet>;
         }
 
-        interface PropertyPool extends style.Style, style.XDefaultsSupplier { }
+        interface PropertyPool extends style.Style, style.XDefaultsSupplier {}
 
         interface RegressionCurve extends beans.PropertySet, drawing.LineProperties, XRegressionCurve {
             setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
         }
 
-        interface RegressionCurveEquation extends beans.PropertySet, drawing.FillProperties, drawing.LineProperties, style.CharacterProperties {
+        interface RegressionCurveEquation
+            extends beans.PropertySet, drawing.FillProperties, drawing.LineProperties, style.CharacterProperties
+        {
             NumberFormat: number;
             ReferencePageSize: awt.Size;
             RelativePosition: RelativePosition;
@@ -17607,7 +18073,9 @@ declare namespace com.sun.star {
             Style: SymbolStyle;
         }
 
-        interface Title extends style.ParagraphProperties, drawing.FillProperties, drawing.LineProperties, beans.PropertySet, XTitle {
+        interface Title
+            extends style.ParagraphProperties, drawing.FillProperties, drawing.LineProperties, beans.PropertySet, XTitle
+        {
             /**
              * contains the size of the page at the time when properties were set (e.g. the CharHeight).
              *
@@ -17919,7 +18387,12 @@ declare namespace com.sun.star {
              * @param nSeriesIndex The index of the series inside the current chart-type group. nSeriesIndex does not uniquely identify a data series alone, but only t
              * @param nSeriesCount The number of series in the current chart-type group.
              */
-            applyStyle(xSeries: XDataSeries, nChartTypeGroupIndex: number, nSeriesIndex: number, nSeriesCount: number): void;
+            applyStyle(
+                xSeries: XDataSeries,
+                nChartTypeGroupIndex: number,
+                nSeriesIndex: number,
+                nSeriesCount: number,
+            ): void;
 
             /**
              * Analyses the given diagram and reinterprets its {@link DataSeries} and Categories and creates a new diagram based on these series.
@@ -17940,7 +18413,11 @@ declare namespace com.sun.star {
              * @param xDataSource This data source will be interpreted in a chart-type specific way and the {@link DataSeries} found in `xDiagram` will be adapted to t
              * @param aArguments Arguments that tell the template how to slice the given range. The properties should be defined in a separate service.  For standard p
              */
-            changeDiagramData(xDiagram: XDiagram, xDataSource: data.XDataSource, aArguments: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            changeDiagramData(
+                xDiagram: XDiagram,
+                xDataSource: data.XDataSource,
+                aArguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * Creates a new diagram based upon the given data .
@@ -17948,7 +18425,10 @@ declare namespace com.sun.star {
              * @param aArguments Arguments that tell the template how to slice the given range. The properties should be defined in a separate service.  For standard p
              * @returns The new diagram which represents this {@link ChartTypeTemplate} .
              */
-            createDiagramByDataSource(xDataSource: data.XDataSource, aArguments: LibreOffice.SeqEquiv<beans.PropertyValue>): XDiagram;
+            createDiagramByDataSource(
+                xDataSource: data.XDataSource,
+                aArguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): XDiagram;
             readonly DataInterpreter: XDataInterpreter;
 
             /**
@@ -18064,7 +18544,11 @@ declare namespace com.sun.star {
              * @param aArguments Arguments that tell the template how to slice the given range. The properties should be defined in a separate service.  For standard p
              * @param aSeriesToReUse use all the data series given here for the result before creating new ones.
              */
-            interpretDataSource(xSource: data.XDataSource, aArguments: LibreOffice.SeqEquiv<beans.PropertyValue>, aSeriesToReUse: LibreOffice.SeqEquiv<XDataSeries>): InterpretedData;
+            interpretDataSource(
+                xSource: data.XDataSource,
+                aArguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aSeriesToReUse: LibreOffice.SeqEquiv<XDataSeries>,
+            ): InterpretedData;
 
             /**
              * parses the given data and states, if a {@link reinterpretDataSeries()} call can be done without data loss.
@@ -18203,7 +18687,7 @@ declare namespace com.sun.star {
          * Provides unified interface for {@link FormattedString} service.
          * @since LibreOffice 4.1
          */
-        interface XFormattedString2 extends beans.XPropertySet, XFormattedString { }
+        interface XFormattedString2 extends beans.XPropertySet, XFormattedString {}
 
         /** An internal DataProvider that has more access to data than a plain DataProvider. */
         interface XInternalDataProvider extends data.XDataProvider {
@@ -18300,14 +18784,25 @@ declare namespace com.sun.star {
              * @param xScalingX a scaling that is used for the values in x-direction
              * @param xScalingY a scaling that is used for the values in y-direction
              */
-            getCurveValues(min: number, max: number, nPointCount: number, xScalingX: XScaling, xScalingY: XScaling, bMaySkipPointsInCalculation: boolean): SafeArray<geometry.RealPoint2D>;
+            getCurveValues(
+                min: number,
+                max: number,
+                nPointCount: number,
+                xScalingX: XScaling,
+                xScalingY: XScaling,
+                bMaySkipPointsInCalculation: boolean,
+            ): SafeArray<geometry.RealPoint2D>;
 
             /**
              * Returns a representation using the given number format for formatting all numbers contained in the formula. Wrap equation to fit in nFormulaLength
              * characters
              * @see getRepresentation
              */
-            getFormattedRepresentation(xNumFmtSupplier: util.XNumberFormatsSupplier, nNumberFormatKey: number, nFormulaLength: number): string;
+            getFormattedRepresentation(
+                xNumFmtSupplier: util.XNumberFormatsSupplier,
+                nNumberFormatKey: number,
+                nFormulaLength: number,
+            ): string;
 
             /**
              * Retrieve a string showing the regression curve's function with calculated parameters.
@@ -18335,7 +18830,12 @@ declare namespace com.sun.star {
              * @param forceIntercept Should force the intercept value.
              * @param interceptValue Intercept value.
              */
-            setRegressionProperties(degree: number, forceIntercept: boolean, interceptValue: number, period: number): void;
+            setRegressionProperties(
+                degree: number,
+                forceIntercept: boolean,
+                interceptValue: number,
+                period: number,
+            ): void;
 
             /**
              * Set the names of X and Y variables of the equation to replace "x" and "f(x)" in representation
@@ -18484,8 +18984,6 @@ declare namespace com.sun.star {
              *
              * **categories **: values are used for categories in the diagram
              *
-             *
-             *
              * In a candle-stick chart you have the following roles:
              *
              * **values-first **: the first value of a series of values. In a stock-chart this would be the opening course.
@@ -18560,7 +19058,7 @@ declare namespace com.sun.star {
              * A filter gets some data and provides some data. The received data is typically (but not necessarily) different from the data that can be retrieved by
              * a filter.
              */
-            interface DataFilter extends DataSink, DataSource { }
+            interface DataFilter extends DataSink, DataSource {}
 
             interface DataProvider extends XDataProvider, XRangeXMLConversion {
                 /** If set to false `FALSE` , values from hidden cells are not returned. */
@@ -18575,8 +19073,16 @@ declare namespace com.sun.star {
              * With the optional {@link com.sun.star.container.XIndexReplace} it is possible to modify single elements, if the corresponding {@link DataProvider}
              * supports modification of its values.
              */
-            interface DataSequence extends XDataSequence, XNumericalDataSequence, XTextualDataSequence, container.XIndexReplace, util.XCloneable, util.XModifyBroadcaster,
-                beans.XPropertySet {
+            interface DataSequence
+                extends
+                    XDataSequence,
+                    XNumericalDataSequence,
+                    XTextualDataSequence,
+                    container.XIndexReplace,
+                    util.XCloneable,
+                    util.XModifyBroadcaster,
+                    beans.XPropertySet
+            {
                 /** a sequence of indexes that identify values that are hidden in the underlying data provider. */
                 HiddenValues: SafeArray<number>;
 
@@ -18687,7 +19193,16 @@ declare namespace com.sun.star {
              * @see XDataProvider
              * @see DataProvider
              */
-            interface XDatabaseDataProvider extends XDataProvider, XRangeXMLConversion, lang.XInitialization, lang.XComponent, beans.XPropertySet, sdbc.XParameters, sdbc.XRowSet {
+            interface XDatabaseDataProvider
+                extends
+                    XDataProvider,
+                    XRangeXMLConversion,
+                    lang.XInitialization,
+                    lang.XComponent,
+                    beans.XPropertySet,
+                    sdbc.XParameters,
+                    sdbc.XRowSet
+            {
                 /** specifies the active connection which is used to create the resulting report. */
                 ActiveConnection: sdbc.XConnection;
 
@@ -19027,7 +19542,7 @@ declare namespace com.sun.star {
             }
 
             /** @since LibreOffice 4.1 */
-            interface XLabeledDataSequence2 extends XLabeledDataSequence, util.XModifyBroadcaster, util.XCloneable { }
+            interface XLabeledDataSequence2 extends XLabeledDataSequence, util.XModifyBroadcaster, util.XCloneable {}
 
             /** allows access to a one-dimensional sequence of double precision floating-point numbers. */
             interface XNumericalDataSequence extends uno.XInterface {
@@ -19143,7 +19658,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.configuration.GroupElement A complementary service, for children of a static heterogeneous collection.
          * @see com.sun.star.configuration.ConfigurationProvider Objects provided by a ConfigurationProvider implement this service.
          */
-        interface AccessRootElement extends HierarchyElement, lang.XComponent, util.XChangesNotifier, lang.XLocalizable { }
+        interface AccessRootElement
+            extends HierarchyElement, lang.XComponent, util.XChangesNotifier, lang.XLocalizable
+        {}
 
         /**
          * manages one, or more, complete sets of configuration data for administrative purposes and serves as a factory for objects that provide access to
@@ -19163,7 +19680,7 @@ declare namespace com.sun.star {
          * context or the environment.
          * @see com.sun.star.configuration.ConfigurationProvider Offers the same services and creates the same accessor objects as this service, but accesses the
          */
-        interface AdministrationProvider extends lang.XMultiServiceFactory, lang.XComponent { }
+        interface AdministrationProvider extends lang.XMultiServiceFactory, lang.XComponent {}
 
         /**
          * provides read access to a fragment of the configuration hierarchy.
@@ -19187,8 +19704,6 @@ declare namespace com.sun.star {
          * **Groups **: are static collections of heterogeneous elements. The names and types of the elements of a **group** are completely defined in the
          * configuration schema. Here each element may be of a different **type** , allowing **groups** that contain a mix of subobjects and simple values.
          *
-         *
-         *
          * Objects in the configuration hierarchy, for example, implementations of this service, can thus be classified in the following ways:
          *
          * **Container** role: An object that can hold child elements as a **set** or a **group** .**Element** role: An object may be an element of a **set** or
@@ -19201,11 +19716,7 @@ declare namespace com.sun.star {
          *
          * Values are represented as `string` .
          *
-         *
-         *
          * Sequences are represented as `string[]` .
-         *
-         *
          *
          * "<em>human-readable</em>" here excludes non-printing characters except for CR, LF and TAB [Unicode code points 9,10,13]. For binary data, use type
          * **binary** instead.
@@ -19220,15 +19731,11 @@ declare namespace com.sun.star {
          *
          * Values are represented as `short` .
          *
-         *
-         *
          * Sequences are represented as `short[]` .
          *
          * **int** can hold a 32-bit signed integer.
          *
          * Values are represented as `long` .
-         *
-         *
          *
          * Sequences are represented as `long[]` .
          *
@@ -19236,15 +19743,11 @@ declare namespace com.sun.star {
          *
          * Values are represented as `hyper` .
          *
-         *
-         *
          * Sequences are represented as `hyper[]` .
          *
          * **double** can hold a floating point number.
          *
          * Values are represented as `double` .
-         *
-         *
          *
          * Sequences are represented as `double[]` .
          *
@@ -19252,11 +19755,7 @@ declare namespace com.sun.star {
          *
          * Values are represented as `byte[]` .
          *
-         *
-         *
          * Sequences are represented as `byte[][]` .
-         *
-         *
          *
          * Within templates an additional type **any** can occur. When such a template is used to create a new {@link SetElement} , the type of the element is
          * initially reported as `any` (having no value). When the value of such an element is first set, it will assume the type used.
@@ -19269,7 +19768,16 @@ declare namespace com.sun.star {
          * @see ConfigurationProvider Root instances of this service can be requested from a ConfigurationProvider.
          * @see ConfigurationUpdateAccess an extended service that includes facilities for modifying configuration data.
          */
-        interface ConfigurationAccess extends HierarchyAccess, HierarchyElement, SetAccess, GroupAccess, AccessRootElement, SetElement, GroupElement {
+        interface ConfigurationAccess
+            extends
+                HierarchyAccess,
+                HierarchyElement,
+                SetAccess,
+                GroupAccess,
+                AccessRootElement,
+                SetElement,
+                GroupElement
+        {
             getPropertyStates(aPropertyName: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyState>;
         }
 
@@ -19287,9 +19795,9 @@ declare namespace com.sun.star {
          * service. In particular this applies to the parameters `"Locale"` and `"EnableAsync"` .
          * @deprecated DeprecatedUse theDefaultProvider instead.
          */
-        interface ConfigurationProvider extends lang.XMultiServiceFactory, lang.XComponent { }
+        interface ConfigurationProvider extends lang.XMultiServiceFactory, lang.XComponent {}
 
-        interface ConfigurationRegistry extends registry.XSimpleRegistry, util.XFlushable { }
+        interface ConfigurationRegistry extends registry.XSimpleRegistry, util.XFlushable {}
 
         /**
          * provides modifying access to a fragment of the configuration hierarchy.
@@ -19309,15 +19817,35 @@ declare namespace com.sun.star {
          * @see ConfigurationProvider Root instances of this service can be requested from a ConfigurationProvider
          */
         interface ConfigurationUpdateAccess extends ConfigurationAccess, SetUpdate, GroupUpdate, UpdateRootElement {
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
             createInstance(aServiceSpecifier?: string): uno.XInterface;
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
             createInstanceWithArguments(aArguments: LibreOffice.SeqEquiv | string): uno.XInterface;
             getPropertyStates(aPropertyName: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyState>;
         }
@@ -19363,7 +19891,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.configuration.GroupElement Child objects of this service generally implement service GroupElement.
          * @see com.sun.star.configuration.SetAccess A complementary service providing for dynamic homogeneous sets of elements.
          */
-        interface GroupAccess extends HierarchyAccess, PropertyHierarchy, beans.XPropertyState, beans.XMultiPropertyStates {
+        interface GroupAccess
+            extends HierarchyAccess, PropertyHierarchy, beans.XPropertyState, beans.XMultiPropertyStates
+        {
             getPropertyStates(aPropertyName: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyState>;
         }
 
@@ -19377,14 +19907,14 @@ declare namespace com.sun.star {
          * @see com.sun.star.configuration.SetElement A complementary service, for elements of a dynamic homogeneous container.
          * @see com.sun.star.configuration.AccessRootElement A complementary service, for the root element of a hierarchy.
          */
-        interface GroupElement extends HierarchyElement, container.XChild { }
+        interface GroupElement extends HierarchyElement, container.XChild {}
 
         /**
          * provides write access to a predefined heterogeneous group of values and nested trees as part of a hierarchy.
          *
          * This service extends {@link GroupAccess} to support modifying values.
          */
-        interface GroupUpdate extends GroupAccess, container.XNameReplace { }
+        interface GroupUpdate extends GroupAccess, container.XNameReplace {}
 
         /**
          * provides access to a hierarchy of descendant elements.
@@ -19398,8 +19928,16 @@ declare namespace com.sun.star {
          * Implementations of this service usually also implement service {@link HierarchyElement} , which concerns the complementary role of being accessible as
          * an element of the hierarchy.
          */
-        interface HierarchyAccess extends container.XNameAccess, container.XHierarchicalNameAccess, container.XContainer, beans.XExactName, beans.XPropertySetInfo,
-            beans.XPropertyState, beans.XMultiPropertyStates {
+        interface HierarchyAccess
+            extends
+                container.XNameAccess,
+                container.XHierarchicalNameAccess,
+                container.XContainer,
+                beans.XExactName,
+                beans.XPropertySetInfo,
+                beans.XPropertyState,
+                beans.XMultiPropertyStates
+        {
             getPropertyStates(aPropertyName: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyState>;
         }
 
@@ -19412,7 +19950,14 @@ declare namespace com.sun.star {
          * Implementations of this service usually also implement service {@link HierarchyAccess} , which concerns the complementary role of providing access to
          * subelements of the hierarchy.
          */
-        interface HierarchyElement extends container.XHierarchicalName, container.XNamed, beans.XProperty, beans.XPropertyWithState, container.XChild { }
+        interface HierarchyElement
+            extends
+                container.XHierarchicalName,
+                container.XNamed,
+                beans.XProperty,
+                beans.XPropertyWithState,
+                container.XChild
+        {}
 
         /** is thrown when creating a configuration provider fails because a bootstrap file needed to locate the configuration contains invalid data */
         interface InvalidBootstrapFileException extends CannotLoadConfigurationException {
@@ -19431,7 +19976,13 @@ declare namespace com.sun.star {
          * properties. This service describes such a hierarchy, and allows direct access even to subproperties.
          * @see com.sun.star.beans.XProperty Properties of an implementation that are objects themselves will often implement com.sun.star.beans.XProperty to all
          */
-        interface PropertyHierarchy extends beans.XPropertySet, beans.XMultiPropertySet, beans.XHierarchicalPropertySet, beans.XMultiHierarchicalPropertySet { }
+        interface PropertyHierarchy
+            extends
+                beans.XPropertySet,
+                beans.XMultiPropertySet,
+                beans.XHierarchicalPropertySet,
+                beans.XMultiHierarchicalPropertySet
+        {}
 
         /**
          * Provides easy read-only access to the complete configuration.
@@ -19472,7 +20023,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.configuration.SetElement Child objects of this service generally implement SetElement. The template name returned by the child from
          * @see com.sun.star.configuration.GroupAccess A complementary service that provides for static heterogeneous groups of elements within the hierarchy.
          */
-        interface SetAccess extends HierarchyAccess, SimpleSetAccess, container.XContainer { }
+        interface SetAccess extends HierarchyAccess, SimpleSetAccess, container.XContainer {}
 
         /**
          * provides information about a dynamic element that can be inserted into a homogeneous set of elements within a hierarchy.
@@ -19506,7 +20057,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.configuration.GroupElement A complementary service for elements of a static heterogeneous collection.
          * @see com.sun.star.configuration.AccessRootElement A complementary service for the root element of a hierarchy.
          */
-        interface SetElement extends HierarchyElement, container.XChild, lang.XComponent, XTemplateInstance { }
+        interface SetElement extends HierarchyElement, container.XChild, lang.XComponent, XTemplateInstance {}
 
         /**
          * provides write access to a dynamic homogeneous set of values or nested trees within a hierarchy.
@@ -19519,11 +20070,21 @@ declare namespace com.sun.star {
          * com.sun.star.beans.PropertyAttribute.READONLY} ).
          */
         interface SetUpdate extends SetAccess, SimpleSetUpdate {
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
             createInstance(aServiceSpecifier?: string): uno.XInterface;
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
             createInstanceWithArguments(aArguments: LibreOffice.SeqEquiv | string): uno.XInterface;
         }
 
@@ -19536,7 +20097,9 @@ declare namespace com.sun.star {
          *
          * The number and names of contained elements is not fixed in advance, but all elements have to be of one predetermined type.
          */
-        interface SimpleSetAccess extends container.XNameAccess, XTemplateContainer, util.XStringEscape, container.XContainer { }
+        interface SimpleSetAccess
+            extends container.XNameAccess, XTemplateContainer, util.XStringEscape, container.XContainer
+        {}
 
         /**
          * provides write access to a dynamic, homogeneous, non-hierarchical set of values or objects.
@@ -19545,10 +20108,17 @@ declare namespace com.sun.star {
          *
          * This service extends {@link SimpleSetAccess} to support modifying the container. Any child objects shall in turn support modifying access.
          */
-        interface SimpleSetUpdate extends SimpleSetAccess, container.XNameContainer, lang.XSingleServiceFactory, lang.XMultiServiceFactory {
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
+        interface SimpleSetUpdate
+            extends SimpleSetAccess, container.XNameContainer, lang.XSingleServiceFactory, lang.XMultiServiceFactory
+        {
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
             createInstance(aServiceSpecifier?: string): uno.XInterface;
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
             createInstanceWithArguments(aArguments: LibreOffice.SeqEquiv | string): uno.XInterface;
         }
 
@@ -19569,9 +20139,11 @@ declare namespace com.sun.star {
          * @see com.sun.star.configuration.GroupUpdate
          * @see com.sun.star.configuration.SetUpdate
          */
-        interface UpdateRootElement extends AccessRootElement, util.XChangesBatch { }
+        interface UpdateRootElement extends AccessRootElement, util.XChangesBatch {}
 
-        interface XReadWriteAccess extends container.XHierarchicalNameReplace, util.XChangesBatch, beans.XHierarchicalPropertySetInfo { }
+        interface XReadWriteAccess
+            extends container.XHierarchicalNameReplace, util.XChangesBatch, beans.XHierarchicalPropertySetInfo
+        {}
 
         /**
          * is implemented by objects that contain instances of a named template to provide information about the template.
@@ -19631,7 +20203,11 @@ declare namespace com.sun.star {
         interface XUpdate {
             insertExtensionXcsFile(shared: boolean, fileUri: string): void;
             insertExtensionXcuFile(shared: boolean, fileUri: string): void;
-            insertModificationXcuFile(fileUri: string, includedPaths: LibreOffice.SeqEquiv<string>, excludedPaths: LibreOffice.SeqEquiv<string>): void;
+            insertModificationXcuFile(
+                fileUri: string,
+                includedPaths: LibreOffice.SeqEquiv<string>,
+                excludedPaths: LibreOffice.SeqEquiv<string>,
+            ): void;
             removeExtensionXcuFile(fileUri: string): void;
         }
 
@@ -19805,13 +20381,13 @@ declare namespace com.sun.star {
              * A layer contains data for multiple components associated to a single entity.
              * @since OOo 1.1.2
              */
-            interface Backend extends XSchemaSupplier, XBackend, XBackendEntities { }
+            interface Backend extends XSchemaSupplier, XBackend, XBackendEntities {}
 
             /**
              * implements {@link Backend} retrieving data from a {@link SingleBackend} .
              * @since OOo 1.1.2
              */
-            interface BackendAdapter extends Backend, XBackendEntities, lang.XInitialization { }
+            interface BackendAdapter extends Backend, XBackendEntities, lang.XInitialization {}
 
             /**
              * Generic exception thrown when setting up a connection to an underlying backend fails.
@@ -19841,7 +20417,7 @@ declare namespace com.sun.star {
              * imports data into a configuration layer by copying over existing data.
              * @since OOo 1.1.2
              */
-            interface CopyImporter extends Importer, lang.XInitialization { }
+            interface CopyImporter extends Importer, lang.XInitialization {}
 
             /**
              * imports data into a configuration layer.
@@ -19849,7 +20425,7 @@ declare namespace com.sun.star {
              * The configuration changes are read from a {@link XLayer} and stored into a {@link Backend} .
              * @since OOo 1.1.2
              */
-            interface Importer extends XLayerImporter, lang.XInitialization { }
+            interface Importer extends XLayerImporter, lang.XInitialization {}
 
             /**
              * An interaction request handler that lets the user handle a number of well known requests via GUI dialogs.
@@ -19865,7 +20441,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.task.InteractionHandler
              * @since OOo 2.0
              */
-            interface InteractionHandler extends task.XInteractionHandler, lang.XInitialization { }
+            interface InteractionHandler extends task.XInteractionHandler, lang.XInitialization {}
 
             /**
              * provides read-only access to a configuration data layer.
@@ -19892,7 +20468,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.configuration.backend.DataImporter Service that supports applying a LayerFilter to imported data.
              * @since OOo 2.0
              */
-            interface LayerFilter extends XLayer, lang.XInitialization { }
+            interface LayerFilter extends XLayer, lang.XInitialization {}
 
             /**
              * applies updates to a configuration layer.
@@ -19902,7 +20478,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.configuration.backend.UpdatableLayer Service describes a layer and accepts a changed layer..
              * @since OOo 1.1.2
              */
-            interface LayerUpdateMerger extends XUpdateHandler, lang.XInitialization { }
+            interface LayerUpdateMerger extends XUpdateHandler, lang.XInitialization {}
 
             /**
              * is raised when the data of a component schema, layer or update is not well-formed, violates the schema or is otherwise invalid.
@@ -19930,8 +20506,6 @@ declare namespace com.sun.star {
                  *
                  * **com::sun::star::lang::NoSupportException**: for features that are not supported by the current implementation.
                  *
-                 *
-                 *
                  * If no more detail information is available, this may be left `VOID` .
                  */
                 ErrorDetails: any;
@@ -19951,8 +20525,6 @@ declare namespace com.sun.star {
                  *
                  * **BackendAccessException**: for layers that can't be accessed.
                  *
-                 *
-                 *
                  * If no more detail information is available, this may be left `VOID` .
                  */
                 ErrorDetails: any;
@@ -19970,13 +20542,13 @@ declare namespace com.sun.star {
             }
 
             /** Provides access to a singe layer of configuration data */
-            interface MultiLayerStratum extends XMultiLayerStratum, XBackendEntities { }
+            interface MultiLayerStratum extends XMultiLayerStratum, XBackendEntities {}
 
             /**
              * implements {@link Backend} provides access to a configuration database composed of one or more storage backends containing settings used by software
              * modules.
              */
-            interface MultiStratumBackend extends Backend, lang.XInitialization { }
+            interface MultiStratumBackend extends Backend, lang.XInitialization {}
 
             /**
              * This structure contains all the information related to a property
@@ -20027,10 +20599,10 @@ declare namespace com.sun.star {
              * Layers contains data for multiple components associated to a single entity.
              * @since OOo 1.1.2
              */
-            interface SingleBackend extends XSchemaSupplier, XMultiLayerStratum, XBackendEntities { }
+            interface SingleBackend extends XSchemaSupplier, XMultiLayerStratum, XBackendEntities {}
 
             /** Provides access to a single layer of configuration data */
-            interface SingleLayerStratum extends XSingleLayerStratum, XBackendEntities { }
+            interface SingleLayerStratum extends XSingleLayerStratum, XBackendEntities {}
 
             /**
              * is passed to an {@link InteractionHandler} when creating a stratum backend fails.
@@ -20045,7 +20617,7 @@ declare namespace com.sun.star {
             }
 
             /** provides access to a configuration data composed of one or more platform backends containing settings used by software modules. */
-            interface SystemIntegration extends XBackend, lang.XInitialization { }
+            interface SystemIntegration extends XBackend, lang.XInitialization {}
 
             /**
              * holds the data needed to identify a template.
@@ -20072,7 +20644,7 @@ declare namespace com.sun.star {
              * An updatable layer can be read or replaced with another layer.
              * @since OOo 1.1.2
              */
-            interface UpdatableLayer extends Layer, XUpdatableLayer { }
+            interface UpdatableLayer extends Layer, XUpdatableLayer {}
 
             /**
              * Handles access to layered data stored in a repository.
@@ -20537,7 +21109,10 @@ declare namespace com.sun.star {
                  * @throws com::sun::star::lang::IllegalArgumentException if one of the layer ids is invalid or if one of the timestamps is invalid or if the lengths of the
                  * @throws com::sun::star::configuration::backend::BackendAccessException if an error occurs while accessing the data.
                  */
-                getMultipleLayers(aLayerIds: LibreOffice.SeqEquiv<string>, aTimestamps: LibreOffice.SeqEquiv<string>): SafeArray<XLayer>;
+                getMultipleLayers(
+                    aLayerIds: LibreOffice.SeqEquiv<string>,
+                    aTimestamps: LibreOffice.SeqEquiv<string>,
+                ): SafeArray<XLayer>;
 
                 /**
                  * retrieves a writable representation of the layer associated to a layer id.
@@ -20769,7 +21344,11 @@ declare namespace com.sun.star {
                  * @throws com::sun::star::configuration::backend::MalformedDataException if there is a unfinished component or template in progressif no schema is started
                  * @throws com::sun::star::lang::WrappedTargetException if an error occurs processing the event.
                  */
-                startSetTemplate(aTemplate: TemplateIdentifier, aAttributes: number, aItemType: TemplateIdentifier): void;
+                startSetTemplate(
+                    aTemplate: TemplateIdentifier,
+                    aAttributes: number,
+                    aItemType: TemplateIdentifier,
+                ): void;
             }
 
             /**
@@ -21078,7 +21657,7 @@ declare namespace com.sun.star {
                  * @see com.sun.star.configuration.backend.xml.LayerWriter Service that writes OOR Update XML for data described via com.sun.star.configuration.backend.X
                  * @since OOo 1.1.2
                  */
-                interface LayerParser extends XLayer, io.XActiveDataSink, lang.XInitialization { }
+                interface LayerParser extends XLayer, io.XActiveDataSink, lang.XInitialization {}
 
                 /**
                  * can be used to parse a stream of configuration layer XML.
@@ -21087,7 +21666,7 @@ declare namespace com.sun.star {
                  * @see com.sun.star.configuration.backend.xml.LayerParser Service that parses configuration layer XML.
                  * @since OOo 1.1.2
                  */
-                interface LayerWriter extends XLayerHandler, io.XActiveDataSource, lang.XInitialization { }
+                interface LayerWriter extends XLayerHandler, io.XActiveDataSource, lang.XInitialization {}
 
                 /**
                  * represents a configuration schema that is stored in a stream in OOR {@link Schema} XML format.
@@ -21096,7 +21675,7 @@ declare namespace com.sun.star {
                  * @see com.sun.star.configuration.backend.xml.LayerParser Service that parses configuration layer XML.
                  * @since OOo 1.1.2
                  */
-                interface SchemaParser extends XSchema, io.XActiveDataSink, lang.XInitialization { }
+                interface SchemaParser extends XSchema, io.XActiveDataSink, lang.XInitialization {}
             }
         }
 
@@ -21365,7 +21944,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::beans::IllegalTypeException if KeyType or ValueType are unsupported types. For values, all type classes except com::sun::star::un
              * @throws com::sun::star::lang::IllegalArgumentException if any of the given values or keys violates the [key rules]{@link url="#keyrules"} or [value rules
              */
-            createImmutable(KeyType: type, ValueType: type, Values: LibreOffice.SeqEquiv<com.sun.star.beans.Pair<any, any>>): void;
+            createImmutable(
+                KeyType: type,
+                ValueType: type,
+                Values: LibreOffice.SeqEquiv<com.sun.star.beans.Pair<any, any>>,
+            ): void;
         }
 
         /**
@@ -21588,8 +22171,6 @@ declare namespace com.sun.star {
          * For example (Java), to print all elements of a vector **aVect** :
          *
          * {{program example here, see documentation}}
-         *
-         *
          *
          * If the object changed, the behavior of the enumeration is not specified. This is not a remote interface.
          */
@@ -22325,10 +22906,12 @@ declare namespace com.sun.star {
              * The clipboard manager is a one-instance service that holds a list of all known clipboard instances.
              * @see XClipboardManager
              */
-            interface ClipboardManager extends XClipboardManager, lang.XComponent { }
+            interface ClipboardManager extends XClipboardManager, lang.XComponent {}
 
             /** A generic clipboard service is a simple container for transferable objects. */
-            interface GenericClipboard extends XClipboardEx, XClipboardNotifier, lang.XInitialization, lang.XComponent { }
+            interface GenericClipboard
+                extends XClipboardEx, XClipboardNotifier, lang.XInitialization, lang.XComponent
+            {}
 
             interface XClipboard extends uno.XInterface {
                 /**
@@ -22488,7 +23071,7 @@ declare namespace com.sun.star {
              * Provides a unified interface for new-style service {@link SystemClipboard} .
              * @since LibreOffice 4.2
              */
-            interface XSystemClipboard extends XClipboardEx, XClipboardNotifier, XFlushableClipboard, lang.XComponent { }
+            interface XSystemClipboard extends XClipboardEx, XClipboardNotifier, XFlushableClipboard, lang.XComponent {}
 
             namespace RenderingCapabilities {
                 const enum Constants {
@@ -22698,20 +23281,20 @@ declare namespace com.sun.star {
              * This service connects the Java-like UNO drag and drop protocol to the protocol used on window platforms. It realized the drag source.
              * @see XDragSource
              */
-            interface OleDragSource extends XDragSource, lang.XInitialization, lang.XComponent { }
+            interface OleDragSource extends XDragSource, lang.XInitialization, lang.XComponent {}
 
             /**
              * This service connects the Java-like UNO Drag & Drop protocol to the protocol used on window platforms. It realizes the drop target.
              * @see XDropTarget
              */
-            interface OleDropTarget extends XDropTarget, lang.XInitialization, lang.XComponent { }
+            interface OleDropTarget extends XDropTarget, lang.XInitialization, lang.XComponent {}
 
             /**
              * This service connects the Java-like UNO Drag and Drop protocol to the X Drag and Drop protocol used on X-Servers to transfer data between applications
              * via Drag and Drop operations.
              * @see XDragSource
              */
-            interface X11DragSource extends XDragSource, lang.XInitialization, lang.XComponent { }
+            interface X11DragSource extends XDragSource, lang.XInitialization, lang.XComponent {}
 
             /**
              * This service connects the Java-like UNO Drag and Drop protocol to the X Drag and Drop protocol used on X-Servers to transfer data between application
@@ -22719,7 +23302,7 @@ declare namespace com.sun.star {
              * @see XDragSource
              * @see XDropTarget
              */
-            interface X11DropTarget extends XDropTarget, lang.XInitialization, lang.XComponent { }
+            interface X11DropTarget extends XDropTarget, lang.XInitialization, lang.XComponent {}
 
             /**
              * Interface for autoscroll support.
@@ -22831,7 +23414,14 @@ declare namespace com.sun.star {
                  * @param listener The {@link XDragSourceListener} .
                  * @see com.sun.star.datatransfer.XTransferable
                  */
-                startDrag(trigger: DragGestureEvent, sourceActions: number, cursor: number, image: number, trans: XTransferable, listener: XDragSourceListener): void;
+                startDrag(
+                    trigger: DragGestureEvent,
+                    sourceActions: number,
+                    cursor: number,
+                    image: number,
+                    trans: XTransferable,
+                    listener: XDragSourceListener,
+                ): void;
             }
 
             /**
@@ -23297,10 +23887,20 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns object representing the extension.
              */
-            addExtension(url: string, properties: LibreOffice.SeqEquiv<beans.NamedValue>, repository: string, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): XPackage;
+            addExtension(
+                url: string,
+                properties: LibreOffice.SeqEquiv<beans.NamedValue>,
+                repository: string,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): XPackage;
 
             /** check if all prerequisites for the extension are fulfilled and activates it, if possible. */
-            checkPrerequisitesAndEnable(extension: XPackage, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): number;
+            checkPrerequisitesAndEnable(
+                extension: XPackage,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): number;
 
             /**
              * creates a command channel to be used to asynchronously abort a command.
@@ -23316,7 +23916,11 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the removing process, or null
              * @param xCmdEnv command environment for error and progress handling
              */
-            disableExtension(extension: XPackage, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            disableExtension(
+                extension: XPackage,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * enable an extension.
@@ -23326,7 +23930,11 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the removing process, or null
              * @param xCmdEnv command environment for error and progress handling
              */
-            enableExtension(extension: XPackage, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            enableExtension(
+                extension: XPackage,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * returns a sequence containing all installed extensions.
@@ -23335,7 +23943,10 @@ declare namespace com.sun.star {
              * as many elements as there are repositories. Those are ordered according to the priority of the repository. That is, the first member is the extension
              * from the user repository, the second is from the shared repository and the last is from the bundled repository.
              */
-            getAllExtensions(xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): SafeArray<SafeArray<XPackage>>;
+            getAllExtensions(
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): SafeArray<SafeArray<XPackage>>;
 
             /**
              * gets an installed extensions.
@@ -23345,7 +23956,12 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns object
              */
-            getDeployedExtension(repository: string, identifier: string, fileName: string, xCmdEnv: ucb.XCommandEnvironment): XPackage;
+            getDeployedExtension(
+                repository: string,
+                identifier: string,
+                fileName: string,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): XPackage;
 
             /**
              * gets all currently installed extensions, including disabled user extensions.
@@ -23354,7 +23970,11 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns all currently installed packages
              */
-            getDeployedExtensions(repository: string, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): SafeArray<XPackage>;
+            getDeployedExtensions(
+                repository: string,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): SafeArray<XPackage>;
 
             /**
              * gets all extensions with the same identifier from all repositories.
@@ -23362,7 +23982,11 @@ declare namespace com.sun.star {
              * The extension at the first position in the returned sequence represents the extension from the user repository. The next element is from the shared
              * and the last one is from the bundled repository. If one repository does not contain this extension, then the respective element is a null reference.
              */
-            getExtensionsWithSameIdentifier(identifier: string, fileName: string, xCmdEnv: ucb.XCommandEnvironment): SafeArray<XPackage>;
+            getExtensionsWithSameIdentifier(
+                identifier: string,
+                fileName: string,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): SafeArray<XPackage>;
 
             /**
              * returns all extensions which are currently not in use because the user did not accept the license.
@@ -23376,7 +24000,10 @@ declare namespace com.sun.star {
              * Extensions returned by these functions are not returned by {@link XExtensionManager.getDeployedExtension()}{@link
              * XExtensionManager.getDeployedExtensions()}{@link XExtensionManager.getAllExtensions()}{@link XExtensionManager.getExtensionsWithSameIdentifier()}
              */
-            getExtensionsWithUnacceptedLicenses(repository: string, xCmdEnv: ucb.XCommandEnvironment): SafeArray<XPackage>;
+            getExtensionsWithUnacceptedLicenses(
+                repository: string,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): SafeArray<XPackage>;
 
             /**
              * gets the supported XPackageTypeInfos.
@@ -23397,7 +24024,12 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the adding process
              * @param xCmdEnv command environment for error and progress handling
              */
-            reinstallDeployedExtensions(force: boolean, repository: string, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            reinstallDeployedExtensions(
+                force: boolean,
+                repository: string,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * removes an extension.
@@ -23407,7 +24039,13 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the removing process, or null
              * @param xCmdEnv command environment for error and progress handling
              */
-            removeExtension(identifier: string, fileName: string, repository: string, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            removeExtension(
+                identifier: string,
+                fileName: string,
+                repository: string,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * gets the supported XPackageTypeInfos.
@@ -23451,7 +24089,11 @@ declare namespace com.sun.star {
              * @param alreadyInstalled indicates that an extension with the same identifier is already installed.
              * @returns `NULL` - all prerequisites are met. Otherwise, a value from {@link Prerequisites} indicating what prerequisites are missing.
              */
-            checkPrerequisites(xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment, alreadyInstalled: boolean): number;
+            checkPrerequisites(
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+                alreadyInstalled: boolean,
+            ): number;
 
             /**
              * creates a command channel to be used to asynchronously abort a command.
@@ -23478,7 +24120,12 @@ declare namespace com.sun.star {
              * @param nameClashAction one of {@link com.sun.star.ucb.NameClash}
              * @param xCmdEnv command environment for error and progress handling
              */
-            exportTo(destFolderURL: string, newTitle: string, nameClashAction: number, xCmdEnv: ucb.XCommandEnvironment): void;
+            exportTo(
+                destFolderURL: string,
+                newTitle: string,
+                nameClashAction: number,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * Gets packages of the bundle.
@@ -23596,7 +24243,10 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns status whether the package is registered ( `TRUE` , `FALSE` ) or the status is ambiguous. Additionally, a registration status may not apply, e.g.
              */
-            isRegistered(xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): com.sun.star.beans.Optional<com.sun.star.beans.Ambiguous<boolean>>;
+            isRegistered(
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): com.sun.star.beans.Optional<com.sun.star.beans.Ambiguous<boolean>>;
 
             /**
              * indicates if this object represents a removed extension or extension item. This is the case when it was created by providing `TRUE` for the `removed`
@@ -23638,7 +24288,11 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the registration process, or `NULL`
              * @param xCmdEnv command environment for error and progress handling
              */
-            registerPackage(startup: boolean, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            registerPackage(
+                startup: boolean,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * return a URL to a directory which contains the registration data.
@@ -23740,7 +24394,13 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns handle
              */
-            addPackage(url: string, properties: LibreOffice.SeqEquiv<beans.NamedValue>, mediaType: string, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): XPackage;
+            addPackage(
+                url: string,
+                properties: LibreOffice.SeqEquiv<beans.NamedValue>,
+                mediaType: string,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): XPackage;
 
             /**
              * checks if the extension can be used.
@@ -23748,7 +24408,11 @@ declare namespace com.sun.star {
              * The extension must be managed by this package manager, that is, it must be recorded in its database. The package manager calls {@link
              * XPackage.checkPrerequisites} and updates its data base with the result. The result, which is from {@link Prerequisites} will be returned.
              */
-            checkPrerequisites(extension: XPackage, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): number;
+            checkPrerequisites(
+                extension: XPackage,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): number;
 
             /**
              * returns the underlying deployment context, that is, the name of the repository.
@@ -23783,7 +24447,10 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns all currently deployed packages
              */
-            getDeployedPackages(xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): SafeArray<XPackage>;
+            getDeployedPackages(
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): SafeArray<XPackage>;
 
             /**
              * returns all extensions which are currently not in use because the user did not accept the license.
@@ -23811,7 +24478,11 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns handle
              */
-            importExtension(extension: XPackage, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): XPackage;
+            importExtension(
+                extension: XPackage,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): XPackage;
 
             /**
              * indicates that this implementation cannot be used for tasks which require write access to the location where the extensions are installed.
@@ -23832,7 +24503,11 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the adding process
              * @param xCmdEnv command environment for error and progress handling
              */
-            reinstallDeployedPackages(force: boolean, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            reinstallDeployedPackages(
+                force: boolean,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * removes an UNO package.
@@ -23841,7 +24516,12 @@ declare namespace com.sun.star {
              * @param xAbortChannel abort channel to asynchronously abort the removing process, or null
              * @param xCmdEnv command environment for error and progress handling
              */
-            removePackage(identifier: string, fileName: string, xAbortChannel: task.XAbortChannel, xCmdEnv: ucb.XCommandEnvironment): void;
+            removePackage(
+                identifier: string,
+                fileName: string,
+                xAbortChannel: task.XAbortChannel,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): void;
 
             /**
              * gets the supported XPackageTypeInfos.
@@ -23912,7 +24592,13 @@ declare namespace com.sun.star {
              * @param xCmdEnv command environment for error and progress handling
              * @returns handle
              */
-            bindPackage(url: string, mediaType: string, removed: boolean, identifier: string, xCmdEnv: ucb.XCommandEnvironment): XPackage;
+            bindPackage(
+                url: string,
+                mediaType: string,
+                removed: boolean,
+                identifier: string,
+                xCmdEnv: ucb.XCommandEnvironment,
+            ): XPackage;
 
             /**
              * gets the supported XPackageTypeInfos.
@@ -24005,7 +24691,10 @@ declare namespace com.sun.star {
              * @param repositories a repository and its mirrors.
              * @param extensionId the unique identifier of an extension. If it is not empty and the update document is an atom feed, only items whose "term" attribute
              */
-            getUpdateInformation(repositories: LibreOffice.SeqEquiv<string>, extensionId: string): SafeArray<xml.dom.XElement>;
+            getUpdateInformation(
+                repositories: LibreOffice.SeqEquiv<string>,
+                extensionId: string,
+            ): SafeArray<xml.dom.XElement>;
 
             /**
              * get update information for a specific extension or all available information from a repository.
@@ -24013,7 +24702,10 @@ declare namespace com.sun.star {
              * @param extensionId the unique identifier of an extension. If it is not empty and the update document is an atom feed, only items whose "term" attribute
              * @returns an enumeration of {@link UpdateInformationEntry} .
              */
-            getUpdateInformationEnumeration(repositories: LibreOffice.SeqEquiv<string>, extensionId: string): container.XEnumeration;
+            getUpdateInformationEnumeration(
+                repositories: LibreOffice.SeqEquiv<string>,
+                extensionId: string,
+            ): container.XEnumeration;
 
             /**
              * Sets an interaction handler to be used for further operations.
@@ -24352,7 +25044,7 @@ declare namespace com.sun.star {
          * should be available at same implementation too.
          * @see ImportFilter
          */
-        interface ExportFilter extends XExporter, XFilter, lang.XInitialization, container.XNamed { }
+        interface ExportFilter extends XExporter, XFilter, lang.XInitialization, container.XNamed {}
 
         /**
          * factory to create extended type detection components.
@@ -24361,7 +25053,14 @@ declare namespace com.sun.star {
          * special query mode can be used here too.
          * @since OOo 1.1.2
          */
-        interface ExtendedTypeDetectionFactory extends lang.XMultiServiceFactory, container.XNameAccess, container.XNameContainer, container.XContainerQuery, util.XFlushable { }
+        interface ExtendedTypeDetectionFactory
+            extends
+                lang.XMultiServiceFactory,
+                container.XNameAccess,
+                container.XNameContainer,
+                container.XContainerQuery,
+                util.XFlushable
+        {}
 
         /**
          * factory to create filter components.
@@ -24372,7 +25071,14 @@ declare namespace com.sun.star {
          * This factory implements read/write access on the underlying configuration set. and further a validate and flush mechanism for more performance and a
          * special query mode can be used here too.
          */
-        interface FilterFactory extends lang.XMultiServiceFactory, container.XNameAccess, container.XNameContainer, container.XContainerQuery, util.XFlushable { }
+        interface FilterFactory
+            extends
+                lang.XMultiServiceFactory,
+                container.XNameAccess,
+                container.XNameContainer,
+                container.XContainerQuery,
+                util.XFlushable
+        {}
 
         /**
          * Is used for interaction handle to get filter options.
@@ -24413,7 +25119,7 @@ declare namespace com.sun.star {
          * should be available at same implementation too.
          * @see ExportFilter
          */
-        interface ImportFilter extends XImporter, XFilter, lang.XInitialization, container.XNamed { }
+        interface ImportFilter extends XImporter, XFilter, lang.XInitialization, container.XNamed {}
 
         /** This service is implemented by objects inside a document object model that can be the target of a link inside a document */
         interface LinkTarget extends beans.XPropertySet, XLinkTargetSupplier {
@@ -24835,8 +25541,21 @@ declare namespace com.sun.star {
          * pure {@link com.sun.star.awt.XWindow} only.
          * @see com.sun.star.frame.Controller
          */
-        interface OfficeDocument extends frame.XModel, util.XModifiable, frame.XStorable, view.XPrintable, XEventBroadcaster, XDocumentEventBroadcaster, XEventsSupplier,
-            XViewDataSupplier, view.XPrintJobBroadcaster, XEmbeddedScripts, XDocumentPropertiesSupplier, XUndoManagerSupplier {
+        interface OfficeDocument
+            extends
+                frame.XModel,
+                util.XModifiable,
+                frame.XStorable,
+                view.XPrintable,
+                XEventBroadcaster,
+                XDocumentEventBroadcaster,
+                XEventsSupplier,
+                XViewDataSupplier,
+                view.XPrintJobBroadcaster,
+                XEmbeddedScripts,
+                XDocumentPropertiesSupplier,
+                XUndoManagerSupplier
+        {
             addEventListener(Listener: lang.XEventListener | XEventListener): void;
 
             /**
@@ -25028,7 +25747,14 @@ declare namespace com.sun.star {
          * ExtendedTypeDetection} services to look into the document stream. Last mode can be suppressed to perform the operation. Of course the results can't be
          * guaranteed then. (e.g. in case the extension was changed)
          */
-        interface TypeDetection extends XTypeDetection, container.XNameAccess, container.XNameContainer, container.XContainerQuery, util.XFlushable { }
+        interface TypeDetection
+            extends
+                XTypeDetection,
+                container.XNameAccess,
+                container.XNameContainer,
+                container.XContainerQuery,
+                util.XFlushable
+        {}
 
         /**
          * thrown when reverting to re-applying an undoable action fails.
@@ -25458,7 +26184,11 @@ declare namespace com.sun.star {
              * @param MediaDescriptor contains additional arguments for the load process, for instance an StatusIndicator.
              * @see MediaDescriptor
              */
-            recoverFromFile(SourceLocation: string, SalvagedFile: string, MediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            recoverFromFile(
+                SourceLocation: string,
+                SalvagedFile: string,
+                MediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * does an emergency save of the document
@@ -25468,7 +26198,10 @@ declare namespace com.sun.star {
              * @param MediaDescriptor contains additional arguments for the save process, for instance an StatusIndicator.
              * @see MediaDescriptor
              */
-            storeToRecoveryFile(TargetLocation: string, MediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            storeToRecoveryFile(
+                TargetLocation: string,
+                MediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * determines whether the document has been modified since the last call to {@link storeToRecoveryFile()} .
@@ -25715,7 +26448,13 @@ declare namespace com.sun.star {
          * @throws com::sun::star::uno::RuntimeException
          */
         interface XFilterAdapter extends uno.XInterface {
-            convert(xml: io.XInputStream, device: io.XOutputStream, convertToOffice: boolean, pluginUrl: string, fileName: string): void;
+            convert(
+                xml: io.XInputStream,
+                device: io.XOutputStream,
+                convertToOffice: boolean,
+                pluginUrl: string,
+                fileName: string,
+            ): void;
         }
 
         /** this interface converts graphic object URLs from one URL space to another. */
@@ -25837,7 +26576,7 @@ declare namespace com.sun.star {
          * should be imported. The {@link com.sun.star.xml.sax.XDocumentHandler} interface is used to stream the XML data into the filter.
          * @since OOo 2.0
          */
-        interface XMLBasicImporter extends XImporter, xml.sax.XDocumentHandler { }
+        interface XMLBasicImporter extends XImporter, xml.sax.XDocumentHandler {}
 
         /**
          * Filter for exporting Basic macros to the OASIS Open Office file format.
@@ -25911,7 +26650,10 @@ declare namespace com.sun.star {
             getDocumentStorage(): embed.XStorage;
 
             /** lets the document load itself using provided storage. */
-            loadFromStorage(xStorage: embed.XStorage, aMediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            loadFromStorage(
+                xStorage: embed.XStorage,
+                aMediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /** allows to deregister the listener. */
             removeStorageChangeListener(xListener: XStorageChangeListener): void;
@@ -26091,8 +26833,6 @@ declare namespace com.sun.star {
              * hidden undo action will transparently undo this action, and also undo the new top element of the stack.Calling {@link redo()} when the top-element is
              * a hidden action will transparently redo this action, and also redo the new top element of the stack.In any user interface presenting the current Undo
              * or Redo actions to the user, a hidden action will not be listed.
-             *
-             *
              *
              * A new undo action will be added to the undo stack. As long as the context is not left, every undo action added to the stack will be treated as sub
              * action. This means it will not be directly accessible at the undo manager, not appear in any user interface, and cannot be separately undone or
@@ -26361,10 +27101,10 @@ declare namespace com.sun.star {
          * Provides unified interface for {@link XMLOasisBasicExporter} and {@link XMLBasicExporter} services.
          * @since LibreOffice 4.1
          */
-        interface XXMLBasicExporter extends XExporter, XFilter { }
+        interface XXMLBasicExporter extends XExporter, XFilter {}
 
         /** @since LibreOffice 4.1 */
-        interface XXMLOasisBasicImporter extends XImporter, xml.sax.XDocumentHandler { }
+        interface XXMLOasisBasicImporter extends XImporter, xml.sax.XDocumentHandler {}
 
         namespace LinkUpdateModes {
             const enum Constants {
@@ -27454,7 +28194,9 @@ declare namespace com.sun.star {
          * a rearrangement of the visible shapes, the user gets notified of this.
          * @since OOo 1.1.2
          */
-        interface AccessibleDrawDocumentView extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent { }
+        interface AccessibleDrawDocumentView
+            extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent
+        {}
 
         /**
          * The service describes the accessible graph controls that are used in the image map of the Draw and Impress applications and the contour dialog of the
@@ -27463,8 +28205,14 @@ declare namespace com.sun.star {
          * The children of graph controls are shapes that define contours.
          * @since OOo 1.1.2
          */
-        interface AccessibleGraphControl extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleSelection { }
+        interface AccessibleGraphControl
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * The {@link AccessibleGraphicShape} service is implemented by the graphic object shapes shapes {@link com.sun.star.drawing.GraphicObjectShape} and
@@ -27474,13 +28222,13 @@ declare namespace com.sun.star {
          * com.sun.star.accessibility.XAccessibleImage} interface.
          * @since OOo 1.1.2
          */
-        interface AccessibleGraphicShape extends AccessibleShape, accessibility.XAccessibleImage { }
+        interface AccessibleGraphicShape extends AccessibleShape, accessibility.XAccessibleImage {}
 
         /**
          * The accessible view of an image bullet.
          * @since OOo 1.1.2
          */
-        interface AccessibleImageBullet extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent { }
+        interface AccessibleImageBullet extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent {}
 
         /**
          * The {@link AccessibleOLEShape} service is implemented by OLE shapes.
@@ -27494,7 +28242,7 @@ declare namespace com.sun.star {
          * document view and not under the OLE object. This is due to underlying implementation constraints and may change in the future.
          * @since OOo 1.1.2
          */
-        interface AccessibleOLEShape extends AccessibleShape, accessibility.XAccessibleAction { }
+        interface AccessibleOLEShape extends AccessibleShape, accessibility.XAccessibleAction {}
 
         /**
          * The {@link AccessibleShape} service is implemented by UNO shapes to provide accessibility information that describe the shape's features. A UNO shape
@@ -27514,8 +28262,13 @@ declare namespace com.sun.star {
          * Each shape object that has not set the DEFUNC state has a valid parent. That is either the containing draw page or a group shape or a 3D scene object.
          * @since OOo 1.1.2
          */
-        interface AccessibleShape extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleComponent,
-            accessibility.XAccessibleExtendedComponent { }
+        interface AccessibleShape
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleExtendedComponent
+        {}
 
         /**
          * The {@link AccessibleSlideView} service is implemented by slide views of Impress documents.
@@ -27523,8 +28276,14 @@ declare namespace com.sun.star {
          * An accessible slide view gives access to all visible slides of a slide view.
          * @since OOo 1.1.2
          */
-        interface AccessibleSlideView extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster,
-            accessibility.XAccessibleComponent, accessibility.XAccessibleSelection { }
+        interface AccessibleSlideView
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * The {@link AccessibleSlideViewObject} service is implemented by the slides of the slide view of Impress documents.
@@ -27532,8 +28291,13 @@ declare namespace com.sun.star {
          * An accessible slide view object gives access to one of the visible slides of a slide view.
          * @since OOo 1.1.2
          */
-        interface AccessibleSlideViewObject extends accessibility.XAccessible, accessibility.XAccessibleContext, accessibility.XAccessibleEventBroadcaster,
-            accessibility.XAccessibleComponent { }
+        interface AccessibleSlideViewObject
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleComponent
+        {}
 
         /**
          * This {@link Shape} encapsulates an applet.
@@ -27606,7 +28370,9 @@ declare namespace com.sun.star {
          * The {@link CaptionShape} represents a rectangular drawing shape with an additional set of lines. It can be used as a description for a fixed point
          * inside a drawing.
          */
-        interface CaptionShape extends Shape, FillProperties, LineProperties, ShadowProperties, Text, RotationDescriptor {
+        interface CaptionShape
+            extends Shape, FillProperties, LineProperties, ShadowProperties, Text, RotationDescriptor
+        {
             /** This property specifies the escape angle of the line of a caption. It is only used if `CaptionIsFixedAngle` is set to `TRUE` */
             CaptionAngle: number;
 
@@ -27654,7 +28420,16 @@ declare namespace com.sun.star {
         }
 
         /** This service is for a closed Bezier shape. */
-        interface ClosedBezierShape extends Shape, LineProperties, FillProperties, PolyPolygonBezierDescriptor, Text, ShadowProperties, RotationDescriptor { }
+        interface ClosedBezierShape
+            extends
+                Shape,
+                LineProperties,
+                FillProperties,
+                PolyPolygonBezierDescriptor,
+                Text,
+                ShadowProperties,
+                RotationDescriptor
+        {}
 
         /** This is a set of properties to describe the style for rendering connector. */
         interface ConnectorProperties {
@@ -27675,7 +28450,9 @@ declare namespace com.sun.star {
         }
 
         /** This service is for a {@link ConnectorShape} , a specialized {@link Shape} , which can be connected to other {@link Shapes} or GluePoints. */
-        interface ConnectorShape extends Shape, LineProperties, ConnectorProperties, ShadowProperties, Text, RotationDescriptor {
+        interface ConnectorShape
+            extends Shape, LineProperties, ConnectorProperties, ShadowProperties, Text, RotationDescriptor
+        {
             /** This property contains the distance of line 1. */
             EdgeLine1Delta: number;
 
@@ -27721,10 +28498,12 @@ declare namespace com.sun.star {
          * @see Shape
          * @see XControlShape
          */
-        interface ControlShape extends Shape, XControlShape { }
+        interface ControlShape extends Shape, XControlShape {}
 
         /** This service is for a {@link CustomShape} */
-        interface CustomShape extends Shape, FillProperties, LineProperties, ShadowProperties, Text, RotationDescriptor {
+        interface CustomShape
+            extends Shape, FillProperties, LineProperties, ShadowProperties, Text, RotationDescriptor
+        {
             /** This property can be used to store data that the {@link CustomShapeEngine} may use for rendering */
             CustomShapeData: string;
 
@@ -27745,13 +28524,21 @@ declare namespace com.sun.star {
         }
 
         /** This service is for a {@link CustomShape} */
-        interface CustomShapeEngine extends lang.XInitialization, XCustomShapeEngine { }
+        interface CustomShapeEngine extends lang.XInitialization, XCustomShapeEngine {}
 
         /**
          * This is a set of properties to access the defaults of a drawing document
          * @see DrawingDocumentFactory
          */
-        interface Defaults extends TextProperties, LineProperties, FillProperties, ShadowProperties, ConnectorProperties, MeasureProperties { }
+        interface Defaults
+            extends
+                TextProperties,
+                LineProperties,
+                FillProperties,
+                ShadowProperties,
+                ConnectorProperties,
+                MeasureProperties
+        {}
 
         /** specifies a 3-dimensional vector. */
         interface Direction3D {
@@ -27788,7 +28575,15 @@ declare namespace com.sun.star {
         }
 
         /** This component integrates a view to a {@link DrawPages} or {@link MasterPage} from a {@link DrawingDocument} . */
-        interface DrawingDocumentDrawView extends frame.Controller, awt.XWindow, view.XFormLayerAccess, XDrawView, beans.XPropertySet, view.XSelectionSupplier {
+        interface DrawingDocumentDrawView
+            extends
+                frame.Controller,
+                awt.XWindow,
+                view.XFormLayerAccess,
+                XDrawView,
+                beans.XPropertySet,
+                view.XSelectionSupplier
+        {
             /** This is the drawing page that is currently visible. */
             CurrentPage: XDrawPage;
 
@@ -27826,17 +28621,19 @@ declare namespace com.sun.star {
          * @see GenericDrawPage
          * @see DrawPages
          */
-        interface DrawPage extends GenericDrawPage, XMasterPageTarget, form.XFormsSupplier { }
+        interface DrawPage extends GenericDrawPage, XMasterPageTarget, form.XFormsSupplier {}
 
         /**
          * provides access to a container of {@link DrawPages} and makes it possible for you to manipulate them.
          * @see XDrawPagesSupplier
          * @see DrawingDocument
          */
-        interface DrawPages extends XDrawPages, XDrawPageSummarizer, XDrawPageExpander { }
+        interface DrawPages extends XDrawPages, XDrawPageSummarizer, XDrawPageExpander {}
 
         /** This service is for an ellipse or circle shape. */
-        interface EllipseShape extends Shape, LineProperties, FillProperties, Text, ShadowProperties, RotationDescriptor {
+        interface EllipseShape
+            extends Shape, LineProperties, FillProperties, Text, ShadowProperties, RotationDescriptor
+        {
             /** If the kind specifies an open circle, this is the end angle. */
             CircleEndAngle: number;
 
@@ -28281,8 +29078,17 @@ declare namespace com.sun.star {
          *
          * Because its function is needed more than once, its defined as generic one.
          */
-        interface GenericDrawingDocument extends document.OfficeDocument, lang.XMultiServiceFactory, beans.XPropertySet, XDrawPageDuplicator, XDrawPagesSupplier,
-            XMasterPagesSupplier, XLayerSupplier, style.XStyleFamiliesSupplier {
+        interface GenericDrawingDocument
+            extends
+                document.OfficeDocument,
+                lang.XMultiServiceFactory,
+                beans.XPropertySet,
+                XDrawPageDuplicator,
+                XDrawPagesSupplier,
+                XMasterPagesSupplier,
+                XLayerSupplier,
+                style.XStyleFamiliesSupplier
+        {
             addEventListener(Listener: document.XEventListener | lang.XEventListener): void;
 
             /** contains the identifier of the default locale of the document. */
@@ -28306,7 +29112,9 @@ declare namespace com.sun.star {
          *
          * {{program example here, see documentation}}
          */
-        interface GenericDrawPage extends XShapes, XShapeGrouper, XShapeCombiner, XShapeBinder, container.XNamed, beans.XPropertySet {
+        interface GenericDrawPage
+            extends XShapes, XShapeGrouper, XShapeCombiner, XShapeBinder, container.XNamed, beans.XPropertySet
+        {
             /** This is the border at the bottom. */
             BorderBottom: number;
 
@@ -28461,7 +29269,7 @@ declare namespace com.sun.star {
          * @see XShapeGroup
          * @see XShapes
          */
-        interface GroupShape extends Shape, XShapeGroup, XShapes { }
+        interface GroupShape extends Shape, XShapeGroup, XShapes {}
 
         /**
          * This struct defines the appearance of a hatch.
@@ -28555,7 +29363,7 @@ declare namespace com.sun.star {
          * This service is provided by documents to support Layers.
          * @see DrawingDocument
          */
-        interface LayerManager extends XLayerManager, container.XNameAccess { }
+        interface LayerManager extends XLayerManager, container.XNameAccess {}
 
         /** A {@link LineDash} defines a non-continuous line. */
         interface LineDash {
@@ -28642,7 +29450,9 @@ declare namespace com.sun.star {
         }
 
         /** This service is for a simple {@link Shape} with lines. */
-        interface LineShape extends Shape, LineProperties, PolyPolygonDescriptor, Text, ShadowProperties, RotationDescriptor { }
+        interface LineShape
+            extends Shape, LineProperties, PolyPolygonDescriptor, Text, ShadowProperties, RotationDescriptor
+        {}
 
         /** This service describes a {@link MeasureShape} . */
         interface MeasureProperties {
@@ -28705,7 +29515,9 @@ declare namespace com.sun.star {
         }
 
         /** This service is for a dimensioning shape. */
-        interface MeasureShape extends Shape, MeasureProperties, LineProperties, Text, ShadowProperties, RotationDescriptor {
+        interface MeasureShape
+            extends Shape, MeasureProperties, LineProperties, Text, ShadowProperties, RotationDescriptor
+        {
             /** this point is the end of the measured distance */
             EndPosition: awt.Point;
 
@@ -28736,7 +29548,9 @@ declare namespace com.sun.star {
         }
 
         /** This service is for an open Bezier shape. */
-        interface OpenBezierShape extends Shape, LineProperties, PolyPolygonBezierDescriptor, Text, ShadowProperties, RotationDescriptor { }
+        interface OpenBezierShape
+            extends Shape, LineProperties, PolyPolygonBezierDescriptor, Text, ShadowProperties, RotationDescriptor
+        {}
 
         /**
          * This service is for a page shape. A page shape displays a preview of another page. These shapes are used inside notes pages to preview the
@@ -28771,7 +29585,9 @@ declare namespace com.sun.star {
          *
          * A polyline has one or more straight lines.
          */
-        interface PolyLineShape extends Shape, LineProperties, PolyPolygonDescriptor, Text, ShadowProperties, RotationDescriptor { }
+        interface PolyLineShape
+            extends Shape, LineProperties, PolyPolygonDescriptor, Text, ShadowProperties, RotationDescriptor
+        {}
 
         /** specifies the coordinates for a poly polygon Bezier. */
         interface PolyPolygonBezierCoords {
@@ -28796,7 +29612,16 @@ declare namespace com.sun.star {
         }
 
         /** This service specifies a poly-polygon Bezier shape. */
-        interface PolyPolygonBezierShape extends Shape, LineProperties, FillProperties, PolyPolygonBezierDescriptor, Text, ShadowProperties, RotationDescriptor { }
+        interface PolyPolygonBezierShape
+            extends
+                Shape,
+                LineProperties,
+                FillProperties,
+                PolyPolygonBezierDescriptor,
+                Text,
+                ShadowProperties,
+                RotationDescriptor
+        {}
 
         /**
          * This service describes a poly-polygon.
@@ -28819,7 +29644,16 @@ declare namespace com.sun.star {
          *
          * A poly-polygon has 2 or more straight lines, with the first and last point connected by a straight line.
          */
-        interface PolyPolygonShape extends Shape, LineProperties, FillProperties, PolyPolygonDescriptor, Text, ShadowProperties, RotationDescriptor { }
+        interface PolyPolygonShape
+            extends
+                Shape,
+                LineProperties,
+                FillProperties,
+                PolyPolygonDescriptor,
+                Text,
+                ShadowProperties,
+                RotationDescriptor
+        {}
 
         /** specifies the coordinates of a 3-dimensional poly polygon. */
         interface PolyPolygonShape3D {
@@ -28841,7 +29675,9 @@ declare namespace com.sun.star {
         }
 
         /** This service is for a rectangle {@link Shape} . */
-        interface RectangleShape extends Shape, FillProperties, LineProperties, Text, ShadowProperties, RotationDescriptor {
+        interface RectangleShape
+            extends Shape, FillProperties, LineProperties, Text, ShadowProperties, RotationDescriptor
+        {
             /** For {@link Shapes} with rounded corners, this is the radius of the corners. */
             CornerRadius: number;
         }
@@ -28898,7 +29734,15 @@ declare namespace com.sun.star {
          * @see com.sun.star.text.XText
          * @see ShapeDescriptor
          */
-        interface Shape extends beans.XPropertySet, XShape, lang.XComponent, XShapeDescriptor, XGluePointsSupplier, beans.XTolerantMultiPropertySet {
+        interface Shape
+            extends
+                beans.XPropertySet,
+                XShape,
+                lang.XComponent,
+                XShapeDescriptor,
+                XGluePointsSupplier,
+                beans.XTolerantMultiPropertySet
+        {
             /** this property lets you get and set a hyperlink for this shape. */
             Hyperlink: string;
 
@@ -29012,11 +29856,18 @@ declare namespace com.sun.star {
         }
 
         /** This abstract service specifies the general characteristics of an optional text inside a {@link Shape} . */
-        interface Text extends text.XText, TextProperties { }
+        interface Text extends text.XText, TextProperties {}
 
         /** This is a set of properties to describe the style for rendering the text area inside a shape. */
-        interface TextProperties extends style.CharacterProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex, style.ParagraphProperties,
-            style.ParagraphPropertiesAsian, style.ParagraphPropertiesComplex {
+        interface TextProperties
+            extends
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                style.ParagraphPropertiesAsian,
+                style.ParagraphPropertiesComplex
+        {
             /** If this is `TRUE` , numbering is ON for the text of this {@link Shape} . */
             IsNumbering: boolean;
 
@@ -29307,7 +30158,7 @@ declare namespace com.sun.star {
          * in the center pane is replaced by another one. The sub controller handles the things that are not common to all views, i.e. properties, the current
          * page/slide, and the selection.
          */
-        interface XDrawSubController extends XDrawView, view.XSelectionSupplier, beans.XFastPropertySet { }
+        interface XDrawSubController extends XDrawView, view.XSelectionSupplier, beans.XFastPropertySet {}
 
         /** is implemented by views that display {@link DrawPages} or {@link MasterPages} . */
         interface XDrawView extends uno.XInterface {
@@ -29739,8 +30590,6 @@ declare namespace com.sun.star {
              *
              * "mso-spt202",
              *
-             *
-             *
              * SJ: following shape types can't be created with this method, they are part of the gallery (soon they also will be added) gallery: quadrat gallery:
              * round-quadrat gallery: circle gallery: circle-pie gallery: frame gallery: flower gallery: cloud gallery: puzzle gallery: octagon-bevel gallery:
              * diamond-bevel gallery: up-right-arrow gallery: up-right-down-arrow gallery: corner-right-arrow gallery: split-arrow gallery: up-right-arrow-callout
@@ -29760,7 +30609,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XGraphicExportFilter extends document.XFilter, document.XExporter, document.XMimeTypeInfo { }
+        interface XGraphicExportFilter extends document.XFilter, document.XExporter, document.XMimeTypeInfo {}
 
         /**
          * This interface makes it possible to access and manage the Layers of a document.
@@ -29854,7 +30703,11 @@ declare namespace com.sun.star {
              * @param nRequestedCanvasFeatureList List of requested features that the new canvas should (has to) provide. Use only values from the {@link CanvasFeature
              * @param sOptionalCanvasServiceName When an explicit service name is given then a new object of this service is created. This service name lets the caller
              */
-            createCanvas(xWindow: awt.XWindow, nRequestedCanvasFeatureList: number, sOptionalCanvasServiceName: string): rendering.XCanvas;
+            createCanvas(
+                xWindow: awt.XWindow,
+                nRequestedCanvasFeatureList: number,
+                sOptionalCanvasServiceName: string,
+            ): rendering.XCanvas;
 
             /**
              * Create a new canvas for the given window. The new canvas is a wrapper around the given shared canvas. The wrapper only modifies the origin in all
@@ -29866,7 +30719,12 @@ declare namespace com.sun.star {
              * @param xWindow The canvas is created for this window. Must not be `NULL`
              */
             createSharedCanvas(
-                xUpdateCanvas: rendering.XSpriteCanvas, xUpdateWindow: awt.XWindow, xSharedCanvas: rendering.XCanvas, xSharedWindow: awt.XWindow, xWindow: awt.XWindow): rendering.XCanvas;
+                xUpdateCanvas: rendering.XSpriteCanvas,
+                xUpdateWindow: awt.XWindow,
+                xSharedCanvas: rendering.XCanvas,
+                xSharedWindow: awt.XWindow,
+                xWindow: awt.XWindow,
+            ): rendering.XCanvas;
 
             /**
              * Create a new window as child window of the given parent window.
@@ -29876,7 +30734,13 @@ declare namespace com.sun.star {
              * @param bEnableChildTransparentMode When `TRUE` the parent window is painted behind its child windows. This is one half of allowing child windows to be t
              * @param bEnableParentClip When `TRUE` then the parent window is not clipped where its child windows are painted. This is the other half of allowing child
              */
-            createWindow(xParentWindow: awt.XWindow, bCreateSystemChildWindow: boolean, bInitiallyVisible: boolean, bEnableChildTransparentMode: boolean, bEnableParentClip: boolean): awt.XWindow;
+            createWindow(
+                xParentWindow: awt.XWindow,
+                bCreateSystemChildWindow: boolean,
+                bInitiallyVisible: boolean,
+                bEnableChildTransparentMode: boolean,
+                bEnableParentClip: boolean,
+            ): awt.XWindow;
 
             /** Return the bounding box of the given child window relative to the direct or indirect parent window. */
             getWindowExtentsRelative(xChildWindow: awt.XWindow, xParentWindow: awt.XWindow): awt.Rectangle;
@@ -29901,8 +30765,16 @@ declare namespace com.sun.star {
             toTop(xWindow: awt.XWindow): void;
         }
 
-        interface XSelectionFunction extends lang.XComponent, lang.XServiceInfo, frame.XDispatch, awt.XKeyHandler, awt.XMouseClickHandler, awt.XMouseMotionHandler,
-            view.XSelectionChangeListener { }
+        interface XSelectionFunction
+            extends
+                lang.XComponent,
+                lang.XServiceInfo,
+                frame.XDispatch,
+                awt.XKeyHandler,
+                awt.XMouseClickHandler,
+                awt.XMouseMotionHandler,
+                view.XSelectionChangeListener
+        {}
 
         /** lets you do a basic transformation on a {@link Shape} and get its type. */
         interface XShape extends XShapeDescriptor {
@@ -30191,7 +31063,11 @@ declare namespace com.sun.star {
              * @param aMaximumPreviewPixelSize The maximum size of the preview measured in pixels. When the aspect ratios of this size and of the given slide differ, t
              * @param nSuperSampleFactor When larger than the default 1 then internally a larger preview is created which, before it is returned, is scaled down to the
              */
-            createPreview(xSlide: XDrawPage, aMaximumPreviewPixelSize: awt.Size, nSuperSampleFactor: number): awt.XBitmap;
+            createPreview(
+                xSlide: XDrawPage,
+                aMaximumPreviewPixelSize: awt.Size,
+                nSuperSampleFactor: number,
+            ): awt.XBitmap;
 
             /**
              * Exactly the same functionality as {@link createPreview()} , only a different return type: {@link com.sun.star.rendering.XBitmap} instead of {@link
@@ -30202,7 +31078,12 @@ declare namespace com.sun.star {
              * @param xCanvas This canvas is used create a canvas specific bitmap.
              * @see createPreview
              */
-            createPreviewForCanvas(xSlide: XDrawPage, aMaximumPreviewPixelSize: awt.Size, nSuperSampleFactor: number, xCanvas: rendering.XCanvas): rendering.XBitmap;
+            createPreviewForCanvas(
+                xSlide: XDrawPage,
+                aMaximumPreviewPixelSize: awt.Size,
+                nSuperSampleFactor: number,
+                xCanvas: rendering.XCanvas,
+            ): rendering.XBitmap;
         }
 
         /**
@@ -30599,7 +31480,11 @@ declare namespace com.sun.star {
                  * @param eSearchMode This flag defines whether to return only resources that are directly bound to the given anchor or a recursive search is to be made. N
                  * @returns The set of returned resource ids may be empty when there are no resource ids that match all conditions. The resources in the sequence are ordered
                  */
-                getResources(xAnchorId: XResourceId, sTargetURLPrefix: string, eSearchMode: AnchorBindingMode): SafeArray<XResourceId>;
+                getResources(
+                    xAnchorId: XResourceId,
+                    sTargetURLPrefix: string,
+                    eSearchMode: AnchorBindingMode,
+                ): SafeArray<XResourceId>;
 
                 /**
                  * Returns whether the specified resource is part of the configuration.
@@ -30667,24 +31552,16 @@ declare namespace com.sun.star {
              * that then are added to the queue. For example when the view in the center pane is replaced by another view, some listeners may want to turn some side
              * panes on or off, or show other views in the side panes.
              *
-             *
-             *
              * This process goes on until the queue of request objects becomes empty. Until this point only the requested configuration has been modified. No
              * resources have been activated or deactivated.
-             *
-             *
              *
              *  2.
              *
              * The second update step activates or deactivates resources so that the current configuration (the one that comprises the actually active resources)
              * reflects the requested configuration.
              *
-             *
-             *
              * The order in which resources are activated or deactivated depends on the dependency between the resources. For example a view depends on the pane it
              * is displayed in. Resources that other resources depend on are activated first and deactivated last. The order is undefined for unrelated resources.
-             *
-             *
              *
              * Note that the second update step may not be able to activate (or even to deactivate) all the requested resources. Either because they are temporarily
              * or permanently unavailable. For example, during the start-up of a new Impress application the side panes are displayed with a visible delay because
@@ -30695,46 +31572,39 @@ declare namespace com.sun.star {
              * the resource is not yet active in the requested configuration. The event is sent when the configuration change request is executed, not when the
              * {@link requestResourceActivation()} call is made.
              *
-             *
-             *
              * The {@link ConfigurationChangeEvent.ResourceId} member is set to the requested resource. The ResourceObject member is not set.
              *
              * ResourceDeactivationRequested is sent when the deactivation of a resource has been requested and the resource is active in the requested
              * configuration. The event is sent when the configuration change request is executed that is created when for example {@link
              * requestResourceDeactivation()} is called.
              *
-             *
-             *
              * The {@link ResourceId} member is set to the requested resource. The ResourceObject member is not set.
              *
              * ConfigurationUpdateStart is sent before the update of the current configuration starts.
-             *
-             *
              *
              * The requested configuration is available in the {@link ConfigurationChangeEvent.Configuration} member. The {@link ResourceId} and ResourceObject
              * members are not set.
              *
              * ConfigurationUpdateEnd is sent after the update of the current configuration ends.
              *
-             *
-             *
              * The requested configuration is available in the {@link ConfigurationChangeEvent.Configuration} member. The {@link ResourceId} and ResourceObject
              * members are not set.
              *
              * ResourceActivation is sent when a resource is activated, i.e. when a new object of a resource is created (or taken from a cache).
-             *
-             *
              *
              * The {@link ResourceId} and ResourceObject members are set to the {@link XResourceId} and object reference of the activated resource.
              *
              * ResourceDeactivation is sent when a resource is deactivated, i.e. when an object that previously was part of the configuration is removed from the
              * configuration.
              *
-             *
-             *
              * The {@link ResourceId} and ResourceObject members are set to {@link XResourceId} and object reference of the deactivated resource.
              */
-            interface XConfigurationController extends XConfigurationControllerRequestQueue, XConfigurationControllerBroadcaster, XResourceFactoryManager {
+            interface XConfigurationController
+                extends
+                    XConfigurationControllerRequestQueue,
+                    XConfigurationControllerBroadcaster,
+                    XResourceFactoryManager
+            {
                 /**
                  * Return a copy of the current configuration.
                  *
@@ -30848,7 +31718,11 @@ declare namespace com.sun.star {
                  * @param sEventType The event type that the listener is interested in. The set of event types is not fixed and there can be no exhaustive list. The empty
                  * @param aUserData Arbitrary data that is passed to the listener when it is called for the specified event type. When one listener is registered for more
                  */
-                addConfigurationChangeListener(xListener: XConfigurationChangeListener, sEventType: string, aUserData: any): void;
+                addConfigurationChangeListener(
+                    xListener: XConfigurationChangeListener,
+                    sEventType: string,
+                    aUserData: any,
+                ): void;
 
                 /** With this method other objects can send events to all the registered listeners. */
                 notifyEvent(aEvent: ConfigurationChangeEvent): void;
@@ -31003,7 +31877,11 @@ declare namespace com.sun.star {
                  * @param aRectangle This rectangle will be converted into a larger one. This should be the center box or the inner bounding box of the border.
                  * @param eBorderType The part of the border to add to the given rectangle. Use INNER_BORDER to convert an inner bounding box into the center box or TOTAL_
                  */
-                addBorder(sPaneBorderStyleName: string, aRectangle: awt.Rectangle, eBorderType: BorderType): awt.Rectangle;
+                addBorder(
+                    sPaneBorderStyleName: string,
+                    aRectangle: awt.Rectangle,
+                    eBorderType: BorderType,
+                ): awt.Rectangle;
 
                 /**
                  * Return the offset of a call out anchor with respect to the outer border. This value is used when the call out is realized by a fixed bitmap in order
@@ -31019,7 +31897,13 @@ declare namespace com.sun.star {
                  * @param aRepaintArea The area in which the border has to be repainted. The clip rectangle.
                  * @param sTitle The pane title. Supply an empty string for panes without title. It is the responsibility of the caller to supply a title only for pane bor
                  */
-                paintBorder(sPaneBorderStyleName: string, xCanvas: rendering.XCanvas, aOuterBorderRectangle: awt.Rectangle, aRepaintArea: awt.Rectangle, sTitle: string): void;
+                paintBorder(
+                    sPaneBorderStyleName: string,
+                    xCanvas: rendering.XCanvas,
+                    aOuterBorderRectangle: awt.Rectangle,
+                    aRepaintArea: awt.Rectangle,
+                    sTitle: string,
+                ): void;
 
                 /**
                  * Paint the border around a pane where the border includes a call out that is anchored at the given point. Most arguments have the same meaning as in
@@ -31033,7 +31917,13 @@ declare namespace com.sun.star {
                  * @see paintBorder
                  */
                 paintBorderWithCallout(
-                    sPaneBorderStyleName: string, xCanvas: rendering.XCanvas, aOuterBorderRectangle: awt.Rectangle, aRepaintArea: awt.Rectangle, sTitle: string, aCalloutAnchor: awt.Point): void;
+                    sPaneBorderStyleName: string,
+                    xCanvas: rendering.XCanvas,
+                    aOuterBorderRectangle: awt.Rectangle,
+                    aRepaintArea: awt.Rectangle,
+                    sTitle: string,
+                    aCalloutAnchor: awt.Point,
+                ): void;
 
                 /**
                  * Shrink the given rectangle by the size of the specified part of the border. This method can be used to convert an outer bounding box into the center
@@ -31042,7 +31932,11 @@ declare namespace com.sun.star {
                  * @param aRectangle This rectangle will be converted into a smaller one that lies inside it. It should be the center box or the outer bounding box of the
                  * @param eBorderType The part of the border to remove from the given rectangle. Use OUTER_BORDER to convert an outer bounding box into the center box or T
                  */
-                removeBorder(sPaneBorderStyleName: string, aRectangle: awt.Rectangle, eBorderType: BorderType): awt.Rectangle;
+                removeBorder(
+                    sPaneBorderStyleName: string,
+                    aRectangle: awt.Rectangle,
+                    eBorderType: BorderType,
+                ): awt.Rectangle;
             }
 
             /** An optional interface that is implemented by resources that are relocatable to different anchors. */
@@ -31380,8 +32274,6 @@ declare namespace com.sun.star {
          * **parameter 3 **: allows to provide com::sun::star::document::MediaDescryptor to the storage so some parts can be used for initialization, it can be
          * for example {@link com.sun.star.task.XInteractionHandler} implementation.
          *
-         *
-         *
          * The parameters are optional, that means that sequence can be empty or contain only first parameter, or first and second one. In case no parameters are
          * provided the call works the same way as {@link com.sun.star.lang.XSingleServiceFactory.createInstance()} . In case only first parameter is provided,
          * the storage is opened in readonly mode.
@@ -31453,8 +32345,6 @@ declare namespace com.sun.star {
          * com.sun.star.task.XInteractionHandler} implementation, password for the storage and repair package flag. ;  Additionally the parameter might contain
          * property with the name "StorageFormat" that can take values from {@link com.sun.star.embed.StorageFormats} . If the property is not provided a storage
          * of package format is created.
-         *
-         *
          *
          * The parameters are optional, that means that sequence can be empty or contain only first parameter, or first and second one. In case no parameters are
          * provided the call works the same way as {@link com.sun.star.lang.XSingleServiceFactory.createInstance()} . In case only first parameter is provided,
@@ -31656,7 +32546,9 @@ declare namespace com.sun.star {
          *
          * In case a stream is open with read-write access only one instance of the stream can exist.
          */
-        interface StorageStream extends io.XStream, lang.XComponent, beans.XPropertySet, io.XSeekable, XEncryptionProtectedSource {
+        interface StorageStream
+            extends io.XStream, lang.XComponent, beans.XPropertySet, io.XSeekable, XEncryptionProtectedSource
+        {
             /** specifies if the stream should be compressed next time it is stored. */
             IsCompressed: boolean;
 
@@ -31820,7 +32712,10 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io problems during opening or creation
              * @throws com::sun::star::uno::Exception in case of other problems
              */
-            reload(aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            reload(
+                aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * lets the object or the link store itself.
@@ -31868,7 +32763,15 @@ declare namespace com.sun.star {
         }
 
         /** represents common functionality for embedded objects. */
-        interface XEmbeddedObject extends XVisualObject, XClassifiedObject, XComponentSupplier, XStateChangeBroadcaster, document.XEventBroadcaster, util.XCloseable {
+        interface XEmbeddedObject
+            extends
+                XVisualObject,
+                XClassifiedObject,
+                XComponentSupplier,
+                XStateChangeBroadcaster,
+                document.XEventBroadcaster,
+                util.XCloseable
+        {
             /**
              * changes the state of the object to the requested one.
              * @param nNewState specifies the new state, can take values from the constant set {@link com.sun.star.embed.EmbedStates}
@@ -31985,7 +32888,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XEmbeddedObjectCreator extends XEmbedObjectCreator, XEmbedObjectFactory, XLinkCreator, XLinkFactory { }
+        interface XEmbeddedObjectCreator extends XEmbedObjectCreator, XEmbedObjectFactory, XLinkCreator, XLinkFactory {}
 
         /**
          * allows to create and initialize a new embedded object from clipboard.
@@ -32007,7 +32910,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io problems during opening or creation
              * @throws com::sun::star::uno::Exception in case of other problems
              */
-            createInstanceInitFromClipboard(xStorage: XStorage, sEntryName: string, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): InsertedObjectInfo;
+            createInstanceInitFromClipboard(
+                xStorage: XStorage,
+                sEntryName: string,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): InsertedObjectInfo;
         }
 
         /**
@@ -32031,7 +32938,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::uno::Exception in case of other problems
              */
             createInstanceInitFromEntry(
-                xStorage: XStorage, sEntryName: string, aMediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): uno.XInterface;
+                xStorage: XStorage,
+                sEntryName: string,
+                aMediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): uno.XInterface;
 
             /**
              * creates a new object and initializes it based on {@link com.sun.star.document.MediaDescriptor} .
@@ -32046,7 +32957,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::uno::Exception in case of other problems
              */
             createInstanceInitFromMediaDescriptor(
-                xStorage: XStorage, sEntryName: string, aMediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): uno.XInterface;
+                xStorage: XStorage,
+                sEntryName: string,
+                aMediaDescriptor: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): uno.XInterface;
 
             /**
              * creates a new object and initializes it as a new one.
@@ -32062,7 +32977,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::uno::Exception in case of other problems
              */
             createInstanceInitNew(
-                aClassID: LibreOffice.SeqEquiv<number>, sClassName: string, xStorage: XStorage, sEntryName: string, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): uno.XInterface;
+                aClassID: LibreOffice.SeqEquiv<number>,
+                sClassName: string,
+                xStorage: XStorage,
+                sEntryName: string,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): uno.XInterface;
         }
 
         /**
@@ -32090,8 +33010,14 @@ declare namespace com.sun.star {
              * @throws com::sun::star::uno::Exception in case of other problems
              */
             createInstanceUserInit(
-                aClassID: LibreOffice.SeqEquiv<number>, sClassName: string, xStorage: XStorage, sEntName: string, nEntryConnectionMode: number,
-                aArgs: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): uno.XInterface;
+                aClassID: LibreOffice.SeqEquiv<number>,
+                sClassName: string,
+                xStorage: XStorage,
+                sEntName: string,
+                nEntryConnectionMode: number,
+                aArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): uno.XInterface;
         }
 
         /**
@@ -32149,8 +33075,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::uno::Exception in case of other problems
              */
             setPersistentEntry(
-                xStorage: XStorage, sEntName: string, nEntryConnectionMode: number, aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
-                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+                xStorage: XStorage,
+                sEntName: string,
+                nEntryConnectionMode: number,
+                aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * lets the object store itself to an entry in destination storage and prepare to use the new entry for own persistence.
@@ -32167,7 +33097,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io problems during storing
              * @throws com::sun::star::uno::Exception in case of other problems
              */
-            storeAsEntry(xStorage: XStorage, sEntName: string, aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            storeAsEntry(
+                xStorage: XStorage,
+                sEntName: string,
+                aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * lets the object store itself to an entry in destination storage, the own persistence entry is not changed.
@@ -32180,7 +33115,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io problems during storing
              * @throws com::sun::star::uno::Exception in case of other problems
              */
-            storeToEntry(xStorage: XStorage, sEntName: string, aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            storeToEntry(
+                xStorage: XStorage,
+                sEntName: string,
+                aMediaArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
         }
 
         interface XEmbedPersist2 extends XEmbedPersist {
@@ -32258,8 +33198,16 @@ declare namespace com.sun.star {
         }
 
         /** This interface allows access to an extended storage stream that might be transacted. */
-        interface XExtendedStorageStream extends io.XStream, lang.XComponent, io.XSeekable, XEncryptionProtectedSource, beans.XPropertySet, XTransactedObject,
-            XTransactionBroadcaster { }
+        interface XExtendedStorageStream
+            extends
+                io.XStream,
+                lang.XComponent,
+                io.XSeekable,
+                XEncryptionProtectedSource,
+                beans.XPropertySet,
+                XTransactedObject,
+                XTransactionBroadcaster
+        {}
 
         /**
          * specifies the operations for a hatch window.
@@ -32337,7 +33285,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io errors during stream opening
              * @throws com::sun::star::embed::StorageWrappedTargetException wraps other exceptions
              */
-            openEncryptedStreamElementByHierarchicalName(sStreamName: string, nOpenMode: number, sPassword: string): XExtendedStorageStream;
+            openEncryptedStreamElementByHierarchicalName(
+                sStreamName: string,
+                nOpenMode: number,
+                sPassword: string,
+            ): XExtendedStorageStream;
 
             /**
              * allows to get access to a child stream of the storage, using hierarchical path.
@@ -32383,7 +33335,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io errors during stream opening
              * @throws com::sun::star::embed::StorageWrappedTargetException wraps other exceptions
              */
-            openEncryptedStreamByHierarchicalName(sStreamName: string, nOpenMode: number, aEncryptionData: LibreOffice.SeqEquiv<beans.NamedValue>): XExtendedStorageStream;
+            openEncryptedStreamByHierarchicalName(
+                sStreamName: string,
+                nOpenMode: number,
+                aEncryptionData: LibreOffice.SeqEquiv<beans.NamedValue>,
+            ): XExtendedStorageStream;
         }
 
         /** represents common functionality for inplace clients. */
@@ -32561,7 +33517,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io problems during opening or creation
              * @throws com::sun::star::uno::Exception in case of other problems
              */
-            createInstanceByDialog(xStorage: XStorage, sEntName: string, lObjArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): InsertedObjectInfo;
+            createInstanceByDialog(
+                xStorage: XStorage,
+                sEntName: string,
+                lObjArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): InsertedObjectInfo;
         }
 
         /** specifies an additional implementation for linked embedded object support. */
@@ -32628,7 +33588,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io problems during opening or creation
              * @throws com::sun::star::uno::Exception in case of other problems
              */
-            createInstanceLink(xStorage: XStorage, sEntryName: string, aArgs: LibreOffice.SeqEquiv<beans.PropertyValue>, aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): uno.XInterface;
+            createInstanceLink(
+                xStorage: XStorage,
+                sEntryName: string,
+                aArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): uno.XInterface;
         }
 
         /** allows to create and initialize a new link of specified type. */
@@ -32648,8 +33613,13 @@ declare namespace com.sun.star {
              * @throws com::sun::star::uno::Exception in case of other problems
              */
             createInstanceLinkUserInit(
-                aClassID: LibreOffice.SeqEquiv<number>, ClassName: string, xStorage: XStorage, sEntryName: string, aArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
-                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>): uno.XInterface;
+                aClassID: LibreOffice.SeqEquiv<number>,
+                ClassName: string,
+                xStorage: XStorage,
+                sEntryName: string,
+                aArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aObjectArgs: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): uno.XInterface;
         }
 
         /**
@@ -32657,7 +33627,9 @@ declare namespace com.sun.star {
          *
          * This is a simple container allowing the access to OLE storages. The subcomponents are either OLE storages themselves or streams.
          */
-        interface XOLESimpleStorage extends container.XNameContainer, lang.XComponent, XTransactedObject, XClassifiedObject { }
+        interface XOLESimpleStorage
+            extends container.XNameContainer, lang.XComponent, XTransactedObject, XClassifiedObject
+        {}
 
         /**
          * This is a temporary interface that is introduced to temporarily optimize the document storing process. PLEASE DO NOT USE IT, it might change in any
@@ -32696,7 +33668,11 @@ declare namespace com.sun.star {
             insertRawNonEncrStreamElementDirect(sStreamName: string, xInStream: io.XInputStream): void;
 
             /** allows to insert a stream to the storage directly. The stream must stay alive till the storage is committed. */
-            insertStreamElementDirect(sStreamName: string, xInStream: io.XInputStream, aProperties: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            insertStreamElementDirect(
+                sStreamName: string,
+                xInStream: io.XInputStream,
+                aProperties: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * allows to switch storage persistence to the provided stream. The stream will be filled by the storage. If an empty reference is provided, the storage
@@ -32814,7 +33790,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case there is a problem reading/writing the relations info
              * @throws com::sun::star::container::ElementExistException in case an element with the specified "ID" tag exists already, and no replacement is allowed
              */
-            insertRelationshipByID(sID: string, aEntry: LibreOffice.SeqEquiv<beans.StringPair>, bReplace: boolean): void;
+            insertRelationshipByID(
+                sID: string,
+                aEntry: LibreOffice.SeqEquiv<beans.StringPair>,
+                bReplace: boolean,
+            ): void;
 
             /**
              * allows to insert a set of entries
@@ -32823,7 +33803,10 @@ declare namespace com.sun.star {
              * @throws com::sun::star::container::ElementExistException in case an element with the provided "ID" tag exists already, and no replacement is allowed
              * @throws com::sun::star::io::IOException in case there is a problem reading/writing the relations info
              */
-            insertRelationships(aEntries: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<beans.StringPair>>, bReplace: boolean): void;
+            insertRelationships(
+                aEntries: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<beans.StringPair>>,
+                bReplace: boolean,
+            ): void;
 
             /**
              * allows to remove an entry.
@@ -33082,7 +34065,10 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io errors during stream opening
              * @throws com::sun::star::embed::StorageWrappedTargetException wraps other exceptions
              */
-            cloneEncryptedStream(sStreamName: string, aEncryptionData: LibreOffice.SeqEquiv<beans.NamedValue>): io.XStream;
+            cloneEncryptedStream(
+                sStreamName: string,
+                aEncryptionData: LibreOffice.SeqEquiv<beans.NamedValue>,
+            ): io.XStream;
 
             /**
              * allows to get access to a child encrypted stream with EncryptionData.
@@ -33100,7 +34086,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException in case of io errors during stream opening
              * @throws com::sun::star::embed::StorageWrappedTargetException wraps other exceptions
              */
-            openEncryptedStream(sStreamName: string, nOpenMode: number, aEncryptionData: LibreOffice.SeqEquiv<beans.NamedValue>): io.XStream;
+            openEncryptedStream(
+                sStreamName: string,
+                nOpenMode: number,
+                aEncryptionData: LibreOffice.SeqEquiv<beans.NamedValue>,
+            ): io.XStream;
         }
 
         /** This interface represents main storage functionality. */
@@ -33680,7 +34670,15 @@ declare namespace com.sun.star {
          * @see FormControlModel
          * @see com.sun.star.form.component.Form
          */
-        interface FormComponent extends XFormComponent, lang.XComponent, container.XNamed, beans.XPropertySet, io.XPersistObject, beans.XPropertyBag {
+        interface FormComponent
+            extends
+                XFormComponent,
+                lang.XComponent,
+                container.XNamed,
+                beans.XPropertySet,
+                io.XPersistObject,
+                beans.XPropertyBag
+        {
             /**
              * the name of the component.
              *
@@ -33696,21 +34694,42 @@ declare namespace com.sun.star {
          * so the collection must be able to handle duplicate entry names.
          * @see FormComponent
          */
-        interface FormComponents extends container.XContainer, container.XNameContainer, container.XIndexContainer, container.XEnumerationAccess, script.XEventAttacherManager { }
+        interface FormComponents
+            extends
+                container.XContainer,
+                container.XNameContainer,
+                container.XIndexContainer,
+                container.XEnumerationAccess,
+                script.XEventAttacherManager
+        {}
 
         /**
          * is superseded by {@link com.sun.star.form.runtime.FormController} .
          * @deprecated Deprecated
          */
-        interface FormController extends FormControllerDispatcher, XFormController, awt.XTabController, container.XChild, lang.XComponent, container.XEnumerationAccess,
-            util.XModifyBroadcaster, XConfirmDeleteBroadcaster, sdb.XSQLErrorBroadcaster, sdb.XRowSetApproveBroadcaster, XDatabaseParameterBroadcaster { }
+        interface FormController
+            extends
+                FormControllerDispatcher,
+                XFormController,
+                awt.XTabController,
+                container.XChild,
+                lang.XComponent,
+                container.XEnumerationAccess,
+                util.XModifyBroadcaster,
+                XConfirmDeleteBroadcaster,
+                sdb.XSQLErrorBroadcaster,
+                sdb.XRowSetApproveBroadcaster,
+                XDatabaseParameterBroadcaster
+        {}
 
         /**
          * specifies a control model within a form.
          *
          * Note that the model-view-paradigm is used for form controls, too.
          */
-        interface FormControlModel extends awt.UnoControlModel, FormComponent, beans.XFastPropertySet, beans.XPropertyState {
+        interface FormControlModel
+            extends awt.UnoControlModel, FormComponent, beans.XFastPropertySet, beans.XPropertyState
+        {
             /**
              * specifies the ID for classification of the component.
              * @see FormComponentType
@@ -33753,7 +34772,9 @@ declare namespace com.sun.star {
          * @deprecated Deprecated  Note that nowadays, this service is only a legacy wrapper using the {@link com.sun.star.inspection.ObjectInspector} and the {@link co
          * @see com.sun.star.frame.XController
          */
-        interface PropertyBrowserController extends frame.XController, beans.XPropertySet, beans.XFastPropertySet, beans.XMultiPropertySet {
+        interface PropertyBrowserController
+            extends frame.XController, beans.XPropertySet, beans.XFastPropertySet, beans.XMultiPropertySet
+        {
             /**
              * controls the actually visible page.
              *
@@ -33776,7 +34797,11 @@ declare namespace com.sun.star {
 
         /** @since LibreOffice 4.2 */
         interface TabOrderDialog extends ui.dialogs.XExecutableDialog {
-            createWithModel(TabbingModel: awt.XTabControllerModel, ControlContext: awt.XControlContainer, ParentWindow: awt.XWindow): void;
+            createWithModel(
+                TabbingModel: awt.XTabControllerModel,
+                ControlContext: awt.XControlContainer,
+                ParentWindow: awt.XWindow,
+            ): void;
         }
 
         /**
@@ -34065,8 +35090,17 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XForms extends container.XContainer, container.XNameContainer, container.XIndexContainer, container.XEnumerationAccess, script.XEventAttacherManager,
-            container.XChild, util.XCloneable, lang.XComponent { }
+        interface XForms
+            extends
+                container.XContainer,
+                container.XNameContainer,
+                container.XIndexContainer,
+                container.XEnumerationAccess,
+                script.XEventAttacherManager,
+                container.XChild,
+                util.XCloneable,
+                lang.XComponent
+        {}
 
         /** provides the access to a collection of forms. */
         interface XFormsSupplier extends uno.XInterface {
@@ -34531,7 +35565,9 @@ declare namespace com.sun.star {
 
             /** specifies the model of a form control which supports binding to an external value supplier. */
             interface BindableControlModel extends FormControlModel, XBindableValue {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34571,7 +35607,9 @@ declare namespace com.sun.star {
              * XValueBinding.getValue()} ) at the control model.
              */
             interface BindableDataAwareControlModel extends DataAwareControlModel, BindableControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34600,7 +35638,9 @@ declare namespace com.sun.star {
                  * member {@link SecondaryRefValue} , clients of the check box can also associate a value with the **not checked** state of the control.
                  */
                 SecondaryRefValue: string;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34613,7 +35653,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlComboBoxModel.Text
              */
             interface BindableDatabaseComboBox extends component.DatabaseComboBox, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34626,7 +35668,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlDateFieldModel.Date
              */
             interface BindableDatabaseDateField extends component.DatabaseDateField, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34637,8 +35681,12 @@ declare namespace com.sun.star {
              * exchanging values of type **double** .
              * @see com.sun.star.form.binding.XValueBinding.supportsType
              */
-            interface BindableDatabaseFormattedField extends component.DatabaseFormattedField, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+            interface BindableDatabaseFormattedField
+                extends component.DatabaseFormattedField, BindableDataAwareControlModel
+            {
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34658,7 +35706,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.form.binding.XValueBinding.supportsType
              */
             interface BindableDatabaseListBox extends component.DatabaseListBox, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34669,8 +35719,12 @@ declare namespace com.sun.star {
              * exchanging values of type **double** .
              * @see com.sun.star.form.binding.XValueBinding.supportsType
              */
-            interface BindableDatabaseNumericField extends component.DatabaseNumericField, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+            interface BindableDatabaseNumericField
+                extends component.DatabaseNumericField, BindableDataAwareControlModel
+            {
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34697,7 +35751,9 @@ declare namespace com.sun.star {
                  * With the member {@link SecondaryRefValue} , clients of the radio button can also associate a value with the **not selected** state of the control.
                  */
                 SecondaryRefValue: string;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34710,7 +35766,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlEditModel.Text
              */
             interface BindableDatabaseTextField extends component.DatabaseTextField, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34723,7 +35781,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlTimeFieldModel.Time
              */
             interface BindableDatabaseTimeField extends component.DatabaseTimeField, BindableDataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -34751,7 +35811,7 @@ declare namespace com.sun.star {
             }
 
             /** defines a component which provides a list of string entries */
-            interface ListEntrySource extends XListEntrySource, lang.XComponent { }
+            interface ListEntrySource extends XListEntrySource, lang.XComponent {}
 
             /**
              * defines a component which allows access to a single value
@@ -34958,7 +36018,9 @@ declare namespace com.sun.star {
                  * When submitting a {@link HTMLForm} which contains a check box, which is checked, the RefValue is used for submission.
                  */
                 RefValue: string;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** specifies a component which allows the input of text or selection of text from a list of text values. */
@@ -34973,14 +36035,18 @@ declare namespace com.sun.star {
                 DefaultText: string;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
              * specifies the control model for a clickable button which is part of a form component hierarchy.
              * @see ImageButton
              */
-            interface CommandButton extends awt.UnoControlButtonModel, FormControlModel, XImageProducerSupplier, XReset {
+            interface CommandButton
+                extends awt.UnoControlButtonModel, FormControlModel, XImageProducerSupplier, XReset
+            {
                 /** describes the action to be executed by the button when pressed. */
                 ButtonType: FormButtonType;
 
@@ -34996,7 +36062,9 @@ declare namespace com.sun.star {
                 DefaultState: boolean;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
 
                 /**
                  * describes the frame, where to open the document specified by the TargetURL.
@@ -35026,7 +36094,9 @@ declare namespace com.sun.star {
                 DefaultValue: number;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35036,7 +36106,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlCheckBoxModel.TriState
              */
             interface DatabaseCheckBox extends CheckBox, DataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35070,17 +36142,23 @@ declare namespace com.sun.star {
                  * usually ignore it and leave the list empty.
                  */
                 ListSourceType: ListSourceType;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a currency field which is data-aware, and can be bound to a database field. */
             interface DatabaseCurrencyField extends CurrencyField, DataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a date field which is data-aware, and can be bound to a database field. */
             interface DatabaseDateField extends DateField, DataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a formatted field model which is data-aware, and can be bound to a database field. */
@@ -35094,7 +36172,9 @@ declare namespace com.sun.star {
                  * If the property is set to `TRUE` , and an empty text is to be committed, this is converted into `NULL` , else it is written as empty string.
                  */
                 ConvertEmptyToNull: boolean;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35128,13 +36208,17 @@ declare namespace com.sun.star {
              * database record counts as modified. If the cursor of the form is moved further, the modified record is saved, means the content of the image pointed
              * to by {@link com.sun.star.awt.UnoControlImageControlModel.ImageURL} is saved into the column.
              */
-            interface DatabaseImageControl extends awt.UnoControlImageControlModel, DataAwareControlModel, XImageProducerSupplier {
+            interface DatabaseImageControl
+                extends awt.UnoControlImageControlModel, DataAwareControlModel, XImageProducerSupplier
+            {
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
 
                 /** indicates if it is possible to change the image being displayed. */
                 ReadOnly: boolean;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35169,8 +36253,6 @@ declare namespace com.sun.star {
                  *
                  * **0 or greater **: The column value of the result set at the position (0-indexed) is stored in the current database field. In particular, for value 0,
                  * the selected (displayed) list box string is stored.
-                 *
-                 *
                  *
                  * The bound column property is only used if a list source is defined and the list source matches with the types
                  * com::sun::star::form::ListSourceType::TABLE, com::sun::star::form::ListSourceType::QUERY, com::sun::star::form::ListSourceType::SQL or
@@ -35209,12 +36291,16 @@ declare namespace com.sun.star {
 
                 /** The selected values. */
                 SelectedValues: SafeArray;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a numeric field which is data-aware, and can be bound to a database field. */
             interface DatabaseNumericField extends NumericField, DataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a data-aware control model for entering text which matches a specific pattern. */
@@ -35228,12 +36314,16 @@ declare namespace com.sun.star {
                  * If the property is set to `TRUE` , and an empty text is to be committed, this is converted into `NULL` , else it is written as empty string.
                  */
                 ConvertEmptyToNull: boolean;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a radio button which is data-aware, and can be bound to a database field. */
             interface DatabaseRadioButton extends RadioButton, DataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a text field which is data-aware, and can be bound to a database field. */
@@ -35247,12 +36337,16 @@ declare namespace com.sun.star {
                  * If the property is set to `TRUE` , and an empty text is to be committed, this is converted into `NULL` , else it is written as empty string.
                  */
                 ConvertEmptyToNull: boolean;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies a data-aware field for inputting a time value. */
             interface DatabaseTimeField extends TimeField, DataAwareControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35262,7 +36356,9 @@ declare namespace com.sun.star {
              * A database form is a special kind of enhanced database row set which provides all information for displaying the data and has more possibilities for
              * configuring the data manipulation.
              */
-            interface DataForm extends sdb.RowSet, Form, XReset, XLoadable, sdb.XCompletedExecution, XDatabaseParameterBroadcaster {
+            interface DataForm
+                extends sdb.RowSet, Form, XReset, XLoadable, sdb.XCompletedExecution, XDatabaseParameterBroadcaster
+            {
                 /**
                  * determines if deletions of records of the form are allowed.
                  *
@@ -35334,7 +36430,9 @@ declare namespace com.sun.star {
                 DefaultDate: number;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** This service specifies the control model of an edit field for a file name. */
@@ -35349,7 +36447,9 @@ declare namespace com.sun.star {
                 DefaultText: string;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35361,7 +36461,9 @@ declare namespace com.sun.star {
             interface FixedText extends awt.UnoControlFixedTextModel, FormControlModel {
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35386,7 +36488,9 @@ declare namespace com.sun.star {
             interface FormattedField extends awt.UnoControlFormattedFieldModel, FormControlModel, XReset {
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35402,7 +36506,9 @@ declare namespace com.sun.star {
              * "single-value" controls, but they are not described as own services. Instead, they need to be created using the {@link
              * com.sun.star.form.XGridColumnFactory} interface.
              */
-            interface GridControl extends FormControlModel, FormComponents, XGridColumnFactory, view.XSelectionSupplier, XReset {
+            interface GridControl
+                extends FormControlModel, FormComponents, XGridColumnFactory, view.XSelectionSupplier, XReset
+            {
                 /**
                  * returns the border style of the control.
                  *
@@ -35433,7 +36539,9 @@ declare namespace com.sun.star {
                  * @see GridControl.FontDescriptor
                  */
                 RowHeight: number;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
 
                 /** determines whether the control can be reached by the tabulator key. */
                 Tabstop: boolean;
@@ -35446,7 +36554,9 @@ declare namespace com.sun.star {
             interface GroupBox extends awt.UnoControlGroupBoxModel, FormControlModel {
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35500,7 +36610,9 @@ declare namespace com.sun.star {
                 ButtonType: FormButtonType;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
 
                 /**
                  * describes the frame, where to open the document specified by the TargetURL.
@@ -35535,7 +36647,9 @@ declare namespace com.sun.star {
 
                 /** contains the values associated to the strings to be displayed (which are specified by {@link com.sun.star.awt.UnoControlListBoxModel.StringItemList} ) */
                 ListSource: SafeArray<string>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35586,7 +36700,9 @@ declare namespace com.sun.star {
                  * such a button. ;  The delay between two such triggers (in milliseconds) is specified with this property.
                  */
                 RepeatDelay: number;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
 
                 /** determines whether the control should provide functionality for filtering and sorting the parent form */
                 ShowFilterSort: boolean;
@@ -35623,7 +36739,9 @@ declare namespace com.sun.star {
                 DefaultValue: number;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** specifies a component which allows the input of text which matches a specific pattern. */
@@ -35638,7 +36756,9 @@ declare namespace com.sun.star {
                 DefaultText: string;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35670,7 +36790,9 @@ declare namespace com.sun.star {
                  * used for submission.
                  */
                 RefValue: string;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
 
                 /**
                  * specifies a value which is to be associated with the control when it's **not** selected.
@@ -35704,7 +36826,9 @@ declare namespace com.sun.star {
                  * com.sun.star.awt.UnoControlEditModel.Align}
                  */
                 RichText: boolean;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** specifies the model of a scroll bar control. */
@@ -35719,7 +36843,9 @@ declare namespace com.sun.star {
                 DefaultScrollValue: number;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** specifies the model of a scroll bar control. */
@@ -35734,7 +36860,9 @@ declare namespace com.sun.star {
                 DefaultSpinValue: number;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -35744,7 +36872,9 @@ declare namespace com.sun.star {
             interface SubmitButton extends FormControlModel, submission.XSubmissionSupplier {
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** specifies a component which allows the input of text, either single- or multi-line. */
@@ -35759,7 +36889,9 @@ declare namespace com.sun.star {
                 DefaultText: string;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** specifies the control model for a field which can be used to input time values. */
@@ -35774,7 +36906,9 @@ declare namespace com.sun.star {
                 DefaultTime: number;
                 getPropertyValues(aPropertyNames: LibreOffice.SeqEquiv<string>): SafeArray;
                 getPropertyValues(): SafeArray<beans.PropertyValue>;
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
         }
 
@@ -35817,7 +36951,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface CheckBox extends awt.UnoControlCheckBox, XBoundControl { }
+            interface CheckBox extends awt.UnoControlCheckBox, XBoundControl {}
 
             /**
              * describes a combo box control.
@@ -35826,7 +36960,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface ComboBox extends awt.UnoControlComboBox, XBoundControl { }
+            interface ComboBox extends awt.UnoControlComboBox, XBoundControl {}
 
             /**
              * describes a button control.
@@ -35838,7 +36972,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlModel
              * @see com.sun.star.form.component.CommandButton.ButtonType
              */
-            interface CommandButton extends awt.UnoControlButton, XApproveActionBroadcaster { }
+            interface CommandButton extends awt.UnoControlButton, XApproveActionBroadcaster {}
 
             /**
              * describes a control which can be used for inputting currency values, and which can (but not necessarily has to) be bound to a database field.
@@ -35847,7 +36981,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface CurrencyField extends awt.UnoControlCurrencyField, XBoundControl { }
+            interface CurrencyField extends awt.UnoControlCurrencyField, XBoundControl {}
 
             /**
              * describes a control which can be used for inputting date values, and which can (but not necessarily has to) be bound to a database field.
@@ -35856,7 +36990,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface DateField extends awt.UnoControlDateField, XBoundControl { }
+            interface DateField extends awt.UnoControlDateField, XBoundControl {}
 
             /**
              * describes a check box control which can (but not necessarily has to) be bound to a database field.
@@ -35866,7 +37000,11 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlModel
              */
             interface FilterControl extends awt.XControl {
-                createWithFormat(MessageParent: awt.XWindow, NumberFormatter: util.XNumberFormatter, ControlModel: beans.XPropertySet): void;
+                createWithFormat(
+                    MessageParent: awt.XWindow,
+                    NumberFormatter: util.XNumberFormatter,
+                    ControlModel: beans.XPropertySet,
+                ): void;
             }
 
             /**
@@ -35881,7 +37019,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlModel
              * @see com.sun.star.util.XNumberFormatsSupplier
              */
-            interface FormattedField extends awt.UnoControlFormattedField, XBoundControl { }
+            interface FormattedField extends awt.UnoControlFormattedField, XBoundControl {}
 
             /**
              * describes a table-like control for displaying data.
@@ -35890,8 +37028,20 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface GridControl extends awt.UnoControl, XBoundComponent, XGrid, XGridControl, util.XModifyBroadcaster, XGridFieldDataSupplier, container.XIndexAccess,
-                container.XEnumerationAccess, util.XModeSelector, view.XSelectionSupplier, frame.XDispatchProviderInterception { }
+            interface GridControl
+                extends
+                    awt.UnoControl,
+                    XBoundComponent,
+                    XGrid,
+                    XGridControl,
+                    util.XModifyBroadcaster,
+                    XGridFieldDataSupplier,
+                    container.XIndexAccess,
+                    container.XEnumerationAccess,
+                    util.XModeSelector,
+                    view.XSelectionSupplier,
+                    frame.XDispatchProviderInterception
+            {}
 
             /**
              * describes a control which can be used for displaying images on a control acting like a button.
@@ -35903,7 +37053,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControlModel
              * @see com.sun.star.form.component.ImageButton.ButtonType
              */
-            interface ImageButton extends awt.UnoControlImageControl, XApproveActionBroadcaster { }
+            interface ImageButton extends awt.UnoControlImageControl, XApproveActionBroadcaster {}
 
             /**
              * describes a control used for displaying images stored in a database.
@@ -35915,10 +37065,10 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface ImageControl extends awt.UnoControlImageControl, XBoundControl { }
+            interface ImageControl extends awt.UnoControlImageControl, XBoundControl {}
 
             /** is an extended grid control, which allows the user to customize some of its user interface's aspects. */
-            interface InteractionGridControl extends GridControl, frame.XDispatch { }
+            interface InteractionGridControl extends GridControl, frame.XDispatch {}
 
             /**
              * describes a list box control which can (but not necessarily has to) be bound to a database field.
@@ -35927,7 +37077,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface ListBox extends awt.UnoControlListBox, XBoundControl, XChangeBroadcaster { }
+            interface ListBox extends awt.UnoControlListBox, XBoundControl, XChangeBroadcaster {}
 
             /**
              * describes a control for inputting numeric values and which can (but not necessarily has to) be bound to a database field.
@@ -35936,7 +37086,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface NumericField extends awt.UnoControlNumericField, XBoundControl { }
+            interface NumericField extends awt.UnoControlNumericField, XBoundControl {}
 
             /**
              * describes a control for inputting text complying to a given pattern, and which can (but not necessarily has to) be bound to a database field.
@@ -35945,7 +37095,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface PatternField extends awt.UnoControlPatternField, XBoundControl { }
+            interface PatternField extends awt.UnoControlPatternField, XBoundControl {}
 
             /**
              * describes a radio button control which can (but not necessarily has to) be bound to a database field.
@@ -35954,7 +37104,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface RadioButton extends awt.UnoControlRadioButton, XBoundControl { }
+            interface RadioButton extends awt.UnoControlRadioButton, XBoundControl {}
 
             /**
              * describes a control for entering arbitrary text which can (but not necessarily has to) be bound to a database field.
@@ -35966,7 +37116,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface TextField extends awt.UnoControlEdit, XBoundControl, XChangeBroadcaster { }
+            interface TextField extends awt.UnoControlEdit, XBoundControl, XChangeBroadcaster {}
 
             /**
              * describes a control for inputting time values which can (but not necessarily has to) be bound to a database field.
@@ -35975,7 +37125,7 @@ declare namespace com.sun.star {
              * @see com.sun.star.awt.UnoControl
              * @see com.sun.star.awt.UnoControlModel
              */
-            interface TimeField extends awt.UnoControlTimeField, XBoundControl { }
+            interface TimeField extends awt.UnoControlTimeField, XBoundControl {}
         }
 
         namespace FormComponentType {
@@ -36256,8 +37406,6 @@ declare namespace com.sun.star {
              * **n** equals the number of filter controls which the filter controller is responsible for. This number doesn't change during one session of the form
              * based filter. On the other hand, **m** , the number of disjunctive terms, is dynamic.
              *
-             *
-             *
              * With the above, there are potentially **m * n****predicate expressions** (though usually only a fraction of those will actually exist). Since in a
              * form based filter, there are only **n** filter controls, and each filter control displays exactly one **predicate expression** , this means that only
              * a part of the complete filter can be displayed, in particular, only one **disjunctive term** can be displayed at a time. Thus, the filter controller
@@ -36440,9 +37588,21 @@ declare namespace com.sun.star {
              * @see com.sun.star.sdb.DataSource.Settings
              * @since OOo 3.3
              */
-            interface XFormController extends awt.XTabController, container.XChild, container.XIndexAccess, container.XEnumerationAccess, lang.XComponent,
-                util.XModifyBroadcaster, XConfirmDeleteBroadcaster, sdb.XSQLErrorBroadcaster, sdb.XRowSetApproveBroadcaster, XDatabaseParameterBroadcaster2,
-                util.XModeSelector, XFilterController {
+            interface XFormController
+                extends
+                    awt.XTabController,
+                    container.XChild,
+                    container.XIndexAccess,
+                    container.XEnumerationAccess,
+                    lang.XComponent,
+                    util.XModifyBroadcaster,
+                    XConfirmDeleteBroadcaster,
+                    sdb.XSQLErrorBroadcaster,
+                    sdb.XRowSetApproveBroadcaster,
+                    XDatabaseParameterBroadcaster2,
+                    util.XModeSelector,
+                    XFilterController
+            {
                 /** adds the specified listener to receive notifications whenever the activation state of the controller changes. */
                 addActivateListener(Listener: XFormControllerListener): void;
 
@@ -36698,7 +37858,9 @@ declare namespace com.sun.star {
              * The {@link ValidatableBindableControlModel} services describes the interaction of these concepts for control models which support both of them.
              */
             interface ValidatableBindableControlModel extends ValidatableControlModel, binding.BindableControlModel {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /**
@@ -36707,8 +37869,12 @@ declare namespace com.sun.star {
              * Validatable control models support setting a validator with dynamic validity constraints, and broadcasting changes in their value as well as the
              * validity of their value.
              */
-            interface ValidatableControlModel extends FormControlModel, XValidatableFormComponent, XValidityConstraintListener {
-                setPropertyValues(aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>): void;
+            interface ValidatableControlModel
+                extends FormControlModel, XValidatableFormComponent, XValidityConstraintListener
+            {
+                setPropertyValues(
+                    aProps: LibreOffice.SeqEquiv<beans.PropertyValue> | LibreOffice.SeqEquiv<string>,
+                ): void;
             }
 
             /** is the listener interface to be notified of changes of a {@link XValidatableFormComponent} */
@@ -36865,15 +38031,26 @@ declare namespace com.sun.star {
          * The accessible view of a formula documents command text.
          * @since OOo 1.1.2
          */
-        interface AccessibleFormulaText extends accessibility.XAccessible, accessibility.XAccessibleComponent, accessibility.XAccessibleContext,
-            accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleFormulaText
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a formula documents visual representation.
          * @since OOo 1.1.2
          */
-        interface AccessibleFormulaView extends accessibility.XAccessible, accessibility.XAccessibleComponent, accessibility.XAccessibleContext,
-            accessibility.XAccessibleText, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleFormulaView
+            extends
+                accessibility.XAccessible,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /** The formula properties provide access to the properties of a formula in a formula generator */
         interface FormulaProperties {
@@ -37572,8 +38749,15 @@ declare namespace com.sun.star {
          * full featured components need a {@link XModel} interface too. ;  (see service {@link com.sun.star.document.OfficeDocument} for further information)
          * @see com.sun.star.document.OfficeDocument
          */
-        interface Controller extends XController, XDispatchProvider, ui.XContextMenuInterception, awt.XUserInputInterception, view.XSelectionSupplier,
-            datatransfer.XTransferableSupplier { }
+        interface Controller
+            extends
+                XController,
+                XDispatchProvider,
+                ui.XContextMenuInterception,
+                awt.XUserInputInterception,
+                view.XSelectionSupplier,
+                datatransfer.XTransferableSupplier
+        {}
 
         /**
          * use the {@link Frame} service instead of this
@@ -37657,7 +38841,7 @@ declare namespace com.sun.star {
          * @see XDispatch
          * @see XControlNotificationListener
          */
-        interface DispatchProvider extends XDispatchProvider, XDispatchProviderInterception { }
+        interface DispatchProvider extends XDispatchProvider, XDispatchProviderInterception {}
 
         /**
          * contains the result of the dispatch action, if State is set to SUCCESS
@@ -37783,7 +38967,7 @@ declare namespace com.sun.star {
          * loaded are at least {@link Controller} . Instead of {@link SynchronousFrameLoader} this one use asynchronous processes to load the component.
          * @see SynchronousFrameLoader
          */
-        interface FrameLoader extends XFrameLoader, lang.XInitialization, container.XNamed { }
+        interface FrameLoader extends XFrameLoader, lang.XInitialization, container.XNamed {}
 
         /**
          * provides access to a pop-up menu controller.
@@ -37793,7 +38977,9 @@ declare namespace com.sun.star {
          * list gets changes consistently during a work session.
          * @since OOo 2.0
          */
-        interface PopupMenuController extends XPopupMenuController, lang.XInitialization, XStatusListener, XDispatchProvider, lang.XComponent { }
+        interface PopupMenuController
+            extends XPopupMenuController, lang.XInitialization, XStatusListener, XDispatchProvider, lang.XComponent
+        {}
 
         /**
          * special dispatch provider registered for URL protocols
@@ -37803,7 +38989,7 @@ declare namespace com.sun.star {
          * Supported URLs must match follow format: `protocol scheme:protocol specific part` If a handler provides optional arguments ("?") or jump marks ("#")
          * depends from its definition and implementation. The generic dispatch provider will use registered URL pattern to detect right handler.
          */
-        interface ProtocolHandler extends XDispatchProvider, lang.XInitialization { }
+        interface ProtocolHandler extends XDispatchProvider, lang.XInitialization {}
 
         /**
          * This was created from its sole place of use, so it might be incomplete.
@@ -37825,7 +39011,7 @@ declare namespace com.sun.star {
          * loaded are at least {@link Controller} . Instead of service {@link FrameLoader} this one use synchronous processes to load the component.
          * @see FrameLoader
          */
-        interface SynchronousFrameLoader extends XSynchronousFrameLoader, lang.XInitialization, container.XNamed { }
+        interface SynchronousFrameLoader extends XSynchronousFrameLoader, lang.XInitialization, container.XNamed {}
 
         /**
          * represents a top level frame in the frame hierarchy with the desktop as root
@@ -37836,10 +39022,10 @@ declare namespace com.sun.star {
          * @see Frame
          * @since OOo 1.1.2
          */
-        interface Task extends XFrame, XTask { }
+        interface Task extends XFrame, XTask {}
 
         /** provides a high level API to organize document templates */
-        interface TemplateAccess extends XDocumentTemplates, lang.XLocalizable { }
+        interface TemplateAccess extends XDocumentTemplates, lang.XLocalizable {}
 
         /** Contains the information about a changed title. */
         interface TitleChangedEvent extends lang.EventObject {
@@ -37856,10 +39042,12 @@ declare namespace com.sun.star {
          * @see com.sun.star.frame.XDispatchProvider
          * @since OOo 2.0
          */
-        interface ToolbarController extends XStatusListener, lang.XInitialization, util.XUpdatable, XToolbarController, XSubToolbarController { }
+        interface ToolbarController
+            extends XStatusListener, lang.XInitialization, util.XUpdatable, XToolbarController, XSubToolbarController
+        {}
 
         /** @since LibreOffice 4.2 */
-        interface XAppDispatchProvider extends XDispatchInformationProvider, XDispatchProvider { }
+        interface XAppDispatchProvider extends XDispatchInformationProvider, XDispatchProvider {}
 
         /** allows to listen to border resize events of a controller. */
         interface XBorderResizeListener extends lang.XEventListener {
@@ -37887,11 +39075,30 @@ declare namespace com.sun.star {
          * @see XFrame
          */
         interface XComponentLoader extends uno.XInterface {
-            loadComponentFromURL(URL: 'private:factory/scalc', TargetFrameName: string, SearchFlags: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): sheet.SpreadsheetDocument;
-            loadComponentFromURL(URL: 'private:factory/sdraw', TargetFrameName: string, SearchFlags: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): drawing.DrawingDocument;
             loadComponentFromURL(
-                URL: 'private:factory/simpress', TargetFrameName: string, SearchFlags: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): presentation.PresentationDocument;
-            loadComponentFromURL(URL: 'private:factory/swriter', TargetFrameName: string, SearchFlags: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): text.TextDocument;
+                URL: "private:factory/scalc",
+                TargetFrameName: string,
+                SearchFlags: number,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): sheet.SpreadsheetDocument;
+            loadComponentFromURL(
+                URL: "private:factory/sdraw",
+                TargetFrameName: string,
+                SearchFlags: number,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): drawing.DrawingDocument;
+            loadComponentFromURL(
+                URL: "private:factory/simpress",
+                TargetFrameName: string,
+                SearchFlags: number,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): presentation.PresentationDocument;
+            loadComponentFromURL(
+                URL: "private:factory/swriter",
+                TargetFrameName: string,
+                SearchFlags: number,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): text.TextDocument;
 
             /**
              * loads a component specified by an URL into the specified new or existing frame.
@@ -37903,7 +39110,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::io::IOException when **URL** couldn't be found or was corrupt
              * @throws com::sun::star::lang::IllegalArgumentException when given parameters doesn't perform the specification
              */
-            loadComponentFromURL(URL: string, TargetFrameName: string, SearchFlags: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): lang.XComponent;
+            loadComponentFromURL(
+                URL: string,
+                TargetFrameName: string,
+                SearchFlags: number,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): lang.XComponent;
         }
 
         /** @deprecated Deprecated */
@@ -38193,7 +39405,9 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XDesktop2 extends XDispatchProvider, XDispatchProviderInterception, XFramesSupplier, XDesktop, XComponentLoader { }
+        interface XDesktop2
+            extends XDispatchProvider, XDispatchProviderInterception, XFramesSupplier, XDesktop, XComponentLoader
+        {}
 
         /**
          * use {@link XFrame} instead of this
@@ -38276,7 +39490,13 @@ declare namespace com.sun.star {
              * @returns A possible result of the executed internal dispatch. The information behind this `any` depends on the dispatch!
              * @see XDispatch.dispatch()
              */
-            executeDispatch(DispatchProvider: XDispatchProvider, URL: string, TargetFrameName: string, SearchFlags: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): any;
+            executeDispatch(
+                DispatchProvider: XDispatchProvider,
+                URL: string,
+                TargetFrameName: string,
+                SearchFlags: number,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): any;
         }
 
         /**
@@ -38490,7 +39710,11 @@ declare namespace com.sun.star {
              * XRecordableDispatch} it will be used to dispatch and record all necessary parameters of the whole process.
              * @see XRecordableDispatch
              */
-            dispatchAndRecord(URL: util.URL, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>, Dispatcher: XDispatch): void;
+            dispatchAndRecord(
+                URL: util.URL,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                Dispatcher: XDispatch,
+            ): void;
 
             /**
              * provides access on the recorder of this supplier
@@ -38876,7 +40100,14 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XFrame2 extends XDispatchProvider, XDispatchInformationProvider, XDispatchProviderInterception, XFramesSupplier, task.XStatusIndicatorFactory {
+        interface XFrame2
+            extends
+                XDispatchProvider,
+                XDispatchInformationProvider,
+                XDispatchProviderInterception,
+                XFramesSupplier,
+                task.XStatusIndicatorFactory
+        {
             /**
              * provides access to the dispatch recorder of the frame
              *
@@ -38950,7 +40181,12 @@ declare namespace com.sun.star {
              * @param Listener this listener will be informed about success
              * @see XLoadEventListener
              */
-            load(Frame: XFrame, URL: string, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>, Listener: XLoadEventListener): void;
+            load(
+                Frame: XFrame,
+                URL: string,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                Listener: XLoadEventListener,
+            ): void;
         }
 
         /**
@@ -39080,8 +40316,14 @@ declare namespace com.sun.star {
          * Provides the unified interface of {@link theGlobalEventBroadcaster} singleton.
          * @since LibreOffice 4.0
          */
-        interface XGlobalEventBroadcaster extends document.XEventsSupplier, document.XDocumentEventBroadcaster, document.XEventBroadcaster, container.XSet,
-            document.XDocumentEventListener { }
+        interface XGlobalEventBroadcaster
+            extends
+                document.XEventsSupplier,
+                document.XDocumentEventBroadcaster,
+                document.XEventBroadcaster,
+                container.XSet,
+                document.XDocumentEventListener
+        {}
 
         /**
          * makes it possible to get information about a registered interceptor and is used by frame interceptor mechanism to perform interception.
@@ -39365,7 +40607,14 @@ declare namespace com.sun.star {
          * Unified interface for {@link LayoutManager} service.
          * @since LibreOffice 4.2
          */
-        interface XLayoutManager2 extends XLayoutManager, XFrameActionListener, ui.XUIConfigurationListener, XMenuBarMergingAcceptor, XLayoutManagerEventBroadcaster { }
+        interface XLayoutManager2
+            extends
+                XLayoutManager,
+                XFrameActionListener,
+                ui.XUIConfigurationListener,
+                XMenuBarMergingAcceptor,
+                XLayoutManagerEventBroadcaster
+        {}
 
         /**
          * makes it possible to receive events from a layout manager.
@@ -39427,7 +40676,7 @@ declare namespace com.sun.star {
          * Unified service interface for {@link FrameLoaderFactory} and {@link ContentHandlerFactory} .
          * @since LibreOffice 4.2
          */
-        interface XLoaderFactory extends lang.XMultiServiceFactory, container.XNameAccess, container.XContainerQuery { }
+        interface XLoaderFactory extends lang.XMultiServiceFactory, container.XNameAccess, container.XContainerQuery {}
 
         /**
          * is used to receive callbacks from an asynchronous frame loader.
@@ -39661,7 +40910,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if one of the given parameter was wrong
              * @throws com::sun::star::uno::Exception if creation of a new view failed by other reasons
              */
-            createViewController(ViewName: string, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>, Frame: XFrame): XController2;
+            createViewController(
+                ViewName: string,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                Frame: XFrame,
+            ): XController2;
 
             /**
              * provides the available names of the factory to be used to create views.
@@ -39731,7 +40984,7 @@ declare namespace com.sun.star {
          * This interface provides a merged single interface for the {@link ModuleManager} service to implement.
          * @since LibreOffice 4.0
          */
-        interface XModuleManager2 extends XModuleManager, container.XNameReplace { }
+        interface XModuleManager2 extends XModuleManager, container.XNameReplace {}
 
         /**
          * dispatch with guaranteed notify (instead of {@link XDispatch} )
@@ -39745,7 +40998,11 @@ declare namespace com.sun.star {
              * @param Arguments optional arguments for this request (see {@link com.sun.star.document.MediaDescriptor} )
              * @param Listener optional listener for guaranteed notifications of this request
              */
-            dispatchWithNotification(URL: util.URL, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>, Listener: XDispatchResultListener): void;
+            dispatchWithNotification(
+                URL: util.URL,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                Listener: XDispatchResultListener,
+            ): void;
         }
 
         /**
@@ -39795,7 +41052,11 @@ declare namespace com.sun.star {
              * @param Arguments optional arguments for this request (see {@link com.sun.star.document.MediaDescriptor} for details)
              * @param Recorder object which can be used to record the request (available on {@link XDispatchRecorderSupplier.getDispatchRecorder()} )
              */
-            dispatchAndRecord(URL: util.URL, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>, Recorder: XDispatchRecorder): void;
+            dispatchAndRecord(
+                URL: util.URL,
+                Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                Recorder: XDispatchRecorder,
+            ): void;
         }
 
         /** Connect to a session manager to get information about pending desktop shutdown */
@@ -40346,7 +41607,7 @@ declare namespace com.sun.star {
          * @see ToolbarControllerFactory
          * @since LibreOffice 4.1
          */
-        interface XUIControllerFactory extends lang.XMultiComponentFactory, XUIControllerRegistration { }
+        interface XUIControllerFactory extends lang.XMultiComponentFactory, XUIControllerRegistration {}
 
         /**
          * is used to query, register and unregister user interface controller.
@@ -40750,7 +42011,7 @@ declare namespace com.sun.star {
          * provides access to a container of GalleryThemes and makes it possible for you to manipulate them.
          * @see XGalleryThemeProvider
          */
-        interface GalleryThemeProvider extends XGalleryThemeProvider, lang.XInitialization { }
+        interface GalleryThemeProvider extends XGalleryThemeProvider, lang.XInitialization {}
 
         /** provides access to a single item of a Gallery theme. */
         interface XGalleryItem extends uno.XInterface {
@@ -41216,7 +42477,7 @@ declare namespace com.sun.star {
          * @see XGraphicTransformer
          * @see GraphicDescriptor
          */
-        interface Graphic extends XGraphic, GraphicDescriptor { }
+        interface Graphic extends XGraphic, GraphicDescriptor {}
 
         /**
          * This service describes all graphic properties that are available via the {@link com.sun.star.beans.XPropertySet} interface
@@ -41474,7 +42735,12 @@ declare namespace com.sun.star {
              * @see com.sun.star.io.XInputStream
              * @see com.sun.star.awt.Size
              */
-            initializeData(DataStream: io.XInputStream, DPI_X: number, DPI_Y: number, DefaultSizePixel: [awt.Size]): boolean;
+            initializeData(
+                DataStream: io.XInputStream,
+                DPI_X: number,
+                DPI_Y: number,
+                DefaultSizePixel: [awt.Size],
+            ): boolean;
 
             /**
              * Rasterizing the initialized data into a {@link XGraphic} container.
@@ -41492,7 +42758,14 @@ declare namespace com.sun.star {
              * @see com.sun.star.beans.PropertyValues
              * @see com.sun.star.graphic.XGraphic
              */
-            rasterize(Width: number, Height: number, RotateAngle: number, ShearAngle_X: number, ShearAngle_Y: number, RasterizeProperties: beans.PropertyValues): XGraphic;
+            rasterize(
+                Width: number,
+                Height: number,
+                RotateAngle: number,
+                ShearAngle_X: number,
+                ShearAngle_Y: number,
+                RasterizeProperties: beans.PropertyValues,
+            ): XGraphic;
         }
 
         /** This interfaces exposes just one method to render a {@link XGraphic} container */
@@ -41573,8 +42846,13 @@ declare namespace com.sun.star {
              * @param MaximumQuadraticPixels The maximum allowed number of pixels to be used to allow limiting the possible size of used pixels. The AspectRatio is pre
              */
             rasterize(
-                Primitive2DSequence: LibreOffice.SeqEquiv<XPrimitive2D>, aViewInformationSequence: LibreOffice.SeqEquiv<beans.PropertyValue>, DPI_X: number, DPI_Y: number,
-                Range: geometry.RealRectangle2D, MaximumQuadraticPixels: number): rendering.XBitmap;
+                Primitive2DSequence: LibreOffice.SeqEquiv<XPrimitive2D>,
+                aViewInformationSequence: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                DPI_X: number,
+                DPI_Y: number,
+                Range: geometry.RealRectangle2D,
+                MaximumQuadraticPixels: number,
+            ): rendering.XBitmap;
         }
 
         /**
@@ -41612,7 +42890,10 @@ declare namespace com.sun.star {
              * @param aParms Sequence of factory parameters, whose semantics depend on the page to be generated.
              * @returns a sequence of primitives, that consists of the geometrical representation for the given XDrawPage.
              */
-            createPrimitivesFromXDrawPage(xDrawPage: drawing.XDrawPage, aParms: LibreOffice.SeqEquiv<beans.PropertyValue>): SafeArray<XPrimitive2D>;
+            createPrimitivesFromXDrawPage(
+                xDrawPage: drawing.XDrawPage,
+                aParms: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): SafeArray<XPrimitive2D>;
 
             /**
              * Create primitives from {@link com.sun.star.drawing.XShape}
@@ -41620,7 +42901,10 @@ declare namespace com.sun.star {
              * @param aParms Sequence of factory parameters, whose semantics depend on the shape to be generated.
              * @returns a sequence of primitives, that consists of the geometrical representation from the given XShape.
              */
-            createPrimitivesFromXShape(xShape: drawing.XShape, aParms: LibreOffice.SeqEquiv<beans.PropertyValue>): SafeArray<XPrimitive2D>;
+            createPrimitivesFromXShape(
+                xShape: drawing.XShape,
+                aParms: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): SafeArray<XPrimitive2D>;
         }
 
         /**
@@ -42347,7 +43631,14 @@ declare namespace com.sun.star {
              * @param aUserOptions Defines how to handle hanging punctuations and forbidden characters at the start/end of a line.
              * @returns The {@link LineBreakResults} contain the break position of the line, {@link BreakType} and {@link com.sun.star.linguistic2.XHyphenatedWord}
              */
-            getLineBreak(aText: string, nStartPos: number, aLocale: lang.Locale, nMinBreakPos: number, aHyphOptions: LineBreakHyphenationOptions, aUserOptions: LineBreakUserOptions): LineBreakResults;
+            getLineBreak(
+                aText: string,
+                nStartPos: number,
+                aLocale: lang.Locale,
+                nMinBreakPos: number,
+                aHyphOptions: LineBreakHyphenationOptions,
+                aUserOptions: LineBreakUserOptions,
+            ): LineBreakResults;
 
             /**
              * Get the script type of the character at position **nPos** .
@@ -42371,7 +43662,13 @@ declare namespace com.sun.star {
              * @param bPreferForward If `TRUE` , nPos should be considered the start of the next word and search proceeds forwards. If `FALSE` , nPos should be conside
              * @returns The {@link Boundary} of the current word.
              */
-            getWordBoundary(aText: string, nPos: number, aLocale: lang.Locale, nWordType: number, bPreferForward: boolean): Boundary;
+            getWordBoundary(
+                aText: string,
+                nPos: number,
+                aLocale: lang.Locale,
+                nWordType: number,
+                bPreferForward: boolean,
+            ): Boundary;
 
             /** @deprecated DeprecatedGet the WordType of the word that starts at position nPos.  This method is mis-defined, since {@link WordType} is not an attribute of a */
             getWordType(aText: string, nPos: number, aLocale: lang.Locale): number;
@@ -42397,7 +43694,14 @@ declare namespace com.sun.star {
              * @param nCount Number of characters to traverse, it should not be less than 0. If you want to traverse in the opposite direction use {@link XBreakIterato
              * @param nDone Out parameter to receive the number of cells/Unicode characters traversed.
              */
-            nextCharacters(aText: string, nStartPos: number, aLocale: lang.Locale, nCharacterIteratorMode: number, nCount: number, nDone: [number]): number;
+            nextCharacters(
+                aText: string,
+                nStartPos: number,
+                aLocale: lang.Locale,
+                nCharacterIteratorMode: number,
+                nCount: number,
+                nDone: [number],
+            ): number;
 
             /**
              * Traverses in Text from **nStartPos** to the next start of the specified character type.
@@ -42438,7 +43742,14 @@ declare namespace com.sun.star {
              * @param nCount Number of characters to traverse, it should not be less than 0. If you want to traverse in the opposite direction use {@link XBreakIterato
              * @param nDone Out parameter to receive the number of cells/Unicode characters traversed.
              */
-            previousCharacters(aText: string, nStartPos: number, aLocale: lang.Locale, nCharacterIteratorMode: number, nCount: number, nDone: [number]): number;
+            previousCharacters(
+                aText: string,
+                nStartPos: number,
+                aLocale: lang.Locale,
+                nCharacterIteratorMode: number,
+                nCount: number,
+                nDone: [number],
+            ): number;
 
             /**
              * Traverses in Text from **nStartPos** to the previous start of the specified character type.
@@ -42668,8 +43979,14 @@ declare namespace com.sun.star {
              * @returns A filled {@link ParseResult} structure. If no unambiguous token could be parsed, {@link ParseResult.TokenType} will be set to **0** (zero), other
              */
             parseAnyToken(
-                aText: string, nPos: number, aLocale: lang.Locale, nStartCharFlags: number, aUserDefinedCharactersStart: string, nContCharFlags: number,
-                aUserDefinedCharactersCont: string): ParseResult;
+                aText: string,
+                nPos: number,
+                aLocale: lang.Locale,
+                nStartCharFlags: number,
+                aUserDefinedCharactersStart: string,
+                nContCharFlags: number,
+                aUserDefinedCharactersCont: string,
+            ): ParseResult;
 
             /**
              * Parse a string for a token of type **nTokenType** starting at position **nPos** .
@@ -42686,8 +44003,15 @@ declare namespace com.sun.star {
              * @param aUserDefinedCharactersCont See {@link parseAnyToken}{{program example here, see documentation}}
              */
             parsePredefinedToken(
-                nTokenType: number, aText: string, nPos: number, aLocale: lang.Locale, nStartCharFlags: number, aUserDefinedCharactersStart: string,
-                nContCharFlags: number, aUserDefinedCharactersCont: string): ParseResult;
+                nTokenType: number,
+                aText: string,
+                nPos: number,
+                aLocale: lang.Locale,
+                nStartCharFlags: number,
+                aUserDefinedCharactersStart: string,
+                nContCharFlags: number,
+                aUserDefinedCharactersCont: string,
+            ): ParseResult;
 
             /** Convert upper case alpha to lower case alpha, starting at position **nPos** for **nCount** code points. */
             toLower(aText: string, nPos: number, nCount: number, aLocale: lang.Locale): string;
@@ -42719,7 +44043,14 @@ declare namespace com.sun.star {
              * @param nLen2 Length (from offset) of the second substring.
              * @returns 1 if the first string is greater than the second string ;  0 if the first string is equal to the second string ;  -1 if the first string is less
              */
-            compareSubstring(aStr1: string, nOff1: number, nLen1: number, aStr2: string, nOff2: number, nLen2: number): number;
+            compareSubstring(
+                aStr1: string,
+                nOff1: number,
+                nLen1: number,
+                aStr2: string,
+                nOff2: number,
+                nLen2: number,
+            ): number;
 
             /**
              * List all collator algorithms for a given locale.
@@ -42750,7 +44081,11 @@ declare namespace com.sun.star {
              * @param aLocale The locale for this collator.
              * @param aCollatorOptions A sequence of end user collator options like those returned by {@link XCollator.listCollatorOptions()} .
              */
-            loadCollatorAlgorithmWithEndUserOption(aAlgorithmName: string, aLocale: lang.Locale, aCollatorOptions: LibreOffice.SeqEquiv<number>): void;
+            loadCollatorAlgorithmWithEndUserOption(
+                aAlgorithmName: string,
+                aLocale: lang.Locale,
+                aCollatorOptions: LibreOffice.SeqEquiv<number>,
+            ): void;
 
             /**
              * Load the collator with default algorithm defined in locale data.
@@ -42802,7 +44137,14 @@ declare namespace com.sun.star {
              * @param aLocale1
              * @param aLocale2 Language attribute for index and phonetic entry. ;  aLocale and the locale in loadAlgorithm may be different. In the case they are diffe
              */
-            compareIndexEntry(aIndexEntry1: string, aPhoneticEntry1: string, aLocale1: lang.Locale, aIndexEntry2: string, aPhoneticEntry2: string, aLocale2: lang.Locale): number;
+            compareIndexEntry(
+                aIndexEntry1: string,
+                aPhoneticEntry1: string,
+                aLocale1: lang.Locale,
+                aIndexEntry2: string,
+                aPhoneticEntry2: string,
+                aLocale2: lang.Locale,
+            ): number;
 
             /** Returns index algorithm list for specific locale */
             getAlgorithmList(aLocale: lang.Locale): SafeArray<string>;
@@ -42875,7 +44217,14 @@ declare namespace com.sun.star {
              * @param rOffset To find the grapheme of input string corresponding to the grapheme of output string, rOffset provides the offset array whose index is the
              */
             getConversionWithOffset(
-                aText: string, nStartPos: number, nLength: number, aLocale: lang.Locale, nTextConversionType: number, nTextConversionOptions: number, rOffset: [LibreOffice.SeqEquiv<number>]): string;
+                aText: string,
+                nStartPos: number,
+                nLength: number,
+                aLocale: lang.Locale,
+                nTextConversionType: number,
+                nTextConversionOptions: number,
+                rOffset: [LibreOffice.SeqEquiv<number>],
+            ): string;
         }
 
         /**
@@ -43182,7 +44531,14 @@ declare namespace com.sun.star {
              * @returns Converted text
              * @throws NoSupportException when **nConversionDictionaryType** is not known by the implementation, or when the locale is not supported.
              */
-            getConversion(aText: string, nStartPos: number, nLength: number, Locale: lang.Locale, nTextConversionType: number, nTextConversionOptions: number): string;
+            getConversion(
+                aText: string,
+                nStartPos: number,
+                nLength: number,
+                Locale: lang.Locale,
+                nTextConversionType: number,
+                nTextConversionOptions: number,
+            ): string;
 
             /**
              * Method to search dictionaries for the conversion candidates.
@@ -43195,7 +44551,14 @@ declare namespace com.sun.star {
              * @returns
              * @throws NoSupportException when **nConversionDictionaryType** is not known by the implementation, or when the locale is not supported.
              */
-            getConversions(aText: string, nStartPos: number, nLength: number, Locale: lang.Locale, nTextConversionType: number, nTextConversionOptions: number): TextConversionResult;
+            getConversions(
+                aText: string,
+                nStartPos: number,
+                nLength: number,
+                Locale: lang.Locale,
+                nTextConversionType: number,
+                nTextConversionOptions: number,
+            ): TextConversionResult;
 
             /**
              * Method to query if the conversion type should be interactive or non-interactive mode.
@@ -43205,7 +44568,11 @@ declare namespace com.sun.star {
              * @returns `TRUE` if the entry is a valid entry for the dictionary `FALSE` otherwise.
              * @throws NoSupportException when **nConversionDictionaryType** is not known by the implementation, or when the locale is not supported.
              */
-            interactiveConversion(Locale: lang.Locale, nTextConversionType: number, nTextConversionOptions: number): boolean;
+            interactiveConversion(
+                Locale: lang.Locale,
+                nTextConversionType: number,
+                nTextConversionOptions: number,
+            ): boolean;
         }
 
         /**
@@ -43240,7 +44607,14 @@ declare namespace com.sun.star {
              * @param nLen2 Length (from offset) of the second substring.
              * @returns 1 if the first substring is greater than the second substring ;  0 if the first substring is equal to the second substring ;  -1 if the first sub
              */
-            compareSubstring(aStr1: string, nOff1: number, nLen1: number, aStr2: string, nOff2: number, nLen2: number): number;
+            compareSubstring(
+                aStr1: string,
+                nOff1: number,
+                nLen1: number,
+                aStr2: string,
+                nOff2: number,
+                nLen2: number,
+            ): number;
 
             /**
              * Match two substrings and find if they are equivalent as per this transliteration.
@@ -43260,7 +44634,16 @@ declare namespace com.sun.star {
              * @param rMatch2 Returns number of matched code points in aStr2.
              * @returns `TRUE` if the substrings are equal per this transliteration ; `FALSE` else.
              */
-            equals(aStr1: string, nPos1: number, nCount1: number, rMatch1: [number], aStr2: string, nPos2: number, nCount2: number, rMatch2: [number]): boolean;
+            equals(
+                aStr1: string,
+                nPos1: number,
+                nCount1: number,
+                rMatch1: [number],
+                aStr2: string,
+                nPos2: number,
+                nCount2: number,
+                rMatch2: [number],
+            ): boolean;
 
             /** @deprecated DeprecatedFor internal use, this method is supported to get the "transliteration", which equals() is based on. */
             folding(aInStr: string, nStartPos: number, nCount: number, rOffset: [LibreOffice.SeqEquiv<number>]): string;
@@ -43324,7 +44707,12 @@ declare namespace com.sun.star {
              * @param nCount Number of code points to be transliterated.
              * @param rOffset To find the grapheme of input string corresponding to the grapheme of output string, rOffset provides the offset array whose index is the
              */
-            transliterate(aInStr: string, nStartPos: number, nCount: number, rOffset: [LibreOffice.SeqEquiv<number>]): string;
+            transliterate(
+                aInStr: string,
+                nStartPos: number,
+                nCount: number,
+                rOffset: [LibreOffice.SeqEquiv<number>],
+            ): string;
 
             /**
              * Transliterate one set of characters to another.
@@ -43768,7 +45156,7 @@ declare namespace com.sun.star {
 
     namespace image {
         /** This service specifies a HTML image map. */
-        interface ImageMap extends container.XNamed, container.XIndexContainer { }
+        interface ImageMap extends container.XNamed, container.XIndexContainer {}
 
         /**
          * this service describes a circular-shaped region inside a HTML image map.
@@ -44102,7 +45490,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if handlerFactories is empty.
              * @throws com::sun::star::lang::IllegalArgumentException if minHelpTextLines or maxHelpTextLines are negative, or if minHelpTextLines is greater than maxHe
              */
-            createWithHandlerFactoriesAndHelpSection(handlerFactories: LibreOffice.SeqEquiv, minHelpTextLines: number, maxHelpTextLines: number): void;
+            createWithHandlerFactoriesAndHelpSection(
+                handlerFactories: LibreOffice.SeqEquiv,
+                minHelpTextLines: number,
+                maxHelpTextLines: number,
+            ): void;
         }
 
         /**
@@ -44130,7 +45522,11 @@ declare namespace com.sun.star {
 
         interface StringRepresentation extends XStringRepresentation {
             create(TypeConverter: script.XTypeConverter): void;
-            createConstant(TypeConverter: script.XTypeConverter, Constant: string, Values: LibreOffice.SeqEquiv<string>): void;
+            createConstant(
+                TypeConverter: script.XTypeConverter,
+                Constant: string,
+                Values: LibreOffice.SeqEquiv<string>,
+            ): void;
         }
 
         /**
@@ -44572,7 +45968,13 @@ declare namespace com.sun.star {
              * @param FirstTimeInit If `TRUE` , the method is called for the first-time update of the respective property, that is, when the property browser is just i
              * @throws com::sun::star::lang::NullPointerException if InspectorUI is `NULL`
              */
-            actuatingPropertyChanged(ActuatingPropertyName: string, NewValue: any, OldValue: any, InspectorUI: XObjectInspectorUI, FirstTimeInit: boolean): void;
+            actuatingPropertyChanged(
+                ActuatingPropertyName: string,
+                NewValue: any,
+                OldValue: any,
+                InspectorUI: XObjectInspectorUI,
+                FirstTimeInit: boolean,
+            ): void;
 
             /**
              * registers a listener for notification about property value changes
@@ -44762,7 +46164,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::beans::UnknownPropertyException if the given property is not supported by the property handler
              * @throws com::sun::star::lang::NullPointerException if InspectorUI is `NULL`
              */
-            onInteractivePropertySelection(PropertyName: string, Primary: boolean, outData: [any], InspectorUI: XObjectInspectorUI): InteractiveSelectionResult;
+            onInteractivePropertySelection(
+                PropertyName: string,
+                Primary: boolean,
+                outData: [any],
+                InspectorUI: XObjectInspectorUI,
+            ): InteractiveSelectionResult;
 
             /**
              * revokes a listener for notification about property value changes
@@ -44989,14 +46396,14 @@ declare namespace com.sun.star {
          * An implementation of this service in general does not need to buffer data itself.
          * @see com.sun.star.io.ObjectInputStream
          */
-        interface DataInputStream extends XDataInputStream, XActiveDataSink, XConnectable { }
+        interface DataInputStream extends XDataInputStream, XActiveDataSink, XConnectable {}
 
         /**
          * writes structured data to a chained {@link XOutputStream} .
          *
          * An implementation of this service in general does not need to buffer data itself.
          */
-        interface DataOutputStream extends XDataOutputStream, XActiveDataSource { }
+        interface DataOutputStream extends XDataOutputStream, XActiveDataSource {}
 
         /**
          * is broadcast by a filter.
@@ -45033,7 +46440,7 @@ declare namespace com.sun.star {
          * The implementation reads the original data from the input stream, that has been set previously at the {@link XActiveDataSink} interface. In general
          * the implementation must buffer the data.
          */
-        interface MarkableInputStream extends XInputStream, XMarkableStream, XActiveDataSink, XConnectable { }
+        interface MarkableInputStream extends XInputStream, XMarkableStream, XActiveDataSink, XConnectable {}
 
         /**
          * allows to set marks in an outputstream and to later jump back to these marks.
@@ -45041,7 +46448,7 @@ declare namespace com.sun.star {
          * The implementation stores the data as long as marks exists and later writes these data into the output stream, that has been set previously at the
          * {@link XActiveDataSource} interface.
          */
-        interface MarkableOutputStream extends XOutputStream, XMarkableStream, XActiveDataSource, XConnectable { }
+        interface MarkableOutputStream extends XOutputStream, XMarkableStream, XActiveDataSource, XConnectable {}
 
         /**
          * is a stream which allows reading the data of persistent objects.
@@ -45055,7 +46462,7 @@ declare namespace com.sun.star {
          * long    ObjectLength     // 0 if it is a reference or no object, otherwise the len of the object data; Object  ObjectData       // the data of the
          * object; ...                      // skipping additional data; `
          */
-        interface ObjectInputStream extends XObjectInputStream, XActiveDataSink, XConnectable, XMarkableStream { }
+        interface ObjectInputStream extends XObjectInputStream, XActiveDataSink, XConnectable, XMarkableStream {}
 
         /**
          * is a stream which allows writing the data of persistent objects.
@@ -45069,7 +46476,7 @@ declare namespace com.sun.star {
          * long    ObjectLength    // 0 if it is a reference or no object, otherwise the len of the object data; Object  ObjectData      // the data of the
          * object; `
          */
-        interface ObjectOutputStream extends XObjectOutputStream, XActiveDataSource, XConnectable { }
+        interface ObjectOutputStream extends XObjectOutputStream, XActiveDataSource, XConnectable {}
 
         /**
          * the implementation of a data source and a data sink.
@@ -45077,7 +46484,7 @@ declare namespace com.sun.star {
          * A thread will be created that reads from the input stream and writes the data to the connected output stream. Data will not be buffered by this
          * service.
          */
-        interface Pump extends XActiveDataSource, XActiveDataSink, XActiveDataControl { }
+        interface Pump extends XActiveDataSource, XActiveDataSink, XActiveDataControl {}
 
         /** This service allows to wrap a sequence of bytes with a stream object. */
         interface SequenceInputStream extends XSeekableInputStream {
@@ -45246,7 +46653,11 @@ declare namespace com.sun.star {
             cancel(): void;
 
             /** exports data for a component into an output stream. */
-            exportData(aOutputStream: XOutputStream, Component: lang.XComponent, aListener: XDataTransferEventListener): void;
+            exportData(
+                aOutputStream: XOutputStream,
+                Component: lang.XComponent,
+                aListener: XDataTransferEventListener,
+            ): void;
         }
 
         /**
@@ -45259,7 +46670,11 @@ declare namespace com.sun.star {
             cancel(): void;
 
             /** imports data for a component from an active data source. */
-            importData(aActiveSource: XActiveDataSource, Component: lang.XComponent, aListener: XDataTransferEventListener): void;
+            importData(
+                aActiveSource: XActiveDataSource,
+                Component: lang.XComponent,
+                aListener: XDataTransferEventListener,
+            ): void;
         }
 
         /**
@@ -45559,7 +46974,7 @@ declare namespace com.sun.star {
          * With the pipe-service, an outputstream can be converted into an input stream at the cost of an additional buffer.
          * @since LibreOffice 4.0
          */
-        interface XPipe extends XOutputStream, XInputStream { }
+        interface XPipe extends XOutputStream, XInputStream {}
 
         /**
          * makes it possible to seek to a certain position within a stream.
@@ -45603,7 +47018,7 @@ declare namespace com.sun.star {
         }
 
         /** This interface can be used to represent a seekable input stream. */
-        interface XSeekableInputStream extends XInputStream, XSeekable { }
+        interface XSeekableInputStream extends XInputStream, XSeekable {}
 
         /** This interface offers access to the written bytes */
         interface XSequenceOutputStream extends XOutputStream {
@@ -45714,7 +47129,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the new-style service {@link TextInputStream} .
          * @since LibreOffice 4.1
          */
-        interface XTextInputStream2 extends XTextInputStream, XActiveDataSink { }
+        interface XTextInputStream2 extends XTextInputStream, XActiveDataSink {}
 
         /**
          * Interface to write strings to a stream using a special character encoding.
@@ -45745,7 +47160,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the new-style service {@link TextOutputStream} .
          * @since LibreOffice 4.1
          */
-        interface XTextOutputStream2 extends XTextOutputStream, XActiveDataSource { }
+        interface XTextOutputStream2 extends XTextOutputStream, XActiveDataSource {}
 
         /** makes it possible to set the size of the underlying data of a stream to zero. */
         interface XTruncate extends uno.XInterface {
@@ -46112,8 +47527,6 @@ declare namespace com.sun.star {
          * **XComponent (optional) **: The service manager calls the method {@link com.sun.star.lang.XComponent.dispose()} on the factory when going down (i.e.
          * it is commonly disposed by the component context).
          *
-         *
-         *
          * Since LibreOffice 3.6, in addition to instances of {@link XServiceInfo} et al, the {@link com.sun.star.container.XSet} of at least the default C++
          * service manager implementation now also supports sequences of {@link com.sun.star.beans.NamedValue} in `insert` and `remove` . The sequence elements
          * must each have a `Name` of `uri` and a string `Value` that is the URI of a service rdb. It is legal for there to be no such `uri` elements. For
@@ -46122,7 +47535,14 @@ declare namespace com.sun.star {
          * implementations.
          * @see com.sun.star.uno.XComponentContext
          */
-        interface ServiceManager extends MultiServiceFactory, XComponent, container.XSet, container.XContentEnumerationAccess, beans.XPropertySet {
+        interface ServiceManager
+            extends
+                MultiServiceFactory,
+                XComponent,
+                container.XSet,
+                container.XContentEnumerationAccess,
+                beans.XPropertySet
+        {
             /** specifies the default component context to be used, if instanciating services via {@link XMultiServiceFactory} */
             DefaultContext: uno.XComponentContext;
             getAvailableServiceNames(): SafeArray<string>;
@@ -46411,7 +47831,11 @@ declare namespace com.sun.star {
              * @param Context context the component instance gets its deployment values from
              * @returns component instance
              */
-            createInstanceWithArgumentsAndContext(ServiceSpecifier: string, Arguments: LibreOffice.SeqEquiv, Context: uno.XComponentContext): uno.XInterface;
+            createInstanceWithArgumentsAndContext(
+                ServiceSpecifier: string,
+                Arguments: LibreOffice.SeqEquiv,
+                Context: uno.XComponentContext,
+            ): uno.XInterface;
 
             /**
              * Creates an instance of a component which supports the services specified by the factory.
@@ -46435,7 +47859,9 @@ declare namespace com.sun.star {
              * @returns sequence of all names
              */
             readonly AvailableServiceNames: SafeArray<string>;
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
 
             /**
              * Creates an instance classified by the specified name.
@@ -46443,7 +47869,10 @@ declare namespace com.sun.star {
              * @returns instance
              */
             createInstance(aServiceSpecifier: string): uno.XInterface;
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
 
             /**
              * Creates an instance classified by the specified name and passes the arguments to that instance.
@@ -46538,7 +47967,10 @@ declare namespace com.sun.star {
              * @param Context the instance gets its deployment values from this
              * @returns component instance
              */
-            createInstanceWithArgumentsAndContext(Arguments: LibreOffice.SeqEquiv, Context: uno.XComponentContext): uno.XInterface;
+            createInstanceWithArgumentsAndContext(
+                Arguments: LibreOffice.SeqEquiv,
+                Context: uno.XComponentContext,
+            ): uno.XInterface;
 
             /**
              * Creates an instance of a service implementation.
@@ -46601,8 +48033,6 @@ declare namespace com.sun.star {
 
         /**
          * An interface to tunnel UNO. This means providing access to data or something else, which is not specified by UNO-IDL.
-         *
-         *
          *
          * Common usage: Getting a C++ object pointer in the same process, thus to use an implementation directly, most often because of a design flaw.
          */
@@ -46751,7 +48181,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.linguistic2.XConversionPropertyType
          * @since OOo 1.1.2
          */
-        interface ConversionDictionary extends XConversionDictionary, util.XFlushable, XConversionPropertyType { }
+        interface ConversionDictionary extends XConversionDictionary, util.XFlushable, XConversionPropertyType {}
 
         /**
          * represents a dictionary used for spell checking and hyphenation.
@@ -46759,7 +48189,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.linguistic2.XSearchableDictionaryList
          * @since OOo 3.0.1
          */
-        interface Dictionary extends XDictionary, XSearchableDictionary, frame.XStorable { }
+        interface Dictionary extends XDictionary, XSearchableDictionary, frame.XStorable {}
 
         /**
          * represents a dictionary event.
@@ -46819,7 +48249,14 @@ declare namespace com.sun.star {
         }
 
         /** offers hyphenation functionality. */
-        interface Hyphenator extends XHyphenator, XLinguServiceEventBroadcaster, lang.XInitialization, lang.XComponent, lang.XServiceDisplayName { }
+        interface Hyphenator
+            extends
+                XHyphenator,
+                XLinguServiceEventBroadcaster,
+                lang.XInitialization,
+                lang.XComponent,
+                lang.XServiceDisplayName
+        {}
 
         /**
          * represents a linguistic service event.
@@ -46875,10 +48312,17 @@ declare namespace com.sun.star {
         }
 
         /** offers spell checking functionality. */
-        interface SpellChecker extends XSpellChecker, XLinguServiceEventBroadcaster, lang.XInitialization, lang.XComponent, lang.XServiceDisplayName { }
+        interface SpellChecker
+            extends
+                XSpellChecker,
+                XLinguServiceEventBroadcaster,
+                lang.XInitialization,
+                lang.XComponent,
+                lang.XServiceDisplayName
+        {}
 
         /** offers thesaurus functionality. */
-        interface Thesaurus extends XThesaurus, lang.XInitialization, lang.XComponent, lang.XServiceDisplayName { }
+        interface Thesaurus extends XThesaurus, lang.XInitialization, lang.XComponent, lang.XServiceDisplayName {}
 
         /** retrieves the list of available languages. */
         interface XAvailableLocales extends uno.XInterface {
@@ -46939,7 +48383,13 @@ declare namespace com.sun.star {
              * @returns the list of conversions found for the supplied text. If no nothing was found, it is empty.
              * @throws com::sun::star::lang::IllegalArgumentException if the locale is not supported by the dictionary or if nTextConversionOptions is invalid for the g
              */
-            getConversions(aText: string, nStartPos: number, nLength: number, eDirection: ConversionDirection, nTextConversionOptions: number): SafeArray<string>;
+            getConversions(
+                aText: string,
+                nStartPos: number,
+                nLength: number,
+                eDirection: ConversionDirection,
+                nTextConversionOptions: number,
+            ): SafeArray<string>;
 
             /**
              * @returns the conversion type supported by the dictionary.
@@ -47009,7 +48459,11 @@ declare namespace com.sun.star {
              * @throws NoSupportException when **nConversionDictionaryType** is not known by the implementation.
              * @throws ElementExistException when a dictionary with the specified name already exists.
              */
-            addNewDictionary(aName: string, aLocale: lang.Locale, nConversionDictionaryType: number): XConversionDictionary;
+            addNewDictionary(
+                aName: string,
+                aLocale: lang.Locale,
+                nConversionDictionaryType: number,
+            ): XConversionDictionary;
 
             /** @returns the name container interface to the dictionaries in the list.  The interface can be used to add, remove or retrieve dictionaries from the list by */
             readonly DictionaryContainer: container.XNameContainer;
@@ -47035,8 +48489,14 @@ declare namespace com.sun.star {
              * @throws NoSupportException when **nConversionDictionaryType** is not known by the implementation, or when the locale is not supported (i.e. there are no
              */
             queryConversions(
-                aText: string, nStartPos: number, nLength: number, aLocale: lang.Locale, nConversionDictionaryType: number, eDirection: ConversionDirection,
-                nTextConversionOptions: number): SafeArray<string>;
+                aText: string,
+                nStartPos: number,
+                nLength: number,
+                aLocale: lang.Locale,
+                nConversionDictionaryType: number,
+                eDirection: ConversionDirection,
+                nTextConversionOptions: number,
+            ): SafeArray<string>;
 
             /**
              * returns the maximum number of characters used as left or right text in entries.
@@ -47049,7 +48509,11 @@ declare namespace com.sun.star {
              * @param eDirection specifies if the left text or the right text of entries will be used.
              * @see com.sun.star.linguistic2.ConversionDirection
              */
-            queryMaxCharCount(aLocale: lang.Locale, nConversionDictionaryType: number, eDirection: ConversionDirection): number;
+            queryMaxCharCount(
+                aLocale: lang.Locale,
+                nConversionDictionaryType: number,
+                eDirection: ConversionDirection,
+            ): number;
         }
 
         /**
@@ -47530,7 +48994,11 @@ declare namespace com.sun.star {
              * @see com.sun.star.linguistic2.XPossibleHyphens
              * @see com.sun.star.lang.Locale
              */
-            createPossibleHyphens(aWord: string, aLocale: lang.Locale, aProperties: beans.PropertyValues): XPossibleHyphens;
+            createPossibleHyphens(
+                aWord: string,
+                aLocale: lang.Locale,
+                aProperties: beans.PropertyValues,
+            ): XPossibleHyphens;
 
             /**
              * tries to find a valid hyphenation position relative to the beginning of a word.
@@ -47544,7 +49012,12 @@ declare namespace com.sun.star {
              * @see com.sun.star.linguistic2.XHyphenatedWord
              * @see com.sun.star.lang.Locale
              */
-            hyphenate(aWord: string, aLocale: lang.Locale, nMaxLeading: number, aProperties: beans.PropertyValues): XHyphenatedWord;
+            hyphenate(
+                aWord: string,
+                aLocale: lang.Locale,
+                nMaxLeading: number,
+                aProperties: beans.PropertyValues,
+            ): XHyphenatedWord;
 
             /**
              * checks whether hyphenation at a position in a word will result in an alternative spelling or not.
@@ -47561,7 +49034,12 @@ declare namespace com.sun.star {
              * @see com.sun.star.linguistic2.XHyphenatedWord
              * @see com.sun.star.lang.Locale
              */
-            queryAlternativeSpelling(aWord: string, aLocale: lang.Locale, nIndex: number, aProperties: beans.PropertyValues): XHyphenatedWord;
+            queryAlternativeSpelling(
+                aWord: string,
+                aLocale: lang.Locale,
+                nIndex: number,
+                aProperties: beans.PropertyValues,
+            ): XHyphenatedWord;
         }
 
         /**
@@ -47800,7 +49278,11 @@ declare namespace com.sun.star {
              * @param aLocale the language to set the list.
              * @param aServiceImplNames the name of the service to set the list.
              */
-            setConfiguredServices(aServiceName: string, aLocale: lang.Locale, aServiceImplNames: LibreOffice.SeqEquiv<string>): void;
+            setConfiguredServices(
+                aServiceName: string,
+                aLocale: lang.Locale,
+                aServiceImplNames: LibreOffice.SeqEquiv<string>,
+            ): void;
 
             /** @returns the {@link com.sun.star.linguistic2.XSpellChecker} interface to be used for spell checking. */
             readonly SpellChecker: XSpellChecker;
@@ -47813,7 +49295,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the {@link LinguServiceManager} service to implement.
          * @since LibreOffice 4.0
          */
-        interface XLinguServiceManager2 extends XLinguServiceManager, XAvailableLocales, lang.XComponent { }
+        interface XLinguServiceManager2 extends XLinguServiceManager, XAvailableLocales, lang.XComponent {}
 
         /**
          * one of the possible meanings for a word.
@@ -47889,8 +49371,13 @@ declare namespace com.sun.star {
              * @throws IllegalArgumentException when any argument is wrong.
              */
             doProofreading(
-                aDocumentIdentifier: string, aText: string, aLocale: lang.Locale, nStartOfSentencePosition: number, nSuggestedBehindEndOfSentencePosition: number,
-                aProperties: LibreOffice.SeqEquiv<beans.PropertyValue>): ProofreadingResult;
+                aDocumentIdentifier: string,
+                aText: string,
+                aLocale: lang.Locale,
+                nStartOfSentencePosition: number,
+                nSuggestedBehindEndOfSentencePosition: number,
+                aProperties: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): ProofreadingResult;
 
             /**
              * disables a specific rule for a given locale.
@@ -47926,8 +49413,14 @@ declare namespace com.sun.star {
              * @throws IllegalArgumentException when any argument is wrong.
              */
             checkSentenceAtPosition(
-                xDocument: uno.XInterface, xFlatParagraph: text.XFlatParagraph, aText: string, aLocale: lang.Locale, nStartOfSentencePosition: number,
-                nSuggestedBehindEndOfSentencePosition: number, nErrorPositionInParagraph: number): ProofreadingResult;
+                xDocument: uno.XInterface,
+                xFlatParagraph: text.XFlatParagraph,
+                aText: string,
+                aLocale: lang.Locale,
+                nStartOfSentencePosition: number,
+                nSuggestedBehindEndOfSentencePosition: number,
+                nErrorPositionInParagraph: number,
+            ): ProofreadingResult;
 
             /**
              * checks if the given document is currently being checked
@@ -47977,7 +49470,12 @@ declare namespace com.sun.star {
              * @param bSpellEntry `TRUE` if entries for purposes of spell checking are required. `FALSE` if only entries for hyphenation purposes are required.
              * @returns the dictionary entry that was found, `NULL` otherwise.
              */
-            queryDictionaryEntry(aWord: string, aLocale: lang.Locale, bSearchPosDics: boolean, bSpellEntry: boolean): XDictionaryEntry;
+            queryDictionaryEntry(
+                aWord: string,
+                aLocale: lang.Locale,
+                bSearchPosDics: boolean,
+                bSpellEntry: boolean,
+            ): XDictionaryEntry;
         }
 
         /**
@@ -48263,7 +49761,12 @@ declare namespace com.sun.star {
              * @param xKey A registry which may be used to read static data previously written via {@link XImplementationLoader.writeRegistryInfo()} . The use of this
              * @returns returns a factory interface, which allows to create an instance of the concrete implementation. In general, the object supports a {@link com.sun.
              */
-            activate(implementationName: string, implementationLoaderUrl: string, locationUrl: string, xKey: registry.XRegistryKey): uno.XInterface;
+            activate(
+                implementationName: string,
+                implementationLoaderUrl: string,
+                locationUrl: string,
+                xKey: registry.XRegistryKey,
+            ): uno.XInterface;
 
             /**
              * writes a list of all implementations hosted by this component into a registry key.
@@ -48274,7 +49777,11 @@ declare namespace com.sun.star {
              * @param locationUrl Points to the location of the file containing the component (for instance a .jar-file or a shared library). This parameter should be
              * @see com.sun.star.registry.XImplementationRegistration
              */
-            writeRegistryInfo(xKey: registry.XRegistryKey, implementationLoaderUrl: string, locationUrl: string): boolean;
+            writeRegistryInfo(
+                xKey: registry.XRegistryKey,
+                implementationLoaderUrl: string,
+                locationUrl: string,
+            ): boolean;
         }
     }
 
@@ -48766,7 +50273,13 @@ declare namespace com.sun.star {
              * @see com.sun.star.datatransfer.XTransferable
              * @see com.sun.star.mail.MailAttachment
              */
-            createWithAttachment(sTo: string, sFrom: string, sSubject: string, xBody: datatransfer.XTransferable, aMailAttachment: MailAttachment): void;
+            createWithAttachment(
+                sTo: string,
+                sFrom: string,
+                sSubject: string,
+                xBody: datatransfer.XTransferable,
+                aMailAttachment: MailAttachment,
+            ): void;
         }
 
         /** @since OOo 2.0 */
@@ -48979,8 +50492,6 @@ declare namespace com.sun.star {
             /**
              * Return the context of the current connection. The context contains information like the server name, port, connection type etc.
              *
-             *
-             *
              * **Precondition**: `isConnected` returns true.
              * @returns the current connection context.
              * @see com.sun.star.mail.connectUser
@@ -48997,8 +50508,6 @@ declare namespace com.sun.star {
 
             /**
              * Return the context of the current connection. The context contains information like the server name, port, connection type etc.
-             *
-             *
              *
              * **Precondition**: `isConnected` returns true.
              * @returns the current connection context.
@@ -49391,7 +50900,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.mozilla.XProxyRunner
          * @see com.sun.star.mozilla.MozillaBootstrap
          */
-        interface XMozillaBootstrap extends XProfileDiscover, XProfileManager, XProxyRunner { }
+        interface XMozillaBootstrap extends XProfileDiscover, XProfileManager, XProxyRunner {}
 
         /**
          * is the interface used to list and get information for Mozilla/Thunderbird profiles
@@ -49611,19 +51120,32 @@ declare namespace com.sun.star {
          * created without arguments, it must be initialized with the {@link com.sun.star.lang.XInitialization} service methods before it is a valid instance of
          * the service.
          */
-        interface Package extends lang.XInitialization, container.XHierarchicalNameAccess, lang.XSingleServiceFactory, util.XChangesBatch { }
+        interface Package
+            extends
+                lang.XInitialization,
+                container.XHierarchicalNameAccess,
+                lang.XSingleServiceFactory,
+                util.XChangesBatch
+        {}
 
         /**
          * The {@link PackageFolder} service represents a single folder or directory within a {@link Package} . Instances of this service can only be constructed
          * by an implementation of the {@link Package} service and not via the service manager.
          */
-        interface PackageFolder extends container.XNamed, container.XChild, container.XNameContainer, container.XEnumerationAccess, beans.XPropertySet { }
+        interface PackageFolder
+            extends
+                container.XNamed,
+                container.XChild,
+                container.XNameContainer,
+                container.XEnumerationAccess,
+                beans.XPropertySet
+        {}
 
         /**
          * This service represents a stream contained within a {@link Package} . Instances of this class can only be constructed by the implementation of the
          * {@link Package} service.
          */
-        interface PackageStream extends container.XNamed, container.XChild, io.XActiveDataSink, beans.XPropertySet { }
+        interface PackageStream extends container.XNamed, container.XChild, io.XActiveDataSink, beans.XPropertySet {}
 
         /** Allows to get access to the stream of a {@link PackageStream} . */
         interface XDataSinkEncrSupport extends uno.XInterface {
@@ -49725,7 +51247,10 @@ declare namespace com.sun.star {
              */
             interface XManifestWriter extends uno.XInterface {
                 /** Writes the supplied sequence of manifest entries to the supplied XOutputStream */
-                writeManifestSequence(rStream: io.XOutputStream, rSequence: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<beans.PropertyValue>>): void;
+                writeManifestSequence(
+                    rStream: io.XOutputStream,
+                    rSequence: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<beans.PropertyValue>>,
+                ): void;
             }
         }
 
@@ -49760,7 +51285,7 @@ declare namespace com.sun.star {
              * Merged interface for {@link ZipFileAccess} service.
              * @since LibreOffice 4.1
              */
-            interface XZipFileAccess2 extends XZipFileAccess, container.XNameAccess { }
+            interface XZipFileAccess2 extends XZipFileAccess, container.XNameAccess {}
 
             /**
              * used to represent a ZIP file entry
@@ -50660,17 +52185,17 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface ChartShape extends Shape, drawing.OLE2Shape { }
+        interface ChartShape extends Shape, drawing.OLE2Shape {}
 
         /**
          * A custom presentation can show the pages of its presentation in a customized order.
          *
          * Such a presentation can use certain pages more than once, but it does not necessarily use all of the pages.
          */
-        interface CustomPresentation extends container.XIndexContainer, container.XNamed { }
+        interface CustomPresentation extends container.XIndexContainer, container.XNamed {}
 
         /** This is a container for custom presentations. */
-        interface CustomPresentationAccess extends container.XNameContainer, lang.XSingleServiceFactory { }
+        interface CustomPresentationAccess extends container.XNameContainer, lang.XSingleServiceFactory {}
 
         /**
          * This service is implemented by the date and time presentation shape.
@@ -50678,7 +52203,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface DateTimeShape extends Shape, drawing.TextShape { }
+        interface DateTimeShape extends Shape, drawing.TextShape {}
 
         /** describes properties that apply to the whole presentation document. */
         interface DocumentSettings extends document.Settings, document.HeaderFooterSettings, beans.XPropertySet {
@@ -50781,7 +52306,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface FooterShape extends Shape, drawing.TextShape { }
+        interface FooterShape extends Shape, drawing.TextShape {}
 
         /**
          * This service is implemented by the graphic presentation shape.
@@ -50789,7 +52314,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface GraphicObjectShape extends Shape, drawing.GraphicObjectShape { }
+        interface GraphicObjectShape extends Shape, drawing.GraphicObjectShape {}
 
         /**
          * This service is implemented by the handout presentation shape.
@@ -50797,7 +52322,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface HandoutShape extends Shape, drawing.PageShape { }
+        interface HandoutShape extends Shape, drawing.PageShape {}
 
         /**
          * This service is implemented by the header presentation shape.
@@ -50805,7 +52330,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface HeaderShape extends Shape, drawing.TextShape { }
+        interface HeaderShape extends Shape, drawing.TextShape {}
 
         /**
          * This service is implemented by the notes presentation shape.
@@ -50813,7 +52338,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface NotesShape extends Shape, drawing.TextShape { }
+        interface NotesShape extends Shape, drawing.TextShape {}
 
         /**
          * This service is implemented by the OLE2 presentation shape.
@@ -50821,7 +52346,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface OLE2Shape extends Shape, drawing.OLE2Shape { }
+        interface OLE2Shape extends Shape, drawing.OLE2Shape {}
 
         /**
          * This service is implemented by the outline presentation shape.
@@ -50829,7 +52354,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface OutlinerShape extends Shape, drawing.TextShape { }
+        interface OutlinerShape extends Shape, drawing.TextShape {}
 
         /**
          * This component integrates an outline view to a presentation document into the desktop.
@@ -50848,7 +52373,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface PageShape extends Shape, drawing.PageShape { }
+        interface PageShape extends Shape, drawing.PageShape {}
 
         /**
          * an event has a source that causes an event to be fired and a trigger that defines under which condition an event should be raised and an offset if the
@@ -50918,10 +52443,16 @@ declare namespace com.sun.star {
          * enhances the {@link Presentation} service to give access to a {@link XPresentation2} interface.
          * @since OOo 3.0
          */
-        interface Presentation2 extends Presentation, XPresentation2 { }
+        interface Presentation2 extends Presentation, XPresentation2 {}
 
         /** This is the service provided by a presentation document. */
-        interface PresentationDocument extends drawing.GenericDrawingDocument, XPresentationSupplier, XCustomPresentationSupplier, document.XLinkTargetSupplier {
+        interface PresentationDocument
+            extends
+                drawing.GenericDrawingDocument,
+                XPresentationSupplier,
+                XCustomPresentationSupplier,
+                document.XLinkTargetSupplier
+        {
             addEventListener(Listener: document.XEventListener | lang.XEventListener): void;
             removeEventListener(Listener: document.XEventListener | lang.XEventListener): void;
         }
@@ -51025,7 +52556,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface SlideNumberShape extends Shape, drawing.TextShape { }
+        interface SlideNumberShape extends Shape, drawing.TextShape {}
 
         /**
          * This component integrates a slides view to a presentation document into the desktop.
@@ -51045,7 +52576,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface SubtitleShape extends Shape, drawing.TextShape { }
+        interface SubtitleShape extends Shape, drawing.TextShape {}
 
         /**
          * This service is implemented by the title and subtitle presentation shape.
@@ -51053,7 +52584,7 @@ declare namespace com.sun.star {
          * {@link Presentation} shapes can be used in a presentation page layouts and their position and size is by default set by the presentation shapes on the
          * {@link com.sun.star.drawing.MasterPage} .
          */
-        interface TitleTextShape extends Shape, drawing.TextShape { }
+        interface TitleTextShape extends Shape, drawing.TextShape {}
 
         /**
          * must be supported to provide access to customized presentations of a presentation document.
@@ -51205,7 +52736,12 @@ declare namespace com.sun.star {
              * @param AnimationNode The animation node determine the animations to display.
              * @param aProperties Sequence of property values, which influence the way the slide is displayed. Currently, the following values are recognized: name: Pr
              */
-            displaySlide(xSlide: drawing.XDrawPage, xDrawPages: drawing.XDrawPagesSupplier, AnimationNode: animations.XAnimationNode, aProperties: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            displaySlide(
+                xSlide: drawing.XDrawPage,
+                xDrawPages: drawing.XDrawPagesSupplier,
+                AnimationNode: animations.XAnimationNode,
+                aProperties: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * Query the currently displayed slide.
@@ -51698,7 +53234,11 @@ declare namespace com.sun.star {
              * @param t Time on the transition timeline to display. Must be in the [0,1] range.
              */
             update(t: number): void;
-            viewChanged(view: XSlideShowView, leavingBitmap: rendering.XBitmap, enteringBitmap: rendering.XBitmap): void;
+            viewChanged(
+                view: XSlideShowView,
+                leavingBitmap: rendering.XBitmap,
+                enteringBitmap: rendering.XBitmap,
+            ): void;
         }
 
         /**
@@ -51718,7 +53258,13 @@ declare namespace com.sun.star {
              * @see com.sun.star.animations.TransitionType)
              * @see com.sun.star.animations.TransitionSubType)
              */
-            createTransition(transitionType: number, transitionSubType: number, view: XSlideShowView, leavingBitmap: rendering.XBitmap, enteringBitmap: rendering.XBitmap): XTransition;
+            createTransition(
+                transitionType: number,
+                transitionSubType: number,
+                view: XSlideShowView,
+                leavingBitmap: rendering.XBitmap,
+                enteringBitmap: rendering.XBitmap,
+            ): XTransition;
 
             /** Checks whether this instance provides an implementation for given transition id. */
             hasTransition(transitionType: number, transitionSubType: number): boolean;
@@ -52025,7 +53571,13 @@ declare namespace com.sun.star {
              * @throws ParseException if the input does not conform to the specified file format.
              * @throws com::sun::star::io::IOException if an I/O error occurs.
              */
-            importMetadataFile(Format: number, InStream: io.XInputStream, FileName: string, BaseURI: XURI, Types: LibreOffice.SeqEquiv<XURI>): XURI;
+            importMetadataFile(
+                Format: number,
+                InStream: io.XInputStream,
+                FileName: string,
+                BaseURI: XURI,
+                Types: LibreOffice.SeqEquiv<XURI>,
+            ): XURI;
 
             /**
              * loads document metadata from a medium.
@@ -52053,7 +53605,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if any argument is `NULL`
              * @throws com::sun::star::lang::WrappedTargetException if an error occurs while loading and no InteractionHandler given
              */
-            loadMetadataFromStorage(Storage: embed.XStorage, BaseURI: XURI, InteractionHandler: task.XInteractionHandler): void;
+            loadMetadataFromStorage(
+                Storage: embed.XStorage,
+                BaseURI: XURI,
+                InteractionHandler: task.XInteractionHandler,
+            ): void;
 
             /**
              * remove a content or styles file from the manifest.
@@ -52166,7 +53722,13 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if any parameter is `NULL` , Predicates is empty, or Object is of a type that can not have RDFa me
              * @throws RepositoryException if an error occurs when accessing the repository.
              */
-            setStatementRDFa(Subject: XResource, Predicates: LibreOffice.SeqEquiv<XURI>, Object: XMetadatable, RDFaContent: string, RDFaDatatype: XURI): void;
+            setStatementRDFa(
+                Subject: XResource,
+                Predicates: LibreOffice.SeqEquiv<XURI>,
+                Object: XMetadatable,
+                RDFaContent: string,
+                RDFaDatatype: XURI,
+            ): void;
         }
 
         /**
@@ -52758,7 +54320,7 @@ declare namespace com.sun.star {
          * objects.
          * @deprecated DeprecatedRather use the 'theCoreReflection' singleton.
          */
-        interface CoreReflection extends XIdlReflection, lang.XComponent { }
+        interface CoreReflection extends XIdlReflection, lang.XComponent {}
 
         /** Provides information about a formal parameter of a method. */
         interface ParamInfo {
@@ -52780,7 +54342,13 @@ declare namespace com.sun.star {
          * @see com.sun.star.reflection.TypeDescriptionProvider
          * @see com.sun.star.reflection.XTypeDescription
          */
-        interface TypeDescriptionManager extends container.XHierarchicalNameAccess, container.XSet, lang.XComponent, XTypeDescriptionEnumerationAccess { }
+        interface TypeDescriptionManager
+            extends
+                container.XHierarchicalNameAccess,
+                container.XSet,
+                lang.XComponent,
+                XTypeDescriptionEnumerationAccess
+        {}
 
         /**
          * This service provides type descriptions, i.e. concrete service implementations read from source like the persistent registry database format. ;
@@ -52790,7 +54358,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.reflection.TypeDescriptionManager
          * @see com.sun.star.reflection.XTypeDescription
          */
-        interface TypeDescriptionProvider extends container.XHierarchicalNameAccess, lang.XComponent, XTypeDescriptionEnumerationAccess { }
+        interface TypeDescriptionProvider
+            extends container.XHierarchicalNameAccess, lang.XComponent, XTypeDescriptionEnumerationAccess
+        {}
 
         /**
          * Deprecated, UNOIDL does not have an array concept.
@@ -53361,7 +54931,9 @@ declare namespace com.sun.star {
          * @see XIdlClass
          */
         interface XIdlReflection extends uno.XInterface {
-            forName<K extends keyof LibreOffice.InstantiableNameMap>(aTypeName: K): XIdlClass<LibreOffice.InstantiableNameMap[K]>;
+            forName<K extends keyof LibreOffice.InstantiableNameMap>(
+                aTypeName: K,
+            ): XIdlClass<LibreOffice.InstantiableNameMap[K]>;
 
             /**
              * Obtaining a reflection interface for a type. You specify the type by its name. If the given type name can not be reflected, then a null-reference is
@@ -54110,7 +55682,11 @@ declare namespace com.sun.star {
              * @throws NoSuchTypeNameException in case that the given module name does not exist. This exception will never be thrown in case moduleName is the empty string.
              * @throws InvalidTypeNameException in case that the given module name does exist, but does not specify an UNOIDL module. This exception will never be throw
              */
-            createTypeDescriptionEnumeration(moduleName: string, types: LibreOffice.SeqEquiv<uno.TypeClass>, depth: TypeDescriptionSearchDepth): XTypeDescriptionEnumeration;
+            createTypeDescriptionEnumeration(
+                moduleName: string,
+                types: LibreOffice.SeqEquiv<uno.TypeClass>,
+                depth: TypeDescriptionSearchDepth,
+            ): XTypeDescriptionEnumeration;
         }
 
         /**
@@ -54216,8 +55792,6 @@ declare namespace com.sun.star {
          *
          * **getRootKey**: returns a virtual rootkey of both registries.
          *
-         *
-         *
          * Functions of {@link XRegistryKey} : **openKey**: returns a virtual key which is specified in the local or the system registry.
          *
          * **deleteKey**: deletes the key only if it is present in the local registry.
@@ -54232,8 +55806,6 @@ declare namespace com.sun.star {
          * **getKeyNames**: returns a sequence with the names of all subkeys in both registries.
          *
          * **Note: all write functions only work on the local registry.**:
-         *
-         *
          *
          * How to find the registries: **search for the system registry:  **: The system registry will always be searched in the same directory as the
          * executable. The name of the system registry is "applicat.rdb". If the system registry was not found, then the environment variable STAR_REGISTRY will
@@ -54321,8 +55893,6 @@ declare namespace com.sun.star {
          *
          * **getRootKey**: returns a virtual rootkey of both registries.
          *
-         *
-         *
          * Functions of {@link XRegistryKey} : **openKey**: returns a virtual key which is specified in registy1 or registry2.;
          *
          * **deleteKey**: deletes the key only if it is present in registry1.;
@@ -54338,8 +55908,6 @@ declare namespace com.sun.star {
          *
          * **Note: all write functions only work on registry1.**:
          *
-         *
-         *
          * How to initialize the registries: ;  Use a sequence of {@link XSimpleRegistry} with two elements. The first element must be the registry which is
          * opened with read/write rights and the second element must be the read-only one. ;  Two different ways are possible: ; use {@link
          * com.sun.star.lang.XMultiServiceFactory.createInstanceWithArguments()} to create an instance of this service where the value of the any parameter must
@@ -54348,7 +55916,7 @@ declare namespace com.sun.star {
          *
          * Guarantees: -thread safe
          */
-        interface NestedRegistry extends XSimpleRegistry, lang.XInitialization { }
+        interface NestedRegistry extends XSimpleRegistry, lang.XInitialization {}
 
         /** offers a registry for implementation objects and provides information about the registered implementations. */
         interface XImplementationRegistration extends uno.XInterface {
@@ -54394,7 +55962,12 @@ declare namespace com.sun.star {
              * @param aRegisteredLocation the URL with which the component is actually registered.
              * @param xReg specifies the registry where the component should be installed. If it is a NULL interface, then the component will be installed in the syste
              */
-            registerImplementationWithLocation(aImplementationLoader: string, aLocation: string, aRegisteredLocation: string, xReg: XSimpleRegistry): void;
+            registerImplementationWithLocation(
+                aImplementationLoader: string,
+                aLocation: string,
+                aRegisteredLocation: string,
+                xReg: XSimpleRegistry,
+            ): void;
         }
 
         /**
@@ -54831,7 +56404,7 @@ declare namespace com.sun.star {
         }
 
         /** This service provides the interfaces for a {@link XBitmapCanvas} */
-        interface BitmapCanvas extends XBitmapCanvas, XBitmap { }
+        interface BitmapCanvas extends XBitmapCanvas, XBitmap {}
 
         /**
          * This structure contains the caret information.
@@ -55480,7 +57053,13 @@ declare namespace com.sun.star {
              * @param bUpdateAnimation Whether this method should implicitly call XSpriteCanvas::updateAnimation() or not.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the passed parameters does not lie in the specified, permissible range.
              */
-            setAll(aNewPos: geometry.RealPoint2D, aViewState: ViewState, aRenderState: RenderState, nAlpha: number, bUpdateAnimation: boolean): void;
+            setAll(
+                aNewPos: geometry.RealPoint2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                nAlpha: number,
+                bUpdateAnimation: boolean,
+            ): void;
 
             /**
              * Changes the view state in place for this sprite's animation.
@@ -55598,7 +57177,12 @@ declare namespace com.sun.star {
              * @returns the sequence of extracted points.
              * @throws com::sun::star::lang::IndexOutOfBoundsException if one of the given values exceed the permissible range.
              */
-            getBezierSegments(nPolygonIndex: number, nNumberOfPolygons: number, nPointIndex: number, nNumberOfPoints: number): SafeArray<SafeArray<geometry.RealBezierSegment2D>>;
+            getBezierSegments(
+                nPolygonIndex: number,
+                nNumberOfPolygons: number,
+                nPointIndex: number,
+                nNumberOfPoints: number,
+            ): SafeArray<SafeArray<geometry.RealBezierSegment2D>>;
 
             /**
              * Set a single point on the poly-polygon.
@@ -55620,7 +57204,10 @@ declare namespace com.sun.star {
              * @param nPolygonIndex The index of the polygon to start segment insertion with. This index must be in the range [0,numPolygons], and the insertion will t
              * @throws com::sun::star::lang::IndexOutOfBoundsException if one of the given values exceed the permissible range.
              */
-            setBezierSegments(points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealBezierSegment2D>>, nPolygonIndex: number): void;
+            setBezierSegments(
+                points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealBezierSegment2D>>,
+                nPolygonIndex: number,
+            ): void;
         }
 
         /**
@@ -55691,8 +57278,14 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if one of the parameters are not within the specified range.
              */
             copyRect(
-                sourceCanvas: XBitmapCanvas, sourceRect: geometry.RealRectangle2D, sourceViewState: ViewState, sourceRenderState: RenderState,
-                destRect: geometry.RealRectangle2D, destViewState: ViewState, destRenderState: RenderState): void;
+                sourceCanvas: XBitmapCanvas,
+                sourceRect: geometry.RealRectangle2D,
+                sourceViewState: ViewState,
+                sourceRenderState: RenderState,
+                destRect: geometry.RealRectangle2D,
+                destViewState: ViewState,
+                destRenderState: RenderState,
+            ): void;
         }
 
         /**
@@ -55861,7 +57454,11 @@ declare namespace com.sun.star {
              * @returns the requested font, or an invalid reference, if the request failed.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the parameters is not within the allowed range.
              */
-            createFont(aFontRequest: FontRequest, aExtraFontProperties: LibreOffice.SeqEquiv<beans.PropertyValue>, aFontMatrix: geometry.Matrix2D): XCanvasFont;
+            createFont(
+                aFontRequest: FontRequest,
+                aExtraFontProperties: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                aFontMatrix: geometry.Matrix2D,
+            ): XCanvasFont;
 
             /**
              * Request the associated graphic device for this canvas.
@@ -55880,7 +57477,12 @@ declare namespace com.sun.star {
              * @param aRenderState The render state to be used when drawing this curve.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            drawBezier(aBezierSegment: geometry.RealBezierSegment2D, aEndPoint: geometry.RealPoint2D, aViewState: ViewState, aRenderState: RenderState): void;
+            drawBezier(
+                aBezierSegment: geometry.RealBezierSegment2D,
+                aEndPoint: geometry.RealPoint2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+            ): void;
 
             /**
              * Render the given bitmap.
@@ -55919,7 +57521,12 @@ declare namespace com.sun.star {
              * @param aRenderState The render state to be used when drawing this line.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            drawLine(aStartPoint: geometry.RealPoint2D, aEndPoint: geometry.RealPoint2D, aViewState: ViewState, aRenderState: RenderState): void;
+            drawLine(
+                aStartPoint: geometry.RealPoint2D,
+                aEndPoint: geometry.RealPoint2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+            ): void;
 
             /**
              * Draw a point in device resolution on the device.
@@ -55938,7 +57545,11 @@ declare namespace com.sun.star {
              * @returns a handle to the cached rendering output.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            drawPolyPolygon(xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState): XCachedPrimitive;
+            drawPolyPolygon(
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+            ): XCachedPrimitive;
 
             /**
              * Draw the text given by the substring of the specified string with the given font.
@@ -55953,7 +57564,13 @@ declare namespace com.sun.star {
              * @returns a handle to the cached rendering output.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            drawText(aText: StringContext, xFont: XCanvasFont, aViewState: ViewState, aRenderState: RenderState, nTextDirection: number): XCachedPrimitive;
+            drawText(
+                aText: StringContext,
+                xFont: XCanvasFont,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                nTextDirection: number,
+            ): XCachedPrimitive;
 
             /**
              * Draw the formatted text given by the text layout.
@@ -55967,7 +57584,11 @@ declare namespace com.sun.star {
              * @returns a handle to the cached rendering output.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            drawTextLayout(xLayoutetText: XTextLayout, aViewState: ViewState, aRenderState: RenderState): XCachedPrimitive;
+            drawTextLayout(
+                xLayoutetText: XTextLayout,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+            ): XCachedPrimitive;
 
             /**
              * Fill the given poly-polygon.
@@ -55979,7 +57600,11 @@ declare namespace com.sun.star {
              * @returns a handle to the cached rendering output.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            fillPolyPolygon(xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState): XCachedPrimitive;
+            fillPolyPolygon(
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+            ): XCachedPrimitive;
 
             /**
              * Fill the given poly-polygon with a texture.
@@ -55993,7 +57618,12 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              * @throws VolatileContentDestroyedException if a texture bitmap was volatile, and the content was destroyed before the rendering could take place.
              */
-            fillTexturedPolyPolygon(xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState, xTextures: LibreOffice.SeqEquiv<Texture>): XCachedPrimitive;
+            fillTexturedPolyPolygon(
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                xTextures: LibreOffice.SeqEquiv<Texture>,
+            ): XCachedPrimitive;
 
             /**
              * Fill the given poly-polygon with a mapped texture.
@@ -56010,7 +57640,12 @@ declare namespace com.sun.star {
              * @throws VolatileContentDestroyedException if a texture bitmap was volatile, and the content was destroyed before the rendering could take place.
              */
             fillTextureMappedPolyPolygon(
-                xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState, xTextures: LibreOffice.SeqEquiv<Texture>, xMapping: geometry.XMapping2D): XCachedPrimitive;
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                xTextures: LibreOffice.SeqEquiv<Texture>,
+                xMapping: geometry.XMapping2D,
+            ): XCachedPrimitive;
 
             /**
              * Request the associated graphic device for this canvas.
@@ -56028,7 +57663,10 @@ declare namespace com.sun.star {
              * @returns the list of fonts matching the filter set.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the font properties are invalid or not recognized, or if one of the {@link FontInfo} mem
              */
-            queryAvailableFonts(aFilter: FontInfo, aFontProperties: LibreOffice.SeqEquiv<beans.PropertyValue>): SafeArray<FontInfo>;
+            queryAvailableFonts(
+                aFilter: FontInfo,
+                aFontProperties: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): SafeArray<FontInfo>;
 
             /**
              * Query the polygonal representation of the stroke outlines, as it would be generated by the strokePolyPolygon methods.
@@ -56041,7 +57679,12 @@ declare namespace com.sun.star {
              * @returns a poly-polygon describing the outline of the stroked area.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            queryStrokeShapes(xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState, aStrokeAttributes: StrokeAttributes): XPolyPolygon2D;
+            queryStrokeShapes(
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                aStrokeAttributes: StrokeAttributes,
+            ): XPolyPolygon2D;
 
             /**
              * Stroke each polygon of the provided poly-polygon with the specified stroke attributes.
@@ -56055,7 +57698,12 @@ declare namespace com.sun.star {
              * @returns a handle to the cached rendering output.
              * @throws com::sun::star::lang::IllegalArgumentException if one of the view and render state parameters are outside the specified range.
              */
-            strokePolyPolygon(xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState, aStrokeAttributes: StrokeAttributes): XCachedPrimitive;
+            strokePolyPolygon(
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                aStrokeAttributes: StrokeAttributes,
+            ): XCachedPrimitive;
 
             /**
              * Stroke each polygon of the provided poly-polygon with the specified stroke attributes, fill the stroked outline with the specified texture graphics.
@@ -56072,7 +57720,12 @@ declare namespace com.sun.star {
              * @throws VolatileContentDestroyedException if a texture bitmap was volatile, and the content was destroyed before the rendering could take place.
              */
             strokeTexturedPolyPolygon(
-                xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState, aTextures: LibreOffice.SeqEquiv<Texture>, aStrokeAttributes: StrokeAttributes): XCachedPrimitive;
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                aTextures: LibreOffice.SeqEquiv<Texture>,
+                aStrokeAttributes: StrokeAttributes,
+            ): XCachedPrimitive;
 
             /**
              * Stroke each polygon of the provided poly-polygon with the specified stroke attributes, fill the stroked outline with the specified texture graphics,
@@ -56091,8 +57744,13 @@ declare namespace com.sun.star {
              * @throws VolatileContentDestroyedException if a texture bitmap was volatile, and the content was destroyed before the rendering could take place.
              */
             strokeTextureMappedPolyPolygon(
-                xPolyPolygon: XPolyPolygon2D, aViewState: ViewState, aRenderState: RenderState, aTextures: LibreOffice.SeqEquiv<Texture>, xMapping: geometry.XMapping2D,
-                aStrokeAttributes: StrokeAttributes): XCachedPrimitive;
+                xPolyPolygon: XPolyPolygon2D,
+                aViewState: ViewState,
+                aRenderState: RenderState,
+                aTextures: LibreOffice.SeqEquiv<Texture>,
+                xMapping: geometry.XMapping2D,
+                aStrokeAttributes: StrokeAttributes,
+            ): XCachedPrimitive;
         }
 
         /**
@@ -56179,8 +57837,6 @@ declare namespace com.sun.star {
              *
              * At the same time, the number of elements in this sequence corresponds to the number of color channels for this color space.
              *
-             *
-             *
              * **Remark**: For the standard RGB color space, ComponentTags consists of three elements, containing RGB_RED, RGB_GREEN and RGB_BLUE tags, respectively
              */
             readonly ComponentTags: SafeArray<number>;
@@ -56192,7 +57848,10 @@ declare namespace com.sun.star {
              * @returns the corresponding sequence of device colors in the target color space (e.g. `sequence<double>` or `sequence<byte>` ).
              * @throws a {@link com.sun.star.lang.IllegalArgumentException} , if the input sequence does not match the device color format (e.g. if the number of compon
              */
-            convertColorSpace(deviceColor: LibreOffice.SeqEquiv<ColorComponent>, targetColorSpace: XColorSpace): SafeArray<ColorComponent>;
+            convertColorSpace(
+                deviceColor: LibreOffice.SeqEquiv<ColorComponent>,
+                targetColorSpace: XColorSpace,
+            ): SafeArray<ColorComponent>;
 
             /**
              * Convert sRGB color with linear alpha into this color space.
@@ -56264,8 +57923,6 @@ declare namespace com.sun.star {
              * one of the {@link ColorComponentTag} constants.
              *
              * At the same time, the number of elements in this sequence corresponds to the number of color channels for this color space.
-             *
-             *
              *
              * **Remark**: For the standard RGB color space, ComponentTags consists of three elements, containing RGB_RED, RGB_GREEN and RGB_BLUE tags, respectively
              */
@@ -56364,7 +58021,9 @@ declare namespace com.sun.star {
              * Create a Bezier poly-polygon which can internally use device-optimized representations already.
              * @param points The points of the poly-polygon, in a separate array for every polygon.
              */
-            createCompatibleBezierPolyPolygon(points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealBezierSegment2D>>): XBezierPolyPolygon2D;
+            createCompatibleBezierPolyPolygon(
+                points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealBezierSegment2D>>,
+            ): XBezierPolyPolygon2D;
 
             /**
              * Create a bitmap whose memory layout and sample model is compatible to the graphic device.
@@ -56376,7 +58035,9 @@ declare namespace com.sun.star {
              * Create a line poly-polygon which can internally use device-optimized representations already.
              * @param points The points of the poly-polygon, in a separate array for every polygon.
              */
-            createCompatibleLinePolyPolygon(points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealPoint2D>>): XLinePolyPolygon2D;
+            createCompatibleLinePolyPolygon(
+                points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealPoint2D>>,
+            ): XLinePolyPolygon2D;
 
             /**
              * Create a volatile bitmap with alpha channel that is usable with this graphic device.
@@ -56484,7 +58145,11 @@ declare namespace com.sun.star {
              * Set raw data of a bitmap, in the format as defined by {@link getMemoryLayout()} . With the given rectangle, a subset of the bitmap can be changed.
              * When setting subsets of the bitmap, the same scanline padding takes place as when the whole bitmap is changed.
              */
-            setData(data: LibreOffice.SeqEquiv<number>, bitmapLayout: FloatingPointBitmapLayout, rect: geometry.IntegerRectangle2D): void;
+            setData(
+                data: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: FloatingPointBitmapLayout,
+                rect: geometry.IntegerRectangle2D,
+            ): void;
 
             /**
              * Set a single pixel of the bitmap with the given color value.
@@ -56493,7 +58158,11 @@ declare namespace com.sun.star {
              * Windows, the memory layout can change for the same bitmap, if the user e.g. switches the screen resolution. Thus, this method will throw an
              * IllegalArgumentException, if the memory layout changed between a call to {@link getMemoryLayout()} and {@link setData()} .
              */
-            setPixel(color: LibreOffice.SeqEquiv<number>, bitmapLayout: FloatingPointBitmapLayout, pos: geometry.IntegerPoint2D): void;
+            setPixel(
+                color: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: FloatingPointBitmapLayout,
+                pos: geometry.IntegerPoint2D,
+            ): void;
         }
 
         /**
@@ -56547,7 +58216,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IndexOutOfBoundsException if parts of the given rectangle are outside the permissible bitmap area.
              * @throws com::sun::star::lang::IllegalArgumentException if the given memory layout does not match this bitmap's layout, or if the given data sequence has
              */
-            setData(data: LibreOffice.SeqEquiv<number>, bitmapLayout: FloatingPointBitmapLayout, rect: geometry.IntegerRectangle2D): void;
+            setData(
+                data: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: FloatingPointBitmapLayout,
+                rect: geometry.IntegerRectangle2D,
+            ): void;
 
             /**
              * Set a single pixel of the bitmap with the given color value.
@@ -56561,7 +58234,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IndexOutOfBoundsException if the given point is outside the permissible bitmap area.
              * @throws com::sun::star::lang::IllegalArgumentException if the given memory layout does not match this bitmap's layout, or if the given data sequence has
              */
-            setPixel(color: LibreOffice.SeqEquiv<number>, bitmapLayout: FloatingPointBitmapLayout, pos: geometry.IntegerPoint2D): void;
+            setPixel(
+                color: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: FloatingPointBitmapLayout,
+                pos: geometry.IntegerPoint2D,
+            ): void;
         }
 
         /**
@@ -56632,7 +58309,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IndexOutOfBoundsException if parts of the given rectangle are outside the permissible bitmap area.
              * @throws com::sun::star::lang::IllegalArgumentException if the given memory layout does not match this bitmap's layout, or if the given data sequence has
              */
-            setData(data: LibreOffice.SeqEquiv<number>, bitmapLayout: FloatingPointBitmapLayout, rect: geometry.IntegerRectangle2D): void;
+            setData(
+                data: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: FloatingPointBitmapLayout,
+                rect: geometry.IntegerRectangle2D,
+            ): void;
 
             /**
              * Set a single pixel of the bitmap with the given color value.
@@ -56646,7 +58327,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IndexOutOfBoundsException if the given point is outside the permissible bitmap area.
              * @throws com::sun::star::lang::IllegalArgumentException if the given memory layout does not match this bitmap's layout, or if the given data sequence has
              */
-            setPixel(color: LibreOffice.SeqEquiv<number>, bitmapLayout: FloatingPointBitmapLayout, pos: geometry.IntegerPoint2D): void;
+            setPixel(
+                color: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: FloatingPointBitmapLayout,
+                pos: geometry.IntegerPoint2D,
+            ): void;
         }
 
         /**
@@ -56722,7 +58407,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IndexOutOfBoundsException if parts of the given rectangle are outside the permissible bitmap area.
              * @throws com::sun::star::lang::IllegalArgumentException if the given memory layout does not match this bitmap's layout, or if the given data sequence has
              */
-            setData(data: LibreOffice.SeqEquiv<number>, bitmapLayout: IntegerBitmapLayout, rect: geometry.IntegerRectangle2D): void;
+            setData(
+                data: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: IntegerBitmapLayout,
+                rect: geometry.IntegerRectangle2D,
+            ): void;
 
             /**
              * Set a single pixel of the bitmap with the given color value.
@@ -56739,7 +58428,11 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IndexOutOfBoundsException if the given point is outside the permissible bitmap area.
              * @throws com::sun::star::lang::IllegalArgumentException if the given memory layout does not match this bitmap's layout, or if the given data sequence has
              */
-            setPixel(color: LibreOffice.SeqEquiv<number>, bitmapLayout: IntegerBitmapLayout, pos: geometry.IntegerPoint2D): void;
+            setPixel(
+                color: LibreOffice.SeqEquiv<number>,
+                bitmapLayout: IntegerBitmapLayout,
+                pos: geometry.IntegerPoint2D,
+            ): void;
         }
 
         /**
@@ -56767,8 +58460,6 @@ declare namespace com.sun.star {
              * of a pixel. Color components will appear in the byte sequences returned from the {@link XIntegerBitmap} methods in the order defined here, with the
              * first element starting from the least significant bits of the pixel, etc.
              *
-             *
-             *
              * **Remark**: For the typical 32 bit RGBA color data, the four values would all contain the value eight. For a 16 bit 1555 ARGB format, with mask values
              * 0x8000 for alpha, 0x7C for red, 0x3E for green and 0x1F for blue, the values would be 5, 5, 5, 1, in that order.
              */
@@ -56783,7 +58474,10 @@ declare namespace com.sun.star {
              * @returns the corresponding sequence of device colors in the target color space
              * @throws a {@link com.sun.star.lang.IllegalArgumentException} , if the input sequence does not match the device color format.
              */
-            convertFromIntegerColorSpace(deviceColor: LibreOffice.SeqEquiv<number>, targetColorSpace: XColorSpace): SafeArray<ColorComponent>;
+            convertFromIntegerColorSpace(
+                deviceColor: LibreOffice.SeqEquiv<number>,
+                targetColorSpace: XColorSpace,
+            ): SafeArray<ColorComponent>;
 
             /**
              * Convert sRGB color with linear alpha into this color space.
@@ -56862,7 +58556,10 @@ declare namespace com.sun.star {
              * @returns the corresponding sequence of device colors in the target color space
              * @throws a {@link com.sun.star.lang.IllegalArgumentException} , if the input sequence does not match the device color format.
              */
-            convertToIntegerColorSpace(deviceColor: LibreOffice.SeqEquiv<number>, targetColorSpace: XIntegerBitmapColorSpace): SafeArray<number>;
+            convertToIntegerColorSpace(
+                deviceColor: LibreOffice.SeqEquiv<number>,
+                targetColorSpace: XIntegerBitmapColorSpace,
+            ): SafeArray<number>;
 
             /**
              * Query whether color data bytes need to be swapped.
@@ -56886,8 +58583,6 @@ declare namespace com.sun.star {
              * be less or equal than the value returned from {@link getBitsPerPixel()} . If the sum is less, excess bits are always kept in the most significant bits
              * of a pixel. Color components will appear in the byte sequences returned from the {@link XIntegerBitmap} methods in the order defined here, with the
              * first element starting from the least significant bits of the pixel, etc.
-             *
-             *
              *
              * **Remark**: For the typical 32 bit RGBA color data, the four values would all contain the value eight. For a 16 bit 1555 ARGB format, with mask values
              * 0x8000 for alpha, 0x7C for red, 0x3E for green and 0x1F for blue, the values would be 5, 5, 5, 1, in that order.
@@ -56974,7 +58669,12 @@ declare namespace com.sun.star {
              * @param nPointIndex The index of the point within the first polygon (that with the index number nPolygonIndex) to start extraction with. Set to 0 to star
              * @param nNumberOfPoints The number of points in the last polygon of the extraction sequence, to be extracted. Set to -1 to extract all points from the la
              */
-            getPoints(nPolygonIndex: number, nNumberOfPolygons: number, nPointIndex: number, nNumberOfPoints: number): SafeArray<SafeArray<geometry.RealPoint2D>>;
+            getPoints(
+                nPolygonIndex: number,
+                nNumberOfPolygons: number,
+                nPointIndex: number,
+                nNumberOfPoints: number,
+            ): SafeArray<SafeArray<geometry.RealPoint2D>>;
 
             /** Set a single point on the poly-polygon. The remaining points of the poly-polygon will not be changed by this method. */
             setPoint(point: geometry.RealPoint2D, nPolygonIndex: number, nPointIndex: number): void;
@@ -56987,7 +58687,10 @@ declare namespace com.sun.star {
              * @param nPolygonIndex The index of the polygon to start point insertion with. This index must be in the range [0,numPolygons], and the insertion will tak
              * @throws com::sun::star::lang::IndexOutOfBoundsException if one of the given values exceed the permissible range.
              */
-            setPoints(points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealPoint2D>>, nPolygonIndex: number): void;
+            setPoints(
+                points: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<geometry.RealPoint2D>>,
+                nPolygonIndex: number,
+            ): void;
         }
 
         interface XMtfRenderer extends uno.XInterface {
@@ -57374,7 +59077,10 @@ declare namespace com.sun.star {
              * @param interpolationMode Value of {@link InterpolationMode} , to determine whether and how to interpolate between the provided bitmaps, if animation run
              * @throws VolatileContentDestroyedException if at least one of the bitmap is volatile, and its content has been destroyed by the system.
              */
-            createSpriteFromBitmaps(animationBitmaps: LibreOffice.SeqEquiv<XBitmap>, interpolationMode: number): XAnimatedSprite;
+            createSpriteFromBitmaps(
+                animationBitmaps: LibreOffice.SeqEquiv<XBitmap>,
+                interpolationMode: number,
+            ): XAnimatedSprite;
 
             /**
              * Tells the sprite canvas to now update the screen representation.
@@ -58074,7 +59780,9 @@ declare namespace com.sun.star {
          * @see XFunction
          * @see XReportDefinition
          */
-        interface XFunctions extends container.XContainer, container.XIndexContainer, container.XChild, lang.XComponent {
+        interface XFunctions
+            extends container.XContainer, container.XIndexContainer, container.XChild, lang.XComponent
+        {
             /** factory method for {@link XFunction} . */
             createFunction(): XFunction;
         }
@@ -58181,7 +59889,9 @@ declare namespace com.sun.star {
          * describes a component which may be part of a report.
          * @see XReportDefinition
          */
-        interface XReportComponent extends util.XCloneable, container.XChild, lang.XComponent, drawing.XShape, beans.XPropertySet {
+        interface XReportComponent
+            extends util.XCloneable, container.XChild, lang.XComponent, drawing.XShape, beans.XPropertySet
+        {
             /**
              * specifies the border style of the control.
              *
@@ -58527,7 +60237,9 @@ declare namespace com.sun.star {
             VisitedCharStyleName: string;
         }
 
-        interface XReportControlModel extends XReportComponent, XReportControlFormat, container.XContainer, container.XIndexContainer {
+        interface XReportControlModel
+            extends XReportComponent, XReportControlFormat, container.XContainer, container.XIndexContainer
+        {
             /**
              * Describes the print expression of the report control model. If the expression evaluates to true than the report control model will be printed
              * otherwise not.
@@ -58565,9 +60277,21 @@ declare namespace com.sun.star {
          * A report fulfills several tasks, like storing the structure of its report components and it provides the event environment for its contained elements.
          * @see XReportComponent
          */
-        interface XReportDefinition extends frame.XModel, frame.XLoadable, embed.XVisualObject, document.XStorageBasedDocument, document.XViewDataSupplier,
-            util.XCloseable, ui.XUIConfigurationManagerSupplier, document.XDocumentSubStorageSupplier, style.XStyleFamiliesSupplier, util.XModifiable2, XReportComponent,
-            XFunctionsSupplier {
+        interface XReportDefinition
+            extends
+                frame.XModel,
+                frame.XLoadable,
+                embed.XVisualObject,
+                document.XStorageBasedDocument,
+                document.XViewDataSupplier,
+                util.XCloseable,
+                ui.XUIConfigurationManagerSupplier,
+                document.XDocumentSubStorageSupplier,
+                style.XStyleFamiliesSupplier,
+                util.XModifiable2,
+                XReportComponent,
+                XFunctionsSupplier
+        {
             /** specifies the active connection which is used to create the resulting report. */
             ActiveConnection: sdbc.XConnection;
 
@@ -58778,7 +60502,15 @@ declare namespace com.sun.star {
          * @see XReportDefinition
          * @see XGroup
          */
-        interface XSection extends container.XChild, container.XContainer, drawing.XShapes, container.XEnumerationAccess, beans.XPropertySet, lang.XComponent {
+        interface XSection
+            extends
+                container.XChild,
+                container.XContainer,
+                drawing.XShapes,
+                container.XEnumerationAccess,
+                beans.XPropertySet,
+                lang.XComponent
+        {
             /** Defines the back ground color of the section. */
             BackColor: util.Color;
 
@@ -59110,7 +60842,14 @@ declare namespace com.sun.star {
              * @param Handler a {@link com.sun.star.task.XInteractionHandler} to be passed to ucb. This may be a null interface.
              * @throws com::sun::star::lang::IllegalArgumentException if no string or an empty string is passed as URL
              */
-            create(URL: string, ReadOnly: boolean, locale: lang.Locale, BaseName: string, Comment: string, Handler: task.XInteractionHandler): void;
+            create(
+                URL: string,
+                ReadOnly: boolean,
+                locale: lang.Locale,
+                BaseName: string,
+                Comment: string,
+                Handler: task.XInteractionHandler,
+            ): void;
         }
 
         /** specifies a service providing access to a resource string table implementing the {@link com.sun.star.resource.XStringResourceWithStorage} interface. */
@@ -59124,7 +60863,13 @@ declare namespace com.sun.star {
              * @param Comment Comment stored first in each properties file followed by a line feed character. The line feed character is added automatically and hasn't
              * @throws com::sun::star::lang::IllegalArgumentException if a null interface is passed as Storage
              */
-            create(Storage: embed.XStorage, ReadOnly: boolean, locale: lang.Locale, BaseName: string, Comment: string): void;
+            create(
+                Storage: embed.XStorage,
+                ReadOnly: boolean,
+                locale: lang.Locale,
+                BaseName: string,
+                Comment: string,
+            ): void;
         }
 
         /**
@@ -59263,8 +61008,6 @@ declare namespace com.sun.star {
          *
          * be easily modified, later, to support even more locales.
          *
-         *
-         *
          * One resource bundle is, conceptually, a set of related services that supports `XResourceBundle` . Each related service of `XResourceBundle` has the
          * same base name plus an additional component that identifies its locale. For example, suppose your resource bundle is named `MyResources` . The first
          * service you are likely to implement is the default resource bundle, which has the same name as its family  - `MyResources` . You can also provide as
@@ -59284,8 +61027,6 @@ declare namespace com.sun.star {
          * the `XResourceBundle` implementation using the {@link XResourceBundleLoader} service:
          *
          * {{program example here, see documentation}}
-         *
-         *
          *
          * The first argument specifies the family name of the resource bundle that contains the object in question. The second argument indicates the desired
          * locale. `getBundle` uses these two arguments to construct the name of the `ResourceBundle` subclass it should load according to the following
@@ -59313,8 +61054,6 @@ declare namespace com.sun.star {
          *
          * {{program example here, see documentation}}
          *
-         *
-         *
          * Keys are always `String` s. In this example, the keys are `OkKey` and `CancelKey` . In the above example, the values are also `String` s  - `OK` and
          * `Cancel` -  but they do not have to be. The values can be any type of object.
          *
@@ -59322,8 +61061,6 @@ declare namespace com.sun.star {
          * retrieve them:
          *
          * {{program example here, see documentation}}
-         *
-         *
          *
          * The get methods all require the key as an argument and return the object if found. If the object is not found, the get methods throw a {@link
          * com.sun.star.container.NoSuchElementException} .
@@ -60323,8 +62060,18 @@ declare namespace com.sun.star {
         }
 
         interface XAutomationInvocation extends XInvocation {
-            invokeGetProperty(aFunctionName: string, aParams: LibreOffice.SeqEquiv, aOutParamIndex: [LibreOffice.SeqEquiv<number>], aOutParam: [LibreOffice.SeqEquiv]): any;
-            invokePutProperty(aFunctionName: string, aParams: LibreOffice.SeqEquiv, aOutParamIndex: [LibreOffice.SeqEquiv<number>], aOutParam: [LibreOffice.SeqEquiv]): any;
+            invokeGetProperty(
+                aFunctionName: string,
+                aParams: LibreOffice.SeqEquiv,
+                aOutParamIndex: [LibreOffice.SeqEquiv<number>],
+                aOutParam: [LibreOffice.SeqEquiv],
+            ): any;
+            invokePutProperty(
+                aFunctionName: string,
+                aParams: LibreOffice.SeqEquiv,
+                aOutParamIndex: [LibreOffice.SeqEquiv<number>],
+                aOutParam: [LibreOffice.SeqEquiv],
+            ): any;
         }
 
         /**
@@ -60523,7 +62270,12 @@ declare namespace com.sun.star {
              *
              * The arguments given in **aArgs** can be ignored by the engine. The script is executed asynchronously.
              */
-            runAsync(acript: string, xThis: uno.XInterface, args: LibreOffice.SeqEquiv, xCallback: XEngineListener): void;
+            runAsync(
+                acript: string,
+                xThis: uno.XInterface,
+                args: LibreOffice.SeqEquiv,
+                xCallback: XEngineListener,
+            ): void;
 
             /** sets an access object to get external functions. */
             setLibraryAccess(Library: XLibraryAccess): void;
@@ -60570,7 +62322,13 @@ declare namespace com.sun.star {
              * registers the given "AllListener" object as a listener at the given interface by creating a suitable listener adapter and calling the "addListener"
              * method corresponding to the "ListenerType".
              */
-            attachListener(xTarget: uno.XInterface, xAllListener: XAllListener, aHelper: any, aListenerType: string, aAddListenerParam: string): lang.XEventListener;
+            attachListener(
+                xTarget: uno.XInterface,
+                xAllListener: XAllListener,
+                aHelper: any,
+                aListenerType: string,
+                aAddListenerParam: string,
+            ): lang.XEventListener;
 
             /**
              * registers an object as a listener at the given interface by creating a suitable listener adapter and calling the method which corresponds to the
@@ -60578,14 +62336,26 @@ declare namespace com.sun.star {
              *
              * Only the event corresponding to the given event method will be delegated to **xAllListener** .
              */
-            attachSingleEventListener(xTarget: uno.XInterface, xAllListener: XAllListener, aHelper: any, aListenerType: string, aAddListenerParam: string, aEventMethod: string): lang.XEventListener;
+            attachSingleEventListener(
+                xTarget: uno.XInterface,
+                xAllListener: XAllListener,
+                aHelper: any,
+                aListenerType: string,
+                aAddListenerParam: string,
+                aEventMethod: string,
+            ): lang.XEventListener;
 
             /**
              * removes a listener object as a listener from the given interface.
              *
              * This method can and should be used as a contrary method to the two attach methods.
              */
-            removeListener(xTarget: uno.XInterface, aListenerType: string, aRemoveListenerParam: string, xToRemoveListener: lang.XEventListener): void;
+            removeListener(
+                xTarget: uno.XInterface,
+                aListenerType: string,
+                aRemoveListenerParam: string,
+                xToRemoveListener: lang.XEventListener,
+            ): void;
         }
 
         interface XEventAttacher2 extends XEventAttacher {
@@ -60594,7 +62364,10 @@ declare namespace com.sun.star {
              * that of {@link attachSingleEventListener()} .
              * @see com.sun.star.script.XEventAttacher.attachSingleEventListener
              */
-            attachMultipleEventListeners(xTarget: uno.XInterface, aListeners: LibreOffice.SeqEquiv<EventListener>): SafeArray<lang.XEventListener>;
+            attachMultipleEventListeners(
+                xTarget: uno.XInterface,
+                aListeners: LibreOffice.SeqEquiv<EventListener>,
+            ): SafeArray<lang.XEventListener>;
         }
 
         /** registers listeners for specified events. */
@@ -60691,7 +62464,12 @@ declare namespace com.sun.star {
              * by methods of {@link XEventAttacher} are caught and ignored.
              * @see attach
              */
-            revokeScriptEvent(nIndex: number, aListenerType: string, aEventMethod: string, aRemoveListenerParam: string): void;
+            revokeScriptEvent(
+                nIndex: number,
+                aListenerType: string,
+                aEventMethod: string,
+                aRemoveListenerParam: string,
+            ): void;
 
             /**
              * revokes all events which are registered for the given index.
@@ -60720,7 +62498,7 @@ declare namespace com.sun.star {
              * returns `TRUE` if the method with the specified name exists, else `FALSE` .
              *
              * This optimizes the calling sequence ( {@link XInvocation.hasMethod()} , {@link XInvocation.invoke()} )!
-             * @@param aName        specifies the name of the method.
+             * @param aName        specifies the name of the method.
              */
             hasMethod(aName: string): boolean;
 
@@ -60731,12 +62509,10 @@ declare namespace com.sun.star {
              *
              *     XInvocation::getValue() ) or
              *
-             *
-             *
              *     ( XInvocation::hasProperty(),
              *
              *     XInvocation::setValue() )!
-             * @@param aName    specifies the name of the property.
+             * @param aName    specifies the name of the property.
              */
             hasProperty(aName: string): boolean;
 
@@ -60750,7 +62526,12 @@ declare namespace com.sun.star {
              * @param aOutParamIndex This sequence contains the indices of all parameters that are specified as out or inout.
              * @param aOutParam This sequence contains the values of all parameters that are specified as out or inout and corresponds with the indices provided by the
              */
-            invoke(aFunctionName: string, aParams: LibreOffice.SeqEquiv, aOutParamIndex: [LibreOffice.SeqEquiv<number>], aOutParam: [LibreOffice.SeqEquiv]): any;
+            invoke(
+                aFunctionName: string,
+                aParams: LibreOffice.SeqEquiv,
+                aOutParamIndex: [LibreOffice.SeqEquiv<number>],
+                aOutParam: [LibreOffice.SeqEquiv],
+            ): any;
 
             /**
              * sets a value to the property with the specified name.
@@ -60851,13 +62632,13 @@ declare namespace com.sun.star {
 
             /**
              * returns `TRUE` , if the function is accessible through this library; otherwise it returns `FALSE` .
-             * @@param aFunctionName    the fully qualified name of a function.      (e.g., "UtilLibrary.ModuleDate.FunctionCurrentDate")
+             * @param aFunctionName    the fully qualified name of a function.      (e.g., "UtilLibrary.ModuleDate.FunctionCurrentDate")
              */
             isFunction(aFunctionName: string): boolean;
 
             /**
              * returns `TRUE` if a fully qualified function name begins with this name.
-             * @@param aPathName    a part of a function name (e.g., "UtilLibrary").
+             * @param aPathName    a part of a function name (e.g., "UtilLibrary").
              */
             isValidPath(aPathName: string): boolean;
 
@@ -61319,7 +63100,7 @@ declare namespace com.sun.star {
              * that is used to execute macros, or to create/delete/rename macros or macro containers.
              * @since OOo 2.0
              */
-            interface BrowseNode extends XBrowseNode, XInvocation { }
+            interface BrowseNode extends XBrowseNode, XInvocation {}
 
             /**
              * This interface represents a node in the hierarchy used to browse available scripts. Objects implementing this interface are expected to also implement
@@ -61484,7 +63265,7 @@ declare namespace com.sun.star {
             }
 
             /** This service providers a means to browse and execute scripts. */
-            interface ScriptProvider extends browse.BrowseNode, XScriptProvider { }
+            interface ScriptProvider extends browse.BrowseNode, XScriptProvider {}
 
             /** This service is used to help transform Scripting Framework storage locations to Scripting Framework script URIs and vice versa. */
             interface ScriptURIHelper extends XScriptURIHelper {
@@ -61507,7 +63288,11 @@ declare namespace com.sun.star {
                  * @returns the value returned from the function being invoked
                  * @throws com::sun::star::reflection::InvocationTargetException if and error occurs while attempting to invoke a script the information is captured. If the
                  */
-                invoke(aParams: LibreOffice.SeqEquiv, aOutParamIndex: [LibreOffice.SeqEquiv<number>], aOutParam: [LibreOffice.SeqEquiv]): any;
+                invoke(
+                    aParams: LibreOffice.SeqEquiv,
+                    aOutParamIndex: [LibreOffice.SeqEquiv<number>],
+                    aOutParam: [LibreOffice.SeqEquiv],
+                ): any;
             }
 
             /**
@@ -61878,10 +63663,10 @@ declare namespace com.sun.star {
          * represents a procedure call. The service differs only in the access of the columns and parameters to the service {@link
          * com.sun.star.sdbc.CallableStatement} .
          */
-        interface CallableStatement extends sdbc.CallableStatement, PreparedStatement { }
+        interface CallableStatement extends sdbc.CallableStatement, PreparedStatement {}
 
         /** describes the common properties of a database column. */
-        interface Column extends sdbcx.Column, ColumnSettings { }
+        interface Column extends sdbcx.Column, ColumnSettings {}
 
         /** specifies the standard model of an {@link ColumnDescriptorControl} . */
         interface ColumnDescriptorControlModel extends awt.UnoControlModel {
@@ -61953,8 +63738,16 @@ declare namespace com.sun.star {
         }
 
         /** extends the {@link com.sun.star.sdbc.Connection} of SDBC by providing the data definitions of a connected database. */
-        interface Connection extends sdbc.Connection, container.XChild, XCommandPreparation, sdbcx.DatabaseDefinition, XQueriesSupplier, XSQLQueryComposerFactory,
-            lang.XMultiServiceFactory { }
+        interface Connection
+            extends
+                sdbc.Connection,
+                container.XChild,
+                XCommandPreparation,
+                sdbcx.DatabaseDefinition,
+                XQueriesSupplier,
+                XSQLQueryComposerFactory,
+                lang.XMultiServiceFactory
+        {}
 
         /**
          * descriptor for accessing basic data access objects.
@@ -62191,7 +63984,14 @@ declare namespace com.sun.star {
          * connection to the database.
          * @deprecated Deprecated
          */
-        interface DatabaseAccessConnection extends sdbc.Connection, sdbcx.DatabaseDefinition, container.XChild, XSQLQueryComposerFactory, XQueriesSupplier { }
+        interface DatabaseAccessConnection
+            extends
+                sdbc.Connection,
+                sdbcx.DatabaseDefinition,
+                container.XChild,
+                XSQLQueryComposerFactory,
+                XQueriesSupplier
+        {}
 
         /**
          * is the context for data access beans. It allows to register aliases for database access beans. It is possible to have different aliases for different
@@ -62206,7 +64006,9 @@ declare namespace com.sun.star {
          * @deprecated Deprecated
          * @see com.sun.star.util.XLocalizedAliases
          */
-        interface DatabaseAccessContext extends container.XEnumerationAccess, container.XNameAccess, util.XLocalizedAliases, lang.XLocalizable { }
+        interface DatabaseAccessContext
+            extends container.XEnumerationAccess, container.XNameAccess, util.XLocalizedAliases, lang.XLocalizable
+        {}
 
         /**
          * is a factory to create data access beans. Data access beans are shared among components, so if an already existing bean is requested, the existing one
@@ -62295,8 +64097,16 @@ declare namespace com.sun.star {
          * is a factory to establish database connections. It should be registered at a {@link com.sun.star.uno.NamingService} .
          * @see com.sun.star.sdb.DatabaseContext
          */
-        interface DataSource extends beans.XPropertySet, XCompletedConnection, sdbc.XIsolatedConnection, util.XFlushable, XQueryDefinitionsSupplier, sdbc.XDataSource,
-            XBookmarksSupplier {
+        interface DataSource
+            extends
+                beans.XPropertySet,
+                XCompletedConnection,
+                sdbc.XIsolatedConnection,
+                util.XFlushable,
+                XQueryDefinitionsSupplier,
+                sdbc.XDataSource,
+                XBookmarksSupplier
+        {
             /**
              * is a list of arbitrary string tag/value pairs as connection arguments
              *
@@ -62390,7 +64200,9 @@ declare namespace com.sun.star {
          *
          * Here, **system wide registered** means registered on the (one and only) instance of the {@link com.sun.star.sdb.DatabaseContext} service.
          */
-        interface DatasourceAdministrationDialog extends beans.XPropertySet, ui.dialogs.XExecutableDialog, lang.XInitialization {
+        interface DatasourceAdministrationDialog
+            extends beans.XPropertySet, ui.dialogs.XExecutableDialog, lang.XInitialization
+        {
             /**
              * parent window to use for the administration dialog
              *
@@ -62447,7 +64259,14 @@ declare namespace com.sun.star {
          * @see com.sun.star.frame.XDispatchProvider
          * @see com.sun.star.frame.XDispatchProviderInterceptor
          */
-        interface DataSourceBrowser extends form.FormController, frame.XController, lang.XInitialization, frame.XDispatchProvider, ui.XContextMenuInterception {
+        interface DataSourceBrowser
+            extends
+                form.FormController,
+                frame.XController,
+                lang.XInitialization,
+                frame.XDispatchProvider,
+                ui.XContextMenuInterception
+        {
             getModel(): awt.XTabControllerModel;
             getModel(): frame.XModel;
         }
@@ -62461,15 +64280,22 @@ declare namespace com.sun.star {
          *
          * To reflect the changes with the underlying database, a refresh mechanism needs to be supported.
          */
-        interface DefinitionContainer extends container.XNameAccess, container.XNameContainer, container.XIndexAccess, container.XEnumerationAccess, util.XRefreshable,
-            lang.XSingleServiceFactory { }
+        interface DefinitionContainer
+            extends
+                container.XNameAccess,
+                container.XNameContainer,
+                container.XIndexAccess,
+                container.XEnumerationAccess,
+                util.XRefreshable,
+                lang.XSingleServiceFactory
+        {}
 
         /**
          * defines the basic functionality for an object in the hierarchy of sub documents of a {@link OfficeDatabaseDocument} .
          * @see DocumentDefinition
          * @see DocumentContainer
          */
-        interface DefinitionContent extends ucb.Content, container.XHierarchicalName { }
+        interface DefinitionContent extends ucb.Content, container.XHierarchicalName {}
 
         /**
          * specifies documents which belong to a database source.
@@ -62497,10 +64323,22 @@ declare namespace com.sun.star {
          * @see DocumentDefinition
          * @see OfficeDatabaseDocument
          */
-        interface DocumentContainer extends DefinitionContainer, DefinitionContent, frame.XComponentLoader, lang.XMultiServiceFactory, container.XHierarchicalNameContainer {
-            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(aServiceSpecifier: K): LibreOffice.ServicesNameMap[K];
+        interface DocumentContainer
+            extends
+                DefinitionContainer,
+                DefinitionContent,
+                frame.XComponentLoader,
+                lang.XMultiServiceFactory,
+                container.XHierarchicalNameContainer
+        {
+            createInstance<K extends keyof LibreOffice.ServicesNameMap = any>(
+                aServiceSpecifier: K,
+            ): LibreOffice.ServicesNameMap[K];
             createInstance(aServiceSpecifier?: string): uno.XInterface;
-            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(ServiceSpecifier: K, Arguments: LibreOffice.SeqEquiv): LibreOffice.ServicesNameMap[K];
+            createInstanceWithArguments<K extends keyof LibreOffice.ServicesNameMap = any>(
+                ServiceSpecifier: K,
+                Arguments: LibreOffice.SeqEquiv,
+            ): LibreOffice.ServicesNameMap[K];
             createInstanceWithArguments(aArguments: LibreOffice.SeqEquiv | string): uno.XInterface;
         }
 
@@ -62509,7 +64347,7 @@ declare namespace com.sun.star {
          * @see DataSource
          * @see XDocumentDataSource
          */
-        interface DocumentDataSource extends DataSource, XDocumentDataSource { }
+        interface DocumentDataSource extends DataSource, XDocumentDataSource {}
 
         /**
          * specifies a sub document of a {@link OfficeDatabaseDocument} .
@@ -62577,7 +64415,11 @@ declare namespace com.sun.star {
          */
         interface FilterDialog extends ui.dialogs.XExecutableDialog {
             createDefault(): void;
-            createWithQuery(QueryComposer: XSingleSelectQueryComposer, RowSet: sdbc.XRowSet, ParentWindow: awt.XWindow): void;
+            createWithQuery(
+                QueryComposer: XSingleSelectQueryComposer,
+                RowSet: sdbc.XRowSet,
+                ParentWindow: awt.XWindow,
+            ): void;
         }
 
         /**
@@ -62591,8 +64433,16 @@ declare namespace com.sun.star {
          * @see com.sun.star.document.OfficeDocument
          * @since OOo 2.0
          */
-        interface OfficeDatabaseDocument extends document.OfficeDocument, XOfficeDatabaseDocument, document.XEmbeddedScripts, script.provider.XScriptProviderSupplier,
-            frame.XLoadable, document.XDocumentEventBroadcaster, util.XCloseable {
+        interface OfficeDatabaseDocument
+            extends
+                document.OfficeDocument,
+                XOfficeDatabaseDocument,
+                document.XEmbeddedScripts,
+                script.provider.XScriptProviderSupplier,
+                frame.XLoadable,
+                document.XDocumentEventBroadcaster,
+                util.XCloseable
+        {
             addEventListener(Listener: document.XEventListener | lang.XEventListener): void;
             removeEventListener(Listener: document.XEventListener | lang.XEventListener): void;
         }
@@ -62638,7 +64488,7 @@ declare namespace com.sun.star {
          * represents a precompiled SQL statement. The service differs only in the access of the columns and parameters to the service {@link
          * com.sun.star.sdbc.PreparedStatement} .
          */
-        interface PreparedStatement extends sdbc.PreparedStatement, sdbcx.XColumnsSupplier { }
+        interface PreparedStatement extends sdbc.PreparedStatement, sdbcx.XColumnsSupplier {}
 
         /**
          * is a stored definition of a SQL query.
@@ -62646,7 +64496,9 @@ declare namespace com.sun.star {
          * It can be used if there is a need to execute SQL statements more than once, or if you want to format the query result fields differently from the
          * underlying table definitions.
          */
-        interface Query extends XQueryDefinition, DataSettings, sdbcx.XDataDescriptorFactory, sdbcx.XRename, sdbcx.XColumnsSupplier { }
+        interface Query
+            extends XQueryDefinition, DataSettings, sdbcx.XDataDescriptorFactory, sdbcx.XRename, sdbcx.XColumnsSupplier
+        {}
 
         /**
          * is a stored definition of a SQL "Select statement".
@@ -62654,7 +64506,9 @@ declare namespace com.sun.star {
          * It can be used, if there is a need to execute SQL statement more than once or if you want to format the query result fields different from the
          * underlying table definitions.
          */
-        interface QueryDescriptor extends sdbcx.Descriptor, sdbcx.XDataDescriptorFactory, DataSettings, sdbcx.XColumnsSupplier {
+        interface QueryDescriptor
+            extends sdbcx.Descriptor, sdbcx.XDataDescriptorFactory, DataSettings, sdbcx.XColumnsSupplier
+        {
             /** is the command of the query, this is typically a select statement. */
             Command: string;
 
@@ -62686,29 +64540,19 @@ declare namespace com.sun.star {
          *
          * In `Query Mode` , the designer is used to modify an existing or create a new client-side query.
          *
-         *
-         *
          * <a name="view_mode" **View Mode**
          *
          * In `View Mode` , the designer is used to modify an existing or create a new server-side view.
          *
-         *
-         *
          * The view which is being designed must support the {@link com.sun.star.sdbcx.XAlterView} interface, except when a new view is being designed. In the
          * latter case, the designer closes itself automatically when `XAlterView` is not supported, and the view has been saved.
-         *
-         *
          *
          * <a name="command_mode" **Command Mode**
          *
          * In `Command Mode` , the designer is used to design an standalone SQL command.
          *
-         *
-         *
          * The client of the designer is then responsible to listen at changes in the {@link ActiveCommand} and {@link EscapeProcessing} members, which are
          * updated every time the user saves the command.
-         *
-         *
          *
          * ** Initialization**
          *
@@ -62785,7 +64629,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.frame.XDispatchProviderInterceptor
          * @since OOo 1.1.2
          */
-        interface RelationDesign extends frame.XController, lang.XInitialization { }
+        interface RelationDesign extends frame.XController, lang.XInitialization {}
 
         /** describes a column of a result set. */
         interface ResultColumn extends sdbcx.Column, ColumnSettings {
@@ -62830,7 +64674,7 @@ declare namespace com.sun.star {
         }
 
         /** extends the {@link com.sun.star.sdbcx.ResultSet} by a more sophisticated access to the result sets data. */
-        interface ResultSet extends sdbcx.ResultSet, sdbcx.XColumnsSupplier { }
+        interface ResultSet extends sdbcx.ResultSet, sdbcx.XColumnsSupplier {}
 
         /** indicates the type of change action on the data source. */
         interface RowChangeEvent extends lang.EventObject {
@@ -62861,8 +64705,17 @@ declare namespace com.sun.star {
          * @see com.sun.star.sdb.RowChangeEvent
          * @see com.sun.star.sdb.RowsChangeEvent  **Notifications**  A row set is able to be operated in various ways, and additionally it notifies various chang
          */
-        interface RowSet extends sdbc.RowSet, ResultSet, XCompletedExecution, XRowSetApproveBroadcaster, sdbc.XResultSetUpdate, sdbcx.XDeleteRows, XResultSetAccess,
-            XParametersSupplier {
+        interface RowSet
+            extends
+                sdbc.RowSet,
+                ResultSet,
+                XCompletedExecution,
+                XRowSetApproveBroadcaster,
+                sdbc.XResultSetUpdate,
+                sdbcx.XDeleteRows,
+                XResultSetAccess,
+                XParametersSupplier
+        {
             /**
              * is the command which is currently used.
              * @see com.sun.star.sdb.CommandType
@@ -62949,7 +64802,9 @@ declare namespace com.sun.star {
          * group by, having and order criteria, as well as the corresponding select columns and tables. If supported, it even gives access to the parameters.
          * @see com.sun.star.sdb.SingleSelectQueryComposer
          */
-        interface SingleSelectQueryAnalyzer extends XSingleSelectQueryAnalyzer, sdbcx.XTablesSupplier, sdbcx.XColumnsSupplier, XParametersSupplier { }
+        interface SingleSelectQueryAnalyzer
+            extends XSingleSelectQueryAnalyzer, sdbcx.XTablesSupplier, sdbcx.XColumnsSupplier, XParametersSupplier
+        {}
 
         /**
          * represents a service for composing a single select statement.
@@ -62959,7 +64814,9 @@ declare namespace com.sun.star {
          *
          * A {@link SingleSelectQueryComposer} is usually obtained from a {@link Connection} using the {@link com.sun.star.lang.XMultiServiceFactory} interface.
          */
-        interface SingleSelectQueryComposer extends beans.XPropertySet, SingleSelectQueryAnalyzer, XSingleSelectQueryComposer {
+        interface SingleSelectQueryComposer
+            extends beans.XPropertySet, SingleSelectQueryAnalyzer, XSingleSelectQueryComposer
+        {
             /** is the original SQL statement set with the interface {@link com.sun.star.sdb.XSingleSelectQueryAnalyzer} . */
             Original: string;
         }
@@ -62991,7 +64848,7 @@ declare namespace com.sun.star {
          * It hides the complexity of parsing and evaluating SQL Statements and provides sophisticated methods for expanding a SQL-Statement with filter and
          * order criteria.
          */
-        interface SQLQueryComposer extends XSQLQueryComposer, sdbcx.XTablesSupplier, sdbcx.XColumnsSupplier { }
+        interface SQLQueryComposer extends XSQLQueryComposer, sdbcx.XTablesSupplier, sdbcx.XColumnsSupplier {}
 
         /** extends the service {@link com.sun.star.sdbcx.Table} with additional display information, sorting, and filtering criteria. */
         interface Table extends sdbcx.Table, DataSettings {
@@ -63012,7 +64869,7 @@ declare namespace com.sun.star {
         }
 
         /** extends the service {@link com.sun.star.sdbcx.TableDescriptor} with additional display information, sorting, and filtering criteria. */
-        interface TableDescriptor extends sdbcx.TableDescriptor, DataSettings { }
+        interface TableDescriptor extends sdbcx.TableDescriptor, DataSettings {}
 
         /**
          * implements a component which allows the creation of tables.
@@ -63026,7 +64883,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.frame.XDispatchProviderInterceptor
          * @since OOo 1.1.2
          */
-        interface TableDesign extends frame.XController, lang.XInitialization { }
+        interface TableDesign extends frame.XController, lang.XInitialization {}
 
         /** is used to alter the command of a query. */
         interface XAlterQuery extends uno.XInterface {
@@ -63544,8 +65401,15 @@ declare namespace com.sun.star {
          * Provides an interface for the new-style {@link DatabaseContext} service to implement.
          * @since LibreOffice 4.0
          */
-        interface XDatabaseContext extends container.XEnumerationAccess, container.XNameAccess, uno.XNamingService, container.XContainer, lang.XSingleServiceFactory,
-            XDatabaseRegistrations { }
+        interface XDatabaseContext
+            extends
+                container.XEnumerationAccess,
+                container.XNameAccess,
+                uno.XNamingService,
+                container.XContainer,
+                lang.XSingleServiceFactory,
+                XDatabaseRegistrations
+        {}
 
         /**
          * is not to be used anymore.
@@ -63715,7 +65579,9 @@ declare namespace com.sun.star {
         }
 
         /** simplifies the accessing of data sources, and it's corresponding database document and forms, and reports. */
-        interface XOfficeDatabaseDocument extends XFormDocumentsSupplier, XReportDocumentsSupplier, document.XDocumentSubStorageSupplier {
+        interface XOfficeDatabaseDocument
+            extends XFormDocumentsSupplier, XReportDocumentsSupplier, document.XDocumentSubStorageSupplier
+        {
             /** provides access to the one and only {@link DataSource} associated with this document */
             DataSource: sdbc.XDataSource;
         }
@@ -63755,7 +65621,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XQueryDefinition extends beans.XPropertySet, ucb.XContent, lang.XComponent { }
+        interface XQueryDefinition extends beans.XPropertySet, ucb.XContent, lang.XComponent {}
 
         /** provides the access to a container of database command definitions. */
         interface XQueryDefinitionsSupplier extends uno.XInterface {
@@ -64415,7 +66281,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XTextConnectionSettings extends ui.dialogs.XExecutableDialog, beans.XPropertySet { }
+        interface XTextConnectionSettings extends ui.dialogs.XExecutableDialog, beans.XPropertySet {}
 
         namespace application {
             /**
@@ -64491,12 +66357,24 @@ declare namespace com.sun.star {
                  * @param InteractionHandler specifies an interaction handler to use when user input is required.  When specifying this parameter, you should use an implem
                  * @see com.sun.star.sdb.InteractionHandler
                  */
-                createWithInteractionHandler(Source: beans.XPropertySet, Destination: beans.XPropertySet, InteractionHandler: task.XInteractionHandler): void;
+                createWithInteractionHandler(
+                    Source: beans.XPropertySet,
+                    Destination: beans.XPropertySet,
+                    InteractionHandler: task.XInteractionHandler,
+                ): void;
             }
 
             /** is the default controller implementation for OpenOffice.org's database application. */
-            interface DefaultViewController extends frame.Controller, ui.XContextMenuInterception, awt.XUserInputInterception, view.XSelectionSupplier, frame.XTitle,
-                frame.XTitleChangeBroadcaster, XDatabaseDocumentUI { }
+            interface DefaultViewController
+                extends
+                    frame.Controller,
+                    ui.XContextMenuInterception,
+                    awt.XUserInputInterception,
+                    view.XSelectionSupplier,
+                    frame.XTitle,
+                    frame.XTitleChangeBroadcaster,
+                    XDatabaseDocumentUI
+            {}
 
             /** @since LibreOffice 4.1 */
             interface MacroMigrationWizard extends ui.dialogs.XExecutableDialog {
@@ -64709,7 +66587,11 @@ declare namespace com.sun.star {
                  * @param Arguments The meaning of the arguments is defined at the service which is effectively created. See the [above table]{@link url="#component_types"
                  * @param DocumentDefinition Upon successful return, and if and only if ObjectType equals {@link DatabaseObject.FORM} or {@link DatabaseObject.REPORT} , th
                  */
-                createComponentWithArguments(ObjectType: number, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>, DocumentDefinition: [lang.XComponent]): lang.XComponent;
+                createComponentWithArguments(
+                    ObjectType: number,
+                    Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                    DocumentDefinition: [lang.XComponent],
+                ): lang.XComponent;
 
                 /** provides access to the data source belong to the database document */
                 DataSource: sdbc.XDataSource;
@@ -64757,7 +66639,12 @@ declare namespace com.sun.star {
                  * The meaning of the arguments is defined at the service which is effectively created. See the [above table]{@link url="#component_types"} for a list of
                  * those services.
                  */
-                loadComponentWithArguments(ObjectType: number, ObjectName: string, ForEditing: boolean, Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>): lang.XComponent;
+                loadComponentWithArguments(
+                    ObjectType: number,
+                    ObjectName: string,
+                    ForEditing: boolean,
+                    Arguments: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                ): lang.XComponent;
 
                 /**
                  * contains all sub components of the database document
@@ -64952,7 +66839,11 @@ declare namespace com.sun.star {
                  * @param keepFieldsAlive If (and only if) {@link CommandType} is {@link CommandType.COMMAND} , the fields collection which is returned by this function
                  * @returns the container of the columns (aka fields) of the object
                  */
-                getFieldsByCommandDescriptor(commandType: number, command: string, keepFieldsAlive: [lang.XComponent]): container.XNameAccess;
+                getFieldsByCommandDescriptor(
+                    commandType: number,
+                    command: string,
+                    keepFieldsAlive: [lang.XComponent],
+                ): container.XNameAccess;
 
                 /**
                  * returns an instance supporting the {@link XObjectNames} interface, which provides access to functionality around table and query names.
@@ -65138,7 +67029,11 @@ declare namespace com.sun.star {
                  * @see com.sun.star.sdbcx.XAlterTable
                  * @throws com::sun::star::sdbc::SQLException
                  */
-                alterColumnByName(table: beans.XPropertySet, columnName: string, columnDescriptor: beans.XPropertySet): void;
+                alterColumnByName(
+                    table: beans.XPropertySet,
+                    columnName: string,
+                    columnDescriptor: beans.XPropertySet,
+                ): void;
 
                 /**
                  * drops an object of the related container identified by its name.
@@ -65337,7 +67232,7 @@ declare namespace com.sun.star {
          * For maximum portability, a call's {@link com.sun.star.sdbc.ResultSet} objects and update counts should be processed prior to getting the values of
          * output parameters.
          */
-        interface CallableStatement extends PreparedStatement, XRow, XOutParameters { }
+        interface CallableStatement extends PreparedStatement, XRow, XOutParameters {}
 
         /** @deprecated Deprecatedindicates the type of change action on the data source. */
         interface ChangeEvent extends lang.EventObject {
@@ -65364,7 +67259,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.sdbc.XResultSet
          * @see com.sun.star.sdbc.XDatabaseMetaData
          */
-        interface Connection extends lang.XComponent, XConnection, XWarningsSupplier { }
+        interface Connection extends lang.XComponent, XConnection, XWarningsSupplier {}
 
         /**
          * represents the properties for a connection (session) with a specific database. These properties can be used when calling the method {@link
@@ -65611,14 +67506,23 @@ declare namespace com.sun.star {
          *
          * Example of setting a parameter; `con` is an active connection. {{program example here, see documentation}}
          *
-         *
-         *
          * Only one {@link com.sun.star.sdbc.ResultSet} per {@link com.sun.star.sdbc.Statement} can be open at any point in time. Therefore, if the reading of
          * one {@link ResultSet} is interleaved with the reading of another, each must have been generated by different Statements. All statement `execute`
          * methods implicitly close a statement's current {@link ResultSet} if an open one exists.
          */
-        interface PreparedStatement extends lang.XComponent, XCloseable, beans.XPropertySet, util.XCancellable, XPreparedStatement, XResultSetMetaDataSupplier,
-            XParameters, XPreparedBatchExecution, XWarningsSupplier, XMultipleResults {
+        interface PreparedStatement
+            extends
+                lang.XComponent,
+                XCloseable,
+                beans.XPropertySet,
+                util.XCancellable,
+                XPreparedStatement,
+                XResultSetMetaDataSupplier,
+                XParameters,
+                XPreparedBatchExecution,
+                XWarningsSupplier,
+                XMultipleResults
+        {
             /**
              * defines the SQL cursor name that will be used by subsequent {@link Statement}`execute` methods.
              *
@@ -65706,8 +67610,19 @@ declare namespace com.sun.star {
          *
          * The number, types, and properties of a {@link ResultSet} 's columns are provided by the ResultSetMetaData object returned by the getMetaData method.
          */
-        interface ResultSet extends lang.XComponent, XCloseable, beans.XPropertySet, XWarningsSupplier, XResultSetMetaDataSupplier, XResultSet, XResultSetUpdate, XRow,
-            XColumnLocate, XRowUpdate {
+        interface ResultSet
+            extends
+                lang.XComponent,
+                XCloseable,
+                beans.XPropertySet,
+                XWarningsSupplier,
+                XResultSetMetaDataSupplier,
+                XResultSet,
+                XResultSetUpdate,
+                XRow,
+                XColumnLocate,
+                XRowUpdate
+        {
             /**
              * defines the SQL cursor name that will be used by subsequent {@link Statement}`execute` methods.
              *
@@ -65848,7 +67763,17 @@ declare namespace com.sun.star {
          * with the reading of another, each must have been generated by different Statements. All statement `execute` methods implicitly close a statement's
          * current {@link ResultSet} if an open one exists.
          */
-        interface Statement extends lang.XComponent, XCloseable, beans.XPropertySet, util.XCancellable, XStatement, XBatchExecution, XWarningsSupplier, XMultipleResults {
+        interface Statement
+            extends
+                lang.XComponent,
+                XCloseable,
+                beans.XPropertySet,
+                util.XCancellable,
+                XStatement,
+                XBatchExecution,
+                XWarningsSupplier,
+                XMultipleResults
+        {
             /**
              * defines the SQL cursor name that will be used by subsequent {@link Statement}`execute` methods.
              *
@@ -66432,7 +68357,7 @@ declare namespace com.sun.star {
             TypeMap: container.XNameAccess;
         }
 
-        interface XConnectionPool extends XDriverManager, XDriverAccess { }
+        interface XConnectionPool extends XDriverManager, XDriverAccess {}
 
         /**
          * provides comprehensive information about the database as a whole.
@@ -66578,7 +68503,13 @@ declare namespace com.sun.star {
              * @returns each row is a column description
              * @throws SQLException if a database access error occurs.
              */
-            getBestRowIdentifier(catalog: any, schema: string, table: string, scope: number, nullable: boolean): XResultSet;
+            getBestRowIdentifier(
+                catalog: any,
+                schema: string,
+                table: string,
+                scope: number,
+                nullable: boolean,
+            ): XResultSet;
 
             /**
              * gets the catalog names available in this database. The results are ordered by catalog name.
@@ -66650,7 +68581,12 @@ declare namespace com.sun.star {
              * @returns each row is a column description
              * @throws SQLException if a database access error occurs.
              */
-            getColumns(catalog: any, schemaPattern: string, tableNamePattern: string, columnNamePattern: string): XResultSet;
+            getColumns(
+                catalog: any,
+                schemaPattern: string,
+                tableNamePattern: string,
+                columnNamePattern: string,
+            ): XResultSet;
 
             /**
              * retrieves the connection that produced this metadata object.
@@ -66688,7 +68624,14 @@ declare namespace com.sun.star {
              * @returns each row is a foreign key column description
              * @throws SQLException if a database access error occurs.
              */
-            getCrossReference(primaryCatalog: any, primarySchema: string, primaryTable: string, foreignCatalog: any, foreignSchema: string, foreignTable: string): XResultSet;
+            getCrossReference(
+                primaryCatalog: any,
+                primarySchema: string,
+                primaryTable: string,
+                foreignCatalog: any,
+                foreignSchema: string,
+                foreignTable: string,
+            ): XResultSet;
 
             /** returns the name of the database product. */
             getDatabaseProductName(): string;
@@ -66809,7 +68752,13 @@ declare namespace com.sun.star {
              * @returns each row is an index column description
              * @throws SQLException if a database access error occurs.
              */
-            getIndexInfo(catalog: any, schema: string, table: string, unique: boolean, approximate: boolean): XResultSet;
+            getIndexInfo(
+                catalog: any,
+                schema: string,
+                table: string,
+                unique: boolean,
+                approximate: boolean,
+            ): XResultSet;
 
             /**
              * return the maximal number of hex characters in an inline binary literal
@@ -66999,7 +68948,12 @@ declare namespace com.sun.star {
              * @returns each row describes a stored procedure parameter or column
              * @throws SQLException if a database access error occurs.
              */
-            getProcedureColumns(catalog: any, schemaPattern: string, procedureNamePattern: string, columnNamePattern: string): XResultSet;
+            getProcedureColumns(
+                catalog: any,
+                schemaPattern: string,
+                procedureNamePattern: string,
+                columnNamePattern: string,
+            ): XResultSet;
 
             /**
              * Gets a description of the stored procedures available in a catalog.
@@ -67118,7 +69072,12 @@ declare namespace com.sun.star {
              * @returns each row is a table description
              * @throws SQLException if a database access error occurs.
              */
-            getTables(catalog: any, schemaPattern: string, tableNamePattern: string, types: LibreOffice.SeqEquiv<string>): XResultSet;
+            getTables(
+                catalog: any,
+                schemaPattern: string,
+                tableNamePattern: string,
+                types: LibreOffice.SeqEquiv<string>,
+            ): XResultSet;
 
             /**
              * gets the table types available in this database. The results are ordered by table type.
@@ -67178,7 +69137,12 @@ declare namespace com.sun.star {
              * @returns each row is a type description
              * @throws SQLException if a database access error occurs.
              */
-            getUDTs(catalog: any, schemaPattern: string, typeNamePattern: string, types: LibreOffice.SeqEquiv<number>): XResultSet;
+            getUDTs(
+                catalog: any,
+                schemaPattern: string,
+                typeNamePattern: string,
+                types: LibreOffice.SeqEquiv<number>,
+            ): XResultSet;
 
             /** returns the URL for the database connection */
             getURL(): string;
@@ -68177,7 +70141,10 @@ declare namespace com.sun.star {
              * @returns an array of {@link DriverPropertyInfo} objects describing possible properties. This array may be an empty array if no properties are required.
              * @throws SQLException if a database access error occurs.
              */
-            getPropertyInfo(url: string, info: LibreOffice.SeqEquiv<beans.PropertyValue>): SafeArray<DriverPropertyInfo>;
+            getPropertyInfo(
+                url: string,
+                info: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): SafeArray<DriverPropertyInfo>;
 
             /**
              * gets the driver's major version number. Initially this should be 1.
@@ -68269,7 +70236,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.sdbc.XConnection
          * @since LibreOffice 4.0
          */
-        interface XDriverManager2 extends XDriverManager, XDriverAccess, container.XEnumerationAccess { }
+        interface XDriverManager2 extends XDriverManager, XDriverAccess, container.XEnumerationAccess {}
 
         /**
          * provides a result set which gives access to automatically generated values after a new row was inserted.
@@ -68677,7 +70644,7 @@ declare namespace com.sun.star {
          * is called, the PooledConnection returns the connection which is pooled.
          *
          * </p>
-         * @@see com::sun::star::sdbc::XConnection
+         * @see com::sun::star::sdbc::XConnection
          */
         interface XPooledConnection extends uno.XInterface {
             /**
@@ -70345,7 +72312,16 @@ declare namespace com.sun.star {
          * A container may support the possibility to add new elements or to drop existing elements. Additions are always done by descriptors which define the
          * properties of the new element.
          */
-        interface Container extends container.XNameAccess, container.XIndexAccess, container.XEnumerationAccess, util.XRefreshable, XDataDescriptorFactory, XAppend, XDrop { }
+        interface Container
+            extends
+                container.XNameAccess,
+                container.XIndexAccess,
+                container.XEnumerationAccess,
+                util.XRefreshable,
+                XDataDescriptorFactory,
+                XAppend,
+                XDrop
+        {}
 
         /**
          * could be used as an extension for performing data definition tasks on databases, and to control the access rights on database objects.
@@ -70357,7 +72333,7 @@ declare namespace com.sun.star {
          *
          * To control the access rights of users, there is the possibility to implement objects like users and groups.
          */
-        interface DatabaseDefinition extends XTablesSupplier, XViewsSupplier, XUsersSupplier, XGroupsSupplier { }
+        interface DatabaseDefinition extends XTablesSupplier, XViewsSupplier, XUsersSupplier, XGroupsSupplier {}
 
         /**
          * is used to create a new object within a database.
@@ -70382,7 +72358,7 @@ declare namespace com.sun.star {
          * Definition and deletion of database catalogs can't be defined in a common manner for DBMS, but it should be possible to hide much of the complexity of
          * creation and deletion of catalogs. Each driver could provide methods to cover these tasks.
          */
-        interface Driver extends sdbc.Driver, XDataDefinitionSupplier, XCreateCatalog, XDropCatalog { }
+        interface Driver extends sdbc.Driver, XDataDefinitionSupplier, XCreateCatalog, XDropCatalog {}
 
         /** represents a group of users, which has certain access rights for the objects of the database. */
         interface Group extends XUsersSupplier, XAuthorizable, beans.XPropertySet {
@@ -70568,7 +72544,16 @@ declare namespace com.sun.star {
          * @see com.sun.star.sdbc.XDatabaseMetaData
          * @see com.sun.star.sdbcx.Privilege
          */
-        interface Table extends XDataDescriptorFactory, XColumnsSupplier, XIndexesSupplier, XKeysSupplier, XRename, XAlterTable, beans.XPropertySet {
+        interface Table
+            extends
+                XDataDescriptorFactory,
+                XColumnsSupplier,
+                XIndexesSupplier,
+                XKeysSupplier,
+                XRename,
+                XAlterTable,
+                beans.XPropertySet
+        {
             /** is the name of the table catalog. */
             CatalogName: string;
 
@@ -71539,21 +73524,30 @@ declare namespace com.sun.star {
              *
              * Only document content will be checked.
              */
-            verifyDocumentContentSignatures(xStorage: embed.XStorage, xSignInStream: io.XInputStream): SafeArray<DocumentSignatureInformation>;
+            verifyDocumentContentSignatures(
+                xStorage: embed.XStorage,
+                xSignInStream: io.XInputStream,
+            ): SafeArray<DocumentSignatureInformation>;
 
             /**
              * checks for digital signatures and their status.
              *
              * Only Package content will be checked.
              */
-            verifyPackageSignatures(Storage: embed.XStorage, xSignInStream: io.XInputStream): SafeArray<DocumentSignatureInformation>;
+            verifyPackageSignatures(
+                Storage: embed.XStorage,
+                xSignInStream: io.XInputStream,
+            ): SafeArray<DocumentSignatureInformation>;
 
             /**
              * checks for digital signatures and their status.
              *
              * Only Scripting content will be checked.
              */
-            verifyScriptingContentSignatures(xStorage: embed.XStorage, xSignInStream: io.XInputStream): SafeArray<DocumentSignatureInformation>;
+            verifyScriptingContentSignatures(
+                xStorage: embed.XStorage,
+                xSignInStream: io.XInputStream,
+            ): SafeArray<DocumentSignatureInformation>;
         }
 
         /**
@@ -72192,8 +74186,6 @@ declare namespace com.sun.star {
             /**
              * specifies the use of a user-defined list. <p>The cells are filled using a user-defined series.</p>
              *
-             *
-             *
              * function is determined automatically. <p>If the values are all numerical, SUM is used, otherwise COUNT.</p>
              */
             AUTO = 4,
@@ -72201,7 +74193,7 @@ declare namespace com.sun.star {
              * specifies an arithmetic series for date values. <p>Cell by cell, the value used to fill the cells is increased
              *
              * by a specified number of days</p>
-             * @@see com::sun::star::sheet::FillDateMode  any date value matching the specified condition is valid.
+             * @see com::sun::star::sheet::FillDateMode  any date value matching the specified condition is valid.
              */
             DATE = 3,
             /**
@@ -72280,8 +74272,6 @@ declare namespace com.sun.star {
         const enum GeneralFunction {
             /**
              * specifies the use of a user-defined list. <p>The cells are filled using a user-defined series.</p>
-             *
-             *
              *
              * function is determined automatically. <p>If the values are all numerical, SUM is used, otherwise COUNT.</p>
              */
@@ -72445,7 +74435,7 @@ declare namespace com.sun.star {
              * specifies an arithmetic series for date values. <p>Cell by cell, the value used to fill the cells is increased
              *
              * by a specified number of days</p>
-             * @@see com::sun::star::sheet::FillDateMode  any date value matching the specified condition is valid.
+             * @see com::sun::star::sheet::FillDateMode  any date value matching the specified condition is valid.
              */
             DATE = 3,
             /** any number matching the specified condition is valid. */
@@ -72464,21 +74454,31 @@ declare namespace com.sun.star {
          * The accessible view of a spreadsheet document
          * @since OOo 1.1.2
          */
-        interface AccessibleCell extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleValue, accessibility.XAccessibleText { }
+        interface AccessibleCell
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleValue,
+                accessibility.XAccessibleText
+        {}
 
         /**
          * The accessible object of a cell in the CSV import dialog.
          * @see com.sun.star.sheet.AccessibleCsvTable
          * @since OOo 1.1.2
          */
-        interface AccessibleCsvCell extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText { }
+        interface AccessibleCsvCell
+            extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText
+        {}
 
         /**
          * The accessible object of the ruler in the CSV import dialog.
          * @see com.sun.star.sheet.AccessibleCsvTable
          * @since OOo 1.1.2
          */
-        interface AccessibleCsvRuler extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText { }
+        interface AccessibleCsvRuler
+            extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleText
+        {}
 
         /**
          * The accessible object of the data table in the CSV import dialog.
@@ -72486,34 +74486,60 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.AccessibleCsvCell
          * @since OOo 1.1.2
          */
-        interface AccessibleCsvTable extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleTable,
-            accessibility.XAccessibleSelection { }
+        interface AccessibleCsvTable
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleTable,
+                accessibility.XAccessibleSelection
+        {}
 
         /**
          * The accessible view of the Header/Footer in a spreadsheet page preview
          * @since OOo 1.1.2
          */
-        interface AccessiblePageHeaderFooterAreasView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessiblePageHeaderFooterAreasView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a spreadsheet document
          * @since OOo 1.1.2
          */
-        interface AccessibleSpreadsheet extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleTable,
-            accessibility.XAccessibleSelection, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleSpreadsheet
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleTable,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a spreadsheet document
          * @since OOo 1.1.2
          */
-        interface AccessibleSpreadsheetDocumentView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleSelection,
-            accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleSpreadsheetDocumentView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a spreadsheet page preview
          * @since OOo 1.1.2
          */
-        interface AccessibleSpreadsheetPageView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleSpreadsheetPageView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * describes a change of the active sheet. The new active sheet is given with this event.
@@ -72559,8 +74585,6 @@ declare namespace com.sun.star {
          * **any[]**: for varying parameters. Only the last parameter of a function may have this type. It will be filled with the remaining arguments of the
          * function call that were not used for the previous parameters. Each element of the sequence will be filled as in the case of `any` above.
          *
-         *
-         *
          * Each {@link AddIn} function must have one of the following return types:
          *
          * `long``double``string``long[][]``double[][]``string[][]``any[][]`{@link XVolatileResult}`any`
@@ -72569,19 +74593,21 @@ declare namespace com.sun.star {
          * implementing the {@link VolatileResult} service, that contains a volatile result. Subsequent calls with the same parameters must return the same
          * object. An `any` return value can contain any of the other types.
          */
-        interface AddIn extends lang.XServiceName, XAddIn, XCompatibilityNames { }
+        interface AddIn extends lang.XServiceName, XAddIn, XCompatibilityNames {}
 
         /**
          * represents a cell annotation object attached to a spreadsheet cell.
          * @see com.sun.star.sheet.SheetCell
          */
-        interface CellAnnotation extends XSheetAnnotation, container.XChild, text.XSimpleText, XSheetAnnotationShapeSupplier { }
+        interface CellAnnotation
+            extends XSheetAnnotation, container.XChild, text.XSimpleText, XSheetAnnotationShapeSupplier
+        {}
 
         /**
          * represents a collection of cell annotations.
          * @see com.sun.star.sheet.Spreadsheet
          */
-        interface CellAnnotations extends XSheetAnnotations, container.XEnumerationAccess { }
+        interface CellAnnotations extends XSheetAnnotations, container.XEnumerationAccess {}
 
         /**
          * represents a linked cell range.
@@ -72618,7 +74644,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.CellAreaLink
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface CellAreaLinks extends XAreaLinks, container.XIndexAccess, container.XEnumerationAccess { }
+        interface CellAreaLinks extends XAreaLinks, container.XIndexAccess, container.XEnumerationAccess {}
 
         /**
          * represents a collection of equal-formatted cell ranges.
@@ -72628,7 +74654,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.SheetCellRanges
          * @see com.sun.star.sheet.UniqueCellFormatRanges
          */
-        interface CellFormatRanges extends container.XIndexAccess, container.XEnumerationAccess { }
+        interface CellFormatRanges extends container.XIndexAccess, container.XEnumerationAccess {}
 
         interface ColorScale extends XConditionEntry {
             ColorScaleEntries: SafeArray<XColorScaleEntry>;
@@ -72724,7 +74750,9 @@ declare namespace com.sun.star {
          * A database range is a name for a cell range that also stores filtering, sorting, subtotal and data import settings and options.
          * @see com.sun.star.sheet.DatabaseRanges
          */
-        interface DatabaseRange extends XDatabaseRange, XCellRangeReferrer, beans.XPropertySet, container.XNamed, util.XRefreshable {
+        interface DatabaseRange
+            extends XDatabaseRange, XCellRangeReferrer, beans.XPropertySet, container.XNamed, util.XRefreshable
+        {
             /**
              * specifies whether the AutoFilter is enabled or not.
              * @since OOo 1.1.2
@@ -72794,13 +74822,15 @@ declare namespace com.sun.star {
          * represents a collection of database ranges in a spreadsheet document.
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface DatabaseRanges extends XDatabaseRanges, container.XEnumerationAccess, container.XIndexAccess { }
+        interface DatabaseRanges extends XDatabaseRanges, container.XEnumerationAccess, container.XIndexAccess {}
 
         /**
          * represents the description of the layout of a data pilot table.
          * @see com.sun.star.sheet.DataPilotTable
          */
-        interface DataPilotDescriptor extends XDataPilotDescriptor, beans.XPropertySet, XDataPilotDataLayoutFieldSupplier {
+        interface DataPilotDescriptor
+            extends XDataPilotDescriptor, beans.XPropertySet, XDataPilotDataLayoutFieldSupplier
+        {
             /** specifies if columns for grand total results are created. */
             ColumnGrand: boolean;
 
@@ -72851,7 +74881,9 @@ declare namespace com.sun.star {
          * If the data pilot table is based on a spreadsheet cell range, a field is represented by a column of the range and is named using the topmost cell of
          * the column.
          */
-        interface DataPilotField extends container.XNamed, beans.XPropertySet, XDataPilotField, XDataPilotFieldGrouping {
+        interface DataPilotField
+            extends container.XNamed, beans.XPropertySet, XDataPilotField, XDataPilotFieldGrouping
+        {
             /** enables the automatic inclusion of only a number of items with the highest or lowest result values. */
             AutoShowInfo: DataPilotFieldAutoShowInfo;
 
@@ -73005,7 +75037,14 @@ declare namespace com.sun.star {
          * @see DataPilotFieldGroups
          * @see DataPilotFieldGroupItem
          */
-        interface DataPilotFieldGroup extends container.XNamed, container.XIndexAccess, container.XEnumerationAccess, container.XNameAccess, container.XNameContainer { }
+        interface DataPilotFieldGroup
+            extends
+                container.XNamed,
+                container.XIndexAccess,
+                container.XEnumerationAccess,
+                container.XNameAccess,
+                container.XNameContainer
+        {}
 
         /** contains the grouping information of a {@link DataPilotField} . */
         interface DataPilotFieldGroupInfo {
@@ -73081,7 +75120,13 @@ declare namespace com.sun.star {
          * @see DataPilotFieldGroup
          * @see DataPilotFieldGroupInfo
          */
-        interface DataPilotFieldGroups extends container.XIndexAccess, container.XEnumerationAccess, container.XNameAccess, container.XNameContainer { }
+        interface DataPilotFieldGroups
+            extends
+                container.XIndexAccess,
+                container.XEnumerationAccess,
+                container.XNameAccess,
+                container.XNameContainer
+        {}
 
         /** contains the layout information of a {@link DataPilotField} . */
         interface DataPilotFieldLayoutInfo {
@@ -73126,7 +75171,7 @@ declare namespace com.sun.star {
          * of the range.
          * @see com.sun.star.sheet.DataPilotField
          */
-        interface DataPilotFields extends container.XIndexAccess, container.XEnumerationAccess, container.XNameAccess { }
+        interface DataPilotFields extends container.XIndexAccess, container.XEnumerationAccess, container.XNameAccess {}
 
         /** describes how to sort a single {@link DataPilotField} */
         interface DataPilotFieldSortInfo {
@@ -73162,14 +75207,16 @@ declare namespace com.sun.star {
          * represents a collection of items in a data pilot field.
          * @see DataPilotItem
          */
-        interface DataPilotItems extends container.XIndexAccess, container.XEnumerationAccess, container.XNameAccess { }
+        interface DataPilotItems extends container.XIndexAccess, container.XEnumerationAccess, container.XNameAccess {}
 
         /**
          * represents a data pilot source.
          *
          * A component that implements this service can be used as data source for a data pilot table in a spreadsheet document.
          */
-        interface DataPilotSource extends XDimensionsSupplier, XDataPilotResults, util.XRefreshable, beans.XPropertySet {
+        interface DataPilotSource
+            extends XDimensionsSupplier, XDataPilotResults, util.XRefreshable, beans.XPropertySet
+        {
             /**
              * specifies the number of column fields.
              * @since OOo 3.0
@@ -73207,7 +75254,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.DataPilotSource
          * @see com.sun.star.sheet.DataPilotTable
          */
-        interface DataPilotSourceDimension extends container.XNamed, XHierarchiesSupplier, util.XCloneable, beans.XPropertySet {
+        interface DataPilotSourceDimension
+            extends container.XNamed, XHierarchiesSupplier, util.XCloneable, beans.XPropertySet
+        {
             /** specifies which values are used. */
             Filter: SafeArray<TableFilterField>;
 
@@ -73250,14 +75299,16 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.DataPilotSourceDimension
          * @see com.sun.star.sheet.DataPilotSource
          */
-        interface DataPilotSourceHierarchy extends container.XNamed, XLevelsSupplier { }
+        interface DataPilotSourceHierarchy extends container.XNamed, XLevelsSupplier {}
 
         /**
          * represents a level in a data pilot source hierarchy.
          * @see com.sun.star.sheet.DataPilotSourceHierarchy
          * @see com.sun.star.sheet.DataPilotSource
          */
-        interface DataPilotSourceLevel extends container.XNamed, XMembersSupplier, XDataPilotMemberResults, beans.XPropertySet {
+        interface DataPilotSourceLevel
+            extends container.XNamed, XMembersSupplier, XDataPilotMemberResults, beans.XPropertySet
+        {
             /** specifies whether empty members are shown. */
             ShowEmpty: boolean;
 
@@ -73300,7 +75351,7 @@ declare namespace com.sun.star {
         }
 
         /** represents a data pilot table on a spreadsheet. */
-        interface DataPilotTable extends XDataPilotDescriptor, XDataPilotTable, util.XModifyBroadcaster { }
+        interface DataPilotTable extends XDataPilotDescriptor, XDataPilotTable, util.XModifyBroadcaster {}
 
         /**
          * information about a cell within the column or row header area of a DataPilot table.
@@ -73394,7 +75445,7 @@ declare namespace com.sun.star {
         }
 
         /** represents a collection of data pilot tables. */
-        interface DataPilotTables extends XDataPilotTables, container.XEnumerationAccess, container.XIndexAccess { }
+        interface DataPilotTables extends XDataPilotTables, container.XEnumerationAccess, container.XIndexAccess {}
 
         /**
          * contains the result of one element in the data pilot data array.
@@ -73436,7 +75487,7 @@ declare namespace com.sun.star {
          *
          * A DDE link controls the results of a DDE spreadsheet formula.
          */
-        interface DDELink extends container.XNamed, XDDELink, util.XRefreshable, XDDELinkResults { }
+        interface DDELink extends container.XNamed, XDDELink, util.XRefreshable, XDDELinkResults {}
 
         /**
          * describes all items of a DDE connection used in formulas.
@@ -73465,7 +75516,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.DDELink
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface DDELinks extends container.XNameAccess, container.XIndexAccess, container.XEnumerationAccess, XDDELinks { }
+        interface DDELinks
+            extends container.XNameAccess, container.XIndexAccess, container.XEnumerationAccess, XDDELinks
+        {}
 
         /**
          * describes properties that apply to the whole spreadsheet document.
@@ -73718,7 +75771,9 @@ declare namespace com.sun.star {
          * All container access methods return a sequence of {@link com.sun.star.beans.PropertyValue} structs. The properties contained in the sequence are
          * collected in the service {@link FunctionDescription} .
          */
-        interface FunctionDescriptions extends XFunctionDescriptions, container.XNameAccess, container.XEnumerationAccess { }
+        interface FunctionDescriptions
+            extends XFunctionDescriptions, container.XNameAccess, container.XEnumerationAccess
+        {}
 
         /** is the result of a goal seek operation. */
         interface GoalResult {
@@ -73742,7 +75797,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.LabelRange
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface LabelRanges extends XLabelRanges, container.XIndexAccess, container.XEnumerationAccess { }
+        interface LabelRanges extends XLabelRanges, container.XIndexAccess, container.XEnumerationAccess {}
 
         /**
          * A name that is valid for a specified locale.
@@ -73819,7 +75874,9 @@ declare namespace com.sun.star {
          * In fact a named range is a named formula expression. A cell range address is one possible content of a named range.
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface NamedRanges extends XNamedRanges, container.XIndexAccess, container.XEnumerationAccess, document.XActionLockable { }
+        interface NamedRanges
+            extends XNamedRanges, container.XIndexAccess, container.XEnumerationAccess, document.XActionLockable
+        {}
 
         /** contains the information regarding named tokens */
         interface NameToken {
@@ -73901,7 +75958,7 @@ declare namespace com.sun.star {
         }
 
         /** represents a collection of scenarios. */
-        interface Scenarios extends XScenarios, container.XEnumerationAccess, container.XIndexAccess { }
+        interface Scenarios extends XScenarios, container.XEnumerationAccess, container.XIndexAccess {}
 
         /** specifies the service of shapes in a spreadsheet document */
         interface Shape extends drawing.Shape {
@@ -73940,10 +75997,27 @@ declare namespace com.sun.star {
         }
 
         /** represents a single addressable cell in a spreadsheet document. */
-        interface SheetCell extends table.Cell, text.Text, style.CharacterProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex,
-            style.ParagraphProperties, style.ParagraphPropertiesAsian, style.ParagraphPropertiesComplex, SheetRangesQuery, document.XActionLockable, util.XReplaceable,
-            util.XIndent, table.XColumnRowRange, XCellAddressable, XSheetAnnotationAnchor, text.XTextFieldsSupplier, beans.XTolerantMultiPropertySet,
-            util.XModifyBroadcaster {
+        interface SheetCell
+            extends
+                table.Cell,
+                text.Text,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                style.ParagraphPropertiesAsian,
+                style.ParagraphPropertiesComplex,
+                SheetRangesQuery,
+                document.XActionLockable,
+                util.XReplaceable,
+                util.XIndent,
+                table.XColumnRowRange,
+                XCellAddressable,
+                XSheetAnnotationAnchor,
+                text.XTextFieldsSupplier,
+                beans.XTolerantMultiPropertySet,
+                util.XModifyBroadcaster
+        {
             /** Returns the absolute address of the range as string, e.g. "$Sheet1.$B$2". */
             AbsoluteName: string;
 
@@ -74008,18 +76082,44 @@ declare namespace com.sun.star {
          *
          * A cursor is a cell range which provides additional methods to move through the table (i.e. to find specific cell ranges).
          */
-        interface SheetCellCursor extends table.CellCursor, SheetCellRange, XSheetCellCursor, XUsedAreaCursor { }
+        interface SheetCellCursor extends table.CellCursor, SheetCellRange, XSheetCellCursor, XUsedAreaCursor {}
 
         /**
          * represents a rectangular range of cells in a spreadsheet document.
          *
          * This service is an extension of the CellRange service for use in spreadsheet documents.
          */
-        interface SheetCellRange extends table.CellRange, style.CharacterProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex,
-            style.ParagraphProperties, SheetRangesQuery, util.XReplaceable, util.XMergeable, util.XIndent, table.XColumnRowRange, table.XAutoFormattable, XSheetCellRange,
-            XCellRangeData, XCellRangeFormula, XCellRangeAddressable, XSheetOperation, XCellSeries, XArrayFormulaRange, XMultipleOperation, util.XSortable,
-            util.XImportable, XSubTotalCalculatable, XSheetFilterableEx, XCellFormatRangesSupplier, XUniqueCellFormatRangesSupplier, chart.XChartDataArray,
-            beans.XTolerantMultiPropertySet, util.XModifyBroadcaster {
+        interface SheetCellRange
+            extends
+                table.CellRange,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                SheetRangesQuery,
+                util.XReplaceable,
+                util.XMergeable,
+                util.XIndent,
+                table.XColumnRowRange,
+                table.XAutoFormattable,
+                XSheetCellRange,
+                XCellRangeData,
+                XCellRangeFormula,
+                XCellRangeAddressable,
+                XSheetOperation,
+                XCellSeries,
+                XArrayFormulaRange,
+                XMultipleOperation,
+                util.XSortable,
+                util.XImportable,
+                XSubTotalCalculatable,
+                XSheetFilterableEx,
+                XCellFormatRangesSupplier,
+                XUniqueCellFormatRangesSupplier,
+                chart.XChartDataArray,
+                beans.XTolerantMultiPropertySet,
+                util.XModifyBroadcaster
+        {
             /** Returns the absolute address of the range as string, e.g. "$Sheet1.$B$2:$D$5". */
             AbsoluteName: string;
 
@@ -74070,9 +76170,22 @@ declare namespace com.sun.star {
          * represents a collection of cell ranges in a spreadsheet document.
          * @see com.sun.star.sheet.SheetCellRange
          */
-        interface SheetCellRanges extends table.CellProperties, style.CharacterProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex,
-            style.ParagraphProperties, SheetRangesQuery, util.XReplaceable, util.XIndent, XSheetOperation, chart.XChartDataArray, XSheetCellRangeContainer,
-            container.XEnumerationAccess, container.XNameContainer {
+        interface SheetCellRanges
+            extends
+                table.CellProperties,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                SheetRangesQuery,
+                util.XReplaceable,
+                util.XIndent,
+                XSheetOperation,
+                chart.XChartDataArray,
+                XSheetCellRangeContainer,
+                container.XEnumerationAccess,
+                container.XNameContainer
+        {
             /** Returns the absolute address of the ranges as string, e.g. "$Sheet1.$B$2:$D$5". */
             AbsoluteName: string;
 
@@ -74179,10 +76292,10 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.SheetLink
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface SheetLinks extends container.XIndexAccess, container.XNameAccess, container.XEnumerationAccess { }
+        interface SheetLinks extends container.XIndexAccess, container.XNameAccess, container.XEnumerationAccess {}
 
         /** provides interfaces to find cells with specific properties. */
-        interface SheetRangesQuery extends XCellRangesQuery, XFormulaQuery { }
+        interface SheetRangesQuery extends XCellRangesQuery, XFormulaQuery {}
 
         /**
          * a description of how a cell range is to be sorted.
@@ -74293,9 +76406,26 @@ declare namespace com.sun.star {
          * This service extents the service {@link SheetCellRange} . A spreadsheet is nothing else than a cell range with extended functionality.
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface Spreadsheet extends SheetCellRange, Scenario, XSpreadsheet, container.XNamed, util.XProtectable, XDataPilotTablesSupplier, XScenariosSupplier,
-            XSheetAnnotationsSupplier, drawing.XDrawPageSupplier, table.XTableChartsSupplier, XCellRangeMovement, XPrintAreas, XSheetPageBreak, XSheetOutline,
-            XSheetAuditing, XSheetLinkable, XExternalSheetName {
+        interface Spreadsheet
+            extends
+                SheetCellRange,
+                Scenario,
+                XSpreadsheet,
+                container.XNamed,
+                util.XProtectable,
+                XDataPilotTablesSupplier,
+                XScenariosSupplier,
+                XSheetAnnotationsSupplier,
+                drawing.XDrawPageSupplier,
+                table.XTableChartsSupplier,
+                XCellRangeMovement,
+                XPrintAreas,
+                XSheetPageBreak,
+                XSheetOutline,
+                XSheetAuditing,
+                XSheetLinkable,
+                XExternalSheetName
+        {
             /**
              * specifies whether the sheet has an automatic print area.
              *
@@ -74336,9 +76466,24 @@ declare namespace com.sun.star {
         }
 
         /** represents a model component which consists of some settings and one or more spreadsheets. */
-        interface SpreadsheetDocument extends document.OfficeDocument, SpreadsheetDocumentSettings, lang.XMultiServiceFactory, frame.XModel, document.XActionLockable,
-            document.XLinkTargetSupplier, util.XProtectable, XSpreadsheetDocument, XCalculatable, XDocumentAuditing, XConsolidatable, XGoalSeek,
-            drawing.XDrawPagesSupplier, style.XStyleFamiliesSupplier, util.XNumberFormatsSupplier {
+        interface SpreadsheetDocument
+            extends
+                document.OfficeDocument,
+                SpreadsheetDocumentSettings,
+                lang.XMultiServiceFactory,
+                frame.XModel,
+                document.XActionLockable,
+                document.XLinkTargetSupplier,
+                util.XProtectable,
+                XSpreadsheetDocument,
+                XCalculatable,
+                XDocumentAuditing,
+                XConsolidatable,
+                XGoalSeek,
+                drawing.XDrawPagesSupplier,
+                style.XStyleFamiliesSupplier,
+                util.XNumberFormatsSupplier
+        {
             addEventListener(Listener: document.XEventListener | lang.XEventListener): void;
 
             /** contains the collection of area links in the document. */
@@ -74512,20 +76657,35 @@ declare namespace com.sun.star {
          * {{program example here, see documentation}}
          * @since OOo 1.1.2
          */
-        interface SpreadsheetDrawPage extends drawing.XDrawPage, drawing.XShapeGrouper { }
+        interface SpreadsheetDrawPage extends drawing.XDrawPage, drawing.XShapeGrouper {}
 
         /**
          * represents the collection of spreadsheets in a spreadsheet document.
          * @see com.sun.star.sheet.SpreadsheetDocument
          */
-        interface Spreadsheets extends XSpreadsheets, container.XIndexAccess, container.XEnumerationAccess, XCellRangesAccess { }
+        interface Spreadsheets
+            extends XSpreadsheets, container.XIndexAccess, container.XEnumerationAccess, XCellRangesAccess
+        {}
 
         /** represents a view of a spreadsheet document. */
-        interface SpreadsheetView extends frame.Controller, SpreadsheetViewSettings, SpreadsheetViewPane, XSpreadsheetView, container.XIndexAccess,
-            container.XEnumerationAccess, view.XSelectionSupplier, XViewSplitable, XViewFreezable, XRangeSelection, XEnhancedMouseClickBroadcaster, XActivationBroadcaster { }
+        interface SpreadsheetView
+            extends
+                frame.Controller,
+                SpreadsheetViewSettings,
+                SpreadsheetViewPane,
+                XSpreadsheetView,
+                container.XIndexAccess,
+                container.XEnumerationAccess,
+                view.XSelectionSupplier,
+                XViewSplitable,
+                XViewFreezable,
+                XRangeSelection,
+                XEnhancedMouseClickBroadcaster,
+                XActivationBroadcaster
+        {}
 
         /** represents a single pane in a view of a spreadsheet document. */
-        interface SpreadsheetViewPane extends XViewPane, XCellRangeReferrer, view.XControlAccess { }
+        interface SpreadsheetViewPane extends XViewPane, XCellRangeReferrer, view.XControlAccess {}
 
         /** contains settings which are specific to each view of a spreadsheet */
         interface SpreadsheetViewSettings extends beans.XPropertySet {
@@ -74619,7 +76779,9 @@ declare namespace com.sun.star {
          *
          * The descriptor contains properties and a collection of subtotal fields which control the behavior of operation.
          */
-        interface SubTotalDescriptor extends XSubTotalDescriptor, container.XEnumerationAccess, container.XIndexAccess, beans.XPropertySet {
+        interface SubTotalDescriptor
+            extends XSubTotalDescriptor, container.XEnumerationAccess, container.XIndexAccess, beans.XPropertySet
+        {
             /** specifies if cell formats are moved with the contents they belong to. */
             BindFormatsToContent: boolean;
 
@@ -74661,7 +76823,9 @@ declare namespace com.sun.star {
          * different types of cells in the range. The AutoFormats are numbered row by row, then column by column.
          * @see com.sun.star.sheet.TableAutoFormatField
          */
-        interface TableAutoFormat extends beans.XPropertySet, container.XIndexAccess, container.XEnumerationAccess, container.XNamed {
+        interface TableAutoFormat
+            extends beans.XPropertySet, container.XIndexAccess, container.XEnumerationAccess, container.XNamed
+        {
             /** specifies whether the background settings from the fields are used. */
             IncludeBackground: boolean;
 
@@ -74841,21 +77005,30 @@ declare namespace com.sun.star {
          *
          * There is only one instance of this collection, containing all AutoFormats usable in spreadsheet and text tables.
          */
-        interface TableAutoFormats extends container.XNameContainer, container.XIndexAccess, container.XEnumerationAccess { }
+        interface TableAutoFormats
+            extends container.XNameContainer, container.XIndexAccess, container.XEnumerationAccess
+        {}
 
         /**
          * contains the properties of a table cell style.
          *
          * This service extends the service {@link com.sun.star.style.CellStyle} with spreadsheet specific properties.
          */
-        interface TableCellStyle extends table.CellProperties, style.CellStyle, style.CharacterProperties, style.CharacterPropertiesAsian,
-            style.CharacterPropertiesComplex, style.ParagraphProperties { }
+        interface TableCellStyle
+            extends
+                table.CellProperties,
+                style.CellStyle,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties
+        {}
 
         /**
          * represents a single condition in a conditional format.
          * @see com.sun.star.sheet.TableConditionalFormat
          */
-        interface TableConditionalEntry extends XSheetCondition, XSheetConditionalEntry { }
+        interface TableConditionalEntry extends XSheetCondition, XSheetConditionalEntry {}
 
         /**
          * represents a collection of conditional formatting settings for a cell or cell range.
@@ -74865,7 +77038,13 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.SheetCellRange
          * @see com.sun.star.sheet.SheetCellRanges
          */
-        interface TableConditionalFormat extends XSheetConditionalEntries, container.XNameAccess, container.XEnumerationAccess, container.XIndexAccess { }
+        interface TableConditionalFormat
+            extends
+                XSheetConditionalEntries,
+                container.XNameAccess,
+                container.XEnumerationAccess,
+                container.XIndexAccess
+        {}
 
         /**
          * describes a single condition in a filter descriptor.
@@ -75112,7 +77291,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.SheetCellRanges
          * @see com.sun.star.sheet.CellFormatRanges
          */
-        interface UniqueCellFormatRanges extends container.XIndexAccess, container.XEnumerationAccess { }
+        interface UniqueCellFormatRanges extends container.XIndexAccess, container.XEnumerationAccess {}
 
         /**
          * provides methods to add and remove {@link XActivationEventListener}
@@ -75296,7 +77475,13 @@ declare namespace com.sun.star {
              * @param aFilter the name of the filter used to load the source document.
              * @param aFilterOptions optional filter options for the specified filter.
              */
-            insertAtPosition(aDestPos: table.CellAddress, aFileName: string, aSourceArea: string, aFilter: string, aFilterOptions: string): void;
+            insertAtPosition(
+                aDestPos: table.CellAddress,
+                aFileName: string,
+                aSourceArea: string,
+                aFilter: string,
+                aFilterOptions: string,
+            ): void;
 
             /** removes an area link from the collection. */
             removeByIndex(nIndex: number): void;
@@ -75561,7 +77746,13 @@ declare namespace com.sun.star {
              * @see com.sun.star.table.CellRange
              * @throws com::sun::star::lang::IndexOutOfBoundsException if an index is outside the dimensions of this range.
              */
-            getCellRangeByPosition(nLeft: number, nTop: number, nRight: number, nBottom: number, nSheet: number): table.XCellRange;
+            getCellRangeByPosition(
+                nLeft: number,
+                nTop: number,
+                nRight: number,
+                nBottom: number,
+                nSheet: number,
+            ): table.XCellRange;
 
             /**
              * Returns a sub-range of cells within the range.
@@ -75657,7 +77848,13 @@ declare namespace com.sun.star {
              * @param fStep contains the value used to increase/decrease the series values.
              * @param fEndValue contains the threshold value on which the calculation of the current series stops.
              */
-            fillSeries(nFillDirection: FillDirection, nFillMode: FillMode, nFillDateMode: FillDateMode, fStep: number, fEndValue: number): void;
+            fillSeries(
+                nFillDirection: FillDirection,
+                nFillMode: FillMode,
+                nFillDateMode: FillDateMode,
+                fStep: number,
+                fEndValue: number,
+            ): void;
         }
 
         interface XColorScaleEntry {
@@ -76420,7 +78617,9 @@ declare namespace com.sun.star {
          * @see com.sun.star.sheet.ExternalDocLinks
          * @since OOo 3.1
          */
-        interface XExternalDocLinks extends container.XNameAccess, container.XIndexAccess, container.XEnumerationAccess {
+        interface XExternalDocLinks
+            extends container.XNameAccess, container.XIndexAccess, container.XEnumerationAccess
+        {
             /**
              * This method adds a new external document link by its URL, and returns its instance. If a document instance already exists for the specified URL, then
              * that instance gets returned instead of creating a new one.
@@ -76724,7 +78923,11 @@ declare namespace com.sun.star {
              * @param aGoalValue is the value which should be reached during the goal seek.
              * @returns the result of the goal seek, including the value that results in the specified goal, using the specified formula.
              */
-            seekGoal(aFormulaPosition: table.CellAddress, aVariablePosition: table.CellAddress, aGoalValue: string): GoalResult;
+            seekGoal(
+                aFormulaPosition: table.CellAddress,
+                aVariablePosition: table.CellAddress,
+                aGoalValue: string,
+            ): GoalResult;
         }
 
         /**
@@ -76962,7 +79165,12 @@ declare namespace com.sun.star {
              * @param aColumnCell contains the address of the cell that is referenced by formulas in a row (mode TableOperationMode::ROW) or by the formula cell used f
              * @param aRowCell contains the address of the cell that is referenced by formulas in a column (mode TableOperationMode::COLUMN) or by the formula cell use
              */
-            setTableOperation(aFormulaRange: table.CellRangeAddress, nMode: TableOperationMode, aColumnCell: table.CellAddress, aRowCell: table.CellAddress): void;
+            setTableOperation(
+                aFormulaRange: table.CellRangeAddress,
+                nMode: TableOperationMode,
+                aColumnCell: table.CellAddress,
+                aRowCell: table.CellAddress,
+            ): void;
         }
 
         /**
@@ -77562,7 +79770,10 @@ declare namespace com.sun.star {
              * @param aCellRangeAddresses contains a sequence of addresses of all new ranges.
              * @param bMergeRanges defines how the ranges should be added. To merge the ranges takes more time, but the memory usage is lower.
              */
-            addRangeAddresses(aCellRangeAddresses: LibreOffice.SeqEquiv<table.CellRangeAddress>, bMergeRanges: boolean): void;
+            addRangeAddresses(
+                aCellRangeAddresses: LibreOffice.SeqEquiv<table.CellRangeAddress>,
+                bMergeRanges: boolean,
+            ): void;
 
             /**
              * removes the given range from the collection of cell ranges.
@@ -77860,7 +80071,13 @@ declare namespace com.sun.star {
              *
              * A {@link SheetLink} object is created if it does not exist, and the link mode, the URL of the linked document and the linked sheet name are set.
              */
-            link(aUrl: string, aSheetName: string, aFilterName: string, aFilterOptions: string, nMode: SheetLinkMode): void;
+            link(
+                aUrl: string,
+                aSheetName: string,
+                aFilterName: string,
+                aFilterOptions: string,
+                nMode: SheetLinkMode,
+            ): void;
 
             /**
              * returns the link mode of the spreadsheet.
@@ -78022,7 +80239,14 @@ declare namespace com.sun.star {
              * The contents of the clipboard must be from a cell range.
              */
             pasteCellRange(
-                aDestination: table.CellRangeAddress, nOperation: PasteOperation, nContents: number, bSkipEmpty: boolean, bTranspose: boolean, bAsLink: boolean, nInsert: CellInsertMode): void;
+                aDestination: table.CellRangeAddress,
+                nOperation: PasteOperation,
+                nContents: number,
+                bSkipEmpty: boolean,
+                bTranspose: boolean,
+                bAsLink: boolean,
+                nInsert: CellInsertMode,
+            ): void;
 
             /** pastes the contents of the clipboard at the specified position on the sheet, using the specified format. */
             pasteFormat(aDestination: table.CellAddress, aFormat: string): void;
@@ -78972,7 +81196,13 @@ declare namespace com.sun.star {
              * @param aApplicationName A string containing the name of the calling application.
              * @param xController The current controller of the document.
              */
-            recognizeTextRange(xRange: text.XTextRange, eDataType: SmartTagRecognizerMode, xTextMarkup: text.XTextMarkup, aApplicationName: string, xController: frame.XController): void;
+            recognizeTextRange(
+                xRange: text.XTextRange,
+                eDataType: SmartTagRecognizerMode,
+                xTextMarkup: text.XTextMarkup,
+                aApplicationName: string,
+                xController: frame.XController,
+            ): void;
         }
 
         /**
@@ -78994,8 +81224,15 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if the ActionID is not recognized.
              */
             getActionCaptionFromID(
-                nActionID: number, aApplicationName: string, aLocale: lang.Locale, xProperties: container.XStringKeyMap, aText: string, aXML: string,
-                xController: frame.XController, xTarget: text.XTextRange): string;
+                nActionID: number,
+                aApplicationName: string,
+                aLocale: lang.Locale,
+                xProperties: container.XStringKeyMap,
+                aText: string,
+                aXML: string,
+                xController: frame.XController,
+                xTarget: text.XTextRange,
+            ): string;
 
             /**
              * obtains the number of actions provided for a specified smart tag type.
@@ -79004,7 +81241,11 @@ declare namespace com.sun.star {
              * @param xProperties Contains the smart tag properties collected by the smart tag recognizer.
              * @returns the number of actions available for the given smart tag type.
              */
-            getActionCount(aSmartTagName: string, xController: frame.XController, xProperties: container.XStringKeyMap): number;
+            getActionCount(
+                aSmartTagName: string,
+                xController: frame.XController,
+                xProperties: container.XStringKeyMap,
+            ): number;
 
             /**
              * obtains a unique integer identifier for an action.
@@ -79069,8 +81310,15 @@ declare namespace com.sun.star {
              * @throws com::sun::star::lang::IllegalArgumentException if the ActionID is not recognized.
              */
             invokeAction(
-                nActionID: number, aApplicationName: string, xController: frame.XController, xTarget: text.XTextRange, xProperties: container.XStringKeyMap, aText: string,
-                aXML: string, aLocale: lang.Locale): void;
+                nActionID: number,
+                aApplicationName: string,
+                xController: frame.XController,
+                xTarget: text.XTextRange,
+                xProperties: container.XStringKeyMap,
+                aText: string,
+                aXML: string,
+                aLocale: lang.Locale,
+            ): void;
 
             /**
              * determines whether a caption is dynamic.
@@ -79081,7 +81329,12 @@ declare namespace com.sun.star {
              * @returns a boolean indicating whether the caption is dynamic.
              * @throws com::sun::star::lang::IllegalArgumentException if the ActionID is not recognized.
              */
-            isCaptionDynamic(nActionID: number, aApplicationName: string, xController: frame.XController, aLocale: lang.Locale): boolean;
+            isCaptionDynamic(
+                nActionID: number,
+                aApplicationName: string,
+                xController: frame.XController,
+                aLocale: lang.Locale,
+            ): boolean;
 
             /**
              * determines whether the smart tag indicator should be visible.
@@ -79092,7 +81345,12 @@ declare namespace com.sun.star {
              * @returns a boolean indicating whether the smart tag indicator should be visible.
              * @throws com::sun::star::lang::IllegalArgumentException if the ActionID is not recognized.
              */
-            isShowSmartTagIndicator(nActionID: number, aApplicationName: string, xController: frame.XController, aLocale: lang.Locale): boolean;
+            isShowSmartTagIndicator(
+                nActionID: number,
+                aApplicationName: string,
+                xController: frame.XController,
+                aLocale: lang.Locale,
+            ): boolean;
 
             /** the number of smart tag types supported by this action component. */
             SmartTagCount: number;
@@ -79163,8 +81421,16 @@ declare namespace com.sun.star {
              * @param xTokenizer This can be used to tokenize the string to recognize.
              */
             recognize(
-                aText: string, nStart: number, nLength: number, eDataType: SmartTagRecognizerMode, aLocale: lang.Locale, xTextMarkup: text.XTextMarkup,
-                aApplicationName: string, xController: frame.XController, xTokenizer: i18n.XBreakIterator): void;
+                aText: string,
+                nStart: number,
+                nLength: number,
+                eDataType: SmartTagRecognizerMode,
+                aLocale: lang.Locale,
+                xTextMarkup: text.XTextMarkup,
+                aApplicationName: string,
+                xController: frame.XController,
+                xTokenizer: i18n.XBreakIterator,
+            ): void;
 
             /** The number of smart tag types supported by this recognizer component. */
             SmartTagCount: number;
@@ -79934,7 +82200,7 @@ declare namespace com.sun.star {
          *
          * It is normally represented by a sequence of {@link com.sun.star.beans.PropertyValues} .
          */
-        interface NumberingRule extends NumberingAlignment, NumberingLevel { }
+        interface NumberingRule extends NumberingAlignment, NumberingLevel {}
 
         /** describes the style of pages. */
         interface PageProperties {
@@ -80266,7 +82532,7 @@ declare namespace com.sun.star {
          * @see com.sun.star.text.TextPageStyle
          * @see com.sun.star.sheet.TablePageStyle
          */
-        interface PageStyle extends Style, PageProperties { }
+        interface PageStyle extends Style, PageProperties {}
 
         /** describes the style of paragraphs. */
         interface ParagraphProperties {
@@ -80593,7 +82859,14 @@ declare namespace com.sun.star {
         }
 
         /** This service specifies a single style sheet. */
-        interface Style extends xml.UserDefinedAttributesSupplier, XStyle, beans.XPropertySet, beans.XMultiPropertySet, beans.XMultiPropertyStates {
+        interface Style
+            extends
+                xml.UserDefinedAttributesSupplier,
+                XStyle,
+                beans.XPropertySet,
+                beans.XMultiPropertySet,
+                beans.XMultiPropertyStates
+        {
             /**
              * contains the name of the style as it is displayed in the user interface.
              *
@@ -80670,13 +82943,13 @@ declare namespace com.sun.star {
          *
          * **ShapeStyles  **: the container for style sheets for shapes
          */
-        interface StyleFamilies extends container.XNameAccess, container.XIndexAccess { }
+        interface StyleFamilies extends container.XNameAccess, container.XIndexAccess {}
 
         /**
          * This service is a container of style sheets of the same style family.
          * @see StyleFamilies
          */
-        interface StyleFamily extends container.XNameAccess, container.XNameContainer, container.XIndexAccess { }
+        interface StyleFamily extends container.XNameAccess, container.XNameContainer, container.XIndexAccess {}
 
         /** This structure is used to specify a single tabulator stop. */
         interface TabStop {
@@ -80708,7 +82981,7 @@ declare namespace com.sun.star {
         }
 
         /** This service contains the collection of automatic style families within the container document. */
-        interface XAutoStyles extends container.XNameAccess, container.XIndexAccess { }
+        interface XAutoStyles extends container.XNameAccess, container.XIndexAccess {}
 
         /** This interface provides access to the style families within the container document. */
         interface XAutoStylesSupplier extends uno.XInterface {
@@ -80799,7 +83072,10 @@ declare namespace com.sun.star {
              * @param aSourceComponent a valid XComponent reference to source document
              * @param aOptions Specifies which of the {@link Style} families the method should load. The `sequence<PropertyValue>` has the following, optional items: b
              */
-            loadStylesFromDocument(aSourceComponent: lang.XComponent, aOptions: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            loadStylesFromDocument(
+                aSourceComponent: lang.XComponent,
+                aOptions: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
         }
 
         interface XStyleSupplier extends uno.XInterface {
@@ -80934,7 +83210,13 @@ declare namespace com.sun.star {
         interface XSVGPrinter extends uno.XInterface {
             endJob(): void;
             printPage(aPrintPage: LibreOffice.SeqEquiv<number>): void;
-            startJob(aHandler: xml.sax.XDocumentHandler, aJobSetup: LibreOffice.SeqEquiv<number>, aJobName: string, nCopies: number, bCollate: boolean): boolean;
+            startJob(
+                aHandler: xml.sax.XDocumentHandler,
+                aJobSetup: LibreOffice.SeqEquiv<number>,
+                aJobName: string,
+                nCopies: number,
+                bCollate: boolean,
+            ): boolean;
         }
 
         /** @deprecated Deprecated */
@@ -81304,16 +83586,28 @@ declare namespace com.sun.star {
          * cells in the edit view of a spreadsheet.
          * @since OOo 1.1.2
          */
-        interface AccessibleCellView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleValue,
-            accessibility.XAccessibleSelection, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleCellView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleValue,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a table in a text document or in the page preview of a spreadsheet document. See {@link
          * com.sun.star.sheet.AccessibleSpreadsheet} for tables in the edit view of a spreadsheet.
          * @since OOo 1.1.2
          */
-        interface AccessibleTableView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleTable,
-            accessibility.XAccessibleSelection, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleTableView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleTable,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /** describes the line type for a single cell edge. */
         interface BorderLine {
@@ -81359,7 +83653,7 @@ declare namespace com.sun.star {
         }
 
         /** represents a singe cell within a table. */
-        interface Cell extends CellProperties, XCell, text.XText { }
+        interface Cell extends CellProperties, XCell, text.XText {}
 
         /** contains a cell address within a spreadsheet document. */
         interface CellAddress {
@@ -81539,7 +83833,7 @@ declare namespace com.sun.star {
         }
 
         /** represents a range of cells within a table. */
-        interface CellRange extends CellProperties, XCellRange { }
+        interface CellRange extends CellProperties, XCellRange {}
 
         /** contains a cell range address within a spreadsheet document. */
         interface CellRangeAddress {
@@ -81743,13 +84037,13 @@ declare namespace com.sun.star {
          *
          * This service does not represent the chart document model itself, but the object in the table that contains this chart document.
          */
-        interface TableChart extends XTableChart, document.XEmbeddedObjectSupplier, container.XNamed { }
+        interface TableChart extends XTableChart, document.XEmbeddedObjectSupplier, container.XNamed {}
 
         /**
          * represents a collection of all charts based on data in a table.
          * @see com.sun.star.table.TableChart
          */
-        interface TableCharts extends XTableCharts, container.XIndexAccess, container.XEnumerationAccess { }
+        interface TableCharts extends XTableCharts, container.XIndexAccess, container.XEnumerationAccess {}
 
         /** represents a special cell range containing all cells of a single specific column in a table or spreadsheet. */
         interface TableColumn extends XCellRange, beans.XPropertySet, container.XNamed {
@@ -81774,7 +84068,7 @@ declare namespace com.sun.star {
          * represents a collection of all columns of a table or spreadsheet.
          * @see com.sun.star.table.TableColumn
          */
-        interface TableColumns extends XTableColumns, container.XEnumerationAccess, container.XNameAccess { }
+        interface TableColumns extends XTableColumns, container.XEnumerationAccess, container.XNameAccess {}
 
         /** represents a special cell range containing all cells of a single specific row in a table or spreadsheet. */
         interface TableRow extends XCellRange, beans.XPropertySet {
@@ -81799,7 +84093,7 @@ declare namespace com.sun.star {
          * represents a collection of all rows of a table or spreadsheet.
          * @see com.sun.star.table.TableRow
          */
-        interface TableRows extends XTableRows, container.XEnumerationAccess { }
+        interface TableRows extends XTableRows, container.XEnumerationAccess {}
 
         /**
          * contains properties which describe sorting of rows or columns in a table.
@@ -82140,7 +84434,15 @@ declare namespace com.sun.star {
             split(Columns: number, Rows: number): void;
         }
 
-        interface XTable extends lang.XComponent, XCellRange, XColumnRowRange, util.XModifiable, beans.XPropertySet, beans.XFastPropertySet {
+        interface XTable
+            extends
+                lang.XComponent,
+                XCellRange,
+                XColumnRowRange,
+                util.XModifiable,
+                beans.XPropertySet,
+                beans.XFastPropertySet
+        {
             /** stores the current column count of this table */
             ColumnCount: number;
 
@@ -82208,7 +84510,13 @@ declare namespace com.sun.star {
              * @param bColumnHeaders if set to `TRUE` , the topmost row of the source data will be used to set labels for the category axis or the legend.
              * @param bRowHeaders if set to `TRUE` , the leftmost column of the source data will be used to set labels for the category axis or the legend.
              */
-            addNewByName(aName: string, aRect: awt.Rectangle, aRanges: LibreOffice.SeqEquiv<CellRangeAddress>, bColumnHeaders: boolean, bRowHeaders: boolean): void;
+            addNewByName(
+                aName: string,
+                aRect: awt.Rectangle,
+                aRanges: LibreOffice.SeqEquiv<CellRangeAddress>,
+                bColumnHeaders: boolean,
+                bRowHeaders: boolean,
+            ): void;
 
             /**
              * removes a chart from the collection.
@@ -82455,7 +84763,7 @@ declare namespace com.sun.star {
          * @see Job
          * @since OOo 1.1.2
          */
-        interface AsyncJob extends XAsyncJob, util.XCloseable { }
+        interface AsyncJob extends XAsyncJob, util.XCloseable {}
 
         /** A classified interaction request. */
         interface ClassifiedInteractionRequest extends uno.Exception {
@@ -82595,8 +84903,6 @@ declare namespace com.sun.star {
          *
          * **"Volume" and "OtherVolume"**: com::sun::star::ucb::IOErrorCode::DIFFERENT_DEVICES only. The names of the two volumes involved (two `string` s).
          *
-         *
-         *
          * **Configuring additional Handlers**
          *
          * It is possible to configure additional interaction handlers, to which certain requests can be delegated. The configuration node
@@ -82632,7 +84938,7 @@ declare namespace com.sun.star {
          * @see AsyncJob
          * @since OOo 1.1.2
          */
-        interface Job extends XJob, util.XCloseable { }
+        interface Job extends XJob, util.XCloseable {}
 
         /** is thrown when a master password is needed but not available/correct. */
         interface NoMasterException extends uno.RuntimeException {
@@ -82938,7 +85244,12 @@ declare namespace com.sun.star {
              * @param Passwords The password-list.
              * @param Handler The handler to get super password to en/decrypt passwords
              */
-            add(Url: string, UserName: string, Passwords: LibreOffice.SeqEquiv<string>, Handler: XInteractionHandler): void;
+            add(
+                Url: string,
+                UserName: string,
+                Passwords: LibreOffice.SeqEquiv<string>,
+                Handler: XInteractionHandler,
+            ): void;
 
             /**
              * Save passwords in to the container, and store them in the file.
@@ -82947,7 +85258,12 @@ declare namespace com.sun.star {
              * @param Passwords The password-list.
              * @param Handler The handler to get super password to en/decrypt passwords
              */
-            addPersistent(Url: string, UserName: string, Passwords: LibreOffice.SeqEquiv<string>, Handler: XInteractionHandler): void;
+            addPersistent(
+                Url: string,
+                UserName: string,
+                Passwords: LibreOffice.SeqEquiv<string>,
+                Handler: XInteractionHandler,
+            ): void;
 
             /**
              * Find users with passwords for the url pattern.
@@ -82994,7 +85310,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the {@link PasswordContainer} service to implement.
          * @since LibreOffice 4.0
          */
-        interface XPasswordContainer2 extends XPasswordContainer, XMasterPasswordHandling2, XUrlContainer { }
+        interface XPasswordContainer2 extends XPasswordContainer, XMasterPasswordHandling2, XUrlContainer {}
 
         /**
          * allows to try to restart the office.
@@ -83149,124 +85465,64 @@ declare namespace com.sun.star {
          * The element type is Sequence< PropertyValues >. Each element in this sequence represents a member of an index line. The following properties are part
          * of such an element.
          *
-         *
-         *
          * TokenType
-         *
-         *
          *
          * Values:
          *
-         *
-         *
          * TokenEntryNumber - chapter number, used in content indexes only
-         *
-         *
          *
          * TokenEntryText - text of the entry
          *
-         *
-         *
          * TokenTabStop - tab stop
-         *
-         *
          *
          * TokenText - user defined text
          *
-         *
-         *
          * TokenPageNumber - page number
-         *
-         *
          *
          * TokenChapterInfo - chapter info, in illustration indexes, table indexes, user indexes, table of objects and alphabetical indexes only
          *
-         *
-         *
          * TokenHyperlinkStart - start of a hyperlink
-         *
-         *
          *
          * TokenHyperlinkEnd - end of a hyperlink
          *
-         *
-         *
          * TokenBibliographyDataField - bibliographic data field
-         *
-         *
          *
          * CharacterStyleName
          *
-         *
-         *
          * Name of the character style applied to the element. Invalid in tab stops.
-         *
-         *
          *
          * TabStopRightAligned
          *
-         *
-         *
          * Tab stop is right aligned. Only valid for tab stops.
-         *
-         *
          *
          * TabStopPosition
          *
-         *
-         *
          * Position of the tab stop. Only valid for tab stops.
-         *
-         *
          *
          * TabStopFillCharacter
          *
-         *
-         *
          * Fill character in tab stops. Only valid for tab stops.
-         *
-         *
          *
          * WithTab
          *
-         *
-         *
          * If true insert tab character.
-         *
-         *
          *
          * {@link Text}
          *
-         *
-         *
          * {@link Text} . Only valid in user defined text.
-         *
-         *
          *
          * {@link ChapterFormat}
          *
-         *
-         *
          * Valid in chapter info and entry number only. See {@link ChapterFormat} .
          *
-         *
-         *
          * Other information.
-         *
-         *
          *
          * In chapter info only {@link com.sun.star.text.ChapterFormat.NUMBER} , {@link com.sun.star.text.ChapterFormat.NAME} , and {@link
          * com.sun.star.text.ChapterFormat.NAME_NUMBER} constants are allowed.
          *
-         *
-         *
          * In entry number only {@link com.sun.star.text.ChapterFormat.NUMBER} and {@link com.sun.star.text.ChapterFormat.DIGIT} constants are allowed.
          *
-         *
-         *
          * ChapterLevel
-         *
-         *
          *
          * Valid in chapter info and entry number only. Denotes the level up to which the chapter information is given. Values permitted 1 to 10 inclusive.
          */
@@ -83510,45 +85766,83 @@ declare namespace com.sun.star {
          * The accessible view of endnotes.
          * @since OOo 1.1.2
          */
-        interface AccessibleEndnoteView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleEndnoteView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of footnotes.
          * @since OOo 1.1.2
          */
-        interface AccessibleFootnoteView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleFootnoteView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of headers and footers.
          * @since OOo 1.1.2
          */
-        interface AccessibleHeaderFooterView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleHeaderFooterView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of pages.
          * @since OOo 1.1.2
          */
-        interface AccessiblePageView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessiblePageView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a paragraph fragment.
          * @since OOo 1.1.2
          */
-        interface AccessibleParagraphView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEditableText,
-            accessibility.XAccessibleText, accessibility.XAccessibleSelection, accessibility.XAccessibleEventBroadcaster, accessibility.XAccessibleTextAttributes { }
+        interface AccessibleParagraphView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEditableText,
+                accessibility.XAccessibleText,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleEventBroadcaster,
+                accessibility.XAccessibleTextAttributes
+        {}
 
         /**
          * The accessible page preview of a text document.
          * @since OOo 1.1.2
          */
-        interface AccessibleTextDocumentPageView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleTextDocumentPageView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of a text document.
          * @since OOo 1.1.2
          */
-        interface AccessibleTextDocumentView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleSelection,
-            accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleTextDocumentView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleSelection,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of an inactive embedded object. If an embedded object gets active, the active document gets an accessible object tree of its own.
@@ -83556,28 +85850,43 @@ declare namespace com.sun.star {
          * deactivated.
          * @since OOo 1.1.2
          */
-        interface AccessibleTextEmbeddedObject extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleImage,
-            accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleTextEmbeddedObject
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleImage,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of text frames.
          * @since OOo 1.1.2
          */
-        interface AccessibleTextFrameView extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleTextFrameView
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * The accessible view of graphics.
          * @since OOo 1.1.2
          */
-        interface AccessibleTextGraphicObject extends accessibility.XAccessibleContext, accessibility.XAccessibleComponent, accessibility.XAccessibleImage,
-            accessibility.XAccessibleEventBroadcaster { }
+        interface AccessibleTextGraphicObject
+            extends
+                accessibility.XAccessibleContext,
+                accessibility.XAccessibleComponent,
+                accessibility.XAccessibleImage,
+                accessibility.XAccessibleEventBroadcaster
+        {}
 
         /**
          * provides access to a text block in a group of an {@link AutoTextContainer} .
          * @see com.sun.star.text.AutoTextContainer
          * @see com.sun.star.text.AutoTextGroup
          */
-        interface AutoTextEntry extends XAutoTextEntry, XText { }
+        interface AutoTextEntry extends XAutoTextEntry, XText {}
 
         /**
          * provides access to text blocks in a group.
@@ -83592,7 +85901,9 @@ declare namespace com.sun.star {
         }
 
         /** specifies the base service of text frames, graphic objects, and embedded objects */
-        interface BaseFrame extends BaseFrameProperties, TextContent, drawing.XShape, beans.XPropertySet, container.XNamed {
+        interface BaseFrame
+            extends BaseFrameProperties, TextContent, drawing.XShape, beans.XPropertySet, container.XNamed
+        {
             /** contains the name of the frame style that is applied to this object. */
             FrameStyleName: string;
         }
@@ -84008,16 +86319,16 @@ declare namespace com.sun.star {
         }
 
         /** A bookmark is a {@link TextContent} , which is like a jump target or a label. */
-        interface Bookmark extends TextContent, container.XNamed { }
+        interface Bookmark extends TextContent, container.XNamed {}
 
         /** This service specifies a collection of {@link Bookmarks} . */
-        interface Bookmarks extends container.XNameAccess, container.XIndexAccess { }
+        interface Bookmarks extends container.XNameAccess, container.XIndexAccess {}
 
         /**
          * represents a singe cell within a text table.
          * @see com.sun.star.text.TextTable
          */
-        interface Cell extends CellProperties, table.CellProperties, table.XCell, XText { }
+        interface Cell extends CellProperties, table.CellProperties, table.XCell, XText {}
 
         /**
          * service that holds all cell properties of a text table cell in a text document.
@@ -84086,8 +86397,18 @@ declare namespace com.sun.star {
          * area of cells within a text table.
          * @see com.sun.star.text.TextTable
          */
-        interface CellRange extends style.CharacterProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex, style.ParagraphProperties,
-            style.ParagraphPropertiesAsian, style.ParagraphPropertiesComplex, table.XCellRange, sheet.XCellRangeData, chart.XChartDataArray {
+        interface CellRange
+            extends
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                style.ParagraphPropertiesAsian,
+                style.ParagraphPropertiesComplex,
+                table.XCellRange,
+                sheet.XCellRangeData,
+                chart.XChartDataArray
+        {
             /** contains color of the background. */
             BackColor: util.Color;
 
@@ -84182,8 +86503,16 @@ declare namespace com.sun.star {
         }
 
         /** provides default settings of a text component for paragraph and character properties. */
-        interface Defaults extends style.CharacterProperties, style.ParagraphProperties, style.CharacterPropertiesAsian, style.CharacterPropertiesComplex,
-            style.ParagraphPropertiesAsian, style.ParagraphPropertiesComplex, beans.XPropertySet {
+        interface Defaults
+            extends
+                style.CharacterProperties,
+                style.ParagraphProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphPropertiesAsian,
+                style.ParagraphPropertiesComplex,
+                beans.XPropertySet
+        {
             /** default tab-distance to be used. */
             TabStopDistance: number;
         }
@@ -84192,7 +86521,7 @@ declare namespace com.sun.star {
          * is a {@link TextField} which is not specified by itself, but dependent on a {@link TextFieldMaster} .
          * @see TextFieldMaster
          */
-        interface DependentTextField extends TextField, XDependentTextField { }
+        interface DependentTextField extends TextField, XDependentTextField {}
 
         /**
          * specifies service of content indexes within a document.
@@ -84234,7 +86563,7 @@ declare namespace com.sun.star {
         }
 
         /** provides access to all indexes in a document. */
-        interface DocumentIndexes extends container.XNameAccess, container.XIndexAccess { }
+        interface DocumentIndexes extends container.XNameAccess, container.XIndexAccess {}
 
         /** is a {@link TextRange} which is explicitly marked as an index entry for a {@link DocumentIndex} . */
         interface DocumentIndexMark extends TextContent, BaseIndexMark {
@@ -84445,10 +86774,32 @@ declare namespace com.sun.star {
          *
          * In addition, all text objects can be searched.
          */
-        interface GenericTextDocument extends document.OfficeDocument, lang.XMultiServiceFactory, XTextDocument, util.XSearchable, util.XRefreshable,
-            tiledrendering.XTiledRenderable, XFootnotesSupplier, XEndnotesSupplier, util.XReplaceable, XPagePrintable, XReferenceMarksSupplier, XChapterNumberingSupplier,
-            beans.XPropertySet, XTextGraphicObjectsSupplier, XTextEmbeddedObjectsSupplier, XTextTablesSupplier, style.XStyleFamiliesSupplier, XBookmarksSupplier,
-            XDocumentIndexesSupplier, XTextFieldsSupplier, XTextFramesSupplier, XTextSectionsSupplier, util.XNumberFormatsSupplier {
+        interface GenericTextDocument
+            extends
+                document.OfficeDocument,
+                lang.XMultiServiceFactory,
+                XTextDocument,
+                util.XSearchable,
+                util.XRefreshable,
+                tiledrendering.XTiledRenderable,
+                XFootnotesSupplier,
+                XEndnotesSupplier,
+                util.XReplaceable,
+                XPagePrintable,
+                XReferenceMarksSupplier,
+                XChapterNumberingSupplier,
+                beans.XPropertySet,
+                XTextGraphicObjectsSupplier,
+                XTextEmbeddedObjectsSupplier,
+                XTextTablesSupplier,
+                style.XStyleFamiliesSupplier,
+                XBookmarksSupplier,
+                XDocumentIndexesSupplier,
+                XTextFieldsSupplier,
+                XTextFramesSupplier,
+                XTextSectionsSupplier,
+                util.XNumberFormatsSupplier
+        {
             addEventListener(Listener: document.XEventListener | lang.XEventListener): void;
 
             /** contains the count of all characters in the document. */
@@ -84500,7 +86851,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a service that provides access to the settings of a text module. */
-        interface GlobalSettings extends view.XPrintSettingsSupplier, view.XViewSettingsSupplier { }
+        interface GlobalSettings extends view.XPrintSettingsSupplier, view.XViewSettingsSupplier {}
 
         /**
          * describes the cropping of graphic objects. Cropping means to show only parts of the object.
@@ -84564,7 +86915,9 @@ declare namespace com.sun.star {
          * is a {@link TextContent} that can be used to attach RDF metadata to a range of text.
          * @since OOo 3.2
          */
-        interface InContentMetadata extends TextContent, rdf.XMetadatable, container.XEnumerationAccess, container.XChild { }
+        interface InContentMetadata
+            extends TextContent, rdf.XMetadatable, container.XEnumerationAccess, container.XChild
+        {}
 
         /** is thrown whenever a method gets a {@link TextContent} as an actual argument when the text content cannot be used for that operation. */
         interface InvalidTextContentException extends uno.Exception {
@@ -84617,7 +86970,9 @@ declare namespace com.sun.star {
          * Gives access to mail merge functionality.
          * @since OOo 1.1.2
          */
-        interface MailMerge extends task.XJob, util.XCancellable, beans.XPropertySet, XMailMergeBroadcaster, sdb.DataAccessDescriptor {
+        interface MailMerge
+            extends task.XJob, util.XCancellable, beans.XPropertySet, XMailMergeBroadcaster, sdb.DataAccessDescriptor
+        {
             /**
              * contains the connection to the database.
              *
@@ -84906,7 +87261,7 @@ declare namespace com.sun.star {
              * Only of relevance, if PositionAndSpaceMode equals LABEL_ALIGNMENT.
              *
              * </p>
-             * @@since OOo 3.0
+             * @since OOo 3.0
              */
             FirstLineIndent: number;
 
@@ -84940,7 +87295,7 @@ declare namespace com.sun.star {
              * Only of relevance, if PositionAndSpaceMode equals LABEL_ALIGNMENT.
              *
              * </p>
-             * @@since OOo 3.0
+             * @since OOo 3.0
              */
             IndentAt: number;
 
@@ -84954,7 +87309,7 @@ declare namespace com.sun.star {
              * Only of relevance, if PositionAndSpaceMode equals LABEL_ALIGNMENT.
              *
              * </p>
-             * @@since OOo 3.0
+             * @since OOo 3.0
              */
             LabelFollowedBy: number;
 
@@ -84973,7 +87328,7 @@ declare namespace com.sun.star {
              * and LabelFollowedBy equal LABELFOLLOW_LISTTAB
              *
              * </p>
-             * @@since OOo 3.0
+             * @since OOo 3.0
              */
             ListtabStopPosition: number;
 
@@ -85005,7 +87360,7 @@ declare namespace com.sun.star {
              * ListtabStopPosition, FirstLineIndent, IndentAt are used.
              *
              * </p>
-             * @@since OOo 3.0
+             * @since OOo 3.0
              */
             PositionAndSpaceMode: number;
 
@@ -85063,7 +87418,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a style sheet numberings within a {@link com.sun.star.text.Text} . */
-        interface NumberingStyle extends style.Style, NumberingRules { }
+        interface NumberingStyle extends style.Style, NumberingRules {}
 
         /**
          * specifies service of object indexes within a document.
@@ -85148,9 +87503,21 @@ declare namespace com.sun.star {
         }
 
         /** is a piece of text which can take its own paragraph-specific attributes (technically, properties). */
-        interface Paragraph extends style.ParagraphProperties, style.ParagraphPropertiesAsian, style.ParagraphPropertiesComplex, style.CharacterProperties,
-            style.CharacterPropertiesAsian, style.CharacterPropertiesComplex, TextTable, TextContent, beans.XPropertySet, beans.XPropertyState,
-            container.XEnumerationAccess, beans.XTolerantMultiPropertySet { }
+        interface Paragraph
+            extends
+                style.ParagraphProperties,
+                style.ParagraphPropertiesAsian,
+                style.ParagraphPropertiesComplex,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                TextTable,
+                TextContent,
+                beans.XPropertySet,
+                beans.XPropertyState,
+                container.XEnumerationAccess,
+                beans.XTolerantMultiPropertySet
+        {}
 
         /** These properties describe the printing of the content of a text document. */
         interface PrintSettings {
@@ -85232,19 +87599,11 @@ declare namespace com.sun.star {
              *
              * The elements of the sequence are:
              *
-             *
-             *
              * string RedlineAuthor;
-             *
-             *
              *
              * {@link com.sun.star.util.DateTime} RedlineDateTime;
              *
-             *
-             *
              * string RedlineComment;
-             *
-             *
              *
              * string RedlineType;
              */
@@ -85261,23 +87620,13 @@ declare namespace com.sun.star {
              *
              * Valid type names are:
              *
-             *
-             *
              * Insert - marks an insertion
-             *
-             *
              *
              * Delete - marks an deletion
              *
-             *
-             *
              * Format - marks an attribute change
              *
-             *
-             *
              * {@link TextTable} - marks a text table
-             *
-             *
              *
              * Style - marks an applied style
              */
@@ -85285,10 +87634,10 @@ declare namespace com.sun.star {
         }
 
         /** is used for cross references in text documents. */
-        interface ReferenceMark extends XTextContent, container.XNamed { }
+        interface ReferenceMark extends XTextContent, container.XNamed {}
 
         /** provides access to the reference marks in a document. */
-        interface ReferenceMarks extends container.XIndexAccess, container.XNameAccess { }
+        interface ReferenceMarks extends container.XIndexAccess, container.XNameAccess {}
 
         /**
          * describes the link for a text section.
@@ -85504,45 +87853,29 @@ declare namespace com.sun.star {
          * @see com.sun.star.text.TextFrame
          * @see com.sun.star.table.Cell
          */
-        interface Text extends container.XEnumerationAccess, XText, XTextRangeCompare, XTextRangeMover, XRelativeTextContentInsert {
+        interface Text
+            extends container.XEnumerationAccess, XText, XTextRangeCompare, XTextRangeMover, XRelativeTextContentInsert
+        {
             /**
              * contains the properties of a redline at the start of the document. The sequence contains the following properties
              *
              * string RedlineAuthor
              *
-             *
-             *
              * {@link com.sun.star.util.DateTime} RedlineDate_Time
-             *
-             *
              *
              * string RedlineComment
              *
-             *
-             *
              * string RedlineType
-             *
-             *
              *
              * string RedlineIdentifier
              *
-             *
-             *
              * boolean IsCollapsed
-             *
-             *
              *
              * boolean IsStart
              *
-             *
-             *
              * boolean MergeLastPara
              *
-             *
-             *
              * [maybevoid] {@link com.sun.star.text.XText} RedlineText (maybevoid)
-             *
-             *
              *
              * {@link com.sun.star.beans.PropertyValues} RedlineSuccessorData (contains the same properties except for the RedlineSuccessorData)
              * @see StartRedline
@@ -85554,39 +87887,21 @@ declare namespace com.sun.star {
              *
              * string RedlineAuthor
              *
-             *
-             *
              * {@link com.sun.star.util.DateTime} RedlineDate_Time
-             *
-             *
              *
              * string RedlineComment
              *
-             *
-             *
              * string RedlineType
-             *
-             *
              *
              * string RedlineIdentifier
              *
-             *
-             *
              * boolean IsCollapsed
-             *
-             *
              *
              * boolean IsStart
              *
-             *
-             *
              * boolean MergeLastPara
              *
-             *
-             *
              * [maybevoid] {@link com.sun.star.text.XText} RedlineText (maybevoid)
-             *
-             *
              *
              * {@link com.sun.star.beans.PropertyValues} RedlineSuccessorData (contains the same properties except for the RedlineSuccessorData)
              * @see EndRedline
@@ -85685,19 +88000,32 @@ declare namespace com.sun.star {
          * Objects of this type are collections of text contents of the same type.
          * @see Text
          */
-        interface TextContentCollection extends container.XNameAccess, container.XContainer { }
+        interface TextContentCollection extends container.XNameAccess, container.XContainer {}
 
         /**
          * A {@link TextCursor} is a {@link TextRange} which can be moved within a {@link Text} object.
          * @see TextRange
          */
-        interface TextCursor extends TextRange, XTextCursor, XWordCursor, XSentenceCursor, XParagraphCursor, beans.XPropertySet, beans.XPropertyState,
-            beans.XMultiPropertyStates, document.XDocumentInsertable, util.XSortable {
+        interface TextCursor
+            extends
+                TextRange,
+                XTextCursor,
+                XWordCursor,
+                XSentenceCursor,
+                XParagraphCursor,
+                beans.XPropertySet,
+                beans.XPropertyState,
+                beans.XMultiPropertyStates,
+                document.XDocumentInsertable,
+                util.XSortable
+        {
             getPropertyStates(aPropertyName: LibreOffice.SeqEquiv<string>): SafeArray<beans.PropertyState>;
         }
 
         /** specifies the view of a {@link TextDocument} . */
-        interface TextDocumentView extends view.OfficeDocumentView, view.XViewSettingsSupplier, XTextViewCursorSupplier, beans.XPropertySet {
+        interface TextDocumentView
+            extends view.OfficeDocumentView, view.XViewSettingsSupplier, XTextViewCursorSupplier, beans.XPropertySet
+        {
             /**
              * specifies if spell checking should be done while typing.
              * @since OOo 2.0
@@ -85745,7 +88073,7 @@ declare namespace com.sun.star {
         }
 
         /** provides access to all embedded objects in a document. */
-        interface TextEmbeddedObjects extends container.XNameAccess, container.XIndexAccess { }
+        interface TextEmbeddedObjects extends container.XNameAccess, container.XIndexAccess {}
 
         /** A {@link TextField} is a {@link TextContent} which fades its textual representation into the text range to which it is anchored. */
         interface TextField extends TextContent, XTextField, beans.XPropertySet {
@@ -85783,7 +88111,7 @@ declare namespace com.sun.star {
         }
 
         /** This is a collection of {@link TextField} instances. */
-        interface TextFields extends container.XEnumerationAccess, util.XRefreshable { }
+        interface TextFields extends container.XEnumerationAccess, util.XRefreshable {}
 
         /**
          * specifies a rectangular shape which contains a {@link Text} object and is attached to a piece of surrounding {@link Text} .
@@ -85834,7 +88162,7 @@ declare namespace com.sun.star {
 
             /**
              * determines the interpretation of the height and relative height properties.
-             * @@see SizeType
+             * @see SizeType
              */
             SizeType: number;
 
@@ -85857,7 +88185,7 @@ declare namespace com.sun.star {
         }
 
         /** This is the collection of all {@link TextFrame} instances within a context (e.g. a document). */
-        interface TextFrames extends container.XNameAccess, container.XIndexAccess, container.XContainer { }
+        interface TextFrames extends container.XNameAccess, container.XIndexAccess, container.XContainer {}
 
         /** specifies a graphic which can be embedded in {@link Text} . */
         interface TextGraphicObject extends BaseFrame {
@@ -85932,10 +88260,10 @@ declare namespace com.sun.star {
         }
 
         /** This is the collection of all {@link TextGraphicObject} instances within a context (e.g. a document). */
-        interface TextGraphicObjects extends container.XNameAccess, container.XIndexAccess { }
+        interface TextGraphicObjects extends container.XNameAccess, container.XIndexAccess {}
 
         /** A {@link TextLayoutCursor} is a {@link TextRange} which can travel within a layout of a {@link Text} object. */
-        interface TextLayoutCursor extends TextCursor, XPageCursor { }
+        interface TextLayoutCursor extends TextCursor, XPageCursor {}
 
         /**
          * A descriptor for a single text markup.
@@ -86120,8 +88448,6 @@ declare namespace com.sun.star {
              *
              * **InContentMetadata**: a text range with attached metadata
              *
-             *
-             *
              * For Reference marks, document index marks, etc., 2 text portions will be generated, one for the start position and one for the end position.
              */
             TextPortionType: string;
@@ -86143,8 +88469,19 @@ declare namespace com.sun.star {
          * implementations of this service.
          * @see Text
          */
-        interface TextRange extends XTextRange, beans.XPropertySet, beans.XPropertyState, container.XContentEnumerationAccess, style.CharacterProperties,
-            style.CharacterPropertiesAsian, style.CharacterPropertiesComplex, style.ParagraphProperties, style.ParagraphPropertiesAsian, style.ParagraphPropertiesComplex { }
+        interface TextRange
+            extends
+                XTextRange,
+                beans.XPropertySet,
+                beans.XPropertyState,
+                container.XContentEnumerationAccess,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                style.ParagraphPropertiesAsian,
+                style.ParagraphPropertiesComplex
+        {}
 
         /**
          * describes the structural properties to retrieve text contents.
@@ -86198,7 +88535,15 @@ declare namespace com.sun.star {
          *
          * {@link TextSection} instances can be linked from and to other texts.
          */
-        interface TextSection extends TextContent, xml.UserDefinedAttributesSupplier, XTextSection, container.XNamed, beans.XPropertySet, beans.XPropertyState {
+        interface TextSection
+            extends
+                TextContent,
+                xml.UserDefinedAttributesSupplier,
+                XTextSection,
+                container.XNamed,
+                beans.XPropertySet,
+                beans.XPropertyState
+        {
             /** contains the name of the file filter for the background graphic. */
             BackGraphicFilter: string;
 
@@ -86314,7 +88659,7 @@ declare namespace com.sun.star {
         }
 
         /** provides access to the text sections in a text document. */
-        interface TextSections extends container.XIndexAccess, container.XNameAccess { }
+        interface TextSections extends container.XIndexAccess, container.XNameAccess {}
 
         /**
          * describes sort criteria for sorting text.
@@ -86386,8 +88731,18 @@ declare namespace com.sun.star {
          * @see com.sun.star.text.TableRows
          * @see com.sun.star.text.TextTableCursor
          */
-        interface TextTable extends TextContent, xml.UserDefinedAttributesSupplier, XTextTable, container.XNamed, table.XCellRange, chart.XChartDataArray,
-            table.XAutoFormattable, util.XSortable, sheet.XCellRangeData {
+        interface TextTable
+            extends
+                TextContent,
+                xml.UserDefinedAttributesSupplier,
+                XTextTable,
+                container.XNamed,
+                table.XCellRange,
+                chart.XChartDataArray,
+                table.XAutoFormattable,
+                util.XSortable,
+                sheet.XCellRangeData
+        {
             /** contains the color of the background. */
             BackColor: util.Color;
 
@@ -86513,8 +88868,16 @@ declare namespace com.sun.star {
          * travel through text table cellsselect text table cellsget property values from the selected cellsset property values in the selected cells
          * @see com.sun.star.text.TextTable
          */
-        interface TextTableCursor extends XTextTableCursor, beans.XPropertySet, style.CharacterProperties, style.CharacterPropertiesAsian,
-            style.CharacterPropertiesComplex, style.ParagraphProperties, xml.UserDefinedAttributesSupplier { }
+        interface TextTableCursor
+            extends
+                XTextTableCursor,
+                beans.XPropertySet,
+                style.CharacterProperties,
+                style.CharacterPropertiesAsian,
+                style.CharacterPropertiesComplex,
+                style.ParagraphProperties,
+                xml.UserDefinedAttributesSupplier
+        {}
 
         /**
          * specifies the properties of a text table row.
@@ -86547,7 +88910,7 @@ declare namespace com.sun.star {
 
             /**
              * If `TRUE` , the row is allowed to be split at page or column breaks.
-             * @@since OOo 2.0
+             * @since OOo 2.0
              */
             IsSplitAllowed: boolean;
 
@@ -86562,13 +88925,13 @@ declare namespace com.sun.star {
         }
 
         /** provides access to all tables in a document. */
-        interface TextTables extends container.XIndexAccess, container.XNameAccess { }
+        interface TextTables extends container.XIndexAccess, container.XNameAccess {}
 
         /**
          * A {@link TextViewCursor} is a {@link TextRange} which can travel within a view of a {@link Text} object.
          * @see TextDocumentView
          */
-        interface TextViewCursor extends TextLayoutCursor, view.XScreenCursor { }
+        interface TextViewCursor extends TextLayoutCursor, view.XScreenCursor {}
 
         /**
          * specifies service of user defined indexes within a document.
@@ -86869,7 +89232,7 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XAutoTextContainer2 extends XAutoTextContainer, container.XIndexAccess { }
+        interface XAutoTextContainer2 extends XAutoTextContainer, container.XIndexAccess {}
 
         /**
          * identifies an autotext entry.
@@ -87078,7 +89441,12 @@ declare namespace com.sun.star {
              * @param aAttributes the given set of attributes e.g. Language
              * @throws IllegalArgumentException when any argument is wrong.
              */
-            changeText(nPos: number, nLen: number, NewText: string, aAttributes: LibreOffice.SeqEquiv<beans.PropertyValue>): void;
+            changeText(
+                nPos: number,
+                nLen: number,
+                NewText: string,
+                aAttributes: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): void;
 
             /**
              * get the language of the specific text
@@ -87474,7 +89842,10 @@ declare namespace com.sun.star {
              * @param TextRange specifies the position of the insertion.
              * @since LibreOffice 4.0
              */
-            finishParagraphInsert(CharacterAndParagraphProperties: beans.PropertyValues, TextRange: XTextRange): XTextRange;
+            finishParagraphInsert(
+                CharacterAndParagraphProperties: beans.PropertyValues,
+                TextRange: XTextRange,
+            ): XTextRange;
         }
 
         /** makes it possible to move paragraph by paragraph. */
@@ -87682,10 +90053,10 @@ declare namespace com.sun.star {
         }
 
         /** is a meta-interface for manipulating and inserting text. */
-        interface XTextAppend extends XText, XParagraphAppend, XTextPortionAppend { }
+        interface XTextAppend extends XText, XParagraphAppend, XTextPortionAppend {}
 
         /** merges the functions of {@link XTextAppend} , {@link XTextContentAppend} and {@link XTextConvert} . */
-        interface XTextAppendAndConvert extends XTextAppend, XTextContentAppend, XTextConvert { }
+        interface XTextAppendAndConvert extends XTextAppend, XTextContentAppend, XTextConvert {}
 
         /**
          * manages columns within the object.
@@ -87764,7 +90135,10 @@ declare namespace com.sun.star {
              * @param CharacterAndParagraphProperties can contain all the properties defined by the service {@link Paragraph} .
              * @returns the anchor text range of the inserted text content.
              */
-            appendTextContent(TextContent: XTextContent, CharacterAndParagraphProperties: beans.PropertyValues): XTextRange;
+            appendTextContent(
+                TextContent: XTextContent,
+                CharacterAndParagraphProperties: beans.PropertyValues,
+            ): XTextRange;
 
             /**
              * inserts a text content at the given position.
@@ -87774,7 +90148,11 @@ declare namespace com.sun.star {
              * @returns the anchor text range of the inserted text content.
              * @since LibreOffice 4.0
              */
-            insertTextContentWithProperties(TextContent: XTextContent, CharacterAndParagraphProperties: beans.PropertyValues, TextRange: XTextRange): XTextRange;
+            insertTextContentWithProperties(
+                TextContent: XTextContent,
+                CharacterAndParagraphProperties: beans.PropertyValues,
+                TextRange: XTextRange,
+            ): XTextRange;
         }
 
         /** allows converting selections of text to frames or tables. */
@@ -87789,8 +90167,10 @@ declare namespace com.sun.star {
              */
             convertToTable(
                 TableRanges: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<sequence<XTextRange>>>,
-                CellProperties: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<beans.PropertyValues>>, RowProperties: LibreOffice.SeqEquiv<beans.PropertyValues>,
-                TableProperties: beans.PropertyValues): XTextTable;
+                CellProperties: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<beans.PropertyValues>>,
+                RowProperties: LibreOffice.SeqEquiv<beans.PropertyValues>,
+                TableProperties: beans.PropertyValues,
+            ): XTextTable;
 
             /**
              * moves the paragraphs from Start to End into a text frame.
@@ -87948,8 +90328,19 @@ declare namespace com.sun.star {
              * @param nLength Length of the markup range.
              * @param xMarkupInfoContainer contains additional information about the markup.
              */
-            commitStringMarkup(nType: number, aIdentifier: string, nStart: number, nLength: number, xMarkupInfoContainer: container.XStringKeyMap): void;
-            commitTextRangeMarkup(nType: number, aIdentifier: string, xRange: XTextRange, xMarkupInfoContainer: container.XStringKeyMap): void;
+            commitStringMarkup(
+                nType: number,
+                aIdentifier: string,
+                nStart: number,
+                nLength: number,
+                xMarkupInfoContainer: container.XStringKeyMap,
+            ): void;
+            commitTextRangeMarkup(
+                nType: number,
+                aIdentifier: string,
+                xRange: XTextRange,
+                xMarkupInfoContainer: container.XStringKeyMap,
+            ): void;
 
             /**
              * obtains a container to store additional user defined text markup information.
@@ -87981,7 +90372,11 @@ declare namespace com.sun.star {
              * @param TextRange specifies the position of the insert.
              * @since LibreOffice 4.0
              */
-            insertTextPortion(Text: string, CharacterAndParagraphProperties: beans.PropertyValues, TextRange: XTextRange): XTextRange;
+            insertTextPortion(
+                Text: string,
+                CharacterAndParagraphProperties: beans.PropertyValues,
+                TextRange: XTextRange,
+            ): XTextRange;
         }
 
         /**
@@ -88485,15 +90880,9 @@ declare namespace com.sun.star {
                  *
                  * [property] short SortKey;
                  *
-                 *
-                 *
                  * Determines the bibliography field that is used to sort by.
                  *
-                 *
-                 *
                  * [property] boolean IsSortAscending;
-                 *
-                 *
                  *
                  * Determines whether the sorting is ascending or descending. It uses the type {@link com.sun.star.text.BibliographyDataField}
                  */
@@ -88764,7 +91153,7 @@ declare namespace com.sun.star {
         namespace textfield {
             /**
              * specifies service of text field that visualizes a {@link DDE} connection.
-             * @@see com::sun::star::text::TextFieldMaster::DDE
+             * @see com::sun::star::text::TextFieldMaster::DDE
              * @since OOo 1.1.2
              */
             type DDE = TextField;
@@ -89375,7 +91764,9 @@ declare namespace com.sun.star {
              * @see com.sun.star.rdf
              * @since OOo 3.2
              */
-            interface MetadataField extends TextField, rdf.XMetadatable, XText, container.XEnumerationAccess, container.XChild {
+            interface MetadataField
+                extends TextField, rdf.XMetadatable, XText, container.XEnumerationAccess, container.XChild
+            {
                 /** determines whether changes in language attributes at the position of the text field also change the number format as appropriate for this language. */
                 IsFixedLanguage: boolean;
 
@@ -90080,7 +92471,15 @@ declare namespace com.sun.star {
              * @param nTileHeight logical height of the rendered rectangle, in TWIPs.
              * @since LibreOffice 5.0
              */
-            paintTile(Parent: any, nOutputWidth: number, nOutputHeight: number, nTilePosX: number, nTilePosY: number, nTileWidth: number, nTileHeight: number): void;
+            paintTile(
+                Parent: any,
+                nOutputWidth: number,
+                nOutputHeight: number,
+                nTilePosX: number,
+                nTilePosY: number,
+                nTileWidth: number,
+                nTileHeight: number,
+            ): void;
         }
     }
 
@@ -90296,8 +92695,8 @@ declare namespace com.sun.star {
 
         /**
          * Offers a simple access to resources, like files and folders located in a local file system or on an WebDAV server.
-         * @@author Andreas Bregas
-         * @@version 1.0 07/25/2000
+         * @author Andreas Bregas
+         * @version 1.0 07/25/2000
          */
         type SimpleFileAccess = XSimpleFileAccess3;
 
@@ -90822,21 +93221,21 @@ declare namespace com.sun.star {
         }
 
         /** is used on provider side to access a {@link ContentResultSet} remote optimized. */
-        interface CachedContentResultSetStub extends ContentResultSet, XFetchProvider, XFetchProviderForContentAccess { }
+        interface CachedContentResultSetStub extends ContentResultSet, XFetchProvider, XFetchProviderForContentAccess {}
 
         /**
          * provides read access to a static or dynamically changing {@link ContentResultSet} .
          *
          * For example, a {@link DynamicResultSet} is returned from the open-command executed by an {@link XCommandProcessor} of the service {@link Content} .
          */
-        interface CachedDynamicResultSet extends XDynamicResultSet, XSourceInitialization { }
+        interface CachedDynamicResultSet extends XDynamicResultSet, XSourceInitialization {}
 
         /**
          * provides read access to a static or dynamically changing {@link ContentResultSet} .
          *
          * For example, a {@link DynamicResultSet} is returned from the open-command executed by an {@link XCommandProcessor} of the service {@link Content} .
          */
-        interface CachedDynamicResultSetStub extends XDynamicResultSet, XSourceInitialization { }
+        interface CachedDynamicResultSetStub extends XDynamicResultSet, XSourceInitialization {}
 
         /** An error specifying an invalid certificate. */
         interface CertificateValidationRequest extends task.ClassifiedInteractionRequest {
@@ -90964,8 +93363,19 @@ declare namespace com.sun.star {
         }
 
         /** A {@link Content} is a service that provides access to data of a content provided by an implementation of the service {@link ContentProvider} . */
-        interface Content extends XContent, lang.XComponent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier, beans.XPropertyContainer,
-            beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, XContentCreator, container.XChild { }
+        interface Content
+            extends
+                XContent,
+                lang.XComponent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                XContentCreator,
+                container.XChild
+        {}
 
         /**
          * This exception is thrown to indicate that the creation of a UCB content failed.
@@ -91051,7 +93461,7 @@ declare namespace com.sun.star {
         }
 
         /** provides access to a set of Contents. */
-        interface ContentProvider extends XContentProvider, XContentIdentifierFactory, XParameterizedContentProvider { }
+        interface ContentProvider extends XContentProvider, XContentIdentifierFactory, XParameterizedContentProvider {}
 
         /**
          * A structure for content provider information.
@@ -91073,15 +93483,26 @@ declare namespace com.sun.star {
          * provider can be created and registered at the UCB.
          * @see XContentProviderProxyFactory
          */
-        interface ContentProviderProxy extends uno.XInterface, XContentProviderSupplier, XContentProvider, XParameterizedContentProvider { }
+        interface ContentProviderProxy
+            extends uno.XInterface, XContentProviderSupplier, XContentProvider, XParameterizedContentProvider
+        {}
 
         /**
          * provides access to the children of a folder content.
          *
          * It can be understand as a table containing a row for each child. The table columns may contain values of properties of the children.
          */
-        interface ContentResultSet extends lang.XComponent, sdbc.XResultSetMetaDataSupplier, sdbc.XResultSet, sdbc.XRow, sdbc.XCloseable, beans.XPropertySet,
-            XContentAccess, sdbc.ResultSet {
+        interface ContentResultSet
+            extends
+                lang.XComponent,
+                sdbc.XResultSetMetaDataSupplier,
+                sdbc.XResultSet,
+                sdbc.XRow,
+                sdbc.XCloseable,
+                beans.XPropertySet,
+                XContentAccess,
+                sdbc.ResultSet
+        {
             /**
              * controls the travel mode of the result set cursor.
              *
@@ -91092,8 +93513,6 @@ declare namespace com.sun.star {
              * The following pseudo-code illustrates the usage of a non-blocking cursor:
              *
              * {{program example here, see documentation}}
-             *
-             *
              *
              * If this property is not supported, the implementation needs to provide a blocking cursor.
              *
@@ -91182,8 +93601,19 @@ declare namespace com.sun.star {
          * Whether a content represents a folder or a file can be determined by inspecting its property **IsFolder** or **IsDocument** .
          * @see com.sun.star.ucb.FileContentProvider
          */
-        interface FileContent extends lang.XComponent, XContent, XContentCreator, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface FileContent
+            extends
+                lang.XComponent,
+                XContent,
+                XContentCreator,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * The File {@link Content} Provider (FCP) implements a {@link ContentProvider} for the {@link UniversalContentBroker} (UCB).
@@ -91193,7 +93623,9 @@ declare namespace com.sun.star {
          * The FCP is able to restrict access to the local file system to a number of directories shown to the client under configurable alias names.
          * @see com.sun.star.ucb.Content
          */
-        interface FileContentProvider extends XContentProvider, XContentIdentifierFactory, beans.XPropertySet, XFileIdentifierConverter { }
+        interface FileContentProvider
+            extends XContentProvider, XContentIdentifierFactory, beans.XPropertySet, XFileIdentifierConverter
+        {}
 
         /** A list of folders. */
         interface FolderList {
@@ -91234,8 +93666,18 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.FTPContentProvider
          * @since OOo 1.1.2
          */
-        interface FTPContent extends lang.XComponent, XContent, XContentCreator, XCommandProcessor, beans.XPropertiesChangeNotifier, beans.XPropertyContainer,
-            beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface FTPContent
+            extends
+                lang.XComponent,
+                XContent,
+                XContentCreator,
+                XCommandProcessor,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /** This struct contains information needed to transfer objects from one location to another. */
         interface GlobalTransferCommandArgument {
@@ -91273,24 +93715,55 @@ declare namespace com.sun.star {
             MimeType: string;
         }
 
-        interface GnomeVFSDocumentContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface GnomeVFSDocumentContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * A DCP Folder is a container for other DCP Folders or Documents.
          * @see com.sun.star.ucb.GnomeVFSContentProvider
          * @see com.sun.star.ucb.GnomeVFSDocumentContent
          */
-        interface GnomeVFSFolderContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface GnomeVFSFolderContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * A Help {@link Content} represents either a directory object allowing access to a search engine and to index information for the respective module, or
          * an object allowing access to the concrete written help content.
          * @see com.sun.star.ucb.HelpContentProvider
          */
-        interface HelpContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier, beans.XPropertyContainer,
-            beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface HelpContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * provides read access to a fragment of the hierarchy data.
@@ -91304,10 +93777,14 @@ declare namespace com.sun.star {
          * contain any URL, which will be treated as the target of a hierarchy link."Children", which is of type {@link HierarchyDataReadAccess} or of type
          * {@link HierarchyDataReadWriteAccess} , depending on the type of the node. This member provides access to the children of a node.
          */
-        interface HierarchyDataReadAccess extends container.XNameAccess, container.XHierarchicalNameAccess, util.XChangesNotifier, lang.XComponent { }
+        interface HierarchyDataReadAccess
+            extends container.XNameAccess, container.XHierarchicalNameAccess, util.XChangesNotifier, lang.XComponent
+        {}
 
         /** provides read and write access to a fragment of the hierarchy data. */
-        interface HierarchyDataReadWriteAccess extends HierarchyDataReadAccess, container.XNameContainer, lang.XSingleServiceFactory, util.XChangesBatch { }
+        interface HierarchyDataReadWriteAccess
+            extends HierarchyDataReadAccess, container.XNameContainer, lang.XSingleServiceFactory, util.XChangesBatch
+        {}
 
         /**
          * manages one or more complete sets of hierarchy data and serves as a factory for objects that provide access to a subset of the data.
@@ -91316,7 +93793,7 @@ declare namespace com.sun.star {
          * `com.sun.star.ucb.HierarchyDataSource` . Each implementation must provide its own service name that can be used to create instances of that service
          * implementation. Important for those service specifications is also to specify which of the optional parts are supported by the implementation.
          */
-        interface HierarchyDataSource extends lang.XMultiServiceFactory, lang.XComponent { }
+        interface HierarchyDataSource extends lang.XMultiServiceFactory, lang.XComponent {}
 
         /**
          * A HCP Folder is a container for other HCP Folders and HCP Links.
@@ -91324,8 +93801,19 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.HierarchyRootFolderContent
          * @see com.sun.star.ucb.HierarchyLinkContent
          */
-        interface HierarchyFolderContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface HierarchyFolderContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * A HCP {@link Link} is a content which points to another location.
@@ -91335,8 +93823,18 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.HierarchyRootFolderContent
          * @see com.sun.star.ucb.HierarchyFolderContent
          */
-        interface HierarchyLinkContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface HierarchyLinkContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * A HCP Root Folder is the root container for all other HCP Folders and HCP Links.
@@ -91346,8 +93844,19 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.HierarchyFolderContent
          * @see com.sun.star.ucb.HierarchyLinkContent
          */
-        interface HierarchyRootFolderContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface HierarchyRootFolderContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * The argument for the command "insert".
@@ -91628,8 +94137,18 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.Content
          * @since OOo 1.1.2
          */
-        interface ODMAContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier, beans.XPropertyContainer,
-            beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface ODMAContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * The argument for commands like "open", "update", and "synchronize".
@@ -91699,8 +94218,19 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.PackageContentProvider
          * @see com.sun.star.ucb.PackageStreamContent
          */
-        interface PackageFolderContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface PackageFolderContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * A PCP Stream is a content which represents a file inside a package.
@@ -91709,11 +94239,23 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.PackageContentProvider
          * @see com.sun.star.ucb.PackageFolderContent
          */
-        interface PackageStreamContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface PackageStreamContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /** This service contains the interfaces to implement by objects returned by {@link XPropertySetRegistry.openPropertySet()} . */
-        interface PersistentPropertySet extends XPersistentPropertySet, container.XNamed, beans.XPropertyContainer, beans.XPropertyAccess { }
+        interface PersistentPropertySet
+            extends XPersistentPropertySet, container.XNamed, beans.XPropertyContainer, beans.XPropertyAccess
+        {}
 
         /**
          * The argument for the command "post".
@@ -91754,7 +94296,7 @@ declare namespace com.sun.star {
         }
 
         /** This service contains the interfaces to implement by objects returned by XPropertySetRegistryFactory::createRegistry(). */
-        interface PropertySetRegistry extends XPropertySetRegistry, container.XNameAccess { }
+        interface PropertySetRegistry extends XPropertySetRegistry, container.XNameAccess {}
 
         /** contains value and state of a {@link com.sun.star.beans.Property} . */
         interface PropertyValueInfo extends beans.PropertyValue {
@@ -91826,10 +94368,12 @@ declare namespace com.sun.star {
         }
 
         /** A {@link RemoteAccessContentProvider} is a {@link ContentProvider} that provides access to contents available at other (remote) UCBs. */
-        interface RemoteAccessContentProvider extends ContentProvider, XParameterizedContentProvider { }
+        interface RemoteAccessContentProvider extends ContentProvider, XParameterizedContentProvider {}
 
         /** allows content providers running in remote processes to be registered at the local content provider broker. */
-        interface RemoteContentProviderAcceptor extends XRemoteContentProviderAcceptor, XRemoteContentProviderActivator { }
+        interface RemoteContentProviderAcceptor
+            extends XRemoteContentProviderAcceptor, XRemoteContentProviderActivator
+        {}
 
         /**
          * The description of a change to a {@link com.sun.star.ucb.XRemoteContentProviderSupplier} .
@@ -91854,7 +94398,9 @@ declare namespace com.sun.star {
          * The way this works might change, therefore this interface is marked as deprecated.
          * @deprecated Deprecated
          */
-        interface RemoteProxyContentProvider extends XContentProvider, XContentIdentifierFactory, XParameterizedContentProvider { }
+        interface RemoteProxyContentProvider
+            extends XContentProvider, XContentIdentifierFactory, XParameterizedContentProvider
+        {}
 
         /**
          * describes a rule that can be applies to a number of objects.
@@ -92058,8 +94604,19 @@ declare namespace com.sun.star {
          * @see TransientDocumentsStreamContent
          * @since OOo 2.0
          */
-        interface TransientDocumentsDocumentContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface TransientDocumentsDocumentContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * A TDCP Folder is a container for other TDCP Folders and TDCP Streams.
@@ -92071,8 +94628,19 @@ declare namespace com.sun.star {
          * @see TransientDocumentsStreamContent
          * @since OOo 2.0
          */
-        interface TransientDocumentsFolderContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface TransientDocumentsFolderContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * A TDCP Root Folder is the root container for all other TDCP contents.
@@ -92085,8 +94653,18 @@ declare namespace com.sun.star {
          * @see TransientDocumentsStreamContent
          * @since OOo 2.0
          */
-        interface TransientDocumentsRootContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface TransientDocumentsRootContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * A TDCP Stream is a content which represents a data stream of an Office document.
@@ -92098,8 +94676,18 @@ declare namespace com.sun.star {
          * @see TransientDocumentsFolderContent
          * @since OOo 2.0
          */
-        interface TransientDocumentsStreamContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface TransientDocumentsStreamContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * is a one-instance service that provides access to a set of Contents via ContentProviders.
@@ -92192,16 +94780,37 @@ declare namespace com.sun.star {
          * @see com.sun.star.ucb.WebDAVContentProvider
          * @see com.sun.star.ucb.WebDAVFolderContent
          */
-        interface WebDAVDocumentContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier,
-            beans.XPropertyContainer, beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild { }
+        interface WebDAVDocumentContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild
+        {}
 
         /**
          * A DCP Folder is a container for other DCP Folders or Documents.
          * @see com.sun.star.ucb.WebDAVContentProvider
          * @see com.sun.star.ucb.WebDAVDocumentContent
          */
-        interface WebDAVFolderContent extends lang.XComponent, XContent, XCommandProcessor, XCommandProcessor2, beans.XPropertiesChangeNotifier, beans.XPropertyContainer,
-            beans.XPropertySetInfoChangeNotifier, XCommandInfoChangeNotifier, container.XChild, XContentCreator { }
+        interface WebDAVFolderContent
+            extends
+                lang.XComponent,
+                XContent,
+                XCommandProcessor,
+                XCommandProcessor2,
+                beans.XPropertiesChangeNotifier,
+                beans.XPropertyContainer,
+                beans.XPropertySetInfoChangeNotifier,
+                XCommandInfoChangeNotifier,
+                container.XChild,
+                XContentCreator
+        {}
 
         /**
          * This struct is to be contained in the first notification of an {@link XDynamicResultSet} .
@@ -92247,7 +94856,10 @@ declare namespace com.sun.star {
              * @param xMapping can be used for optimization of remote access via the interface {@link XContentAccess} of the {@link CachedContentResultSet} . This para
              * @returns an instance of service {@link CachedContentResultSet} .
              */
-            createCachedContentResultSet(xSource: sdbc.XResultSet, xMapping: XContentIdentifierMapping): sdbc.XResultSet;
+            createCachedContentResultSet(
+                xSource: sdbc.XResultSet,
+                xMapping: XContentIdentifierMapping,
+            ): sdbc.XResultSet;
         }
 
         /** creates a {@link CachedContentResultSetStub} . */
@@ -92275,7 +94887,10 @@ declare namespace com.sun.star {
              * @param ContentIdentifierMapping is not required, but can be set if it is necessary to change the identity of the contents accessible via the interface {
              * @returns an instance of service {@link CachedDynamicResultSet} .
              */
-            createCachedDynamicResultSet(SourceStub: XDynamicResultSet, ContentIdentifierMapping: XContentIdentifierMapping): XDynamicResultSet;
+            createCachedDynamicResultSet(
+                SourceStub: XDynamicResultSet,
+                ContentIdentifierMapping: XContentIdentifierMapping,
+            ): XDynamicResultSet;
         }
 
         /**
@@ -92302,7 +94917,12 @@ declare namespace com.sun.star {
              * @throws ListenerAlreadySetException if `Source` is already in use.
              * @throws AlreadyInitializedException if `TargetCache` already has been initialized.
              */
-            connectToCache(Source: XDynamicResultSet, TargetCache: XDynamicResultSet, SortingInfo: LibreOffice.SeqEquiv<NumberedSortingInfo>, CompareFactory: XAnyCompareFactory): void;
+            connectToCache(
+                Source: XDynamicResultSet,
+                TargetCache: XDynamicResultSet,
+                SortingInfo: LibreOffice.SeqEquiv<NumberedSortingInfo>,
+                CompareFactory: XAnyCompareFactory,
+            ): void;
 
             /**
              * creates a remote optimizes {@link XDynamicResultSet} .
@@ -92792,7 +95412,11 @@ declare namespace com.sun.star {
              * @returns the replaced content provider, if there was one.
              * @see XContentIdentifier
              */
-            registerContentProvider(Provider: XContentProvider, Scheme: string, ReplaceExisting: boolean): XContentProvider;
+            registerContentProvider(
+                Provider: XContentProvider,
+                Scheme: string,
+                ReplaceExisting: boolean,
+            ): XContentProvider;
         }
 
         /**
@@ -93024,7 +95648,11 @@ declare namespace com.sun.star {
              * @param bDirection `TRUE` , if you want the rows to be read in the same order, as they are contained in the result set ( `TRUE` <-> forward step; `FALSE`
              * @returns contains a sequence of anys. Each of these anys contains a string.
              */
-            fetchContentIdentifierStrings(nRowStartPosition: number, nRowCount: number, bDirection: boolean): FetchResult;
+            fetchContentIdentifierStrings(
+                nRowStartPosition: number,
+                nRowCount: number,
+                bDirection: boolean,
+            ): FetchResult;
 
             /**
              * returns the {@link XContent} s of the columns of the indicated rows
@@ -93368,7 +95996,12 @@ declare namespace com.sun.star {
              * @param DoneListener If not null, the implementation of this interface can  --  through this callback  --  tell the calling side that the implementation
              * @returns true if the remote content provider has successfully been added.
              */
-            addRemoteContentProvider(Identifier: string, Factory: lang.XMultiServiceFactory, Templates: LibreOffice.SeqEquiv<string>, DoneListener: XRemoteContentProviderDoneListener): boolean;
+            addRemoteContentProvider(
+                Identifier: string,
+                Factory: lang.XMultiServiceFactory,
+                Templates: LibreOffice.SeqEquiv<string>,
+                DoneListener: XRemoteContentProviderDoneListener,
+            ): boolean;
 
             /**
              * Remove a remote content provider.
@@ -93671,7 +96304,11 @@ declare namespace com.sun.star {
              * @param CompareFactory a factory for compare objects.
              * @returns a sorted result set.
              */
-            createSortedDynamicResultSet(Source: XDynamicResultSet, Info: LibreOffice.SeqEquiv<NumberedSortingInfo>, CompareFactory: XAnyCompareFactory): XDynamicResultSet;
+            createSortedDynamicResultSet(
+                Source: XDynamicResultSet,
+                Info: LibreOffice.SeqEquiv<NumberedSortingInfo>,
+                CompareFactory: XAnyCompareFactory,
+            ): XDynamicResultSet;
         }
 
         /** provides the initialization of a component with any source object. */
@@ -93690,7 +96327,14 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.0 */
-        interface XUniversalContentBroker extends lang.XComponent, XContentProvider, XContentProviderManager, XContentIdentifierFactory, XCommandProcessor2 { }
+        interface XUniversalContentBroker
+            extends
+                lang.XComponent,
+                XContentProvider,
+                XContentProviderManager,
+                XContentIdentifierFactory,
+                XCommandProcessor2
+        {}
 
         /** A command environment that can be used to deal with WebDAV/HTTP specific commands. */
         interface XWebDAVCommandEnvironment extends XCommandEnvironment {
@@ -94154,7 +96798,13 @@ declare namespace com.sun.star {
          * ActionTriggerSeparator} - represents a separator between two entries ;  This entry type is of interest for components rendering a an {@link
          * ActionTriggerContainer}{@link ActionTriggerContainer} - represents a sub container
          */
-        interface ActionTriggerContainer extends container.XIndexContainer, lang.XMultiServiceFactory, container.XEnumerationAccess, container.XContainer { }
+        interface ActionTriggerContainer
+            extends
+                container.XIndexContainer,
+                lang.XMultiServiceFactory,
+                container.XEnumerationAccess,
+                container.XContainer
+        {}
 
         /** describes a separator entry. Such entries are of interest for components rendering an {@link ActionTriggerContainer} . */
         interface ActionTriggerSeparator {
@@ -94167,7 +96817,13 @@ declare namespace com.sun.star {
          * @since LibreOffice 4.1
          */
         interface AddressBookSourceDialog extends dialogs.XExecutableDialog {
-            createWithDataSource(ParentWindow: awt.XWindow, DataSource: beans.XPropertySet, DataSourceName: string, Command: string, Title: string): void;
+            createWithDataSource(
+                ParentWindow: awt.XWindow,
+                DataSource: beans.XPropertySet,
+                DataSourceName: string,
+                Command: string,
+                Title: string,
+            ): void;
         }
 
         /**
@@ -94339,7 +96995,7 @@ declare namespace com.sun.star {
          * depends on the specific user interface element type. Every user interface must be initialized before it can be used.
          * @since OOo 2.0
          */
-        interface UIElement extends XUIElement, lang.XInitialization, util.XUpdatable, lang.XComponent { }
+        interface UIElement extends XUIElement, lang.XInitialization, util.XUpdatable, lang.XComponent {}
 
         /**
          * describes the internal structure of a configurable user interface element.
@@ -94369,7 +97025,9 @@ declare namespace com.sun.star {
          * @see dom.sun.star.util.XFlushable
          * @since OOo 2.0
          */
-        interface XAcceleratorConfiguration extends XUIConfigurationPersistence, XUIConfigurationStorage, XUIConfiguration {
+        interface XAcceleratorConfiguration
+            extends XUIConfigurationPersistence, XUIConfigurationStorage, XUIConfiguration
+        {
             /**
              * return the list of all key events, which are available at this configuration set.
              *
@@ -94599,7 +97257,7 @@ declare namespace com.sun.star {
          * provides access to Decks of a Sidebar.
          * @since LibreOffice 5.1
          */
-        interface XDecks extends container.XIndexAccess, container.XNameAccess { }
+        interface XDecks extends container.XIndexAccess, container.XNameAccess {}
 
         /**
          * this interface enables developer to implement different docking area acceptors which are used by the frame based layout manager.
@@ -94649,7 +97307,9 @@ declare namespace com.sun.star {
          *
          * An image manager controls a number of image sets which are specified by a {@link ImageType} .
          */
-        interface XImageManager extends XUIConfigurationPersistence, XUIConfiguration, lang.XComponent, lang.XInitialization {
+        interface XImageManager
+            extends XUIConfigurationPersistence, XUIConfiguration, lang.XComponent, lang.XInitialization
+        {
             /**
              * retrieves the list of command URLs which have images associated.
              * @param nImageType specifies the image type for this operation.
@@ -94663,7 +97323,10 @@ declare namespace com.sun.star {
              * @param aCommandURLSequence a sequence of command URLs for which the images are requested.
              * @returns a sequence of graphics object which are associated with the provided command URLs. If an unknown command URL is provided or a command URL has no
              */
-            getImages(nImageType: number, aCommandURLSequence: LibreOffice.SeqEquiv<string>): SafeArray<graphic.XGraphic>;
+            getImages(
+                nImageType: number,
+                aCommandURLSequence: LibreOffice.SeqEquiv<string>,
+            ): SafeArray<graphic.XGraphic>;
 
             /**
              * determines if a command URL has an associated image.
@@ -94679,7 +97342,11 @@ declare namespace com.sun.star {
              * @param aCommandURLSequence a sequence of command URLs which specify which commands get an new image.
              * @param aGraphicSequence a sequence of graphic objects which should be associated with the provided command URLs.  If an association is already present i
              */
-            insertImages(nImageType: number, aCommandURLSequence: LibreOffice.SeqEquiv<string>, aGraphicSequence: LibreOffice.SeqEquiv<graphic.XGraphic>): void;
+            insertImages(
+                nImageType: number,
+                aCommandURLSequence: LibreOffice.SeqEquiv<string>,
+                aGraphicSequence: LibreOffice.SeqEquiv<graphic.XGraphic>,
+            ): void;
 
             /**
              * removes associated images to a command URL.
@@ -94694,7 +97361,11 @@ declare namespace com.sun.star {
              * @param aCommandURLSequence a sequence of command URLs for which images should be replaced.
              * @param aGraphicsSequence a sequence of graphic objects which should replace the old images of the provided command URLs.  If a command URL cannot be fou
              */
-            replaceImages(nImageType: number, aCommandURLSequence: LibreOffice.SeqEquiv<string>, aGraphicsSequence: LibreOffice.SeqEquiv<graphic.XGraphic>): void;
+            replaceImages(
+                nImageType: number,
+                aCommandURLSequence: LibreOffice.SeqEquiv<string>,
+                aGraphicsSequence: LibreOffice.SeqEquiv<graphic.XGraphic>,
+            ): void;
 
             /**
              * resets the image manager to default data.
@@ -94734,7 +97405,13 @@ declare namespace com.sun.star {
          * Provides a unified interface for the {@link ModuleUIConfigurationManager} service.
          * @since LibreOffice 4.2
          */
-        interface XModuleUIConfigurationManager2 extends XUIConfigurationPersistence, XUIConfigurationManager, XModuleUIConfigurationManager, XUIConfiguration { }
+        interface XModuleUIConfigurationManager2
+            extends
+                XUIConfigurationPersistence,
+                XUIConfigurationManager,
+                XModuleUIConfigurationManager,
+                XUIConfiguration
+        {}
 
         /**
          * allows to retrieve user interface configuration managers related to OpenOffice.org modules.
@@ -95128,7 +97805,14 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XUIConfigurationManager2 extends XUIConfigurationStorage, XUIConfigurationPersistence, XUIConfigurationManager, XUIConfiguration, lang.XComponent { }
+        interface XUIConfigurationManager2
+            extends
+                XUIConfigurationStorage,
+                XUIConfigurationPersistence,
+                XUIConfigurationManager,
+                XUIConfiguration,
+                lang.XComponent
+        {}
 
         /**
          * allows to retrieve the user interface configuration manager related to an object.
@@ -95271,7 +97955,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the new-style service {@link XUIElementFactoryManager} .
          * @since LibreOffice 4.1
          */
-        interface XUIElementFactoryManager extends XUIElementFactory, XUIElementFactoryRegistration { }
+        interface XUIElementFactoryManager extends XUIElementFactory, XUIElementFactoryRegistration {}
 
         /**
          * is used to query, register and deregister user interface element factories.
@@ -95319,7 +98003,12 @@ declare namespace com.sun.star {
              * @param aModuleIdentifier an optional module identifier that can be used to register a factory only for a single module. This value can remain empty if n
              * @param aFactoryImplementationName a UNO implementation name that can be used by an implementation to create a factory instance.
              */
-            registerFactory(aType: string, aName: string, aModuleIdentifier: string, aFactoryImplementationName: string): void;
+            registerFactory(
+                aType: string,
+                aName: string,
+                aModuleIdentifier: string,
+                aFactoryImplementationName: string,
+            ): void;
         }
 
         /**
@@ -95456,7 +98145,7 @@ declare namespace com.sun.star {
              * Otherwise, the filter operation is canceled.
              * @since OOo 1.1.2
              */
-            interface FilterOptionsDialog extends beans.XPropertyAccess, XExecutableDialog { }
+            interface FilterOptionsDialog extends beans.XPropertyAccess, XExecutableDialog {}
 
             /**
              * provides a framework for implementing a wizard dialog.
@@ -95468,7 +98157,10 @@ declare namespace com.sun.star {
                  * @param PageIds the IDs of the pages which constitute the execution paths. IDs in each path must be in ascending order.
                  * @param Controller the wizard controller.
                  */
-                createMultiplePathsWizard(PageIds: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<number>>, Controller: XWizardController): void;
+                createMultiplePathsWizard(
+                    PageIds: LibreOffice.SeqEquiv<LibreOffice.SeqEquiv<number>>,
+                    Controller: XWizardController,
+                ): void;
 
                 /**
                  * creates a wizard with a single execution path
@@ -95702,7 +98394,16 @@ declare namespace com.sun.star {
              * Provides unified interface for {@link FilePicker} service.
              * @since LibreOffice 4.1
              */
-            interface XFilePicker3 extends XFilePicker2, XFilePickerNotifier, XFilterManager, XFilePreview, XFilterGroupManager, util.XCancellable, lang.XComponent { }
+            interface XFilePicker3
+                extends
+                    XFilePicker2,
+                    XFilePickerNotifier,
+                    XFilterManager,
+                    XFilePreview,
+                    XFilterGroupManager,
+                    util.XCancellable,
+                    lang.XComponent
+            {}
 
             /**
              * Provides access to the controls of a {@link FilePicker} .
@@ -95998,7 +98699,7 @@ declare namespace com.sun.star {
              * Provides a unified interface for the new-style {@link FolderPicker} service to implement.
              * @since LibreOffice 4.0
              */
-            interface XFolderPicker2 extends XFolderPicker, util.XCancellable { }
+            interface XFolderPicker2 extends XFolderPicker, util.XCancellable {}
 
             /**
              * is the main interface implemented by the {@link Wizard} services.
@@ -97087,7 +99788,12 @@ declare namespace com.sun.star {
              * @param excessParentSegments details how excess special parent segments ( "`..`" ) are handled.
              * @returns a fresh object that supports {@link com.sun.star.uri.XUriReference} (and possibly also additional, scheme-specific interfaces), if the given `uri
              */
-            makeAbsolute(baseUriReference: XUriReference, uriReference: XUriReference, processSpecialBaseSegments: boolean, excessParentSegments: RelativeUriExcessParentSegments): XUriReference;
+            makeAbsolute(
+                baseUriReference: XUriReference,
+                uriReference: XUriReference,
+                processSpecialBaseSegments: boolean,
+                excessParentSegments: RelativeUriExcessParentSegments,
+            ): XUriReference;
 
             /**
              * changes an absolute URI reference to relative form.
@@ -97099,8 +99805,12 @@ declare namespace com.sun.star {
              * @returns a fresh object that supports {@link com.sun.star.uri.XUriReference} , if the given `uriReference` is either already relative, or is not hierarchi
              */
             makeRelative(
-                baseUriReference: XUriReference, uriReference: XUriReference, preferAuthorityOverRelativePath: boolean, preferAbsoluteOverRelativePath: boolean,
-                encodeRetainedSpecialSegments: boolean): XUriReference;
+                baseUriReference: XUriReference,
+                uriReference: XUriReference,
+                preferAuthorityOverRelativePath: boolean,
+                preferAbsoluteOverRelativePath: boolean,
+                encodeRetainedSpecialSegments: boolean,
+            ): XUriReference;
 
             /**
              * parses the textual representation of a URI reference.
@@ -97154,7 +99864,7 @@ declare namespace com.sun.star {
          * represents absolute " vnd.sun.star.expand " URL references.
          * @since OOo 2.3
          */
-        interface XVndSunStarExpandUrlReference extends XUriReference, XVndSunStarExpandUrl { }
+        interface XVndSunStarExpandUrlReference extends XUriReference, XVndSunStarExpandUrl {}
 
         /**
          * creates " vnd.sun.star.pkg " URL references.
@@ -97231,7 +99941,7 @@ declare namespace com.sun.star {
         }
 
         /** represents absolute " vnd.sun.star.script " URL references. */
-        interface XVndSunStarScriptUrlReference extends XUriReference, XVndSunStarScriptUrl { }
+        interface XVndSunStarScriptUrlReference extends XUriReference, XVndSunStarScriptUrl {}
     }
 
     namespace util {
@@ -97328,8 +100038,6 @@ declare namespace com.sun.star {
          * **$(langid) **: The language code used by the Office, like 0x0009=English, 0x0409=English US.
          *
          * **$(vlang) **: The language used by the Office as a string. Like "German" for a German Office.
-         *
-         *
          *
          * Attention: Most predefined variables describe an absolute path. The only exceptions are: $(username), $(langid) and $(vlang). Therefore the service
          * implementation should only substitute variables which are located at the start of a provided path string or are part of a multi-path. This special
@@ -97507,7 +100215,7 @@ declare namespace com.sun.star {
          * @see theMacroExpander
          * @since OOo 1.1.2
          */
-        interface BootstrapMacroExpander extends MacroExpander, lang.XInitialization { }
+        interface BootstrapMacroExpander extends MacroExpander, lang.XInitialization {}
 
         /** describes the kind of protection for a protectable cell. */
         interface CellProtection {
@@ -97739,7 +100447,7 @@ declare namespace com.sun.star {
          * @see theMacroExpander
          * @since OOo 1.1.2
          */
-        interface MacroExpander extends XMacroExpander, lang.XComponent { }
+        interface MacroExpander extends XMacroExpander, lang.XComponent {}
 
         /** is thrown when a {@link NumberFormat} string is syntactically incorrect. */
         interface MalformedNumberFormatException extends uno.Exception {
@@ -97784,7 +100492,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a container of number formats. */
-        interface NumberFormats extends XNumberFormats, XNumberFormatTypes { }
+        interface NumberFormats extends XNumberFormats, XNumberFormatTypes {}
 
         /** specifies the settings for number formatting. */
         interface NumberFormatSettings extends beans.XPropertySet {
@@ -97823,7 +100531,7 @@ declare namespace com.sun.star {
         }
 
         /** describes what and how to replace strings. */
-        interface ReplaceDescriptor extends SearchDescriptor, XReplaceDescriptor { }
+        interface ReplaceDescriptor extends SearchDescriptor, XReplaceDescriptor {}
 
         /** represents the information that describes a revision of something. */
         interface RevisionTag {
@@ -97975,11 +100683,7 @@ declare namespace com.sun.star {
              *
              * For example, if you search "X" in the text "-X-" the offsets are: for forward:    start = 1, end = 2
              *
-             *
-             *
              * for backward:   start = 2, end = 1
-             *
-             *
              *
              * Forward, the startOffset is inclusive, the endOffset exclusive. Backward, the startOffset is exclusive, the endOffset inclusive.
              *
@@ -98776,7 +101480,12 @@ declare namespace com.sun.star {
              * @returns the formatted string.
              * @throws com::sun::star::util::MalformedNumberFormatException if the format string is invalid.
              */
-            convertNumberToPreviewString(aFormat: string, fValue: number, nLocale: lang.Locale, bAllowEnglish: boolean): string;
+            convertNumberToPreviewString(
+                aFormat: string,
+                fValue: number,
+                nLocale: lang.Locale,
+                bAllowEnglish: boolean,
+            ): string;
 
             /**
              * returns the color which is to be used for a number.
@@ -98788,7 +101497,13 @@ declare namespace com.sun.star {
              * @returns the color that should used to output the formatted string.
              * @throws com::sun::star::util::MalformedNumberFormatException if the format string is invalid.
              */
-            queryPreviewColorForNumber(aFormat: string, fValue: number, nLocale: lang.Locale, bAllowEnglish: boolean, aDefaultColor: Color): Color;
+            queryPreviewColorForNumber(
+                aFormat: string,
+                fValue: number,
+                nLocale: lang.Locale,
+                bAllowEnglish: boolean,
+                aDefaultColor: Color,
+            ): Color;
         }
 
         /**
@@ -98826,7 +101541,14 @@ declare namespace com.sun.star {
              * @param nLeading how many number of leading zeros are shown
              * @returns the string representation for the number format
              */
-            generateFormat(nBaseKey: number, nLocale: lang.Locale, bThousands: boolean, bRed: boolean, nDecimals: number, nLeading: number): string;
+            generateFormat(
+                nBaseKey: number,
+                nLocale: lang.Locale,
+                bThousands: boolean,
+                bRed: boolean,
+                nDecimals: number,
+                nLeading: number,
+            ): string;
 
             /**
              * @param nKey the key for the format
@@ -98923,7 +101645,7 @@ declare namespace com.sun.star {
          * Provides a unified interface for the {@link NumberFormatter} service to implement.
          * @since LibreOffice 4.0
          */
-        interface XNumberFormatter2 extends XNumberFormatter, XNumberFormatPreviewer { }
+        interface XNumberFormatter2 extends XNumberFormatter, XNumberFormatPreviewer {}
 
         /** represents functions to get specific, predefined number formats. */
         interface XNumberFormatTypes extends uno.XInterface {
@@ -99672,7 +102394,7 @@ declare namespace com.sun.star {
         }
 
         /** specifies a view of a standard office document. */
-        interface OfficeDocumentView extends XSelectionSupplier, XViewSettingsSupplier, XControlAccess { }
+        interface OfficeDocumentView extends XSelectionSupplier, XViewSettingsSupplier, XControlAccess {}
 
         /**
          * specifies the print progress of an {@link XPrintable} .
@@ -100163,7 +102885,11 @@ declare namespace com.sun.star {
              * @see RenderDescriptor
              * @see RenderOptions
              */
-            getRenderer(nRenderer: number, aSelection: any, xOptions: LibreOffice.SeqEquiv<beans.PropertyValue>): SafeArray<beans.PropertyValue>;
+            getRenderer(
+                nRenderer: number,
+                aSelection: any,
+                xOptions: LibreOffice.SeqEquiv<beans.PropertyValue>,
+            ): SafeArray<beans.PropertyValue>;
 
             /**
              * @returns the count of renderers (based on paper count of a document, for example).  If a selection is given, the count has to be calculated based on this
@@ -100310,7 +103036,13 @@ declare namespace com.sun.star {
         type XForms = container.XNameContainer;
 
         /** represent a binding to one or more nodes in the DOM tree of an {@link XModel} . */
-        interface Binding extends form.binding.ValueBinding, util.XModifyBroadcaster, form.binding.ListEntrySource, form.validation.XValidator {
+        interface Binding
+            extends
+                form.binding.ValueBinding,
+                util.XModifyBroadcaster,
+                form.binding.ListEntrySource,
+                form.validation.XValidator
+        {
             /**
              * among other properties, there is this one
              *
@@ -100386,7 +103118,11 @@ declare namespace com.sun.star {
             getDefaultServiceNameForNode(xNode: xml.dom.XNode): string;
             getNodeDisplayName(xNode: xml.dom.XNode, bDetail: boolean): string;
             getNodeName(xNode: xml.dom.XNode): string;
-            getResultForExpression(xBinding: beans.XPropertySet, bIsBindingExpression: boolean, sExpression: string): string;
+            getResultForExpression(
+                xBinding: beans.XPropertySet,
+                bIsBindingExpression: boolean,
+                sExpression: string,
+            ): string;
             getSubmissionName(xSubm: beans.XPropertySet, bDetail: boolean): string;
             isValidPrefixName(sName: string): boolean;
             isValidXMLName(sName: string): boolean;
@@ -100538,10 +103274,10 @@ declare namespace com.sun.star {
         }
 
         /** @since LibreOffice 4.1 */
-        interface XModel2 extends XModel, beans.XPropertySet { }
+        interface XModel2 extends XModel, beans.XPropertySet {}
 
         /** specifies a submission object, associated with an {@link XModel} */
-        interface XSubmission extends beans.XPropertySet, container.XNamed, form.submission.XSubmission { }
+        interface XSubmission extends beans.XPropertySet, container.XNamed, form.submission.XSubmission {}
     }
 
     namespace xml {
@@ -100617,7 +103353,7 @@ declare namespace com.sun.star {
          * {@link com.sun.star.xml.sax.XDocumentHandler} calls.
          * @since OOo 1.1.2
          */
-        interface ExportFilter extends sax.XDocumentHandler, XExportFilter { }
+        interface ExportFilter extends sax.XDocumentHandler, XExportFilter {}
 
         /** A struct to keep information of an element's attribute. */
         interface FastAttribute {
@@ -100693,7 +103429,10 @@ declare namespace com.sun.star {
              * @param msUserData Sequence of strings which contains the user data defined in the TypeDetection.xml (???)
              * @returns `TRUE` if import process is successful
              */
-            exporter(aSourceData: LibreOffice.SeqEquiv<beans.PropertyValue>, msUserData: LibreOffice.SeqEquiv<string>): boolean;
+            exporter(
+                aSourceData: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                msUserData: LibreOffice.SeqEquiv<string>,
+            ): boolean;
         }
 
         /**
@@ -100711,7 +103450,11 @@ declare namespace com.sun.star {
              * @param xDocHandler target for the XML document representation
              * @returns `TRUE` if import process is successful
              */
-            importer(aSourceData: LibreOffice.SeqEquiv<beans.PropertyValue>, xDocHandler: sax.XDocumentHandler, msUserData: LibreOffice.SeqEquiv<string>): boolean;
+            importer(
+                aSourceData: LibreOffice.SeqEquiv<beans.PropertyValue>,
+                xDocHandler: sax.XDocumentHandler,
+                msUserData: LibreOffice.SeqEquiv<string>,
+            ): boolean;
         }
 
         /**
@@ -100720,7 +103463,7 @@ declare namespace com.sun.star {
          * It is an extension of {@link com.sun.star.document.ImportFilter} and differs from it in that this filter additionally supports the {@link
          * com.sun.star.xml.sax.XDocumentHandler} interface.
          */
-        interface XMLImportFilter extends document.ImportFilter, sax.XDocumentHandler { }
+        interface XMLImportFilter extends document.ImportFilter, sax.XDocumentHandler {}
 
         namespace crypto {
             /** @since LibreOffice 4.0 */
@@ -100852,8 +103595,12 @@ declare namespace com.sun.star {
                  * @throws com::sun::star::lang::IllegalArgumentException one of provided arguments is illegal
                  */
                 getCipherContext(
-                    nCipherID: number, aKey: LibreOffice.SeqEquiv<number>, aInitializationVector: LibreOffice.SeqEquiv<number>, bEncryption: boolean,
-                    aParams: LibreOffice.SeqEquiv<beans.NamedValue>): XCipherContext;
+                    nCipherID: number,
+                    aKey: LibreOffice.SeqEquiv<number>,
+                    aInitializationVector: LibreOffice.SeqEquiv<number>,
+                    bEncryption: boolean,
+                    aParams: LibreOffice.SeqEquiv<beans.NamedValue>,
+                ): XCipherContext;
             }
 
             /**
@@ -100889,13 +103636,13 @@ declare namespace com.sun.star {
             }
 
             /** Service of {@link XMLEncryption} */
-            interface XMLEncryption extends XXMLEncryption, lang.XInitialization { }
+            interface XMLEncryption extends XXMLEncryption, lang.XInitialization {}
 
             /** Service of {@link XMLSignature} */
-            interface XMLSignature extends XXMLSignature, lang.XInitialization { }
+            interface XMLSignature extends XXMLSignature, lang.XInitialization {}
 
             /** @since LibreOffice 4.0 */
-            interface XNSSInitializer extends XDigestContextSupplier, XCipherContextSupplier { }
+            interface XNSSInitializer extends XDigestContextSupplier, XCipherContextSupplier {}
 
             /** Interface of Security Environment */
             interface XSecurityEnvironment extends uno.XInterface {
@@ -100941,7 +103688,10 @@ declare namespace com.sun.star {
                  * @param intermediateCertificates Additional certificates which can be used by the method in constructing the certificate chain. The root certificate may
                  * @returns The validation status will returned as a bit-wise long, please refer to CertificateValidity definition.
                  */
-                verifyCertificate(xEECertificate: security.XCertificate, intermediateCertificates: LibreOffice.SeqEquiv<security.XCertificate>): number;
+                verifyCertificate(
+                    xEECertificate: security.XCertificate,
+                    intermediateCertificates: LibreOffice.SeqEquiv<security.XCertificate>,
+                ): number;
             }
 
             /** Interface to manipulate Security Environment */
@@ -101191,7 +103941,15 @@ declare namespace com.sun.star {
                 }
 
                 /** Service of {@link Decryptor} */
-                interface Decryptor extends XReferenceResolvedListener, XBlockerMonitor, XDecryptionResultBroadcaster, XKeyCollector, XMissionTaker, lang.XInitialization { }
+                interface Decryptor
+                    extends
+                        XReferenceResolvedListener,
+                        XBlockerMonitor,
+                        XDecryptionResultBroadcaster,
+                        XKeyCollector,
+                        XMissionTaker,
+                        lang.XInitialization
+                {}
 
                 /** A struct to keep a startElement/endElement SAX event. */
                 interface ElementStackItem {
@@ -101206,19 +103964,50 @@ declare namespace com.sun.star {
                 }
 
                 /** Service of {@link Encryptor} */
-                interface Encryptor extends XReferenceResolvedListener, XReferenceCollector, XBlockerMonitor, XEncryptionResultBroadcaster, XKeyCollector, XMissionTaker,
-                    lang.XInitialization { }
+                interface Encryptor
+                    extends
+                        XReferenceResolvedListener,
+                        XReferenceCollector,
+                        XBlockerMonitor,
+                        XEncryptionResultBroadcaster,
+                        XKeyCollector,
+                        XMissionTaker,
+                        lang.XInitialization
+                {}
 
                 /** Service of {@link SAXEventKeeper} */
-                interface SAXEventKeeper extends XSecuritySAXEventKeeper, XReferenceResolvedBroadcaster, XSAXEventKeeperStatusChangeBroadcaster,
-                    com.sun.star.xml.sax.XDocumentHandler, lang.XInitialization { }
+                interface SAXEventKeeper
+                    extends
+                        XSecuritySAXEventKeeper,
+                        XReferenceResolvedBroadcaster,
+                        XSAXEventKeeperStatusChangeBroadcaster,
+                        com.sun.star.xml.sax.XDocumentHandler,
+                        lang.XInitialization
+                {}
 
-                interface SignatureCreator extends XReferenceResolvedListener, XReferenceCollector, XSignatureCreationResultBroadcaster, XBlockerMonitor, XKeyCollector,
-                    XMissionTaker, XUriBinding, lang.XInitialization { }
+                interface SignatureCreator
+                    extends
+                        XReferenceResolvedListener,
+                        XReferenceCollector,
+                        XSignatureCreationResultBroadcaster,
+                        XBlockerMonitor,
+                        XKeyCollector,
+                        XMissionTaker,
+                        XUriBinding,
+                        lang.XInitialization
+                {}
 
                 /** Service of {@link SignatureVerifier} */
-                interface SignatureVerifier extends XReferenceResolvedListener, XReferenceCollector, XSignatureVerifyResultBroadcaster, XKeyCollector, XMissionTaker,
-                    XUriBinding, lang.XInitialization { }
+                interface SignatureVerifier
+                    extends
+                        XReferenceResolvedListener,
+                        XReferenceCollector,
+                        XSignatureVerifyResultBroadcaster,
+                        XKeyCollector,
+                        XMissionTaker,
+                        XUriBinding,
+                        lang.XInitialization
+                {}
 
                 /**
                  * Interface of Blocker Monitor.
@@ -101493,7 +104282,9 @@ declare namespace com.sun.star {
                      * @param nextHandler the next handler in the SAX chain
                      * @returns the old next handler
                      */
-                    setNextHandler(nextHandler: com.sun.star.xml.sax.XDocumentHandler): com.sun.star.xml.sax.XDocumentHandler;
+                    setNextHandler(
+                        nextHandler: com.sun.star.xml.sax.XDocumentHandler,
+                    ): com.sun.star.xml.sax.XDocumentHandler;
                 }
 
                 /**
@@ -101663,7 +104454,12 @@ declare namespace com.sun.star {
                 compressedEndElement(aName: string): void;
                 compressedIgnorableWhitespace(aWhitespaces: string): void;
                 compressedProcessingInstruction(aTarget: string, aData: string): void;
-                compressedSetDocumentLocator(columnNumber: number, lineNumber: number, publicId: string, systemId: string): void;
+                compressedSetDocumentLocator(
+                    columnNumber: number,
+                    lineNumber: number,
+                    publicId: string,
+                    systemId: string,
+                ): void;
                 compressedStartDocument(): void;
                 compressedStartElement(aName: string, aAttributes: LibreOffice.SeqEquiv<XMLAttribute>): void;
             }
@@ -102390,7 +105186,7 @@ declare namespace com.sun.star {
              * Provides a unified interface for the {@link SAXDocumentBuilder} service to implement.
              * @since LibreOffice 4.0
              */
-            interface XSAXDocumentBuilder2 extends XSAXDocumentBuilder, sax.XDocumentHandler { }
+            interface XSAXDocumentBuilder2 extends XSAXDocumentBuilder, sax.XDocumentHandler {}
 
             interface XText extends XCharacterData {
                 /**
@@ -102487,9 +105283,22 @@ declare namespace com.sun.star {
                     getScreenY(): number;
                     getShiftKey(): boolean;
                     initMouseEvent(
-                        typeArg: string, canBubbleArg: boolean, cancelableArg: boolean, viewArg: views.XAbstractView, detailArg: number, screenXArg: number,
-                        screenYArg: number, clientXArg: number, clientYArg: number, ctrlKeyArg: boolean, altKeyArg: boolean, shiftKeyArg: boolean, metaKeyArg: boolean,
-                        buttonArg: number, relatedTargetArg: XEventTarget): void;
+                        typeArg: string,
+                        canBubbleArg: boolean,
+                        cancelableArg: boolean,
+                        viewArg: views.XAbstractView,
+                        detailArg: number,
+                        screenXArg: number,
+                        screenYArg: number,
+                        clientXArg: number,
+                        clientYArg: number,
+                        ctrlKeyArg: boolean,
+                        altKeyArg: boolean,
+                        shiftKeyArg: boolean,
+                        metaKeyArg: boolean,
+                        buttonArg: number,
+                        relatedTargetArg: XEventTarget,
+                    ): void;
                     readonly MetaKey: boolean;
                     readonly RelatedTarget: XEventTarget;
                     readonly ScreenX: number;
@@ -102506,8 +105315,15 @@ declare namespace com.sun.star {
                     getPrevValue(): string;
                     getRelatedNode(): XNode;
                     initMutationEvent(
-                        typeArg: string, canBubbleArg: boolean, cancelableArg: boolean, relatedNodeArg: XNode, prevValueArg: string, newValueArg: string,
-                        attrNameArg: string, attrChangeArg: AttrChangeType): void;
+                        typeArg: string,
+                        canBubbleArg: boolean,
+                        cancelableArg: boolean,
+                        relatedNodeArg: XNode,
+                        prevValueArg: string,
+                        newValueArg: string,
+                        attrNameArg: string,
+                        attrChangeArg: AttrChangeType,
+                    ): void;
                     readonly NewValue: string;
                     readonly PrevValue: string;
                     readonly RelatedNode: XNode;
@@ -102517,7 +105333,13 @@ declare namespace com.sun.star {
                     readonly Detail: number;
                     getDetail(): number;
                     getView(): views.XAbstractView;
-                    initUIEvent(typeArg: string, canBubbleArg: boolean, cancelableArg: boolean, viewArg: views.XAbstractView, detailArg: number): void;
+                    initUIEvent(
+                        typeArg: string,
+                        canBubbleArg: boolean,
+                        cancelableArg: boolean,
+                        viewArg: views.XAbstractView,
+                        detailArg: number,
+                    ): void;
                     readonly View: views.XAbstractView;
                 }
             }
@@ -102540,7 +105362,7 @@ declare namespace com.sun.star {
              * This service helps parsing files by providing a SAX document handler interface for a SAX parsers. You have to instantiate this service passing an
              * {@link XRoot} instance.
              */
-            interface SaxDocumentHandler extends sax.XDocumentHandler, lang.XInitialization { }
+            interface SaxDocumentHandler extends sax.XDocumentHandler, lang.XInitialization {}
 
             /** An element's attributes */
             interface XAttributes extends uno.XInterface {
@@ -103048,7 +105870,11 @@ declare namespace com.sun.star {
                  * @param Name contains the elements local name.
                  * @param Attribs Contains a {@link XFastAttributeList} to access the attributes the element.
                  */
-                createUnknownChildContext(Namespace: string, Name: string, Attribs: XFastAttributeList): XFastContextHandler;
+                createUnknownChildContext(
+                    Namespace: string,
+                    Name: string,
+                    Attribs: XFastAttributeList,
+                ): XFastContextHandler;
 
                 /**
                  * receives notification of the end of an known element.
@@ -103195,8 +106021,11 @@ declare namespace com.sun.star {
                  * @throws com::sun::star::xml::sax::SAXException if serializing the XML document fails
                  */
                 fastSerialize(
-                    handler: XFastDocumentHandler, tokenHandler: XFastTokenHandler, namespaces: LibreOffice.SeqEquiv<beans.StringPair>,
-                    registerNamespaces: LibreOffice.SeqEquiv<com.sun.star.beans.Pair<string, number>>): void;
+                    handler: XFastDocumentHandler,
+                    tokenHandler: XFastTokenHandler,
+                    namespaces: LibreOffice.SeqEquiv<beans.StringPair>,
+                    registerNamespaces: LibreOffice.SeqEquiv<com.sun.star.beans.Pair<string, number>>,
+                ): void;
             }
 
             /**
@@ -103322,7 +106151,7 @@ declare namespace com.sun.star {
              * Provides a unified interface for the new-style {@link Writer} service to implement.
              * @since LibreOffice 4.0
              */
-            interface XWriter extends io.XActiveDataSource, XExtendedDocumentHandler { }
+            interface XWriter extends io.XActiveDataSource, XExtendedDocumentHandler {}
 
             namespace FastToken {
                 const enum Constants {
@@ -103342,10 +106171,10 @@ declare namespace com.sun.star {
             type XXMLElementWrapper = uno.XInterface;
 
             /** Service of {@link XMLDocumentWrapper} */
-            interface XMLDocumentWrapper extends XXMLDocumentWrapper, lang.XInitialization { }
+            interface XMLDocumentWrapper extends XXMLDocumentWrapper, lang.XInitialization {}
 
             /** Service of {@link XMLElementWrapper} */
-            interface XMLElementWrapper extends XXMLElementWrapper, lang.XUnoTunnel, lang.XInitialization { }
+            interface XMLElementWrapper extends XXMLElementWrapper, lang.XUnoTunnel, lang.XInitialization {}
 
             /**
              * Interface of XML Document Wrapper.
@@ -103364,7 +106193,11 @@ declare namespace com.sun.star {
                  * @param reservedDescendants an array including all elements that need to be reserved (along their ancestor path)
                  * @param stopAtNode the stop element. The operation have to interrupt when this element is met during clearing
                  */
-                clearUselessData(node: XXMLElementWrapper, reservedDescendants: LibreOffice.SeqEquiv<XXMLElementWrapper>, stopAtNode: XXMLElementWrapper): void;
+                clearUselessData(
+                    node: XXMLElementWrapper,
+                    reservedDescendants: LibreOffice.SeqEquiv<XXMLElementWrapper>,
+                    stopAtNode: XXMLElementWrapper,
+                ): void;
 
                 /**
                  * Collapses a tree path
@@ -103387,7 +106220,12 @@ declare namespace com.sun.star {
                  * @param startNode the start point to generate SAX events
                  * @param endNode the end point where to stop generating
                  */
-                generateSAXEvents(handler: sax.XDocumentHandler, saxEventKeeperHandler: sax.XDocumentHandler, startNode: XXMLElementWrapper, endNode: XXMLElementWrapper): void;
+                generateSAXEvents(
+                    handler: sax.XDocumentHandler,
+                    saxEventKeeperHandler: sax.XDocumentHandler,
+                    startNode: XXMLElementWrapper,
+                    endNode: XXMLElementWrapper,
+                ): void;
 
                 /**
                  * Gets the current element.
@@ -103636,7 +106474,9 @@ declare namespace com.sun.star {
              * An interface for XSLT transformers.
              * @since LibreOffice 4.0
              */
-            interface XXSLTTransformer extends io.XActiveDataControl, io.XActiveDataSink, io.XActiveDataSource, lang.XInitialization { }
+            interface XXSLTTransformer
+                extends io.XActiveDataControl, io.XActiveDataSink, io.XActiveDataSource, lang.XInitialization
+            {}
         }
     }
 
@@ -103946,7 +106786,7 @@ declare namespace com.sun.star {
 }
 
 interface ActiveXObject {
-    new(progid: 'com.sun.star.ServiceManager'): LibreOffice.AutomationServiceManager;
+    new(progid: "com.sun.star.ServiceManager"): LibreOffice.AutomationServiceManager;
 }
 
 declare namespace org.freedesktop.PackageKit {
@@ -104009,7 +106849,12 @@ declare namespace org.freedesktop.PackageKit {
          * Installs resources of a given type from a configured software source.
          * @since LibreOffice 4.0
          */
-        InstallResources(xid: number, types: LibreOffice.SeqEquiv<string>, resources: LibreOffice.SeqEquiv<string>, interaction: string): void;
+        InstallResources(
+            xid: number,
+            types: LibreOffice.SeqEquiv<string>,
+            resources: LibreOffice.SeqEquiv<string>,
+            interaction: string,
+        ): void;
 
         /**
          * Removes sequence< string > packages that provide the given local sequence< string > files.
@@ -104036,7 +106881,7 @@ declare namespace org.freedesktop.PackageKit {
         SearchFile(fileName: string, interaction: string, installed: [boolean], packageName: [string]): void;
     }
 
-    interface XSyncDbusSessionHelper extends XModify, XQuery { }
+    interface XSyncDbusSessionHelper extends XModify, XQuery {}
 }
 
 /** Helper types which are not part of the UNO API */
@@ -104062,1796 +106907,1830 @@ declare namespace LibreOffice {
     }
 
     interface ServicesNameMap {
-        'com.sun.star.accessibility.Accessible': com.sun.star.accessibility.Accessible;
-        'com.sun.star.accessibility.AccessibleContext': com.sun.star.accessibility.AccessibleContext;
-        'com.sun.star.accessibility.MSAAService': com.sun.star.accessibility.MSAAService;
-        'com.sun.star.animations.AnimateColor': com.sun.star.animations.AnimateColor;
-        'com.sun.star.animations.AnimateMotion': com.sun.star.animations.AnimateMotion;
-        'com.sun.star.animations.AnimateSet': com.sun.star.animations.AnimateSet;
-        'com.sun.star.animations.Audio': com.sun.star.animations.Audio;
-        'com.sun.star.animations.Command': com.sun.star.animations.Command;
-        'com.sun.star.animations.IterateContainer': com.sun.star.animations.IterateContainer;
-        'com.sun.star.animations.ParallelTimeContainer': com.sun.star.animations.ParallelTimeContainer;
-        'com.sun.star.animations.SequenceTimeContainer': com.sun.star.animations.SequenceTimeContainer;
-        'com.sun.star.auth.SSOManagerFactory': com.sun.star.auth.SSOManagerFactory;
-        'com.sun.star.auth.SSOPasswordCache': com.sun.star.auth.SSOPasswordCache;
-        'com.sun.star.awt.AccessibleButton': com.sun.star.awt.AccessibleButton;
-        'com.sun.star.awt.AccessibleCheckBox': com.sun.star.awt.AccessibleCheckBox;
-        'com.sun.star.awt.AccessibleComboBox': com.sun.star.awt.AccessibleComboBox;
-        'com.sun.star.awt.AccessibleDropDownComboBox': com.sun.star.awt.AccessibleDropDownComboBox;
-        'com.sun.star.awt.AccessibleDropDownListBox': com.sun.star.awt.AccessibleDropDownListBox;
-        'com.sun.star.awt.AccessibleEdit': com.sun.star.awt.AccessibleEdit;
-        'com.sun.star.awt.AccessibleFixedText': com.sun.star.awt.AccessibleFixedText;
-        'com.sun.star.awt.AccessibleIconChoiceControl': com.sun.star.awt.AccessibleIconChoiceControl;
-        'com.sun.star.awt.AccessibleIconChoiceControlEntry': com.sun.star.awt.AccessibleIconChoiceControlEntry;
-        'com.sun.star.awt.AccessibleList': com.sun.star.awt.AccessibleList;
-        'com.sun.star.awt.AccessibleListBox': com.sun.star.awt.AccessibleListBox;
-        'com.sun.star.awt.AccessibleListBoxList': com.sun.star.awt.AccessibleListBoxList;
-        'com.sun.star.awt.AccessibleListItem': com.sun.star.awt.AccessibleListItem;
-        'com.sun.star.awt.AccessibleMenu': com.sun.star.awt.AccessibleMenu;
-        'com.sun.star.awt.AccessibleMenuBar': com.sun.star.awt.AccessibleMenuBar;
-        'com.sun.star.awt.AccessibleMenuItem': com.sun.star.awt.AccessibleMenuItem;
-        'com.sun.star.awt.AccessibleMenuSeparator': com.sun.star.awt.AccessibleMenuSeparator;
-        'com.sun.star.awt.AccessiblePopupMenu': com.sun.star.awt.AccessiblePopupMenu;
-        'com.sun.star.awt.AccessibleRadioButton': com.sun.star.awt.AccessibleRadioButton;
-        'com.sun.star.awt.AccessibleScrollBar': com.sun.star.awt.AccessibleScrollBar;
-        'com.sun.star.awt.AccessibleStatusBar': com.sun.star.awt.AccessibleStatusBar;
-        'com.sun.star.awt.AccessibleStatusBarItem': com.sun.star.awt.AccessibleStatusBarItem;
-        'com.sun.star.awt.AccessibleTabBar': com.sun.star.awt.AccessibleTabBar;
-        'com.sun.star.awt.AccessibleTabBarPage': com.sun.star.awt.AccessibleTabBarPage;
-        'com.sun.star.awt.AccessibleTabBarPageList': com.sun.star.awt.AccessibleTabBarPageList;
-        'com.sun.star.awt.AccessibleTabControl': com.sun.star.awt.AccessibleTabControl;
-        'com.sun.star.awt.AccessibleTabPage': com.sun.star.awt.AccessibleTabPage;
-        'com.sun.star.awt.AccessibleTextField': com.sun.star.awt.AccessibleTextField;
-        'com.sun.star.awt.AccessibleToolBox': com.sun.star.awt.AccessibleToolBox;
-        'com.sun.star.awt.AccessibleToolBoxItem': com.sun.star.awt.AccessibleToolBoxItem;
-        'com.sun.star.awt.AccessibleTreeListBox': com.sun.star.awt.AccessibleTreeListBox;
-        'com.sun.star.awt.AccessibleTreeListBoxEntry': com.sun.star.awt.AccessibleTreeListBoxEntry;
-        'com.sun.star.awt.AccessibleWindow': com.sun.star.awt.AccessibleWindow;
-        'com.sun.star.awt.AnimatedImagesControl': com.sun.star.awt.AnimatedImagesControl;
-        'com.sun.star.awt.AnimatedImagesControlModel': com.sun.star.awt.AnimatedImagesControlModel;
-        'com.sun.star.awt.AsyncCallback': com.sun.star.awt.AsyncCallback;
-        'com.sun.star.awt.ContainerWindowProvider': com.sun.star.awt.ContainerWindowProvider;
-        'com.sun.star.awt.DialogProvider': com.sun.star.awt.DialogProvider;
-        'com.sun.star.awt.DialogProvider2': com.sun.star.awt.DialogProvider2;
-        'com.sun.star.awt.grid.DefaultGridColumnModel': com.sun.star.awt.grid.DefaultGridColumnModel;
-        'com.sun.star.awt.grid.DefaultGridDataModel': com.sun.star.awt.grid.DefaultGridDataModel;
-        'com.sun.star.awt.grid.GridColumn': com.sun.star.awt.grid.GridColumn;
-        'com.sun.star.awt.grid.SortableGridDataModel': com.sun.star.awt.grid.SortableGridDataModel;
-        'com.sun.star.awt.grid.UnoControlGrid': com.sun.star.awt.grid.UnoControlGrid;
-        'com.sun.star.awt.grid.UnoControlGridModel': com.sun.star.awt.grid.UnoControlGridModel;
-        'com.sun.star.awt.MenuBar': com.sun.star.awt.MenuBar;
-        'com.sun.star.awt.Pointer': com.sun.star.awt.Pointer;
-        'com.sun.star.awt.PopupMenu': com.sun.star.awt.PopupMenu;
-        'com.sun.star.awt.PrinterServer': com.sun.star.awt.PrinterServer;
-        'com.sun.star.awt.RoadmapItem': com.sun.star.awt.RoadmapItem;
-        'com.sun.star.awt.SpinningProgressControlModel': com.sun.star.awt.SpinningProgressControlModel;
-        'com.sun.star.awt.tab.UnoControlTabPage': com.sun.star.awt.tab.UnoControlTabPage;
-        'com.sun.star.awt.tab.UnoControlTabPageContainer': com.sun.star.awt.tab.UnoControlTabPageContainer;
-        'com.sun.star.awt.tab.UnoControlTabPageContainerModel': com.sun.star.awt.tab.UnoControlTabPageContainerModel;
-        'com.sun.star.awt.tab.UnoControlTabPageModel': com.sun.star.awt.tab.UnoControlTabPageModel;
-        'com.sun.star.awt.TabController': com.sun.star.awt.TabController;
-        'com.sun.star.awt.TabControllerModel': com.sun.star.awt.TabControllerModel;
-        'com.sun.star.awt.Toolkit': com.sun.star.awt.Toolkit;
-        'com.sun.star.awt.tree.MutableTreeDataModel': com.sun.star.awt.tree.MutableTreeDataModel;
-        'com.sun.star.awt.tree.MutableTreeNode': com.sun.star.awt.tree.MutableTreeNode;
-        'com.sun.star.awt.tree.TreeControl': com.sun.star.awt.tree.TreeControl;
-        'com.sun.star.awt.tree.TreeControlModel': com.sun.star.awt.tree.TreeControlModel;
-        'com.sun.star.awt.UnoControl': com.sun.star.awt.UnoControl;
-        'com.sun.star.awt.UnoControlButton': com.sun.star.awt.UnoControlButton;
-        'com.sun.star.awt.UnoControlButtonModel': com.sun.star.awt.UnoControlButtonModel;
-        'com.sun.star.awt.UnoControlCheckBox': com.sun.star.awt.UnoControlCheckBox;
-        'com.sun.star.awt.UnoControlCheckBoxModel': com.sun.star.awt.UnoControlCheckBoxModel;
-        'com.sun.star.awt.UnoControlComboBox': com.sun.star.awt.UnoControlComboBox;
-        'com.sun.star.awt.UnoControlComboBoxModel': com.sun.star.awt.UnoControlComboBoxModel;
-        'com.sun.star.awt.UnoControlContainer': com.sun.star.awt.UnoControlContainer;
-        'com.sun.star.awt.UnoControlContainerModel': com.sun.star.awt.UnoControlContainerModel;
-        'com.sun.star.awt.UnoControlCurrencyField': com.sun.star.awt.UnoControlCurrencyField;
-        'com.sun.star.awt.UnoControlCurrencyFieldModel': com.sun.star.awt.UnoControlCurrencyFieldModel;
-        'com.sun.star.awt.UnoControlDateField': com.sun.star.awt.UnoControlDateField;
-        'com.sun.star.awt.UnoControlDateFieldModel': com.sun.star.awt.UnoControlDateFieldModel;
-        'com.sun.star.awt.UnoControlDialog': com.sun.star.awt.UnoControlDialog;
-        'com.sun.star.awt.UnoControlDialogElement': com.sun.star.awt.UnoControlDialogElement;
-        'com.sun.star.awt.UnoControlDialogModel': com.sun.star.awt.UnoControlDialogModel;
-        'com.sun.star.awt.UnoControlDialogModelProvider': com.sun.star.awt.UnoControlDialogModelProvider;
-        'com.sun.star.awt.UnoControlEdit': com.sun.star.awt.UnoControlEdit;
-        'com.sun.star.awt.UnoControlEditModel': com.sun.star.awt.UnoControlEditModel;
-        'com.sun.star.awt.UnoControlFileControl': com.sun.star.awt.UnoControlFileControl;
-        'com.sun.star.awt.UnoControlFileControlModel': com.sun.star.awt.UnoControlFileControlModel;
-        'com.sun.star.awt.UnoControlFixedHyperlink': com.sun.star.awt.UnoControlFixedHyperlink;
-        'com.sun.star.awt.UnoControlFixedHyperlinkModel': com.sun.star.awt.UnoControlFixedHyperlinkModel;
-        'com.sun.star.awt.UnoControlFixedLine': com.sun.star.awt.UnoControlFixedLine;
-        'com.sun.star.awt.UnoControlFixedLineModel': com.sun.star.awt.UnoControlFixedLineModel;
-        'com.sun.star.awt.UnoControlFixedText': com.sun.star.awt.UnoControlFixedText;
-        'com.sun.star.awt.UnoControlFixedTextModel': com.sun.star.awt.UnoControlFixedTextModel;
-        'com.sun.star.awt.UnoControlFormattedField': com.sun.star.awt.UnoControlFormattedField;
-        'com.sun.star.awt.UnoControlFormattedFieldModel': com.sun.star.awt.UnoControlFormattedFieldModel;
-        'com.sun.star.awt.UnoControlGroupBox': com.sun.star.awt.UnoControlGroupBox;
-        'com.sun.star.awt.UnoControlGroupBoxModel': com.sun.star.awt.UnoControlGroupBoxModel;
-        'com.sun.star.awt.UnoControlImageControl': com.sun.star.awt.UnoControlImageControl;
-        'com.sun.star.awt.UnoControlImageControlModel': com.sun.star.awt.UnoControlImageControlModel;
-        'com.sun.star.awt.UnoControlListBox': com.sun.star.awt.UnoControlListBox;
-        'com.sun.star.awt.UnoControlListBoxModel': com.sun.star.awt.UnoControlListBoxModel;
-        'com.sun.star.awt.UnoControlModel': com.sun.star.awt.UnoControlModel;
-        'com.sun.star.awt.UnoControlNumericField': com.sun.star.awt.UnoControlNumericField;
-        'com.sun.star.awt.UnoControlNumericFieldModel': com.sun.star.awt.UnoControlNumericFieldModel;
-        'com.sun.star.awt.UnoControlPatternField': com.sun.star.awt.UnoControlPatternField;
-        'com.sun.star.awt.UnoControlPatternFieldModel': com.sun.star.awt.UnoControlPatternFieldModel;
-        'com.sun.star.awt.UnoControlProgressBar': com.sun.star.awt.UnoControlProgressBar;
-        'com.sun.star.awt.UnoControlProgressBarModel': com.sun.star.awt.UnoControlProgressBarModel;
-        'com.sun.star.awt.UnoControlRadioButton': com.sun.star.awt.UnoControlRadioButton;
-        'com.sun.star.awt.UnoControlRadioButtonModel': com.sun.star.awt.UnoControlRadioButtonModel;
-        'com.sun.star.awt.UnoControlRoadmap': com.sun.star.awt.UnoControlRoadmap;
-        'com.sun.star.awt.UnoControlRoadmapModel': com.sun.star.awt.UnoControlRoadmapModel;
-        'com.sun.star.awt.UnoControlScrollBar': com.sun.star.awt.UnoControlScrollBar;
-        'com.sun.star.awt.UnoControlScrollBarModel': com.sun.star.awt.UnoControlScrollBarModel;
-        'com.sun.star.awt.UnoControlSpinButton': com.sun.star.awt.UnoControlSpinButton;
-        'com.sun.star.awt.UnoControlSpinButtonModel': com.sun.star.awt.UnoControlSpinButtonModel;
-        'com.sun.star.awt.UnoControlTimeField': com.sun.star.awt.UnoControlTimeField;
-        'com.sun.star.awt.UnoControlTimeFieldModel': com.sun.star.awt.UnoControlTimeFieldModel;
-        'com.sun.star.beans.Introspection': com.sun.star.beans.Introspection;
-        'com.sun.star.beans.PropertyBag': com.sun.star.beans.PropertyBag;
-        'com.sun.star.beans.PropertySet': com.sun.star.beans.PropertySet;
-        'com.sun.star.bridge.Bridge': com.sun.star.bridge.Bridge;
-        'com.sun.star.bridge.BridgeFactory': com.sun.star.bridge.BridgeFactory;
-        'com.sun.star.bridge.IiopBridge': com.sun.star.bridge.IiopBridge;
-        'com.sun.star.bridge.OleApplicationRegistration': com.sun.star.bridge.OleApplicationRegistration;
-        'com.sun.star.bridge.oleautomation.ApplicationRegistration': com.sun.star.bridge.oleautomation.ApplicationRegistration;
-        'com.sun.star.bridge.oleautomation.BridgeSupplier': com.sun.star.bridge.oleautomation.BridgeSupplier;
-        'com.sun.star.bridge.oleautomation.Factory': com.sun.star.bridge.oleautomation.Factory;
-        'com.sun.star.bridge.OleBridgeSupplier': com.sun.star.bridge.OleBridgeSupplier;
-        'com.sun.star.bridge.OleBridgeSupplier2': com.sun.star.bridge.OleBridgeSupplier2;
-        'com.sun.star.bridge.OleBridgeSupplierVar1': com.sun.star.bridge.OleBridgeSupplierVar1;
-        'com.sun.star.bridge.OleObjectFactory': com.sun.star.bridge.OleObjectFactory;
-        'com.sun.star.bridge.UnoUrlResolver': com.sun.star.bridge.UnoUrlResolver;
-        'com.sun.star.bridge.UrpBridge': com.sun.star.bridge.UrpBridge;
-        'com.sun.star.chart.AccessibleChartDocumentView': com.sun.star.chart.AccessibleChartDocumentView;
-        'com.sun.star.chart.AccessibleChartElement': com.sun.star.chart.AccessibleChartElement;
-        'com.sun.star.chart.AreaDiagram': com.sun.star.chart.AreaDiagram;
-        'com.sun.star.chart.BarDiagram': com.sun.star.chart.BarDiagram;
-        'com.sun.star.chart.BubbleDiagram': com.sun.star.chart.BubbleDiagram;
-        'com.sun.star.chart.Chart3DBarProperties': com.sun.star.chart.Chart3DBarProperties;
-        'com.sun.star.chart.ChartArea': com.sun.star.chart.ChartArea;
-        'com.sun.star.chart.ChartAxis': com.sun.star.chart.ChartAxis;
-        'com.sun.star.chart.ChartAxisXSupplier': com.sun.star.chart.ChartAxisXSupplier;
-        'com.sun.star.chart.ChartAxisYSupplier': com.sun.star.chart.ChartAxisYSupplier;
-        'com.sun.star.chart.ChartAxisZSupplier': com.sun.star.chart.ChartAxisZSupplier;
-        'com.sun.star.chart.ChartData': com.sun.star.chart.ChartData;
-        'com.sun.star.chart.ChartDataArray': com.sun.star.chart.ChartDataArray;
-        'com.sun.star.chart.ChartDataPointProperties': com.sun.star.chart.ChartDataPointProperties;
-        'com.sun.star.chart.ChartDataRowProperties': com.sun.star.chart.ChartDataRowProperties;
-        'com.sun.star.chart.ChartDocument': com.sun.star.chart.ChartDocument;
-        'com.sun.star.chart.ChartGrid': com.sun.star.chart.ChartGrid;
-        'com.sun.star.chart.ChartLegend': com.sun.star.chart.ChartLegend;
-        'com.sun.star.chart.ChartLine': com.sun.star.chart.ChartLine;
-        'com.sun.star.chart.ChartPieSegmentProperties': com.sun.star.chart.ChartPieSegmentProperties;
-        'com.sun.star.chart.ChartStatistics': com.sun.star.chart.ChartStatistics;
-        'com.sun.star.chart.ChartTableAddressSupplier': com.sun.star.chart.ChartTableAddressSupplier;
-        'com.sun.star.chart.ChartTitle': com.sun.star.chart.ChartTitle;
-        'com.sun.star.chart.ChartTwoAxisXSupplier': com.sun.star.chart.ChartTwoAxisXSupplier;
-        'com.sun.star.chart.ChartTwoAxisYSupplier': com.sun.star.chart.ChartTwoAxisYSupplier;
-        'com.sun.star.chart.Diagram': com.sun.star.chart.Diagram;
-        'com.sun.star.chart.Dim3DDiagram': com.sun.star.chart.Dim3DDiagram;
-        'com.sun.star.chart.DonutDiagram': com.sun.star.chart.DonutDiagram;
-        'com.sun.star.chart.FilledNetDiagram': com.sun.star.chart.FilledNetDiagram;
-        'com.sun.star.chart.LineDiagram': com.sun.star.chart.LineDiagram;
-        'com.sun.star.chart.NetDiagram': com.sun.star.chart.NetDiagram;
-        'com.sun.star.chart.PieDiagram': com.sun.star.chart.PieDiagram;
-        'com.sun.star.chart.StackableDiagram': com.sun.star.chart.StackableDiagram;
-        'com.sun.star.chart.StockDiagram': com.sun.star.chart.StockDiagram;
-        'com.sun.star.chart.XYDiagram': com.sun.star.chart.XYDiagram;
-        'com.sun.star.chart2.Axis': com.sun.star.chart2.Axis;
-        'com.sun.star.chart2.CandleStickChartType': com.sun.star.chart2.CandleStickChartType;
-        'com.sun.star.chart2.CartesianCoordinateSystem2d': com.sun.star.chart2.CartesianCoordinateSystem2d;
-        'com.sun.star.chart2.CartesianCoordinateSystem3d': com.sun.star.chart2.CartesianCoordinateSystem3d;
-        'com.sun.star.chart2.ChartDocument': com.sun.star.chart2.ChartDocument;
-        'com.sun.star.chart2.ChartDocumentWrapper': com.sun.star.chart2.ChartDocumentWrapper;
-        'com.sun.star.chart2.ChartType': com.sun.star.chart2.ChartType;
-        'com.sun.star.chart2.ChartTypeManager': com.sun.star.chart2.ChartTypeManager;
-        'com.sun.star.chart2.ChartTypeTemplate': com.sun.star.chart2.ChartTypeTemplate;
-        'com.sun.star.chart2.CoordinateSystem': com.sun.star.chart2.CoordinateSystem;
-        'com.sun.star.chart2.CoordinateSystemType': com.sun.star.chart2.CoordinateSystemType;
-        'com.sun.star.chart2.data.DatabaseDataProvider': com.sun.star.chart2.data.DatabaseDataProvider;
-        'com.sun.star.chart2.data.DataFilter': com.sun.star.chart2.data.DataFilter;
-        'com.sun.star.chart2.data.DataProvider': com.sun.star.chart2.data.DataProvider;
-        'com.sun.star.chart2.data.DataSequence': com.sun.star.chart2.data.DataSequence;
-        'com.sun.star.chart2.data.DataSink': com.sun.star.chart2.data.DataSink;
-        'com.sun.star.chart2.data.DataSource': com.sun.star.chart2.data.DataSource;
-        'com.sun.star.chart2.data.LabeledDataSequence': com.sun.star.chart2.data.LabeledDataSequence;
-        'com.sun.star.chart2.data.RangeHighlighter': com.sun.star.chart2.data.RangeHighlighter;
-        'com.sun.star.chart2.data.RangeHighlightListener': com.sun.star.chart2.data.RangeHighlightListener;
-        'com.sun.star.chart2.data.TabularDataProviderArguments': com.sun.star.chart2.data.TabularDataProviderArguments;
-        'com.sun.star.chart2.DataPoint': com.sun.star.chart2.DataPoint;
-        'com.sun.star.chart2.DataPointProperties': com.sun.star.chart2.DataPointProperties;
-        'com.sun.star.chart2.DataSeries': com.sun.star.chart2.DataSeries;
-        'com.sun.star.chart2.Diagram': com.sun.star.chart2.Diagram;
-        'com.sun.star.chart2.ErrorBar': com.sun.star.chart2.ErrorBar;
-        'com.sun.star.chart2.ExponentialRegressionCurve': com.sun.star.chart2.ExponentialRegressionCurve;
-        'com.sun.star.chart2.ExponentialScaling': com.sun.star.chart2.ExponentialScaling;
-        'com.sun.star.chart2.FormattedString': com.sun.star.chart2.FormattedString;
-        'com.sun.star.chart2.GridProperties': com.sun.star.chart2.GridProperties;
-        'com.sun.star.chart2.Legend': com.sun.star.chart2.Legend;
-        'com.sun.star.chart2.LinearRegressionCurve': com.sun.star.chart2.LinearRegressionCurve;
-        'com.sun.star.chart2.LinearScaling': com.sun.star.chart2.LinearScaling;
-        'com.sun.star.chart2.LogarithmicRegressionCurve': com.sun.star.chart2.LogarithmicRegressionCurve;
-        'com.sun.star.chart2.LogarithmicScaling': com.sun.star.chart2.LogarithmicScaling;
-        'com.sun.star.chart2.LogicTargetModel': com.sun.star.chart2.LogicTargetModel;
-        'com.sun.star.chart2.MovingAverageRegressionCurve': com.sun.star.chart2.MovingAverageRegressionCurve;
-        'com.sun.star.chart2.PolarCoordinateSystem2d': com.sun.star.chart2.PolarCoordinateSystem2d;
-        'com.sun.star.chart2.PolarCoordinateSystem3d': com.sun.star.chart2.PolarCoordinateSystem3d;
-        'com.sun.star.chart2.PolynomialRegressionCurve': com.sun.star.chart2.PolynomialRegressionCurve;
-        'com.sun.star.chart2.PotentialRegressionCurve': com.sun.star.chart2.PotentialRegressionCurve;
-        'com.sun.star.chart2.PowerScaling': com.sun.star.chart2.PowerScaling;
-        'com.sun.star.chart2.PropertyPool': com.sun.star.chart2.PropertyPool;
-        'com.sun.star.chart2.RegressionCurve': com.sun.star.chart2.RegressionCurve;
-        'com.sun.star.chart2.RegressionCurveEquation': com.sun.star.chart2.RegressionCurveEquation;
-        'com.sun.star.chart2.RegressionEquation': com.sun.star.chart2.RegressionEquation;
-        'com.sun.star.chart2.Scaling': com.sun.star.chart2.Scaling;
-        'com.sun.star.chart2.StandardDiagramCreationParameters': com.sun.star.chart2.StandardDiagramCreationParameters;
-        'com.sun.star.chart2.Title': com.sun.star.chart2.Title;
-        'com.sun.star.configuration.AccessRootElement': com.sun.star.configuration.AccessRootElement;
-        'com.sun.star.configuration.AdministrationProvider': com.sun.star.configuration.AdministrationProvider;
-        'com.sun.star.configuration.backend.Backend': com.sun.star.configuration.backend.Backend;
-        'com.sun.star.configuration.backend.BackendAdapter': com.sun.star.configuration.backend.BackendAdapter;
-        'com.sun.star.configuration.backend.CopyImporter': com.sun.star.configuration.backend.CopyImporter;
-        'com.sun.star.configuration.backend.DataImporter': com.sun.star.configuration.backend.DataImporter;
-        'com.sun.star.configuration.backend.DefaultBackend': com.sun.star.configuration.backend.DefaultBackend;
-        'com.sun.star.configuration.backend.HierarchyBrowser': com.sun.star.configuration.backend.HierarchyBrowser;
-        'com.sun.star.configuration.backend.Importer': com.sun.star.configuration.backend.Importer;
-        'com.sun.star.configuration.backend.InteractionHandler': com.sun.star.configuration.backend.InteractionHandler;
-        'com.sun.star.configuration.backend.Layer': com.sun.star.configuration.backend.Layer;
-        'com.sun.star.configuration.backend.LayerDescriber': com.sun.star.configuration.backend.LayerDescriber;
-        'com.sun.star.configuration.backend.LayerFilter': com.sun.star.configuration.backend.LayerFilter;
-        'com.sun.star.configuration.backend.LayerUpdateMerger': com.sun.star.configuration.backend.LayerUpdateMerger;
-        'com.sun.star.configuration.backend.LdapMultiLayerStratum': com.sun.star.configuration.backend.LdapMultiLayerStratum;
-        'com.sun.star.configuration.backend.LdapSingleBackend': com.sun.star.configuration.backend.LdapSingleBackend;
-        'com.sun.star.configuration.backend.LdapSingleStratum': com.sun.star.configuration.backend.LdapSingleStratum;
-        'com.sun.star.configuration.backend.LocalDataImporter': com.sun.star.configuration.backend.LocalDataImporter;
-        'com.sun.star.configuration.backend.LocalHierarchyBrowser': com.sun.star.configuration.backend.LocalHierarchyBrowser;
-        'com.sun.star.configuration.backend.LocalSchemaSupplier': com.sun.star.configuration.backend.LocalSchemaSupplier;
-        'com.sun.star.configuration.backend.LocalSingleBackend': com.sun.star.configuration.backend.LocalSingleBackend;
-        'com.sun.star.configuration.backend.LocalSingleStratum': com.sun.star.configuration.backend.LocalSingleStratum;
-        'com.sun.star.configuration.backend.MergeImporter': com.sun.star.configuration.backend.MergeImporter;
-        'com.sun.star.configuration.backend.MultiLayerStratum': com.sun.star.configuration.backend.MultiLayerStratum;
-        'com.sun.star.configuration.backend.MultiStratumBackend': com.sun.star.configuration.backend.MultiStratumBackend;
-        'com.sun.star.configuration.backend.OfflineBackend': com.sun.star.configuration.backend.OfflineBackend;
-        'com.sun.star.configuration.backend.OnlineBackend': com.sun.star.configuration.backend.OnlineBackend;
-        'com.sun.star.configuration.backend.PlatformBackend': com.sun.star.configuration.backend.PlatformBackend;
-        'com.sun.star.configuration.backend.Schema': com.sun.star.configuration.backend.Schema;
-        'com.sun.star.configuration.backend.SchemaSupplier': com.sun.star.configuration.backend.SchemaSupplier;
-        'com.sun.star.configuration.backend.SingleBackend': com.sun.star.configuration.backend.SingleBackend;
-        'com.sun.star.configuration.backend.SingleBackendAdapter': com.sun.star.configuration.backend.SingleBackendAdapter;
-        'com.sun.star.configuration.backend.SingleLayerStratum': com.sun.star.configuration.backend.SingleLayerStratum;
-        'com.sun.star.configuration.backend.SystemIntegration': com.sun.star.configuration.backend.SystemIntegration;
-        'com.sun.star.configuration.backend.UpdatableLayer': com.sun.star.configuration.backend.UpdatableLayer;
-        'com.sun.star.configuration.backend.xml.LayerParser': com.sun.star.configuration.backend.xml.LayerParser;
-        'com.sun.star.configuration.backend.xml.LayerWriter': com.sun.star.configuration.backend.xml.LayerWriter;
-        'com.sun.star.configuration.backend.xml.SchemaParser': com.sun.star.configuration.backend.xml.SchemaParser;
-        'com.sun.star.configuration.bootstrap.BootstrapContext': com.sun.star.configuration.bootstrap.BootstrapContext;
-        'com.sun.star.configuration.ConfigurationAccess': com.sun.star.configuration.ConfigurationAccess;
-        'com.sun.star.configuration.ConfigurationProvider': com.sun.star.configuration.ConfigurationProvider;
-        'com.sun.star.configuration.ConfigurationRegistry': com.sun.star.configuration.ConfigurationRegistry;
-        'com.sun.star.configuration.ConfigurationUpdateAccess': com.sun.star.configuration.ConfigurationUpdateAccess;
-        'com.sun.star.configuration.DefaultProvider': com.sun.star.configuration.DefaultProvider;
-        'com.sun.star.configuration.GroupAccess': com.sun.star.configuration.GroupAccess;
-        'com.sun.star.configuration.GroupElement': com.sun.star.configuration.GroupElement;
-        'com.sun.star.configuration.GroupUpdate': com.sun.star.configuration.GroupUpdate;
-        'com.sun.star.configuration.HierarchyAccess': com.sun.star.configuration.HierarchyAccess;
-        'com.sun.star.configuration.HierarchyElement': com.sun.star.configuration.HierarchyElement;
-        'com.sun.star.configuration.PropertyHierarchy': com.sun.star.configuration.PropertyHierarchy;
-        'com.sun.star.configuration.ReadOnlyAccess': com.sun.star.configuration.ReadOnlyAccess;
-        'com.sun.star.configuration.ReadWriteAccess': com.sun.star.configuration.ReadWriteAccess;
-        'com.sun.star.configuration.SetAccess': com.sun.star.configuration.SetAccess;
-        'com.sun.star.configuration.SetElement': com.sun.star.configuration.SetElement;
-        'com.sun.star.configuration.SetUpdate': com.sun.star.configuration.SetUpdate;
-        'com.sun.star.configuration.SimpleSetAccess': com.sun.star.configuration.SimpleSetAccess;
-        'com.sun.star.configuration.SimpleSetUpdate': com.sun.star.configuration.SimpleSetUpdate;
-        'com.sun.star.configuration.UpdateRootElement': com.sun.star.configuration.UpdateRootElement;
-        'com.sun.star.connection.Acceptor': com.sun.star.connection.Acceptor;
-        'com.sun.star.connection.Connector': com.sun.star.connection.Connector;
-        'com.sun.star.container.EnumerableMap': com.sun.star.container.EnumerableMap;
-        'com.sun.star.cui.ColorPicker': com.sun.star.cui.ColorPicker;
-        'com.sun.star.datatransfer.clipboard.ClipboardManager': com.sun.star.datatransfer.clipboard.ClipboardManager;
-        'com.sun.star.datatransfer.clipboard.GenericClipboard': com.sun.star.datatransfer.clipboard.GenericClipboard;
-        'com.sun.star.datatransfer.clipboard.SystemClipboard': com.sun.star.datatransfer.clipboard.SystemClipboard;
-        'com.sun.star.datatransfer.DataFormatTranslator': com.sun.star.datatransfer.DataFormatTranslator;
-        'com.sun.star.datatransfer.dnd.OleDragSource': com.sun.star.datatransfer.dnd.OleDragSource;
-        'com.sun.star.datatransfer.dnd.OleDropTarget': com.sun.star.datatransfer.dnd.OleDropTarget;
-        'com.sun.star.datatransfer.dnd.X11DragSource': com.sun.star.datatransfer.dnd.X11DragSource;
-        'com.sun.star.datatransfer.dnd.X11DropTarget': com.sun.star.datatransfer.dnd.X11DropTarget;
-        'com.sun.star.datatransfer.MimeContentTypeFactory': com.sun.star.datatransfer.MimeContentTypeFactory;
-        'com.sun.star.deployment.PackageRegistryBackend': com.sun.star.deployment.PackageRegistryBackend;
-        'com.sun.star.deployment.test.SmoketestCommandEnvironment': com.sun.star.deployment.test.SmoketestCommandEnvironment;
-        'com.sun.star.deployment.ui.LicenseDialog': com.sun.star.deployment.ui.LicenseDialog;
-        'com.sun.star.deployment.ui.PackageManagerDialog': com.sun.star.deployment.ui.PackageManagerDialog;
-        'com.sun.star.deployment.ui.UpdateRequiredDialog': com.sun.star.deployment.ui.UpdateRequiredDialog;
-        'com.sun.star.deployment.UpdateInformationProvider': com.sun.star.deployment.UpdateInformationProvider;
-        'com.sun.star.document.DocumentProperties': com.sun.star.document.DocumentProperties;
-        'com.sun.star.document.DocumentRevisionListPersistence': com.sun.star.document.DocumentRevisionListPersistence;
-        'com.sun.star.document.EventDescriptor': com.sun.star.document.EventDescriptor;
-        'com.sun.star.document.Events': com.sun.star.document.Events;
-        'com.sun.star.document.ExportFilter': com.sun.star.document.ExportFilter;
-        'com.sun.star.document.ExtendedTypeDetection': com.sun.star.document.ExtendedTypeDetection;
-        'com.sun.star.document.ExtendedTypeDetectionFactory': com.sun.star.document.ExtendedTypeDetectionFactory;
-        'com.sun.star.document.FilterAdapter': com.sun.star.document.FilterAdapter;
-        'com.sun.star.document.FilterConfigRefresh': com.sun.star.document.FilterConfigRefresh;
-        'com.sun.star.document.FilterFactory': com.sun.star.document.FilterFactory;
-        'com.sun.star.document.GraphicObjectResolver': com.sun.star.document.GraphicObjectResolver;
-        'com.sun.star.document.HeaderFooterSettings': com.sun.star.document.HeaderFooterSettings;
-        'com.sun.star.document.ImportFilter': com.sun.star.document.ImportFilter;
-        'com.sun.star.document.IndexedPropertyValues': com.sun.star.document.IndexedPropertyValues;
-        'com.sun.star.document.LinkTarget': com.sun.star.document.LinkTarget;
-        'com.sun.star.document.LinkTargets': com.sun.star.document.LinkTargets;
-        'com.sun.star.document.MediaDescriptor': com.sun.star.document.MediaDescriptor;
-        'com.sun.star.document.NamedPropertyValues': com.sun.star.document.NamedPropertyValues;
-        'com.sun.star.document.OfficeDocument': com.sun.star.document.OfficeDocument;
-        'com.sun.star.document.OleEmbeddedServerRegistration': com.sun.star.document.OleEmbeddedServerRegistration;
-        'com.sun.star.document.OOXMLDocumentPropertiesImporter': com.sun.star.document.OOXMLDocumentPropertiesImporter;
-        'com.sun.star.document.PDFDialog': com.sun.star.document.PDFDialog;
-        'com.sun.star.document.Settings': com.sun.star.document.Settings;
-        'com.sun.star.document.TypeDetection': com.sun.star.document.TypeDetection;
-        'com.sun.star.document.XMLBasicExporter': com.sun.star.document.XMLBasicExporter;
-        'com.sun.star.document.XMLBasicImporter': com.sun.star.document.XMLBasicImporter;
-        'com.sun.star.document.XMLOasisBasicExporter': com.sun.star.document.XMLOasisBasicExporter;
-        'com.sun.star.document.XMLOasisBasicImporter': com.sun.star.document.XMLOasisBasicImporter;
-        'com.sun.star.drawing.AccessibleDrawDocumentView': com.sun.star.drawing.AccessibleDrawDocumentView;
-        'com.sun.star.drawing.AccessibleGraphControl': com.sun.star.drawing.AccessibleGraphControl;
-        'com.sun.star.drawing.AccessibleGraphicShape': com.sun.star.drawing.AccessibleGraphicShape;
-        'com.sun.star.drawing.AccessibleImageBullet': com.sun.star.drawing.AccessibleImageBullet;
-        'com.sun.star.drawing.AccessibleOLEShape': com.sun.star.drawing.AccessibleOLEShape;
-        'com.sun.star.drawing.AccessibleShape': com.sun.star.drawing.AccessibleShape;
-        'com.sun.star.drawing.AccessibleSlideView': com.sun.star.drawing.AccessibleSlideView;
-        'com.sun.star.drawing.AccessibleSlideViewObject': com.sun.star.drawing.AccessibleSlideViewObject;
-        'com.sun.star.drawing.AppletShape': com.sun.star.drawing.AppletShape;
-        'com.sun.star.drawing.Background': com.sun.star.drawing.Background;
-        'com.sun.star.drawing.BitmapTable': com.sun.star.drawing.BitmapTable;
-        'com.sun.star.drawing.CaptionShape': com.sun.star.drawing.CaptionShape;
-        'com.sun.star.drawing.ClosedBezierShape': com.sun.star.drawing.ClosedBezierShape;
-        'com.sun.star.drawing.ColorTable': com.sun.star.drawing.ColorTable;
-        'com.sun.star.drawing.ConnectorProperties': com.sun.star.drawing.ConnectorProperties;
-        'com.sun.star.drawing.ConnectorShape': com.sun.star.drawing.ConnectorShape;
-        'com.sun.star.drawing.ControlShape': com.sun.star.drawing.ControlShape;
-        'com.sun.star.drawing.CustomShape': com.sun.star.drawing.CustomShape;
-        'com.sun.star.drawing.CustomShapeEngine': com.sun.star.drawing.CustomShapeEngine;
-        'com.sun.star.drawing.DashTable': com.sun.star.drawing.DashTable;
-        'com.sun.star.drawing.Defaults': com.sun.star.drawing.Defaults;
-        'com.sun.star.drawing.DocumentSettings': com.sun.star.drawing.DocumentSettings;
-        'com.sun.star.drawing.DrawingDocument': com.sun.star.drawing.DrawingDocument;
-        'com.sun.star.drawing.DrawingDocumentDrawView': com.sun.star.drawing.DrawingDocumentDrawView;
-        'com.sun.star.drawing.DrawingDocumentFactory': com.sun.star.drawing.DrawingDocumentFactory;
-        'com.sun.star.drawing.DrawPage': com.sun.star.drawing.DrawPage;
-        'com.sun.star.drawing.DrawPages': com.sun.star.drawing.DrawPages;
-        'com.sun.star.drawing.EllipseShape': com.sun.star.drawing.EllipseShape;
-        'com.sun.star.drawing.EnhancedCustomShapeExtrusion': com.sun.star.drawing.EnhancedCustomShapeExtrusion;
-        'com.sun.star.drawing.EnhancedCustomShapeGeometry': com.sun.star.drawing.EnhancedCustomShapeGeometry;
-        'com.sun.star.drawing.EnhancedCustomShapeHandle': com.sun.star.drawing.EnhancedCustomShapeHandle;
-        'com.sun.star.drawing.EnhancedCustomShapePath': com.sun.star.drawing.EnhancedCustomShapePath;
-        'com.sun.star.drawing.EnhancedCustomShapeTextPath': com.sun.star.drawing.EnhancedCustomShapeTextPath;
-        'com.sun.star.drawing.FillProperties': com.sun.star.drawing.FillProperties;
-        'com.sun.star.drawing.framework.BasicPaneFactory': com.sun.star.drawing.framework.BasicPaneFactory;
-        'com.sun.star.drawing.framework.BasicToolBarFactory': com.sun.star.drawing.framework.BasicToolBarFactory;
-        'com.sun.star.drawing.framework.BasicViewFactory': com.sun.star.drawing.framework.BasicViewFactory;
-        'com.sun.star.drawing.framework.Configuration': com.sun.star.drawing.framework.Configuration;
-        'com.sun.star.drawing.framework.ConfigurationController': com.sun.star.drawing.framework.ConfigurationController;
-        'com.sun.star.drawing.framework.ModuleController': com.sun.star.drawing.framework.ModuleController;
-        'com.sun.star.drawing.framework.ResourceId': com.sun.star.drawing.framework.ResourceId;
-        'com.sun.star.drawing.GenericDrawingDocument': com.sun.star.drawing.GenericDrawingDocument;
-        'com.sun.star.drawing.GenericDrawPage': com.sun.star.drawing.GenericDrawPage;
-        'com.sun.star.drawing.GradientTable': com.sun.star.drawing.GradientTable;
-        'com.sun.star.drawing.GraphicExportFilter': com.sun.star.drawing.GraphicExportFilter;
-        'com.sun.star.drawing.GraphicObjectShape': com.sun.star.drawing.GraphicObjectShape;
-        'com.sun.star.drawing.GroupShape': com.sun.star.drawing.GroupShape;
-        'com.sun.star.drawing.HatchTable': com.sun.star.drawing.HatchTable;
-        'com.sun.star.drawing.Layer': com.sun.star.drawing.Layer;
-        'com.sun.star.drawing.LayerManager': com.sun.star.drawing.LayerManager;
-        'com.sun.star.drawing.LineProperties': com.sun.star.drawing.LineProperties;
-        'com.sun.star.drawing.LineShape': com.sun.star.drawing.LineShape;
-        'com.sun.star.drawing.MarkerTable': com.sun.star.drawing.MarkerTable;
-        'com.sun.star.drawing.MasterPage': com.sun.star.drawing.MasterPage;
-        'com.sun.star.drawing.MasterPages': com.sun.star.drawing.MasterPages;
-        'com.sun.star.drawing.MeasureProperties': com.sun.star.drawing.MeasureProperties;
-        'com.sun.star.drawing.MeasureShape': com.sun.star.drawing.MeasureShape;
-        'com.sun.star.drawing.ModuleDispatcher': com.sun.star.drawing.ModuleDispatcher;
-        'com.sun.star.drawing.OLE2Shape': com.sun.star.drawing.OLE2Shape;
-        'com.sun.star.drawing.OpenBezierShape': com.sun.star.drawing.OpenBezierShape;
-        'com.sun.star.drawing.PageShape': com.sun.star.drawing.PageShape;
-        'com.sun.star.drawing.PluginShape': com.sun.star.drawing.PluginShape;
-        'com.sun.star.drawing.PolyLineShape': com.sun.star.drawing.PolyLineShape;
-        'com.sun.star.drawing.PolyPolygonBezierDescriptor': com.sun.star.drawing.PolyPolygonBezierDescriptor;
-        'com.sun.star.drawing.PolyPolygonBezierShape': com.sun.star.drawing.PolyPolygonBezierShape;
-        'com.sun.star.drawing.PolyPolygonDescriptor': com.sun.star.drawing.PolyPolygonDescriptor;
-        'com.sun.star.drawing.PolyPolygonShape': com.sun.star.drawing.PolyPolygonShape;
-        'com.sun.star.drawing.RectangleShape': com.sun.star.drawing.RectangleShape;
-        'com.sun.star.drawing.RotationDescriptor': com.sun.star.drawing.RotationDescriptor;
-        'com.sun.star.drawing.ShadowProperties': com.sun.star.drawing.ShadowProperties;
-        'com.sun.star.drawing.Shape': com.sun.star.drawing.Shape;
-        'com.sun.star.drawing.ShapeCollection': com.sun.star.drawing.ShapeCollection;
-        'com.sun.star.drawing.Shapes': com.sun.star.drawing.Shapes;
-        'com.sun.star.drawing.SlideRenderer': com.sun.star.drawing.SlideRenderer;
-        'com.sun.star.drawing.SlideSorter': com.sun.star.drawing.SlideSorter;
-        'com.sun.star.drawing.Text': com.sun.star.drawing.Text;
-        'com.sun.star.drawing.TextProperties': com.sun.star.drawing.TextProperties;
-        'com.sun.star.drawing.TextShape': com.sun.star.drawing.TextShape;
-        'com.sun.star.drawing.TransparencyGradientTable': com.sun.star.drawing.TransparencyGradientTable;
-        'com.sun.star.embed.BaseStorage': com.sun.star.embed.BaseStorage;
-        'com.sun.star.embed.DocumentCloser': com.sun.star.embed.DocumentCloser;
-        'com.sun.star.embed.EmbeddedObjectCreator': com.sun.star.embed.EmbeddedObjectCreator;
-        'com.sun.star.embed.EmbeddedObjectDescriptor': com.sun.star.embed.EmbeddedObjectDescriptor;
-        'com.sun.star.embed.FileSystemStorage': com.sun.star.embed.FileSystemStorage;
-        'com.sun.star.embed.FileSystemStorageFactory': com.sun.star.embed.FileSystemStorageFactory;
-        'com.sun.star.embed.HatchWindowFactory': com.sun.star.embed.HatchWindowFactory;
-        'com.sun.star.embed.InstanceLocker': com.sun.star.embed.InstanceLocker;
-        'com.sun.star.embed.MSOLEObjectSystemCreator': com.sun.star.embed.MSOLEObjectSystemCreator;
-        'com.sun.star.embed.OLEEmbeddedObjectFactory': com.sun.star.embed.OLEEmbeddedObjectFactory;
-        'com.sun.star.embed.OLESimpleStorage': com.sun.star.embed.OLESimpleStorage;
-        'com.sun.star.embed.OOoEmbeddedObjectFactory': com.sun.star.embed.OOoEmbeddedObjectFactory;
-        'com.sun.star.embed.Storage': com.sun.star.embed.Storage;
-        'com.sun.star.embed.StorageFactory': com.sun.star.embed.StorageFactory;
-        'com.sun.star.embed.StorageStream': com.sun.star.embed.StorageStream;
-        'com.sun.star.form.binding.BindableControlModel': com.sun.star.form.binding.BindableControlModel;
-        'com.sun.star.form.binding.BindableDataAwareControlModel': com.sun.star.form.binding.BindableDataAwareControlModel;
-        'com.sun.star.form.binding.BindableDatabaseCheckBox': com.sun.star.form.binding.BindableDatabaseCheckBox;
-        'com.sun.star.form.binding.BindableDatabaseComboBox': com.sun.star.form.binding.BindableDatabaseComboBox;
-        'com.sun.star.form.binding.BindableDatabaseDateField': com.sun.star.form.binding.BindableDatabaseDateField;
-        'com.sun.star.form.binding.BindableDatabaseFormattedField': com.sun.star.form.binding.BindableDatabaseFormattedField;
-        'com.sun.star.form.binding.BindableDatabaseListBox': com.sun.star.form.binding.BindableDatabaseListBox;
-        'com.sun.star.form.binding.BindableDatabaseNumericField': com.sun.star.form.binding.BindableDatabaseNumericField;
-        'com.sun.star.form.binding.BindableDatabaseRadioButton': com.sun.star.form.binding.BindableDatabaseRadioButton;
-        'com.sun.star.form.binding.BindableDatabaseTextField': com.sun.star.form.binding.BindableDatabaseTextField;
-        'com.sun.star.form.binding.BindableDatabaseTimeField': com.sun.star.form.binding.BindableDatabaseTimeField;
-        'com.sun.star.form.binding.BindableIntegerValueRange': com.sun.star.form.binding.BindableIntegerValueRange;
-        'com.sun.star.form.binding.ListEntrySource': com.sun.star.form.binding.ListEntrySource;
-        'com.sun.star.form.binding.ValueBinding': com.sun.star.form.binding.ValueBinding;
-        'com.sun.star.form.component.CheckBox': com.sun.star.form.component.CheckBox;
-        'com.sun.star.form.component.ComboBox': com.sun.star.form.component.ComboBox;
-        'com.sun.star.form.component.CommandButton': com.sun.star.form.component.CommandButton;
-        'com.sun.star.form.component.CurrencyField': com.sun.star.form.component.CurrencyField;
-        'com.sun.star.form.component.DatabaseCheckBox': com.sun.star.form.component.DatabaseCheckBox;
-        'com.sun.star.form.component.DatabaseComboBox': com.sun.star.form.component.DatabaseComboBox;
-        'com.sun.star.form.component.DatabaseCurrencyField': com.sun.star.form.component.DatabaseCurrencyField;
-        'com.sun.star.form.component.DatabaseDateField': com.sun.star.form.component.DatabaseDateField;
-        'com.sun.star.form.component.DatabaseFormattedField': com.sun.star.form.component.DatabaseFormattedField;
-        'com.sun.star.form.component.DatabaseImageControl': com.sun.star.form.component.DatabaseImageControl;
-        'com.sun.star.form.component.DatabaseListBox': com.sun.star.form.component.DatabaseListBox;
-        'com.sun.star.form.component.DatabaseNumericField': com.sun.star.form.component.DatabaseNumericField;
-        'com.sun.star.form.component.DatabasePatternField': com.sun.star.form.component.DatabasePatternField;
-        'com.sun.star.form.component.DatabaseRadioButton': com.sun.star.form.component.DatabaseRadioButton;
-        'com.sun.star.form.component.DatabaseTextField': com.sun.star.form.component.DatabaseTextField;
-        'com.sun.star.form.component.DatabaseTimeField': com.sun.star.form.component.DatabaseTimeField;
-        'com.sun.star.form.component.DataForm': com.sun.star.form.component.DataForm;
-        'com.sun.star.form.component.DateField': com.sun.star.form.component.DateField;
-        'com.sun.star.form.component.FileControl': com.sun.star.form.component.FileControl;
-        'com.sun.star.form.component.FixedText': com.sun.star.form.component.FixedText;
-        'com.sun.star.form.component.Form': com.sun.star.form.component.Form;
-        'com.sun.star.form.component.FormattedField': com.sun.star.form.component.FormattedField;
-        'com.sun.star.form.component.GridControl': com.sun.star.form.component.GridControl;
-        'com.sun.star.form.component.GroupBox': com.sun.star.form.component.GroupBox;
-        'com.sun.star.form.component.HiddenControl': com.sun.star.form.component.HiddenControl;
-        'com.sun.star.form.component.HTMLForm': com.sun.star.form.component.HTMLForm;
-        'com.sun.star.form.component.ImageButton': com.sun.star.form.component.ImageButton;
-        'com.sun.star.form.component.ListBox': com.sun.star.form.component.ListBox;
-        'com.sun.star.form.component.NavigationToolBar': com.sun.star.form.component.NavigationToolBar;
-        'com.sun.star.form.component.NumericField': com.sun.star.form.component.NumericField;
-        'com.sun.star.form.component.PatternField': com.sun.star.form.component.PatternField;
-        'com.sun.star.form.component.RadioButton': com.sun.star.form.component.RadioButton;
-        'com.sun.star.form.component.RichTextControl': com.sun.star.form.component.RichTextControl;
-        'com.sun.star.form.component.ScrollBar': com.sun.star.form.component.ScrollBar;
-        'com.sun.star.form.component.SpinButton': com.sun.star.form.component.SpinButton;
-        'com.sun.star.form.component.SubmitButton': com.sun.star.form.component.SubmitButton;
-        'com.sun.star.form.component.TextField': com.sun.star.form.component.TextField;
-        'com.sun.star.form.component.TimeField': com.sun.star.form.component.TimeField;
-        'com.sun.star.form.control.CheckBox': com.sun.star.form.control.CheckBox;
-        'com.sun.star.form.control.ComboBox': com.sun.star.form.control.ComboBox;
-        'com.sun.star.form.control.CommandButton': com.sun.star.form.control.CommandButton;
-        'com.sun.star.form.control.CurrencyField': com.sun.star.form.control.CurrencyField;
-        'com.sun.star.form.control.DateField': com.sun.star.form.control.DateField;
-        'com.sun.star.form.control.FilterControl': com.sun.star.form.control.FilterControl;
-        'com.sun.star.form.control.FormattedField': com.sun.star.form.control.FormattedField;
-        'com.sun.star.form.control.GridControl': com.sun.star.form.control.GridControl;
-        'com.sun.star.form.control.GroupBox': com.sun.star.form.control.GroupBox;
-        'com.sun.star.form.control.ImageButton': com.sun.star.form.control.ImageButton;
-        'com.sun.star.form.control.ImageControl': com.sun.star.form.control.ImageControl;
-        'com.sun.star.form.control.InteractionGridControl': com.sun.star.form.control.InteractionGridControl;
-        'com.sun.star.form.control.ListBox': com.sun.star.form.control.ListBox;
-        'com.sun.star.form.control.NavigationToolBar': com.sun.star.form.control.NavigationToolBar;
-        'com.sun.star.form.control.NumericField': com.sun.star.form.control.NumericField;
-        'com.sun.star.form.control.PatternField': com.sun.star.form.control.PatternField;
-        'com.sun.star.form.control.RadioButton': com.sun.star.form.control.RadioButton;
-        'com.sun.star.form.control.SubmitButton': com.sun.star.form.control.SubmitButton;
-        'com.sun.star.form.control.TextField': com.sun.star.form.control.TextField;
-        'com.sun.star.form.control.TimeField': com.sun.star.form.control.TimeField;
-        'com.sun.star.form.ControlFontDialog': com.sun.star.form.ControlFontDialog;
-        'com.sun.star.form.DataAwareControlModel': com.sun.star.form.DataAwareControlModel;
-        'com.sun.star.form.FormComponent': com.sun.star.form.FormComponent;
-        'com.sun.star.form.FormComponents': com.sun.star.form.FormComponents;
-        'com.sun.star.form.FormController': com.sun.star.form.FormController;
-        'com.sun.star.form.FormControllerDispatcher': com.sun.star.form.FormControllerDispatcher;
-        'com.sun.star.form.FormControlModel': com.sun.star.form.FormControlModel;
-        'com.sun.star.form.Forms': com.sun.star.form.Forms;
-        'com.sun.star.form.inspection.ButtonNavigationHandler': com.sun.star.form.inspection.ButtonNavigationHandler;
-        'com.sun.star.form.inspection.CellBindingPropertyHandler': com.sun.star.form.inspection.CellBindingPropertyHandler;
-        'com.sun.star.form.inspection.DefaultFormComponentInspectorModel': com.sun.star.form.inspection.DefaultFormComponentInspectorModel;
-        'com.sun.star.form.inspection.EditPropertyHandler': com.sun.star.form.inspection.EditPropertyHandler;
-        'com.sun.star.form.inspection.EventHandler': com.sun.star.form.inspection.EventHandler;
-        'com.sun.star.form.inspection.FormComponentPropertyHandler': com.sun.star.form.inspection.FormComponentPropertyHandler;
-        'com.sun.star.form.inspection.SubmissionPropertyHandler': com.sun.star.form.inspection.SubmissionPropertyHandler;
-        'com.sun.star.form.inspection.XMLFormsPropertyHandler': com.sun.star.form.inspection.XMLFormsPropertyHandler;
-        'com.sun.star.form.inspection.XSDValidationPropertyHandler': com.sun.star.form.inspection.XSDValidationPropertyHandler;
-        'com.sun.star.form.PropertyBrowserController': com.sun.star.form.PropertyBrowserController;
-        'com.sun.star.form.runtime.FormController': com.sun.star.form.runtime.FormController;
-        'com.sun.star.form.runtime.FormOperations': com.sun.star.form.runtime.FormOperations;
-        'com.sun.star.form.TabOrderDialog': com.sun.star.form.TabOrderDialog;
-        'com.sun.star.form.validation.ValidatableBindableControlModel': com.sun.star.form.validation.ValidatableBindableControlModel;
-        'com.sun.star.form.validation.ValidatableControlModel': com.sun.star.form.validation.ValidatableControlModel;
-        'com.sun.star.formula.AccessibleFormulaText': com.sun.star.formula.AccessibleFormulaText;
-        'com.sun.star.formula.AccessibleFormulaView': com.sun.star.formula.AccessibleFormulaView;
-        'com.sun.star.formula.FormulaProperties': com.sun.star.formula.FormulaProperties;
-        'com.sun.star.frame.AppDispatchProvider': com.sun.star.frame.AppDispatchProvider;
-        'com.sun.star.frame.AutoRecovery': com.sun.star.frame.AutoRecovery;
-        'com.sun.star.frame.Bibliography': com.sun.star.frame.Bibliography;
-        'com.sun.star.frame.Components': com.sun.star.frame.Components;
-        'com.sun.star.frame.ContentHandler': com.sun.star.frame.ContentHandler;
-        'com.sun.star.frame.ContentHandlerFactory': com.sun.star.frame.ContentHandlerFactory;
-        'com.sun.star.frame.Controller': com.sun.star.frame.Controller;
-        'com.sun.star.frame.Desktop': com.sun.star.frame.Desktop;
-        'com.sun.star.frame.DesktopTask': com.sun.star.frame.DesktopTask;
-        'com.sun.star.frame.DesktopTasks': com.sun.star.frame.DesktopTasks;
-        'com.sun.star.frame.DispatchHelper': com.sun.star.frame.DispatchHelper;
-        'com.sun.star.frame.DispatchProvider': com.sun.star.frame.DispatchProvider;
-        'com.sun.star.frame.DispatchRecorder': com.sun.star.frame.DispatchRecorder;
-        'com.sun.star.frame.DispatchRecorderSupplier': com.sun.star.frame.DispatchRecorderSupplier;
-        'com.sun.star.frame.DocumentTemplates': com.sun.star.frame.DocumentTemplates;
-        'com.sun.star.frame.Frame': com.sun.star.frame.Frame;
-        'com.sun.star.frame.FrameControl': com.sun.star.frame.FrameControl;
-        'com.sun.star.frame.FrameLoader': com.sun.star.frame.FrameLoader;
-        'com.sun.star.frame.FrameLoaderFactory': com.sun.star.frame.FrameLoaderFactory;
-        'com.sun.star.frame.FramesContainer': com.sun.star.frame.FramesContainer;
-        'com.sun.star.frame.GlobalEventBroadcaster': com.sun.star.frame.GlobalEventBroadcaster;
-        'com.sun.star.frame.LayoutManager': com.sun.star.frame.LayoutManager;
-        'com.sun.star.frame.MediaTypeDetectionHelper': com.sun.star.frame.MediaTypeDetectionHelper;
-        'com.sun.star.frame.ModuleManager': com.sun.star.frame.ModuleManager;
-        'com.sun.star.frame.OfficeFrameLoader': com.sun.star.frame.OfficeFrameLoader;
-        'com.sun.star.frame.PopupMenuController': com.sun.star.frame.PopupMenuController;
-        'com.sun.star.frame.PopupMenuControllerFactory': com.sun.star.frame.PopupMenuControllerFactory;
-        'com.sun.star.frame.ProtocolHandler': com.sun.star.frame.ProtocolHandler;
-        'com.sun.star.frame.SessionListener': com.sun.star.frame.SessionListener;
-        'com.sun.star.frame.SessionManager': com.sun.star.frame.SessionManager;
-        'com.sun.star.frame.Settings': com.sun.star.frame.Settings;
-        'com.sun.star.frame.StartModule': com.sun.star.frame.StartModule;
-        'com.sun.star.frame.StatusbarController': com.sun.star.frame.StatusbarController;
-        'com.sun.star.frame.StatusbarControllerFactory': com.sun.star.frame.StatusbarControllerFactory;
-        'com.sun.star.frame.SynchronousFrameLoader': com.sun.star.frame.SynchronousFrameLoader;
-        'com.sun.star.frame.Task': com.sun.star.frame.Task;
-        'com.sun.star.frame.TaskCreator': com.sun.star.frame.TaskCreator;
-        'com.sun.star.frame.TemplateAccess': com.sun.star.frame.TemplateAccess;
-        'com.sun.star.frame.ToolbarController': com.sun.star.frame.ToolbarController;
-        'com.sun.star.frame.ToolbarControllerFactory': com.sun.star.frame.ToolbarControllerFactory;
-        'com.sun.star.frame.TransientDocumentsDocumentContentFactory': com.sun.star.frame.TransientDocumentsDocumentContentFactory;
-        'com.sun.star.frame.UICommandDescription': com.sun.star.frame.UICommandDescription;
-        'com.sun.star.gallery.GalleryItem': com.sun.star.gallery.GalleryItem;
-        'com.sun.star.gallery.GalleryTheme': com.sun.star.gallery.GalleryTheme;
-        'com.sun.star.gallery.GalleryThemeProvider': com.sun.star.gallery.GalleryThemeProvider;
-        'com.sun.star.graphic.Graphic': com.sun.star.graphic.Graphic;
-        'com.sun.star.graphic.GraphicDescriptor': com.sun.star.graphic.GraphicDescriptor;
-        'com.sun.star.graphic.GraphicObject': com.sun.star.graphic.GraphicObject;
-        'com.sun.star.graphic.GraphicProvider': com.sun.star.graphic.GraphicProvider;
-        'com.sun.star.graphic.GraphicRasterizer': com.sun.star.graphic.GraphicRasterizer;
-        'com.sun.star.graphic.GraphicRendererVCL': com.sun.star.graphic.GraphicRendererVCL;
-        'com.sun.star.graphic.MediaProperties': com.sun.star.graphic.MediaProperties;
-        'com.sun.star.graphic.Primitive2DTools': com.sun.star.graphic.Primitive2DTools;
-        'com.sun.star.graphic.PrimitiveFactory2D': com.sun.star.graphic.PrimitiveFactory2D;
-        'com.sun.star.graphic.SvgTools': com.sun.star.graphic.SvgTools;
-        'com.sun.star.i18n.BreakIterator': com.sun.star.i18n.BreakIterator;
-        'com.sun.star.i18n.ChapterCollator': com.sun.star.i18n.ChapterCollator;
-        'com.sun.star.i18n.CharacterClassification': com.sun.star.i18n.CharacterClassification;
-        'com.sun.star.i18n.Collator': com.sun.star.i18n.Collator;
-        'com.sun.star.i18n.IndexEntrySupplier': com.sun.star.i18n.IndexEntrySupplier;
-        'com.sun.star.i18n.InputSequenceChecker': com.sun.star.i18n.InputSequenceChecker;
-        'com.sun.star.i18n.LocaleCalendar': com.sun.star.i18n.LocaleCalendar;
-        'com.sun.star.i18n.LocaleCalendar2': com.sun.star.i18n.LocaleCalendar2;
-        'com.sun.star.i18n.LocaleData': com.sun.star.i18n.LocaleData;
-        'com.sun.star.i18n.NativeNumberSupplier': com.sun.star.i18n.NativeNumberSupplier;
-        'com.sun.star.i18n.NumberFormatMapper': com.sun.star.i18n.NumberFormatMapper;
-        'com.sun.star.i18n.OrdinalSuffix': com.sun.star.i18n.OrdinalSuffix;
-        'com.sun.star.i18n.TextConversion': com.sun.star.i18n.TextConversion;
-        'com.sun.star.i18n.Transliteration': com.sun.star.i18n.Transliteration;
-        'com.sun.star.image.ImageMap': com.sun.star.image.ImageMap;
-        'com.sun.star.image.ImageMapCircleObject': com.sun.star.image.ImageMapCircleObject;
-        'com.sun.star.image.ImageMapObject': com.sun.star.image.ImageMapObject;
-        'com.sun.star.image.ImageMapPolygonObject': com.sun.star.image.ImageMapPolygonObject;
-        'com.sun.star.image.ImageMapRectangleObject': com.sun.star.image.ImageMapRectangleObject;
-        'com.sun.star.inspection.DefaultHelpProvider': com.sun.star.inspection.DefaultHelpProvider;
-        'com.sun.star.inspection.GenericPropertyHandler': com.sun.star.inspection.GenericPropertyHandler;
-        'com.sun.star.inspection.ObjectInspector': com.sun.star.inspection.ObjectInspector;
-        'com.sun.star.inspection.ObjectInspectorModel': com.sun.star.inspection.ObjectInspectorModel;
-        'com.sun.star.inspection.StringRepresentation': com.sun.star.inspection.StringRepresentation;
-        'com.sun.star.io.DataInputStream': com.sun.star.io.DataInputStream;
-        'com.sun.star.io.DataOutputStream': com.sun.star.io.DataOutputStream;
-        'com.sun.star.io.MarkableInputStream': com.sun.star.io.MarkableInputStream;
-        'com.sun.star.io.MarkableOutputStream': com.sun.star.io.MarkableOutputStream;
-        'com.sun.star.io.ObjectInputStream': com.sun.star.io.ObjectInputStream;
-        'com.sun.star.io.ObjectOutputStream': com.sun.star.io.ObjectOutputStream;
-        'com.sun.star.io.Pipe': com.sun.star.io.Pipe;
-        'com.sun.star.io.Pump': com.sun.star.io.Pump;
-        'com.sun.star.io.SequenceInputStream': com.sun.star.io.SequenceInputStream;
-        'com.sun.star.io.SequenceOutputStream': com.sun.star.io.SequenceOutputStream;
-        'com.sun.star.io.TempFile': com.sun.star.io.TempFile;
-        'com.sun.star.io.TextInputStream': com.sun.star.io.TextInputStream;
-        'com.sun.star.io.TextOutputStream': com.sun.star.io.TextOutputStream;
-        'com.sun.star.java.JavaVirtualMachine': com.sun.star.java.JavaVirtualMachine;
-        'com.sun.star.lang.MultiServiceFactory': com.sun.star.lang.MultiServiceFactory;
-        'com.sun.star.lang.RegistryServiceManager': com.sun.star.lang.RegistryServiceManager;
-        'com.sun.star.lang.ServiceManager': com.sun.star.lang.ServiceManager;
-        'com.sun.star.linguistic2.ConversionDictionary': com.sun.star.linguistic2.ConversionDictionary;
-        'com.sun.star.linguistic2.ConversionDictionaryList': com.sun.star.linguistic2.ConversionDictionaryList;
-        'com.sun.star.linguistic2.Dictionary': com.sun.star.linguistic2.Dictionary;
-        'com.sun.star.linguistic2.DictionaryList': com.sun.star.linguistic2.DictionaryList;
-        'com.sun.star.linguistic2.HangulHanjaConversionDictionary': com.sun.star.linguistic2.HangulHanjaConversionDictionary;
-        'com.sun.star.linguistic2.Hyphenator': com.sun.star.linguistic2.Hyphenator;
-        'com.sun.star.linguistic2.LanguageGuessing': com.sun.star.linguistic2.LanguageGuessing;
-        'com.sun.star.linguistic2.LinguProperties': com.sun.star.linguistic2.LinguProperties;
-        'com.sun.star.linguistic2.LinguServiceManager': com.sun.star.linguistic2.LinguServiceManager;
-        'com.sun.star.linguistic2.Proofreader': com.sun.star.linguistic2.Proofreader;
-        'com.sun.star.linguistic2.ProofreadingIterator': com.sun.star.linguistic2.ProofreadingIterator;
-        'com.sun.star.linguistic2.SpellChecker': com.sun.star.linguistic2.SpellChecker;
-        'com.sun.star.linguistic2.Thesaurus': com.sun.star.linguistic2.Thesaurus;
-        'com.sun.star.loader.Dynamic': com.sun.star.loader.Dynamic;
-        'com.sun.star.loader.Java': com.sun.star.loader.Java;
-        'com.sun.star.loader.Java2': com.sun.star.loader.Java2;
-        'com.sun.star.loader.SharedLibrary': com.sun.star.loader.SharedLibrary;
-        'com.sun.star.logging.ConsoleHandler': com.sun.star.logging.ConsoleHandler;
-        'com.sun.star.logging.CsvLogFormatter': com.sun.star.logging.CsvLogFormatter;
-        'com.sun.star.logging.FileHandler': com.sun.star.logging.FileHandler;
-        'com.sun.star.logging.PlainTextFormatter': com.sun.star.logging.PlainTextFormatter;
-        'com.sun.star.logging.SimpleLogRing': com.sun.star.logging.SimpleLogRing;
-        'com.sun.star.mail.MailMessage': com.sun.star.mail.MailMessage;
-        'com.sun.star.mail.MailServiceProvider': com.sun.star.mail.MailServiceProvider;
-        'com.sun.star.media.Manager': com.sun.star.media.Manager;
-        'com.sun.star.mozilla.MenuProxy': com.sun.star.mozilla.MenuProxy;
-        'com.sun.star.mozilla.MenuProxyListener': com.sun.star.mozilla.MenuProxyListener;
-        'com.sun.star.mozilla.MozillaBootstrap': com.sun.star.mozilla.MozillaBootstrap;
-        'com.sun.star.office.Quickstart': com.sun.star.office.Quickstart;
-        'com.sun.star.packages.manifest.ManifestReader': com.sun.star.packages.manifest.ManifestReader;
-        'com.sun.star.packages.manifest.ManifestWriter': com.sun.star.packages.manifest.ManifestWriter;
-        'com.sun.star.packages.Package': com.sun.star.packages.Package;
-        'com.sun.star.packages.PackageFolder': com.sun.star.packages.PackageFolder;
-        'com.sun.star.packages.PackageFolderEnumeration': com.sun.star.packages.PackageFolderEnumeration;
-        'com.sun.star.packages.PackageStream': com.sun.star.packages.PackageStream;
-        'com.sun.star.packages.zip.ZipFileAccess': com.sun.star.packages.zip.ZipFileAccess;
-        'com.sun.star.presentation.ChartShape': com.sun.star.presentation.ChartShape;
-        'com.sun.star.presentation.CustomPresentation': com.sun.star.presentation.CustomPresentation;
-        'com.sun.star.presentation.CustomPresentationAccess': com.sun.star.presentation.CustomPresentationAccess;
-        'com.sun.star.presentation.DateTimeShape': com.sun.star.presentation.DateTimeShape;
-        'com.sun.star.presentation.DocumentSettings': com.sun.star.presentation.DocumentSettings;
-        'com.sun.star.presentation.DrawPage': com.sun.star.presentation.DrawPage;
-        'com.sun.star.presentation.FooterShape': com.sun.star.presentation.FooterShape;
-        'com.sun.star.presentation.GraphicObjectShape': com.sun.star.presentation.GraphicObjectShape;
-        'com.sun.star.presentation.HandoutShape': com.sun.star.presentation.HandoutShape;
-        'com.sun.star.presentation.HandoutView': com.sun.star.presentation.HandoutView;
-        'com.sun.star.presentation.HeaderShape': com.sun.star.presentation.HeaderShape;
-        'com.sun.star.presentation.NotesShape': com.sun.star.presentation.NotesShape;
-        'com.sun.star.presentation.NotesView': com.sun.star.presentation.NotesView;
-        'com.sun.star.presentation.OLE2Shape': com.sun.star.presentation.OLE2Shape;
-        'com.sun.star.presentation.OutlinerShape': com.sun.star.presentation.OutlinerShape;
-        'com.sun.star.presentation.OutlineView': com.sun.star.presentation.OutlineView;
-        'com.sun.star.presentation.PageShape': com.sun.star.presentation.PageShape;
-        'com.sun.star.presentation.Presentation': com.sun.star.presentation.Presentation;
-        'com.sun.star.presentation.Presentation2': com.sun.star.presentation.Presentation2;
-        'com.sun.star.presentation.PresentationDocument': com.sun.star.presentation.PresentationDocument;
-        'com.sun.star.presentation.PresentationView': com.sun.star.presentation.PresentationView;
-        'com.sun.star.presentation.PreviewView': com.sun.star.presentation.PreviewView;
-        'com.sun.star.presentation.Shape': com.sun.star.presentation.Shape;
-        'com.sun.star.presentation.SlideNumberShape': com.sun.star.presentation.SlideNumberShape;
-        'com.sun.star.presentation.SlideShow': com.sun.star.presentation.SlideShow;
-        'com.sun.star.presentation.SlidesView': com.sun.star.presentation.SlidesView;
-        'com.sun.star.presentation.SubtitleShape': com.sun.star.presentation.SubtitleShape;
-        'com.sun.star.presentation.textfield.DateTime': com.sun.star.presentation.textfield.DateTime;
-        'com.sun.star.presentation.textfield.Footer': com.sun.star.presentation.textfield.Footer;
-        'com.sun.star.presentation.textfield.Header': com.sun.star.presentation.textfield.Header;
-        'com.sun.star.presentation.TitleTextShape': com.sun.star.presentation.TitleTextShape;
-        'com.sun.star.presentation.TransitionFactory': com.sun.star.presentation.TransitionFactory;
-        'com.sun.star.rdf.BlankNode': com.sun.star.rdf.BlankNode;
-        'com.sun.star.rdf.Literal': com.sun.star.rdf.Literal;
-        'com.sun.star.rdf.Repository': com.sun.star.rdf.Repository;
-        'com.sun.star.rdf.URI': com.sun.star.rdf.URI;
-        'com.sun.star.reflection.CoreReflection': com.sun.star.reflection.CoreReflection;
-        'com.sun.star.reflection.ProxyFactory': com.sun.star.reflection.ProxyFactory;
-        'com.sun.star.reflection.TypeDescriptionManager': com.sun.star.reflection.TypeDescriptionManager;
-        'com.sun.star.reflection.TypeDescriptionProvider': com.sun.star.reflection.TypeDescriptionProvider;
-        'com.sun.star.registry.DefaultRegistry': com.sun.star.registry.DefaultRegistry;
-        'com.sun.star.registry.ImplementationRegistration': com.sun.star.registry.ImplementationRegistration;
-        'com.sun.star.registry.NestedRegistry': com.sun.star.registry.NestedRegistry;
-        'com.sun.star.registry.SimpleRegistry': com.sun.star.registry.SimpleRegistry;
-        'com.sun.star.rendering.BitmapCanvas': com.sun.star.rendering.BitmapCanvas;
-        'com.sun.star.rendering.Canvas': com.sun.star.rendering.Canvas;
-        'com.sun.star.rendering.CanvasFactory': com.sun.star.rendering.CanvasFactory;
-        'com.sun.star.rendering.MtfRenderer': com.sun.star.rendering.MtfRenderer;
-        'com.sun.star.report.FixedLine': com.sun.star.report.FixedLine;
-        'com.sun.star.report.FixedText': com.sun.star.report.FixedText;
-        'com.sun.star.report.FormatCondition': com.sun.star.report.FormatCondition;
-        'com.sun.star.report.FormattedField': com.sun.star.report.FormattedField;
-        'com.sun.star.report.Function': com.sun.star.report.Function;
-        'com.sun.star.report.Group': com.sun.star.report.Group;
-        'com.sun.star.report.Groups': com.sun.star.report.Groups;
-        'com.sun.star.report.ImageControl': com.sun.star.report.ImageControl;
-        'com.sun.star.report.inspection.DataProviderHandler': com.sun.star.report.inspection.DataProviderHandler;
-        'com.sun.star.report.inspection.DefaultComponentInspectorModel': com.sun.star.report.inspection.DefaultComponentInspectorModel;
-        'com.sun.star.report.inspection.ReportComponentHandler': com.sun.star.report.inspection.ReportComponentHandler;
-        'com.sun.star.report.ReportControlFormat': com.sun.star.report.ReportControlFormat;
-        'com.sun.star.report.ReportControlModel': com.sun.star.report.ReportControlModel;
-        'com.sun.star.report.ReportDefinition': com.sun.star.report.ReportDefinition;
-        'com.sun.star.report.ReportEngine': com.sun.star.report.ReportEngine;
-        'com.sun.star.report.Section': com.sun.star.report.Section;
-        'com.sun.star.report.Shape': com.sun.star.report.Shape;
-        'com.sun.star.resource.StringResource': com.sun.star.resource.StringResource;
-        'com.sun.star.resource.StringResourceWithLocation': com.sun.star.resource.StringResourceWithLocation;
-        'com.sun.star.resource.StringResourceWithStorage': com.sun.star.resource.StringResourceWithStorage;
-        'com.sun.star.scanner.ScannerManager': com.sun.star.scanner.ScannerManager;
-        'com.sun.star.script.AllListenerAdapter': com.sun.star.script.AllListenerAdapter;
-        'com.sun.star.script.browse.BrowseNode': com.sun.star.script.browse.BrowseNode;
-        'com.sun.star.script.browse.BrowseNodeFactory': com.sun.star.script.browse.BrowseNodeFactory;
-        'com.sun.star.script.Converter': com.sun.star.script.Converter;
-        'com.sun.star.script.DocumentDialogLibraryContainer': com.sun.star.script.DocumentDialogLibraryContainer;
-        'com.sun.star.script.DocumentScriptLibraryContainer': com.sun.star.script.DocumentScriptLibraryContainer;
-        'com.sun.star.script.Engine': com.sun.star.script.Engine;
-        'com.sun.star.script.Invocation': com.sun.star.script.Invocation;
-        'com.sun.star.script.InvocationAdapterFactory': com.sun.star.script.InvocationAdapterFactory;
-        'com.sun.star.script.JavaScript': com.sun.star.script.JavaScript;
-        'com.sun.star.script.provider.LanguageScriptProvider': com.sun.star.script.provider.LanguageScriptProvider;
-        'com.sun.star.script.provider.MasterScriptProvider': com.sun.star.script.provider.MasterScriptProvider;
-        'com.sun.star.script.provider.MasterScriptProviderFactory': com.sun.star.script.provider.MasterScriptProviderFactory;
-        'com.sun.star.script.provider.ScriptProvider': com.sun.star.script.provider.ScriptProvider;
-        'com.sun.star.script.provider.ScriptProviderForBasic': com.sun.star.script.provider.ScriptProviderForBasic;
-        'com.sun.star.script.provider.ScriptProviderForBeanShell': com.sun.star.script.provider.ScriptProviderForBeanShell;
-        'com.sun.star.script.provider.ScriptProviderForJava': com.sun.star.script.provider.ScriptProviderForJava;
-        'com.sun.star.script.provider.ScriptProviderForJavaScript': com.sun.star.script.provider.ScriptProviderForJavaScript;
-        'com.sun.star.script.provider.ScriptURIHelper': com.sun.star.script.provider.ScriptURIHelper;
-        'com.sun.star.script.vba.VBAEventProcessor': com.sun.star.script.vba.VBAEventProcessor;
-        'com.sun.star.script.vba.VBAMacroResolver': com.sun.star.script.vba.VBAMacroResolver;
-        'com.sun.star.script.vba.VBASpreadsheetEventProcessor': com.sun.star.script.vba.VBASpreadsheetEventProcessor;
-        'com.sun.star.script.vba.VBATextEventProcessor': com.sun.star.script.vba.VBATextEventProcessor;
-        'com.sun.star.sdb.application.CopyTableWizard': com.sun.star.sdb.application.CopyTableWizard;
-        'com.sun.star.sdb.application.DefaultViewController': com.sun.star.sdb.application.DefaultViewController;
-        'com.sun.star.sdb.application.MacroMigrationWizard': com.sun.star.sdb.application.MacroMigrationWizard;
-        'com.sun.star.sdb.CallableStatement': com.sun.star.sdb.CallableStatement;
-        'com.sun.star.sdb.Column': com.sun.star.sdb.Column;
-        'com.sun.star.sdb.ColumnDescriptorControl': com.sun.star.sdb.ColumnDescriptorControl;
-        'com.sun.star.sdb.ColumnDescriptorControlModel': com.sun.star.sdb.ColumnDescriptorControlModel;
-        'com.sun.star.sdb.ColumnSettings': com.sun.star.sdb.ColumnSettings;
-        'com.sun.star.sdb.CommandDefinition': com.sun.star.sdb.CommandDefinition;
-        'com.sun.star.sdb.Connection': com.sun.star.sdb.Connection;
-        'com.sun.star.sdb.ContentLoader': com.sun.star.sdb.ContentLoader;
-        'com.sun.star.sdb.DataAccessDescriptor': com.sun.star.sdb.DataAccessDescriptor;
-        'com.sun.star.sdb.DatabaseAccess': com.sun.star.sdb.DatabaseAccess;
-        'com.sun.star.sdb.DatabaseAccessConnection': com.sun.star.sdb.DatabaseAccessConnection;
-        'com.sun.star.sdb.DatabaseAccessContext': com.sun.star.sdb.DatabaseAccessContext;
-        'com.sun.star.sdb.DatabaseAccessDataSource': com.sun.star.sdb.DatabaseAccessDataSource;
-        'com.sun.star.sdb.DatabaseContext': com.sun.star.sdb.DatabaseContext;
-        'com.sun.star.sdb.DatabaseDocument': com.sun.star.sdb.DatabaseDocument;
-        'com.sun.star.sdb.DatabaseEnvironment': com.sun.star.sdb.DatabaseEnvironment;
-        'com.sun.star.sdb.DatabaseInteractionHandler': com.sun.star.sdb.DatabaseInteractionHandler;
-        'com.sun.star.sdb.DataColumn': com.sun.star.sdb.DataColumn;
-        'com.sun.star.sdb.DataSettings': com.sun.star.sdb.DataSettings;
-        'com.sun.star.sdb.DataSource': com.sun.star.sdb.DataSource;
-        'com.sun.star.sdb.DatasourceAdministrationDialog': com.sun.star.sdb.DatasourceAdministrationDialog;
-        'com.sun.star.sdb.DataSourceBrowser': com.sun.star.sdb.DataSourceBrowser;
-        'com.sun.star.sdb.DefinitionContainer': com.sun.star.sdb.DefinitionContainer;
-        'com.sun.star.sdb.DefinitionContent': com.sun.star.sdb.DefinitionContent;
-        'com.sun.star.sdb.Document': com.sun.star.sdb.Document;
-        'com.sun.star.sdb.DocumentContainer': com.sun.star.sdb.DocumentContainer;
-        'com.sun.star.sdb.DocumentDataSource': com.sun.star.sdb.DocumentDataSource;
-        'com.sun.star.sdb.DocumentDefinition': com.sun.star.sdb.DocumentDefinition;
-        'com.sun.star.sdb.ErrorMessageDialog': com.sun.star.sdb.ErrorMessageDialog;
-        'com.sun.star.sdb.FilterDialog': com.sun.star.sdb.FilterDialog;
-        'com.sun.star.sdb.Forms': com.sun.star.sdb.Forms;
-        'com.sun.star.sdb.InteractionHandler': com.sun.star.sdb.InteractionHandler;
-        'com.sun.star.sdb.OfficeDatabaseDocument': com.sun.star.sdb.OfficeDatabaseDocument;
-        'com.sun.star.sdb.OrderColumn': com.sun.star.sdb.OrderColumn;
-        'com.sun.star.sdb.OrderDialog': com.sun.star.sdb.OrderDialog;
-        'com.sun.star.sdb.PreparedStatement': com.sun.star.sdb.PreparedStatement;
-        'com.sun.star.sdb.Query': com.sun.star.sdb.Query;
-        'com.sun.star.sdb.QueryDefinition': com.sun.star.sdb.QueryDefinition;
-        'com.sun.star.sdb.QueryDescriptor': com.sun.star.sdb.QueryDescriptor;
-        'com.sun.star.sdb.QueryDesign': com.sun.star.sdb.QueryDesign;
-        'com.sun.star.sdb.RelationDesign': com.sun.star.sdb.RelationDesign;
-        'com.sun.star.sdb.ReportDesign': com.sun.star.sdb.ReportDesign;
-        'com.sun.star.sdb.Reports': com.sun.star.sdb.Reports;
-        'com.sun.star.sdb.ResultColumn': com.sun.star.sdb.ResultColumn;
-        'com.sun.star.sdb.ResultSet': com.sun.star.sdb.ResultSet;
-        'com.sun.star.sdb.RowSet': com.sun.star.sdb.RowSet;
-        'com.sun.star.sdb.SingleSelectQueryAnalyzer': com.sun.star.sdb.SingleSelectQueryAnalyzer;
-        'com.sun.star.sdb.SingleSelectQueryComposer': com.sun.star.sdb.SingleSelectQueryComposer;
-        'com.sun.star.sdb.SQLQueryComposer': com.sun.star.sdb.SQLQueryComposer;
-        'com.sun.star.sdb.Table': com.sun.star.sdb.Table;
-        'com.sun.star.sdb.TableDefinition': com.sun.star.sdb.TableDefinition;
-        'com.sun.star.sdb.TableDescriptor': com.sun.star.sdb.TableDescriptor;
-        'com.sun.star.sdb.TableDesign': com.sun.star.sdb.TableDesign;
-        'com.sun.star.sdb.TextConnectionSettings': com.sun.star.sdb.TextConnectionSettings;
-        'com.sun.star.sdb.tools.ConnectionTools': com.sun.star.sdb.tools.ConnectionTools;
-        'com.sun.star.sdbc.CallableStatement': com.sun.star.sdbc.CallableStatement;
-        'com.sun.star.sdbc.Connection': com.sun.star.sdbc.Connection;
-        'com.sun.star.sdbc.ConnectionPool': com.sun.star.sdbc.ConnectionPool;
-        'com.sun.star.sdbc.ConnectionProperties': com.sun.star.sdbc.ConnectionProperties;
-        'com.sun.star.sdbc.DBASEConnectionProperties': com.sun.star.sdbc.DBASEConnectionProperties;
-        'com.sun.star.sdbc.Driver': com.sun.star.sdbc.Driver;
-        'com.sun.star.sdbc.DriverManager': com.sun.star.sdbc.DriverManager;
-        'com.sun.star.sdbc.FILEConnectionProperties': com.sun.star.sdbc.FILEConnectionProperties;
-        'com.sun.star.sdbc.FLATConnectionProperties': com.sun.star.sdbc.FLATConnectionProperties;
-        'com.sun.star.sdbc.JDBCConnectionProperties': com.sun.star.sdbc.JDBCConnectionProperties;
-        'com.sun.star.sdbc.ODBCConnectionProperties': com.sun.star.sdbc.ODBCConnectionProperties;
-        'com.sun.star.sdbc.PreparedStatement': com.sun.star.sdbc.PreparedStatement;
-        'com.sun.star.sdbc.ResultSet': com.sun.star.sdbc.ResultSet;
-        'com.sun.star.sdbc.RowSet': com.sun.star.sdbc.RowSet;
-        'com.sun.star.sdbc.Statement': com.sun.star.sdbc.Statement;
-        'com.sun.star.sdbcx.Column': com.sun.star.sdbcx.Column;
-        'com.sun.star.sdbcx.ColumnDescriptor': com.sun.star.sdbcx.ColumnDescriptor;
-        'com.sun.star.sdbcx.Container': com.sun.star.sdbcx.Container;
-        'com.sun.star.sdbcx.DatabaseDefinition': com.sun.star.sdbcx.DatabaseDefinition;
-        'com.sun.star.sdbcx.Descriptor': com.sun.star.sdbcx.Descriptor;
-        'com.sun.star.sdbcx.Driver': com.sun.star.sdbcx.Driver;
-        'com.sun.star.sdbcx.Group': com.sun.star.sdbcx.Group;
-        'com.sun.star.sdbcx.GroupDescriptor': com.sun.star.sdbcx.GroupDescriptor;
-        'com.sun.star.sdbcx.Index': com.sun.star.sdbcx.Index;
-        'com.sun.star.sdbcx.IndexColumn': com.sun.star.sdbcx.IndexColumn;
-        'com.sun.star.sdbcx.IndexColumnDescriptor': com.sun.star.sdbcx.IndexColumnDescriptor;
-        'com.sun.star.sdbcx.IndexDescriptor': com.sun.star.sdbcx.IndexDescriptor;
-        'com.sun.star.sdbcx.Key': com.sun.star.sdbcx.Key;
-        'com.sun.star.sdbcx.KeyColumn': com.sun.star.sdbcx.KeyColumn;
-        'com.sun.star.sdbcx.KeyColumnDescriptor': com.sun.star.sdbcx.KeyColumnDescriptor;
-        'com.sun.star.sdbcx.KeyDescriptor': com.sun.star.sdbcx.KeyDescriptor;
-        'com.sun.star.sdbcx.PreparedStatement': com.sun.star.sdbcx.PreparedStatement;
-        'com.sun.star.sdbcx.ReferenceColumn': com.sun.star.sdbcx.ReferenceColumn;
-        'com.sun.star.sdbcx.ResultSet': com.sun.star.sdbcx.ResultSet;
-        'com.sun.star.sdbcx.Statement': com.sun.star.sdbcx.Statement;
-        'com.sun.star.sdbcx.Table': com.sun.star.sdbcx.Table;
-        'com.sun.star.sdbcx.TableDescriptor': com.sun.star.sdbcx.TableDescriptor;
-        'com.sun.star.sdbcx.User': com.sun.star.sdbcx.User;
-        'com.sun.star.sdbcx.UserDescriptor': com.sun.star.sdbcx.UserDescriptor;
-        'com.sun.star.sdbcx.View': com.sun.star.sdbcx.View;
-        'com.sun.star.sdbcx.ViewDescriptor': com.sun.star.sdbcx.ViewDescriptor;
-        'com.sun.star.security.AccessController': com.sun.star.security.AccessController;
-        'com.sun.star.security.CertificateContainer': com.sun.star.security.CertificateContainer;
-        'com.sun.star.security.DocumentDigitalSignatures': com.sun.star.security.DocumentDigitalSignatures;
-        'com.sun.star.security.Policy': com.sun.star.security.Policy;
-        'com.sun.star.security.SerialNumberAdapter': com.sun.star.security.SerialNumberAdapter;
-        'com.sun.star.setup.UpdateCheck': com.sun.star.setup.UpdateCheck;
-        'com.sun.star.setup.UpdateCheckConfig': com.sun.star.setup.UpdateCheckConfig;
-        'com.sun.star.sheet.AccessibleCell': com.sun.star.sheet.AccessibleCell;
-        'com.sun.star.sheet.AccessibleCsvCell': com.sun.star.sheet.AccessibleCsvCell;
-        'com.sun.star.sheet.AccessibleCsvRuler': com.sun.star.sheet.AccessibleCsvRuler;
-        'com.sun.star.sheet.AccessibleCsvTable': com.sun.star.sheet.AccessibleCsvTable;
-        'com.sun.star.sheet.AccessiblePageHeaderFooterAreasView': com.sun.star.sheet.AccessiblePageHeaderFooterAreasView;
-        'com.sun.star.sheet.AccessibleSpreadsheet': com.sun.star.sheet.AccessibleSpreadsheet;
-        'com.sun.star.sheet.AccessibleSpreadsheetDocumentView': com.sun.star.sheet.AccessibleSpreadsheetDocumentView;
-        'com.sun.star.sheet.AccessibleSpreadsheetPageView': com.sun.star.sheet.AccessibleSpreadsheetPageView;
-        'com.sun.star.sheet.AddIn': com.sun.star.sheet.AddIn;
-        'com.sun.star.sheet.CellAnnotation': com.sun.star.sheet.CellAnnotation;
-        'com.sun.star.sheet.CellAnnotations': com.sun.star.sheet.CellAnnotations;
-        'com.sun.star.sheet.CellAnnotationsEnumeration': com.sun.star.sheet.CellAnnotationsEnumeration;
-        'com.sun.star.sheet.CellAnnotationShape': com.sun.star.sheet.CellAnnotationShape;
-        'com.sun.star.sheet.CellAreaLink': com.sun.star.sheet.CellAreaLink;
-        'com.sun.star.sheet.CellAreaLinks': com.sun.star.sheet.CellAreaLinks;
-        'com.sun.star.sheet.CellAreaLinksEnumeration': com.sun.star.sheet.CellAreaLinksEnumeration;
-        'com.sun.star.sheet.CellFormatRanges': com.sun.star.sheet.CellFormatRanges;
-        'com.sun.star.sheet.CellFormatRangesEnumeration': com.sun.star.sheet.CellFormatRangesEnumeration;
-        'com.sun.star.sheet.Cells': com.sun.star.sheet.Cells;
-        'com.sun.star.sheet.CellsEnumeration': com.sun.star.sheet.CellsEnumeration;
-        'com.sun.star.sheet.ColorScale': com.sun.star.sheet.ColorScale;
-        'com.sun.star.sheet.ConditionalFormat': com.sun.star.sheet.ConditionalFormat;
-        'com.sun.star.sheet.ConditionFormatEntry': com.sun.star.sheet.ConditionFormatEntry;
-        'com.sun.star.sheet.ConsolidationDescriptor': com.sun.star.sheet.ConsolidationDescriptor;
-        'com.sun.star.sheet.DataBar': com.sun.star.sheet.DataBar;
-        'com.sun.star.sheet.DatabaseImportDescriptor': com.sun.star.sheet.DatabaseImportDescriptor;
-        'com.sun.star.sheet.DatabaseRange': com.sun.star.sheet.DatabaseRange;
-        'com.sun.star.sheet.DatabaseRanges': com.sun.star.sheet.DatabaseRanges;
-        'com.sun.star.sheet.DatabaseRangesEnumeration': com.sun.star.sheet.DatabaseRangesEnumeration;
-        'com.sun.star.sheet.DataPilotDescriptor': com.sun.star.sheet.DataPilotDescriptor;
-        'com.sun.star.sheet.DataPilotField': com.sun.star.sheet.DataPilotField;
-        'com.sun.star.sheet.DataPilotFieldGroup': com.sun.star.sheet.DataPilotFieldGroup;
-        'com.sun.star.sheet.DataPilotFieldGroupEnumeration': com.sun.star.sheet.DataPilotFieldGroupEnumeration;
-        'com.sun.star.sheet.DataPilotFieldGroupItem': com.sun.star.sheet.DataPilotFieldGroupItem;
-        'com.sun.star.sheet.DataPilotFieldGroups': com.sun.star.sheet.DataPilotFieldGroups;
-        'com.sun.star.sheet.DataPilotFieldGroupsEnumeration': com.sun.star.sheet.DataPilotFieldGroupsEnumeration;
-        'com.sun.star.sheet.DataPilotFields': com.sun.star.sheet.DataPilotFields;
-        'com.sun.star.sheet.DataPilotFieldsEnumeration': com.sun.star.sheet.DataPilotFieldsEnumeration;
-        'com.sun.star.sheet.DataPilotItem': com.sun.star.sheet.DataPilotItem;
-        'com.sun.star.sheet.DataPilotItems': com.sun.star.sheet.DataPilotItems;
-        'com.sun.star.sheet.DataPilotItemsEnumeration': com.sun.star.sheet.DataPilotItemsEnumeration;
-        'com.sun.star.sheet.DataPilotSource': com.sun.star.sheet.DataPilotSource;
-        'com.sun.star.sheet.DataPilotSourceDimension': com.sun.star.sheet.DataPilotSourceDimension;
-        'com.sun.star.sheet.DataPilotSourceDimensions': com.sun.star.sheet.DataPilotSourceDimensions;
-        'com.sun.star.sheet.DataPilotSourceHierarchies': com.sun.star.sheet.DataPilotSourceHierarchies;
-        'com.sun.star.sheet.DataPilotSourceHierarchy': com.sun.star.sheet.DataPilotSourceHierarchy;
-        'com.sun.star.sheet.DataPilotSourceLevel': com.sun.star.sheet.DataPilotSourceLevel;
-        'com.sun.star.sheet.DataPilotSourceLevels': com.sun.star.sheet.DataPilotSourceLevels;
-        'com.sun.star.sheet.DataPilotSourceMember': com.sun.star.sheet.DataPilotSourceMember;
-        'com.sun.star.sheet.DataPilotSourceMembers': com.sun.star.sheet.DataPilotSourceMembers;
-        'com.sun.star.sheet.DataPilotTable': com.sun.star.sheet.DataPilotTable;
-        'com.sun.star.sheet.DataPilotTables': com.sun.star.sheet.DataPilotTables;
-        'com.sun.star.sheet.DataPilotTablesEnumeration': com.sun.star.sheet.DataPilotTablesEnumeration;
-        'com.sun.star.sheet.DateCondition': com.sun.star.sheet.DateCondition;
-        'com.sun.star.sheet.DDELink': com.sun.star.sheet.DDELink;
-        'com.sun.star.sheet.DDELinks': com.sun.star.sheet.DDELinks;
-        'com.sun.star.sheet.DDELinksEnumeration': com.sun.star.sheet.DDELinksEnumeration;
-        'com.sun.star.sheet.DocumentSettings': com.sun.star.sheet.DocumentSettings;
-        'com.sun.star.sheet.ExternalDocLink': com.sun.star.sheet.ExternalDocLink;
-        'com.sun.star.sheet.ExternalDocLinks': com.sun.star.sheet.ExternalDocLinks;
-        'com.sun.star.sheet.ExternalSheetCache': com.sun.star.sheet.ExternalSheetCache;
-        'com.sun.star.sheet.FilterFormulaParser': com.sun.star.sheet.FilterFormulaParser;
-        'com.sun.star.sheet.FormulaOpCodeMapper': com.sun.star.sheet.FormulaOpCodeMapper;
-        'com.sun.star.sheet.FormulaParser': com.sun.star.sheet.FormulaParser;
-        'com.sun.star.sheet.FunctionAccess': com.sun.star.sheet.FunctionAccess;
-        'com.sun.star.sheet.FunctionDescription': com.sun.star.sheet.FunctionDescription;
-        'com.sun.star.sheet.FunctionDescriptionEnumeration': com.sun.star.sheet.FunctionDescriptionEnumeration;
-        'com.sun.star.sheet.FunctionDescriptions': com.sun.star.sheet.FunctionDescriptions;
-        'com.sun.star.sheet.GlobalSheetSettings': com.sun.star.sheet.GlobalSheetSettings;
-        'com.sun.star.sheet.HeaderFooterContent': com.sun.star.sheet.HeaderFooterContent;
-        'com.sun.star.sheet.IconSet': com.sun.star.sheet.IconSet;
-        'com.sun.star.sheet.LabelRange': com.sun.star.sheet.LabelRange;
-        'com.sun.star.sheet.LabelRanges': com.sun.star.sheet.LabelRanges;
-        'com.sun.star.sheet.LabelRangesEnumeration': com.sun.star.sheet.LabelRangesEnumeration;
-        'com.sun.star.sheet.NamedRange': com.sun.star.sheet.NamedRange;
-        'com.sun.star.sheet.NamedRanges': com.sun.star.sheet.NamedRanges;
-        'com.sun.star.sheet.NamedRangesEnumeration': com.sun.star.sheet.NamedRangesEnumeration;
-        'com.sun.star.sheet.RangeSelectionArguments': com.sun.star.sheet.RangeSelectionArguments;
-        'com.sun.star.sheet.RecentFunctions': com.sun.star.sheet.RecentFunctions;
-        'com.sun.star.sheet.Scenario': com.sun.star.sheet.Scenario;
-        'com.sun.star.sheet.Scenarios': com.sun.star.sheet.Scenarios;
-        'com.sun.star.sheet.ScenariosEnumeration': com.sun.star.sheet.ScenariosEnumeration;
-        'com.sun.star.sheet.Shape': com.sun.star.sheet.Shape;
-        'com.sun.star.sheet.SheetCell': com.sun.star.sheet.SheetCell;
-        'com.sun.star.sheet.SheetCellCursor': com.sun.star.sheet.SheetCellCursor;
-        'com.sun.star.sheet.SheetCellRange': com.sun.star.sheet.SheetCellRange;
-        'com.sun.star.sheet.SheetCellRanges': com.sun.star.sheet.SheetCellRanges;
-        'com.sun.star.sheet.SheetCellRangesEnumeration': com.sun.star.sheet.SheetCellRangesEnumeration;
-        'com.sun.star.sheet.SheetFilterDescriptor': com.sun.star.sheet.SheetFilterDescriptor;
-        'com.sun.star.sheet.SheetLink': com.sun.star.sheet.SheetLink;
-        'com.sun.star.sheet.SheetLinks': com.sun.star.sheet.SheetLinks;
-        'com.sun.star.sheet.SheetLinksEnumeration': com.sun.star.sheet.SheetLinksEnumeration;
-        'com.sun.star.sheet.SheetRangesQuery': com.sun.star.sheet.SheetRangesQuery;
-        'com.sun.star.sheet.SheetSortDescriptor': com.sun.star.sheet.SheetSortDescriptor;
-        'com.sun.star.sheet.SheetSortDescriptor2': com.sun.star.sheet.SheetSortDescriptor2;
-        'com.sun.star.sheet.Solver': com.sun.star.sheet.Solver;
-        'com.sun.star.sheet.Spreadsheet': com.sun.star.sheet.Spreadsheet;
-        'com.sun.star.sheet.SpreadsheetDocument': com.sun.star.sheet.SpreadsheetDocument;
-        'com.sun.star.sheet.SpreadsheetDocumentSettings': com.sun.star.sheet.SpreadsheetDocumentSettings;
-        'com.sun.star.sheet.SpreadsheetDrawPage': com.sun.star.sheet.SpreadsheetDrawPage;
-        'com.sun.star.sheet.Spreadsheets': com.sun.star.sheet.Spreadsheets;
-        'com.sun.star.sheet.SpreadsheetsEnumeration': com.sun.star.sheet.SpreadsheetsEnumeration;
-        'com.sun.star.sheet.SpreadsheetView': com.sun.star.sheet.SpreadsheetView;
-        'com.sun.star.sheet.SpreadsheetViewPane': com.sun.star.sheet.SpreadsheetViewPane;
-        'com.sun.star.sheet.SpreadsheetViewPanesEnumeration': com.sun.star.sheet.SpreadsheetViewPanesEnumeration;
-        'com.sun.star.sheet.SpreadsheetViewSettings': com.sun.star.sheet.SpreadsheetViewSettings;
-        'com.sun.star.sheet.SubTotalDescriptor': com.sun.star.sheet.SubTotalDescriptor;
-        'com.sun.star.sheet.SubTotalField': com.sun.star.sheet.SubTotalField;
-        'com.sun.star.sheet.SubTotalFieldsEnumeration': com.sun.star.sheet.SubTotalFieldsEnumeration;
-        'com.sun.star.sheet.TableAutoFormat': com.sun.star.sheet.TableAutoFormat;
-        'com.sun.star.sheet.TableAutoFormatEnumeration': com.sun.star.sheet.TableAutoFormatEnumeration;
-        'com.sun.star.sheet.TableAutoFormatField': com.sun.star.sheet.TableAutoFormatField;
-        'com.sun.star.sheet.TableAutoFormats': com.sun.star.sheet.TableAutoFormats;
-        'com.sun.star.sheet.TableAutoFormatsEnumeration': com.sun.star.sheet.TableAutoFormatsEnumeration;
-        'com.sun.star.sheet.TableCellStyle': com.sun.star.sheet.TableCellStyle;
-        'com.sun.star.sheet.TableConditionalEntry': com.sun.star.sheet.TableConditionalEntry;
-        'com.sun.star.sheet.TableConditionalEntryEnumeration': com.sun.star.sheet.TableConditionalEntryEnumeration;
-        'com.sun.star.sheet.TableConditionalFormat': com.sun.star.sheet.TableConditionalFormat;
-        'com.sun.star.sheet.TablePageStyle': com.sun.star.sheet.TablePageStyle;
-        'com.sun.star.sheet.TableValidation': com.sun.star.sheet.TableValidation;
-        'com.sun.star.sheet.UniqueCellFormatRanges': com.sun.star.sheet.UniqueCellFormatRanges;
-        'com.sun.star.sheet.UniqueCellFormatRangesEnumeration': com.sun.star.sheet.UniqueCellFormatRangesEnumeration;
-        'com.sun.star.sheet.VolatileResult': com.sun.star.sheet.VolatileResult;
-        'com.sun.star.smarttags.SmartTagAction': com.sun.star.smarttags.SmartTagAction;
-        'com.sun.star.smarttags.SmartTagRecognizer': com.sun.star.smarttags.SmartTagRecognizer;
-        'com.sun.star.style.CellStyle': com.sun.star.style.CellStyle;
-        'com.sun.star.style.CharacterProperties': com.sun.star.style.CharacterProperties;
-        'com.sun.star.style.CharacterPropertiesAsian': com.sun.star.style.CharacterPropertiesAsian;
-        'com.sun.star.style.CharacterPropertiesComplex': com.sun.star.style.CharacterPropertiesComplex;
-        'com.sun.star.style.CharacterStyle': com.sun.star.style.CharacterStyle;
-        'com.sun.star.style.NumberingAlignment': com.sun.star.style.NumberingAlignment;
-        'com.sun.star.style.NumberingLevel': com.sun.star.style.NumberingLevel;
-        'com.sun.star.style.NumberingRule': com.sun.star.style.NumberingRule;
-        'com.sun.star.style.PageProperties': com.sun.star.style.PageProperties;
-        'com.sun.star.style.PageStyle': com.sun.star.style.PageStyle;
-        'com.sun.star.style.ParagraphProperties': com.sun.star.style.ParagraphProperties;
-        'com.sun.star.style.ParagraphPropertiesAsian': com.sun.star.style.ParagraphPropertiesAsian;
-        'com.sun.star.style.ParagraphPropertiesComplex': com.sun.star.style.ParagraphPropertiesComplex;
-        'com.sun.star.style.ParagraphStyle': com.sun.star.style.ParagraphStyle;
-        'com.sun.star.style.Style': com.sun.star.style.Style;
-        'com.sun.star.style.StyleFamilies': com.sun.star.style.StyleFamilies;
-        'com.sun.star.style.StyleFamily': com.sun.star.style.StyleFamily;
-        'com.sun.star.system.SimpleCommandMail': com.sun.star.system.SimpleCommandMail;
-        'com.sun.star.system.SimpleSystemMail': com.sun.star.system.SimpleSystemMail;
-        'com.sun.star.system.SystemShellExecute': com.sun.star.system.SystemShellExecute;
-        'com.sun.star.table.AccessibleCellView': com.sun.star.table.AccessibleCellView;
-        'com.sun.star.table.AccessibleTableView': com.sun.star.table.AccessibleTableView;
-        'com.sun.star.table.Cell': com.sun.star.table.Cell;
-        'com.sun.star.table.CellCursor': com.sun.star.table.CellCursor;
-        'com.sun.star.table.CellProperties': com.sun.star.table.CellProperties;
-        'com.sun.star.table.CellRange': com.sun.star.table.CellRange;
-        'com.sun.star.table.CellRangeListSource': com.sun.star.table.CellRangeListSource;
-        'com.sun.star.table.CellValueBinding': com.sun.star.table.CellValueBinding;
-        'com.sun.star.table.ListPositionCellBinding': com.sun.star.table.ListPositionCellBinding;
-        'com.sun.star.table.TableChart': com.sun.star.table.TableChart;
-        'com.sun.star.table.TableCharts': com.sun.star.table.TableCharts;
-        'com.sun.star.table.TableChartsEnumeration': com.sun.star.table.TableChartsEnumeration;
-        'com.sun.star.table.TableColumn': com.sun.star.table.TableColumn;
-        'com.sun.star.table.TableColumns': com.sun.star.table.TableColumns;
-        'com.sun.star.table.TableColumnsEnumeration': com.sun.star.table.TableColumnsEnumeration;
-        'com.sun.star.table.TableRow': com.sun.star.table.TableRow;
-        'com.sun.star.table.TableRows': com.sun.star.table.TableRows;
-        'com.sun.star.table.TableRowsEnumeration': com.sun.star.table.TableRowsEnumeration;
-        'com.sun.star.table.TableSortDescriptor': com.sun.star.table.TableSortDescriptor;
-        'com.sun.star.table.TableSortDescriptor2': com.sun.star.table.TableSortDescriptor2;
-        'com.sun.star.task.AsyncJob': com.sun.star.task.AsyncJob;
-        'com.sun.star.task.InteractionHandler': com.sun.star.task.InteractionHandler;
-        'com.sun.star.task.InteractionRequestStringResolver': com.sun.star.task.InteractionRequestStringResolver;
-        'com.sun.star.task.Job': com.sun.star.task.Job;
-        'com.sun.star.task.JobExecutor': com.sun.star.task.JobExecutor;
-        'com.sun.star.task.PasswordContainer': com.sun.star.task.PasswordContainer;
-        'com.sun.star.task.PasswordContainerInteractionHandler': com.sun.star.task.PasswordContainerInteractionHandler;
-        'com.sun.star.task.StatusIndicatorFactory': com.sun.star.task.StatusIndicatorFactory;
-        'com.sun.star.text.AccessibleEndnoteView': com.sun.star.text.AccessibleEndnoteView;
-        'com.sun.star.text.AccessibleFootnoteView': com.sun.star.text.AccessibleFootnoteView;
-        'com.sun.star.text.AccessibleHeaderFooterView': com.sun.star.text.AccessibleHeaderFooterView;
-        'com.sun.star.text.AccessiblePageView': com.sun.star.text.AccessiblePageView;
-        'com.sun.star.text.AccessibleParagraphView': com.sun.star.text.AccessibleParagraphView;
-        'com.sun.star.text.AccessibleTextDocumentPageView': com.sun.star.text.AccessibleTextDocumentPageView;
-        'com.sun.star.text.AccessibleTextDocumentView': com.sun.star.text.AccessibleTextDocumentView;
-        'com.sun.star.text.AccessibleTextEmbeddedObject': com.sun.star.text.AccessibleTextEmbeddedObject;
-        'com.sun.star.text.AccessibleTextFrameView': com.sun.star.text.AccessibleTextFrameView;
-        'com.sun.star.text.AccessibleTextGraphicObject': com.sun.star.text.AccessibleTextGraphicObject;
-        'com.sun.star.text.AutoTextContainer': com.sun.star.text.AutoTextContainer;
-        'com.sun.star.text.AutoTextEntry': com.sun.star.text.AutoTextEntry;
-        'com.sun.star.text.AutoTextGroup': com.sun.star.text.AutoTextGroup;
-        'com.sun.star.text.BaseFrame': com.sun.star.text.BaseFrame;
-        'com.sun.star.text.BaseFrameProperties': com.sun.star.text.BaseFrameProperties;
-        'com.sun.star.text.BaseIndex': com.sun.star.text.BaseIndex;
-        'com.sun.star.text.BaseIndexMark': com.sun.star.text.BaseIndexMark;
-        'com.sun.star.text.Bibliography': com.sun.star.text.Bibliography;
-        'com.sun.star.text.Bookmark': com.sun.star.text.Bookmark;
-        'com.sun.star.text.Bookmarks': com.sun.star.text.Bookmarks;
-        'com.sun.star.text.Cell': com.sun.star.text.Cell;
-        'com.sun.star.text.CellProperties': com.sun.star.text.CellProperties;
-        'com.sun.star.text.CellRange': com.sun.star.text.CellRange;
-        'com.sun.star.text.ChainedTextFrame': com.sun.star.text.ChainedTextFrame;
-        'com.sun.star.text.ChapterNumberingRule': com.sun.star.text.ChapterNumberingRule;
-        'com.sun.star.text.ContentIndex': com.sun.star.text.ContentIndex;
-        'com.sun.star.text.ContentIndexMark': com.sun.star.text.ContentIndexMark;
-        'com.sun.star.text.DefaultNumberingProvider': com.sun.star.text.DefaultNumberingProvider;
-        'com.sun.star.text.Defaults': com.sun.star.text.Defaults;
-        'com.sun.star.text.DependentTextField': com.sun.star.text.DependentTextField;
-        'com.sun.star.text.DocumentIndex': com.sun.star.text.DocumentIndex;
-        'com.sun.star.text.DocumentIndexes': com.sun.star.text.DocumentIndexes;
-        'com.sun.star.text.DocumentIndexLevelFormat': com.sun.star.text.DocumentIndexLevelFormat;
-        'com.sun.star.text.DocumentIndexMark': com.sun.star.text.DocumentIndexMark;
-        'com.sun.star.text.DocumentIndexMarkAsian': com.sun.star.text.DocumentIndexMarkAsian;
-        'com.sun.star.text.DocumentIndexParagraphStyles': com.sun.star.text.DocumentIndexParagraphStyles;
-        'com.sun.star.text.DocumentSettings': com.sun.star.text.DocumentSettings;
-        'com.sun.star.text.Endnote': com.sun.star.text.Endnote;
-        'com.sun.star.text.EndnoteSettings': com.sun.star.text.EndnoteSettings;
-        'com.sun.star.text.fieldmaster.Bibliography': com.sun.star.text.fieldmaster.Bibliography;
-        'com.sun.star.text.fieldmaster.Database': com.sun.star.text.fieldmaster.Database;
-        'com.sun.star.text.fieldmaster.DDE': com.sun.star.text.fieldmaster.DDE;
-        'com.sun.star.text.fieldmaster.SetExpression': com.sun.star.text.fieldmaster.SetExpression;
-        'com.sun.star.text.fieldmaster.User': com.sun.star.text.fieldmaster.User;
-        'com.sun.star.text.Footnote': com.sun.star.text.Footnote;
-        'com.sun.star.text.Footnotes': com.sun.star.text.Footnotes;
-        'com.sun.star.text.FootnoteSettings': com.sun.star.text.FootnoteSettings;
-        'com.sun.star.text.GenericTextDocument': com.sun.star.text.GenericTextDocument;
-        'com.sun.star.text.GlobalDocument': com.sun.star.text.GlobalDocument;
-        'com.sun.star.text.GlobalSettings': com.sun.star.text.GlobalSettings;
-        'com.sun.star.text.IllustrationsIndex': com.sun.star.text.IllustrationsIndex;
-        'com.sun.star.text.InContentMetadata': com.sun.star.text.InContentMetadata;
-        'com.sun.star.text.LineNumberingProperties': com.sun.star.text.LineNumberingProperties;
-        'com.sun.star.text.MailMerge': com.sun.star.text.MailMerge;
-        'com.sun.star.text.ModuleDispatcher': com.sun.star.text.ModuleDispatcher;
-        'com.sun.star.text.NumberingLevel': com.sun.star.text.NumberingLevel;
-        'com.sun.star.text.NumberingRules': com.sun.star.text.NumberingRules;
-        'com.sun.star.text.NumberingStyle': com.sun.star.text.NumberingStyle;
-        'com.sun.star.text.ObjectIndex': com.sun.star.text.ObjectIndex;
-        'com.sun.star.text.PageFootnoteInfo': com.sun.star.text.PageFootnoteInfo;
-        'com.sun.star.text.PagePrintSettings': com.sun.star.text.PagePrintSettings;
-        'com.sun.star.text.Paragraph': com.sun.star.text.Paragraph;
-        'com.sun.star.text.ParagraphEnumeration': com.sun.star.text.ParagraphEnumeration;
-        'com.sun.star.text.PrintSettings': com.sun.star.text.PrintSettings;
-        'com.sun.star.text.RedlinePortion': com.sun.star.text.RedlinePortion;
-        'com.sun.star.text.ReferenceMark': com.sun.star.text.ReferenceMark;
-        'com.sun.star.text.ReferenceMarks': com.sun.star.text.ReferenceMarks;
-        'com.sun.star.text.Shape': com.sun.star.text.Shape;
-        'com.sun.star.text.TableColumns': com.sun.star.text.TableColumns;
-        'com.sun.star.text.TableIndex': com.sun.star.text.TableIndex;
-        'com.sun.star.text.TableRows': com.sun.star.text.TableRows;
-        'com.sun.star.text.Text': com.sun.star.text.Text;
-        'com.sun.star.text.TextColumns': com.sun.star.text.TextColumns;
-        'com.sun.star.text.TextContent': com.sun.star.text.TextContent;
-        'com.sun.star.text.TextContentCollection': com.sun.star.text.TextContentCollection;
-        'com.sun.star.text.TextCursor': com.sun.star.text.TextCursor;
-        'com.sun.star.text.TextDocument': com.sun.star.text.TextDocument;
-        'com.sun.star.text.TextDocumentView': com.sun.star.text.TextDocumentView;
-        'com.sun.star.text.TextEmbeddedObject': com.sun.star.text.TextEmbeddedObject;
-        'com.sun.star.text.TextEmbeddedObjects': com.sun.star.text.TextEmbeddedObjects;
-        'com.sun.star.text.TextField': com.sun.star.text.TextField;
-        'com.sun.star.text.textfield.Annotation': com.sun.star.text.textfield.Annotation;
-        'com.sun.star.text.textfield.Author': com.sun.star.text.textfield.Author;
-        'com.sun.star.text.textfield.Bibliography': com.sun.star.text.textfield.Bibliography;
-        'com.sun.star.text.textfield.Chapter': com.sun.star.text.textfield.Chapter;
-        'com.sun.star.text.textfield.CharacterCount': com.sun.star.text.textfield.CharacterCount;
-        'com.sun.star.text.textfield.CombinedCharacters': com.sun.star.text.textfield.CombinedCharacters;
-        'com.sun.star.text.textfield.ConditionalText': com.sun.star.text.textfield.ConditionalText;
-        'com.sun.star.text.textfield.Database': com.sun.star.text.textfield.Database;
-        'com.sun.star.text.textfield.DatabaseName': com.sun.star.text.textfield.DatabaseName;
-        'com.sun.star.text.textfield.DatabaseNextSet': com.sun.star.text.textfield.DatabaseNextSet;
-        'com.sun.star.text.textfield.DatabaseNumberOfSet': com.sun.star.text.textfield.DatabaseNumberOfSet;
-        'com.sun.star.text.textfield.DatabaseSetNumber': com.sun.star.text.textfield.DatabaseSetNumber;
-        'com.sun.star.text.textfield.DateTime': com.sun.star.text.textfield.DateTime;
-        'com.sun.star.text.textfield.DDE': com.sun.star.text.textfield.DDE;
-        'com.sun.star.text.textfield.docinfo.ChangeAuthor': com.sun.star.text.textfield.docinfo.ChangeAuthor;
-        'com.sun.star.text.textfield.docinfo.ChangeDateTime': com.sun.star.text.textfield.docinfo.ChangeDateTime;
-        'com.sun.star.text.textfield.docinfo.CreateAuthor': com.sun.star.text.textfield.docinfo.CreateAuthor;
-        'com.sun.star.text.textfield.docinfo.CreateDateTime': com.sun.star.text.textfield.docinfo.CreateDateTime;
-        'com.sun.star.text.textfield.docinfo.Custom': com.sun.star.text.textfield.docinfo.Custom;
-        'com.sun.star.text.textfield.docinfo.Description': com.sun.star.text.textfield.docinfo.Description;
-        'com.sun.star.text.textfield.docinfo.EditTime': com.sun.star.text.textfield.docinfo.EditTime;
-        'com.sun.star.text.textfield.docinfo.Keywords': com.sun.star.text.textfield.docinfo.Keywords;
-        'com.sun.star.text.textfield.docinfo.PrintAuthor': com.sun.star.text.textfield.docinfo.PrintAuthor;
-        'com.sun.star.text.textfield.docinfo.PrintDateTime': com.sun.star.text.textfield.docinfo.PrintDateTime;
-        'com.sun.star.text.textfield.docinfo.Revision': com.sun.star.text.textfield.docinfo.Revision;
-        'com.sun.star.text.textfield.docinfo.Subject': com.sun.star.text.textfield.docinfo.Subject;
-        'com.sun.star.text.textfield.docinfo.Title': com.sun.star.text.textfield.docinfo.Title;
-        'com.sun.star.text.textfield.DropDown': com.sun.star.text.textfield.DropDown;
-        'com.sun.star.text.textfield.EmbeddedObjectCount': com.sun.star.text.textfield.EmbeddedObjectCount;
-        'com.sun.star.text.textfield.ExtendedUser': com.sun.star.text.textfield.ExtendedUser;
-        'com.sun.star.text.textfield.FileName': com.sun.star.text.textfield.FileName;
-        'com.sun.star.text.textfield.GetExpression': com.sun.star.text.textfield.GetExpression;
-        'com.sun.star.text.textfield.GetReference': com.sun.star.text.textfield.GetReference;
-        'com.sun.star.text.textfield.GraphicObjectCount': com.sun.star.text.textfield.GraphicObjectCount;
-        'com.sun.star.text.textfield.HiddenParagraph': com.sun.star.text.textfield.HiddenParagraph;
-        'com.sun.star.text.textfield.HiddenText': com.sun.star.text.textfield.HiddenText;
-        'com.sun.star.text.textfield.Input': com.sun.star.text.textfield.Input;
-        'com.sun.star.text.textfield.InputUser': com.sun.star.text.textfield.InputUser;
-        'com.sun.star.text.textfield.JumpEdit': com.sun.star.text.textfield.JumpEdit;
-        'com.sun.star.text.textfield.Macro': com.sun.star.text.textfield.Macro;
-        'com.sun.star.text.textfield.MetadataField': com.sun.star.text.textfield.MetadataField;
-        'com.sun.star.text.textfield.PageCount': com.sun.star.text.textfield.PageCount;
-        'com.sun.star.text.textfield.PageNumber': com.sun.star.text.textfield.PageNumber;
-        'com.sun.star.text.textfield.ParagraphCount': com.sun.star.text.textfield.ParagraphCount;
-        'com.sun.star.text.textfield.ReferencePageGet': com.sun.star.text.textfield.ReferencePageGet;
-        'com.sun.star.text.textfield.ReferencePageSet': com.sun.star.text.textfield.ReferencePageSet;
-        'com.sun.star.text.textfield.Script': com.sun.star.text.textfield.Script;
-        'com.sun.star.text.textfield.SetExpression': com.sun.star.text.textfield.SetExpression;
-        'com.sun.star.text.textfield.TableCount': com.sun.star.text.textfield.TableCount;
-        'com.sun.star.text.textfield.TableFormula': com.sun.star.text.textfield.TableFormula;
-        'com.sun.star.text.textfield.TemplateName': com.sun.star.text.textfield.TemplateName;
-        'com.sun.star.text.textfield.URL': com.sun.star.text.textfield.URL;
-        'com.sun.star.text.textfield.User': com.sun.star.text.textfield.User;
-        'com.sun.star.text.textfield.WordCount': com.sun.star.text.textfield.WordCount;
-        'com.sun.star.text.TextFieldEnumeration': com.sun.star.text.TextFieldEnumeration;
-        'com.sun.star.text.TextFieldMaster': com.sun.star.text.TextFieldMaster;
-        'com.sun.star.text.TextFieldMasters': com.sun.star.text.TextFieldMasters;
-        'com.sun.star.text.TextFields': com.sun.star.text.TextFields;
-        'com.sun.star.text.TextFrame': com.sun.star.text.TextFrame;
-        'com.sun.star.text.TextFrames': com.sun.star.text.TextFrames;
-        'com.sun.star.text.TextGraphicObject': com.sun.star.text.TextGraphicObject;
-        'com.sun.star.text.TextGraphicObjects': com.sun.star.text.TextGraphicObjects;
-        'com.sun.star.text.TextLayoutCursor': com.sun.star.text.TextLayoutCursor;
-        'com.sun.star.text.TextPageStyle': com.sun.star.text.TextPageStyle;
-        'com.sun.star.text.TextPortion': com.sun.star.text.TextPortion;
-        'com.sun.star.text.TextPortionEnumeration': com.sun.star.text.TextPortionEnumeration;
-        'com.sun.star.text.TextRange': com.sun.star.text.TextRange;
-        'com.sun.star.text.TextRangeContentProperties': com.sun.star.text.TextRangeContentProperties;
-        'com.sun.star.text.TextRanges': com.sun.star.text.TextRanges;
-        'com.sun.star.text.TextSection': com.sun.star.text.TextSection;
-        'com.sun.star.text.TextSections': com.sun.star.text.TextSections;
-        'com.sun.star.text.TextSortable': com.sun.star.text.TextSortable;
-        'com.sun.star.text.TextSortDescriptor': com.sun.star.text.TextSortDescriptor;
-        'com.sun.star.text.TextSortDescriptor2': com.sun.star.text.TextSortDescriptor2;
-        'com.sun.star.text.TextTable': com.sun.star.text.TextTable;
-        'com.sun.star.text.TextTableCursor': com.sun.star.text.TextTableCursor;
-        'com.sun.star.text.TextTableRow': com.sun.star.text.TextTableRow;
-        'com.sun.star.text.TextTables': com.sun.star.text.TextTables;
-        'com.sun.star.text.TextViewCursor': com.sun.star.text.TextViewCursor;
-        'com.sun.star.text.UserDefinedIndex': com.sun.star.text.UserDefinedIndex;
-        'com.sun.star.text.UserIndex': com.sun.star.text.UserIndex;
-        'com.sun.star.text.UserIndexMark': com.sun.star.text.UserIndexMark;
-        'com.sun.star.text.ViewSettings': com.sun.star.text.ViewSettings;
-        'com.sun.star.text.WebDocument': com.sun.star.text.WebDocument;
-        'com.sun.star.ucb.AnyCompareFactory': com.sun.star.ucb.AnyCompareFactory;
-        'com.sun.star.ucb.CachedContentResultSet': com.sun.star.ucb.CachedContentResultSet;
-        'com.sun.star.ucb.CachedContentResultSetFactory': com.sun.star.ucb.CachedContentResultSetFactory;
-        'com.sun.star.ucb.CachedContentResultSetStub': com.sun.star.ucb.CachedContentResultSetStub;
-        'com.sun.star.ucb.CachedContentResultSetStubFactory': com.sun.star.ucb.CachedContentResultSetStubFactory;
-        'com.sun.star.ucb.CachedDynamicResultSet': com.sun.star.ucb.CachedDynamicResultSet;
-        'com.sun.star.ucb.CachedDynamicResultSetFactory': com.sun.star.ucb.CachedDynamicResultSetFactory;
-        'com.sun.star.ucb.CachedDynamicResultSetStub': com.sun.star.ucb.CachedDynamicResultSetStub;
-        'com.sun.star.ucb.CachedDynamicResultSetStubFactory': com.sun.star.ucb.CachedDynamicResultSetStubFactory;
-        'com.sun.star.ucb.CmisContentProvider': com.sun.star.ucb.CmisContentProvider;
-        'com.sun.star.ucb.CommandEnvironment': com.sun.star.ucb.CommandEnvironment;
-        'com.sun.star.ucb.Content': com.sun.star.ucb.Content;
-        'com.sun.star.ucb.ContentProvider': com.sun.star.ucb.ContentProvider;
-        'com.sun.star.ucb.ContentProviderProxy': com.sun.star.ucb.ContentProviderProxy;
-        'com.sun.star.ucb.ContentProviderProxyFactory': com.sun.star.ucb.ContentProviderProxyFactory;
-        'com.sun.star.ucb.ContentResultSet': com.sun.star.ucb.ContentResultSet;
-        'com.sun.star.ucb.ContentTransmitter': com.sun.star.ucb.ContentTransmitter;
-        'com.sun.star.ucb.DefaultHierarchyDataSource': com.sun.star.ucb.DefaultHierarchyDataSource;
-        'com.sun.star.ucb.DynamicResultSet': com.sun.star.ucb.DynamicResultSet;
-        'com.sun.star.ucb.ExpandContentProvider': com.sun.star.ucb.ExpandContentProvider;
-        'com.sun.star.ucb.FileContent': com.sun.star.ucb.FileContent;
-        'com.sun.star.ucb.FileContentProvider': com.sun.star.ucb.FileContentProvider;
-        'com.sun.star.ucb.FTPContent': com.sun.star.ucb.FTPContent;
-        'com.sun.star.ucb.FTPContentProvider': com.sun.star.ucb.FTPContentProvider;
-        'com.sun.star.ucb.GIOContentProvider': com.sun.star.ucb.GIOContentProvider;
-        'com.sun.star.ucb.GnomeVFSContentProvider': com.sun.star.ucb.GnomeVFSContentProvider;
-        'com.sun.star.ucb.GnomeVFSDocumentContent': com.sun.star.ucb.GnomeVFSDocumentContent;
-        'com.sun.star.ucb.GnomeVFSFolderContent': com.sun.star.ucb.GnomeVFSFolderContent;
-        'com.sun.star.ucb.HelpContent': com.sun.star.ucb.HelpContent;
-        'com.sun.star.ucb.HelpContentProvider': com.sun.star.ucb.HelpContentProvider;
-        'com.sun.star.ucb.HierarchyContentProvider': com.sun.star.ucb.HierarchyContentProvider;
-        'com.sun.star.ucb.HierarchyDataReadAccess': com.sun.star.ucb.HierarchyDataReadAccess;
-        'com.sun.star.ucb.HierarchyDataReadWriteAccess': com.sun.star.ucb.HierarchyDataReadWriteAccess;
-        'com.sun.star.ucb.HierarchyDataSource': com.sun.star.ucb.HierarchyDataSource;
-        'com.sun.star.ucb.HierarchyFolderContent': com.sun.star.ucb.HierarchyFolderContent;
-        'com.sun.star.ucb.HierarchyLinkContent': com.sun.star.ucb.HierarchyLinkContent;
-        'com.sun.star.ucb.HierarchyRootFolderContent': com.sun.star.ucb.HierarchyRootFolderContent;
-        'com.sun.star.ucb.ODMAContent': com.sun.star.ucb.ODMAContent;
-        'com.sun.star.ucb.ODMAContentProvider': com.sun.star.ucb.ODMAContentProvider;
-        'com.sun.star.ucb.PackageContentProvider': com.sun.star.ucb.PackageContentProvider;
-        'com.sun.star.ucb.PackageFolderContent': com.sun.star.ucb.PackageFolderContent;
-        'com.sun.star.ucb.PackageStreamContent': com.sun.star.ucb.PackageStreamContent;
-        'com.sun.star.ucb.PersistentPropertySet': com.sun.star.ucb.PersistentPropertySet;
-        'com.sun.star.ucb.PropertiesManager': com.sun.star.ucb.PropertiesManager;
-        'com.sun.star.ucb.PropertySetRegistry': com.sun.star.ucb.PropertySetRegistry;
-        'com.sun.star.ucb.RemoteAccessContentProvider': com.sun.star.ucb.RemoteAccessContentProvider;
-        'com.sun.star.ucb.RemoteContentProviderAcceptor': com.sun.star.ucb.RemoteContentProviderAcceptor;
-        'com.sun.star.ucb.RemoteProxyContentProvider': com.sun.star.ucb.RemoteProxyContentProvider;
-        'com.sun.star.ucb.SimpleFileAccess': com.sun.star.ucb.SimpleFileAccess;
-        'com.sun.star.ucb.SortedDynamicResultSetFactory': com.sun.star.ucb.SortedDynamicResultSetFactory;
-        'com.sun.star.ucb.Store': com.sun.star.ucb.Store;
-        'com.sun.star.ucb.TransientDocumentsContentProvider': com.sun.star.ucb.TransientDocumentsContentProvider;
-        'com.sun.star.ucb.TransientDocumentsDocumentContent': com.sun.star.ucb.TransientDocumentsDocumentContent;
-        'com.sun.star.ucb.TransientDocumentsFolderContent': com.sun.star.ucb.TransientDocumentsFolderContent;
-        'com.sun.star.ucb.TransientDocumentsRootContent': com.sun.star.ucb.TransientDocumentsRootContent;
-        'com.sun.star.ucb.TransientDocumentsStreamContent': com.sun.star.ucb.TransientDocumentsStreamContent;
-        'com.sun.star.ucb.UniversalContentBroker': com.sun.star.ucb.UniversalContentBroker;
-        'com.sun.star.ucb.WebDAVContentProvider': com.sun.star.ucb.WebDAVContentProvider;
-        'com.sun.star.ucb.WebDAVDocumentContent': com.sun.star.ucb.WebDAVDocumentContent;
-        'com.sun.star.ucb.WebDAVFolderContent': com.sun.star.ucb.WebDAVFolderContent;
-        'com.sun.star.ui.ActionTrigger': com.sun.star.ui.ActionTrigger;
-        'com.sun.star.ui.ActionTriggerContainer': com.sun.star.ui.ActionTriggerContainer;
-        'com.sun.star.ui.ActionTriggerSeparator': com.sun.star.ui.ActionTriggerSeparator;
-        'com.sun.star.ui.AddressBookSourceDialog': com.sun.star.ui.AddressBookSourceDialog;
-        'com.sun.star.ui.ConfigurableUIElement': com.sun.star.ui.ConfigurableUIElement;
-        'com.sun.star.ui.dialogs.AddressBookSourcePilot': com.sun.star.ui.dialogs.AddressBookSourcePilot;
-        'com.sun.star.ui.dialogs.FilePicker': com.sun.star.ui.dialogs.FilePicker;
-        'com.sun.star.ui.dialogs.FilterOptionsDialog': com.sun.star.ui.dialogs.FilterOptionsDialog;
-        'com.sun.star.ui.dialogs.FolderPicker': com.sun.star.ui.dialogs.FolderPicker;
-        'com.sun.star.ui.dialogs.Wizard': com.sun.star.ui.dialogs.Wizard;
-        'com.sun.star.ui.dialogs.XSLTFilterDialog': com.sun.star.ui.dialogs.XSLTFilterDialog;
-        'com.sun.star.ui.DocumentAcceleratorConfiguration': com.sun.star.ui.DocumentAcceleratorConfiguration;
-        'com.sun.star.ui.GlobalAcceleratorConfiguration': com.sun.star.ui.GlobalAcceleratorConfiguration;
-        'com.sun.star.ui.ImageManager': com.sun.star.ui.ImageManager;
-        'com.sun.star.ui.ItemDescriptor': com.sun.star.ui.ItemDescriptor;
-        'com.sun.star.ui.ModuleAcceleratorConfiguration': com.sun.star.ui.ModuleAcceleratorConfiguration;
-        'com.sun.star.ui.ModuleUICategoryDescription': com.sun.star.ui.ModuleUICategoryDescription;
-        'com.sun.star.ui.ModuleUICommandDescription': com.sun.star.ui.ModuleUICommandDescription;
-        'com.sun.star.ui.ModuleUIConfigurationManager': com.sun.star.ui.ModuleUIConfigurationManager;
-        'com.sun.star.ui.ModuleWindowStateConfiguration': com.sun.star.ui.ModuleWindowStateConfiguration;
-        'com.sun.star.ui.test.UITest': com.sun.star.ui.test.UITest;
-        'com.sun.star.ui.UICategoryDescription': com.sun.star.ui.UICategoryDescription;
-        'com.sun.star.ui.UIConfigurationManager': com.sun.star.ui.UIConfigurationManager;
-        'com.sun.star.ui.UIElement': com.sun.star.ui.UIElement;
-        'com.sun.star.ui.UIElementFactory': com.sun.star.ui.UIElementFactory;
-        'com.sun.star.ui.UIElementFactoryManager': com.sun.star.ui.UIElementFactoryManager;
-        'com.sun.star.ui.UIElementSettings': com.sun.star.ui.UIElementSettings;
-        'com.sun.star.ui.WindowContentFactory': com.sun.star.ui.WindowContentFactory;
-        'com.sun.star.ui.WindowContentFactoryManager': com.sun.star.ui.WindowContentFactoryManager;
-        'com.sun.star.ui.WindowStateConfiguration': com.sun.star.ui.WindowStateConfiguration;
-        'com.sun.star.uno.NamingService': com.sun.star.uno.NamingService;
-        'com.sun.star.uri.ExternalUriReferenceTranslator': com.sun.star.uri.ExternalUriReferenceTranslator;
-        'com.sun.star.uri.UriReferenceFactory': com.sun.star.uri.UriReferenceFactory;
-        'com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTexpand': com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTexpand;
-        'com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTscript': com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTscript;
-        'com.sun.star.uri.VndSunStarPkgUrlReferenceFactory': com.sun.star.uri.VndSunStarPkgUrlReferenceFactory;
-        'com.sun.star.util.BootstrapMacroExpander': com.sun.star.util.BootstrapMacroExpander;
-        'com.sun.star.util.JobManager': com.sun.star.util.JobManager;
-        'com.sun.star.util.MacroExpander': com.sun.star.util.MacroExpander;
-        'com.sun.star.util.NumberFormatProperties': com.sun.star.util.NumberFormatProperties;
-        'com.sun.star.util.NumberFormats': com.sun.star.util.NumberFormats;
-        'com.sun.star.util.NumberFormatSettings': com.sun.star.util.NumberFormatSettings;
-        'com.sun.star.util.NumberFormatsSupplier': com.sun.star.util.NumberFormatsSupplier;
-        'com.sun.star.util.NumberFormatter': com.sun.star.util.NumberFormatter;
-        'com.sun.star.util.OfficeInstallationDirectories': com.sun.star.util.OfficeInstallationDirectories;
-        'com.sun.star.util.PathSettings': com.sun.star.util.PathSettings;
-        'com.sun.star.util.PathSubstitution': com.sun.star.util.PathSubstitution;
-        'com.sun.star.util.ReplaceDescriptor': com.sun.star.util.ReplaceDescriptor;
-        'com.sun.star.util.SearchDescriptor': com.sun.star.util.SearchDescriptor;
-        'com.sun.star.util.Sortable': com.sun.star.util.Sortable;
-        'com.sun.star.util.SortDescriptor': com.sun.star.util.SortDescriptor;
-        'com.sun.star.util.SortDescriptor2': com.sun.star.util.SortDescriptor2;
-        'com.sun.star.util.TextSearch': com.sun.star.util.TextSearch;
-        'com.sun.star.util.TextSearch2': com.sun.star.util.TextSearch2;
-        'com.sun.star.util.UriAbbreviation': com.sun.star.util.UriAbbreviation;
-        'com.sun.star.util.URLTransformer': com.sun.star.util.URLTransformer;
-        'com.sun.star.view.OfficeDocumentView': com.sun.star.view.OfficeDocumentView;
-        'com.sun.star.view.PrinterDescriptor': com.sun.star.view.PrinterDescriptor;
-        'com.sun.star.view.PrintOptions': com.sun.star.view.PrintOptions;
-        'com.sun.star.view.PrintSettings': com.sun.star.view.PrintSettings;
-        'com.sun.star.view.RenderDescriptor': com.sun.star.view.RenderDescriptor;
-        'com.sun.star.view.RenderOptions': com.sun.star.view.RenderOptions;
-        'com.sun.star.view.ViewSettings': com.sun.star.view.ViewSettings;
-        'com.sun.star.xforms.Binding': com.sun.star.xforms.Binding;
-        'com.sun.star.xforms.Model': com.sun.star.xforms.Model;
-        'com.sun.star.xforms.XForms': com.sun.star.xforms.XForms;
-        'com.sun.star.xml.AttributeContainer': com.sun.star.xml.AttributeContainer;
-        'com.sun.star.xml.crypto.NSSInitializer': com.sun.star.xml.crypto.NSSInitializer;
-        'com.sun.star.xml.crypto.sax.Decryptor': com.sun.star.xml.crypto.sax.Decryptor;
-        'com.sun.star.xml.crypto.sax.Encryptor': com.sun.star.xml.crypto.sax.Encryptor;
-        'com.sun.star.xml.crypto.sax.SAXEventKeeper': com.sun.star.xml.crypto.sax.SAXEventKeeper;
-        'com.sun.star.xml.crypto.sax.SignatureCreator': com.sun.star.xml.crypto.sax.SignatureCreator;
-        'com.sun.star.xml.crypto.sax.SignatureVerifier': com.sun.star.xml.crypto.sax.SignatureVerifier;
-        'com.sun.star.xml.crypto.SecurityEnvironment': com.sun.star.xml.crypto.SecurityEnvironment;
-        'com.sun.star.xml.crypto.SEInitializer': com.sun.star.xml.crypto.SEInitializer;
-        'com.sun.star.xml.crypto.XMLEncryption': com.sun.star.xml.crypto.XMLEncryption;
-        'com.sun.star.xml.crypto.XMLEncryptionTemplate': com.sun.star.xml.crypto.XMLEncryptionTemplate;
-        'com.sun.star.xml.crypto.XMLSecurityContext': com.sun.star.xml.crypto.XMLSecurityContext;
-        'com.sun.star.xml.crypto.XMLSignature': com.sun.star.xml.crypto.XMLSignature;
-        'com.sun.star.xml.crypto.XMLSignatureTemplate': com.sun.star.xml.crypto.XMLSignatureTemplate;
-        'com.sun.star.xml.dom.DocumentBuilder': com.sun.star.xml.dom.DocumentBuilder;
-        'com.sun.star.xml.dom.SAXDocumentBuilder': com.sun.star.xml.dom.SAXDocumentBuilder;
-        'com.sun.star.xml.ExportFilter': com.sun.star.xml.ExportFilter;
-        'com.sun.star.xml.ImportFilter': com.sun.star.xml.ImportFilter;
-        'com.sun.star.xml.input.SaxDocumentHandler': com.sun.star.xml.input.SaxDocumentHandler;
-        'com.sun.star.xml.NamespaceContainer': com.sun.star.xml.NamespaceContainer;
-        'com.sun.star.xml.ParaUserDefinedAttributesSupplier': com.sun.star.xml.ParaUserDefinedAttributesSupplier;
-        'com.sun.star.xml.sax.FastParser': com.sun.star.xml.sax.FastParser;
-        'com.sun.star.xml.sax.FastShapeContextHandler': com.sun.star.xml.sax.FastShapeContextHandler;
-        'com.sun.star.xml.sax.FastTokenHandler': com.sun.star.xml.sax.FastTokenHandler;
-        'com.sun.star.xml.sax.Parser': com.sun.star.xml.sax.Parser;
-        'com.sun.star.xml.sax.Writer': com.sun.star.xml.sax.Writer;
-        'com.sun.star.xml.TextUserDefinedAttributesSupplier': com.sun.star.xml.TextUserDefinedAttributesSupplier;
-        'com.sun.star.xml.UserDefinedAttributesSupplier': com.sun.star.xml.UserDefinedAttributesSupplier;
-        'com.sun.star.xml.wrapper.XMLDocumentWrapper': com.sun.star.xml.wrapper.XMLDocumentWrapper;
-        'com.sun.star.xml.wrapper.XMLElementWrapper': com.sun.star.xml.wrapper.XMLElementWrapper;
-        'com.sun.star.xml.XMLExportFilter': com.sun.star.xml.XMLExportFilter;
-        'com.sun.star.xml.XMLImportFilter': com.sun.star.xml.XMLImportFilter;
-        'com.sun.star.xml.xpath.XPathAPI': com.sun.star.xml.xpath.XPathAPI;
-        'com.sun.star.xml.xpath.XPathExtension': com.sun.star.xml.xpath.XPathExtension;
-        'com.sun.star.xml.xslt.XSLT2Transformer': com.sun.star.xml.xslt.XSLT2Transformer;
-        'com.sun.star.xml.xslt.XSLTTransformer': com.sun.star.xml.xslt.XSLTTransformer;
-        'com.sun.star.xsd.Boolean': com.sun.star.xsd.Boolean;
-        'com.sun.star.xsd.Date': com.sun.star.xsd.Date;
-        'com.sun.star.xsd.DateTime': com.sun.star.xsd.DateTime;
-        'com.sun.star.xsd.Day': com.sun.star.xsd.Day;
-        'com.sun.star.xsd.Decimal': com.sun.star.xsd.Decimal;
-        'com.sun.star.xsd.Month': com.sun.star.xsd.Month;
-        'com.sun.star.xsd.String': com.sun.star.xsd.String;
-        'com.sun.star.xsd.Time': com.sun.star.xsd.Time;
-        'com.sun.star.xsd.Year': com.sun.star.xsd.Year;
-        'org.freedesktop.PackageKit.SyncDbusSessionHelper': org.freedesktop.PackageKit.SyncDbusSessionHelper;
+        "com.sun.star.accessibility.Accessible": com.sun.star.accessibility.Accessible;
+        "com.sun.star.accessibility.AccessibleContext": com.sun.star.accessibility.AccessibleContext;
+        "com.sun.star.accessibility.MSAAService": com.sun.star.accessibility.MSAAService;
+        "com.sun.star.animations.AnimateColor": com.sun.star.animations.AnimateColor;
+        "com.sun.star.animations.AnimateMotion": com.sun.star.animations.AnimateMotion;
+        "com.sun.star.animations.AnimateSet": com.sun.star.animations.AnimateSet;
+        "com.sun.star.animations.Audio": com.sun.star.animations.Audio;
+        "com.sun.star.animations.Command": com.sun.star.animations.Command;
+        "com.sun.star.animations.IterateContainer": com.sun.star.animations.IterateContainer;
+        "com.sun.star.animations.ParallelTimeContainer": com.sun.star.animations.ParallelTimeContainer;
+        "com.sun.star.animations.SequenceTimeContainer": com.sun.star.animations.SequenceTimeContainer;
+        "com.sun.star.auth.SSOManagerFactory": com.sun.star.auth.SSOManagerFactory;
+        "com.sun.star.auth.SSOPasswordCache": com.sun.star.auth.SSOPasswordCache;
+        "com.sun.star.awt.AccessibleButton": com.sun.star.awt.AccessibleButton;
+        "com.sun.star.awt.AccessibleCheckBox": com.sun.star.awt.AccessibleCheckBox;
+        "com.sun.star.awt.AccessibleComboBox": com.sun.star.awt.AccessibleComboBox;
+        "com.sun.star.awt.AccessibleDropDownComboBox": com.sun.star.awt.AccessibleDropDownComboBox;
+        "com.sun.star.awt.AccessibleDropDownListBox": com.sun.star.awt.AccessibleDropDownListBox;
+        "com.sun.star.awt.AccessibleEdit": com.sun.star.awt.AccessibleEdit;
+        "com.sun.star.awt.AccessibleFixedText": com.sun.star.awt.AccessibleFixedText;
+        "com.sun.star.awt.AccessibleIconChoiceControl": com.sun.star.awt.AccessibleIconChoiceControl;
+        "com.sun.star.awt.AccessibleIconChoiceControlEntry": com.sun.star.awt.AccessibleIconChoiceControlEntry;
+        "com.sun.star.awt.AccessibleList": com.sun.star.awt.AccessibleList;
+        "com.sun.star.awt.AccessibleListBox": com.sun.star.awt.AccessibleListBox;
+        "com.sun.star.awt.AccessibleListBoxList": com.sun.star.awt.AccessibleListBoxList;
+        "com.sun.star.awt.AccessibleListItem": com.sun.star.awt.AccessibleListItem;
+        "com.sun.star.awt.AccessibleMenu": com.sun.star.awt.AccessibleMenu;
+        "com.sun.star.awt.AccessibleMenuBar": com.sun.star.awt.AccessibleMenuBar;
+        "com.sun.star.awt.AccessibleMenuItem": com.sun.star.awt.AccessibleMenuItem;
+        "com.sun.star.awt.AccessibleMenuSeparator": com.sun.star.awt.AccessibleMenuSeparator;
+        "com.sun.star.awt.AccessiblePopupMenu": com.sun.star.awt.AccessiblePopupMenu;
+        "com.sun.star.awt.AccessibleRadioButton": com.sun.star.awt.AccessibleRadioButton;
+        "com.sun.star.awt.AccessibleScrollBar": com.sun.star.awt.AccessibleScrollBar;
+        "com.sun.star.awt.AccessibleStatusBar": com.sun.star.awt.AccessibleStatusBar;
+        "com.sun.star.awt.AccessibleStatusBarItem": com.sun.star.awt.AccessibleStatusBarItem;
+        "com.sun.star.awt.AccessibleTabBar": com.sun.star.awt.AccessibleTabBar;
+        "com.sun.star.awt.AccessibleTabBarPage": com.sun.star.awt.AccessibleTabBarPage;
+        "com.sun.star.awt.AccessibleTabBarPageList": com.sun.star.awt.AccessibleTabBarPageList;
+        "com.sun.star.awt.AccessibleTabControl": com.sun.star.awt.AccessibleTabControl;
+        "com.sun.star.awt.AccessibleTabPage": com.sun.star.awt.AccessibleTabPage;
+        "com.sun.star.awt.AccessibleTextField": com.sun.star.awt.AccessibleTextField;
+        "com.sun.star.awt.AccessibleToolBox": com.sun.star.awt.AccessibleToolBox;
+        "com.sun.star.awt.AccessibleToolBoxItem": com.sun.star.awt.AccessibleToolBoxItem;
+        "com.sun.star.awt.AccessibleTreeListBox": com.sun.star.awt.AccessibleTreeListBox;
+        "com.sun.star.awt.AccessibleTreeListBoxEntry": com.sun.star.awt.AccessibleTreeListBoxEntry;
+        "com.sun.star.awt.AccessibleWindow": com.sun.star.awt.AccessibleWindow;
+        "com.sun.star.awt.AnimatedImagesControl": com.sun.star.awt.AnimatedImagesControl;
+        "com.sun.star.awt.AnimatedImagesControlModel": com.sun.star.awt.AnimatedImagesControlModel;
+        "com.sun.star.awt.AsyncCallback": com.sun.star.awt.AsyncCallback;
+        "com.sun.star.awt.ContainerWindowProvider": com.sun.star.awt.ContainerWindowProvider;
+        "com.sun.star.awt.DialogProvider": com.sun.star.awt.DialogProvider;
+        "com.sun.star.awt.DialogProvider2": com.sun.star.awt.DialogProvider2;
+        "com.sun.star.awt.grid.DefaultGridColumnModel": com.sun.star.awt.grid.DefaultGridColumnModel;
+        "com.sun.star.awt.grid.DefaultGridDataModel": com.sun.star.awt.grid.DefaultGridDataModel;
+        "com.sun.star.awt.grid.GridColumn": com.sun.star.awt.grid.GridColumn;
+        "com.sun.star.awt.grid.SortableGridDataModel": com.sun.star.awt.grid.SortableGridDataModel;
+        "com.sun.star.awt.grid.UnoControlGrid": com.sun.star.awt.grid.UnoControlGrid;
+        "com.sun.star.awt.grid.UnoControlGridModel": com.sun.star.awt.grid.UnoControlGridModel;
+        "com.sun.star.awt.MenuBar": com.sun.star.awt.MenuBar;
+        "com.sun.star.awt.Pointer": com.sun.star.awt.Pointer;
+        "com.sun.star.awt.PopupMenu": com.sun.star.awt.PopupMenu;
+        "com.sun.star.awt.PrinterServer": com.sun.star.awt.PrinterServer;
+        "com.sun.star.awt.RoadmapItem": com.sun.star.awt.RoadmapItem;
+        "com.sun.star.awt.SpinningProgressControlModel": com.sun.star.awt.SpinningProgressControlModel;
+        "com.sun.star.awt.tab.UnoControlTabPage": com.sun.star.awt.tab.UnoControlTabPage;
+        "com.sun.star.awt.tab.UnoControlTabPageContainer": com.sun.star.awt.tab.UnoControlTabPageContainer;
+        "com.sun.star.awt.tab.UnoControlTabPageContainerModel": com.sun.star.awt.tab.UnoControlTabPageContainerModel;
+        "com.sun.star.awt.tab.UnoControlTabPageModel": com.sun.star.awt.tab.UnoControlTabPageModel;
+        "com.sun.star.awt.TabController": com.sun.star.awt.TabController;
+        "com.sun.star.awt.TabControllerModel": com.sun.star.awt.TabControllerModel;
+        "com.sun.star.awt.Toolkit": com.sun.star.awt.Toolkit;
+        "com.sun.star.awt.tree.MutableTreeDataModel": com.sun.star.awt.tree.MutableTreeDataModel;
+        "com.sun.star.awt.tree.MutableTreeNode": com.sun.star.awt.tree.MutableTreeNode;
+        "com.sun.star.awt.tree.TreeControl": com.sun.star.awt.tree.TreeControl;
+        "com.sun.star.awt.tree.TreeControlModel": com.sun.star.awt.tree.TreeControlModel;
+        "com.sun.star.awt.UnoControl": com.sun.star.awt.UnoControl;
+        "com.sun.star.awt.UnoControlButton": com.sun.star.awt.UnoControlButton;
+        "com.sun.star.awt.UnoControlButtonModel": com.sun.star.awt.UnoControlButtonModel;
+        "com.sun.star.awt.UnoControlCheckBox": com.sun.star.awt.UnoControlCheckBox;
+        "com.sun.star.awt.UnoControlCheckBoxModel": com.sun.star.awt.UnoControlCheckBoxModel;
+        "com.sun.star.awt.UnoControlComboBox": com.sun.star.awt.UnoControlComboBox;
+        "com.sun.star.awt.UnoControlComboBoxModel": com.sun.star.awt.UnoControlComboBoxModel;
+        "com.sun.star.awt.UnoControlContainer": com.sun.star.awt.UnoControlContainer;
+        "com.sun.star.awt.UnoControlContainerModel": com.sun.star.awt.UnoControlContainerModel;
+        "com.sun.star.awt.UnoControlCurrencyField": com.sun.star.awt.UnoControlCurrencyField;
+        "com.sun.star.awt.UnoControlCurrencyFieldModel": com.sun.star.awt.UnoControlCurrencyFieldModel;
+        "com.sun.star.awt.UnoControlDateField": com.sun.star.awt.UnoControlDateField;
+        "com.sun.star.awt.UnoControlDateFieldModel": com.sun.star.awt.UnoControlDateFieldModel;
+        "com.sun.star.awt.UnoControlDialog": com.sun.star.awt.UnoControlDialog;
+        "com.sun.star.awt.UnoControlDialogElement": com.sun.star.awt.UnoControlDialogElement;
+        "com.sun.star.awt.UnoControlDialogModel": com.sun.star.awt.UnoControlDialogModel;
+        "com.sun.star.awt.UnoControlDialogModelProvider": com.sun.star.awt.UnoControlDialogModelProvider;
+        "com.sun.star.awt.UnoControlEdit": com.sun.star.awt.UnoControlEdit;
+        "com.sun.star.awt.UnoControlEditModel": com.sun.star.awt.UnoControlEditModel;
+        "com.sun.star.awt.UnoControlFileControl": com.sun.star.awt.UnoControlFileControl;
+        "com.sun.star.awt.UnoControlFileControlModel": com.sun.star.awt.UnoControlFileControlModel;
+        "com.sun.star.awt.UnoControlFixedHyperlink": com.sun.star.awt.UnoControlFixedHyperlink;
+        "com.sun.star.awt.UnoControlFixedHyperlinkModel": com.sun.star.awt.UnoControlFixedHyperlinkModel;
+        "com.sun.star.awt.UnoControlFixedLine": com.sun.star.awt.UnoControlFixedLine;
+        "com.sun.star.awt.UnoControlFixedLineModel": com.sun.star.awt.UnoControlFixedLineModel;
+        "com.sun.star.awt.UnoControlFixedText": com.sun.star.awt.UnoControlFixedText;
+        "com.sun.star.awt.UnoControlFixedTextModel": com.sun.star.awt.UnoControlFixedTextModel;
+        "com.sun.star.awt.UnoControlFormattedField": com.sun.star.awt.UnoControlFormattedField;
+        "com.sun.star.awt.UnoControlFormattedFieldModel": com.sun.star.awt.UnoControlFormattedFieldModel;
+        "com.sun.star.awt.UnoControlGroupBox": com.sun.star.awt.UnoControlGroupBox;
+        "com.sun.star.awt.UnoControlGroupBoxModel": com.sun.star.awt.UnoControlGroupBoxModel;
+        "com.sun.star.awt.UnoControlImageControl": com.sun.star.awt.UnoControlImageControl;
+        "com.sun.star.awt.UnoControlImageControlModel": com.sun.star.awt.UnoControlImageControlModel;
+        "com.sun.star.awt.UnoControlListBox": com.sun.star.awt.UnoControlListBox;
+        "com.sun.star.awt.UnoControlListBoxModel": com.sun.star.awt.UnoControlListBoxModel;
+        "com.sun.star.awt.UnoControlModel": com.sun.star.awt.UnoControlModel;
+        "com.sun.star.awt.UnoControlNumericField": com.sun.star.awt.UnoControlNumericField;
+        "com.sun.star.awt.UnoControlNumericFieldModel": com.sun.star.awt.UnoControlNumericFieldModel;
+        "com.sun.star.awt.UnoControlPatternField": com.sun.star.awt.UnoControlPatternField;
+        "com.sun.star.awt.UnoControlPatternFieldModel": com.sun.star.awt.UnoControlPatternFieldModel;
+        "com.sun.star.awt.UnoControlProgressBar": com.sun.star.awt.UnoControlProgressBar;
+        "com.sun.star.awt.UnoControlProgressBarModel": com.sun.star.awt.UnoControlProgressBarModel;
+        "com.sun.star.awt.UnoControlRadioButton": com.sun.star.awt.UnoControlRadioButton;
+        "com.sun.star.awt.UnoControlRadioButtonModel": com.sun.star.awt.UnoControlRadioButtonModel;
+        "com.sun.star.awt.UnoControlRoadmap": com.sun.star.awt.UnoControlRoadmap;
+        "com.sun.star.awt.UnoControlRoadmapModel": com.sun.star.awt.UnoControlRoadmapModel;
+        "com.sun.star.awt.UnoControlScrollBar": com.sun.star.awt.UnoControlScrollBar;
+        "com.sun.star.awt.UnoControlScrollBarModel": com.sun.star.awt.UnoControlScrollBarModel;
+        "com.sun.star.awt.UnoControlSpinButton": com.sun.star.awt.UnoControlSpinButton;
+        "com.sun.star.awt.UnoControlSpinButtonModel": com.sun.star.awt.UnoControlSpinButtonModel;
+        "com.sun.star.awt.UnoControlTimeField": com.sun.star.awt.UnoControlTimeField;
+        "com.sun.star.awt.UnoControlTimeFieldModel": com.sun.star.awt.UnoControlTimeFieldModel;
+        "com.sun.star.beans.Introspection": com.sun.star.beans.Introspection;
+        "com.sun.star.beans.PropertyBag": com.sun.star.beans.PropertyBag;
+        "com.sun.star.beans.PropertySet": com.sun.star.beans.PropertySet;
+        "com.sun.star.bridge.Bridge": com.sun.star.bridge.Bridge;
+        "com.sun.star.bridge.BridgeFactory": com.sun.star.bridge.BridgeFactory;
+        "com.sun.star.bridge.IiopBridge": com.sun.star.bridge.IiopBridge;
+        "com.sun.star.bridge.OleApplicationRegistration": com.sun.star.bridge.OleApplicationRegistration;
+        "com.sun.star.bridge.oleautomation.ApplicationRegistration":
+            com.sun.star.bridge.oleautomation.ApplicationRegistration;
+        "com.sun.star.bridge.oleautomation.BridgeSupplier": com.sun.star.bridge.oleautomation.BridgeSupplier;
+        "com.sun.star.bridge.oleautomation.Factory": com.sun.star.bridge.oleautomation.Factory;
+        "com.sun.star.bridge.OleBridgeSupplier": com.sun.star.bridge.OleBridgeSupplier;
+        "com.sun.star.bridge.OleBridgeSupplier2": com.sun.star.bridge.OleBridgeSupplier2;
+        "com.sun.star.bridge.OleBridgeSupplierVar1": com.sun.star.bridge.OleBridgeSupplierVar1;
+        "com.sun.star.bridge.OleObjectFactory": com.sun.star.bridge.OleObjectFactory;
+        "com.sun.star.bridge.UnoUrlResolver": com.sun.star.bridge.UnoUrlResolver;
+        "com.sun.star.bridge.UrpBridge": com.sun.star.bridge.UrpBridge;
+        "com.sun.star.chart.AccessibleChartDocumentView": com.sun.star.chart.AccessibleChartDocumentView;
+        "com.sun.star.chart.AccessibleChartElement": com.sun.star.chart.AccessibleChartElement;
+        "com.sun.star.chart.AreaDiagram": com.sun.star.chart.AreaDiagram;
+        "com.sun.star.chart.BarDiagram": com.sun.star.chart.BarDiagram;
+        "com.sun.star.chart.BubbleDiagram": com.sun.star.chart.BubbleDiagram;
+        "com.sun.star.chart.Chart3DBarProperties": com.sun.star.chart.Chart3DBarProperties;
+        "com.sun.star.chart.ChartArea": com.sun.star.chart.ChartArea;
+        "com.sun.star.chart.ChartAxis": com.sun.star.chart.ChartAxis;
+        "com.sun.star.chart.ChartAxisXSupplier": com.sun.star.chart.ChartAxisXSupplier;
+        "com.sun.star.chart.ChartAxisYSupplier": com.sun.star.chart.ChartAxisYSupplier;
+        "com.sun.star.chart.ChartAxisZSupplier": com.sun.star.chart.ChartAxisZSupplier;
+        "com.sun.star.chart.ChartData": com.sun.star.chart.ChartData;
+        "com.sun.star.chart.ChartDataArray": com.sun.star.chart.ChartDataArray;
+        "com.sun.star.chart.ChartDataPointProperties": com.sun.star.chart.ChartDataPointProperties;
+        "com.sun.star.chart.ChartDataRowProperties": com.sun.star.chart.ChartDataRowProperties;
+        "com.sun.star.chart.ChartDocument": com.sun.star.chart.ChartDocument;
+        "com.sun.star.chart.ChartGrid": com.sun.star.chart.ChartGrid;
+        "com.sun.star.chart.ChartLegend": com.sun.star.chart.ChartLegend;
+        "com.sun.star.chart.ChartLine": com.sun.star.chart.ChartLine;
+        "com.sun.star.chart.ChartPieSegmentProperties": com.sun.star.chart.ChartPieSegmentProperties;
+        "com.sun.star.chart.ChartStatistics": com.sun.star.chart.ChartStatistics;
+        "com.sun.star.chart.ChartTableAddressSupplier": com.sun.star.chart.ChartTableAddressSupplier;
+        "com.sun.star.chart.ChartTitle": com.sun.star.chart.ChartTitle;
+        "com.sun.star.chart.ChartTwoAxisXSupplier": com.sun.star.chart.ChartTwoAxisXSupplier;
+        "com.sun.star.chart.ChartTwoAxisYSupplier": com.sun.star.chart.ChartTwoAxisYSupplier;
+        "com.sun.star.chart.Diagram": com.sun.star.chart.Diagram;
+        "com.sun.star.chart.Dim3DDiagram": com.sun.star.chart.Dim3DDiagram;
+        "com.sun.star.chart.DonutDiagram": com.sun.star.chart.DonutDiagram;
+        "com.sun.star.chart.FilledNetDiagram": com.sun.star.chart.FilledNetDiagram;
+        "com.sun.star.chart.LineDiagram": com.sun.star.chart.LineDiagram;
+        "com.sun.star.chart.NetDiagram": com.sun.star.chart.NetDiagram;
+        "com.sun.star.chart.PieDiagram": com.sun.star.chart.PieDiagram;
+        "com.sun.star.chart.StackableDiagram": com.sun.star.chart.StackableDiagram;
+        "com.sun.star.chart.StockDiagram": com.sun.star.chart.StockDiagram;
+        "com.sun.star.chart.XYDiagram": com.sun.star.chart.XYDiagram;
+        "com.sun.star.chart2.Axis": com.sun.star.chart2.Axis;
+        "com.sun.star.chart2.CandleStickChartType": com.sun.star.chart2.CandleStickChartType;
+        "com.sun.star.chart2.CartesianCoordinateSystem2d": com.sun.star.chart2.CartesianCoordinateSystem2d;
+        "com.sun.star.chart2.CartesianCoordinateSystem3d": com.sun.star.chart2.CartesianCoordinateSystem3d;
+        "com.sun.star.chart2.ChartDocument": com.sun.star.chart2.ChartDocument;
+        "com.sun.star.chart2.ChartDocumentWrapper": com.sun.star.chart2.ChartDocumentWrapper;
+        "com.sun.star.chart2.ChartType": com.sun.star.chart2.ChartType;
+        "com.sun.star.chart2.ChartTypeManager": com.sun.star.chart2.ChartTypeManager;
+        "com.sun.star.chart2.ChartTypeTemplate": com.sun.star.chart2.ChartTypeTemplate;
+        "com.sun.star.chart2.CoordinateSystem": com.sun.star.chart2.CoordinateSystem;
+        "com.sun.star.chart2.CoordinateSystemType": com.sun.star.chart2.CoordinateSystemType;
+        "com.sun.star.chart2.data.DatabaseDataProvider": com.sun.star.chart2.data.DatabaseDataProvider;
+        "com.sun.star.chart2.data.DataFilter": com.sun.star.chart2.data.DataFilter;
+        "com.sun.star.chart2.data.DataProvider": com.sun.star.chart2.data.DataProvider;
+        "com.sun.star.chart2.data.DataSequence": com.sun.star.chart2.data.DataSequence;
+        "com.sun.star.chart2.data.DataSink": com.sun.star.chart2.data.DataSink;
+        "com.sun.star.chart2.data.DataSource": com.sun.star.chart2.data.DataSource;
+        "com.sun.star.chart2.data.LabeledDataSequence": com.sun.star.chart2.data.LabeledDataSequence;
+        "com.sun.star.chart2.data.RangeHighlighter": com.sun.star.chart2.data.RangeHighlighter;
+        "com.sun.star.chart2.data.RangeHighlightListener": com.sun.star.chart2.data.RangeHighlightListener;
+        "com.sun.star.chart2.data.TabularDataProviderArguments": com.sun.star.chart2.data.TabularDataProviderArguments;
+        "com.sun.star.chart2.DataPoint": com.sun.star.chart2.DataPoint;
+        "com.sun.star.chart2.DataPointProperties": com.sun.star.chart2.DataPointProperties;
+        "com.sun.star.chart2.DataSeries": com.sun.star.chart2.DataSeries;
+        "com.sun.star.chart2.Diagram": com.sun.star.chart2.Diagram;
+        "com.sun.star.chart2.ErrorBar": com.sun.star.chart2.ErrorBar;
+        "com.sun.star.chart2.ExponentialRegressionCurve": com.sun.star.chart2.ExponentialRegressionCurve;
+        "com.sun.star.chart2.ExponentialScaling": com.sun.star.chart2.ExponentialScaling;
+        "com.sun.star.chart2.FormattedString": com.sun.star.chart2.FormattedString;
+        "com.sun.star.chart2.GridProperties": com.sun.star.chart2.GridProperties;
+        "com.sun.star.chart2.Legend": com.sun.star.chart2.Legend;
+        "com.sun.star.chart2.LinearRegressionCurve": com.sun.star.chart2.LinearRegressionCurve;
+        "com.sun.star.chart2.LinearScaling": com.sun.star.chart2.LinearScaling;
+        "com.sun.star.chart2.LogarithmicRegressionCurve": com.sun.star.chart2.LogarithmicRegressionCurve;
+        "com.sun.star.chart2.LogarithmicScaling": com.sun.star.chart2.LogarithmicScaling;
+        "com.sun.star.chart2.LogicTargetModel": com.sun.star.chart2.LogicTargetModel;
+        "com.sun.star.chart2.MovingAverageRegressionCurve": com.sun.star.chart2.MovingAverageRegressionCurve;
+        "com.sun.star.chart2.PolarCoordinateSystem2d": com.sun.star.chart2.PolarCoordinateSystem2d;
+        "com.sun.star.chart2.PolarCoordinateSystem3d": com.sun.star.chart2.PolarCoordinateSystem3d;
+        "com.sun.star.chart2.PolynomialRegressionCurve": com.sun.star.chart2.PolynomialRegressionCurve;
+        "com.sun.star.chart2.PotentialRegressionCurve": com.sun.star.chart2.PotentialRegressionCurve;
+        "com.sun.star.chart2.PowerScaling": com.sun.star.chart2.PowerScaling;
+        "com.sun.star.chart2.PropertyPool": com.sun.star.chart2.PropertyPool;
+        "com.sun.star.chart2.RegressionCurve": com.sun.star.chart2.RegressionCurve;
+        "com.sun.star.chart2.RegressionCurveEquation": com.sun.star.chart2.RegressionCurveEquation;
+        "com.sun.star.chart2.RegressionEquation": com.sun.star.chart2.RegressionEquation;
+        "com.sun.star.chart2.Scaling": com.sun.star.chart2.Scaling;
+        "com.sun.star.chart2.StandardDiagramCreationParameters": com.sun.star.chart2.StandardDiagramCreationParameters;
+        "com.sun.star.chart2.Title": com.sun.star.chart2.Title;
+        "com.sun.star.configuration.AccessRootElement": com.sun.star.configuration.AccessRootElement;
+        "com.sun.star.configuration.AdministrationProvider": com.sun.star.configuration.AdministrationProvider;
+        "com.sun.star.configuration.backend.Backend": com.sun.star.configuration.backend.Backend;
+        "com.sun.star.configuration.backend.BackendAdapter": com.sun.star.configuration.backend.BackendAdapter;
+        "com.sun.star.configuration.backend.CopyImporter": com.sun.star.configuration.backend.CopyImporter;
+        "com.sun.star.configuration.backend.DataImporter": com.sun.star.configuration.backend.DataImporter;
+        "com.sun.star.configuration.backend.DefaultBackend": com.sun.star.configuration.backend.DefaultBackend;
+        "com.sun.star.configuration.backend.HierarchyBrowser": com.sun.star.configuration.backend.HierarchyBrowser;
+        "com.sun.star.configuration.backend.Importer": com.sun.star.configuration.backend.Importer;
+        "com.sun.star.configuration.backend.InteractionHandler": com.sun.star.configuration.backend.InteractionHandler;
+        "com.sun.star.configuration.backend.Layer": com.sun.star.configuration.backend.Layer;
+        "com.sun.star.configuration.backend.LayerDescriber": com.sun.star.configuration.backend.LayerDescriber;
+        "com.sun.star.configuration.backend.LayerFilter": com.sun.star.configuration.backend.LayerFilter;
+        "com.sun.star.configuration.backend.LayerUpdateMerger": com.sun.star.configuration.backend.LayerUpdateMerger;
+        "com.sun.star.configuration.backend.LdapMultiLayerStratum":
+            com.sun.star.configuration.backend.LdapMultiLayerStratum;
+        "com.sun.star.configuration.backend.LdapSingleBackend": com.sun.star.configuration.backend.LdapSingleBackend;
+        "com.sun.star.configuration.backend.LdapSingleStratum": com.sun.star.configuration.backend.LdapSingleStratum;
+        "com.sun.star.configuration.backend.LocalDataImporter": com.sun.star.configuration.backend.LocalDataImporter;
+        "com.sun.star.configuration.backend.LocalHierarchyBrowser":
+            com.sun.star.configuration.backend.LocalHierarchyBrowser;
+        "com.sun.star.configuration.backend.LocalSchemaSupplier":
+            com.sun.star.configuration.backend.LocalSchemaSupplier;
+        "com.sun.star.configuration.backend.LocalSingleBackend": com.sun.star.configuration.backend.LocalSingleBackend;
+        "com.sun.star.configuration.backend.LocalSingleStratum": com.sun.star.configuration.backend.LocalSingleStratum;
+        "com.sun.star.configuration.backend.MergeImporter": com.sun.star.configuration.backend.MergeImporter;
+        "com.sun.star.configuration.backend.MultiLayerStratum": com.sun.star.configuration.backend.MultiLayerStratum;
+        "com.sun.star.configuration.backend.MultiStratumBackend":
+            com.sun.star.configuration.backend.MultiStratumBackend;
+        "com.sun.star.configuration.backend.OfflineBackend": com.sun.star.configuration.backend.OfflineBackend;
+        "com.sun.star.configuration.backend.OnlineBackend": com.sun.star.configuration.backend.OnlineBackend;
+        "com.sun.star.configuration.backend.PlatformBackend": com.sun.star.configuration.backend.PlatformBackend;
+        "com.sun.star.configuration.backend.Schema": com.sun.star.configuration.backend.Schema;
+        "com.sun.star.configuration.backend.SchemaSupplier": com.sun.star.configuration.backend.SchemaSupplier;
+        "com.sun.star.configuration.backend.SingleBackend": com.sun.star.configuration.backend.SingleBackend;
+        "com.sun.star.configuration.backend.SingleBackendAdapter":
+            com.sun.star.configuration.backend.SingleBackendAdapter;
+        "com.sun.star.configuration.backend.SingleLayerStratum": com.sun.star.configuration.backend.SingleLayerStratum;
+        "com.sun.star.configuration.backend.SystemIntegration": com.sun.star.configuration.backend.SystemIntegration;
+        "com.sun.star.configuration.backend.UpdatableLayer": com.sun.star.configuration.backend.UpdatableLayer;
+        "com.sun.star.configuration.backend.xml.LayerParser": com.sun.star.configuration.backend.xml.LayerParser;
+        "com.sun.star.configuration.backend.xml.LayerWriter": com.sun.star.configuration.backend.xml.LayerWriter;
+        "com.sun.star.configuration.backend.xml.SchemaParser": com.sun.star.configuration.backend.xml.SchemaParser;
+        "com.sun.star.configuration.bootstrap.BootstrapContext": com.sun.star.configuration.bootstrap.BootstrapContext;
+        "com.sun.star.configuration.ConfigurationAccess": com.sun.star.configuration.ConfigurationAccess;
+        "com.sun.star.configuration.ConfigurationProvider": com.sun.star.configuration.ConfigurationProvider;
+        "com.sun.star.configuration.ConfigurationRegistry": com.sun.star.configuration.ConfigurationRegistry;
+        "com.sun.star.configuration.ConfigurationUpdateAccess": com.sun.star.configuration.ConfigurationUpdateAccess;
+        "com.sun.star.configuration.DefaultProvider": com.sun.star.configuration.DefaultProvider;
+        "com.sun.star.configuration.GroupAccess": com.sun.star.configuration.GroupAccess;
+        "com.sun.star.configuration.GroupElement": com.sun.star.configuration.GroupElement;
+        "com.sun.star.configuration.GroupUpdate": com.sun.star.configuration.GroupUpdate;
+        "com.sun.star.configuration.HierarchyAccess": com.sun.star.configuration.HierarchyAccess;
+        "com.sun.star.configuration.HierarchyElement": com.sun.star.configuration.HierarchyElement;
+        "com.sun.star.configuration.PropertyHierarchy": com.sun.star.configuration.PropertyHierarchy;
+        "com.sun.star.configuration.ReadOnlyAccess": com.sun.star.configuration.ReadOnlyAccess;
+        "com.sun.star.configuration.ReadWriteAccess": com.sun.star.configuration.ReadWriteAccess;
+        "com.sun.star.configuration.SetAccess": com.sun.star.configuration.SetAccess;
+        "com.sun.star.configuration.SetElement": com.sun.star.configuration.SetElement;
+        "com.sun.star.configuration.SetUpdate": com.sun.star.configuration.SetUpdate;
+        "com.sun.star.configuration.SimpleSetAccess": com.sun.star.configuration.SimpleSetAccess;
+        "com.sun.star.configuration.SimpleSetUpdate": com.sun.star.configuration.SimpleSetUpdate;
+        "com.sun.star.configuration.UpdateRootElement": com.sun.star.configuration.UpdateRootElement;
+        "com.sun.star.connection.Acceptor": com.sun.star.connection.Acceptor;
+        "com.sun.star.connection.Connector": com.sun.star.connection.Connector;
+        "com.sun.star.container.EnumerableMap": com.sun.star.container.EnumerableMap;
+        "com.sun.star.cui.ColorPicker": com.sun.star.cui.ColorPicker;
+        "com.sun.star.datatransfer.clipboard.ClipboardManager": com.sun.star.datatransfer.clipboard.ClipboardManager;
+        "com.sun.star.datatransfer.clipboard.GenericClipboard": com.sun.star.datatransfer.clipboard.GenericClipboard;
+        "com.sun.star.datatransfer.clipboard.SystemClipboard": com.sun.star.datatransfer.clipboard.SystemClipboard;
+        "com.sun.star.datatransfer.DataFormatTranslator": com.sun.star.datatransfer.DataFormatTranslator;
+        "com.sun.star.datatransfer.dnd.OleDragSource": com.sun.star.datatransfer.dnd.OleDragSource;
+        "com.sun.star.datatransfer.dnd.OleDropTarget": com.sun.star.datatransfer.dnd.OleDropTarget;
+        "com.sun.star.datatransfer.dnd.X11DragSource": com.sun.star.datatransfer.dnd.X11DragSource;
+        "com.sun.star.datatransfer.dnd.X11DropTarget": com.sun.star.datatransfer.dnd.X11DropTarget;
+        "com.sun.star.datatransfer.MimeContentTypeFactory": com.sun.star.datatransfer.MimeContentTypeFactory;
+        "com.sun.star.deployment.PackageRegistryBackend": com.sun.star.deployment.PackageRegistryBackend;
+        "com.sun.star.deployment.test.SmoketestCommandEnvironment":
+            com.sun.star.deployment.test.SmoketestCommandEnvironment;
+        "com.sun.star.deployment.ui.LicenseDialog": com.sun.star.deployment.ui.LicenseDialog;
+        "com.sun.star.deployment.ui.PackageManagerDialog": com.sun.star.deployment.ui.PackageManagerDialog;
+        "com.sun.star.deployment.ui.UpdateRequiredDialog": com.sun.star.deployment.ui.UpdateRequiredDialog;
+        "com.sun.star.deployment.UpdateInformationProvider": com.sun.star.deployment.UpdateInformationProvider;
+        "com.sun.star.document.DocumentProperties": com.sun.star.document.DocumentProperties;
+        "com.sun.star.document.DocumentRevisionListPersistence": com.sun.star.document.DocumentRevisionListPersistence;
+        "com.sun.star.document.EventDescriptor": com.sun.star.document.EventDescriptor;
+        "com.sun.star.document.Events": com.sun.star.document.Events;
+        "com.sun.star.document.ExportFilter": com.sun.star.document.ExportFilter;
+        "com.sun.star.document.ExtendedTypeDetection": com.sun.star.document.ExtendedTypeDetection;
+        "com.sun.star.document.ExtendedTypeDetectionFactory": com.sun.star.document.ExtendedTypeDetectionFactory;
+        "com.sun.star.document.FilterAdapter": com.sun.star.document.FilterAdapter;
+        "com.sun.star.document.FilterConfigRefresh": com.sun.star.document.FilterConfigRefresh;
+        "com.sun.star.document.FilterFactory": com.sun.star.document.FilterFactory;
+        "com.sun.star.document.GraphicObjectResolver": com.sun.star.document.GraphicObjectResolver;
+        "com.sun.star.document.HeaderFooterSettings": com.sun.star.document.HeaderFooterSettings;
+        "com.sun.star.document.ImportFilter": com.sun.star.document.ImportFilter;
+        "com.sun.star.document.IndexedPropertyValues": com.sun.star.document.IndexedPropertyValues;
+        "com.sun.star.document.LinkTarget": com.sun.star.document.LinkTarget;
+        "com.sun.star.document.LinkTargets": com.sun.star.document.LinkTargets;
+        "com.sun.star.document.MediaDescriptor": com.sun.star.document.MediaDescriptor;
+        "com.sun.star.document.NamedPropertyValues": com.sun.star.document.NamedPropertyValues;
+        "com.sun.star.document.OfficeDocument": com.sun.star.document.OfficeDocument;
+        "com.sun.star.document.OleEmbeddedServerRegistration": com.sun.star.document.OleEmbeddedServerRegistration;
+        "com.sun.star.document.OOXMLDocumentPropertiesImporter": com.sun.star.document.OOXMLDocumentPropertiesImporter;
+        "com.sun.star.document.PDFDialog": com.sun.star.document.PDFDialog;
+        "com.sun.star.document.Settings": com.sun.star.document.Settings;
+        "com.sun.star.document.TypeDetection": com.sun.star.document.TypeDetection;
+        "com.sun.star.document.XMLBasicExporter": com.sun.star.document.XMLBasicExporter;
+        "com.sun.star.document.XMLBasicImporter": com.sun.star.document.XMLBasicImporter;
+        "com.sun.star.document.XMLOasisBasicExporter": com.sun.star.document.XMLOasisBasicExporter;
+        "com.sun.star.document.XMLOasisBasicImporter": com.sun.star.document.XMLOasisBasicImporter;
+        "com.sun.star.drawing.AccessibleDrawDocumentView": com.sun.star.drawing.AccessibleDrawDocumentView;
+        "com.sun.star.drawing.AccessibleGraphControl": com.sun.star.drawing.AccessibleGraphControl;
+        "com.sun.star.drawing.AccessibleGraphicShape": com.sun.star.drawing.AccessibleGraphicShape;
+        "com.sun.star.drawing.AccessibleImageBullet": com.sun.star.drawing.AccessibleImageBullet;
+        "com.sun.star.drawing.AccessibleOLEShape": com.sun.star.drawing.AccessibleOLEShape;
+        "com.sun.star.drawing.AccessibleShape": com.sun.star.drawing.AccessibleShape;
+        "com.sun.star.drawing.AccessibleSlideView": com.sun.star.drawing.AccessibleSlideView;
+        "com.sun.star.drawing.AccessibleSlideViewObject": com.sun.star.drawing.AccessibleSlideViewObject;
+        "com.sun.star.drawing.AppletShape": com.sun.star.drawing.AppletShape;
+        "com.sun.star.drawing.Background": com.sun.star.drawing.Background;
+        "com.sun.star.drawing.BitmapTable": com.sun.star.drawing.BitmapTable;
+        "com.sun.star.drawing.CaptionShape": com.sun.star.drawing.CaptionShape;
+        "com.sun.star.drawing.ClosedBezierShape": com.sun.star.drawing.ClosedBezierShape;
+        "com.sun.star.drawing.ColorTable": com.sun.star.drawing.ColorTable;
+        "com.sun.star.drawing.ConnectorProperties": com.sun.star.drawing.ConnectorProperties;
+        "com.sun.star.drawing.ConnectorShape": com.sun.star.drawing.ConnectorShape;
+        "com.sun.star.drawing.ControlShape": com.sun.star.drawing.ControlShape;
+        "com.sun.star.drawing.CustomShape": com.sun.star.drawing.CustomShape;
+        "com.sun.star.drawing.CustomShapeEngine": com.sun.star.drawing.CustomShapeEngine;
+        "com.sun.star.drawing.DashTable": com.sun.star.drawing.DashTable;
+        "com.sun.star.drawing.Defaults": com.sun.star.drawing.Defaults;
+        "com.sun.star.drawing.DocumentSettings": com.sun.star.drawing.DocumentSettings;
+        "com.sun.star.drawing.DrawingDocument": com.sun.star.drawing.DrawingDocument;
+        "com.sun.star.drawing.DrawingDocumentDrawView": com.sun.star.drawing.DrawingDocumentDrawView;
+        "com.sun.star.drawing.DrawingDocumentFactory": com.sun.star.drawing.DrawingDocumentFactory;
+        "com.sun.star.drawing.DrawPage": com.sun.star.drawing.DrawPage;
+        "com.sun.star.drawing.DrawPages": com.sun.star.drawing.DrawPages;
+        "com.sun.star.drawing.EllipseShape": com.sun.star.drawing.EllipseShape;
+        "com.sun.star.drawing.EnhancedCustomShapeExtrusion": com.sun.star.drawing.EnhancedCustomShapeExtrusion;
+        "com.sun.star.drawing.EnhancedCustomShapeGeometry": com.sun.star.drawing.EnhancedCustomShapeGeometry;
+        "com.sun.star.drawing.EnhancedCustomShapeHandle": com.sun.star.drawing.EnhancedCustomShapeHandle;
+        "com.sun.star.drawing.EnhancedCustomShapePath": com.sun.star.drawing.EnhancedCustomShapePath;
+        "com.sun.star.drawing.EnhancedCustomShapeTextPath": com.sun.star.drawing.EnhancedCustomShapeTextPath;
+        "com.sun.star.drawing.FillProperties": com.sun.star.drawing.FillProperties;
+        "com.sun.star.drawing.framework.BasicPaneFactory": com.sun.star.drawing.framework.BasicPaneFactory;
+        "com.sun.star.drawing.framework.BasicToolBarFactory": com.sun.star.drawing.framework.BasicToolBarFactory;
+        "com.sun.star.drawing.framework.BasicViewFactory": com.sun.star.drawing.framework.BasicViewFactory;
+        "com.sun.star.drawing.framework.Configuration": com.sun.star.drawing.framework.Configuration;
+        "com.sun.star.drawing.framework.ConfigurationController":
+            com.sun.star.drawing.framework.ConfigurationController;
+        "com.sun.star.drawing.framework.ModuleController": com.sun.star.drawing.framework.ModuleController;
+        "com.sun.star.drawing.framework.ResourceId": com.sun.star.drawing.framework.ResourceId;
+        "com.sun.star.drawing.GenericDrawingDocument": com.sun.star.drawing.GenericDrawingDocument;
+        "com.sun.star.drawing.GenericDrawPage": com.sun.star.drawing.GenericDrawPage;
+        "com.sun.star.drawing.GradientTable": com.sun.star.drawing.GradientTable;
+        "com.sun.star.drawing.GraphicExportFilter": com.sun.star.drawing.GraphicExportFilter;
+        "com.sun.star.drawing.GraphicObjectShape": com.sun.star.drawing.GraphicObjectShape;
+        "com.sun.star.drawing.GroupShape": com.sun.star.drawing.GroupShape;
+        "com.sun.star.drawing.HatchTable": com.sun.star.drawing.HatchTable;
+        "com.sun.star.drawing.Layer": com.sun.star.drawing.Layer;
+        "com.sun.star.drawing.LayerManager": com.sun.star.drawing.LayerManager;
+        "com.sun.star.drawing.LineProperties": com.sun.star.drawing.LineProperties;
+        "com.sun.star.drawing.LineShape": com.sun.star.drawing.LineShape;
+        "com.sun.star.drawing.MarkerTable": com.sun.star.drawing.MarkerTable;
+        "com.sun.star.drawing.MasterPage": com.sun.star.drawing.MasterPage;
+        "com.sun.star.drawing.MasterPages": com.sun.star.drawing.MasterPages;
+        "com.sun.star.drawing.MeasureProperties": com.sun.star.drawing.MeasureProperties;
+        "com.sun.star.drawing.MeasureShape": com.sun.star.drawing.MeasureShape;
+        "com.sun.star.drawing.ModuleDispatcher": com.sun.star.drawing.ModuleDispatcher;
+        "com.sun.star.drawing.OLE2Shape": com.sun.star.drawing.OLE2Shape;
+        "com.sun.star.drawing.OpenBezierShape": com.sun.star.drawing.OpenBezierShape;
+        "com.sun.star.drawing.PageShape": com.sun.star.drawing.PageShape;
+        "com.sun.star.drawing.PluginShape": com.sun.star.drawing.PluginShape;
+        "com.sun.star.drawing.PolyLineShape": com.sun.star.drawing.PolyLineShape;
+        "com.sun.star.drawing.PolyPolygonBezierDescriptor": com.sun.star.drawing.PolyPolygonBezierDescriptor;
+        "com.sun.star.drawing.PolyPolygonBezierShape": com.sun.star.drawing.PolyPolygonBezierShape;
+        "com.sun.star.drawing.PolyPolygonDescriptor": com.sun.star.drawing.PolyPolygonDescriptor;
+        "com.sun.star.drawing.PolyPolygonShape": com.sun.star.drawing.PolyPolygonShape;
+        "com.sun.star.drawing.RectangleShape": com.sun.star.drawing.RectangleShape;
+        "com.sun.star.drawing.RotationDescriptor": com.sun.star.drawing.RotationDescriptor;
+        "com.sun.star.drawing.ShadowProperties": com.sun.star.drawing.ShadowProperties;
+        "com.sun.star.drawing.Shape": com.sun.star.drawing.Shape;
+        "com.sun.star.drawing.ShapeCollection": com.sun.star.drawing.ShapeCollection;
+        "com.sun.star.drawing.Shapes": com.sun.star.drawing.Shapes;
+        "com.sun.star.drawing.SlideRenderer": com.sun.star.drawing.SlideRenderer;
+        "com.sun.star.drawing.SlideSorter": com.sun.star.drawing.SlideSorter;
+        "com.sun.star.drawing.Text": com.sun.star.drawing.Text;
+        "com.sun.star.drawing.TextProperties": com.sun.star.drawing.TextProperties;
+        "com.sun.star.drawing.TextShape": com.sun.star.drawing.TextShape;
+        "com.sun.star.drawing.TransparencyGradientTable": com.sun.star.drawing.TransparencyGradientTable;
+        "com.sun.star.embed.BaseStorage": com.sun.star.embed.BaseStorage;
+        "com.sun.star.embed.DocumentCloser": com.sun.star.embed.DocumentCloser;
+        "com.sun.star.embed.EmbeddedObjectCreator": com.sun.star.embed.EmbeddedObjectCreator;
+        "com.sun.star.embed.EmbeddedObjectDescriptor": com.sun.star.embed.EmbeddedObjectDescriptor;
+        "com.sun.star.embed.FileSystemStorage": com.sun.star.embed.FileSystemStorage;
+        "com.sun.star.embed.FileSystemStorageFactory": com.sun.star.embed.FileSystemStorageFactory;
+        "com.sun.star.embed.HatchWindowFactory": com.sun.star.embed.HatchWindowFactory;
+        "com.sun.star.embed.InstanceLocker": com.sun.star.embed.InstanceLocker;
+        "com.sun.star.embed.MSOLEObjectSystemCreator": com.sun.star.embed.MSOLEObjectSystemCreator;
+        "com.sun.star.embed.OLEEmbeddedObjectFactory": com.sun.star.embed.OLEEmbeddedObjectFactory;
+        "com.sun.star.embed.OLESimpleStorage": com.sun.star.embed.OLESimpleStorage;
+        "com.sun.star.embed.OOoEmbeddedObjectFactory": com.sun.star.embed.OOoEmbeddedObjectFactory;
+        "com.sun.star.embed.Storage": com.sun.star.embed.Storage;
+        "com.sun.star.embed.StorageFactory": com.sun.star.embed.StorageFactory;
+        "com.sun.star.embed.StorageStream": com.sun.star.embed.StorageStream;
+        "com.sun.star.form.binding.BindableControlModel": com.sun.star.form.binding.BindableControlModel;
+        "com.sun.star.form.binding.BindableDataAwareControlModel":
+            com.sun.star.form.binding.BindableDataAwareControlModel;
+        "com.sun.star.form.binding.BindableDatabaseCheckBox": com.sun.star.form.binding.BindableDatabaseCheckBox;
+        "com.sun.star.form.binding.BindableDatabaseComboBox": com.sun.star.form.binding.BindableDatabaseComboBox;
+        "com.sun.star.form.binding.BindableDatabaseDateField": com.sun.star.form.binding.BindableDatabaseDateField;
+        "com.sun.star.form.binding.BindableDatabaseFormattedField":
+            com.sun.star.form.binding.BindableDatabaseFormattedField;
+        "com.sun.star.form.binding.BindableDatabaseListBox": com.sun.star.form.binding.BindableDatabaseListBox;
+        "com.sun.star.form.binding.BindableDatabaseNumericField":
+            com.sun.star.form.binding.BindableDatabaseNumericField;
+        "com.sun.star.form.binding.BindableDatabaseRadioButton": com.sun.star.form.binding.BindableDatabaseRadioButton;
+        "com.sun.star.form.binding.BindableDatabaseTextField": com.sun.star.form.binding.BindableDatabaseTextField;
+        "com.sun.star.form.binding.BindableDatabaseTimeField": com.sun.star.form.binding.BindableDatabaseTimeField;
+        "com.sun.star.form.binding.BindableIntegerValueRange": com.sun.star.form.binding.BindableIntegerValueRange;
+        "com.sun.star.form.binding.ListEntrySource": com.sun.star.form.binding.ListEntrySource;
+        "com.sun.star.form.binding.ValueBinding": com.sun.star.form.binding.ValueBinding;
+        "com.sun.star.form.component.CheckBox": com.sun.star.form.component.CheckBox;
+        "com.sun.star.form.component.ComboBox": com.sun.star.form.component.ComboBox;
+        "com.sun.star.form.component.CommandButton": com.sun.star.form.component.CommandButton;
+        "com.sun.star.form.component.CurrencyField": com.sun.star.form.component.CurrencyField;
+        "com.sun.star.form.component.DatabaseCheckBox": com.sun.star.form.component.DatabaseCheckBox;
+        "com.sun.star.form.component.DatabaseComboBox": com.sun.star.form.component.DatabaseComboBox;
+        "com.sun.star.form.component.DatabaseCurrencyField": com.sun.star.form.component.DatabaseCurrencyField;
+        "com.sun.star.form.component.DatabaseDateField": com.sun.star.form.component.DatabaseDateField;
+        "com.sun.star.form.component.DatabaseFormattedField": com.sun.star.form.component.DatabaseFormattedField;
+        "com.sun.star.form.component.DatabaseImageControl": com.sun.star.form.component.DatabaseImageControl;
+        "com.sun.star.form.component.DatabaseListBox": com.sun.star.form.component.DatabaseListBox;
+        "com.sun.star.form.component.DatabaseNumericField": com.sun.star.form.component.DatabaseNumericField;
+        "com.sun.star.form.component.DatabasePatternField": com.sun.star.form.component.DatabasePatternField;
+        "com.sun.star.form.component.DatabaseRadioButton": com.sun.star.form.component.DatabaseRadioButton;
+        "com.sun.star.form.component.DatabaseTextField": com.sun.star.form.component.DatabaseTextField;
+        "com.sun.star.form.component.DatabaseTimeField": com.sun.star.form.component.DatabaseTimeField;
+        "com.sun.star.form.component.DataForm": com.sun.star.form.component.DataForm;
+        "com.sun.star.form.component.DateField": com.sun.star.form.component.DateField;
+        "com.sun.star.form.component.FileControl": com.sun.star.form.component.FileControl;
+        "com.sun.star.form.component.FixedText": com.sun.star.form.component.FixedText;
+        "com.sun.star.form.component.Form": com.sun.star.form.component.Form;
+        "com.sun.star.form.component.FormattedField": com.sun.star.form.component.FormattedField;
+        "com.sun.star.form.component.GridControl": com.sun.star.form.component.GridControl;
+        "com.sun.star.form.component.GroupBox": com.sun.star.form.component.GroupBox;
+        "com.sun.star.form.component.HiddenControl": com.sun.star.form.component.HiddenControl;
+        "com.sun.star.form.component.HTMLForm": com.sun.star.form.component.HTMLForm;
+        "com.sun.star.form.component.ImageButton": com.sun.star.form.component.ImageButton;
+        "com.sun.star.form.component.ListBox": com.sun.star.form.component.ListBox;
+        "com.sun.star.form.component.NavigationToolBar": com.sun.star.form.component.NavigationToolBar;
+        "com.sun.star.form.component.NumericField": com.sun.star.form.component.NumericField;
+        "com.sun.star.form.component.PatternField": com.sun.star.form.component.PatternField;
+        "com.sun.star.form.component.RadioButton": com.sun.star.form.component.RadioButton;
+        "com.sun.star.form.component.RichTextControl": com.sun.star.form.component.RichTextControl;
+        "com.sun.star.form.component.ScrollBar": com.sun.star.form.component.ScrollBar;
+        "com.sun.star.form.component.SpinButton": com.sun.star.form.component.SpinButton;
+        "com.sun.star.form.component.SubmitButton": com.sun.star.form.component.SubmitButton;
+        "com.sun.star.form.component.TextField": com.sun.star.form.component.TextField;
+        "com.sun.star.form.component.TimeField": com.sun.star.form.component.TimeField;
+        "com.sun.star.form.control.CheckBox": com.sun.star.form.control.CheckBox;
+        "com.sun.star.form.control.ComboBox": com.sun.star.form.control.ComboBox;
+        "com.sun.star.form.control.CommandButton": com.sun.star.form.control.CommandButton;
+        "com.sun.star.form.control.CurrencyField": com.sun.star.form.control.CurrencyField;
+        "com.sun.star.form.control.DateField": com.sun.star.form.control.DateField;
+        "com.sun.star.form.control.FilterControl": com.sun.star.form.control.FilterControl;
+        "com.sun.star.form.control.FormattedField": com.sun.star.form.control.FormattedField;
+        "com.sun.star.form.control.GridControl": com.sun.star.form.control.GridControl;
+        "com.sun.star.form.control.GroupBox": com.sun.star.form.control.GroupBox;
+        "com.sun.star.form.control.ImageButton": com.sun.star.form.control.ImageButton;
+        "com.sun.star.form.control.ImageControl": com.sun.star.form.control.ImageControl;
+        "com.sun.star.form.control.InteractionGridControl": com.sun.star.form.control.InteractionGridControl;
+        "com.sun.star.form.control.ListBox": com.sun.star.form.control.ListBox;
+        "com.sun.star.form.control.NavigationToolBar": com.sun.star.form.control.NavigationToolBar;
+        "com.sun.star.form.control.NumericField": com.sun.star.form.control.NumericField;
+        "com.sun.star.form.control.PatternField": com.sun.star.form.control.PatternField;
+        "com.sun.star.form.control.RadioButton": com.sun.star.form.control.RadioButton;
+        "com.sun.star.form.control.SubmitButton": com.sun.star.form.control.SubmitButton;
+        "com.sun.star.form.control.TextField": com.sun.star.form.control.TextField;
+        "com.sun.star.form.control.TimeField": com.sun.star.form.control.TimeField;
+        "com.sun.star.form.ControlFontDialog": com.sun.star.form.ControlFontDialog;
+        "com.sun.star.form.DataAwareControlModel": com.sun.star.form.DataAwareControlModel;
+        "com.sun.star.form.FormComponent": com.sun.star.form.FormComponent;
+        "com.sun.star.form.FormComponents": com.sun.star.form.FormComponents;
+        "com.sun.star.form.FormController": com.sun.star.form.FormController;
+        "com.sun.star.form.FormControllerDispatcher": com.sun.star.form.FormControllerDispatcher;
+        "com.sun.star.form.FormControlModel": com.sun.star.form.FormControlModel;
+        "com.sun.star.form.Forms": com.sun.star.form.Forms;
+        "com.sun.star.form.inspection.ButtonNavigationHandler": com.sun.star.form.inspection.ButtonNavigationHandler;
+        "com.sun.star.form.inspection.CellBindingPropertyHandler":
+            com.sun.star.form.inspection.CellBindingPropertyHandler;
+        "com.sun.star.form.inspection.DefaultFormComponentInspectorModel":
+            com.sun.star.form.inspection.DefaultFormComponentInspectorModel;
+        "com.sun.star.form.inspection.EditPropertyHandler": com.sun.star.form.inspection.EditPropertyHandler;
+        "com.sun.star.form.inspection.EventHandler": com.sun.star.form.inspection.EventHandler;
+        "com.sun.star.form.inspection.FormComponentPropertyHandler":
+            com.sun.star.form.inspection.FormComponentPropertyHandler;
+        "com.sun.star.form.inspection.SubmissionPropertyHandler":
+            com.sun.star.form.inspection.SubmissionPropertyHandler;
+        "com.sun.star.form.inspection.XMLFormsPropertyHandler": com.sun.star.form.inspection.XMLFormsPropertyHandler;
+        "com.sun.star.form.inspection.XSDValidationPropertyHandler":
+            com.sun.star.form.inspection.XSDValidationPropertyHandler;
+        "com.sun.star.form.PropertyBrowserController": com.sun.star.form.PropertyBrowserController;
+        "com.sun.star.form.runtime.FormController": com.sun.star.form.runtime.FormController;
+        "com.sun.star.form.runtime.FormOperations": com.sun.star.form.runtime.FormOperations;
+        "com.sun.star.form.TabOrderDialog": com.sun.star.form.TabOrderDialog;
+        "com.sun.star.form.validation.ValidatableBindableControlModel":
+            com.sun.star.form.validation.ValidatableBindableControlModel;
+        "com.sun.star.form.validation.ValidatableControlModel": com.sun.star.form.validation.ValidatableControlModel;
+        "com.sun.star.formula.AccessibleFormulaText": com.sun.star.formula.AccessibleFormulaText;
+        "com.sun.star.formula.AccessibleFormulaView": com.sun.star.formula.AccessibleFormulaView;
+        "com.sun.star.formula.FormulaProperties": com.sun.star.formula.FormulaProperties;
+        "com.sun.star.frame.AppDispatchProvider": com.sun.star.frame.AppDispatchProvider;
+        "com.sun.star.frame.AutoRecovery": com.sun.star.frame.AutoRecovery;
+        "com.sun.star.frame.Bibliography": com.sun.star.frame.Bibliography;
+        "com.sun.star.frame.Components": com.sun.star.frame.Components;
+        "com.sun.star.frame.ContentHandler": com.sun.star.frame.ContentHandler;
+        "com.sun.star.frame.ContentHandlerFactory": com.sun.star.frame.ContentHandlerFactory;
+        "com.sun.star.frame.Controller": com.sun.star.frame.Controller;
+        "com.sun.star.frame.Desktop": com.sun.star.frame.Desktop;
+        "com.sun.star.frame.DesktopTask": com.sun.star.frame.DesktopTask;
+        "com.sun.star.frame.DesktopTasks": com.sun.star.frame.DesktopTasks;
+        "com.sun.star.frame.DispatchHelper": com.sun.star.frame.DispatchHelper;
+        "com.sun.star.frame.DispatchProvider": com.sun.star.frame.DispatchProvider;
+        "com.sun.star.frame.DispatchRecorder": com.sun.star.frame.DispatchRecorder;
+        "com.sun.star.frame.DispatchRecorderSupplier": com.sun.star.frame.DispatchRecorderSupplier;
+        "com.sun.star.frame.DocumentTemplates": com.sun.star.frame.DocumentTemplates;
+        "com.sun.star.frame.Frame": com.sun.star.frame.Frame;
+        "com.sun.star.frame.FrameControl": com.sun.star.frame.FrameControl;
+        "com.sun.star.frame.FrameLoader": com.sun.star.frame.FrameLoader;
+        "com.sun.star.frame.FrameLoaderFactory": com.sun.star.frame.FrameLoaderFactory;
+        "com.sun.star.frame.FramesContainer": com.sun.star.frame.FramesContainer;
+        "com.sun.star.frame.GlobalEventBroadcaster": com.sun.star.frame.GlobalEventBroadcaster;
+        "com.sun.star.frame.LayoutManager": com.sun.star.frame.LayoutManager;
+        "com.sun.star.frame.MediaTypeDetectionHelper": com.sun.star.frame.MediaTypeDetectionHelper;
+        "com.sun.star.frame.ModuleManager": com.sun.star.frame.ModuleManager;
+        "com.sun.star.frame.OfficeFrameLoader": com.sun.star.frame.OfficeFrameLoader;
+        "com.sun.star.frame.PopupMenuController": com.sun.star.frame.PopupMenuController;
+        "com.sun.star.frame.PopupMenuControllerFactory": com.sun.star.frame.PopupMenuControllerFactory;
+        "com.sun.star.frame.ProtocolHandler": com.sun.star.frame.ProtocolHandler;
+        "com.sun.star.frame.SessionListener": com.sun.star.frame.SessionListener;
+        "com.sun.star.frame.SessionManager": com.sun.star.frame.SessionManager;
+        "com.sun.star.frame.Settings": com.sun.star.frame.Settings;
+        "com.sun.star.frame.StartModule": com.sun.star.frame.StartModule;
+        "com.sun.star.frame.StatusbarController": com.sun.star.frame.StatusbarController;
+        "com.sun.star.frame.StatusbarControllerFactory": com.sun.star.frame.StatusbarControllerFactory;
+        "com.sun.star.frame.SynchronousFrameLoader": com.sun.star.frame.SynchronousFrameLoader;
+        "com.sun.star.frame.Task": com.sun.star.frame.Task;
+        "com.sun.star.frame.TaskCreator": com.sun.star.frame.TaskCreator;
+        "com.sun.star.frame.TemplateAccess": com.sun.star.frame.TemplateAccess;
+        "com.sun.star.frame.ToolbarController": com.sun.star.frame.ToolbarController;
+        "com.sun.star.frame.ToolbarControllerFactory": com.sun.star.frame.ToolbarControllerFactory;
+        "com.sun.star.frame.TransientDocumentsDocumentContentFactory":
+            com.sun.star.frame.TransientDocumentsDocumentContentFactory;
+        "com.sun.star.frame.UICommandDescription": com.sun.star.frame.UICommandDescription;
+        "com.sun.star.gallery.GalleryItem": com.sun.star.gallery.GalleryItem;
+        "com.sun.star.gallery.GalleryTheme": com.sun.star.gallery.GalleryTheme;
+        "com.sun.star.gallery.GalleryThemeProvider": com.sun.star.gallery.GalleryThemeProvider;
+        "com.sun.star.graphic.Graphic": com.sun.star.graphic.Graphic;
+        "com.sun.star.graphic.GraphicDescriptor": com.sun.star.graphic.GraphicDescriptor;
+        "com.sun.star.graphic.GraphicObject": com.sun.star.graphic.GraphicObject;
+        "com.sun.star.graphic.GraphicProvider": com.sun.star.graphic.GraphicProvider;
+        "com.sun.star.graphic.GraphicRasterizer": com.sun.star.graphic.GraphicRasterizer;
+        "com.sun.star.graphic.GraphicRendererVCL": com.sun.star.graphic.GraphicRendererVCL;
+        "com.sun.star.graphic.MediaProperties": com.sun.star.graphic.MediaProperties;
+        "com.sun.star.graphic.Primitive2DTools": com.sun.star.graphic.Primitive2DTools;
+        "com.sun.star.graphic.PrimitiveFactory2D": com.sun.star.graphic.PrimitiveFactory2D;
+        "com.sun.star.graphic.SvgTools": com.sun.star.graphic.SvgTools;
+        "com.sun.star.i18n.BreakIterator": com.sun.star.i18n.BreakIterator;
+        "com.sun.star.i18n.ChapterCollator": com.sun.star.i18n.ChapterCollator;
+        "com.sun.star.i18n.CharacterClassification": com.sun.star.i18n.CharacterClassification;
+        "com.sun.star.i18n.Collator": com.sun.star.i18n.Collator;
+        "com.sun.star.i18n.IndexEntrySupplier": com.sun.star.i18n.IndexEntrySupplier;
+        "com.sun.star.i18n.InputSequenceChecker": com.sun.star.i18n.InputSequenceChecker;
+        "com.sun.star.i18n.LocaleCalendar": com.sun.star.i18n.LocaleCalendar;
+        "com.sun.star.i18n.LocaleCalendar2": com.sun.star.i18n.LocaleCalendar2;
+        "com.sun.star.i18n.LocaleData": com.sun.star.i18n.LocaleData;
+        "com.sun.star.i18n.NativeNumberSupplier": com.sun.star.i18n.NativeNumberSupplier;
+        "com.sun.star.i18n.NumberFormatMapper": com.sun.star.i18n.NumberFormatMapper;
+        "com.sun.star.i18n.OrdinalSuffix": com.sun.star.i18n.OrdinalSuffix;
+        "com.sun.star.i18n.TextConversion": com.sun.star.i18n.TextConversion;
+        "com.sun.star.i18n.Transliteration": com.sun.star.i18n.Transliteration;
+        "com.sun.star.image.ImageMap": com.sun.star.image.ImageMap;
+        "com.sun.star.image.ImageMapCircleObject": com.sun.star.image.ImageMapCircleObject;
+        "com.sun.star.image.ImageMapObject": com.sun.star.image.ImageMapObject;
+        "com.sun.star.image.ImageMapPolygonObject": com.sun.star.image.ImageMapPolygonObject;
+        "com.sun.star.image.ImageMapRectangleObject": com.sun.star.image.ImageMapRectangleObject;
+        "com.sun.star.inspection.DefaultHelpProvider": com.sun.star.inspection.DefaultHelpProvider;
+        "com.sun.star.inspection.GenericPropertyHandler": com.sun.star.inspection.GenericPropertyHandler;
+        "com.sun.star.inspection.ObjectInspector": com.sun.star.inspection.ObjectInspector;
+        "com.sun.star.inspection.ObjectInspectorModel": com.sun.star.inspection.ObjectInspectorModel;
+        "com.sun.star.inspection.StringRepresentation": com.sun.star.inspection.StringRepresentation;
+        "com.sun.star.io.DataInputStream": com.sun.star.io.DataInputStream;
+        "com.sun.star.io.DataOutputStream": com.sun.star.io.DataOutputStream;
+        "com.sun.star.io.MarkableInputStream": com.sun.star.io.MarkableInputStream;
+        "com.sun.star.io.MarkableOutputStream": com.sun.star.io.MarkableOutputStream;
+        "com.sun.star.io.ObjectInputStream": com.sun.star.io.ObjectInputStream;
+        "com.sun.star.io.ObjectOutputStream": com.sun.star.io.ObjectOutputStream;
+        "com.sun.star.io.Pipe": com.sun.star.io.Pipe;
+        "com.sun.star.io.Pump": com.sun.star.io.Pump;
+        "com.sun.star.io.SequenceInputStream": com.sun.star.io.SequenceInputStream;
+        "com.sun.star.io.SequenceOutputStream": com.sun.star.io.SequenceOutputStream;
+        "com.sun.star.io.TempFile": com.sun.star.io.TempFile;
+        "com.sun.star.io.TextInputStream": com.sun.star.io.TextInputStream;
+        "com.sun.star.io.TextOutputStream": com.sun.star.io.TextOutputStream;
+        "com.sun.star.java.JavaVirtualMachine": com.sun.star.java.JavaVirtualMachine;
+        "com.sun.star.lang.MultiServiceFactory": com.sun.star.lang.MultiServiceFactory;
+        "com.sun.star.lang.RegistryServiceManager": com.sun.star.lang.RegistryServiceManager;
+        "com.sun.star.lang.ServiceManager": com.sun.star.lang.ServiceManager;
+        "com.sun.star.linguistic2.ConversionDictionary": com.sun.star.linguistic2.ConversionDictionary;
+        "com.sun.star.linguistic2.ConversionDictionaryList": com.sun.star.linguistic2.ConversionDictionaryList;
+        "com.sun.star.linguistic2.Dictionary": com.sun.star.linguistic2.Dictionary;
+        "com.sun.star.linguistic2.DictionaryList": com.sun.star.linguistic2.DictionaryList;
+        "com.sun.star.linguistic2.HangulHanjaConversionDictionary":
+            com.sun.star.linguistic2.HangulHanjaConversionDictionary;
+        "com.sun.star.linguistic2.Hyphenator": com.sun.star.linguistic2.Hyphenator;
+        "com.sun.star.linguistic2.LanguageGuessing": com.sun.star.linguistic2.LanguageGuessing;
+        "com.sun.star.linguistic2.LinguProperties": com.sun.star.linguistic2.LinguProperties;
+        "com.sun.star.linguistic2.LinguServiceManager": com.sun.star.linguistic2.LinguServiceManager;
+        "com.sun.star.linguistic2.Proofreader": com.sun.star.linguistic2.Proofreader;
+        "com.sun.star.linguistic2.ProofreadingIterator": com.sun.star.linguistic2.ProofreadingIterator;
+        "com.sun.star.linguistic2.SpellChecker": com.sun.star.linguistic2.SpellChecker;
+        "com.sun.star.linguistic2.Thesaurus": com.sun.star.linguistic2.Thesaurus;
+        "com.sun.star.loader.Dynamic": com.sun.star.loader.Dynamic;
+        "com.sun.star.loader.Java": com.sun.star.loader.Java;
+        "com.sun.star.loader.Java2": com.sun.star.loader.Java2;
+        "com.sun.star.loader.SharedLibrary": com.sun.star.loader.SharedLibrary;
+        "com.sun.star.logging.ConsoleHandler": com.sun.star.logging.ConsoleHandler;
+        "com.sun.star.logging.CsvLogFormatter": com.sun.star.logging.CsvLogFormatter;
+        "com.sun.star.logging.FileHandler": com.sun.star.logging.FileHandler;
+        "com.sun.star.logging.PlainTextFormatter": com.sun.star.logging.PlainTextFormatter;
+        "com.sun.star.logging.SimpleLogRing": com.sun.star.logging.SimpleLogRing;
+        "com.sun.star.mail.MailMessage": com.sun.star.mail.MailMessage;
+        "com.sun.star.mail.MailServiceProvider": com.sun.star.mail.MailServiceProvider;
+        "com.sun.star.media.Manager": com.sun.star.media.Manager;
+        "com.sun.star.mozilla.MenuProxy": com.sun.star.mozilla.MenuProxy;
+        "com.sun.star.mozilla.MenuProxyListener": com.sun.star.mozilla.MenuProxyListener;
+        "com.sun.star.mozilla.MozillaBootstrap": com.sun.star.mozilla.MozillaBootstrap;
+        "com.sun.star.office.Quickstart": com.sun.star.office.Quickstart;
+        "com.sun.star.packages.manifest.ManifestReader": com.sun.star.packages.manifest.ManifestReader;
+        "com.sun.star.packages.manifest.ManifestWriter": com.sun.star.packages.manifest.ManifestWriter;
+        "com.sun.star.packages.Package": com.sun.star.packages.Package;
+        "com.sun.star.packages.PackageFolder": com.sun.star.packages.PackageFolder;
+        "com.sun.star.packages.PackageFolderEnumeration": com.sun.star.packages.PackageFolderEnumeration;
+        "com.sun.star.packages.PackageStream": com.sun.star.packages.PackageStream;
+        "com.sun.star.packages.zip.ZipFileAccess": com.sun.star.packages.zip.ZipFileAccess;
+        "com.sun.star.presentation.ChartShape": com.sun.star.presentation.ChartShape;
+        "com.sun.star.presentation.CustomPresentation": com.sun.star.presentation.CustomPresentation;
+        "com.sun.star.presentation.CustomPresentationAccess": com.sun.star.presentation.CustomPresentationAccess;
+        "com.sun.star.presentation.DateTimeShape": com.sun.star.presentation.DateTimeShape;
+        "com.sun.star.presentation.DocumentSettings": com.sun.star.presentation.DocumentSettings;
+        "com.sun.star.presentation.DrawPage": com.sun.star.presentation.DrawPage;
+        "com.sun.star.presentation.FooterShape": com.sun.star.presentation.FooterShape;
+        "com.sun.star.presentation.GraphicObjectShape": com.sun.star.presentation.GraphicObjectShape;
+        "com.sun.star.presentation.HandoutShape": com.sun.star.presentation.HandoutShape;
+        "com.sun.star.presentation.HandoutView": com.sun.star.presentation.HandoutView;
+        "com.sun.star.presentation.HeaderShape": com.sun.star.presentation.HeaderShape;
+        "com.sun.star.presentation.NotesShape": com.sun.star.presentation.NotesShape;
+        "com.sun.star.presentation.NotesView": com.sun.star.presentation.NotesView;
+        "com.sun.star.presentation.OLE2Shape": com.sun.star.presentation.OLE2Shape;
+        "com.sun.star.presentation.OutlinerShape": com.sun.star.presentation.OutlinerShape;
+        "com.sun.star.presentation.OutlineView": com.sun.star.presentation.OutlineView;
+        "com.sun.star.presentation.PageShape": com.sun.star.presentation.PageShape;
+        "com.sun.star.presentation.Presentation": com.sun.star.presentation.Presentation;
+        "com.sun.star.presentation.Presentation2": com.sun.star.presentation.Presentation2;
+        "com.sun.star.presentation.PresentationDocument": com.sun.star.presentation.PresentationDocument;
+        "com.sun.star.presentation.PresentationView": com.sun.star.presentation.PresentationView;
+        "com.sun.star.presentation.PreviewView": com.sun.star.presentation.PreviewView;
+        "com.sun.star.presentation.Shape": com.sun.star.presentation.Shape;
+        "com.sun.star.presentation.SlideNumberShape": com.sun.star.presentation.SlideNumberShape;
+        "com.sun.star.presentation.SlideShow": com.sun.star.presentation.SlideShow;
+        "com.sun.star.presentation.SlidesView": com.sun.star.presentation.SlidesView;
+        "com.sun.star.presentation.SubtitleShape": com.sun.star.presentation.SubtitleShape;
+        "com.sun.star.presentation.textfield.DateTime": com.sun.star.presentation.textfield.DateTime;
+        "com.sun.star.presentation.textfield.Footer": com.sun.star.presentation.textfield.Footer;
+        "com.sun.star.presentation.textfield.Header": com.sun.star.presentation.textfield.Header;
+        "com.sun.star.presentation.TitleTextShape": com.sun.star.presentation.TitleTextShape;
+        "com.sun.star.presentation.TransitionFactory": com.sun.star.presentation.TransitionFactory;
+        "com.sun.star.rdf.BlankNode": com.sun.star.rdf.BlankNode;
+        "com.sun.star.rdf.Literal": com.sun.star.rdf.Literal;
+        "com.sun.star.rdf.Repository": com.sun.star.rdf.Repository;
+        "com.sun.star.rdf.URI": com.sun.star.rdf.URI;
+        "com.sun.star.reflection.CoreReflection": com.sun.star.reflection.CoreReflection;
+        "com.sun.star.reflection.ProxyFactory": com.sun.star.reflection.ProxyFactory;
+        "com.sun.star.reflection.TypeDescriptionManager": com.sun.star.reflection.TypeDescriptionManager;
+        "com.sun.star.reflection.TypeDescriptionProvider": com.sun.star.reflection.TypeDescriptionProvider;
+        "com.sun.star.registry.DefaultRegistry": com.sun.star.registry.DefaultRegistry;
+        "com.sun.star.registry.ImplementationRegistration": com.sun.star.registry.ImplementationRegistration;
+        "com.sun.star.registry.NestedRegistry": com.sun.star.registry.NestedRegistry;
+        "com.sun.star.registry.SimpleRegistry": com.sun.star.registry.SimpleRegistry;
+        "com.sun.star.rendering.BitmapCanvas": com.sun.star.rendering.BitmapCanvas;
+        "com.sun.star.rendering.Canvas": com.sun.star.rendering.Canvas;
+        "com.sun.star.rendering.CanvasFactory": com.sun.star.rendering.CanvasFactory;
+        "com.sun.star.rendering.MtfRenderer": com.sun.star.rendering.MtfRenderer;
+        "com.sun.star.report.FixedLine": com.sun.star.report.FixedLine;
+        "com.sun.star.report.FixedText": com.sun.star.report.FixedText;
+        "com.sun.star.report.FormatCondition": com.sun.star.report.FormatCondition;
+        "com.sun.star.report.FormattedField": com.sun.star.report.FormattedField;
+        "com.sun.star.report.Function": com.sun.star.report.Function;
+        "com.sun.star.report.Group": com.sun.star.report.Group;
+        "com.sun.star.report.Groups": com.sun.star.report.Groups;
+        "com.sun.star.report.ImageControl": com.sun.star.report.ImageControl;
+        "com.sun.star.report.inspection.DataProviderHandler": com.sun.star.report.inspection.DataProviderHandler;
+        "com.sun.star.report.inspection.DefaultComponentInspectorModel":
+            com.sun.star.report.inspection.DefaultComponentInspectorModel;
+        "com.sun.star.report.inspection.ReportComponentHandler": com.sun.star.report.inspection.ReportComponentHandler;
+        "com.sun.star.report.ReportControlFormat": com.sun.star.report.ReportControlFormat;
+        "com.sun.star.report.ReportControlModel": com.sun.star.report.ReportControlModel;
+        "com.sun.star.report.ReportDefinition": com.sun.star.report.ReportDefinition;
+        "com.sun.star.report.ReportEngine": com.sun.star.report.ReportEngine;
+        "com.sun.star.report.Section": com.sun.star.report.Section;
+        "com.sun.star.report.Shape": com.sun.star.report.Shape;
+        "com.sun.star.resource.StringResource": com.sun.star.resource.StringResource;
+        "com.sun.star.resource.StringResourceWithLocation": com.sun.star.resource.StringResourceWithLocation;
+        "com.sun.star.resource.StringResourceWithStorage": com.sun.star.resource.StringResourceWithStorage;
+        "com.sun.star.scanner.ScannerManager": com.sun.star.scanner.ScannerManager;
+        "com.sun.star.script.AllListenerAdapter": com.sun.star.script.AllListenerAdapter;
+        "com.sun.star.script.browse.BrowseNode": com.sun.star.script.browse.BrowseNode;
+        "com.sun.star.script.browse.BrowseNodeFactory": com.sun.star.script.browse.BrowseNodeFactory;
+        "com.sun.star.script.Converter": com.sun.star.script.Converter;
+        "com.sun.star.script.DocumentDialogLibraryContainer": com.sun.star.script.DocumentDialogLibraryContainer;
+        "com.sun.star.script.DocumentScriptLibraryContainer": com.sun.star.script.DocumentScriptLibraryContainer;
+        "com.sun.star.script.Engine": com.sun.star.script.Engine;
+        "com.sun.star.script.Invocation": com.sun.star.script.Invocation;
+        "com.sun.star.script.InvocationAdapterFactory": com.sun.star.script.InvocationAdapterFactory;
+        "com.sun.star.script.JavaScript": com.sun.star.script.JavaScript;
+        "com.sun.star.script.provider.LanguageScriptProvider": com.sun.star.script.provider.LanguageScriptProvider;
+        "com.sun.star.script.provider.MasterScriptProvider": com.sun.star.script.provider.MasterScriptProvider;
+        "com.sun.star.script.provider.MasterScriptProviderFactory":
+            com.sun.star.script.provider.MasterScriptProviderFactory;
+        "com.sun.star.script.provider.ScriptProvider": com.sun.star.script.provider.ScriptProvider;
+        "com.sun.star.script.provider.ScriptProviderForBasic": com.sun.star.script.provider.ScriptProviderForBasic;
+        "com.sun.star.script.provider.ScriptProviderForBeanShell":
+            com.sun.star.script.provider.ScriptProviderForBeanShell;
+        "com.sun.star.script.provider.ScriptProviderForJava": com.sun.star.script.provider.ScriptProviderForJava;
+        "com.sun.star.script.provider.ScriptProviderForJavaScript":
+            com.sun.star.script.provider.ScriptProviderForJavaScript;
+        "com.sun.star.script.provider.ScriptURIHelper": com.sun.star.script.provider.ScriptURIHelper;
+        "com.sun.star.script.vba.VBAEventProcessor": com.sun.star.script.vba.VBAEventProcessor;
+        "com.sun.star.script.vba.VBAMacroResolver": com.sun.star.script.vba.VBAMacroResolver;
+        "com.sun.star.script.vba.VBASpreadsheetEventProcessor": com.sun.star.script.vba.VBASpreadsheetEventProcessor;
+        "com.sun.star.script.vba.VBATextEventProcessor": com.sun.star.script.vba.VBATextEventProcessor;
+        "com.sun.star.sdb.application.CopyTableWizard": com.sun.star.sdb.application.CopyTableWizard;
+        "com.sun.star.sdb.application.DefaultViewController": com.sun.star.sdb.application.DefaultViewController;
+        "com.sun.star.sdb.application.MacroMigrationWizard": com.sun.star.sdb.application.MacroMigrationWizard;
+        "com.sun.star.sdb.CallableStatement": com.sun.star.sdb.CallableStatement;
+        "com.sun.star.sdb.Column": com.sun.star.sdb.Column;
+        "com.sun.star.sdb.ColumnDescriptorControl": com.sun.star.sdb.ColumnDescriptorControl;
+        "com.sun.star.sdb.ColumnDescriptorControlModel": com.sun.star.sdb.ColumnDescriptorControlModel;
+        "com.sun.star.sdb.ColumnSettings": com.sun.star.sdb.ColumnSettings;
+        "com.sun.star.sdb.CommandDefinition": com.sun.star.sdb.CommandDefinition;
+        "com.sun.star.sdb.Connection": com.sun.star.sdb.Connection;
+        "com.sun.star.sdb.ContentLoader": com.sun.star.sdb.ContentLoader;
+        "com.sun.star.sdb.DataAccessDescriptor": com.sun.star.sdb.DataAccessDescriptor;
+        "com.sun.star.sdb.DatabaseAccess": com.sun.star.sdb.DatabaseAccess;
+        "com.sun.star.sdb.DatabaseAccessConnection": com.sun.star.sdb.DatabaseAccessConnection;
+        "com.sun.star.sdb.DatabaseAccessContext": com.sun.star.sdb.DatabaseAccessContext;
+        "com.sun.star.sdb.DatabaseAccessDataSource": com.sun.star.sdb.DatabaseAccessDataSource;
+        "com.sun.star.sdb.DatabaseContext": com.sun.star.sdb.DatabaseContext;
+        "com.sun.star.sdb.DatabaseDocument": com.sun.star.sdb.DatabaseDocument;
+        "com.sun.star.sdb.DatabaseEnvironment": com.sun.star.sdb.DatabaseEnvironment;
+        "com.sun.star.sdb.DatabaseInteractionHandler": com.sun.star.sdb.DatabaseInteractionHandler;
+        "com.sun.star.sdb.DataColumn": com.sun.star.sdb.DataColumn;
+        "com.sun.star.sdb.DataSettings": com.sun.star.sdb.DataSettings;
+        "com.sun.star.sdb.DataSource": com.sun.star.sdb.DataSource;
+        "com.sun.star.sdb.DatasourceAdministrationDialog": com.sun.star.sdb.DatasourceAdministrationDialog;
+        "com.sun.star.sdb.DataSourceBrowser": com.sun.star.sdb.DataSourceBrowser;
+        "com.sun.star.sdb.DefinitionContainer": com.sun.star.sdb.DefinitionContainer;
+        "com.sun.star.sdb.DefinitionContent": com.sun.star.sdb.DefinitionContent;
+        "com.sun.star.sdb.Document": com.sun.star.sdb.Document;
+        "com.sun.star.sdb.DocumentContainer": com.sun.star.sdb.DocumentContainer;
+        "com.sun.star.sdb.DocumentDataSource": com.sun.star.sdb.DocumentDataSource;
+        "com.sun.star.sdb.DocumentDefinition": com.sun.star.sdb.DocumentDefinition;
+        "com.sun.star.sdb.ErrorMessageDialog": com.sun.star.sdb.ErrorMessageDialog;
+        "com.sun.star.sdb.FilterDialog": com.sun.star.sdb.FilterDialog;
+        "com.sun.star.sdb.Forms": com.sun.star.sdb.Forms;
+        "com.sun.star.sdb.InteractionHandler": com.sun.star.sdb.InteractionHandler;
+        "com.sun.star.sdb.OfficeDatabaseDocument": com.sun.star.sdb.OfficeDatabaseDocument;
+        "com.sun.star.sdb.OrderColumn": com.sun.star.sdb.OrderColumn;
+        "com.sun.star.sdb.OrderDialog": com.sun.star.sdb.OrderDialog;
+        "com.sun.star.sdb.PreparedStatement": com.sun.star.sdb.PreparedStatement;
+        "com.sun.star.sdb.Query": com.sun.star.sdb.Query;
+        "com.sun.star.sdb.QueryDefinition": com.sun.star.sdb.QueryDefinition;
+        "com.sun.star.sdb.QueryDescriptor": com.sun.star.sdb.QueryDescriptor;
+        "com.sun.star.sdb.QueryDesign": com.sun.star.sdb.QueryDesign;
+        "com.sun.star.sdb.RelationDesign": com.sun.star.sdb.RelationDesign;
+        "com.sun.star.sdb.ReportDesign": com.sun.star.sdb.ReportDesign;
+        "com.sun.star.sdb.Reports": com.sun.star.sdb.Reports;
+        "com.sun.star.sdb.ResultColumn": com.sun.star.sdb.ResultColumn;
+        "com.sun.star.sdb.ResultSet": com.sun.star.sdb.ResultSet;
+        "com.sun.star.sdb.RowSet": com.sun.star.sdb.RowSet;
+        "com.sun.star.sdb.SingleSelectQueryAnalyzer": com.sun.star.sdb.SingleSelectQueryAnalyzer;
+        "com.sun.star.sdb.SingleSelectQueryComposer": com.sun.star.sdb.SingleSelectQueryComposer;
+        "com.sun.star.sdb.SQLQueryComposer": com.sun.star.sdb.SQLQueryComposer;
+        "com.sun.star.sdb.Table": com.sun.star.sdb.Table;
+        "com.sun.star.sdb.TableDefinition": com.sun.star.sdb.TableDefinition;
+        "com.sun.star.sdb.TableDescriptor": com.sun.star.sdb.TableDescriptor;
+        "com.sun.star.sdb.TableDesign": com.sun.star.sdb.TableDesign;
+        "com.sun.star.sdb.TextConnectionSettings": com.sun.star.sdb.TextConnectionSettings;
+        "com.sun.star.sdb.tools.ConnectionTools": com.sun.star.sdb.tools.ConnectionTools;
+        "com.sun.star.sdbc.CallableStatement": com.sun.star.sdbc.CallableStatement;
+        "com.sun.star.sdbc.Connection": com.sun.star.sdbc.Connection;
+        "com.sun.star.sdbc.ConnectionPool": com.sun.star.sdbc.ConnectionPool;
+        "com.sun.star.sdbc.ConnectionProperties": com.sun.star.sdbc.ConnectionProperties;
+        "com.sun.star.sdbc.DBASEConnectionProperties": com.sun.star.sdbc.DBASEConnectionProperties;
+        "com.sun.star.sdbc.Driver": com.sun.star.sdbc.Driver;
+        "com.sun.star.sdbc.DriverManager": com.sun.star.sdbc.DriverManager;
+        "com.sun.star.sdbc.FILEConnectionProperties": com.sun.star.sdbc.FILEConnectionProperties;
+        "com.sun.star.sdbc.FLATConnectionProperties": com.sun.star.sdbc.FLATConnectionProperties;
+        "com.sun.star.sdbc.JDBCConnectionProperties": com.sun.star.sdbc.JDBCConnectionProperties;
+        "com.sun.star.sdbc.ODBCConnectionProperties": com.sun.star.sdbc.ODBCConnectionProperties;
+        "com.sun.star.sdbc.PreparedStatement": com.sun.star.sdbc.PreparedStatement;
+        "com.sun.star.sdbc.ResultSet": com.sun.star.sdbc.ResultSet;
+        "com.sun.star.sdbc.RowSet": com.sun.star.sdbc.RowSet;
+        "com.sun.star.sdbc.Statement": com.sun.star.sdbc.Statement;
+        "com.sun.star.sdbcx.Column": com.sun.star.sdbcx.Column;
+        "com.sun.star.sdbcx.ColumnDescriptor": com.sun.star.sdbcx.ColumnDescriptor;
+        "com.sun.star.sdbcx.Container": com.sun.star.sdbcx.Container;
+        "com.sun.star.sdbcx.DatabaseDefinition": com.sun.star.sdbcx.DatabaseDefinition;
+        "com.sun.star.sdbcx.Descriptor": com.sun.star.sdbcx.Descriptor;
+        "com.sun.star.sdbcx.Driver": com.sun.star.sdbcx.Driver;
+        "com.sun.star.sdbcx.Group": com.sun.star.sdbcx.Group;
+        "com.sun.star.sdbcx.GroupDescriptor": com.sun.star.sdbcx.GroupDescriptor;
+        "com.sun.star.sdbcx.Index": com.sun.star.sdbcx.Index;
+        "com.sun.star.sdbcx.IndexColumn": com.sun.star.sdbcx.IndexColumn;
+        "com.sun.star.sdbcx.IndexColumnDescriptor": com.sun.star.sdbcx.IndexColumnDescriptor;
+        "com.sun.star.sdbcx.IndexDescriptor": com.sun.star.sdbcx.IndexDescriptor;
+        "com.sun.star.sdbcx.Key": com.sun.star.sdbcx.Key;
+        "com.sun.star.sdbcx.KeyColumn": com.sun.star.sdbcx.KeyColumn;
+        "com.sun.star.sdbcx.KeyColumnDescriptor": com.sun.star.sdbcx.KeyColumnDescriptor;
+        "com.sun.star.sdbcx.KeyDescriptor": com.sun.star.sdbcx.KeyDescriptor;
+        "com.sun.star.sdbcx.PreparedStatement": com.sun.star.sdbcx.PreparedStatement;
+        "com.sun.star.sdbcx.ReferenceColumn": com.sun.star.sdbcx.ReferenceColumn;
+        "com.sun.star.sdbcx.ResultSet": com.sun.star.sdbcx.ResultSet;
+        "com.sun.star.sdbcx.Statement": com.sun.star.sdbcx.Statement;
+        "com.sun.star.sdbcx.Table": com.sun.star.sdbcx.Table;
+        "com.sun.star.sdbcx.TableDescriptor": com.sun.star.sdbcx.TableDescriptor;
+        "com.sun.star.sdbcx.User": com.sun.star.sdbcx.User;
+        "com.sun.star.sdbcx.UserDescriptor": com.sun.star.sdbcx.UserDescriptor;
+        "com.sun.star.sdbcx.View": com.sun.star.sdbcx.View;
+        "com.sun.star.sdbcx.ViewDescriptor": com.sun.star.sdbcx.ViewDescriptor;
+        "com.sun.star.security.AccessController": com.sun.star.security.AccessController;
+        "com.sun.star.security.CertificateContainer": com.sun.star.security.CertificateContainer;
+        "com.sun.star.security.DocumentDigitalSignatures": com.sun.star.security.DocumentDigitalSignatures;
+        "com.sun.star.security.Policy": com.sun.star.security.Policy;
+        "com.sun.star.security.SerialNumberAdapter": com.sun.star.security.SerialNumberAdapter;
+        "com.sun.star.setup.UpdateCheck": com.sun.star.setup.UpdateCheck;
+        "com.sun.star.setup.UpdateCheckConfig": com.sun.star.setup.UpdateCheckConfig;
+        "com.sun.star.sheet.AccessibleCell": com.sun.star.sheet.AccessibleCell;
+        "com.sun.star.sheet.AccessibleCsvCell": com.sun.star.sheet.AccessibleCsvCell;
+        "com.sun.star.sheet.AccessibleCsvRuler": com.sun.star.sheet.AccessibleCsvRuler;
+        "com.sun.star.sheet.AccessibleCsvTable": com.sun.star.sheet.AccessibleCsvTable;
+        "com.sun.star.sheet.AccessiblePageHeaderFooterAreasView":
+            com.sun.star.sheet.AccessiblePageHeaderFooterAreasView;
+        "com.sun.star.sheet.AccessibleSpreadsheet": com.sun.star.sheet.AccessibleSpreadsheet;
+        "com.sun.star.sheet.AccessibleSpreadsheetDocumentView": com.sun.star.sheet.AccessibleSpreadsheetDocumentView;
+        "com.sun.star.sheet.AccessibleSpreadsheetPageView": com.sun.star.sheet.AccessibleSpreadsheetPageView;
+        "com.sun.star.sheet.AddIn": com.sun.star.sheet.AddIn;
+        "com.sun.star.sheet.CellAnnotation": com.sun.star.sheet.CellAnnotation;
+        "com.sun.star.sheet.CellAnnotations": com.sun.star.sheet.CellAnnotations;
+        "com.sun.star.sheet.CellAnnotationsEnumeration": com.sun.star.sheet.CellAnnotationsEnumeration;
+        "com.sun.star.sheet.CellAnnotationShape": com.sun.star.sheet.CellAnnotationShape;
+        "com.sun.star.sheet.CellAreaLink": com.sun.star.sheet.CellAreaLink;
+        "com.sun.star.sheet.CellAreaLinks": com.sun.star.sheet.CellAreaLinks;
+        "com.sun.star.sheet.CellAreaLinksEnumeration": com.sun.star.sheet.CellAreaLinksEnumeration;
+        "com.sun.star.sheet.CellFormatRanges": com.sun.star.sheet.CellFormatRanges;
+        "com.sun.star.sheet.CellFormatRangesEnumeration": com.sun.star.sheet.CellFormatRangesEnumeration;
+        "com.sun.star.sheet.Cells": com.sun.star.sheet.Cells;
+        "com.sun.star.sheet.CellsEnumeration": com.sun.star.sheet.CellsEnumeration;
+        "com.sun.star.sheet.ColorScale": com.sun.star.sheet.ColorScale;
+        "com.sun.star.sheet.ConditionalFormat": com.sun.star.sheet.ConditionalFormat;
+        "com.sun.star.sheet.ConditionFormatEntry": com.sun.star.sheet.ConditionFormatEntry;
+        "com.sun.star.sheet.ConsolidationDescriptor": com.sun.star.sheet.ConsolidationDescriptor;
+        "com.sun.star.sheet.DataBar": com.sun.star.sheet.DataBar;
+        "com.sun.star.sheet.DatabaseImportDescriptor": com.sun.star.sheet.DatabaseImportDescriptor;
+        "com.sun.star.sheet.DatabaseRange": com.sun.star.sheet.DatabaseRange;
+        "com.sun.star.sheet.DatabaseRanges": com.sun.star.sheet.DatabaseRanges;
+        "com.sun.star.sheet.DatabaseRangesEnumeration": com.sun.star.sheet.DatabaseRangesEnumeration;
+        "com.sun.star.sheet.DataPilotDescriptor": com.sun.star.sheet.DataPilotDescriptor;
+        "com.sun.star.sheet.DataPilotField": com.sun.star.sheet.DataPilotField;
+        "com.sun.star.sheet.DataPilotFieldGroup": com.sun.star.sheet.DataPilotFieldGroup;
+        "com.sun.star.sheet.DataPilotFieldGroupEnumeration": com.sun.star.sheet.DataPilotFieldGroupEnumeration;
+        "com.sun.star.sheet.DataPilotFieldGroupItem": com.sun.star.sheet.DataPilotFieldGroupItem;
+        "com.sun.star.sheet.DataPilotFieldGroups": com.sun.star.sheet.DataPilotFieldGroups;
+        "com.sun.star.sheet.DataPilotFieldGroupsEnumeration": com.sun.star.sheet.DataPilotFieldGroupsEnumeration;
+        "com.sun.star.sheet.DataPilotFields": com.sun.star.sheet.DataPilotFields;
+        "com.sun.star.sheet.DataPilotFieldsEnumeration": com.sun.star.sheet.DataPilotFieldsEnumeration;
+        "com.sun.star.sheet.DataPilotItem": com.sun.star.sheet.DataPilotItem;
+        "com.sun.star.sheet.DataPilotItems": com.sun.star.sheet.DataPilotItems;
+        "com.sun.star.sheet.DataPilotItemsEnumeration": com.sun.star.sheet.DataPilotItemsEnumeration;
+        "com.sun.star.sheet.DataPilotSource": com.sun.star.sheet.DataPilotSource;
+        "com.sun.star.sheet.DataPilotSourceDimension": com.sun.star.sheet.DataPilotSourceDimension;
+        "com.sun.star.sheet.DataPilotSourceDimensions": com.sun.star.sheet.DataPilotSourceDimensions;
+        "com.sun.star.sheet.DataPilotSourceHierarchies": com.sun.star.sheet.DataPilotSourceHierarchies;
+        "com.sun.star.sheet.DataPilotSourceHierarchy": com.sun.star.sheet.DataPilotSourceHierarchy;
+        "com.sun.star.sheet.DataPilotSourceLevel": com.sun.star.sheet.DataPilotSourceLevel;
+        "com.sun.star.sheet.DataPilotSourceLevels": com.sun.star.sheet.DataPilotSourceLevels;
+        "com.sun.star.sheet.DataPilotSourceMember": com.sun.star.sheet.DataPilotSourceMember;
+        "com.sun.star.sheet.DataPilotSourceMembers": com.sun.star.sheet.DataPilotSourceMembers;
+        "com.sun.star.sheet.DataPilotTable": com.sun.star.sheet.DataPilotTable;
+        "com.sun.star.sheet.DataPilotTables": com.sun.star.sheet.DataPilotTables;
+        "com.sun.star.sheet.DataPilotTablesEnumeration": com.sun.star.sheet.DataPilotTablesEnumeration;
+        "com.sun.star.sheet.DateCondition": com.sun.star.sheet.DateCondition;
+        "com.sun.star.sheet.DDELink": com.sun.star.sheet.DDELink;
+        "com.sun.star.sheet.DDELinks": com.sun.star.sheet.DDELinks;
+        "com.sun.star.sheet.DDELinksEnumeration": com.sun.star.sheet.DDELinksEnumeration;
+        "com.sun.star.sheet.DocumentSettings": com.sun.star.sheet.DocumentSettings;
+        "com.sun.star.sheet.ExternalDocLink": com.sun.star.sheet.ExternalDocLink;
+        "com.sun.star.sheet.ExternalDocLinks": com.sun.star.sheet.ExternalDocLinks;
+        "com.sun.star.sheet.ExternalSheetCache": com.sun.star.sheet.ExternalSheetCache;
+        "com.sun.star.sheet.FilterFormulaParser": com.sun.star.sheet.FilterFormulaParser;
+        "com.sun.star.sheet.FormulaOpCodeMapper": com.sun.star.sheet.FormulaOpCodeMapper;
+        "com.sun.star.sheet.FormulaParser": com.sun.star.sheet.FormulaParser;
+        "com.sun.star.sheet.FunctionAccess": com.sun.star.sheet.FunctionAccess;
+        "com.sun.star.sheet.FunctionDescription": com.sun.star.sheet.FunctionDescription;
+        "com.sun.star.sheet.FunctionDescriptionEnumeration": com.sun.star.sheet.FunctionDescriptionEnumeration;
+        "com.sun.star.sheet.FunctionDescriptions": com.sun.star.sheet.FunctionDescriptions;
+        "com.sun.star.sheet.GlobalSheetSettings": com.sun.star.sheet.GlobalSheetSettings;
+        "com.sun.star.sheet.HeaderFooterContent": com.sun.star.sheet.HeaderFooterContent;
+        "com.sun.star.sheet.IconSet": com.sun.star.sheet.IconSet;
+        "com.sun.star.sheet.LabelRange": com.sun.star.sheet.LabelRange;
+        "com.sun.star.sheet.LabelRanges": com.sun.star.sheet.LabelRanges;
+        "com.sun.star.sheet.LabelRangesEnumeration": com.sun.star.sheet.LabelRangesEnumeration;
+        "com.sun.star.sheet.NamedRange": com.sun.star.sheet.NamedRange;
+        "com.sun.star.sheet.NamedRanges": com.sun.star.sheet.NamedRanges;
+        "com.sun.star.sheet.NamedRangesEnumeration": com.sun.star.sheet.NamedRangesEnumeration;
+        "com.sun.star.sheet.RangeSelectionArguments": com.sun.star.sheet.RangeSelectionArguments;
+        "com.sun.star.sheet.RecentFunctions": com.sun.star.sheet.RecentFunctions;
+        "com.sun.star.sheet.Scenario": com.sun.star.sheet.Scenario;
+        "com.sun.star.sheet.Scenarios": com.sun.star.sheet.Scenarios;
+        "com.sun.star.sheet.ScenariosEnumeration": com.sun.star.sheet.ScenariosEnumeration;
+        "com.sun.star.sheet.Shape": com.sun.star.sheet.Shape;
+        "com.sun.star.sheet.SheetCell": com.sun.star.sheet.SheetCell;
+        "com.sun.star.sheet.SheetCellCursor": com.sun.star.sheet.SheetCellCursor;
+        "com.sun.star.sheet.SheetCellRange": com.sun.star.sheet.SheetCellRange;
+        "com.sun.star.sheet.SheetCellRanges": com.sun.star.sheet.SheetCellRanges;
+        "com.sun.star.sheet.SheetCellRangesEnumeration": com.sun.star.sheet.SheetCellRangesEnumeration;
+        "com.sun.star.sheet.SheetFilterDescriptor": com.sun.star.sheet.SheetFilterDescriptor;
+        "com.sun.star.sheet.SheetLink": com.sun.star.sheet.SheetLink;
+        "com.sun.star.sheet.SheetLinks": com.sun.star.sheet.SheetLinks;
+        "com.sun.star.sheet.SheetLinksEnumeration": com.sun.star.sheet.SheetLinksEnumeration;
+        "com.sun.star.sheet.SheetRangesQuery": com.sun.star.sheet.SheetRangesQuery;
+        "com.sun.star.sheet.SheetSortDescriptor": com.sun.star.sheet.SheetSortDescriptor;
+        "com.sun.star.sheet.SheetSortDescriptor2": com.sun.star.sheet.SheetSortDescriptor2;
+        "com.sun.star.sheet.Solver": com.sun.star.sheet.Solver;
+        "com.sun.star.sheet.Spreadsheet": com.sun.star.sheet.Spreadsheet;
+        "com.sun.star.sheet.SpreadsheetDocument": com.sun.star.sheet.SpreadsheetDocument;
+        "com.sun.star.sheet.SpreadsheetDocumentSettings": com.sun.star.sheet.SpreadsheetDocumentSettings;
+        "com.sun.star.sheet.SpreadsheetDrawPage": com.sun.star.sheet.SpreadsheetDrawPage;
+        "com.sun.star.sheet.Spreadsheets": com.sun.star.sheet.Spreadsheets;
+        "com.sun.star.sheet.SpreadsheetsEnumeration": com.sun.star.sheet.SpreadsheetsEnumeration;
+        "com.sun.star.sheet.SpreadsheetView": com.sun.star.sheet.SpreadsheetView;
+        "com.sun.star.sheet.SpreadsheetViewPane": com.sun.star.sheet.SpreadsheetViewPane;
+        "com.sun.star.sheet.SpreadsheetViewPanesEnumeration": com.sun.star.sheet.SpreadsheetViewPanesEnumeration;
+        "com.sun.star.sheet.SpreadsheetViewSettings": com.sun.star.sheet.SpreadsheetViewSettings;
+        "com.sun.star.sheet.SubTotalDescriptor": com.sun.star.sheet.SubTotalDescriptor;
+        "com.sun.star.sheet.SubTotalField": com.sun.star.sheet.SubTotalField;
+        "com.sun.star.sheet.SubTotalFieldsEnumeration": com.sun.star.sheet.SubTotalFieldsEnumeration;
+        "com.sun.star.sheet.TableAutoFormat": com.sun.star.sheet.TableAutoFormat;
+        "com.sun.star.sheet.TableAutoFormatEnumeration": com.sun.star.sheet.TableAutoFormatEnumeration;
+        "com.sun.star.sheet.TableAutoFormatField": com.sun.star.sheet.TableAutoFormatField;
+        "com.sun.star.sheet.TableAutoFormats": com.sun.star.sheet.TableAutoFormats;
+        "com.sun.star.sheet.TableAutoFormatsEnumeration": com.sun.star.sheet.TableAutoFormatsEnumeration;
+        "com.sun.star.sheet.TableCellStyle": com.sun.star.sheet.TableCellStyle;
+        "com.sun.star.sheet.TableConditionalEntry": com.sun.star.sheet.TableConditionalEntry;
+        "com.sun.star.sheet.TableConditionalEntryEnumeration": com.sun.star.sheet.TableConditionalEntryEnumeration;
+        "com.sun.star.sheet.TableConditionalFormat": com.sun.star.sheet.TableConditionalFormat;
+        "com.sun.star.sheet.TablePageStyle": com.sun.star.sheet.TablePageStyle;
+        "com.sun.star.sheet.TableValidation": com.sun.star.sheet.TableValidation;
+        "com.sun.star.sheet.UniqueCellFormatRanges": com.sun.star.sheet.UniqueCellFormatRanges;
+        "com.sun.star.sheet.UniqueCellFormatRangesEnumeration": com.sun.star.sheet.UniqueCellFormatRangesEnumeration;
+        "com.sun.star.sheet.VolatileResult": com.sun.star.sheet.VolatileResult;
+        "com.sun.star.smarttags.SmartTagAction": com.sun.star.smarttags.SmartTagAction;
+        "com.sun.star.smarttags.SmartTagRecognizer": com.sun.star.smarttags.SmartTagRecognizer;
+        "com.sun.star.style.CellStyle": com.sun.star.style.CellStyle;
+        "com.sun.star.style.CharacterProperties": com.sun.star.style.CharacterProperties;
+        "com.sun.star.style.CharacterPropertiesAsian": com.sun.star.style.CharacterPropertiesAsian;
+        "com.sun.star.style.CharacterPropertiesComplex": com.sun.star.style.CharacterPropertiesComplex;
+        "com.sun.star.style.CharacterStyle": com.sun.star.style.CharacterStyle;
+        "com.sun.star.style.NumberingAlignment": com.sun.star.style.NumberingAlignment;
+        "com.sun.star.style.NumberingLevel": com.sun.star.style.NumberingLevel;
+        "com.sun.star.style.NumberingRule": com.sun.star.style.NumberingRule;
+        "com.sun.star.style.PageProperties": com.sun.star.style.PageProperties;
+        "com.sun.star.style.PageStyle": com.sun.star.style.PageStyle;
+        "com.sun.star.style.ParagraphProperties": com.sun.star.style.ParagraphProperties;
+        "com.sun.star.style.ParagraphPropertiesAsian": com.sun.star.style.ParagraphPropertiesAsian;
+        "com.sun.star.style.ParagraphPropertiesComplex": com.sun.star.style.ParagraphPropertiesComplex;
+        "com.sun.star.style.ParagraphStyle": com.sun.star.style.ParagraphStyle;
+        "com.sun.star.style.Style": com.sun.star.style.Style;
+        "com.sun.star.style.StyleFamilies": com.sun.star.style.StyleFamilies;
+        "com.sun.star.style.StyleFamily": com.sun.star.style.StyleFamily;
+        "com.sun.star.system.SimpleCommandMail": com.sun.star.system.SimpleCommandMail;
+        "com.sun.star.system.SimpleSystemMail": com.sun.star.system.SimpleSystemMail;
+        "com.sun.star.system.SystemShellExecute": com.sun.star.system.SystemShellExecute;
+        "com.sun.star.table.AccessibleCellView": com.sun.star.table.AccessibleCellView;
+        "com.sun.star.table.AccessibleTableView": com.sun.star.table.AccessibleTableView;
+        "com.sun.star.table.Cell": com.sun.star.table.Cell;
+        "com.sun.star.table.CellCursor": com.sun.star.table.CellCursor;
+        "com.sun.star.table.CellProperties": com.sun.star.table.CellProperties;
+        "com.sun.star.table.CellRange": com.sun.star.table.CellRange;
+        "com.sun.star.table.CellRangeListSource": com.sun.star.table.CellRangeListSource;
+        "com.sun.star.table.CellValueBinding": com.sun.star.table.CellValueBinding;
+        "com.sun.star.table.ListPositionCellBinding": com.sun.star.table.ListPositionCellBinding;
+        "com.sun.star.table.TableChart": com.sun.star.table.TableChart;
+        "com.sun.star.table.TableCharts": com.sun.star.table.TableCharts;
+        "com.sun.star.table.TableChartsEnumeration": com.sun.star.table.TableChartsEnumeration;
+        "com.sun.star.table.TableColumn": com.sun.star.table.TableColumn;
+        "com.sun.star.table.TableColumns": com.sun.star.table.TableColumns;
+        "com.sun.star.table.TableColumnsEnumeration": com.sun.star.table.TableColumnsEnumeration;
+        "com.sun.star.table.TableRow": com.sun.star.table.TableRow;
+        "com.sun.star.table.TableRows": com.sun.star.table.TableRows;
+        "com.sun.star.table.TableRowsEnumeration": com.sun.star.table.TableRowsEnumeration;
+        "com.sun.star.table.TableSortDescriptor": com.sun.star.table.TableSortDescriptor;
+        "com.sun.star.table.TableSortDescriptor2": com.sun.star.table.TableSortDescriptor2;
+        "com.sun.star.task.AsyncJob": com.sun.star.task.AsyncJob;
+        "com.sun.star.task.InteractionHandler": com.sun.star.task.InteractionHandler;
+        "com.sun.star.task.InteractionRequestStringResolver": com.sun.star.task.InteractionRequestStringResolver;
+        "com.sun.star.task.Job": com.sun.star.task.Job;
+        "com.sun.star.task.JobExecutor": com.sun.star.task.JobExecutor;
+        "com.sun.star.task.PasswordContainer": com.sun.star.task.PasswordContainer;
+        "com.sun.star.task.PasswordContainerInteractionHandler": com.sun.star.task.PasswordContainerInteractionHandler;
+        "com.sun.star.task.StatusIndicatorFactory": com.sun.star.task.StatusIndicatorFactory;
+        "com.sun.star.text.AccessibleEndnoteView": com.sun.star.text.AccessibleEndnoteView;
+        "com.sun.star.text.AccessibleFootnoteView": com.sun.star.text.AccessibleFootnoteView;
+        "com.sun.star.text.AccessibleHeaderFooterView": com.sun.star.text.AccessibleHeaderFooterView;
+        "com.sun.star.text.AccessiblePageView": com.sun.star.text.AccessiblePageView;
+        "com.sun.star.text.AccessibleParagraphView": com.sun.star.text.AccessibleParagraphView;
+        "com.sun.star.text.AccessibleTextDocumentPageView": com.sun.star.text.AccessibleTextDocumentPageView;
+        "com.sun.star.text.AccessibleTextDocumentView": com.sun.star.text.AccessibleTextDocumentView;
+        "com.sun.star.text.AccessibleTextEmbeddedObject": com.sun.star.text.AccessibleTextEmbeddedObject;
+        "com.sun.star.text.AccessibleTextFrameView": com.sun.star.text.AccessibleTextFrameView;
+        "com.sun.star.text.AccessibleTextGraphicObject": com.sun.star.text.AccessibleTextGraphicObject;
+        "com.sun.star.text.AutoTextContainer": com.sun.star.text.AutoTextContainer;
+        "com.sun.star.text.AutoTextEntry": com.sun.star.text.AutoTextEntry;
+        "com.sun.star.text.AutoTextGroup": com.sun.star.text.AutoTextGroup;
+        "com.sun.star.text.BaseFrame": com.sun.star.text.BaseFrame;
+        "com.sun.star.text.BaseFrameProperties": com.sun.star.text.BaseFrameProperties;
+        "com.sun.star.text.BaseIndex": com.sun.star.text.BaseIndex;
+        "com.sun.star.text.BaseIndexMark": com.sun.star.text.BaseIndexMark;
+        "com.sun.star.text.Bibliography": com.sun.star.text.Bibliography;
+        "com.sun.star.text.Bookmark": com.sun.star.text.Bookmark;
+        "com.sun.star.text.Bookmarks": com.sun.star.text.Bookmarks;
+        "com.sun.star.text.Cell": com.sun.star.text.Cell;
+        "com.sun.star.text.CellProperties": com.sun.star.text.CellProperties;
+        "com.sun.star.text.CellRange": com.sun.star.text.CellRange;
+        "com.sun.star.text.ChainedTextFrame": com.sun.star.text.ChainedTextFrame;
+        "com.sun.star.text.ChapterNumberingRule": com.sun.star.text.ChapterNumberingRule;
+        "com.sun.star.text.ContentIndex": com.sun.star.text.ContentIndex;
+        "com.sun.star.text.ContentIndexMark": com.sun.star.text.ContentIndexMark;
+        "com.sun.star.text.DefaultNumberingProvider": com.sun.star.text.DefaultNumberingProvider;
+        "com.sun.star.text.Defaults": com.sun.star.text.Defaults;
+        "com.sun.star.text.DependentTextField": com.sun.star.text.DependentTextField;
+        "com.sun.star.text.DocumentIndex": com.sun.star.text.DocumentIndex;
+        "com.sun.star.text.DocumentIndexes": com.sun.star.text.DocumentIndexes;
+        "com.sun.star.text.DocumentIndexLevelFormat": com.sun.star.text.DocumentIndexLevelFormat;
+        "com.sun.star.text.DocumentIndexMark": com.sun.star.text.DocumentIndexMark;
+        "com.sun.star.text.DocumentIndexMarkAsian": com.sun.star.text.DocumentIndexMarkAsian;
+        "com.sun.star.text.DocumentIndexParagraphStyles": com.sun.star.text.DocumentIndexParagraphStyles;
+        "com.sun.star.text.DocumentSettings": com.sun.star.text.DocumentSettings;
+        "com.sun.star.text.Endnote": com.sun.star.text.Endnote;
+        "com.sun.star.text.EndnoteSettings": com.sun.star.text.EndnoteSettings;
+        "com.sun.star.text.fieldmaster.Bibliography": com.sun.star.text.fieldmaster.Bibliography;
+        "com.sun.star.text.fieldmaster.Database": com.sun.star.text.fieldmaster.Database;
+        "com.sun.star.text.fieldmaster.DDE": com.sun.star.text.fieldmaster.DDE;
+        "com.sun.star.text.fieldmaster.SetExpression": com.sun.star.text.fieldmaster.SetExpression;
+        "com.sun.star.text.fieldmaster.User": com.sun.star.text.fieldmaster.User;
+        "com.sun.star.text.Footnote": com.sun.star.text.Footnote;
+        "com.sun.star.text.Footnotes": com.sun.star.text.Footnotes;
+        "com.sun.star.text.FootnoteSettings": com.sun.star.text.FootnoteSettings;
+        "com.sun.star.text.GenericTextDocument": com.sun.star.text.GenericTextDocument;
+        "com.sun.star.text.GlobalDocument": com.sun.star.text.GlobalDocument;
+        "com.sun.star.text.GlobalSettings": com.sun.star.text.GlobalSettings;
+        "com.sun.star.text.IllustrationsIndex": com.sun.star.text.IllustrationsIndex;
+        "com.sun.star.text.InContentMetadata": com.sun.star.text.InContentMetadata;
+        "com.sun.star.text.LineNumberingProperties": com.sun.star.text.LineNumberingProperties;
+        "com.sun.star.text.MailMerge": com.sun.star.text.MailMerge;
+        "com.sun.star.text.ModuleDispatcher": com.sun.star.text.ModuleDispatcher;
+        "com.sun.star.text.NumberingLevel": com.sun.star.text.NumberingLevel;
+        "com.sun.star.text.NumberingRules": com.sun.star.text.NumberingRules;
+        "com.sun.star.text.NumberingStyle": com.sun.star.text.NumberingStyle;
+        "com.sun.star.text.ObjectIndex": com.sun.star.text.ObjectIndex;
+        "com.sun.star.text.PageFootnoteInfo": com.sun.star.text.PageFootnoteInfo;
+        "com.sun.star.text.PagePrintSettings": com.sun.star.text.PagePrintSettings;
+        "com.sun.star.text.Paragraph": com.sun.star.text.Paragraph;
+        "com.sun.star.text.ParagraphEnumeration": com.sun.star.text.ParagraphEnumeration;
+        "com.sun.star.text.PrintSettings": com.sun.star.text.PrintSettings;
+        "com.sun.star.text.RedlinePortion": com.sun.star.text.RedlinePortion;
+        "com.sun.star.text.ReferenceMark": com.sun.star.text.ReferenceMark;
+        "com.sun.star.text.ReferenceMarks": com.sun.star.text.ReferenceMarks;
+        "com.sun.star.text.Shape": com.sun.star.text.Shape;
+        "com.sun.star.text.TableColumns": com.sun.star.text.TableColumns;
+        "com.sun.star.text.TableIndex": com.sun.star.text.TableIndex;
+        "com.sun.star.text.TableRows": com.sun.star.text.TableRows;
+        "com.sun.star.text.Text": com.sun.star.text.Text;
+        "com.sun.star.text.TextColumns": com.sun.star.text.TextColumns;
+        "com.sun.star.text.TextContent": com.sun.star.text.TextContent;
+        "com.sun.star.text.TextContentCollection": com.sun.star.text.TextContentCollection;
+        "com.sun.star.text.TextCursor": com.sun.star.text.TextCursor;
+        "com.sun.star.text.TextDocument": com.sun.star.text.TextDocument;
+        "com.sun.star.text.TextDocumentView": com.sun.star.text.TextDocumentView;
+        "com.sun.star.text.TextEmbeddedObject": com.sun.star.text.TextEmbeddedObject;
+        "com.sun.star.text.TextEmbeddedObjects": com.sun.star.text.TextEmbeddedObjects;
+        "com.sun.star.text.TextField": com.sun.star.text.TextField;
+        "com.sun.star.text.textfield.Annotation": com.sun.star.text.textfield.Annotation;
+        "com.sun.star.text.textfield.Author": com.sun.star.text.textfield.Author;
+        "com.sun.star.text.textfield.Bibliography": com.sun.star.text.textfield.Bibliography;
+        "com.sun.star.text.textfield.Chapter": com.sun.star.text.textfield.Chapter;
+        "com.sun.star.text.textfield.CharacterCount": com.sun.star.text.textfield.CharacterCount;
+        "com.sun.star.text.textfield.CombinedCharacters": com.sun.star.text.textfield.CombinedCharacters;
+        "com.sun.star.text.textfield.ConditionalText": com.sun.star.text.textfield.ConditionalText;
+        "com.sun.star.text.textfield.Database": com.sun.star.text.textfield.Database;
+        "com.sun.star.text.textfield.DatabaseName": com.sun.star.text.textfield.DatabaseName;
+        "com.sun.star.text.textfield.DatabaseNextSet": com.sun.star.text.textfield.DatabaseNextSet;
+        "com.sun.star.text.textfield.DatabaseNumberOfSet": com.sun.star.text.textfield.DatabaseNumberOfSet;
+        "com.sun.star.text.textfield.DatabaseSetNumber": com.sun.star.text.textfield.DatabaseSetNumber;
+        "com.sun.star.text.textfield.DateTime": com.sun.star.text.textfield.DateTime;
+        "com.sun.star.text.textfield.DDE": com.sun.star.text.textfield.DDE;
+        "com.sun.star.text.textfield.docinfo.ChangeAuthor": com.sun.star.text.textfield.docinfo.ChangeAuthor;
+        "com.sun.star.text.textfield.docinfo.ChangeDateTime": com.sun.star.text.textfield.docinfo.ChangeDateTime;
+        "com.sun.star.text.textfield.docinfo.CreateAuthor": com.sun.star.text.textfield.docinfo.CreateAuthor;
+        "com.sun.star.text.textfield.docinfo.CreateDateTime": com.sun.star.text.textfield.docinfo.CreateDateTime;
+        "com.sun.star.text.textfield.docinfo.Custom": com.sun.star.text.textfield.docinfo.Custom;
+        "com.sun.star.text.textfield.docinfo.Description": com.sun.star.text.textfield.docinfo.Description;
+        "com.sun.star.text.textfield.docinfo.EditTime": com.sun.star.text.textfield.docinfo.EditTime;
+        "com.sun.star.text.textfield.docinfo.Keywords": com.sun.star.text.textfield.docinfo.Keywords;
+        "com.sun.star.text.textfield.docinfo.PrintAuthor": com.sun.star.text.textfield.docinfo.PrintAuthor;
+        "com.sun.star.text.textfield.docinfo.PrintDateTime": com.sun.star.text.textfield.docinfo.PrintDateTime;
+        "com.sun.star.text.textfield.docinfo.Revision": com.sun.star.text.textfield.docinfo.Revision;
+        "com.sun.star.text.textfield.docinfo.Subject": com.sun.star.text.textfield.docinfo.Subject;
+        "com.sun.star.text.textfield.docinfo.Title": com.sun.star.text.textfield.docinfo.Title;
+        "com.sun.star.text.textfield.DropDown": com.sun.star.text.textfield.DropDown;
+        "com.sun.star.text.textfield.EmbeddedObjectCount": com.sun.star.text.textfield.EmbeddedObjectCount;
+        "com.sun.star.text.textfield.ExtendedUser": com.sun.star.text.textfield.ExtendedUser;
+        "com.sun.star.text.textfield.FileName": com.sun.star.text.textfield.FileName;
+        "com.sun.star.text.textfield.GetExpression": com.sun.star.text.textfield.GetExpression;
+        "com.sun.star.text.textfield.GetReference": com.sun.star.text.textfield.GetReference;
+        "com.sun.star.text.textfield.GraphicObjectCount": com.sun.star.text.textfield.GraphicObjectCount;
+        "com.sun.star.text.textfield.HiddenParagraph": com.sun.star.text.textfield.HiddenParagraph;
+        "com.sun.star.text.textfield.HiddenText": com.sun.star.text.textfield.HiddenText;
+        "com.sun.star.text.textfield.Input": com.sun.star.text.textfield.Input;
+        "com.sun.star.text.textfield.InputUser": com.sun.star.text.textfield.InputUser;
+        "com.sun.star.text.textfield.JumpEdit": com.sun.star.text.textfield.JumpEdit;
+        "com.sun.star.text.textfield.Macro": com.sun.star.text.textfield.Macro;
+        "com.sun.star.text.textfield.MetadataField": com.sun.star.text.textfield.MetadataField;
+        "com.sun.star.text.textfield.PageCount": com.sun.star.text.textfield.PageCount;
+        "com.sun.star.text.textfield.PageNumber": com.sun.star.text.textfield.PageNumber;
+        "com.sun.star.text.textfield.ParagraphCount": com.sun.star.text.textfield.ParagraphCount;
+        "com.sun.star.text.textfield.ReferencePageGet": com.sun.star.text.textfield.ReferencePageGet;
+        "com.sun.star.text.textfield.ReferencePageSet": com.sun.star.text.textfield.ReferencePageSet;
+        "com.sun.star.text.textfield.Script": com.sun.star.text.textfield.Script;
+        "com.sun.star.text.textfield.SetExpression": com.sun.star.text.textfield.SetExpression;
+        "com.sun.star.text.textfield.TableCount": com.sun.star.text.textfield.TableCount;
+        "com.sun.star.text.textfield.TableFormula": com.sun.star.text.textfield.TableFormula;
+        "com.sun.star.text.textfield.TemplateName": com.sun.star.text.textfield.TemplateName;
+        "com.sun.star.text.textfield.URL": com.sun.star.text.textfield.URL;
+        "com.sun.star.text.textfield.User": com.sun.star.text.textfield.User;
+        "com.sun.star.text.textfield.WordCount": com.sun.star.text.textfield.WordCount;
+        "com.sun.star.text.TextFieldEnumeration": com.sun.star.text.TextFieldEnumeration;
+        "com.sun.star.text.TextFieldMaster": com.sun.star.text.TextFieldMaster;
+        "com.sun.star.text.TextFieldMasters": com.sun.star.text.TextFieldMasters;
+        "com.sun.star.text.TextFields": com.sun.star.text.TextFields;
+        "com.sun.star.text.TextFrame": com.sun.star.text.TextFrame;
+        "com.sun.star.text.TextFrames": com.sun.star.text.TextFrames;
+        "com.sun.star.text.TextGraphicObject": com.sun.star.text.TextGraphicObject;
+        "com.sun.star.text.TextGraphicObjects": com.sun.star.text.TextGraphicObjects;
+        "com.sun.star.text.TextLayoutCursor": com.sun.star.text.TextLayoutCursor;
+        "com.sun.star.text.TextPageStyle": com.sun.star.text.TextPageStyle;
+        "com.sun.star.text.TextPortion": com.sun.star.text.TextPortion;
+        "com.sun.star.text.TextPortionEnumeration": com.sun.star.text.TextPortionEnumeration;
+        "com.sun.star.text.TextRange": com.sun.star.text.TextRange;
+        "com.sun.star.text.TextRangeContentProperties": com.sun.star.text.TextRangeContentProperties;
+        "com.sun.star.text.TextRanges": com.sun.star.text.TextRanges;
+        "com.sun.star.text.TextSection": com.sun.star.text.TextSection;
+        "com.sun.star.text.TextSections": com.sun.star.text.TextSections;
+        "com.sun.star.text.TextSortable": com.sun.star.text.TextSortable;
+        "com.sun.star.text.TextSortDescriptor": com.sun.star.text.TextSortDescriptor;
+        "com.sun.star.text.TextSortDescriptor2": com.sun.star.text.TextSortDescriptor2;
+        "com.sun.star.text.TextTable": com.sun.star.text.TextTable;
+        "com.sun.star.text.TextTableCursor": com.sun.star.text.TextTableCursor;
+        "com.sun.star.text.TextTableRow": com.sun.star.text.TextTableRow;
+        "com.sun.star.text.TextTables": com.sun.star.text.TextTables;
+        "com.sun.star.text.TextViewCursor": com.sun.star.text.TextViewCursor;
+        "com.sun.star.text.UserDefinedIndex": com.sun.star.text.UserDefinedIndex;
+        "com.sun.star.text.UserIndex": com.sun.star.text.UserIndex;
+        "com.sun.star.text.UserIndexMark": com.sun.star.text.UserIndexMark;
+        "com.sun.star.text.ViewSettings": com.sun.star.text.ViewSettings;
+        "com.sun.star.text.WebDocument": com.sun.star.text.WebDocument;
+        "com.sun.star.ucb.AnyCompareFactory": com.sun.star.ucb.AnyCompareFactory;
+        "com.sun.star.ucb.CachedContentResultSet": com.sun.star.ucb.CachedContentResultSet;
+        "com.sun.star.ucb.CachedContentResultSetFactory": com.sun.star.ucb.CachedContentResultSetFactory;
+        "com.sun.star.ucb.CachedContentResultSetStub": com.sun.star.ucb.CachedContentResultSetStub;
+        "com.sun.star.ucb.CachedContentResultSetStubFactory": com.sun.star.ucb.CachedContentResultSetStubFactory;
+        "com.sun.star.ucb.CachedDynamicResultSet": com.sun.star.ucb.CachedDynamicResultSet;
+        "com.sun.star.ucb.CachedDynamicResultSetFactory": com.sun.star.ucb.CachedDynamicResultSetFactory;
+        "com.sun.star.ucb.CachedDynamicResultSetStub": com.sun.star.ucb.CachedDynamicResultSetStub;
+        "com.sun.star.ucb.CachedDynamicResultSetStubFactory": com.sun.star.ucb.CachedDynamicResultSetStubFactory;
+        "com.sun.star.ucb.CmisContentProvider": com.sun.star.ucb.CmisContentProvider;
+        "com.sun.star.ucb.CommandEnvironment": com.sun.star.ucb.CommandEnvironment;
+        "com.sun.star.ucb.Content": com.sun.star.ucb.Content;
+        "com.sun.star.ucb.ContentProvider": com.sun.star.ucb.ContentProvider;
+        "com.sun.star.ucb.ContentProviderProxy": com.sun.star.ucb.ContentProviderProxy;
+        "com.sun.star.ucb.ContentProviderProxyFactory": com.sun.star.ucb.ContentProviderProxyFactory;
+        "com.sun.star.ucb.ContentResultSet": com.sun.star.ucb.ContentResultSet;
+        "com.sun.star.ucb.ContentTransmitter": com.sun.star.ucb.ContentTransmitter;
+        "com.sun.star.ucb.DefaultHierarchyDataSource": com.sun.star.ucb.DefaultHierarchyDataSource;
+        "com.sun.star.ucb.DynamicResultSet": com.sun.star.ucb.DynamicResultSet;
+        "com.sun.star.ucb.ExpandContentProvider": com.sun.star.ucb.ExpandContentProvider;
+        "com.sun.star.ucb.FileContent": com.sun.star.ucb.FileContent;
+        "com.sun.star.ucb.FileContentProvider": com.sun.star.ucb.FileContentProvider;
+        "com.sun.star.ucb.FTPContent": com.sun.star.ucb.FTPContent;
+        "com.sun.star.ucb.FTPContentProvider": com.sun.star.ucb.FTPContentProvider;
+        "com.sun.star.ucb.GIOContentProvider": com.sun.star.ucb.GIOContentProvider;
+        "com.sun.star.ucb.GnomeVFSContentProvider": com.sun.star.ucb.GnomeVFSContentProvider;
+        "com.sun.star.ucb.GnomeVFSDocumentContent": com.sun.star.ucb.GnomeVFSDocumentContent;
+        "com.sun.star.ucb.GnomeVFSFolderContent": com.sun.star.ucb.GnomeVFSFolderContent;
+        "com.sun.star.ucb.HelpContent": com.sun.star.ucb.HelpContent;
+        "com.sun.star.ucb.HelpContentProvider": com.sun.star.ucb.HelpContentProvider;
+        "com.sun.star.ucb.HierarchyContentProvider": com.sun.star.ucb.HierarchyContentProvider;
+        "com.sun.star.ucb.HierarchyDataReadAccess": com.sun.star.ucb.HierarchyDataReadAccess;
+        "com.sun.star.ucb.HierarchyDataReadWriteAccess": com.sun.star.ucb.HierarchyDataReadWriteAccess;
+        "com.sun.star.ucb.HierarchyDataSource": com.sun.star.ucb.HierarchyDataSource;
+        "com.sun.star.ucb.HierarchyFolderContent": com.sun.star.ucb.HierarchyFolderContent;
+        "com.sun.star.ucb.HierarchyLinkContent": com.sun.star.ucb.HierarchyLinkContent;
+        "com.sun.star.ucb.HierarchyRootFolderContent": com.sun.star.ucb.HierarchyRootFolderContent;
+        "com.sun.star.ucb.ODMAContent": com.sun.star.ucb.ODMAContent;
+        "com.sun.star.ucb.ODMAContentProvider": com.sun.star.ucb.ODMAContentProvider;
+        "com.sun.star.ucb.PackageContentProvider": com.sun.star.ucb.PackageContentProvider;
+        "com.sun.star.ucb.PackageFolderContent": com.sun.star.ucb.PackageFolderContent;
+        "com.sun.star.ucb.PackageStreamContent": com.sun.star.ucb.PackageStreamContent;
+        "com.sun.star.ucb.PersistentPropertySet": com.sun.star.ucb.PersistentPropertySet;
+        "com.sun.star.ucb.PropertiesManager": com.sun.star.ucb.PropertiesManager;
+        "com.sun.star.ucb.PropertySetRegistry": com.sun.star.ucb.PropertySetRegistry;
+        "com.sun.star.ucb.RemoteAccessContentProvider": com.sun.star.ucb.RemoteAccessContentProvider;
+        "com.sun.star.ucb.RemoteContentProviderAcceptor": com.sun.star.ucb.RemoteContentProviderAcceptor;
+        "com.sun.star.ucb.RemoteProxyContentProvider": com.sun.star.ucb.RemoteProxyContentProvider;
+        "com.sun.star.ucb.SimpleFileAccess": com.sun.star.ucb.SimpleFileAccess;
+        "com.sun.star.ucb.SortedDynamicResultSetFactory": com.sun.star.ucb.SortedDynamicResultSetFactory;
+        "com.sun.star.ucb.Store": com.sun.star.ucb.Store;
+        "com.sun.star.ucb.TransientDocumentsContentProvider": com.sun.star.ucb.TransientDocumentsContentProvider;
+        "com.sun.star.ucb.TransientDocumentsDocumentContent": com.sun.star.ucb.TransientDocumentsDocumentContent;
+        "com.sun.star.ucb.TransientDocumentsFolderContent": com.sun.star.ucb.TransientDocumentsFolderContent;
+        "com.sun.star.ucb.TransientDocumentsRootContent": com.sun.star.ucb.TransientDocumentsRootContent;
+        "com.sun.star.ucb.TransientDocumentsStreamContent": com.sun.star.ucb.TransientDocumentsStreamContent;
+        "com.sun.star.ucb.UniversalContentBroker": com.sun.star.ucb.UniversalContentBroker;
+        "com.sun.star.ucb.WebDAVContentProvider": com.sun.star.ucb.WebDAVContentProvider;
+        "com.sun.star.ucb.WebDAVDocumentContent": com.sun.star.ucb.WebDAVDocumentContent;
+        "com.sun.star.ucb.WebDAVFolderContent": com.sun.star.ucb.WebDAVFolderContent;
+        "com.sun.star.ui.ActionTrigger": com.sun.star.ui.ActionTrigger;
+        "com.sun.star.ui.ActionTriggerContainer": com.sun.star.ui.ActionTriggerContainer;
+        "com.sun.star.ui.ActionTriggerSeparator": com.sun.star.ui.ActionTriggerSeparator;
+        "com.sun.star.ui.AddressBookSourceDialog": com.sun.star.ui.AddressBookSourceDialog;
+        "com.sun.star.ui.ConfigurableUIElement": com.sun.star.ui.ConfigurableUIElement;
+        "com.sun.star.ui.dialogs.AddressBookSourcePilot": com.sun.star.ui.dialogs.AddressBookSourcePilot;
+        "com.sun.star.ui.dialogs.FilePicker": com.sun.star.ui.dialogs.FilePicker;
+        "com.sun.star.ui.dialogs.FilterOptionsDialog": com.sun.star.ui.dialogs.FilterOptionsDialog;
+        "com.sun.star.ui.dialogs.FolderPicker": com.sun.star.ui.dialogs.FolderPicker;
+        "com.sun.star.ui.dialogs.Wizard": com.sun.star.ui.dialogs.Wizard;
+        "com.sun.star.ui.dialogs.XSLTFilterDialog": com.sun.star.ui.dialogs.XSLTFilterDialog;
+        "com.sun.star.ui.DocumentAcceleratorConfiguration": com.sun.star.ui.DocumentAcceleratorConfiguration;
+        "com.sun.star.ui.GlobalAcceleratorConfiguration": com.sun.star.ui.GlobalAcceleratorConfiguration;
+        "com.sun.star.ui.ImageManager": com.sun.star.ui.ImageManager;
+        "com.sun.star.ui.ItemDescriptor": com.sun.star.ui.ItemDescriptor;
+        "com.sun.star.ui.ModuleAcceleratorConfiguration": com.sun.star.ui.ModuleAcceleratorConfiguration;
+        "com.sun.star.ui.ModuleUICategoryDescription": com.sun.star.ui.ModuleUICategoryDescription;
+        "com.sun.star.ui.ModuleUICommandDescription": com.sun.star.ui.ModuleUICommandDescription;
+        "com.sun.star.ui.ModuleUIConfigurationManager": com.sun.star.ui.ModuleUIConfigurationManager;
+        "com.sun.star.ui.ModuleWindowStateConfiguration": com.sun.star.ui.ModuleWindowStateConfiguration;
+        "com.sun.star.ui.test.UITest": com.sun.star.ui.test.UITest;
+        "com.sun.star.ui.UICategoryDescription": com.sun.star.ui.UICategoryDescription;
+        "com.sun.star.ui.UIConfigurationManager": com.sun.star.ui.UIConfigurationManager;
+        "com.sun.star.ui.UIElement": com.sun.star.ui.UIElement;
+        "com.sun.star.ui.UIElementFactory": com.sun.star.ui.UIElementFactory;
+        "com.sun.star.ui.UIElementFactoryManager": com.sun.star.ui.UIElementFactoryManager;
+        "com.sun.star.ui.UIElementSettings": com.sun.star.ui.UIElementSettings;
+        "com.sun.star.ui.WindowContentFactory": com.sun.star.ui.WindowContentFactory;
+        "com.sun.star.ui.WindowContentFactoryManager": com.sun.star.ui.WindowContentFactoryManager;
+        "com.sun.star.ui.WindowStateConfiguration": com.sun.star.ui.WindowStateConfiguration;
+        "com.sun.star.uno.NamingService": com.sun.star.uno.NamingService;
+        "com.sun.star.uri.ExternalUriReferenceTranslator": com.sun.star.uri.ExternalUriReferenceTranslator;
+        "com.sun.star.uri.UriReferenceFactory": com.sun.star.uri.UriReferenceFactory;
+        "com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTexpand":
+            com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTexpand;
+        "com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTscript":
+            com.sun.star.uri.UriSchemeParser_vndDOTsunDOTstarDOTscript;
+        "com.sun.star.uri.VndSunStarPkgUrlReferenceFactory": com.sun.star.uri.VndSunStarPkgUrlReferenceFactory;
+        "com.sun.star.util.BootstrapMacroExpander": com.sun.star.util.BootstrapMacroExpander;
+        "com.sun.star.util.JobManager": com.sun.star.util.JobManager;
+        "com.sun.star.util.MacroExpander": com.sun.star.util.MacroExpander;
+        "com.sun.star.util.NumberFormatProperties": com.sun.star.util.NumberFormatProperties;
+        "com.sun.star.util.NumberFormats": com.sun.star.util.NumberFormats;
+        "com.sun.star.util.NumberFormatSettings": com.sun.star.util.NumberFormatSettings;
+        "com.sun.star.util.NumberFormatsSupplier": com.sun.star.util.NumberFormatsSupplier;
+        "com.sun.star.util.NumberFormatter": com.sun.star.util.NumberFormatter;
+        "com.sun.star.util.OfficeInstallationDirectories": com.sun.star.util.OfficeInstallationDirectories;
+        "com.sun.star.util.PathSettings": com.sun.star.util.PathSettings;
+        "com.sun.star.util.PathSubstitution": com.sun.star.util.PathSubstitution;
+        "com.sun.star.util.ReplaceDescriptor": com.sun.star.util.ReplaceDescriptor;
+        "com.sun.star.util.SearchDescriptor": com.sun.star.util.SearchDescriptor;
+        "com.sun.star.util.Sortable": com.sun.star.util.Sortable;
+        "com.sun.star.util.SortDescriptor": com.sun.star.util.SortDescriptor;
+        "com.sun.star.util.SortDescriptor2": com.sun.star.util.SortDescriptor2;
+        "com.sun.star.util.TextSearch": com.sun.star.util.TextSearch;
+        "com.sun.star.util.TextSearch2": com.sun.star.util.TextSearch2;
+        "com.sun.star.util.UriAbbreviation": com.sun.star.util.UriAbbreviation;
+        "com.sun.star.util.URLTransformer": com.sun.star.util.URLTransformer;
+        "com.sun.star.view.OfficeDocumentView": com.sun.star.view.OfficeDocumentView;
+        "com.sun.star.view.PrinterDescriptor": com.sun.star.view.PrinterDescriptor;
+        "com.sun.star.view.PrintOptions": com.sun.star.view.PrintOptions;
+        "com.sun.star.view.PrintSettings": com.sun.star.view.PrintSettings;
+        "com.sun.star.view.RenderDescriptor": com.sun.star.view.RenderDescriptor;
+        "com.sun.star.view.RenderOptions": com.sun.star.view.RenderOptions;
+        "com.sun.star.view.ViewSettings": com.sun.star.view.ViewSettings;
+        "com.sun.star.xforms.Binding": com.sun.star.xforms.Binding;
+        "com.sun.star.xforms.Model": com.sun.star.xforms.Model;
+        "com.sun.star.xforms.XForms": com.sun.star.xforms.XForms;
+        "com.sun.star.xml.AttributeContainer": com.sun.star.xml.AttributeContainer;
+        "com.sun.star.xml.crypto.NSSInitializer": com.sun.star.xml.crypto.NSSInitializer;
+        "com.sun.star.xml.crypto.sax.Decryptor": com.sun.star.xml.crypto.sax.Decryptor;
+        "com.sun.star.xml.crypto.sax.Encryptor": com.sun.star.xml.crypto.sax.Encryptor;
+        "com.sun.star.xml.crypto.sax.SAXEventKeeper": com.sun.star.xml.crypto.sax.SAXEventKeeper;
+        "com.sun.star.xml.crypto.sax.SignatureCreator": com.sun.star.xml.crypto.sax.SignatureCreator;
+        "com.sun.star.xml.crypto.sax.SignatureVerifier": com.sun.star.xml.crypto.sax.SignatureVerifier;
+        "com.sun.star.xml.crypto.SecurityEnvironment": com.sun.star.xml.crypto.SecurityEnvironment;
+        "com.sun.star.xml.crypto.SEInitializer": com.sun.star.xml.crypto.SEInitializer;
+        "com.sun.star.xml.crypto.XMLEncryption": com.sun.star.xml.crypto.XMLEncryption;
+        "com.sun.star.xml.crypto.XMLEncryptionTemplate": com.sun.star.xml.crypto.XMLEncryptionTemplate;
+        "com.sun.star.xml.crypto.XMLSecurityContext": com.sun.star.xml.crypto.XMLSecurityContext;
+        "com.sun.star.xml.crypto.XMLSignature": com.sun.star.xml.crypto.XMLSignature;
+        "com.sun.star.xml.crypto.XMLSignatureTemplate": com.sun.star.xml.crypto.XMLSignatureTemplate;
+        "com.sun.star.xml.dom.DocumentBuilder": com.sun.star.xml.dom.DocumentBuilder;
+        "com.sun.star.xml.dom.SAXDocumentBuilder": com.sun.star.xml.dom.SAXDocumentBuilder;
+        "com.sun.star.xml.ExportFilter": com.sun.star.xml.ExportFilter;
+        "com.sun.star.xml.ImportFilter": com.sun.star.xml.ImportFilter;
+        "com.sun.star.xml.input.SaxDocumentHandler": com.sun.star.xml.input.SaxDocumentHandler;
+        "com.sun.star.xml.NamespaceContainer": com.sun.star.xml.NamespaceContainer;
+        "com.sun.star.xml.ParaUserDefinedAttributesSupplier": com.sun.star.xml.ParaUserDefinedAttributesSupplier;
+        "com.sun.star.xml.sax.FastParser": com.sun.star.xml.sax.FastParser;
+        "com.sun.star.xml.sax.FastShapeContextHandler": com.sun.star.xml.sax.FastShapeContextHandler;
+        "com.sun.star.xml.sax.FastTokenHandler": com.sun.star.xml.sax.FastTokenHandler;
+        "com.sun.star.xml.sax.Parser": com.sun.star.xml.sax.Parser;
+        "com.sun.star.xml.sax.Writer": com.sun.star.xml.sax.Writer;
+        "com.sun.star.xml.TextUserDefinedAttributesSupplier": com.sun.star.xml.TextUserDefinedAttributesSupplier;
+        "com.sun.star.xml.UserDefinedAttributesSupplier": com.sun.star.xml.UserDefinedAttributesSupplier;
+        "com.sun.star.xml.wrapper.XMLDocumentWrapper": com.sun.star.xml.wrapper.XMLDocumentWrapper;
+        "com.sun.star.xml.wrapper.XMLElementWrapper": com.sun.star.xml.wrapper.XMLElementWrapper;
+        "com.sun.star.xml.XMLExportFilter": com.sun.star.xml.XMLExportFilter;
+        "com.sun.star.xml.XMLImportFilter": com.sun.star.xml.XMLImportFilter;
+        "com.sun.star.xml.xpath.XPathAPI": com.sun.star.xml.xpath.XPathAPI;
+        "com.sun.star.xml.xpath.XPathExtension": com.sun.star.xml.xpath.XPathExtension;
+        "com.sun.star.xml.xslt.XSLT2Transformer": com.sun.star.xml.xslt.XSLT2Transformer;
+        "com.sun.star.xml.xslt.XSLTTransformer": com.sun.star.xml.xslt.XSLTTransformer;
+        "com.sun.star.xsd.Boolean": com.sun.star.xsd.Boolean;
+        "com.sun.star.xsd.Date": com.sun.star.xsd.Date;
+        "com.sun.star.xsd.DateTime": com.sun.star.xsd.DateTime;
+        "com.sun.star.xsd.Day": com.sun.star.xsd.Day;
+        "com.sun.star.xsd.Decimal": com.sun.star.xsd.Decimal;
+        "com.sun.star.xsd.Month": com.sun.star.xsd.Month;
+        "com.sun.star.xsd.String": com.sun.star.xsd.String;
+        "com.sun.star.xsd.Time": com.sun.star.xsd.Time;
+        "com.sun.star.xsd.Year": com.sun.star.xsd.Year;
+        "org.freedesktop.PackageKit.SyncDbusSessionHelper": org.freedesktop.PackageKit.SyncDbusSessionHelper;
     }
 
     interface SingletonsNameMap {
-        '/singleton/com.sun.star.beans.theIntrospection': com.sun.star.beans.theIntrospection;
-        '/singleton/com.sun.star.configuration.theDefaultProvider': com.sun.star.configuration.theDefaultProvider;
-        '/singleton/com.sun.star.configuration.Update': com.sun.star.configuration.Update;
-        '/singleton/com.sun.star.deployment.ExtensionManager': com.sun.star.deployment.ExtensionManager;
-        '/singleton/com.sun.star.deployment.PackageInformationProvider': com.sun.star.deployment.PackageInformationProvider;
-        '/singleton/com.sun.star.deployment.thePackageManagerFactory': com.sun.star.deployment.thePackageManagerFactory;
-        '/singleton/com.sun.star.frame.theAutoRecovery': com.sun.star.frame.theAutoRecovery;
-        '/singleton/com.sun.star.frame.theDesktop': com.sun.star.frame.theDesktop;
-        '/singleton/com.sun.star.frame.theGlobalEventBroadcaster': com.sun.star.frame.theGlobalEventBroadcaster;
-        '/singleton/com.sun.star.frame.thePopupMenuControllerFactory': com.sun.star.frame.thePopupMenuControllerFactory;
-        '/singleton/com.sun.star.frame.theStatusbarControllerFactory': com.sun.star.frame.theStatusbarControllerFactory;
-        '/singleton/com.sun.star.frame.theToolbarControllerFactory': com.sun.star.frame.theToolbarControllerFactory;
-        '/singleton/com.sun.star.frame.theUICommandDescription': com.sun.star.frame.theUICommandDescription;
-        '/singleton/com.sun.star.logging.DocumentIOLogRing': com.sun.star.logging.DocumentIOLogRing;
-        '/singleton/com.sun.star.logging.LoggerPool': com.sun.star.logging.LoggerPool;
-        '/singleton/com.sun.star.reflection.theCoreReflection': com.sun.star.reflection.theCoreReflection;
-        '/singleton/com.sun.star.resource.OfficeResourceLoader': com.sun.star.resource.OfficeResourceLoader;
-        '/singleton/com.sun.star.script.browse.theBrowseNodeFactory': com.sun.star.script.browse.theBrowseNodeFactory;
-        '/singleton/com.sun.star.script.provider.theMasterScriptProviderFactory': com.sun.star.script.provider.theMasterScriptProviderFactory;
-        '/singleton/com.sun.star.script.theServiceDocumenter': com.sun.star.script.theServiceDocumenter;
-        '/singleton/com.sun.star.sdb.DataAccessDescriptorFactory': com.sun.star.sdb.DataAccessDescriptorFactory;
-        '/singleton/com.sun.star.task.OfficeRestartManager': com.sun.star.task.OfficeRestartManager;
-        '/singleton/com.sun.star.task.theJobExecutor': com.sun.star.task.theJobExecutor;
-        '/singleton/com.sun.star.ui.ContextChangeEventMultiplexer': com.sun.star.ui.ContextChangeEventMultiplexer;
-        '/singleton/com.sun.star.ui.theModuleUIConfigurationManagerSupplier': com.sun.star.ui.theModuleUIConfigurationManagerSupplier;
-        '/singleton/com.sun.star.ui.theUICategoryDescription': com.sun.star.ui.theUICategoryDescription;
-        '/singleton/com.sun.star.ui.theUIElementFactoryManager': com.sun.star.ui.theUIElementFactoryManager;
-        '/singleton/com.sun.star.ui.theWindowContentFactoryManager': com.sun.star.ui.theWindowContentFactoryManager;
-        '/singleton/com.sun.star.ui.theWindowStateConfiguration': com.sun.star.ui.theWindowStateConfiguration;
-        '/singleton/com.sun.star.util.theMacroExpander': com.sun.star.util.theMacroExpander;
-        '/singleton/com.sun.star.util.theOfficeInstallationDirectories': com.sun.star.util.theOfficeInstallationDirectories;
-        '/singleton/com.sun.star.util.thePathSettings': com.sun.star.util.thePathSettings;
+        "/singleton/com.sun.star.beans.theIntrospection": com.sun.star.beans.theIntrospection;
+        "/singleton/com.sun.star.configuration.theDefaultProvider": com.sun.star.configuration.theDefaultProvider;
+        "/singleton/com.sun.star.configuration.Update": com.sun.star.configuration.Update;
+        "/singleton/com.sun.star.deployment.ExtensionManager": com.sun.star.deployment.ExtensionManager;
+        "/singleton/com.sun.star.deployment.PackageInformationProvider":
+            com.sun.star.deployment.PackageInformationProvider;
+        "/singleton/com.sun.star.deployment.thePackageManagerFactory": com.sun.star.deployment.thePackageManagerFactory;
+        "/singleton/com.sun.star.frame.theAutoRecovery": com.sun.star.frame.theAutoRecovery;
+        "/singleton/com.sun.star.frame.theDesktop": com.sun.star.frame.theDesktop;
+        "/singleton/com.sun.star.frame.theGlobalEventBroadcaster": com.sun.star.frame.theGlobalEventBroadcaster;
+        "/singleton/com.sun.star.frame.thePopupMenuControllerFactory": com.sun.star.frame.thePopupMenuControllerFactory;
+        "/singleton/com.sun.star.frame.theStatusbarControllerFactory": com.sun.star.frame.theStatusbarControllerFactory;
+        "/singleton/com.sun.star.frame.theToolbarControllerFactory": com.sun.star.frame.theToolbarControllerFactory;
+        "/singleton/com.sun.star.frame.theUICommandDescription": com.sun.star.frame.theUICommandDescription;
+        "/singleton/com.sun.star.logging.DocumentIOLogRing": com.sun.star.logging.DocumentIOLogRing;
+        "/singleton/com.sun.star.logging.LoggerPool": com.sun.star.logging.LoggerPool;
+        "/singleton/com.sun.star.reflection.theCoreReflection": com.sun.star.reflection.theCoreReflection;
+        "/singleton/com.sun.star.resource.OfficeResourceLoader": com.sun.star.resource.OfficeResourceLoader;
+        "/singleton/com.sun.star.script.browse.theBrowseNodeFactory": com.sun.star.script.browse.theBrowseNodeFactory;
+        "/singleton/com.sun.star.script.provider.theMasterScriptProviderFactory":
+            com.sun.star.script.provider.theMasterScriptProviderFactory;
+        "/singleton/com.sun.star.script.theServiceDocumenter": com.sun.star.script.theServiceDocumenter;
+        "/singleton/com.sun.star.sdb.DataAccessDescriptorFactory": com.sun.star.sdb.DataAccessDescriptorFactory;
+        "/singleton/com.sun.star.task.OfficeRestartManager": com.sun.star.task.OfficeRestartManager;
+        "/singleton/com.sun.star.task.theJobExecutor": com.sun.star.task.theJobExecutor;
+        "/singleton/com.sun.star.ui.ContextChangeEventMultiplexer": com.sun.star.ui.ContextChangeEventMultiplexer;
+        "/singleton/com.sun.star.ui.theModuleUIConfigurationManagerSupplier":
+            com.sun.star.ui.theModuleUIConfigurationManagerSupplier;
+        "/singleton/com.sun.star.ui.theUICategoryDescription": com.sun.star.ui.theUICategoryDescription;
+        "/singleton/com.sun.star.ui.theUIElementFactoryManager": com.sun.star.ui.theUIElementFactoryManager;
+        "/singleton/com.sun.star.ui.theWindowContentFactoryManager": com.sun.star.ui.theWindowContentFactoryManager;
+        "/singleton/com.sun.star.ui.theWindowStateConfiguration": com.sun.star.ui.theWindowStateConfiguration;
+        "/singleton/com.sun.star.util.theMacroExpander": com.sun.star.util.theMacroExpander;
+        "/singleton/com.sun.star.util.theOfficeInstallationDirectories":
+            com.sun.star.util.theOfficeInstallationDirectories;
+        "/singleton/com.sun.star.util.thePathSettings": com.sun.star.util.thePathSettings;
     }
 
     interface StructNameMap {
-        'com.sun.star.accessibility.AccessibleEventObject': com.sun.star.accessibility.AccessibleEventObject;
-        'com.sun.star.accessibility.AccessibleRelation': com.sun.star.accessibility.AccessibleRelation;
-        'com.sun.star.accessibility.AccessibleTableModelChange': com.sun.star.accessibility.AccessibleTableModelChange;
-        'com.sun.star.accessibility.TextSegment': com.sun.star.accessibility.TextSegment;
-        'com.sun.star.animations.Event': com.sun.star.animations.Event;
-        'com.sun.star.animations.TargetProperties': com.sun.star.animations.TargetProperties;
-        'com.sun.star.animations.TimeFilterPair': com.sun.star.animations.TimeFilterPair;
-        'com.sun.star.animations.ValuePair': com.sun.star.animations.ValuePair;
-        'com.sun.star.awt.ActionEvent': com.sun.star.awt.ActionEvent;
-        'com.sun.star.awt.AdjustmentEvent': com.sun.star.awt.AdjustmentEvent;
-        'com.sun.star.awt.DeviceInfo': com.sun.star.awt.DeviceInfo;
-        'com.sun.star.awt.DockingData': com.sun.star.awt.DockingData;
-        'com.sun.star.awt.DockingEvent': com.sun.star.awt.DockingEvent;
-        'com.sun.star.awt.EndDockingEvent': com.sun.star.awt.EndDockingEvent;
-        'com.sun.star.awt.EndPopupModeEvent': com.sun.star.awt.EndPopupModeEvent;
-        'com.sun.star.awt.EnhancedMouseEvent': com.sun.star.awt.EnhancedMouseEvent;
-        'com.sun.star.awt.FocusEvent': com.sun.star.awt.FocusEvent;
-        'com.sun.star.awt.FontDescriptor': com.sun.star.awt.FontDescriptor;
-        'com.sun.star.awt.Gradient': com.sun.star.awt.Gradient;
-        'com.sun.star.awt.grid.GridColumnEvent': com.sun.star.awt.grid.GridColumnEvent;
-        'com.sun.star.awt.grid.GridDataEvent': com.sun.star.awt.grid.GridDataEvent;
-        'com.sun.star.awt.grid.GridSelectionEvent': com.sun.star.awt.grid.GridSelectionEvent;
-        'com.sun.star.awt.InputEvent': com.sun.star.awt.InputEvent;
-        'com.sun.star.awt.ItemEvent': com.sun.star.awt.ItemEvent;
-        'com.sun.star.awt.ItemListEvent': com.sun.star.awt.ItemListEvent;
-        'com.sun.star.awt.KeyEvent': com.sun.star.awt.KeyEvent;
-        'com.sun.star.awt.KeyStroke': com.sun.star.awt.KeyStroke;
-        'com.sun.star.awt.MenuEvent': com.sun.star.awt.MenuEvent;
-        'com.sun.star.awt.MouseEvent': com.sun.star.awt.MouseEvent;
-        'com.sun.star.awt.PaintEvent': com.sun.star.awt.PaintEvent;
-        'com.sun.star.awt.Point': com.sun.star.awt.Point;
-        'com.sun.star.awt.Rectangle': com.sun.star.awt.Rectangle;
-        'com.sun.star.awt.Selection': com.sun.star.awt.Selection;
-        'com.sun.star.awt.SimpleFontMetric': com.sun.star.awt.SimpleFontMetric;
-        'com.sun.star.awt.Size': com.sun.star.awt.Size;
-        'com.sun.star.awt.SpinEvent': com.sun.star.awt.SpinEvent;
-        'com.sun.star.awt.SystemDependentXWindow': com.sun.star.awt.SystemDependentXWindow;
-        'com.sun.star.awt.tab.TabPageActivatedEvent': com.sun.star.awt.tab.TabPageActivatedEvent;
-        'com.sun.star.awt.TextEvent': com.sun.star.awt.TextEvent;
-        'com.sun.star.awt.tree.TreeDataModelEvent': com.sun.star.awt.tree.TreeDataModelEvent;
-        'com.sun.star.awt.tree.TreeExpansionEvent': com.sun.star.awt.tree.TreeExpansionEvent;
-        'com.sun.star.awt.VclContainerEvent': com.sun.star.awt.VclContainerEvent;
-        'com.sun.star.awt.WindowDescriptor': com.sun.star.awt.WindowDescriptor;
-        'com.sun.star.awt.WindowEvent': com.sun.star.awt.WindowEvent;
-        'com.sun.star.beans.GetDirectPropertyTolerantResult': com.sun.star.beans.GetDirectPropertyTolerantResult;
-        'com.sun.star.beans.GetPropertyTolerantResult': com.sun.star.beans.GetPropertyTolerantResult;
-        'com.sun.star.beans.NamedValue': com.sun.star.beans.NamedValue;
-        'com.sun.star.beans.Property': com.sun.star.beans.Property;
-        'com.sun.star.beans.PropertyChangeEvent': com.sun.star.beans.PropertyChangeEvent;
-        'com.sun.star.beans.PropertySetInfoChangeEvent': com.sun.star.beans.PropertySetInfoChangeEvent;
-        'com.sun.star.beans.PropertyStateChangeEvent': com.sun.star.beans.PropertyStateChangeEvent;
-        'com.sun.star.beans.PropertyValue': com.sun.star.beans.PropertyValue;
-        'com.sun.star.beans.SetPropertyTolerantFailed': com.sun.star.beans.SetPropertyTolerantFailed;
-        'com.sun.star.beans.StringPair': com.sun.star.beans.StringPair;
-        'com.sun.star.bridge.oleautomation.Currency': com.sun.star.bridge.oleautomation.Currency;
-        'com.sun.star.bridge.oleautomation.Date': com.sun.star.bridge.oleautomation.Date;
-        'com.sun.star.bridge.oleautomation.Decimal': com.sun.star.bridge.oleautomation.Decimal;
-        'com.sun.star.bridge.oleautomation.NamedArgument': com.sun.star.bridge.oleautomation.NamedArgument;
-        'com.sun.star.bridge.oleautomation.PropertyPutArgument': com.sun.star.bridge.oleautomation.PropertyPutArgument;
-        'com.sun.star.bridge.oleautomation.SCode': com.sun.star.bridge.oleautomation.SCode;
-        'com.sun.star.bridge.ProtocolProperty': com.sun.star.bridge.ProtocolProperty;
-        'com.sun.star.chart.ChartDataChangeEvent': com.sun.star.chart.ChartDataChangeEvent;
-        'com.sun.star.chart.ChartDataRow': com.sun.star.chart.ChartDataRow;
-        'com.sun.star.chart.ChartDataValue': com.sun.star.chart.ChartDataValue;
-        'com.sun.star.chart.ChartSeriesAddress': com.sun.star.chart.ChartSeriesAddress;
-        'com.sun.star.chart.TimeIncrement': com.sun.star.chart.TimeIncrement;
-        'com.sun.star.chart.TimeInterval': com.sun.star.chart.TimeInterval;
-        'com.sun.star.chart2.data.HighlightedRange': com.sun.star.chart2.data.HighlightedRange;
-        'com.sun.star.chart2.DataPointLabel': com.sun.star.chart2.DataPointLabel;
-        'com.sun.star.chart2.FillBitmap': com.sun.star.chart2.FillBitmap;
-        'com.sun.star.chart2.IncrementData': com.sun.star.chart2.IncrementData;
-        'com.sun.star.chart2.InterpretedData': com.sun.star.chart2.InterpretedData;
-        'com.sun.star.chart2.LightSource': com.sun.star.chart2.LightSource;
-        'com.sun.star.chart2.RelativePosition': com.sun.star.chart2.RelativePosition;
-        'com.sun.star.chart2.RelativeSize': com.sun.star.chart2.RelativeSize;
-        'com.sun.star.chart2.ScaleData': com.sun.star.chart2.ScaleData;
-        'com.sun.star.chart2.SubIncrement': com.sun.star.chart2.SubIncrement;
-        'com.sun.star.chart2.Symbol': com.sun.star.chart2.Symbol;
-        'com.sun.star.configuration.backend.ComponentChangeEvent': com.sun.star.configuration.backend.ComponentChangeEvent;
-        'com.sun.star.configuration.backend.PropertyInfo': com.sun.star.configuration.backend.PropertyInfo;
-        'com.sun.star.configuration.backend.TemplateIdentifier': com.sun.star.configuration.backend.TemplateIdentifier;
-        'com.sun.star.connection.SocketPermission': com.sun.star.connection.SocketPermission;
-        'com.sun.star.container.ContainerEvent': com.sun.star.container.ContainerEvent;
-        'com.sun.star.datatransfer.clipboard.ClipboardEvent': com.sun.star.datatransfer.clipboard.ClipboardEvent;
-        'com.sun.star.datatransfer.DataFlavor': com.sun.star.datatransfer.DataFlavor;
-        'com.sun.star.datatransfer.dnd.DragGestureEvent': com.sun.star.datatransfer.dnd.DragGestureEvent;
-        'com.sun.star.datatransfer.dnd.DragSourceDragEvent': com.sun.star.datatransfer.dnd.DragSourceDragEvent;
-        'com.sun.star.datatransfer.dnd.DragSourceDropEvent': com.sun.star.datatransfer.dnd.DragSourceDropEvent;
-        'com.sun.star.datatransfer.dnd.DragSourceEvent': com.sun.star.datatransfer.dnd.DragSourceEvent;
-        'com.sun.star.datatransfer.dnd.DropTargetDragEnterEvent': com.sun.star.datatransfer.dnd.DropTargetDragEnterEvent;
-        'com.sun.star.datatransfer.dnd.DropTargetDragEvent': com.sun.star.datatransfer.dnd.DropTargetDragEvent;
-        'com.sun.star.datatransfer.dnd.DropTargetDropEvent': com.sun.star.datatransfer.dnd.DropTargetDropEvent;
-        'com.sun.star.datatransfer.dnd.DropTargetEvent': com.sun.star.datatransfer.dnd.DropTargetEvent;
-        'com.sun.star.deployment.UpdateInformationEntry': com.sun.star.deployment.UpdateInformationEntry;
-        'com.sun.star.document.CmisProperty': com.sun.star.document.CmisProperty;
-        'com.sun.star.document.CmisVersion': com.sun.star.document.CmisVersion;
-        'com.sun.star.document.DocumentEvent': com.sun.star.document.DocumentEvent;
-        'com.sun.star.document.EventObject': com.sun.star.document.EventObject;
-        'com.sun.star.document.UndoManagerEvent': com.sun.star.document.UndoManagerEvent;
-        'com.sun.star.drawing.BezierPoint': com.sun.star.drawing.BezierPoint;
-        'com.sun.star.drawing.BoundVolume': com.sun.star.drawing.BoundVolume;
-        'com.sun.star.drawing.CameraGeometry': com.sun.star.drawing.CameraGeometry;
-        'com.sun.star.drawing.Direction3D': com.sun.star.drawing.Direction3D;
-        'com.sun.star.drawing.EnhancedCustomShapeAdjustmentValue': com.sun.star.drawing.EnhancedCustomShapeAdjustmentValue;
-        'com.sun.star.drawing.EnhancedCustomShapeParameter': com.sun.star.drawing.EnhancedCustomShapeParameter;
-        'com.sun.star.drawing.EnhancedCustomShapeParameterPair': com.sun.star.drawing.EnhancedCustomShapeParameterPair;
-        'com.sun.star.drawing.EnhancedCustomShapeSegment': com.sun.star.drawing.EnhancedCustomShapeSegment;
-        'com.sun.star.drawing.EnhancedCustomShapeTextFrame': com.sun.star.drawing.EnhancedCustomShapeTextFrame;
-        'com.sun.star.drawing.framework.ConfigurationChangeEvent': com.sun.star.drawing.framework.ConfigurationChangeEvent;
-        'com.sun.star.drawing.framework.TabBarButton': com.sun.star.drawing.framework.TabBarButton;
-        'com.sun.star.drawing.GluePoint': com.sun.star.drawing.GluePoint;
-        'com.sun.star.drawing.GluePoint2': com.sun.star.drawing.GluePoint2;
-        'com.sun.star.drawing.Hatch': com.sun.star.drawing.Hatch;
-        'com.sun.star.drawing.HomogenMatrix': com.sun.star.drawing.HomogenMatrix;
-        'com.sun.star.drawing.HomogenMatrix3': com.sun.star.drawing.HomogenMatrix3;
-        'com.sun.star.drawing.HomogenMatrix4': com.sun.star.drawing.HomogenMatrix4;
-        'com.sun.star.drawing.HomogenMatrixLine': com.sun.star.drawing.HomogenMatrixLine;
-        'com.sun.star.drawing.HomogenMatrixLine3': com.sun.star.drawing.HomogenMatrixLine3;
-        'com.sun.star.drawing.HomogenMatrixLine4': com.sun.star.drawing.HomogenMatrixLine4;
-        'com.sun.star.drawing.LineDash': com.sun.star.drawing.LineDash;
-        'com.sun.star.drawing.PolyPolygonBezierCoords': com.sun.star.drawing.PolyPolygonBezierCoords;
-        'com.sun.star.drawing.PolyPolygonShape3D': com.sun.star.drawing.PolyPolygonShape3D;
-        'com.sun.star.drawing.Position3D': com.sun.star.drawing.Position3D;
-        'com.sun.star.embed.InsertedObjectInfo': com.sun.star.embed.InsertedObjectInfo;
-        'com.sun.star.embed.VerbDescriptor': com.sun.star.embed.VerbDescriptor;
-        'com.sun.star.embed.VisualRepresentation': com.sun.star.embed.VisualRepresentation;
-        'com.sun.star.form.binding.ListEntryEvent': com.sun.star.form.binding.ListEntryEvent;
-        'com.sun.star.form.DatabaseDeleteEvent': com.sun.star.form.DatabaseDeleteEvent;
-        'com.sun.star.form.DatabaseParameterEvent': com.sun.star.form.DatabaseParameterEvent;
-        'com.sun.star.form.ErrorEvent': com.sun.star.form.ErrorEvent;
-        'com.sun.star.form.runtime.FeatureState': com.sun.star.form.runtime.FeatureState;
-        'com.sun.star.form.runtime.FilterEvent': com.sun.star.form.runtime.FilterEvent;
-        'com.sun.star.formula.SymbolDescriptor': com.sun.star.formula.SymbolDescriptor;
-        'com.sun.star.frame.BorderWidths': com.sun.star.frame.BorderWidths;
-        'com.sun.star.frame.ControlCommand': com.sun.star.frame.ControlCommand;
-        'com.sun.star.frame.ControlEvent': com.sun.star.frame.ControlEvent;
-        'com.sun.star.frame.DispatchDescriptor': com.sun.star.frame.DispatchDescriptor;
-        'com.sun.star.frame.DispatchInformation': com.sun.star.frame.DispatchInformation;
-        'com.sun.star.frame.DispatchResultEvent': com.sun.star.frame.DispatchResultEvent;
-        'com.sun.star.frame.DispatchStatement': com.sun.star.frame.DispatchStatement;
-        'com.sun.star.frame.FeatureStateEvent': com.sun.star.frame.FeatureStateEvent;
-        'com.sun.star.frame.FrameActionEvent': com.sun.star.frame.FrameActionEvent;
-        'com.sun.star.frame.status.ClipboardFormats': com.sun.star.frame.status.ClipboardFormats;
-        'com.sun.star.frame.status.FontHeight': com.sun.star.frame.status.FontHeight;
-        'com.sun.star.frame.status.ItemStatus': com.sun.star.frame.status.ItemStatus;
-        'com.sun.star.frame.status.LeftRightMargin': com.sun.star.frame.status.LeftRightMargin;
-        'com.sun.star.frame.status.LeftRightMarginScale': com.sun.star.frame.status.LeftRightMarginScale;
-        'com.sun.star.frame.status.Template': com.sun.star.frame.status.Template;
-        'com.sun.star.frame.status.UpperLowerMargin': com.sun.star.frame.status.UpperLowerMargin;
-        'com.sun.star.frame.status.UpperLowerMarginScale': com.sun.star.frame.status.UpperLowerMarginScale;
-        'com.sun.star.frame.status.Verb': com.sun.star.frame.status.Verb;
-        'com.sun.star.frame.status.Visibility': com.sun.star.frame.status.Visibility;
-        'com.sun.star.frame.TitleChangedEvent': com.sun.star.frame.TitleChangedEvent;
-        'com.sun.star.geometry.AffineMatrix2D': com.sun.star.geometry.AffineMatrix2D;
-        'com.sun.star.geometry.AffineMatrix3D': com.sun.star.geometry.AffineMatrix3D;
-        'com.sun.star.geometry.EllipticalArc': com.sun.star.geometry.EllipticalArc;
-        'com.sun.star.geometry.IntegerBezierSegment2D': com.sun.star.geometry.IntegerBezierSegment2D;
-        'com.sun.star.geometry.IntegerPoint2D': com.sun.star.geometry.IntegerPoint2D;
-        'com.sun.star.geometry.IntegerRectangle2D': com.sun.star.geometry.IntegerRectangle2D;
-        'com.sun.star.geometry.IntegerSize2D': com.sun.star.geometry.IntegerSize2D;
-        'com.sun.star.geometry.Matrix2D': com.sun.star.geometry.Matrix2D;
-        'com.sun.star.geometry.RealBezierSegment2D': com.sun.star.geometry.RealBezierSegment2D;
-        'com.sun.star.geometry.RealPoint2D': com.sun.star.geometry.RealPoint2D;
-        'com.sun.star.geometry.RealRectangle2D': com.sun.star.geometry.RealRectangle2D;
-        'com.sun.star.geometry.RealRectangle3D': com.sun.star.geometry.RealRectangle3D;
-        'com.sun.star.geometry.RealSize2D': com.sun.star.geometry.RealSize2D;
-        'com.sun.star.i18n.Boundary': com.sun.star.i18n.Boundary;
-        'com.sun.star.i18n.Calendar': com.sun.star.i18n.Calendar;
-        'com.sun.star.i18n.Calendar2': com.sun.star.i18n.Calendar2;
-        'com.sun.star.i18n.CalendarItem': com.sun.star.i18n.CalendarItem;
-        'com.sun.star.i18n.CalendarItem2': com.sun.star.i18n.CalendarItem2;
-        'com.sun.star.i18n.Currency': com.sun.star.i18n.Currency;
-        'com.sun.star.i18n.Currency2': com.sun.star.i18n.Currency2;
-        'com.sun.star.i18n.ForbiddenCharacters': com.sun.star.i18n.ForbiddenCharacters;
-        'com.sun.star.i18n.FormatElement': com.sun.star.i18n.FormatElement;
-        'com.sun.star.i18n.Implementation': com.sun.star.i18n.Implementation;
-        'com.sun.star.i18n.LanguageCountryInfo': com.sun.star.i18n.LanguageCountryInfo;
-        'com.sun.star.i18n.LineBreakHyphenationOptions': com.sun.star.i18n.LineBreakHyphenationOptions;
-        'com.sun.star.i18n.LineBreakResults': com.sun.star.i18n.LineBreakResults;
-        'com.sun.star.i18n.LineBreakUserOptions': com.sun.star.i18n.LineBreakUserOptions;
-        'com.sun.star.i18n.LocaleDataItem': com.sun.star.i18n.LocaleDataItem;
-        'com.sun.star.i18n.NativeNumberXmlAttributes': com.sun.star.i18n.NativeNumberXmlAttributes;
-        'com.sun.star.i18n.NumberFormatCode': com.sun.star.i18n.NumberFormatCode;
-        'com.sun.star.i18n.ParseResult': com.sun.star.i18n.ParseResult;
-        'com.sun.star.i18n.TextConversionResult': com.sun.star.i18n.TextConversionResult;
-        'com.sun.star.inspection.LineDescriptor': com.sun.star.inspection.LineDescriptor;
-        'com.sun.star.inspection.PropertyCategoryDescriptor': com.sun.star.inspection.PropertyCategoryDescriptor;
-        'com.sun.star.io.DataTransferEvent': com.sun.star.io.DataTransferEvent;
-        'com.sun.star.io.FilePermission': com.sun.star.io.FilePermission;
-        'com.sun.star.lang.EventObject': com.sun.star.lang.EventObject;
-        'com.sun.star.lang.Locale': com.sun.star.lang.Locale;
-        'com.sun.star.linguistic2.DictionaryEvent': com.sun.star.linguistic2.DictionaryEvent;
-        'com.sun.star.linguistic2.DictionaryListEvent': com.sun.star.linguistic2.DictionaryListEvent;
-        'com.sun.star.linguistic2.LinguServiceEvent': com.sun.star.linguistic2.LinguServiceEvent;
-        'com.sun.star.linguistic2.ProofreadingResult': com.sun.star.linguistic2.ProofreadingResult;
-        'com.sun.star.linguistic2.SingleProofreadingError': com.sun.star.linguistic2.SingleProofreadingError;
-        'com.sun.star.logging.LogRecord': com.sun.star.logging.LogRecord;
-        'com.sun.star.mail.MailAttachment': com.sun.star.mail.MailAttachment;
-        'com.sun.star.mozilla.MenuMultipleChange': com.sun.star.mozilla.MenuMultipleChange;
-        'com.sun.star.mozilla.MenuSingleChange': com.sun.star.mozilla.MenuSingleChange;
-        'com.sun.star.packages.zip.ZipEntry': com.sun.star.packages.zip.ZipEntry;
-        'com.sun.star.presentation.ParagraphTarget': com.sun.star.presentation.ParagraphTarget;
-        'com.sun.star.rdf.Statement': com.sun.star.rdf.Statement;
-        'com.sun.star.reflection.ParamInfo': com.sun.star.reflection.ParamInfo;
-        'com.sun.star.rendering.AnimationAttributes': com.sun.star.rendering.AnimationAttributes;
-        'com.sun.star.rendering.ARGBColor': com.sun.star.rendering.ARGBColor;
-        'com.sun.star.rendering.Caret': com.sun.star.rendering.Caret;
-        'com.sun.star.rendering.ColorProfile': com.sun.star.rendering.ColorProfile;
-        'com.sun.star.rendering.FloatingPointBitmapLayout': com.sun.star.rendering.FloatingPointBitmapLayout;
-        'com.sun.star.rendering.FontInfo': com.sun.star.rendering.FontInfo;
-        'com.sun.star.rendering.FontMetrics': com.sun.star.rendering.FontMetrics;
-        'com.sun.star.rendering.FontRequest': com.sun.star.rendering.FontRequest;
-        'com.sun.star.rendering.IntegerBitmapLayout': com.sun.star.rendering.IntegerBitmapLayout;
-        'com.sun.star.rendering.Panose': com.sun.star.rendering.Panose;
-        'com.sun.star.rendering.RenderState': com.sun.star.rendering.RenderState;
-        'com.sun.star.rendering.RGBColor': com.sun.star.rendering.RGBColor;
-        'com.sun.star.rendering.StringContext': com.sun.star.rendering.StringContext;
-        'com.sun.star.rendering.StrokeAttributes': com.sun.star.rendering.StrokeAttributes;
-        'com.sun.star.rendering.TextHit': com.sun.star.rendering.TextHit;
-        'com.sun.star.rendering.Texture': com.sun.star.rendering.Texture;
-        'com.sun.star.rendering.ViewState': com.sun.star.rendering.ViewState;
-        'com.sun.star.scanner.ScannerContext': com.sun.star.scanner.ScannerContext;
-        'com.sun.star.script.AllEventObject': com.sun.star.script.AllEventObject;
-        'com.sun.star.script.ArrayWrapper': com.sun.star.script.ArrayWrapper;
-        'com.sun.star.script.ContextInformation': com.sun.star.script.ContextInformation;
-        'com.sun.star.script.EventListener': com.sun.star.script.EventListener;
-        'com.sun.star.script.FinishEngineEvent': com.sun.star.script.FinishEngineEvent;
-        'com.sun.star.script.InterruptEngineEvent': com.sun.star.script.InterruptEngineEvent;
-        'com.sun.star.script.InvocationInfo': com.sun.star.script.InvocationInfo;
-        'com.sun.star.script.ModuleInfo': com.sun.star.script.ModuleInfo;
-        'com.sun.star.script.NativeObjectWrapper': com.sun.star.script.NativeObjectWrapper;
-        'com.sun.star.script.ScriptEvent': com.sun.star.script.ScriptEvent;
-        'com.sun.star.script.ScriptEventDescriptor': com.sun.star.script.ScriptEventDescriptor;
-        'com.sun.star.script.vba.VBAScriptEvent': com.sun.star.script.vba.VBAScriptEvent;
-        'com.sun.star.sdb.application.CopyTableRowEvent': com.sun.star.sdb.application.CopyTableRowEvent;
-        'com.sun.star.sdb.application.NamedDatabaseObject': com.sun.star.sdb.application.NamedDatabaseObject;
-        'com.sun.star.sdb.DatabaseRegistrationEvent': com.sun.star.sdb.DatabaseRegistrationEvent;
-        'com.sun.star.sdb.RowChangeEvent': com.sun.star.sdb.RowChangeEvent;
-        'com.sun.star.sdb.RowsChangeEvent': com.sun.star.sdb.RowsChangeEvent;
-        'com.sun.star.sdb.SQLErrorEvent': com.sun.star.sdb.SQLErrorEvent;
-        'com.sun.star.sdbc.ChangeEvent': com.sun.star.sdbc.ChangeEvent;
-        'com.sun.star.sdbc.DriverPropertyInfo': com.sun.star.sdbc.DriverPropertyInfo;
-        'com.sun.star.security.AllPermission': com.sun.star.security.AllPermission;
-        'com.sun.star.security.CertAltNameEntry': com.sun.star.security.CertAltNameEntry;
-        'com.sun.star.security.DocumentSignatureInformation': com.sun.star.security.DocumentSignatureInformation;
-        'com.sun.star.security.RuntimePermission': com.sun.star.security.RuntimePermission;
-        'com.sun.star.sheet.ActivationEvent': com.sun.star.sheet.ActivationEvent;
-        'com.sun.star.sheet.ComplexReference': com.sun.star.sheet.ComplexReference;
-        'com.sun.star.sheet.DataPilotFieldAutoShowInfo': com.sun.star.sheet.DataPilotFieldAutoShowInfo;
-        'com.sun.star.sheet.DataPilotFieldFilter': com.sun.star.sheet.DataPilotFieldFilter;
-        'com.sun.star.sheet.DataPilotFieldGroupInfo': com.sun.star.sheet.DataPilotFieldGroupInfo;
-        'com.sun.star.sheet.DataPilotFieldLayoutInfo': com.sun.star.sheet.DataPilotFieldLayoutInfo;
-        'com.sun.star.sheet.DataPilotFieldReference': com.sun.star.sheet.DataPilotFieldReference;
-        'com.sun.star.sheet.DataPilotFieldSortInfo': com.sun.star.sheet.DataPilotFieldSortInfo;
-        'com.sun.star.sheet.DataPilotTableHeaderData': com.sun.star.sheet.DataPilotTableHeaderData;
-        'com.sun.star.sheet.DataPilotTablePositionData': com.sun.star.sheet.DataPilotTablePositionData;
-        'com.sun.star.sheet.DataPilotTableResultData': com.sun.star.sheet.DataPilotTableResultData;
-        'com.sun.star.sheet.DataResult': com.sun.star.sheet.DataResult;
-        'com.sun.star.sheet.DDEItemInfo': com.sun.star.sheet.DDEItemInfo;
-        'com.sun.star.sheet.DDELinkInfo': com.sun.star.sheet.DDELinkInfo;
-        'com.sun.star.sheet.ExternalLinkInfo': com.sun.star.sheet.ExternalLinkInfo;
-        'com.sun.star.sheet.ExternalReference': com.sun.star.sheet.ExternalReference;
-        'com.sun.star.sheet.FilterFieldValue': com.sun.star.sheet.FilterFieldValue;
-        'com.sun.star.sheet.FormulaOpCodeMapEntry': com.sun.star.sheet.FormulaOpCodeMapEntry;
-        'com.sun.star.sheet.FormulaToken': com.sun.star.sheet.FormulaToken;
-        'com.sun.star.sheet.FunctionArgument': com.sun.star.sheet.FunctionArgument;
-        'com.sun.star.sheet.GoalResult': com.sun.star.sheet.GoalResult;
-        'com.sun.star.sheet.LocalizedName': com.sun.star.sheet.LocalizedName;
-        'com.sun.star.sheet.MemberResult': com.sun.star.sheet.MemberResult;
-        'com.sun.star.sheet.NameToken': com.sun.star.sheet.NameToken;
-        'com.sun.star.sheet.opencl.OpenCLDevice': com.sun.star.sheet.opencl.OpenCLDevice;
-        'com.sun.star.sheet.opencl.OpenCLPlatform': com.sun.star.sheet.opencl.OpenCLPlatform;
-        'com.sun.star.sheet.RangeSelectionEvent': com.sun.star.sheet.RangeSelectionEvent;
-        'com.sun.star.sheet.ResultEvent': com.sun.star.sheet.ResultEvent;
-        'com.sun.star.sheet.SingleReference': com.sun.star.sheet.SingleReference;
-        'com.sun.star.sheet.SolverConstraint': com.sun.star.sheet.SolverConstraint;
-        'com.sun.star.sheet.SubTotalColumn': com.sun.star.sheet.SubTotalColumn;
-        'com.sun.star.sheet.TableFilterField': com.sun.star.sheet.TableFilterField;
-        'com.sun.star.sheet.TableFilterField2': com.sun.star.sheet.TableFilterField2;
-        'com.sun.star.sheet.TableFilterField3': com.sun.star.sheet.TableFilterField3;
-        'com.sun.star.sheet.TablePageBreakData': com.sun.star.sheet.TablePageBreakData;
-        'com.sun.star.style.DropCapFormat': com.sun.star.style.DropCapFormat;
-        'com.sun.star.style.LineSpacing': com.sun.star.style.LineSpacing;
-        'com.sun.star.style.TabStop': com.sun.star.style.TabStop;
-        'com.sun.star.table.BorderLine': com.sun.star.table.BorderLine;
-        'com.sun.star.table.BorderLine2': com.sun.star.table.BorderLine2;
-        'com.sun.star.table.CellAddress': com.sun.star.table.CellAddress;
-        'com.sun.star.table.CellRangeAddress': com.sun.star.table.CellRangeAddress;
-        'com.sun.star.table.ShadowFormat': com.sun.star.table.ShadowFormat;
-        'com.sun.star.table.TableBorder': com.sun.star.table.TableBorder;
-        'com.sun.star.table.TableBorder2': com.sun.star.table.TableBorder2;
-        'com.sun.star.table.TableBorderDistances': com.sun.star.table.TableBorderDistances;
-        'com.sun.star.table.TableSortField': com.sun.star.table.TableSortField;
-        'com.sun.star.task.UrlRecord': com.sun.star.task.UrlRecord;
-        'com.sun.star.task.UserRecord': com.sun.star.task.UserRecord;
-        'com.sun.star.text.GraphicCrop': com.sun.star.text.GraphicCrop;
-        'com.sun.star.text.HoriOrientationFormat': com.sun.star.text.HoriOrientationFormat;
-        'com.sun.star.text.MailMergeEvent': com.sun.star.text.MailMergeEvent;
-        'com.sun.star.text.SectionFileLink': com.sun.star.text.SectionFileLink;
-        'com.sun.star.text.TableColumnSeparator': com.sun.star.text.TableColumnSeparator;
-        'com.sun.star.text.TextColumn': com.sun.star.text.TextColumn;
-        'com.sun.star.text.TextMarkupDescriptor': com.sun.star.text.TextMarkupDescriptor;
-        'com.sun.star.text.TextPosition': com.sun.star.text.TextPosition;
-        'com.sun.star.text.TextRangeSelection': com.sun.star.text.TextRangeSelection;
-        'com.sun.star.text.VertOrientationFormat': com.sun.star.text.VertOrientationFormat;
-        'com.sun.star.ucb.CheckinArgument': com.sun.star.ucb.CheckinArgument;
-        'com.sun.star.ucb.Command': com.sun.star.ucb.Command;
-        'com.sun.star.ucb.CommandInfo': com.sun.star.ucb.CommandInfo;
-        'com.sun.star.ucb.CommandInfoChangeEvent': com.sun.star.ucb.CommandInfoChangeEvent;
-        'com.sun.star.ucb.ContentEvent': com.sun.star.ucb.ContentEvent;
-        'com.sun.star.ucb.ContentInfo': com.sun.star.ucb.ContentInfo;
-        'com.sun.star.ucb.ContentProviderInfo': com.sun.star.ucb.ContentProviderInfo;
-        'com.sun.star.ucb.CrossReference': com.sun.star.ucb.CrossReference;
-        'com.sun.star.ucb.DocumentHeaderField': com.sun.star.ucb.DocumentHeaderField;
-        'com.sun.star.ucb.ExportStreamInfo': com.sun.star.ucb.ExportStreamInfo;
-        'com.sun.star.ucb.FetchResult': com.sun.star.ucb.FetchResult;
-        'com.sun.star.ucb.FolderList': com.sun.star.ucb.FolderList;
-        'com.sun.star.ucb.FolderListEntry': com.sun.star.ucb.FolderListEntry;
-        'com.sun.star.ucb.GlobalTransferCommandArgument': com.sun.star.ucb.GlobalTransferCommandArgument;
-        'com.sun.star.ucb.GlobalTransferCommandArgument2': com.sun.star.ucb.GlobalTransferCommandArgument2;
-        'com.sun.star.ucb.InsertCommandArgument': com.sun.star.ucb.InsertCommandArgument;
-        'com.sun.star.ucb.InsertCommandArgument2': com.sun.star.ucb.InsertCommandArgument2;
-        'com.sun.star.ucb.Link': com.sun.star.ucb.Link;
-        'com.sun.star.ucb.ListAction': com.sun.star.ucb.ListAction;
-        'com.sun.star.ucb.ListEvent': com.sun.star.ucb.ListEvent;
-        'com.sun.star.ucb.Lock': com.sun.star.ucb.Lock;
-        'com.sun.star.ucb.LockEntry': com.sun.star.ucb.LockEntry;
-        'com.sun.star.ucb.NumberedSortingInfo': com.sun.star.ucb.NumberedSortingInfo;
-        'com.sun.star.ucb.OpenCommandArgument': com.sun.star.ucb.OpenCommandArgument;
-        'com.sun.star.ucb.OpenCommandArgument2': com.sun.star.ucb.OpenCommandArgument2;
-        'com.sun.star.ucb.OpenCommandArgument3': com.sun.star.ucb.OpenCommandArgument3;
-        'com.sun.star.ucb.PostCommandArgument': com.sun.star.ucb.PostCommandArgument;
-        'com.sun.star.ucb.PostCommandArgument2': com.sun.star.ucb.PostCommandArgument2;
-        'com.sun.star.ucb.PropertyCommandArgument': com.sun.star.ucb.PropertyCommandArgument;
-        'com.sun.star.ucb.PropertyValueInfo': com.sun.star.ucb.PropertyValueInfo;
-        'com.sun.star.ucb.RecipientInfo': com.sun.star.ucb.RecipientInfo;
-        'com.sun.star.ucb.RemoteContentProviderChangeEvent': com.sun.star.ucb.RemoteContentProviderChangeEvent;
-        'com.sun.star.ucb.Rule': com.sun.star.ucb.Rule;
-        'com.sun.star.ucb.RuleSet': com.sun.star.ucb.RuleSet;
-        'com.sun.star.ucb.RuleTerm': com.sun.star.ucb.RuleTerm;
-        'com.sun.star.ucb.SearchCommandArgument': com.sun.star.ucb.SearchCommandArgument;
-        'com.sun.star.ucb.SearchCriterium': com.sun.star.ucb.SearchCriterium;
-        'com.sun.star.ucb.SearchInfo': com.sun.star.ucb.SearchInfo;
-        'com.sun.star.ucb.SendInfo': com.sun.star.ucb.SendInfo;
-        'com.sun.star.ucb.SendMediaTypes': com.sun.star.ucb.SendMediaTypes;
-        'com.sun.star.ucb.SortingInfo': com.sun.star.ucb.SortingInfo;
-        'com.sun.star.ucb.TransferInfo': com.sun.star.ucb.TransferInfo;
-        'com.sun.star.ucb.TransferInfo2': com.sun.star.ucb.TransferInfo2;
-        'com.sun.star.ucb.TransferResult': com.sun.star.ucb.TransferResult;
-        'com.sun.star.ucb.WelcomeDynamicResultSetStruct': com.sun.star.ucb.WelcomeDynamicResultSetStruct;
-        'com.sun.star.ui.ConfigurationEvent': com.sun.star.ui.ConfigurationEvent;
-        'com.sun.star.ui.ContextChangeEventObject': com.sun.star.ui.ContextChangeEventObject;
-        'com.sun.star.ui.ContextMenuExecuteEvent': com.sun.star.ui.ContextMenuExecuteEvent;
-        'com.sun.star.ui.dialogs.DialogClosedEvent': com.sun.star.ui.dialogs.DialogClosedEvent;
-        'com.sun.star.ui.dialogs.FilePickerEvent': com.sun.star.ui.dialogs.FilePickerEvent;
-        'com.sun.star.ui.LayoutSize': com.sun.star.ui.LayoutSize;
-        'com.sun.star.uno.Uik': com.sun.star.uno.Uik;
-        'com.sun.star.util.AliasProgrammaticPair': com.sun.star.util.AliasProgrammaticPair;
-        'com.sun.star.util.AtomClassRequest': com.sun.star.util.AtomClassRequest;
-        'com.sun.star.util.AtomDescription': com.sun.star.util.AtomDescription;
-        'com.sun.star.util.CellProtection': com.sun.star.util.CellProtection;
-        'com.sun.star.util.ChangesEvent': com.sun.star.util.ChangesEvent;
-        'com.sun.star.util.DataEditorEvent': com.sun.star.util.DataEditorEvent;
-        'com.sun.star.util.Date': com.sun.star.util.Date;
-        'com.sun.star.util.DateTime': com.sun.star.util.DateTime;
-        'com.sun.star.util.DateTimeRange': com.sun.star.util.DateTimeRange;
-        'com.sun.star.util.DateTimeWithTimezone': com.sun.star.util.DateTimeWithTimezone;
-        'com.sun.star.util.DateWithTimezone': com.sun.star.util.DateWithTimezone;
-        'com.sun.star.util.Duration': com.sun.star.util.Duration;
-        'com.sun.star.util.ElementChange': com.sun.star.util.ElementChange;
-        'com.sun.star.util.ModeChangeEvent': com.sun.star.util.ModeChangeEvent;
-        'com.sun.star.util.RevisionTag': com.sun.star.util.RevisionTag;
-        'com.sun.star.util.SearchOptions': com.sun.star.util.SearchOptions;
-        'com.sun.star.util.SearchOptions2': com.sun.star.util.SearchOptions2;
-        'com.sun.star.util.SearchResult': com.sun.star.util.SearchResult;
-        'com.sun.star.util.SortField': com.sun.star.util.SortField;
-        'com.sun.star.util.Time': com.sun.star.util.Time;
-        'com.sun.star.util.TimeWithTimezone': com.sun.star.util.TimeWithTimezone;
-        'com.sun.star.util.URL': com.sun.star.util.URL;
-        'com.sun.star.view.PrintableStateEvent': com.sun.star.view.PrintableStateEvent;
-        'com.sun.star.view.PrintJobEvent': com.sun.star.view.PrintJobEvent;
-        'com.sun.star.xml.Attribute': com.sun.star.xml.Attribute;
-        'com.sun.star.xml.AttributeData': com.sun.star.xml.AttributeData;
-        'com.sun.star.xml.crypto.sax.ElementStackItem': com.sun.star.xml.crypto.sax.ElementStackItem;
-        'com.sun.star.xml.csax.XMLAttribute': com.sun.star.xml.csax.XMLAttribute;
-        'com.sun.star.xml.FastAttribute': com.sun.star.xml.FastAttribute;
-        'com.sun.star.xml.sax.InputSource': com.sun.star.xml.sax.InputSource;
-        'com.sun.star.xml.xpath.Libxml2ExtensionHandle': com.sun.star.xml.xpath.Libxml2ExtensionHandle;
+        "com.sun.star.accessibility.AccessibleEventObject": com.sun.star.accessibility.AccessibleEventObject;
+        "com.sun.star.accessibility.AccessibleRelation": com.sun.star.accessibility.AccessibleRelation;
+        "com.sun.star.accessibility.AccessibleTableModelChange": com.sun.star.accessibility.AccessibleTableModelChange;
+        "com.sun.star.accessibility.TextSegment": com.sun.star.accessibility.TextSegment;
+        "com.sun.star.animations.Event": com.sun.star.animations.Event;
+        "com.sun.star.animations.TargetProperties": com.sun.star.animations.TargetProperties;
+        "com.sun.star.animations.TimeFilterPair": com.sun.star.animations.TimeFilterPair;
+        "com.sun.star.animations.ValuePair": com.sun.star.animations.ValuePair;
+        "com.sun.star.awt.ActionEvent": com.sun.star.awt.ActionEvent;
+        "com.sun.star.awt.AdjustmentEvent": com.sun.star.awt.AdjustmentEvent;
+        "com.sun.star.awt.DeviceInfo": com.sun.star.awt.DeviceInfo;
+        "com.sun.star.awt.DockingData": com.sun.star.awt.DockingData;
+        "com.sun.star.awt.DockingEvent": com.sun.star.awt.DockingEvent;
+        "com.sun.star.awt.EndDockingEvent": com.sun.star.awt.EndDockingEvent;
+        "com.sun.star.awt.EndPopupModeEvent": com.sun.star.awt.EndPopupModeEvent;
+        "com.sun.star.awt.EnhancedMouseEvent": com.sun.star.awt.EnhancedMouseEvent;
+        "com.sun.star.awt.FocusEvent": com.sun.star.awt.FocusEvent;
+        "com.sun.star.awt.FontDescriptor": com.sun.star.awt.FontDescriptor;
+        "com.sun.star.awt.Gradient": com.sun.star.awt.Gradient;
+        "com.sun.star.awt.grid.GridColumnEvent": com.sun.star.awt.grid.GridColumnEvent;
+        "com.sun.star.awt.grid.GridDataEvent": com.sun.star.awt.grid.GridDataEvent;
+        "com.sun.star.awt.grid.GridSelectionEvent": com.sun.star.awt.grid.GridSelectionEvent;
+        "com.sun.star.awt.InputEvent": com.sun.star.awt.InputEvent;
+        "com.sun.star.awt.ItemEvent": com.sun.star.awt.ItemEvent;
+        "com.sun.star.awt.ItemListEvent": com.sun.star.awt.ItemListEvent;
+        "com.sun.star.awt.KeyEvent": com.sun.star.awt.KeyEvent;
+        "com.sun.star.awt.KeyStroke": com.sun.star.awt.KeyStroke;
+        "com.sun.star.awt.MenuEvent": com.sun.star.awt.MenuEvent;
+        "com.sun.star.awt.MouseEvent": com.sun.star.awt.MouseEvent;
+        "com.sun.star.awt.PaintEvent": com.sun.star.awt.PaintEvent;
+        "com.sun.star.awt.Point": com.sun.star.awt.Point;
+        "com.sun.star.awt.Rectangle": com.sun.star.awt.Rectangle;
+        "com.sun.star.awt.Selection": com.sun.star.awt.Selection;
+        "com.sun.star.awt.SimpleFontMetric": com.sun.star.awt.SimpleFontMetric;
+        "com.sun.star.awt.Size": com.sun.star.awt.Size;
+        "com.sun.star.awt.SpinEvent": com.sun.star.awt.SpinEvent;
+        "com.sun.star.awt.SystemDependentXWindow": com.sun.star.awt.SystemDependentXWindow;
+        "com.sun.star.awt.tab.TabPageActivatedEvent": com.sun.star.awt.tab.TabPageActivatedEvent;
+        "com.sun.star.awt.TextEvent": com.sun.star.awt.TextEvent;
+        "com.sun.star.awt.tree.TreeDataModelEvent": com.sun.star.awt.tree.TreeDataModelEvent;
+        "com.sun.star.awt.tree.TreeExpansionEvent": com.sun.star.awt.tree.TreeExpansionEvent;
+        "com.sun.star.awt.VclContainerEvent": com.sun.star.awt.VclContainerEvent;
+        "com.sun.star.awt.WindowDescriptor": com.sun.star.awt.WindowDescriptor;
+        "com.sun.star.awt.WindowEvent": com.sun.star.awt.WindowEvent;
+        "com.sun.star.beans.GetDirectPropertyTolerantResult": com.sun.star.beans.GetDirectPropertyTolerantResult;
+        "com.sun.star.beans.GetPropertyTolerantResult": com.sun.star.beans.GetPropertyTolerantResult;
+        "com.sun.star.beans.NamedValue": com.sun.star.beans.NamedValue;
+        "com.sun.star.beans.Property": com.sun.star.beans.Property;
+        "com.sun.star.beans.PropertyChangeEvent": com.sun.star.beans.PropertyChangeEvent;
+        "com.sun.star.beans.PropertySetInfoChangeEvent": com.sun.star.beans.PropertySetInfoChangeEvent;
+        "com.sun.star.beans.PropertyStateChangeEvent": com.sun.star.beans.PropertyStateChangeEvent;
+        "com.sun.star.beans.PropertyValue": com.sun.star.beans.PropertyValue;
+        "com.sun.star.beans.SetPropertyTolerantFailed": com.sun.star.beans.SetPropertyTolerantFailed;
+        "com.sun.star.beans.StringPair": com.sun.star.beans.StringPair;
+        "com.sun.star.bridge.oleautomation.Currency": com.sun.star.bridge.oleautomation.Currency;
+        "com.sun.star.bridge.oleautomation.Date": com.sun.star.bridge.oleautomation.Date;
+        "com.sun.star.bridge.oleautomation.Decimal": com.sun.star.bridge.oleautomation.Decimal;
+        "com.sun.star.bridge.oleautomation.NamedArgument": com.sun.star.bridge.oleautomation.NamedArgument;
+        "com.sun.star.bridge.oleautomation.PropertyPutArgument": com.sun.star.bridge.oleautomation.PropertyPutArgument;
+        "com.sun.star.bridge.oleautomation.SCode": com.sun.star.bridge.oleautomation.SCode;
+        "com.sun.star.bridge.ProtocolProperty": com.sun.star.bridge.ProtocolProperty;
+        "com.sun.star.chart.ChartDataChangeEvent": com.sun.star.chart.ChartDataChangeEvent;
+        "com.sun.star.chart.ChartDataRow": com.sun.star.chart.ChartDataRow;
+        "com.sun.star.chart.ChartDataValue": com.sun.star.chart.ChartDataValue;
+        "com.sun.star.chart.ChartSeriesAddress": com.sun.star.chart.ChartSeriesAddress;
+        "com.sun.star.chart.TimeIncrement": com.sun.star.chart.TimeIncrement;
+        "com.sun.star.chart.TimeInterval": com.sun.star.chart.TimeInterval;
+        "com.sun.star.chart2.data.HighlightedRange": com.sun.star.chart2.data.HighlightedRange;
+        "com.sun.star.chart2.DataPointLabel": com.sun.star.chart2.DataPointLabel;
+        "com.sun.star.chart2.FillBitmap": com.sun.star.chart2.FillBitmap;
+        "com.sun.star.chart2.IncrementData": com.sun.star.chart2.IncrementData;
+        "com.sun.star.chart2.InterpretedData": com.sun.star.chart2.InterpretedData;
+        "com.sun.star.chart2.LightSource": com.sun.star.chart2.LightSource;
+        "com.sun.star.chart2.RelativePosition": com.sun.star.chart2.RelativePosition;
+        "com.sun.star.chart2.RelativeSize": com.sun.star.chart2.RelativeSize;
+        "com.sun.star.chart2.ScaleData": com.sun.star.chart2.ScaleData;
+        "com.sun.star.chart2.SubIncrement": com.sun.star.chart2.SubIncrement;
+        "com.sun.star.chart2.Symbol": com.sun.star.chart2.Symbol;
+        "com.sun.star.configuration.backend.ComponentChangeEvent":
+            com.sun.star.configuration.backend.ComponentChangeEvent;
+        "com.sun.star.configuration.backend.PropertyInfo": com.sun.star.configuration.backend.PropertyInfo;
+        "com.sun.star.configuration.backend.TemplateIdentifier": com.sun.star.configuration.backend.TemplateIdentifier;
+        "com.sun.star.connection.SocketPermission": com.sun.star.connection.SocketPermission;
+        "com.sun.star.container.ContainerEvent": com.sun.star.container.ContainerEvent;
+        "com.sun.star.datatransfer.clipboard.ClipboardEvent": com.sun.star.datatransfer.clipboard.ClipboardEvent;
+        "com.sun.star.datatransfer.DataFlavor": com.sun.star.datatransfer.DataFlavor;
+        "com.sun.star.datatransfer.dnd.DragGestureEvent": com.sun.star.datatransfer.dnd.DragGestureEvent;
+        "com.sun.star.datatransfer.dnd.DragSourceDragEvent": com.sun.star.datatransfer.dnd.DragSourceDragEvent;
+        "com.sun.star.datatransfer.dnd.DragSourceDropEvent": com.sun.star.datatransfer.dnd.DragSourceDropEvent;
+        "com.sun.star.datatransfer.dnd.DragSourceEvent": com.sun.star.datatransfer.dnd.DragSourceEvent;
+        "com.sun.star.datatransfer.dnd.DropTargetDragEnterEvent":
+            com.sun.star.datatransfer.dnd.DropTargetDragEnterEvent;
+        "com.sun.star.datatransfer.dnd.DropTargetDragEvent": com.sun.star.datatransfer.dnd.DropTargetDragEvent;
+        "com.sun.star.datatransfer.dnd.DropTargetDropEvent": com.sun.star.datatransfer.dnd.DropTargetDropEvent;
+        "com.sun.star.datatransfer.dnd.DropTargetEvent": com.sun.star.datatransfer.dnd.DropTargetEvent;
+        "com.sun.star.deployment.UpdateInformationEntry": com.sun.star.deployment.UpdateInformationEntry;
+        "com.sun.star.document.CmisProperty": com.sun.star.document.CmisProperty;
+        "com.sun.star.document.CmisVersion": com.sun.star.document.CmisVersion;
+        "com.sun.star.document.DocumentEvent": com.sun.star.document.DocumentEvent;
+        "com.sun.star.document.EventObject": com.sun.star.document.EventObject;
+        "com.sun.star.document.UndoManagerEvent": com.sun.star.document.UndoManagerEvent;
+        "com.sun.star.drawing.BezierPoint": com.sun.star.drawing.BezierPoint;
+        "com.sun.star.drawing.BoundVolume": com.sun.star.drawing.BoundVolume;
+        "com.sun.star.drawing.CameraGeometry": com.sun.star.drawing.CameraGeometry;
+        "com.sun.star.drawing.Direction3D": com.sun.star.drawing.Direction3D;
+        "com.sun.star.drawing.EnhancedCustomShapeAdjustmentValue":
+            com.sun.star.drawing.EnhancedCustomShapeAdjustmentValue;
+        "com.sun.star.drawing.EnhancedCustomShapeParameter": com.sun.star.drawing.EnhancedCustomShapeParameter;
+        "com.sun.star.drawing.EnhancedCustomShapeParameterPair": com.sun.star.drawing.EnhancedCustomShapeParameterPair;
+        "com.sun.star.drawing.EnhancedCustomShapeSegment": com.sun.star.drawing.EnhancedCustomShapeSegment;
+        "com.sun.star.drawing.EnhancedCustomShapeTextFrame": com.sun.star.drawing.EnhancedCustomShapeTextFrame;
+        "com.sun.star.drawing.framework.ConfigurationChangeEvent":
+            com.sun.star.drawing.framework.ConfigurationChangeEvent;
+        "com.sun.star.drawing.framework.TabBarButton": com.sun.star.drawing.framework.TabBarButton;
+        "com.sun.star.drawing.GluePoint": com.sun.star.drawing.GluePoint;
+        "com.sun.star.drawing.GluePoint2": com.sun.star.drawing.GluePoint2;
+        "com.sun.star.drawing.Hatch": com.sun.star.drawing.Hatch;
+        "com.sun.star.drawing.HomogenMatrix": com.sun.star.drawing.HomogenMatrix;
+        "com.sun.star.drawing.HomogenMatrix3": com.sun.star.drawing.HomogenMatrix3;
+        "com.sun.star.drawing.HomogenMatrix4": com.sun.star.drawing.HomogenMatrix4;
+        "com.sun.star.drawing.HomogenMatrixLine": com.sun.star.drawing.HomogenMatrixLine;
+        "com.sun.star.drawing.HomogenMatrixLine3": com.sun.star.drawing.HomogenMatrixLine3;
+        "com.sun.star.drawing.HomogenMatrixLine4": com.sun.star.drawing.HomogenMatrixLine4;
+        "com.sun.star.drawing.LineDash": com.sun.star.drawing.LineDash;
+        "com.sun.star.drawing.PolyPolygonBezierCoords": com.sun.star.drawing.PolyPolygonBezierCoords;
+        "com.sun.star.drawing.PolyPolygonShape3D": com.sun.star.drawing.PolyPolygonShape3D;
+        "com.sun.star.drawing.Position3D": com.sun.star.drawing.Position3D;
+        "com.sun.star.embed.InsertedObjectInfo": com.sun.star.embed.InsertedObjectInfo;
+        "com.sun.star.embed.VerbDescriptor": com.sun.star.embed.VerbDescriptor;
+        "com.sun.star.embed.VisualRepresentation": com.sun.star.embed.VisualRepresentation;
+        "com.sun.star.form.binding.ListEntryEvent": com.sun.star.form.binding.ListEntryEvent;
+        "com.sun.star.form.DatabaseDeleteEvent": com.sun.star.form.DatabaseDeleteEvent;
+        "com.sun.star.form.DatabaseParameterEvent": com.sun.star.form.DatabaseParameterEvent;
+        "com.sun.star.form.ErrorEvent": com.sun.star.form.ErrorEvent;
+        "com.sun.star.form.runtime.FeatureState": com.sun.star.form.runtime.FeatureState;
+        "com.sun.star.form.runtime.FilterEvent": com.sun.star.form.runtime.FilterEvent;
+        "com.sun.star.formula.SymbolDescriptor": com.sun.star.formula.SymbolDescriptor;
+        "com.sun.star.frame.BorderWidths": com.sun.star.frame.BorderWidths;
+        "com.sun.star.frame.ControlCommand": com.sun.star.frame.ControlCommand;
+        "com.sun.star.frame.ControlEvent": com.sun.star.frame.ControlEvent;
+        "com.sun.star.frame.DispatchDescriptor": com.sun.star.frame.DispatchDescriptor;
+        "com.sun.star.frame.DispatchInformation": com.sun.star.frame.DispatchInformation;
+        "com.sun.star.frame.DispatchResultEvent": com.sun.star.frame.DispatchResultEvent;
+        "com.sun.star.frame.DispatchStatement": com.sun.star.frame.DispatchStatement;
+        "com.sun.star.frame.FeatureStateEvent": com.sun.star.frame.FeatureStateEvent;
+        "com.sun.star.frame.FrameActionEvent": com.sun.star.frame.FrameActionEvent;
+        "com.sun.star.frame.status.ClipboardFormats": com.sun.star.frame.status.ClipboardFormats;
+        "com.sun.star.frame.status.FontHeight": com.sun.star.frame.status.FontHeight;
+        "com.sun.star.frame.status.ItemStatus": com.sun.star.frame.status.ItemStatus;
+        "com.sun.star.frame.status.LeftRightMargin": com.sun.star.frame.status.LeftRightMargin;
+        "com.sun.star.frame.status.LeftRightMarginScale": com.sun.star.frame.status.LeftRightMarginScale;
+        "com.sun.star.frame.status.Template": com.sun.star.frame.status.Template;
+        "com.sun.star.frame.status.UpperLowerMargin": com.sun.star.frame.status.UpperLowerMargin;
+        "com.sun.star.frame.status.UpperLowerMarginScale": com.sun.star.frame.status.UpperLowerMarginScale;
+        "com.sun.star.frame.status.Verb": com.sun.star.frame.status.Verb;
+        "com.sun.star.frame.status.Visibility": com.sun.star.frame.status.Visibility;
+        "com.sun.star.frame.TitleChangedEvent": com.sun.star.frame.TitleChangedEvent;
+        "com.sun.star.geometry.AffineMatrix2D": com.sun.star.geometry.AffineMatrix2D;
+        "com.sun.star.geometry.AffineMatrix3D": com.sun.star.geometry.AffineMatrix3D;
+        "com.sun.star.geometry.EllipticalArc": com.sun.star.geometry.EllipticalArc;
+        "com.sun.star.geometry.IntegerBezierSegment2D": com.sun.star.geometry.IntegerBezierSegment2D;
+        "com.sun.star.geometry.IntegerPoint2D": com.sun.star.geometry.IntegerPoint2D;
+        "com.sun.star.geometry.IntegerRectangle2D": com.sun.star.geometry.IntegerRectangle2D;
+        "com.sun.star.geometry.IntegerSize2D": com.sun.star.geometry.IntegerSize2D;
+        "com.sun.star.geometry.Matrix2D": com.sun.star.geometry.Matrix2D;
+        "com.sun.star.geometry.RealBezierSegment2D": com.sun.star.geometry.RealBezierSegment2D;
+        "com.sun.star.geometry.RealPoint2D": com.sun.star.geometry.RealPoint2D;
+        "com.sun.star.geometry.RealRectangle2D": com.sun.star.geometry.RealRectangle2D;
+        "com.sun.star.geometry.RealRectangle3D": com.sun.star.geometry.RealRectangle3D;
+        "com.sun.star.geometry.RealSize2D": com.sun.star.geometry.RealSize2D;
+        "com.sun.star.i18n.Boundary": com.sun.star.i18n.Boundary;
+        "com.sun.star.i18n.Calendar": com.sun.star.i18n.Calendar;
+        "com.sun.star.i18n.Calendar2": com.sun.star.i18n.Calendar2;
+        "com.sun.star.i18n.CalendarItem": com.sun.star.i18n.CalendarItem;
+        "com.sun.star.i18n.CalendarItem2": com.sun.star.i18n.CalendarItem2;
+        "com.sun.star.i18n.Currency": com.sun.star.i18n.Currency;
+        "com.sun.star.i18n.Currency2": com.sun.star.i18n.Currency2;
+        "com.sun.star.i18n.ForbiddenCharacters": com.sun.star.i18n.ForbiddenCharacters;
+        "com.sun.star.i18n.FormatElement": com.sun.star.i18n.FormatElement;
+        "com.sun.star.i18n.Implementation": com.sun.star.i18n.Implementation;
+        "com.sun.star.i18n.LanguageCountryInfo": com.sun.star.i18n.LanguageCountryInfo;
+        "com.sun.star.i18n.LineBreakHyphenationOptions": com.sun.star.i18n.LineBreakHyphenationOptions;
+        "com.sun.star.i18n.LineBreakResults": com.sun.star.i18n.LineBreakResults;
+        "com.sun.star.i18n.LineBreakUserOptions": com.sun.star.i18n.LineBreakUserOptions;
+        "com.sun.star.i18n.LocaleDataItem": com.sun.star.i18n.LocaleDataItem;
+        "com.sun.star.i18n.NativeNumberXmlAttributes": com.sun.star.i18n.NativeNumberXmlAttributes;
+        "com.sun.star.i18n.NumberFormatCode": com.sun.star.i18n.NumberFormatCode;
+        "com.sun.star.i18n.ParseResult": com.sun.star.i18n.ParseResult;
+        "com.sun.star.i18n.TextConversionResult": com.sun.star.i18n.TextConversionResult;
+        "com.sun.star.inspection.LineDescriptor": com.sun.star.inspection.LineDescriptor;
+        "com.sun.star.inspection.PropertyCategoryDescriptor": com.sun.star.inspection.PropertyCategoryDescriptor;
+        "com.sun.star.io.DataTransferEvent": com.sun.star.io.DataTransferEvent;
+        "com.sun.star.io.FilePermission": com.sun.star.io.FilePermission;
+        "com.sun.star.lang.EventObject": com.sun.star.lang.EventObject;
+        "com.sun.star.lang.Locale": com.sun.star.lang.Locale;
+        "com.sun.star.linguistic2.DictionaryEvent": com.sun.star.linguistic2.DictionaryEvent;
+        "com.sun.star.linguistic2.DictionaryListEvent": com.sun.star.linguistic2.DictionaryListEvent;
+        "com.sun.star.linguistic2.LinguServiceEvent": com.sun.star.linguistic2.LinguServiceEvent;
+        "com.sun.star.linguistic2.ProofreadingResult": com.sun.star.linguistic2.ProofreadingResult;
+        "com.sun.star.linguistic2.SingleProofreadingError": com.sun.star.linguistic2.SingleProofreadingError;
+        "com.sun.star.logging.LogRecord": com.sun.star.logging.LogRecord;
+        "com.sun.star.mail.MailAttachment": com.sun.star.mail.MailAttachment;
+        "com.sun.star.mozilla.MenuMultipleChange": com.sun.star.mozilla.MenuMultipleChange;
+        "com.sun.star.mozilla.MenuSingleChange": com.sun.star.mozilla.MenuSingleChange;
+        "com.sun.star.packages.zip.ZipEntry": com.sun.star.packages.zip.ZipEntry;
+        "com.sun.star.presentation.ParagraphTarget": com.sun.star.presentation.ParagraphTarget;
+        "com.sun.star.rdf.Statement": com.sun.star.rdf.Statement;
+        "com.sun.star.reflection.ParamInfo": com.sun.star.reflection.ParamInfo;
+        "com.sun.star.rendering.AnimationAttributes": com.sun.star.rendering.AnimationAttributes;
+        "com.sun.star.rendering.ARGBColor": com.sun.star.rendering.ARGBColor;
+        "com.sun.star.rendering.Caret": com.sun.star.rendering.Caret;
+        "com.sun.star.rendering.ColorProfile": com.sun.star.rendering.ColorProfile;
+        "com.sun.star.rendering.FloatingPointBitmapLayout": com.sun.star.rendering.FloatingPointBitmapLayout;
+        "com.sun.star.rendering.FontInfo": com.sun.star.rendering.FontInfo;
+        "com.sun.star.rendering.FontMetrics": com.sun.star.rendering.FontMetrics;
+        "com.sun.star.rendering.FontRequest": com.sun.star.rendering.FontRequest;
+        "com.sun.star.rendering.IntegerBitmapLayout": com.sun.star.rendering.IntegerBitmapLayout;
+        "com.sun.star.rendering.Panose": com.sun.star.rendering.Panose;
+        "com.sun.star.rendering.RenderState": com.sun.star.rendering.RenderState;
+        "com.sun.star.rendering.RGBColor": com.sun.star.rendering.RGBColor;
+        "com.sun.star.rendering.StringContext": com.sun.star.rendering.StringContext;
+        "com.sun.star.rendering.StrokeAttributes": com.sun.star.rendering.StrokeAttributes;
+        "com.sun.star.rendering.TextHit": com.sun.star.rendering.TextHit;
+        "com.sun.star.rendering.Texture": com.sun.star.rendering.Texture;
+        "com.sun.star.rendering.ViewState": com.sun.star.rendering.ViewState;
+        "com.sun.star.scanner.ScannerContext": com.sun.star.scanner.ScannerContext;
+        "com.sun.star.script.AllEventObject": com.sun.star.script.AllEventObject;
+        "com.sun.star.script.ArrayWrapper": com.sun.star.script.ArrayWrapper;
+        "com.sun.star.script.ContextInformation": com.sun.star.script.ContextInformation;
+        "com.sun.star.script.EventListener": com.sun.star.script.EventListener;
+        "com.sun.star.script.FinishEngineEvent": com.sun.star.script.FinishEngineEvent;
+        "com.sun.star.script.InterruptEngineEvent": com.sun.star.script.InterruptEngineEvent;
+        "com.sun.star.script.InvocationInfo": com.sun.star.script.InvocationInfo;
+        "com.sun.star.script.ModuleInfo": com.sun.star.script.ModuleInfo;
+        "com.sun.star.script.NativeObjectWrapper": com.sun.star.script.NativeObjectWrapper;
+        "com.sun.star.script.ScriptEvent": com.sun.star.script.ScriptEvent;
+        "com.sun.star.script.ScriptEventDescriptor": com.sun.star.script.ScriptEventDescriptor;
+        "com.sun.star.script.vba.VBAScriptEvent": com.sun.star.script.vba.VBAScriptEvent;
+        "com.sun.star.sdb.application.CopyTableRowEvent": com.sun.star.sdb.application.CopyTableRowEvent;
+        "com.sun.star.sdb.application.NamedDatabaseObject": com.sun.star.sdb.application.NamedDatabaseObject;
+        "com.sun.star.sdb.DatabaseRegistrationEvent": com.sun.star.sdb.DatabaseRegistrationEvent;
+        "com.sun.star.sdb.RowChangeEvent": com.sun.star.sdb.RowChangeEvent;
+        "com.sun.star.sdb.RowsChangeEvent": com.sun.star.sdb.RowsChangeEvent;
+        "com.sun.star.sdb.SQLErrorEvent": com.sun.star.sdb.SQLErrorEvent;
+        "com.sun.star.sdbc.ChangeEvent": com.sun.star.sdbc.ChangeEvent;
+        "com.sun.star.sdbc.DriverPropertyInfo": com.sun.star.sdbc.DriverPropertyInfo;
+        "com.sun.star.security.AllPermission": com.sun.star.security.AllPermission;
+        "com.sun.star.security.CertAltNameEntry": com.sun.star.security.CertAltNameEntry;
+        "com.sun.star.security.DocumentSignatureInformation": com.sun.star.security.DocumentSignatureInformation;
+        "com.sun.star.security.RuntimePermission": com.sun.star.security.RuntimePermission;
+        "com.sun.star.sheet.ActivationEvent": com.sun.star.sheet.ActivationEvent;
+        "com.sun.star.sheet.ComplexReference": com.sun.star.sheet.ComplexReference;
+        "com.sun.star.sheet.DataPilotFieldAutoShowInfo": com.sun.star.sheet.DataPilotFieldAutoShowInfo;
+        "com.sun.star.sheet.DataPilotFieldFilter": com.sun.star.sheet.DataPilotFieldFilter;
+        "com.sun.star.sheet.DataPilotFieldGroupInfo": com.sun.star.sheet.DataPilotFieldGroupInfo;
+        "com.sun.star.sheet.DataPilotFieldLayoutInfo": com.sun.star.sheet.DataPilotFieldLayoutInfo;
+        "com.sun.star.sheet.DataPilotFieldReference": com.sun.star.sheet.DataPilotFieldReference;
+        "com.sun.star.sheet.DataPilotFieldSortInfo": com.sun.star.sheet.DataPilotFieldSortInfo;
+        "com.sun.star.sheet.DataPilotTableHeaderData": com.sun.star.sheet.DataPilotTableHeaderData;
+        "com.sun.star.sheet.DataPilotTablePositionData": com.sun.star.sheet.DataPilotTablePositionData;
+        "com.sun.star.sheet.DataPilotTableResultData": com.sun.star.sheet.DataPilotTableResultData;
+        "com.sun.star.sheet.DataResult": com.sun.star.sheet.DataResult;
+        "com.sun.star.sheet.DDEItemInfo": com.sun.star.sheet.DDEItemInfo;
+        "com.sun.star.sheet.DDELinkInfo": com.sun.star.sheet.DDELinkInfo;
+        "com.sun.star.sheet.ExternalLinkInfo": com.sun.star.sheet.ExternalLinkInfo;
+        "com.sun.star.sheet.ExternalReference": com.sun.star.sheet.ExternalReference;
+        "com.sun.star.sheet.FilterFieldValue": com.sun.star.sheet.FilterFieldValue;
+        "com.sun.star.sheet.FormulaOpCodeMapEntry": com.sun.star.sheet.FormulaOpCodeMapEntry;
+        "com.sun.star.sheet.FormulaToken": com.sun.star.sheet.FormulaToken;
+        "com.sun.star.sheet.FunctionArgument": com.sun.star.sheet.FunctionArgument;
+        "com.sun.star.sheet.GoalResult": com.sun.star.sheet.GoalResult;
+        "com.sun.star.sheet.LocalizedName": com.sun.star.sheet.LocalizedName;
+        "com.sun.star.sheet.MemberResult": com.sun.star.sheet.MemberResult;
+        "com.sun.star.sheet.NameToken": com.sun.star.sheet.NameToken;
+        "com.sun.star.sheet.opencl.OpenCLDevice": com.sun.star.sheet.opencl.OpenCLDevice;
+        "com.sun.star.sheet.opencl.OpenCLPlatform": com.sun.star.sheet.opencl.OpenCLPlatform;
+        "com.sun.star.sheet.RangeSelectionEvent": com.sun.star.sheet.RangeSelectionEvent;
+        "com.sun.star.sheet.ResultEvent": com.sun.star.sheet.ResultEvent;
+        "com.sun.star.sheet.SingleReference": com.sun.star.sheet.SingleReference;
+        "com.sun.star.sheet.SolverConstraint": com.sun.star.sheet.SolverConstraint;
+        "com.sun.star.sheet.SubTotalColumn": com.sun.star.sheet.SubTotalColumn;
+        "com.sun.star.sheet.TableFilterField": com.sun.star.sheet.TableFilterField;
+        "com.sun.star.sheet.TableFilterField2": com.sun.star.sheet.TableFilterField2;
+        "com.sun.star.sheet.TableFilterField3": com.sun.star.sheet.TableFilterField3;
+        "com.sun.star.sheet.TablePageBreakData": com.sun.star.sheet.TablePageBreakData;
+        "com.sun.star.style.DropCapFormat": com.sun.star.style.DropCapFormat;
+        "com.sun.star.style.LineSpacing": com.sun.star.style.LineSpacing;
+        "com.sun.star.style.TabStop": com.sun.star.style.TabStop;
+        "com.sun.star.table.BorderLine": com.sun.star.table.BorderLine;
+        "com.sun.star.table.BorderLine2": com.sun.star.table.BorderLine2;
+        "com.sun.star.table.CellAddress": com.sun.star.table.CellAddress;
+        "com.sun.star.table.CellRangeAddress": com.sun.star.table.CellRangeAddress;
+        "com.sun.star.table.ShadowFormat": com.sun.star.table.ShadowFormat;
+        "com.sun.star.table.TableBorder": com.sun.star.table.TableBorder;
+        "com.sun.star.table.TableBorder2": com.sun.star.table.TableBorder2;
+        "com.sun.star.table.TableBorderDistances": com.sun.star.table.TableBorderDistances;
+        "com.sun.star.table.TableSortField": com.sun.star.table.TableSortField;
+        "com.sun.star.task.UrlRecord": com.sun.star.task.UrlRecord;
+        "com.sun.star.task.UserRecord": com.sun.star.task.UserRecord;
+        "com.sun.star.text.GraphicCrop": com.sun.star.text.GraphicCrop;
+        "com.sun.star.text.HoriOrientationFormat": com.sun.star.text.HoriOrientationFormat;
+        "com.sun.star.text.MailMergeEvent": com.sun.star.text.MailMergeEvent;
+        "com.sun.star.text.SectionFileLink": com.sun.star.text.SectionFileLink;
+        "com.sun.star.text.TableColumnSeparator": com.sun.star.text.TableColumnSeparator;
+        "com.sun.star.text.TextColumn": com.sun.star.text.TextColumn;
+        "com.sun.star.text.TextMarkupDescriptor": com.sun.star.text.TextMarkupDescriptor;
+        "com.sun.star.text.TextPosition": com.sun.star.text.TextPosition;
+        "com.sun.star.text.TextRangeSelection": com.sun.star.text.TextRangeSelection;
+        "com.sun.star.text.VertOrientationFormat": com.sun.star.text.VertOrientationFormat;
+        "com.sun.star.ucb.CheckinArgument": com.sun.star.ucb.CheckinArgument;
+        "com.sun.star.ucb.Command": com.sun.star.ucb.Command;
+        "com.sun.star.ucb.CommandInfo": com.sun.star.ucb.CommandInfo;
+        "com.sun.star.ucb.CommandInfoChangeEvent": com.sun.star.ucb.CommandInfoChangeEvent;
+        "com.sun.star.ucb.ContentEvent": com.sun.star.ucb.ContentEvent;
+        "com.sun.star.ucb.ContentInfo": com.sun.star.ucb.ContentInfo;
+        "com.sun.star.ucb.ContentProviderInfo": com.sun.star.ucb.ContentProviderInfo;
+        "com.sun.star.ucb.CrossReference": com.sun.star.ucb.CrossReference;
+        "com.sun.star.ucb.DocumentHeaderField": com.sun.star.ucb.DocumentHeaderField;
+        "com.sun.star.ucb.ExportStreamInfo": com.sun.star.ucb.ExportStreamInfo;
+        "com.sun.star.ucb.FetchResult": com.sun.star.ucb.FetchResult;
+        "com.sun.star.ucb.FolderList": com.sun.star.ucb.FolderList;
+        "com.sun.star.ucb.FolderListEntry": com.sun.star.ucb.FolderListEntry;
+        "com.sun.star.ucb.GlobalTransferCommandArgument": com.sun.star.ucb.GlobalTransferCommandArgument;
+        "com.sun.star.ucb.GlobalTransferCommandArgument2": com.sun.star.ucb.GlobalTransferCommandArgument2;
+        "com.sun.star.ucb.InsertCommandArgument": com.sun.star.ucb.InsertCommandArgument;
+        "com.sun.star.ucb.InsertCommandArgument2": com.sun.star.ucb.InsertCommandArgument2;
+        "com.sun.star.ucb.Link": com.sun.star.ucb.Link;
+        "com.sun.star.ucb.ListAction": com.sun.star.ucb.ListAction;
+        "com.sun.star.ucb.ListEvent": com.sun.star.ucb.ListEvent;
+        "com.sun.star.ucb.Lock": com.sun.star.ucb.Lock;
+        "com.sun.star.ucb.LockEntry": com.sun.star.ucb.LockEntry;
+        "com.sun.star.ucb.NumberedSortingInfo": com.sun.star.ucb.NumberedSortingInfo;
+        "com.sun.star.ucb.OpenCommandArgument": com.sun.star.ucb.OpenCommandArgument;
+        "com.sun.star.ucb.OpenCommandArgument2": com.sun.star.ucb.OpenCommandArgument2;
+        "com.sun.star.ucb.OpenCommandArgument3": com.sun.star.ucb.OpenCommandArgument3;
+        "com.sun.star.ucb.PostCommandArgument": com.sun.star.ucb.PostCommandArgument;
+        "com.sun.star.ucb.PostCommandArgument2": com.sun.star.ucb.PostCommandArgument2;
+        "com.sun.star.ucb.PropertyCommandArgument": com.sun.star.ucb.PropertyCommandArgument;
+        "com.sun.star.ucb.PropertyValueInfo": com.sun.star.ucb.PropertyValueInfo;
+        "com.sun.star.ucb.RecipientInfo": com.sun.star.ucb.RecipientInfo;
+        "com.sun.star.ucb.RemoteContentProviderChangeEvent": com.sun.star.ucb.RemoteContentProviderChangeEvent;
+        "com.sun.star.ucb.Rule": com.sun.star.ucb.Rule;
+        "com.sun.star.ucb.RuleSet": com.sun.star.ucb.RuleSet;
+        "com.sun.star.ucb.RuleTerm": com.sun.star.ucb.RuleTerm;
+        "com.sun.star.ucb.SearchCommandArgument": com.sun.star.ucb.SearchCommandArgument;
+        "com.sun.star.ucb.SearchCriterium": com.sun.star.ucb.SearchCriterium;
+        "com.sun.star.ucb.SearchInfo": com.sun.star.ucb.SearchInfo;
+        "com.sun.star.ucb.SendInfo": com.sun.star.ucb.SendInfo;
+        "com.sun.star.ucb.SendMediaTypes": com.sun.star.ucb.SendMediaTypes;
+        "com.sun.star.ucb.SortingInfo": com.sun.star.ucb.SortingInfo;
+        "com.sun.star.ucb.TransferInfo": com.sun.star.ucb.TransferInfo;
+        "com.sun.star.ucb.TransferInfo2": com.sun.star.ucb.TransferInfo2;
+        "com.sun.star.ucb.TransferResult": com.sun.star.ucb.TransferResult;
+        "com.sun.star.ucb.WelcomeDynamicResultSetStruct": com.sun.star.ucb.WelcomeDynamicResultSetStruct;
+        "com.sun.star.ui.ConfigurationEvent": com.sun.star.ui.ConfigurationEvent;
+        "com.sun.star.ui.ContextChangeEventObject": com.sun.star.ui.ContextChangeEventObject;
+        "com.sun.star.ui.ContextMenuExecuteEvent": com.sun.star.ui.ContextMenuExecuteEvent;
+        "com.sun.star.ui.dialogs.DialogClosedEvent": com.sun.star.ui.dialogs.DialogClosedEvent;
+        "com.sun.star.ui.dialogs.FilePickerEvent": com.sun.star.ui.dialogs.FilePickerEvent;
+        "com.sun.star.ui.LayoutSize": com.sun.star.ui.LayoutSize;
+        "com.sun.star.uno.Uik": com.sun.star.uno.Uik;
+        "com.sun.star.util.AliasProgrammaticPair": com.sun.star.util.AliasProgrammaticPair;
+        "com.sun.star.util.AtomClassRequest": com.sun.star.util.AtomClassRequest;
+        "com.sun.star.util.AtomDescription": com.sun.star.util.AtomDescription;
+        "com.sun.star.util.CellProtection": com.sun.star.util.CellProtection;
+        "com.sun.star.util.ChangesEvent": com.sun.star.util.ChangesEvent;
+        "com.sun.star.util.DataEditorEvent": com.sun.star.util.DataEditorEvent;
+        "com.sun.star.util.Date": com.sun.star.util.Date;
+        "com.sun.star.util.DateTime": com.sun.star.util.DateTime;
+        "com.sun.star.util.DateTimeRange": com.sun.star.util.DateTimeRange;
+        "com.sun.star.util.DateTimeWithTimezone": com.sun.star.util.DateTimeWithTimezone;
+        "com.sun.star.util.DateWithTimezone": com.sun.star.util.DateWithTimezone;
+        "com.sun.star.util.Duration": com.sun.star.util.Duration;
+        "com.sun.star.util.ElementChange": com.sun.star.util.ElementChange;
+        "com.sun.star.util.ModeChangeEvent": com.sun.star.util.ModeChangeEvent;
+        "com.sun.star.util.RevisionTag": com.sun.star.util.RevisionTag;
+        "com.sun.star.util.SearchOptions": com.sun.star.util.SearchOptions;
+        "com.sun.star.util.SearchOptions2": com.sun.star.util.SearchOptions2;
+        "com.sun.star.util.SearchResult": com.sun.star.util.SearchResult;
+        "com.sun.star.util.SortField": com.sun.star.util.SortField;
+        "com.sun.star.util.Time": com.sun.star.util.Time;
+        "com.sun.star.util.TimeWithTimezone": com.sun.star.util.TimeWithTimezone;
+        "com.sun.star.util.URL": com.sun.star.util.URL;
+        "com.sun.star.view.PrintableStateEvent": com.sun.star.view.PrintableStateEvent;
+        "com.sun.star.view.PrintJobEvent": com.sun.star.view.PrintJobEvent;
+        "com.sun.star.xml.Attribute": com.sun.star.xml.Attribute;
+        "com.sun.star.xml.AttributeData": com.sun.star.xml.AttributeData;
+        "com.sun.star.xml.crypto.sax.ElementStackItem": com.sun.star.xml.crypto.sax.ElementStackItem;
+        "com.sun.star.xml.csax.XMLAttribute": com.sun.star.xml.csax.XMLAttribute;
+        "com.sun.star.xml.FastAttribute": com.sun.star.xml.FastAttribute;
+        "com.sun.star.xml.sax.InputSource": com.sun.star.xml.sax.InputSource;
+        "com.sun.star.xml.xpath.Libxml2ExtensionHandle": com.sun.star.xml.xpath.Libxml2ExtensionHandle;
     }
 
     interface ValueObject {
@@ -105860,21 +108739,95 @@ declare namespace LibreOffice {
 
         /** Initialize the object as an `inout` parameter */
         InitInOutParam(
-            type: '[][]any' | '[][]boolean' | '[][]byte' | '[][]char' | '[][]double' | '[][]float' | '[][]long' | '[][]object' | '[][]short' | '[][]string' |
-            '[][]unsigned' | '[][]unsigned long' | '[][]unsigned short' | '[]any' | '[]boolean' | '[]byte' | '[]char' | '[]double' | '[]float' | '[]long' | '[]object' |
-            '[]short' | '[]string' | '[]unsigned' | '[]unsigned long' | '[]unsigned short' | 'any' | 'boolean' | 'byte' | 'char' | 'double' | 'float' | 'long' | 'object' |
-            'short' | 'string' | 'unsigned' | 'unsigned long' | 'unsigned short',
-            value: any): void;
+            type:
+                | "[][]any"
+                | "[][]boolean"
+                | "[][]byte"
+                | "[][]char"
+                | "[][]double"
+                | "[][]float"
+                | "[][]long"
+                | "[][]object"
+                | "[][]short"
+                | "[][]string"
+                | "[][]unsigned"
+                | "[][]unsigned long"
+                | "[][]unsigned short"
+                | "[]any"
+                | "[]boolean"
+                | "[]byte"
+                | "[]char"
+                | "[]double"
+                | "[]float"
+                | "[]long"
+                | "[]object"
+                | "[]short"
+                | "[]string"
+                | "[]unsigned"
+                | "[]unsigned long"
+                | "[]unsigned short"
+                | "any"
+                | "boolean"
+                | "byte"
+                | "char"
+                | "double"
+                | "float"
+                | "long"
+                | "object"
+                | "short"
+                | "string"
+                | "unsigned"
+                | "unsigned long"
+                | "unsigned short",
+            value: any,
+        ): void;
 
         /** Initialize the object as an `out` parameter */
         InitOutParam(): void;
 
         /** Assigns a type and a value */
         Set(
-            type: '[][]any' | '[][]boolean' | '[][]byte' | '[][]char' | '[][]double' | '[][]float' | '[][]long' | '[][]object' | '[][]short' | '[][]string' |
-            '[][]unsigned' | '[][]unsigned long' | '[][]unsigned short' | '[]any' | '[]boolean' | '[]byte' | '[]char' | '[]double' | '[]float' | '[]long' | '[]object' |
-            '[]short' | '[]string' | '[]unsigned' | '[]unsigned long' | '[]unsigned short' | 'any' | 'boolean' | 'byte' | 'char' | 'double' | 'float' | 'long' | 'object' |
-            'short' | 'string' | 'unsigned' | 'unsigned long' | 'unsigned short',
-            value: any): void;
+            type:
+                | "[][]any"
+                | "[][]boolean"
+                | "[][]byte"
+                | "[][]char"
+                | "[][]double"
+                | "[][]float"
+                | "[][]long"
+                | "[][]object"
+                | "[][]short"
+                | "[][]string"
+                | "[][]unsigned"
+                | "[][]unsigned long"
+                | "[][]unsigned short"
+                | "[]any"
+                | "[]boolean"
+                | "[]byte"
+                | "[]char"
+                | "[]double"
+                | "[]float"
+                | "[]long"
+                | "[]object"
+                | "[]short"
+                | "[]string"
+                | "[]unsigned"
+                | "[]unsigned long"
+                | "[]unsigned short"
+                | "any"
+                | "boolean"
+                | "byte"
+                | "char"
+                | "double"
+                | "float"
+                | "long"
+                | "object"
+                | "short"
+                | "string"
+                | "unsigned"
+                | "unsigned long"
+                | "unsigned short",
+            value: any,
+        ): void;
     }
 }

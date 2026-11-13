@@ -1,5 +1,5 @@
 /// <reference lib="esnext.bigint" />
-import ndarray = require('ndarray');
+import ndarray = require("ndarray");
 
 const data1 = new Int32Array(2 * 2 * 2 + 10);
 const typedArr = ndarray(data1, [2, 2, 2], [1, 2, 4], 5);
@@ -12,7 +12,7 @@ console.log(typedArr.stride[0] === 1);
 console.log(typedArr.stride[1] === 2);
 console.log(typedArr.stride[2] === 4);
 console.log(typedArr.offset === 5);
-console.log(typedArr.dtype === 'int32');
+console.log(typedArr.dtype === "int32");
 console.log(typedArr.size === 8);
 console.log(typedArr.order[0] === 0);
 console.log(typedArr.order[1] === 1);
@@ -50,9 +50,9 @@ function generic2<T>(...values: T[]): ndarray.NdArray<T[]> {
     return ndarray(values);
 }
 
-const gen2 = generic2<string | boolean>('test', 'blah', true);
+const gen2 = generic2<string | boolean>("test", "blah", true);
 const firstVal = gen2.get(0);
-console.log(typeof firstVal === 'string' ? firstVal.length : firstVal.valueOf());
+console.log(typeof firstVal === "string" ? firstVal.length : firstVal.valueOf());
 
 function getFirstValue(arr: ndarray.NdArray): number {
     return arr.get(0);
@@ -66,31 +66,62 @@ function getTypedArrayOrNumberArray(arr: ndarray.NdArray<ndarray.Data<number>>):
 }
 
 function getBigIntTypedArrayOrBigIntArray(arr: ndarray.NdArray<ndarray.Data<bigint>>): {
-    data: ndarray.GenericArray<bigint> | BigUint64Array | BigInt64Array | Array<bigint>;
+    data: ndarray.GenericArray<bigint> | BigUint64Array | BigInt64Array | bigint[];
     scalar: bigint;
 } {
     return { data: arr.data, scalar: arr.get(0) };
 }
 
 function getBigIntOrNumeric(arr: ndarray.NdArray<ndarray.Data<number | bigint>>): {
-    data: ndarray.GenericArray<number> | ndarray.GenericArray<bigint> | number[] | ndarray.TypedArray | BigUint64Array | BigInt64Array | Array<bigint>;
+    data:
+        | ndarray.GenericArray<number>
+        | ndarray.GenericArray<bigint>
+        | number[]
+        | ndarray.TypedArray
+        | BigUint64Array
+        | BigInt64Array
+        | bigint[];
     scalar: number | bigint;
 } {
     return { data: arr.data, scalar: arr.get(0) };
 }
 
-function infersStringOnly(arr: ndarray.NdArray<ndarray.Data<string>>): { data: ndarray.GenericArray<string> | string[]; scalar: string } {
+function infersStringOnly(
+    arr: ndarray.NdArray<ndarray.Data<string>>,
+): { data: ndarray.GenericArray<string> | string[]; scalar: string } {
     return { data: arr.data, scalar: arr.get(0) };
 }
 
-function genericDtype(arr: ndarray.NdArray<ndarray.GenericArray<any>>): 'generic' {
+function genericDtype(arr: ndarray.NdArray<ndarray.GenericArray<any>>): "generic" {
     return arr.dtype;
 }
 
-function bigintDtype(arr: ndarray.NdArray<ndarray.Data<bigint>>): 'generic' | 'array' | 'bigint64' | 'biguint64' {
+function bigintDtype(arr: ndarray.NdArray<ndarray.Data<bigint>>): "generic" | "array" | "bigint64" | "biguint64" {
     return arr.dtype;
 }
 
-function stringDtype(arr: ndarray.NdArray<ndarray.Data<string>>): 'generic' | 'array' {
+function stringDtype(arr: ndarray.NdArray<ndarray.Data<string>>): "generic" | "array" {
     return arr.dtype;
 }
+
+// TypeScript's float16 lib is `esnext.float16` in 5.8/5.9 and `es2025.float16`
+// in 6.0, and absent before 5.8, so no `/// <reference lib="..." />` covers
+// every version dtslint checks. Declaring the global exercises
+// MaybeFloat16Array on all of them; this package's tsconfig never loads a
+// float16 lib, so there is nothing to conflict with.
+declare global {
+    interface Float16Array {
+        readonly length: number;
+        [index: number]: number;
+    }
+    var Float16Array: {
+        prototype: Float16Array;
+        new(values: readonly number[]): Float16Array;
+        from(values: readonly number[]): Float16Array;
+    };
+}
+
+function float16Dtype(arr: ndarray.NdArray<ndarray.MaybeFloat16Array>): "float16" {
+    return arr.dtype;
+}
+console.log(float16Dtype(ndarray(Float16Array.from([1.5, -2.5]), [2])));

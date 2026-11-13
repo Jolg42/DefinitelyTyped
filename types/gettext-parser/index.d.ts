@@ -1,42 +1,59 @@
-// Type definitions for gettext-parser 4.0
-// Project: https://github.com/smhg/gettext-parser
-// Definitions by: Lorent Lempereur <https://github.com/looorent>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
+import type { Transform, TransformOptions } from "node:stream";
+
 export interface GetTextComment {
-    translator: string;
-    reference: string;
-    extracted: string;
-    flag: string;
-    previous: string;
+    translator?: string;
+    reference?: string;
+    extracted?: string;
+    flag?: string;
+    previous?: string;
 }
 
 export interface GetTextTranslation {
-    msgctxt?: string | undefined;
+    msgctxt?: string;
     msgid: string;
-    msgid_plural?: any;
+    msgid_plural?: string;
     msgstr: string[];
-    comments?: GetTextComment | undefined;
+    comments?: GetTextComment;
+    obsolete?: boolean;
+}
+
+export interface GetTextTranslationRecord {
+    [msgctxt: string]: {
+        [msgId: string]: GetTextTranslation;
+    };
 }
 
 export interface GetTextTranslations {
     charset: string;
     headers: { [headerName: string]: string };
-    translations: { [msgctxt: string]: { [msgId: string]: GetTextTranslation } };
+    translations: GetTextTranslationRecord;
+    obsolete?: GetTextTranslationRecord;
+}
+
+export interface GetTextPoParserOptions {
+    defaultCharset?: string;
+    validation?: boolean;
+}
+
+export interface GetTextPoCompilerOptions {
+    foldLength?: number;
+    escapeCharacters?: boolean;
+    sort?: boolean | ((a: GetTextTranslation, b: GetTextTranslation) => number);
+    eol?: string;
 }
 
 export interface PoParser {
-    parse: (buffer: Buffer | string, defaultCharset?: string) => GetTextTranslations;
-    compile: (table: GetTextTranslations, options?: any) => Buffer;
-    createParseStream: (buffer: any, defaultCharset?: string) => any;
+    parse: (buffer: Buffer | string, options?: GetTextPoParserOptions) => GetTextTranslations;
+    compile: (table: GetTextTranslations, options?: GetTextPoCompilerOptions) => Buffer;
+    createParseStream: (options?: GetTextPoParserOptions, transformOptions?: TransformOptions) => Transform;
 }
 
 export interface MoParser {
     parse: (buffer: Buffer | string, defaultCharset?: string) => GetTextTranslations;
-    compile: (table: GetTextTranslations, options?: any) => Buffer;
+    compile: (table: GetTextTranslations) => Buffer;
 }
 
-export const po: MoParser;
+export const po: PoParser;
 export const mo: MoParser;

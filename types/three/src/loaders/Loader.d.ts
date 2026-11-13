@@ -1,9 +1,9 @@
-import { LoadingManager } from './LoadingManager';
+import { LoadingManager } from "./LoadingManager.js";
 
 /**
  * Base class for implementing loaders.
  */
-export class Loader {
+export class Loader<TData = unknown, TUrl = string> {
     constructor(manager?: LoadingManager);
 
     /**
@@ -12,7 +12,7 @@ export class Loader {
     crossOrigin: string;
 
     /**
-     * @default: false
+     * @default false
      */
     withCredentials: boolean;
 
@@ -32,16 +32,34 @@ export class Loader {
      */
     requestHeader: { [header: string]: string };
 
-    /*
-	load(): void;
-	parse(): void;
-	*/
+    /**
+     * The request priority hint. Image loaders use `HTMLImageElement.fetchPriority`.
+     * @default 'auto'
+     */
+    priority: "high" | "low" | "auto";
 
-    loadAsync(url: string, onProgress?: (event: ProgressEvent) => void): Promise<any>;
+    /**
+     * The HTTP cache mode passed to `fetch()`. This does not affect {@link Cache} or loaders using `HTMLImageElement`.
+     * @default 'default'
+     */
+    cache: "default" | "no-store" | "reload" | "no-cache" | "force-cache";
+
+    load(
+        url: TUrl,
+        onLoad: (data: TData) => void,
+        onProgress?: (event: ProgressEvent) => void,
+        onError?: (err: unknown) => void,
+    ): void;
+    loadAsync(url: TUrl, onProgress?: (event: ProgressEvent) => void): Promise<TData>;
 
     setCrossOrigin(crossOrigin: string): this;
     setWithCredentials(value: boolean): this;
     setPath(path: string): this;
     setResourcePath(resourcePath: string): this;
     setRequestHeader(requestHeader: { [header: string]: string }): this;
+    setPriority(value: "high" | "low" | "auto"): this;
+    setCache(value: "default" | "no-store" | "reload" | "no-cache" | "force-cache"): this;
+    abort(): this;
+
+    static DEFAULT_MATERIAL_NAME: string;
 }

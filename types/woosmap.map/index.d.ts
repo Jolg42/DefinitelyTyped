@@ -1,0 +1,5883 @@
+/// <reference types="mapbox__mapbox-gl-draw" />
+
+declare namespace woosmap.map.marker {
+    /**
+     * Shows a position on a map. `AdvancedMarkerElement` is a custom element
+     * (`<gmp-advanced-marker>` / `<wmp-advanced-marker>`) that extends `HTMLElement`,
+     * mirroring Google Maps. Provide content with the `content` property or by
+     * appending child nodes; with neither it shows a default `PinElement`. Attach it
+     * by setting `map`, passing `map` to the constructor, or appending it into a
+     * `<wmp-map>`/`<gmp-map>`.
+     */
+    class AdvancedMarkerElement extends HTMLElement {
+        /**
+         * Signed CSS length offsetting the content horizontally from the position,
+         * applied as written. Defaults to `-50%` (horizontally centred).
+         */
+        anchorLeft?: string | null;
+        /**
+         * Signed CSS length offsetting the content vertically from the position,
+         * applied as written. Defaults to `-100%` (content sits above the position).
+         */
+        anchorTop?: string | null;
+        /**
+         * Collision behavior against other markers; see `CollisionBehavior`.
+         * Priority arbitration across overlay types is not yet enforced.
+         */
+        collisionBehavior?: "OPTIONAL_AND_HIDES_LOWER_PRIORITY" | "REQUIRED" | "REQUIRED_AND_HIDES_OPTIONAL" | null;
+        /**
+         * The DOM element backing the marker's visual.
+         */
+        content?: HTMLElement | null;
+        /**
+         * Whether the marker fires click events / is keyboard-accessible.
+         */
+        gmpClickable: boolean;
+        /**
+         * Whether the marker can be dragged.
+         */
+        gmpDraggable: boolean;
+        /**
+         * The map on which the marker is displayed.
+         */
+        map: woosmap.map.Map | null;
+        /**
+         * The marker's geographical position.
+         */
+        position?: woosmap.map.LatLng | null;
+        /**
+         * Rollover text, also exposed to assistive technology.
+         */
+        title: string;
+        /**
+         * Stacking order.
+         */
+        zIndex?: number | null;
+        constructor(options?: woosmap.map.marker.AdvancedMarkerElementOptions);
+
+        /**
+         * Google-compat eventing: register a listener for the internal event system
+         * (`click`, `drag`, `dragstart`, `dragend`, `gmp-click`, …).
+         */
+        addListener(eventName: string, handler: (...args: any[]) => any): woosmap.map.MapEventListener;
+
+        /**
+         * Sets the map on which to display the marker (or `null` to remove it).
+         */
+        setMap(map?: woosmap.map.Map | null): void;
+
+        /**
+         * Returns the map the marker is attached to.
+         */
+        getMap(): woosmap.map.Map | null;
+
+        setPosition(
+            position:
+                | woosmap.map.LatLng
+                | woosmap.map.LatLngLiteral
+                | woosmap.map.LatLngAltitude
+                | woosmap.map.LatLngAltitudeLiteral
+                | string,
+        ): void;
+
+        /**
+         * Returns the marker's geographical position.
+         */
+        getPosition(): woosmap.map.LatLng | null;
+    }
+}
+declare namespace woosmap.map.marker {
+    /**
+     * A `PinElement` is a DOM element made of a teardrop shape and a glyph, suitable
+     * as the `content` of an `AdvancedMarkerElement`.
+     * `background`, `borderColor`, `glyph`, `glyphColor`, `glyphText`, `glyphSrc` and
+     * `scale` are reactive: assigning a new value rebuilds the element.
+     */
+    class PinElement extends HTMLElement {
+        /**
+         * Fill color of the pin shape. Reassigning rebuilds the element.
+         */
+        background: string;
+        /**
+         * Border color of the pin shape. Reassigning rebuilds the element.
+         */
+        borderColor: string;
+        /**
+         * The pin's DOM element. A `PinElement` is itself an `HTMLElement`, so this
+         * returns the pin and exists only for backward compatibility with the
+         * deprecated Google Maps `PinElement.element` accessor — append the
+         * `PinElement` directly instead.
+         */
+        element: HTMLElement;
+        /**
+         * A glyph element, image URL, or text rendered in the center of the pin. Reassigning rebuilds the element.
+         */
+        glyph?: string | HTMLElement | URL | null;
+        /**
+         * Color of the default/text glyph. Reassigning rebuilds the element.
+         */
+        glyphColor: string;
+        /**
+         * Image URL rendered as the glyph. Reassigning rebuilds the element.
+         */
+        glyphSrc?: string | URL | null;
+        /**
+         * Text rendered as the glyph. Reassigning rebuilds the element.
+         */
+        glyphText?: string | null;
+        /**
+         * Uniform scale factor applied to the pin. Reassigning rebuilds the element.
+         */
+        scale: number;
+        constructor(options?: woosmap.map.marker.PinElementOptions);
+
+        /**
+         * Returns the pin's DOM element. A `PinElement` is itself an `HTMLElement`,
+         * so this returns the pin; kept for the deprecated Google Maps accessor.
+         */
+        getElement(): HTMLElement;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Add drawing capabilities to Woosmap Map. You can call methods of a Drawing instance and add custom modes as you would
+     * with a MapboxDraw instance. This Drawing library is not loaded by default when you load the Map JS API but must be
+     * explicitly specified through use of a `libraries` parameter in SDK URL.
+     *
+     * @example Add the Drawing Lib
+     *
+     * ```html
+     * <script async
+     *     src="https://sdk.woosmap.com/map/map.js?key=YOUR_API_KEY&libraries=drawing&callback=initMap">
+     * </script>
+     * ```
+     *
+     * @example Create a Draw control and add it to the map
+     *
+     * ```js
+     * var draw = new woosmap.map.Drawing(drawOptions);
+     * draw.addControl(map);
+     * ```
+     */
+    class Drawing extends MapboxDraw {
+        constructor(options?: MapboxDraw.MapboxDrawOptions);
+
+        /**
+         * Adds Drawing Control to a Map.
+         */
+        addControl(map: woosmap.map.Map, position?: woosmap.map.ControlPositionType): void;
+
+        /**
+         * Removes Drawing Control to its attached Map.
+         */
+        removeControl(): void;
+
+        /**
+         * Register Drawing Events
+         */
+        addListener(event: MapboxDraw.DrawEventType, handler: (...args: any[]) => any): void;
+    }
+}
+declare namespace woosmap.map {
+    class Map extends woosmap.map.MVCObject {
+        /**
+         * Custom controls to add to the map, indexed by `ControlPosition`. Push a DOM
+         * element into `controls[position]` to register it. Rendering of the controls
+         * pane is not yet implemented; the array exists so registering a control does
+         * not throw.
+         */
+        controls: Array<woosmap.map.MVCArray<HTMLElement>>;
+        /**
+         * An instance of `Data`, bound to the map.
+         * Add features to this `Data` object to conveniently display them on this map.
+         */
+        data: woosmap.map.Data;
+        /**
+         * Additional map types to overlay.
+         */
+        overlayMapTypes: woosmap.map.MVCArray<woosmap.map.MapType>;
+        /**
+         * Creates a new map inside the given HTML container, which is typically a `DIV` element.
+         */
+        constructor(mapDiv: HTMLElement | string, options?: woosmap.map.MapOptions);
+
+        /**
+         * Clean up and release all internal resources associated with this map.
+         *
+         * This includes DOM elements, event bindings, web workers, and WebGL resources.
+         *
+         * Use this method when you are done using the map and wish to ensure that it no longer consumes browser resources. Afterwards, you must not call any other methods on the map.
+         */
+        remove(): void;
+
+        /**
+         * Sets the viewport to contain the given bounds.
+         */
+        fitBounds(
+            bounds: woosmap.map.LatLngBounds | woosmap.map.LatLngBoundsLiteral,
+            padding?: woosmap.map.Padding,
+            animate?: boolean,
+        ): void;
+
+        /**
+         * Returns the lat/lng bounds of the current viewport.
+         * Optionally takes a padding parameter.
+         */
+        getBounds(padding?: woosmap.map.Padding): woosmap.map.LatLngBounds;
+
+        /**
+         * Returns the position displayed at the center of the map.
+         */
+        getCenter(): woosmap.map.LatLng;
+
+        getDiv(): HTMLElement;
+
+        /**
+         * Returns the compass heading.
+         * The heading value is measured in degrees (clockwise) from cardinal direction North.
+         */
+        getHeading(): number;
+
+        /**
+         * Returns the current angle of incidence of the map, in degrees from the viewport plane to the map plane
+         */
+        getTilt(): number;
+
+        /**
+         * Returns the current angle of incidence of the map, in degrees from the viewport plane to the map plane.
+         */
+        getZoom(): number;
+
+        /**
+         * Changes the center of the map by the given distance in pixels
+         */
+        panBy(x: number, y: number): void;
+
+        /**
+         * Changes the center of the map to the given LatLng.
+         */
+        panTo(latLng: woosmap.map.LatLng | woosmap.map.LatLngLiteral, padding?: woosmap.map.Padding): void;
+
+        /**
+         * Changes any combination of center, zoom, bearing, and pitch, animating the transition along a curve that evokes
+         * flight.
+         */
+        flyTo(options: woosmap.map.FlyToOptions): void;
+
+        /**
+         * Instantly moves the camera to any combination of center, zoom, heading and
+         * tilt — no animation; omitted fields are left unchanged. Fires the usual
+         * camera-change events (`center_changed`, `zoom_changed`, …) so listeners stay
+         * consistent. For an animated move use `flyTo`; for a bounded fit use
+         * `fitBounds`.
+         */
+        moveCamera(cameraOptions: woosmap.map.CameraOptions): void;
+
+        /**
+         * Pans the map by the minimum amount necessary to contain the given LatLngBounds.
+         * It makes no guarantee where on the map the bounds will be,
+         * except that the map will be panned to show as much of the bounds as possible inside
+         * `{currentMapSizeInPx} - {padding}.`
+         */
+        panToBounds(
+            latLngBounds: woosmap.map.LatLngBounds | woosmap.map.LatLngBoundsLiteral,
+            padding?: number | woosmap.map.Padding,
+        ): void;
+
+        /**
+         * Sets the map center
+         */
+        setCenter(center: woosmap.map.LatLng | woosmap.map.LatLngLiteral, padding?: woosmap.map.Padding): void;
+
+        /**
+         * Sets the compass heading for map measured in degrees from cardinal direction North.
+         */
+        setHeading(heading: number): void;
+
+        setTilt(tilt: number): void;
+
+        setZoom(zoom: number): void;
+
+        /**
+         * Returns the `Projection` for this map: world coordinates via
+         * `fromLatLngToPoint`/`fromPointToLatLng`, and the container/div pixel
+         * conversions used by overlays.
+         */
+        getProjection(): woosmap.map.Projection;
+
+        /**
+         * Returns the current map type id.
+         */
+        getMapTypeId(): string;
+
+        /**
+         * Reports the capabilities currently available to the map, mirroring Google
+         * Maps. `AdvancedMarkerElement` ships as the on-demand `marker` library, so
+         * `isAdvancedMarkersAvailable` reflects whether that library is loaded; the
+         * other capabilities are not yet supported.
+         */
+        getMapCapabilities(): woosmap.map.MapCapabilities;
+
+        /**
+         * Sets the map type id.
+         */
+        setMapTypeId(mapTypeId: string): void;
+    }
+}
+declare namespace woosmap.map {
+    class InfoWindow extends woosmap.map.MVCObject {
+        constructor(options: woosmap.map.InfoWindowOptions);
+
+        /**
+         * Opens the info window on the given map, optionally anchored to a Marker,
+         * AdvancedMarkerElement, or bare position. Also accepts Google's
+         * `{map, anchor}` options-object form as the first argument, in which case
+         * the second argument is ignored.
+         */
+        open(
+            optionsOrMap?: woosmap.map.Map | woosmap.map.InfoWindowOpenOptions,
+            openAnchor?:
+                | woosmap.map.Marker
+                | woosmap.map.marker.AdvancedMarkerElement
+                | woosmap.map.LatLng
+                | woosmap.map.LatLngLiteral,
+        ): void;
+
+        /**
+         * Injects the content, keeping it reachable by page CSS like Google's
+         * InfoWindow. On a classic light-DOM map the content goes straight into the
+         * content element. When the map lives inside a shadow root (e.g. `<wmp-map>`),
+         * the bubble sits in that shadow tree where page CSS can't reach — so the
+         * content is parked in the host's light DOM and projected into the bubble
+         * through a named `<slot>`. The name matters: the map's marker overlay uses
+         * an unnamed default slot that would otherwise capture the content.
+         */
+        _renderContent(): void;
+
+        /**
+         * The shadow host of the map's container when the map lives inside a shadow
+         * root (e.g. `<wmp-map>`), else null for a classic light-DOM map.
+         */
+        _shadowHost(): Element | null;
+
+        /**
+         * Closes this InfoWindow by removing it from the DOM structure.
+         */
+        close(): void;
+
+        /**
+         * Sets the info window content
+         */
+        setContent(content: string): void;
+
+        /**
+         * Sets the anchor
+         */
+        setPosition(
+            positionOrMarker:
+                | woosmap.map.Marker
+                | woosmap.map.marker.AdvancedMarkerElement
+                | woosmap.map.LatLng
+                | woosmap.map.LatLngLiteral,
+        ): void;
+
+        /**
+         * Sets the offset
+         */
+        setOffset(offset: woosmap.map.Point): void;
+
+        /**
+         * Sets the marker
+         */
+        setMarker(marker?: woosmap.map.Marker | null): void;
+
+        /**
+         * Sets the info window map.
+         */
+        setMap(map: woosmap.map.Map | null): void;
+
+        /**
+         * Gets the current map bound to the
+         */
+        getMap(): woosmap.map.Map | null;
+    }
+}
+declare namespace woosmap.map {
+    class Marker extends woosmap.map.MVCObject {
+        cursor: string;
+        map: woosmap.map.Map | null;
+        position: woosmap.map.LatLng;
+        /**
+         * Constructs a Marker
+         */
+        constructor(options?: woosmap.map.MarkerOptions);
+
+        setIcon(icon: woosmap.map.Icon | string): void;
+
+        setMap(map?: woosmap.map.Map | null): void;
+
+        /**
+         * Sets the marker opacity.
+         */
+        setOpacity(opacity: number): void;
+
+        /**
+         * Gets the marker opacity.
+         */
+        getOpacity(): number;
+
+        /**
+         * Get the marker's geographical location.
+         *
+         * The longitude of the result may differ by a multiple of 360 degrees from the longitude previously
+         * set by `setLngLat` because `Marker` wraps the anchor longitude across copies of the world to keep
+         * the marker on screen.
+         */
+        getPosition(): woosmap.map.LatLng;
+
+        /**
+         * Sets the position of the marker
+         */
+        setPosition(
+            position: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+            animate?: boolean,
+            options?: woosmap.map.MarkerAnimateOptions,
+        ): void;
+
+        /**
+         * Get the marker's offset.
+         */
+        getOffset(): woosmap.map.Point;
+
+        /**
+         * Sets the offset of the marker
+         */
+        setOffset(offset: woosmap.map.Point): woosmap.map.Marker;
+
+        /**
+         * Sets the `draggable` property and functionality of the marker
+         */
+        setDraggable(shouldBeDraggable: boolean): woosmap.map.Marker;
+
+        /**
+         * Returns true if the marker can be dragged
+         */
+        getDraggable(): boolean;
+
+        /**
+         * Sets the `rotation` property of the marker.
+         */
+        setRotation(rotation: number): woosmap.map.Marker;
+
+        /**
+         * Returns the current rotation angle of the marker (in degrees).
+         */
+        getRotation(): number;
+
+        /**
+         * Sets the `rotationAlignment` property of the marker.
+         */
+        setRotationAlignment(alignment: string): woosmap.map.Marker;
+
+        /**
+         * Returns the current `rotationAlignment` property of the marker.
+         */
+        getRotationAlignment(): string;
+
+        /**
+         * Sets the `pitchAlignment` property of the marker.
+         */
+        setPitchAlignment(alignment?: string): woosmap.map.Marker;
+
+        /**
+         * Returns the current `pitchAlignment` property of the marker.
+         */
+        getPitchAlignment(): string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Displays the stores of the project as layers of the map, rendered from tiles.
+     *
+     * Built for whole store catalogues. To place a few points yourself with full
+     * control over stacking, use [woosmap.map.Marker](#woosmap.map.Marker) instead.
+     *
+     * Rendering by zoom:
+     *
+     * -  Below `style.breakPoint`: each store is a dot, a circle in the rule's `color`.
+     * -  From `style.breakPoint` upward: each store is a marker, the rule's `icon`.
+     * Markers always show, even when they overlap each other.
+     *
+     * Relative to the basemap labels:
+     *
+     * -  Place, state and country labels draw over dots and markers, and are never
+     * hidden by them.
+     * -  Road, POI and water labels draw below the stores. A marker hides those it
+     * overlaps; dots never hide labels.
+     * -  With `style.aboveLabels`, dots and markers draw above every label of the
+     * Woosmap styles instead. Markers hide the labels they overlap; dots draw
+     * over them without hiding them.
+     *
+     * Stacking between store types:
+     *
+     * -  The order of `style.rules` is the stacking order: a later rule draws above
+     * an earlier one (see [woosmap.map.Style](#woosmap.map.Style)).
+     * -  Nothing reorders stores against the basemap.
+     * -  The selected store draws on top of every other layer.
+     */
+    class StoresOverlay extends woosmap.map.OverlayView {
+        /**
+         * Constructs a StoreOverlay
+         */
+        constructor(style: woosmap.map.Style);
+
+        /**
+         * Clears selected store if any
+         */
+        clearSelection(): void;
+
+        /**
+         * Sets the selected store
+         */
+        setSelection(feature: object): void;
+
+        /**
+         * Sets the query used to fetch stores.
+         * To clear the query set it to undefined.
+         */
+        setQuery(query?: string | null): void;
+
+        setMap(map?: woosmap.map.Map | null): void;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * This class allows you to create custom overlay objects on the map.
+     * To use this class, set your overlay's class to extend from `OverlayView`.
+     * You'll need to implement three methods: `onAdd()`, `draw()`, and `onRemove()`.
+     *
+     * @example Example
+     * ```javascript
+     * class MyOverlay extends woosmap.map.OverlayView {
+     *  constructor({ map }) {
+     *       super();
+     *       this.setMap(map);
+     *  }
+     *  onAdd(){}
+     *  draw(){}
+     *  onRemove(){}
+     * }
+     * ```
+     */
+    class OverlayView {
+        /**
+         * This class allows you to create custom overlay objects on the map.
+         * To use this class, set your overlay's class to extend from `OverlayView`.
+         * You'll need to implement three methods: `onAdd()`, `draw()`, and `onRemove()`.
+         */
+        constructor();
+
+        /**
+         * This method should be implemented to draw or update the overlay.
+         * Use the position from `projection.fromLatLngToDivPixel()` to correctly position the overlay relative to the `MapPanes`.
+         * This method is called after `onAdd()`, and whenever the zoom or center of the map changes.
+         * Avoid performing computationally expensive operations in this method.
+         */
+        draw(): void;
+
+        /**
+         * Retrieves the map associated with this overlay.
+         */
+        getMap(): woosmap.map.Map | null;
+
+        /**
+         * Retrieves the panes in which this `OverlayView` can be rendered.
+         * The panes are not initialized until onAdd is called by the API.
+         */
+        getPanes(): woosmap.map.MapPanes | null;
+
+        /**
+         * Retrieves the map canvas `Projection` object associated with this `OverlayView`.
+         * The projection is not initialized until `onAdd` is called by the API.
+         */
+        getProjection(): woosmap.map.MapCanvasProjection | null;
+
+        /**
+         * This method should be implemented to initialize the overlay DOM elements.
+         * It is called once after `setMap()` is called with a valid map.
+         * At this point, panes and projection will have been initialized.
+         */
+        onAdd(): void;
+
+        /**
+         * This method should be implemented to remove your elements from the DOM.
+         * It is called once following a call to `setMap(null)`.
+         */
+        onRemove(): void;
+
+        /**
+         * Adds or removes the overlay from the map.
+         */
+        setMap(map: woosmap.map.Map | null): void;
+    }
+}
+declare namespace woosmap.map {
+    class DirectionsService {
+        constructor();
+
+        /**
+         * Issue a directions search request.
+         */
+        route(
+            request: woosmap.map.DirectionRequest,
+            callback: (result: woosmap.map.DirectionResult, status: string) => any,
+        ): void;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A layer for displaying geospatial data. Points can be displayed.
+     */
+    class Data extends woosmap.map.MVCObject {
+        /**
+         * Creates an empty collection.
+         */
+        constructor();
+
+        /**
+         * Adds the feature passed as parameter.
+         */
+        add(feature: woosmap.map.Data.Feature | woosmap.map.Data.FeatureOptions): void;
+
+        /**
+         * Remove the feature passed as parameter.
+         */
+        remove(feature: woosmap.map.Data.Feature): void;
+
+        /**
+         * Adds GeoJSON features to the collection. Give this method a parsed JSON.
+         * The imported features are returned. Throws an exception if the GeoJSON could not be imported.
+         */
+        addGeoJson(
+            geojson: woosmap.map.GeoJSONFeatureCollection | woosmap.map.GeoJSONFeature,
+            options?: { idPropertyName: string },
+        ): void;
+
+        /**
+         * Exports the features in the collection to a GeoJSON object.
+         */
+        toGeoJson(callback: (geojson: woosmap.map.GeoJSONFeatureCollection) => void): void;
+
+        /**
+         * Checks whether the given feature is in the collection.
+         */
+        contains(feature: woosmap.map.Data.Feature): boolean;
+
+        /**
+         * Repeatedly invokes the given function, passing a feature in the collection to the function on each invocation.
+         * The order of iteration through the features is undefined.
+         */
+        forEach(callback: (feature: woosmap.map.Data.Feature) => void): void;
+
+        /**
+         * Returns the feature matching the id.
+         */
+        getFeatureById(id: string): woosmap.map.Data.Feature | null;
+
+        /**
+         * Returns the map on which the features are displayed.
+         */
+        getMap(): woosmap.map.Map | null;
+
+        /**
+         * Renders the features on the specified map. If map is set to null, the features will be removed from the map.
+         */
+        setMap(map: woosmap.map.Map | null): void;
+
+        /**
+         * Sets the style for all features in the collection. Styles specified on a per-feature basis via `overrideStyle()`
+         * continue to apply.
+         * Pass either an object with the desired style options, or a function that computes the style for each feature.
+         * The function will be called every time a feature's properties are updated.
+         */
+        setStyle(style: woosmap.map.Data.StylingFunction | woosmap.map.Data.StyleOptions): void;
+
+        /**
+         * Gets the style for all features in the collection.
+         */
+        getStyle(): woosmap.map.Data.StylingFunction | woosmap.map.Data.StyleOptions;
+
+        /**
+         * Changes the style of a feature.
+         * These changes are applied on top of the style specified by `setStyle()`.
+         * Style properties set to null revert to the value specified via `setStyle()`.
+         */
+        overrideStyle(feature: woosmap.map.Data.Feature, style: woosmap.map.Data.StyleOptions): void;
+
+        /**
+         * Removes the effect of previous `overrideStyle()` calls.
+         * The style of the given feature reverts to the style specified by `setStyle()`.
+         * If no feature is given, all features have their style reverted.
+         */
+        revertStyle(feature?: woosmap.map.Data.Feature | null): void;
+
+        /**
+         * Loads GeoJSON features to the collection from an url. If a callback is provided
+         * it will be called with the imported features.
+         */
+        loadGeoJson(
+            url: string,
+            options?: { idPropertyName: string },
+            callback?: (data: woosmap.map.Data.Feature[]) => void,
+        ): void;
+    }
+}
+declare namespace woosmap.map.Data {
+    class Feature {
+        /**
+         * Constructs a new Data.Feature
+         */
+        constructor(featureData: woosmap.map.Data.FeatureOptions | woosmap.map.GeoJSONFeature);
+
+        /**
+         * Returns the feature geometry.
+         */
+        getGeometry(): woosmap.map.GeometryCollectionElement | woosmap.map.Data.GeometryCollection;
+
+        /**
+         * Set the feature geometry.
+         */
+        setGeometry(geometry: woosmap.map.GeometryCollectionElement | woosmap.map.Data.GeometryCollection): void;
+
+        /**
+         * Returns the feature id.
+         */
+        getId(): string;
+
+        /**
+         * Returns the feature property
+         */
+        getProperty(name: string): unknown;
+
+        /**
+         * Removes property
+         */
+        removeProperty(name: string): void;
+
+        /**
+         * Sets the value of the specified property. If newValue is undefined this is equivalent to calling removeProperty.
+         */
+        setProperty(name: string, newValue: unknown): void;
+
+        /**
+         * Exports the feature to a GeoJSON object.
+         */
+        toGeoJson(callback: (geojson: woosmap.map.GeoJSONFeature) => void): void;
+    }
+}
+declare namespace woosmap.map.Data {
+    class Point implements Geometry<"Point", Coordinates> {
+        /**
+         * Constructs a Point geometry
+         */
+        constructor(point: woosmap.map.LatLng | woosmap.map.Coordinates | woosmap.map.LatLngLiteral);
+
+        /**
+         * Returns the point geometry
+         */
+        get(): woosmap.map.LatLng;
+
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        /**
+         * Returns `"Point"`.
+         */
+        getType(): "Point";
+    }
+}
+declare namespace woosmap.map.Data {
+    class MultiPoint implements Geometry<"MultiPoint", Coordinates[]> {
+        /**
+         * Constructs a Multipoint geometry.
+         */
+        constructor(points: woosmap.map.LatLng[] | woosmap.map.Coordinates[] | woosmap.map.LatLngLiteral[]);
+
+        /**
+         * Returns n-th Point of the MultiPoint.
+         */
+        getAt(n: number): woosmap.map.LatLng;
+
+        /**
+         * Return the array of points
+         */
+        getArray(): woosmap.map.LatLng[];
+
+        /**
+         * Returns the length of the multipoint.
+         */
+        getLength(): number;
+
+        /**
+         * For each point calls the callback.
+         */
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        /**
+         * Returns `"MultiPoint"`.
+         */
+        getType(): "MultiPoint";
+    }
+}
+declare namespace woosmap.map.Data {
+    class LineString implements Geometry<"LineString", Coordinates[]> {
+        constructor(points: woosmap.map.LatLng[] | woosmap.map.Coordinates[] | woosmap.map.LatLngLiteral[]);
+
+        /**
+         * Returns the n-th Point (as LatLng) of the LineString.
+         */
+        getAt(n: number): woosmap.map.LatLng;
+
+        /**
+         * Returns the points of the linestring as an array of LatLng.
+         */
+        getArray(): woosmap.map.LatLng[];
+
+        /**
+         * Returns the count of points in the linestring.
+         */
+        getLength(): number;
+
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        getType(): "LineString";
+    }
+}
+declare namespace woosmap.map.Data {
+    class MultiLineString implements Geometry<"MultiLineString", Coordinates[][]> {
+        /**
+         * Constructs a MultiLineString.
+         * A MultiLineString is a collection of LineString.
+         */
+        constructor(
+            linestrings: woosmap.map.Data.LineString[] | woosmap.map.LatLng[][] | woosmap.map.LatLngLiteral[][],
+        );
+
+        /**
+         * Returns the n-th LineString of the MultiLineString.
+         */
+        getAt(n: number): woosmap.map.Data.LineString;
+
+        getArray(): woosmap.map.Data.LineString[];
+
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        /**
+         * Returns `"MultiLineString"`.
+         */
+        getType(): "MultiLineString";
+    }
+}
+declare namespace woosmap.map.Data {
+    class LinearRing extends woosmap.map.Data.LineString {
+        /**
+         * Constructs a linear ring.
+         */
+        constructor(points: woosmap.map.LatLng[] | woosmap.map.Coordinates[] | woosmap.map.LatLngLiteral[]);
+    }
+}
+declare namespace woosmap.map.Data {
+    class Polygon implements Geometry<"Polygon", Coordinates[][]> {
+        /**
+         * Constructs a Polygon, using a set of linear ring.
+         */
+        constructor(
+            elements:
+                | woosmap.map.Data.LinearRing[]
+                | woosmap.map.LatLng[][]
+                | woosmap.map.LatLngLiteral[][]
+                | woosmap.map.Coordinates[][],
+        );
+
+        /**
+         * Returns the n-th LinearRing of the Polygon.
+         */
+        getAt(n: number): woosmap.map.Data.LinearRing;
+
+        /**
+         * Returns the array of LinearRing that composes the Polygon.
+         */
+        getArray(): woosmap.map.Data.LinearRing[];
+
+        /**
+         * Returns the count of LinearRings that composes the Polygon.
+         */
+        getLength(): number;
+
+        /**
+         * For each LinearRing call `callback`.
+         */
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        /**
+         * Returns `"Polygon"`.
+         */
+        getType(): "Polygon";
+    }
+}
+declare namespace woosmap.map.Data {
+    class MultiPolygon implements Geometry<"MultiPolygon", Coordinates[][][]> {
+        /**
+         * Constructs a MultiPolygon geometry.
+         * A MultiPolygon is a set of Polygons.
+         */
+        constructor(
+            elements:
+                | woosmap.map.Data.Polygon[]
+                | woosmap.map.Data.LinearRing[][]
+                | woosmap.map.LatLng[][][]
+                | woosmap.map.LatLngLiteral[][][],
+        );
+
+        /**
+         * Returns the n-th polygon of the MultiPolygon.
+         */
+        getAt(n: number): woosmap.map.Data.Polygon;
+
+        /**
+         * Returns the array of Polygons that makes the MultiPolygon.
+         */
+        getArray(): woosmap.map.Data.Polygon[];
+
+        /**
+         * Return the count of Polygon in the MultiPolygon.
+         */
+        getLength(): number;
+
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        /**
+         * Returns `"MultiPolygon"`.
+         */
+        getType(): "MultiPolygon";
+    }
+}
+declare namespace woosmap.map.Data {
+    class GeometryCollection implements Geometry<"GeometryCollection", any> {
+        /**
+         * Constructs a geometry collection from an array of geometries.
+         */
+        constructor(elements: woosmap.map.GeometryArray | woosmap.map.GeoJSONGeometry[]);
+
+        /**
+         * Returns the n-th Geometry of the GeometryCollection.
+         */
+        getAt(n: number): woosmap.map.GeometryCollectionElement;
+
+        getArray(): woosmap.map.GeometryArray;
+
+        getLength(): number;
+
+        forEachLatLng(callback: (point: woosmap.map.LatLng) => void): void;
+
+        /**
+         * Returns `"GeometryCollection"`.
+         */
+        getType(): "GeometryCollection";
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * ImageMapType defines tiled image layer that can be added to the map.
+     * It supports both `xyz` and `tms` tile schemes.
+     *
+     * @example Adds a tileLayer with .5 opacity.
+     *
+     * ```javascript
+     * const tiledLayer = new woosmap.map.ImageMapType({
+     *  url: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+     *  scheme: "xyz",
+     *  maxZoom: 22,
+     *  minZoom: 0,
+     *  opacity: 0.5,
+     * });
+     * map.overlayMapTypes.insertAt(0, tiledLayer);
+     * ```
+     */
+    class ImageMapType implements woosmap.map.MapType {
+        maxZoom: number;
+        minZoom: number;
+        /**
+         * ImageMapType defines tiled image layer that can be added to the map.
+         * It supports both `xyz` and `tms` tile schemes.
+         */
+        constructor(opts: woosmap.map.ImageMapTypeOptions);
+
+        getTile(tileCoord: woosmap.map.Point, zoom: number, ownerDocument: null): Element | null;
+
+        releaseTile(tile: Element): void;
+    }
+}
+declare namespace woosmap.map {
+    class BaseGeometry extends woosmap.map.MVCObject {
+        constructor(options: woosmap.map.GeometryOptions);
+
+        /**
+         * Returns whether the geometry is draggable or not.
+         */
+        getDraggable(): boolean;
+
+        /**
+         * Returns whether the geometry is editable or not.
+         */
+        getEditable(): boolean;
+
+        /**
+         * Returns the current parent Map.
+         */
+        getMap(): woosmap.map.Map | null;
+
+        /**
+         * Returns whether the geometry is visible or not.
+         */
+        getVisible(): boolean;
+
+        /**
+         * Sets the geometry draggable.
+         */
+        setDraggable(draggable: boolean): void;
+
+        /**
+         * Sets the geometry editable.
+         */
+        setEditable(editable: boolean): void;
+
+        /**
+         * Sets the map object to display on.
+         * if `map` is null, the geometry will be removed from the current `map`.
+         */
+        setMap(map: woosmap.map.Map | null): void;
+
+        /**
+         * Sets the visibility of the geometry.
+         */
+        setVisible(visible: boolean): void;
+    }
+}
+declare namespace woosmap.map {
+    class Polyline extends woosmap.map.BaseGeometry {
+        /**
+         * Constructs a Polyline.
+         */
+        constructor(options: woosmap.map.PolylineOptions);
+
+        getPath(): woosmap.map.MVCArray<woosmap.map.LatLng>;
+
+        setOptions(options: woosmap.map.PolylineOptions): void;
+
+        setPath(
+            path: woosmap.map.MVCArray<woosmap.map.LatLng> | woosmap.map.LatLng[] | woosmap.map.LatLngLiteral[],
+        ): void;
+    }
+}
+declare namespace woosmap.map {
+    class BasePolygon extends woosmap.map.BaseGeometry {
+        constructor(options: woosmap.map.GeometryOptions);
+    }
+}
+declare namespace woosmap.map {
+    class Polygon extends woosmap.map.BasePolygon {
+        /**
+         * Constructs a polygon.
+         */
+        constructor(options: woosmap.map.PolygonOptions);
+
+        /**
+         * Returns the outer path of the polygon.
+         */
+        getPath(): woosmap.map.MVCArray<woosmap.map.LatLng>;
+
+        /**
+         * Returns all the path that compose the polygon.
+         */
+        getPaths(): woosmap.map.MVCArray<woosmap.map.MVCArray<woosmap.map.LatLng>>;
+
+        /**
+         * Sets the polygon options.
+         */
+        setOptions(options: woosmap.map.PolygonOptions): void;
+
+        /**
+         * Sets the polygon path.
+         */
+        setPath(
+            path: woosmap.map.MVCArray<woosmap.map.LatLng> | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>,
+        ): void;
+
+        /**
+         * Sets the polygon paths.
+         */
+        setPaths(
+            paths:
+                | woosmap.map.MVCArray<woosmap.map.MVCArray<woosmap.map.LatLng>>
+                | woosmap.map.MVCArray<woosmap.map.LatLng>
+                | Array<Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>>
+                | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>,
+        ): void;
+    }
+}
+declare namespace woosmap.map {
+    class Rectangle extends woosmap.map.BasePolygon {
+        /**
+         * Constructs a Rectangle.
+         */
+        constructor(options: woosmap.map.RectangleOptions);
+
+        getBounds(): woosmap.map.LatLngBounds;
+
+        setBounds(bounds: woosmap.map.LatLngBounds | woosmap.map.LatLngBoundsLiteral): void;
+
+        setOptions(options: woosmap.map.RectangleOptions): void;
+    }
+}
+declare namespace woosmap.map {
+    class Circle extends woosmap.map.BasePolygon {
+        /**
+         * Constructs a Circle.
+         */
+        constructor(options: woosmap.map.CircleOptions);
+
+        /**
+         * Returns the bounds for the circle geometry.
+         */
+        getBounds(): woosmap.map.LatLngBounds;
+
+        /**
+         * Returns the center for the circle geometry.
+         */
+        getCenter(): woosmap.map.LatLng;
+
+        /**
+         * Returns the radius for the circle geometry.
+         */
+        getRadius(): number;
+
+        /**
+         * Sets the center for the circle.
+         */
+        setCenter(center: woosmap.map.LatLng | woosmap.map.LatLngLiteral): void;
+
+        /**
+         * Sets the radius for the circle.
+         */
+        setRadius(radius: number): void;
+
+        /**
+         * Sets the options for the circle.
+         */
+        setOptions(options: woosmap.map.CircleOptions): void;
+    }
+}
+declare namespace woosmap.map {
+    class LatLng {
+        /**
+         * Returns the latitude in degrees.
+         */
+        lat: () => number;
+        /**
+         * Returns the longitude in degrees.
+         */
+        lng: () => number;
+        /**
+         * Creates a `LatLng` object representing a geographic point.
+         * Latitude is specified in degrees within the range [-90, 90].
+         * Longitude is specified in degrees within the range [-180, 180].
+         * Set `noWrap` to `true` to enable values outside of this range.
+         * Note the ordering of latitude and longitude.
+         */
+        constructor(
+            lat: woosmap.map.LatLng | woosmap.map.LatLngLiteral | number | (() => number),
+            lng?: number | (() => number),
+        );
+
+        /**
+         * Comparison function.
+         */
+        equals(other: woosmap.map.LatLng): boolean;
+
+        /**
+         * Converts to JSON representation. This function is intended to be used via `JSON.stringify`.
+         */
+        toJSON(): woosmap.map.LatLngLiteral;
+
+        toString(): string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A `LatLngAltitude` is a 3-dimensional geographical point: a `lat`/`lng` on the
+     * ground plus an `altitude` in metres above the surface. `lat`, `lng` and
+     * `altitude` are exposed as read-only number properties, mirroring
+     * `google.maps.LatLngAltitude` (which implements `LatLngAltitudeLiteral`) — note
+     * this differs from `LatLng`, whose `lat()`/`lng()` are methods.
+     */
+    class LatLngAltitude {
+        /**
+         * Altitude in metres above the ground surface.
+         */
+        altitude: number;
+        /**
+         * Latitude in degrees.
+         */
+        lat: number;
+        /**
+         * Longitude in degrees.
+         */
+        lng: number;
+        /**
+         * Creates a `LatLngAltitude`.
+         */
+        constructor(
+            value:
+                | woosmap.map.LatLngAltitude
+                | woosmap.map.LatLngAltitudeLiteral
+                | woosmap.map.LatLng
+                | woosmap.map.LatLngLiteral,
+            noClampNoWrap?: boolean,
+        );
+
+        /**
+         * Returns `true` when the coordinates of both points are within `1e-9` of
+         * each other, mirroring `google.maps.LatLngAltitude.equals`.
+         */
+        equals(
+            other:
+                | woosmap.map.LatLngAltitude
+                | woosmap.map.LatLngAltitudeLiteral
+                | woosmap.map.LatLng
+                | woosmap.map.LatLngLiteral
+                | null,
+        ): boolean;
+
+        /**
+         * Converts to a plain `LatLngAltitudeLiteral`, for use via `JSON.stringify`.
+         */
+        toJSON(key?: string): woosmap.map.LatLngAltitudeLiteral;
+    }
+}
+declare namespace woosmap.map {
+    class LatLngBounds {
+        /**
+         * Creates a LatLngBounds object
+         */
+        constructor(
+            northEast?: woosmap.map.LatLng | woosmap.map.LatLngLiteral | null,
+            southWest?: woosmap.map.LatLng | woosmap.map.LatLngLiteral | null,
+        );
+
+        /**
+         * Extends the current bounds with point.
+         */
+        extend(latlng: woosmap.map.LatLng | woosmap.map.LatLngLiteral): void;
+
+        /**
+         * Checks if current bounds contain latlng.
+         */
+        contains(latlng: woosmap.map.LatLng | woosmap.map.LatLngLiteral): boolean;
+
+        /**
+         * Checks if bounds are intersecting with other.
+         */
+        intersects(other: woosmap.map.LatLngBounds): boolean;
+
+        /**
+         * Computes the union of this bounds and other.
+         */
+        union(other: woosmap.map.LatLngBounds): void;
+
+        /**
+         * Returns the north-east corner of these bounds.
+         */
+        getNorthEast(): woosmap.map.LatLng;
+
+        /**
+         * Returns the south-west corner of this bounds.
+         */
+        getSouthWest(): woosmap.map.LatLng;
+
+        /**
+         * Computes the center of the latlng bounds.
+         */
+        getCenter(): woosmap.map.LatLng;
+
+        /**
+         * Checks if the current bounds are empty.
+         */
+        isEmpty(): boolean;
+    }
+}
+declare namespace woosmap.map {
+    class Point {
+        /**
+         * Creates a Point object
+         */
+        constructor(x: number, y: number);
+
+        /**
+         * Indicates whether some other object is "equal to" this one.
+         */
+        equals(other: woosmap.map.Point): boolean;
+    }
+}
+declare namespace woosmap.map {
+    class Size {
+        /**
+         * Creates a Size object
+         */
+        constructor(width: number, height: number);
+
+        /**
+         * Indicates whether some other object is "equal to" this one.
+         */
+        equals(other: woosmap.map.Size): boolean;
+    }
+}
+declare namespace woosmap.map {
+    class MVCArray<T> extends woosmap.map.MVCObject {
+        constructor(array?: T[]);
+
+        /**
+         * Removes all elements from the array.
+         */
+        clear(): void;
+
+        /**
+         * Iterate over each element, calling the provided callback. The callback is called for each element like: callback(element, index).
+         */
+        forEach(callback: (element: T, index: number) => void): void;
+
+        getArray(): T[];
+
+        /**
+         * Get the element at the specified index.
+         */
+        getAt(i: number): T;
+
+        /**
+         * Get the number of elements in this array.
+         */
+        getLength(): number;
+
+        /**
+         * Inserts an element at the specified index.
+         */
+        insertAt(i: number, elem: T): void;
+
+        /**
+         * Removes the last element of the array and returns that element.
+         */
+        pop(): T;
+
+        /**
+         * Adds one element to the end of the array and returns the new length of the array.
+         */
+        push(elem: T): number;
+
+        /**
+         * Removes an element from the specified index.
+         */
+        removeAt(i: number): T;
+
+        /**
+         * Sets an element at the specified index.
+         */
+        setAt(i: number, elem: T): void;
+
+        /**
+         * Returns the index of a given element.
+         */
+        indexOf(elem: T): number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Constructor for MVCObject.
+     */
+    class MVCObject {
+        /**
+         * Constructor for MVCObject.
+         */
+        constructor();
+
+        /**
+         * Binds the property identified by 'key' to the specified target.
+         */
+        bindTo(key: string, target: object, targetKey?: string, notify?: boolean): void;
+
+        /**
+         * Is this property a complex object - is it bound as either observer or target
+         */
+        isPropertyBound(key: string): boolean;
+
+        /**
+         * Returns the value of the property specified by `key`
+         */
+        get(key: string): any;
+
+        /**
+         * Sets `value` to `key` on `this`.
+         */
+        set(key: string, value: any, forceCallback?: boolean): void;
+
+        /**
+         * Set all the values of the properties contained in `keyValuePairs`
+         */
+        setOptions(keyValuePairs: object): void;
+
+        /**
+         * Un-bind the property identified by `key` from its current target
+         */
+        unbind(key: string): void;
+
+        /**
+         * Unbind all bound properties on this object
+         */
+        unbindAll(): void;
+
+        /**
+         * Adds a listener for eventName.
+         */
+        addListener(eventName: string, handler: (...args: any[]) => any): woosmap.map.MapEventListener;
+    }
+}
+declare namespace woosmap.map {
+    class DirectionsRenderer extends woosmap.map.MVCObject {
+        constructor(options: woosmap.map.DirectionsRendererOptions);
+
+        /**
+         * Sets the map where to render the directions.
+         */
+        setMap(map: woosmap.map.Map | null): void;
+
+        /**
+         * Sets the directions result to render.
+         */
+        setDirections(directions: woosmap.map.DirectionResult): void;
+
+        /**
+         * Sets the route index in the DirectionResult object to render.
+         * By default the first route (0) will be rendered.
+         */
+        setRouteIndex(routeIndex: number): void;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A service for computing distances and durations between multiple origins and
+     * destinations and retrieving isochrone destinations.
+     */
+    class DistanceService {
+        /**
+         * A service for computing distances and durations between multiple origins and
+         * destinations and retrieving isochrone destinations.
+         */
+        constructor();
+
+        /**
+         * Retrieves distances and durations for the supplied
+         * matrix request.
+         */
+        getDistanceMatrix(
+            request: woosmap.map.distance.DistanceMatrixRequest,
+        ): Promise<woosmap.map.distance.DistanceMatrixResponse>;
+
+        /**
+         * Find all destinations that can be reached in a specific amount of time or a maximum travel distance based
+         * on the supplied isochrone request.
+         */
+        getDistanceIsochrone(
+            request: woosmap.map.distance.DistanceIsochroneRequest,
+        ): Promise<woosmap.map.distance.DistanceIsochroneResponse>;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Contains methods related to retrieving stores and stores' bounds.
+     */
+    class StoresService {
+        /**
+         * Contains methods related to retrieving stores and stores' bounds.
+         */
+        constructor();
+
+        /**
+         * Retrieves stores autocomplete suggestions based on the supplied
+         * autocomplete request.
+         */
+        autocomplete(
+            request: woosmap.map.stores.StoresAutocompleteRequest,
+        ): Promise<woosmap.map.stores.StoresAutocompleteResponse>;
+
+        /**
+         * Searches stores based on the supplied search request.
+         */
+        search(request: woosmap.map.stores.StoresSearchRequest): Promise<woosmap.map.stores.StoresSearchResponse>;
+
+        /**
+         * Retrieves a store object based on the supplied store ID.
+         */
+        getStoreById(storeId: string): Promise<woosmap.map.stores.StoreResponse>;
+
+        /**
+         * Retrieves bounds of stores based on the supplied bounds search request.
+         */
+        getBounds(request: woosmap.map.stores.StoresBoundsRequest): Promise<woosmap.map.stores.StoresBoundsResponse>;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Contains methods related to retrieving autocomplete predictions, geocoding for localities and retrieving details
+     */
+    class LocalitiesService {
+        /**
+         * To better track autocomplete sessions and get more accurate and performant results, provide a common uuid to all
+         * autocomplete session requests and the details request. sessionId must be reset when autocomplete input is emptied
+         * and when a details is successful.
+         */
+        _sessionId: string;
+        /**
+         * Contains methods related to retrieving autocomplete predictions, geocoding for localities and retrieving details
+         */
+        constructor();
+
+        /**
+         * Retrieves localities autocomplete predictions based on the supplied
+         * autocomplete request.
+         */
+        autocomplete(
+            request: woosmap.map.localities.LocalitiesAutocompleteRequest,
+        ): Promise<woosmap.map.localities.LocalitiesAutocompleteResponse>;
+
+        /**
+         * Retrieves localities results based on the supplied
+         * geocode request.
+         */
+        geocode(
+            request: woosmap.map.localities.LocalitiesGeocodeRequest,
+        ): Promise<woosmap.map.localities.LocalitiesGeocodeResponse>;
+
+        /**
+         * Retrieves details about the locality identified by the given `public_id`
+         */
+        getDetails(
+            request: woosmap.map.localities.LocalitiesDetailsRequest,
+        ): Promise<woosmap.map.localities.LocalitiesDetailsResponse>;
+
+        /**
+         * Retrieves localities results based on the nearby request.
+         */
+        nearby(
+            request: woosmap.map.localities.LocalitiesNearbyRequest,
+        ): Promise<woosmap.map.localities.LocalitiesNearbyResponse>;
+    }
+}
+declare namespace woosmap.map {
+    class DatasetsService {
+        constructor(datasetId: string);
+
+        /**
+         * Returns features intersecting with the geometry, buffer is applied if defined.
+         */
+        intersects(
+            request: woosmap.map.DatasetsSearchWithInputGeometryRequest,
+            pagination?: woosmap.map.DatasetsPaginationRequest,
+        ): Promise<woosmap.map.DatasetsSearchResponse>;
+
+        /**
+         * Returns features within by the geometry, buffer is applied if defined.
+         */
+        within(
+            request: woosmap.map.DatasetsSearchWithPolygonGeometryRequest,
+            pagination?: woosmap.map.DatasetsPaginationRequest,
+        ): Promise<woosmap.map.DatasetsSearchResponse>;
+
+        /**
+         * Returns feature containing the geometry.
+         */
+        contains(
+            request: woosmap.map.DatasetsSearchWithInputGeometryRequest,
+            pagination?: woosmap.map.DatasetsPaginationRequest,
+        ): Promise<woosmap.map.DatasetsSearchResponse>;
+
+        /**
+         * Searches for features matching the query.
+         */
+        search(
+            request: woosmap.map.DatasetsSearchRequest,
+            pagination?: woosmap.map.DatasetsPaginationRequest,
+        ): Promise<woosmap.map.DatasetsSearchResponse>;
+
+        /**
+         * Get the full feature, with its geometry.
+         */
+        getFeature(featureId: string): Promise<woosmap.map.DatasetsFeature>;
+    }
+}
+declare namespace woosmap.map.query {
+    class Field {
+        /**
+         * Represents a field filter. Used to build a string for query parameter to pass to Store Search Service.
+         */
+        constructor(key: string, value: string | number | boolean, operator?: woosmap.map.query.Operators | null);
+
+        /**
+         * Returns the field clause in query format.
+         */
+        toString(): string;
+    }
+}
+declare namespace woosmap.map.query {
+    class Query {
+        /**
+         * Represents a Query.  Used to build a string for query parameter to pass to Store Search Service.
+         * Default operator is `BoolOperators.AND`
+         */
+        constructor(
+            children: Array<woosmap.map.query.Query | woosmap.map.query.Field | string>,
+            connector: woosmap.map.query.BoolOperators,
+            negate: boolean,
+        );
+
+        /**
+         * Returns the Query as a string usable for the search endpoint query parameter.
+         */
+        toString(): string;
+    }
+}
+declare namespace woosmap.map.errors {
+    class APIError extends Error {
+        /**
+         * The http Status code extracted from the response.
+         */
+        statusCode: number;
+        constructor();
+    }
+}
+declare namespace woosmap.map.errors {
+    class BadRequestError extends woosmap.map.errors.APIError {
+        constructor(message?: string);
+    }
+}
+declare namespace woosmap.map.errors {
+    class UnauthorizedError extends woosmap.map.errors.APIError {
+        constructor(message?: string);
+    }
+}
+declare namespace woosmap.map.errors {
+    class ForbiddenError extends woosmap.map.errors.APIError {
+        constructor(message?: string);
+    }
+}
+declare namespace woosmap.map.errors {
+    class NotFoundError extends woosmap.map.errors.APIError {
+        constructor(message?: string);
+    }
+}
+declare namespace woosmap.map.errors {
+    class TooManyRequestsError extends woosmap.map.errors.APIError {
+        constructor(message?: string);
+    }
+}
+declare namespace woosmap.map.errors {
+    class InternalServerError extends woosmap.map.errors.APIError {
+        constructor(message?: string);
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A service for computing route using public transportation networks.
+     */
+    class TransitService {
+        /**
+         * A service for computing route using public transportation networks.
+         */
+        constructor();
+
+        /**
+         * Get distance, duration and path (as a polyline and transports details) for a pair of origin and destination,
+         * based on the recommended route between those two points and by using public transportations.
+         */
+        route(request: woosmap.map.transit.TransitRouteRequest): Promise<woosmap.map.transit.TransitRouteResponse>;
+    }
+}
+declare namespace woosmap.map {
+    class TransitRenderer extends woosmap.map.MVCObject {
+        constructor(options?: woosmap.map.TransitRendererOptions);
+
+        /**
+         * Sets the map.
+         */
+        setMap(map: woosmap.map.Map | null): any;
+
+        /**
+         * Sets the current selected route.
+         */
+        setRouteIndex(routeIndex: number): any;
+
+        /**
+         * Sets the transit routes to display.
+         */
+        setRoutes(routes: woosmap.map.transit.TransitRoute[]): any;
+    }
+}
+declare namespace woosmap.map {
+    class DatasetsOverlay {
+        constructor(datasetId: string, options?: woosmap.map.DatasetsOverlayOptions);
+
+        /**
+         * Adds or remove the overlay from the map.
+         */
+        setMap(map: woosmap.map.Map | null): void;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * The canonical Woosmap map web component, registered as `<wmp-map>`. Mounts a
+     * Woosmap `Map` inside a shadow root (by default) and mirrors the Google Maps
+     * Platform attribute/property surface so consumers can swap providers without
+     * HTML changes. Named after Google's core `google.maps.MapElement` (the
+     * `<gmp-map>` tag in the Maps JavaScript API) for migration familiarity.
+     */
+    class MapElement extends HTMLElement {
+        /**
+         * The map center, mirrored from the `center` attribute.
+         */
+        center: woosmap.map.LatLng;
+        /**
+         * The camera heading in degrees, mirrored from the `heading` attribute.
+         */
+        heading: number;
+        /**
+         * Whether rotation gestures are disabled, mirrored from the
+         * `heading-interaction-disabled` attribute. Woosmap couples tilt and
+         * rotation, so setting either this or [MapElement#tiltInteractionDisabled](#woosmap.map.MapElement__tiltInteractionDisabled)
+         * disables both; the flag must be set before the map mounts.
+         */
+        headingInteractionDisabled: boolean;
+        /**
+         * Escape hatch to the underlying Woosmap `Map` for full-API interop.
+         */
+        innerMap: woosmap.map.Map;
+        /**
+         * The map identifier, mirrored from the `map-id` attribute.
+         */
+        mapId: string;
+        /**
+         * The map type identifier, mirrored from the `map-type-id` attribute.
+         */
+        mapTypeId: string;
+        /**
+         * The rendering type. Woosmap renders vector tiles only, so this is a
+         * read-only `"VECTOR"`; the setter accepts the GMP property for migration
+         * compatibility but is a no-op (any value is silently ignored — passing
+         * `"RASTER"` will not switch rendering, but neither does it throw).
+         */
+        renderingType: "VECTOR";
+        /**
+         * The camera tilt in degrees, mirrored from the `tilt` attribute.
+         */
+        tilt: number;
+        /**
+         * Whether tilt gestures are disabled, mirrored from the
+         * `tilt-interaction-disabled` attribute. Woosmap couples tilt and rotation,
+         * so setting either this or [MapElement#headingInteractionDisabled](#woosmap.map.MapElement__headingInteractionDisabled) disables
+         * both; the flag must be set before the map mounts.
+         */
+        tiltInteractionDisabled: boolean;
+        /**
+         * The zoom level, mirrored from the `zoom` attribute.
+         */
+        zoom: number;
+        /**
+         * The canonical Woosmap map web component, registered as `<wmp-map>`. Mounts a
+         * Woosmap `Map` inside a shadow root (by default) and mirrors the Google Maps
+         * Platform attribute/property surface so consumers can swap providers without
+         * HTML changes. Named after Google's core `google.maps.MapElement` (the
+         * `<gmp-map>` tag in the Maps JavaScript API) for migration familiarity.
+         */
+        constructor();
+    }
+}
+declare namespace woosmap.map.marker {
+    /**
+     * One of the `CollisionBehavior` values.
+     */
+    type CollisionBehaviorType = "OPTIONAL_AND_HIDES_LOWER_PRIORITY" | "REQUIRED" | "REQUIRED_AND_HIDES_OPTIONAL";
+}
+declare namespace woosmap.map.marker {
+    /**
+     * Options for constructing an `AdvancedMarkerElement`.
+     */
+    interface AdvancedMarkerElementOptions {
+        /**
+         * Signed CSS length offsetting the content horizontally from the position,
+         * applied as written. Defaults to `-50%` (horizontally centred over the
+         * position).
+         */
+        anchorLeft?: string;
+        /**
+         * Signed CSS length offsetting the content vertically from the position,
+         * applied as written. Defaults to `-100%` (content sits above the position).
+         */
+        anchorTop?: string;
+        /**
+         * Collision behavior against other markers; see `CollisionBehavior`.
+         */
+        collisionBehavior?: "OPTIONAL_AND_HIDES_LOWER_PRIORITY" | "REQUIRED" | "REQUIRED_AND_HIDES_OPTIONAL";
+        /**
+         * DOM element used as the marker's content. Defaults to a `PinElement`. Not cloned.
+         */
+        content?: HTMLElement;
+        /**
+         * When `true`, the marker fires click events and is interactive for
+         * accessibility (focusable, activated by Enter/Space). Defaults to `false`.
+         */
+        gmpClickable?: boolean;
+        /**
+         * When `true`, the marker can be dragged to a new position. Defaults to `false`.
+         */
+        gmpDraggable?: boolean;
+        /**
+         * Map on which to display the marker.
+         */
+        map?: woosmap.map.Map;
+        /**
+         * Geographical location of the marker. Required for the marker to display.
+         * Accepts an `altitude` (metres above ground); it displaces the marker
+         * vertically on a tilted map and is ignored when the map is top-down. The
+         * declarative `position="lat,lng"` attribute is parsed at runtime — the typed
+         * property mirrors Google and takes objects, not a string.
+         */
+        position?:
+            | woosmap.map.LatLng
+            | woosmap.map.LatLngLiteral
+            | woosmap.map.LatLngAltitude
+            | woosmap.map.LatLngAltitudeLiteral
+            | null;
+        /**
+         * Rollover text, also exposed to assistive technology.
+         */
+        title?: string;
+        /**
+         * Stacking order; markers with higher values render in front.
+         */
+        zIndex?: number;
+    }
+}
+declare namespace woosmap.map.marker {
+    /**
+     * Options for constructing a `PinElement`.
+     */
+    interface PinElementOptions {
+        /**
+         * Fill color of the pin shape. Defaults to Google's red (`#EA4335`).
+         */
+        background?: string;
+        /**
+         * Border color of the pin shape. Defaults to `#B31412`.
+         */
+        borderColor?: string;
+        /**
+         * A glyph element, image URL, or text rendered in the center of the pin.
+         */
+        glyph?: string | HTMLElement | URL;
+        /**
+         * Color of the default/text glyph. Defaults to `#FFFFFF`.
+         */
+        glyphColor?: string;
+        /**
+         * Image URL rendered as the glyph.
+         */
+        glyphSrc?: string | URL;
+        /**
+         * Text rendered as the glyph.
+         */
+        glyphText?: string;
+        /**
+         * Uniform scale factor applied to the pin. Defaults to `1`.
+         */
+        scale?: number;
+    }
+}
+declare namespace woosmap.map {
+    type ControlPositionType = "top-left" | "top-right" | "bottom-left" | "bottom-right";
+}
+declare namespace woosmap.map {
+    /**
+     * Exports of the `core` library, as resolved by `importLibrary("core")`.
+     */
+    interface CoreLibrary {
+        ControlPosition: typeof woosmap.map.ControlPosition;
+        LatLng: typeof woosmap.map.LatLng;
+        LatLngAltitude: typeof woosmap.map.LatLngAltitude;
+        LatLngBounds: typeof woosmap.map.LatLngBounds;
+        MVCArray: typeof woosmap.map.MVCArray;
+        MVCObject: typeof woosmap.map.MVCObject;
+        Point: typeof woosmap.map.Point;
+        Size: typeof woosmap.map.Size;
+        SymbolPath: typeof woosmap.map.SymbolPath;
+        UnitSystem: typeof woosmap.map.UnitSystem;
+        event: typeof woosmap.map.event;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Exports of the `maps` library, as resolved by `importLibrary("maps")`.
+     */
+    interface MapsLibrary {
+        Circle: typeof woosmap.map.Circle;
+        Data: typeof woosmap.map.Data;
+        ImageMapType: typeof woosmap.map.ImageMapType;
+        InfoWindow: typeof woosmap.map.InfoWindow;
+        Map: typeof woosmap.map.Map;
+        MapElement: typeof woosmap.map.MapElement;
+        MapTypeId: typeof woosmap.map.MapTypeId;
+        OverlayView: typeof woosmap.map.OverlayView;
+        Polygon: typeof woosmap.map.Polygon;
+        Polyline: typeof woosmap.map.Polyline;
+        Rectangle: typeof woosmap.map.Rectangle;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Exports of the `marker` library, as resolved by `importLibrary("marker")`.
+     */
+    interface MarkerLibrary {
+        AdvancedMarkerElement: typeof woosmap.map.marker.AdvancedMarkerElement;
+        CollisionBehavior: typeof woosmap.map.CollisionBehavior;
+        Marker: typeof woosmap.map.Marker;
+        PinElement: typeof woosmap.map.marker.PinElement;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Exports of the `geometry` library, as resolved by `importLibrary("geometry")`.
+     */
+    interface GeometryLibrary {
+        encoding: typeof woosmap.map.geometry.encoding;
+        poly: typeof woosmap.map.geometry.poly;
+        spherical: typeof woosmap.map.geometry.spherical;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Exports of the `drawing` library, as resolved by `importLibrary("drawing")`.
+     */
+    interface DrawingLibrary {
+        Drawing: typeof woosmap.map.Drawing;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Options for an instant (non-animated) camera move via `moveCamera`. Any
+     * combination of the fields may be given; omitted fields are left unchanged.
+     */
+    interface CameraOptions {
+        /**
+         * The new center.
+         */
+        center?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * The new heading, in degrees clockwise from north.
+         */
+        heading?: number;
+        /**
+         * The new tilt (angle towards the horizon), in degrees.
+         */
+        tilt?: number;
+        /**
+         * The new zoom level.
+         */
+        zoom?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface FlyToOptions {
+        /**
+         * Controls whether to animate or not.
+         */
+        animate?: boolean;
+        /**
+         * If `zoom` is specified, `around` determines the point around which the zoom is centered.
+         */
+        around?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * The target bearing in degrees.
+         */
+        bearing?: number;
+        /**
+         * The target center.
+         */
+        center?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * The animation's duration (in milliseconds).
+         */
+        duration?: number;
+        /**
+         * A function taking a time in the range 0..1 and returning a number where 0 is
+         * the start state and 1 is the final state.
+         */
+        easing?: (_: number) => number;
+        /**
+         * If `false`, then the animation can be avoided if the user browser has `prefers-reduced-motion` turned on.
+         */
+        essential?: boolean;
+        /**
+         * The target center relative to real map container center at the end of animation.
+         */
+        offset?: woosmap.map.Point | woosmap.map.PointLiteral;
+        /**
+         * Padding to apply when centering the map.
+         */
+        padding?: woosmap.map.Padding;
+        /**
+         * The target pitch (angle towards horizon) in degrees.
+         */
+        pitch?: number;
+        /**
+         * The target zoom level.
+         */
+        zoom?: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * The pixel conversions made available to an `OverlayView` from within its
+     * `draw` method. `Map.getProjection()` returns an object that satisfies this as
+     * well as `Projection`, and `OverlayView.getProjection()` hands back that same
+     * object, so either set of conversions is reachable from either.
+     */
+    interface MapCanvasProjection {
+        /**
+         * Converts a geographical location to pixel coordinates within the map's container element.
+         */
+        fromLatLngToContainerPixel(
+            latLng: woosmap.map.LatLng | woosmap.map.LatLngLiteral | null,
+        ): woosmap.map.Point | null;
+
+        /**
+         * Converts pixel coordinates within the map's container element to a geographical location.
+         */
+        fromContainerPixelToLatLng(pixel: woosmap.map.Point | null, noClampNoWrap?: boolean): woosmap.map.LatLng | null;
+
+        /**
+         * Converts a geographical location to pixel coordinates within the DOM element that holds the draggable map.
+         */
+        fromLatLngToDivPixel(latLng: woosmap.map.LatLng | woosmap.map.LatLngLiteral | null): woosmap.map.Point | null;
+
+        /**
+         * Converts pixel coordinates within the DOM element that holds the draggable map to a geographical location.
+         */
+        fromDivPixelToLatLng(pixel: woosmap.map.Point | null, noClampNoWrap?: boolean): woosmap.map.LatLng | null;
+
+        /**
+         * The width of the world in pixels at the current zoom level.
+         */
+        getWorldWidth(): number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * This object is made available to the OverlayView from within the draw method.
+     */
+    interface Projection extends MapCanvasProjection {
+        /**
+         * Converts a geographical location to a world coordinate: a point in a
+         * 256x256 square where (0, 0) is the north-west corner and (256, 256) the
+         * south-east, independent of the current zoom. Pass `point` to write the
+         * result into an existing `Point` rather than allocating one.
+         */
+        fromLatLngToPoint(
+            latLng: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+            point?: woosmap.map.Point,
+        ): woosmap.map.Point;
+
+        /**
+         * Converts a world coordinate back to a geographical location. By default the
+         * result is wrapped to a longitude in [-180, 180] and a latitude clamped to
+         * the Mercator limits; pass `noClampNoWrap` to keep it as computed.
+         */
+        fromPointToLatLng(pixel: woosmap.map.Point, noClampNoWrap?: boolean): woosmap.map.LatLng;
+    }
+}
+declare namespace woosmap.map {
+    interface Padding {
+        bottom?: number;
+        left?: number;
+        right?: number;
+        top?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface MapPanes {
+        /**
+         * This pane contains the info window. It is above all map overlays. (Pane 4).
+         */
+        floatPane: Element;
+        mapPane: Element;
+        /**
+         * This pane is the lowest pane and is above the tiles. It does not receive DOM events.
+         * (Pane 0).
+         */
+        markerLayer: Element;
+        /**
+         * This pane contains polylines, polygons, ground overlays and tile layer overlays.
+         * It does not receive DOM events. (Pane 1).
+         */
+        overlayLayer: Element;
+        /**
+         * This pane contains elements that receive DOM events. (Pane 3).
+         */
+        overlayMouseTarget: Element;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * The capabilities available to a `Map`, as reported by `getMapCapabilities`.
+     * Mirrors Google Maps.
+     */
+    interface MapCapabilities {
+        /**
+         * Whether `AdvancedMarkerElement` can be used (the `marker` library is loaded).
+         */
+        isAdvancedMarkersAvailable: boolean;
+        /**
+         * Whether data-driven styling is available. Not yet supported.
+         */
+        isDataDrivenStylingAvailable: boolean;
+        /**
+         * Whether `WebGLOverlayView` is available. Not yet supported.
+         */
+        isWebGLOverlayViewAvailable: boolean;
+    }
+}
+declare namespace woosmap.map {
+    type GestureHandlingMode = "none" | "greedy" | "cooperative" | "auto";
+}
+declare namespace woosmap.map {
+    /**
+     * MapOptions object used to define the properties that can be set on a Map.
+     */
+    interface MapOptions {
+        /**
+         * The initial map center to start from.
+         */
+        center?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        defaultStyle?: string;
+        /**
+         * Disable the rendering of the buildings in 3D when the map is pitched.
+         */
+        disable3dBuilding?: boolean;
+        /**
+         * Disables the default maps controls interface, (default: false).
+         */
+        disableDefaultUI?: boolean;
+        /**
+         * Disable the tilt and rotation controls for the users. When set to `true`, this prevents map tilt as well as rotation via touch gestures (two-finger rotate) and keyboard shortcuts (Shift+Arrow keys), (default: false).
+         */
+        disableTilt?: boolean;
+        /**
+         * Enables the markers to be selected using tab and keyboard arrows.
+         */
+        enableMarkerAccessibleNavigation?: boolean;
+        /**
+         * This option controls how the gesture are handled
+         * Depending on the value when gesture on the map is detected (scroll on desktop, one finger pan on mobile)
+         * an overlay asking the user to use Cmd or Ctrl while scrolling or use two finger gesture to pan on mobile will be
+         * shown.
+         *
+         * -  `cooperative`: Shows the overlay only if the page is scrollable.
+         * -  `greedy`: Never shows the overlay.
+         * -  `none`: Disables gesture handling. The map cannot be zoomed or paned using gestures.
+         * -  `auto`: (default) Use cooperative mode if the page is scrollable, else use greedy mode.
+         */
+        gestureHandling?: woosmap.map.GestureHandlingMode;
+        /**
+         * The initial heading to start from.
+         */
+        heading?: number;
+        /**
+         * Whether to display the map type control. When unset, the control auto-attaches
+         * once the loaded maptype advertises the `satellite` capability. Pass `true`/`false`
+         * explicitly to opt in or out. Note: `get('mapTypeControl')` reflects the user
+         * option, not attachment state — it stays `false` while auto-attach is pending.
+         */
+        mapTypeControl?: boolean;
+        /**
+         * The initial map type. Defaults to `MapTypeId.ROADMAP`.
+         */
+        mapTypeId?: string;
+        /**
+         * ```json
+         * [
+         *   {
+         *     "featureType": "poi",
+         *     "stylers": [{
+         *       "visibility": "on"
+         *     }]
+         *   },
+         *   {
+         *     "featureType": "water",
+         *     "stylers": [{
+         *         "saturation": -100
+         *     }]
+         *   }
+         * ]
+         * ```
+         */
+        styles?: woosmap.map.MapStyleSpec[] | null;
+        /**
+         * The initial tilt to start from.
+         */
+        tilt?: number;
+        /**
+         * Opt into the upcoming visual refresh of the default basemap styles.
+         * Defaults to false. Will be removed once the refreshed styles become
+         * the default.
+         */
+        visualRefresh?: boolean;
+        /**
+         * The initial map zoom level to start from.
+         */
+        zoom?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface MapStyler {
+        /**
+         * The color to use to style features.
+         * Expected to be in hex form `#RRBBGG`.
+         */
+        color?: string;
+        /**
+         * Applies a gamma correction on lightness.
+         */
+        gamma?: number;
+        /**
+         * The color to extract the hue from. The lightness and saturation will be kept from the original color.
+         */
+        hue?: string;
+        /**
+         * Inverts the lightness.
+         */
+        invert_lightness?: boolean;
+        /**
+         * Changes the lightness.
+         */
+        lightness?: number;
+        /**
+         * Changes the saturation
+         */
+        saturation?: number;
+        /**
+         * Sets the visibility of the selected features.
+         * Expected to be in hex form `#RRBBGG`.
+         * expected values are "on", "off"
+         */
+        visibility?: string;
+        /**
+         * Changes the weight of drawn features (mostly lines, labels outline).
+         */
+        weight?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface MapStyleSpec {
+        /**
+         * The group of elements, to which stylers will be applied.
+         * default value: "all"
+         */
+        elementType?: string;
+        /**
+         * The group of feature, to which stylers will be applied.
+         * default value: "all"
+         */
+        featureType?: string;
+        /**
+         * The rules to apply to the selected features.
+         */
+        stylers: woosmap.map.MapStyler[];
+    }
+}
+declare namespace woosmap.map {
+    interface MapType {
+        /**
+         * Displays the overlay up to the maximum zoom level.
+         */
+        maxZoom: number;
+        /**
+         * Displays the overlay startingat the minmum zoom level.
+         */
+        minZoom: number;
+        getTile(tileCoord: woosmap.map.Point, zoom: number, ownerDocument: null): Element | null;
+
+        releaseTile(tile: Element): void;
+    }
+}
+declare namespace woosmap.map {
+    interface InfoWindowOptions {
+        /**
+         * Content to display in the InfoWindow.
+         * This can be an HTML element, a plain-text string, or a string containing HTML.
+         * The InfoWindow will be sized according to the content.
+         */
+        content?: string | Node | null;
+        /**
+         * Disable auto-pan on open.
+         * By default, the info window will pan the map so that it is fully visible when it opens.
+         */
+        disableAutoPan?: boolean | null;
+        /**
+         * Maximum width of the infowindow, regardless of content's width.
+         * This value is only considered if it is set before a call to open.
+         */
+        maxWidth?: number | null;
+        /**
+         * The offset, in pixels, of the tip of the info window from the point on the map at whose geographical
+         * coordinates the info window is anchored.
+         */
+        pixelOffset?: woosmap.map.Point;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Options for [woosmap.map.InfoWindow#open](#woosmap.map.InfoWindow__open).
+     */
+    interface InfoWindowOpenOptions {
+        /**
+         * The anchor to which this InfoWindow will be positioned.
+         */
+        anchor?:
+            | woosmap.map.Marker
+            | woosmap.map.marker.AdvancedMarkerElement
+            | woosmap.map.LatLng
+            | woosmap.map.LatLngLiteral
+            | null;
+        /**
+         * The map on which to render this InfoWindow.
+         */
+        map?: woosmap.map.Map | null;
+    }
+}
+declare namespace woosmap.map {
+    interface MarkerLabelOptions {
+        /**
+         * A custom className property to be applied to the label's element.
+         */
+        className?: string | null;
+        /**
+         * The color of the label text. (black by default).
+         */
+        color?: string | null;
+        /**
+         * The font family for the label.
+         */
+        fontFamily?: string | null;
+        /**
+         * The font size for the label.
+         */
+        fontSize?: string | null;
+        /**
+         * The font weight for the label.
+         */
+        fontWeight?: string | null;
+        /**
+         * The text to be displayed in the label.
+         */
+        text: string;
+    }
+}
+declare namespace woosmap.map {
+    interface MarkerAnimateOptions {
+        /**
+         * A callback function to be called after setting the position. null as default
+         */
+        complete?: (...args: any[]) => any;
+        /**
+         * The animation's duration (in milliseconds).
+         */
+        duration?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface MarkerOptions {
+        /**
+         * The offset from the marker's position to the tip of an InfoWindow that has been opened with the marker as anchor.
+         */
+        anchorPoint?: woosmap.map.Point;
+        /**
+         * If true the marker receive the click events. Default value is true.
+         */
+        clickable?: boolean;
+        draggable?: boolean;
+        /**
+         * The icon to display.
+         * When icon is a string it is treated as Icon with the string as `url` property.
+         * A `MarkerSymbol` (with a `path`) renders a vector icon.
+         * When omitted (or set to `null`), the marker renders a built-in drop-pin.
+         */
+        icon?: string | woosmap.map.Icon | woosmap.map.MarkerSymbol;
+        /**
+         * Adds a letter or number label inside a marker.
+         */
+        label?: string | woosmap.map.MarkerLabelOptions;
+        /**
+         * The Map where the marker should be displayed.
+         */
+        map?: woosmap.map.Map;
+        /**
+         * The marker's opacity (min: 0, max: 1)
+         */
+        opacity?: number;
+        /**
+         * The markers's position.
+         */
+        position: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        title?: string | null;
+        /**
+         * If true the marker will be visible. Default value is true
+         */
+        visible?: boolean;
+    }
+}
+declare namespace woosmap.map {
+    interface Icon {
+        anchor?: woosmap.map.Point | woosmap.map.PointLiteral;
+        labelOrigin?: woosmap.map.Point | woosmap.map.PointLiteral;
+        scaledSize?: woosmap.map.Size | woosmap.map.SizeLiteral;
+        size?: woosmap.map.Size | woosmap.map.SizeLiteral;
+        url: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A vector-path marker icon, mirroring Google Maps' `Symbol`. The `path` is an
+     * SVG path string; `anchor`/`labelOrigin` are expressed in the path's own
+     * coordinate space.
+     */
+    interface MarkerSymbol {
+        anchor?: woosmap.map.Point | woosmap.map.PointLiteral;
+        fillColor?: string;
+        fillOpacity?: number;
+        labelOrigin?: woosmap.map.Point | woosmap.map.PointLiteral;
+        path: string;
+        rotation?: number;
+        scale?: number;
+        strokeColor?: string;
+        strokeOpacity?: number;
+        strokeWeight?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface StyleRule {
+        color: string;
+        icon: woosmap.map.Icon;
+        minSize?: number;
+        selectedIcon?: woosmap.map.Icon;
+        size?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface TypedStyleRule {
+        color: string;
+        icon: woosmap.map.Icon;
+        selectedIcon?: woosmap.map.Icon;
+        type: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Styles the stores of a [woosmap.map.StoresOverlay](#woosmap.map.StoresOverlay).
+     */
+    interface Style {
+        /**
+         * Draws dots and markers above every label of the Woosmap styles.
+         * Markers hide the labels they overlap; dots draw over them without hiding
+         * them. Defaults to `false`: stores draw below the place, state and
+         * country labels.
+         */
+        aboveLabels?: boolean;
+        /**
+         * Zoom level where stores switch from dots to icons.
+         */
+        breakPoint: number;
+        /**
+         * Rule for the stores no rule matches. They draw below every rule.
+         */
+        default: woosmap.map.StyleRule;
+        /**
+         * One rule per store type. The order of the rules is the stacking order:
+         * where stores overlap, a later rule draws above an earlier one. To bring
+         * a store type to the front, move its rule towards the end of the array.
+         * Rules have no `zIndex` here: that is a setting of the store SDK's
+         * server-rendered tiles, and it has no effect on this overlay.
+         *
+         * A store matching several rules is drawn by each of them, so the icon of
+         * the last matching rule shows on top.
+         */
+        rules: woosmap.map.TypedStyleRule[];
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionLeg {
+        distance: woosmap.map.Distance;
+        duration: woosmap.map.Duration;
+        end_address: string;
+        end_location: woosmap.map.LatLngLiteral;
+        end_waypoint: number;
+        start_address: string;
+        start_location: woosmap.map.LatLngLiteral;
+        start_waypoint: number;
+        steps?: woosmap.map.DirectionStep[];
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionStep {
+        distance: string;
+        duration: string;
+        end_location: woosmap.map.LatLngLiteral;
+        instructions: woosmap.map.DirectionStepInstructions;
+        start_location: woosmap.map.LatLngLiteral;
+        travelMode: string;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionStepInstructions {
+        action: number;
+        summary: string;
+        verbal_after?: string;
+        verbal_alert?: string;
+        verbal_before?: string;
+        verbal_succint?: string;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionsBounds {
+        northeast: woosmap.map.LatLngLiteral;
+        southwest: woosmap.map.LatLngLiteral;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionsOverviewPolyline {
+        /**
+         * Contains encoded polyline.
+         */
+        points: string;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionRoute {
+        bounds: woosmap.map.DirectionsBounds;
+        legs: woosmap.map.DirectionLeg[];
+        /**
+         * The main route name, determined by the longest step length, used to differentiate routes when alternatives are provided.
+         * Note: This is not returned when computing routes with traffic.
+         */
+        main_route_name?: string;
+        /**
+         * additional information of the route.
+         */
+        notice: string;
+        /**
+         * The decoded overview path.
+         */
+        overview_path?: woosmap.map.LatLng[];
+        /**
+         * The encoded overview polyline.
+         */
+        overview_polyline: woosmap.map.DirectionsOverviewPolyline;
+        /**
+         * Indicates if the route is the recommended one. Present and set to true only for the recommended route.
+         */
+        recommended?: boolean;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionResult {
+        error_message?: string;
+        routes: woosmap.map.DirectionRoute[];
+        status: string;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionsWayPoint {
+        /**
+         * Waypoint location.
+         */
+        location: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * If set to `true` the route will be splitted into two legs.
+         */
+        stopover?: boolean;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionRequest {
+        /**
+         * Valid values are a timestamp (e.g. 1600799173 for the date:22/09/2020 20:26:13) or now. Use either arrival_time or departure_time, not both.
+         */
+        arrival_time?: string;
+        /**
+         * If `true`, instructs the directions service to avoid ferries
+         * where possible. Optional.
+         */
+        avoidFerries?: boolean;
+        /**
+         * If `true`, instructs the directions service to avoid highways
+         * where possible. Optional.
+         */
+        avoidHighways?: boolean;
+        /**
+         * If `true`, instructs the directions service to avoid toll
+         * roads where possible. Optional.
+         */
+        avoidTolls?: boolean;
+        /**
+         * If set, instructs the directions service to avoid the specific polygons.
+         */
+        avoidZones?: woosmap.map.LatLng[][] | woosmap.map.LatLngLiteral[][];
+        /**
+         * Valid values are a timestamp (e.g. 1600799173 for the date:22/09/2020 20:26:13) or now. Use either arrival_time or departure_time, not both.
+         */
+        departure_time?: string;
+        destination: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * When set to full the response will contain detailed driving instructions.
+         */
+        details?: "none" | "full";
+        /**
+         * The language code, indicating in which language the results should be returned
+         */
+        language?: string;
+        /**
+         * Specifies the method to compute the route between the start point and the end point
+         */
+        method?: "time" | "distance";
+        optimizeWaypoints?: boolean;
+        origin: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        provideRouteAlternatives?: boolean;
+        travelMode?: string;
+        unitSystem?: string;
+        waypoints?: woosmap.map.DirectionsWayPoint[];
+    }
+}
+declare namespace woosmap.map {
+    interface AutocompleteMatchedSubstring {
+        length: number;
+        offset: number;
+    }
+}
+declare namespace woosmap.map {
+    interface MatchedSubstring {
+        description: woosmap.map.AutocompleteMatchedSubstring[];
+    }
+}
+declare namespace woosmap.map {
+    interface Pagination {
+        page: number;
+        pageCount: number;
+    }
+}
+declare namespace woosmap.map.localities {
+    interface AddressComponents {
+        long_name: string | string[];
+        short_name: string | string[];
+        types: string[];
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A representation of distance as a numeric value and a display string.
+     */
+    interface Distance {
+        text: string;
+        value: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A representation of duration as a numeric value and a display string.
+     */
+    interface Duration {
+        text: string;
+        value: number;
+    }
+}
+declare namespace woosmap.map.Data {
+    interface FeatureOptions {
+        /**
+         * The feature's geometry. `null` leaves the feature without one.
+         */
+        geometry?: woosmap.map.GeometryClasses | woosmap.map.LatLng | woosmap.map.LatLngLiteral | null;
+        /**
+         * Feature id. Optional, but when present must be a string or a number.
+         */
+        id?: string | number;
+        /**
+         * Arbitrary properties carried by the feature.
+         */
+        properties?: object;
+    }
+}
+declare namespace woosmap.map {
+    type GeometryType =
+        | "Point"
+        | "MultiPoint"
+        | "LineString"
+        | "MultiLineString"
+        | "LinearRing"
+        | "Polygon"
+        | "MultiPolygon"
+        | "GeometryCollection";
+}
+declare namespace woosmap.map {
+    interface GeometryData {
+        coordinates: any;
+        geometries?: woosmap.map.GeometryData[];
+        type: woosmap.map.GeometryType;
+    }
+}
+declare namespace woosmap.map.Data {
+    interface Geometry<T, C> {
+        /**
+         * Returns the type of the geometry.
+         */
+        getType(): T;
+    }
+}
+declare namespace woosmap.map {
+    type GeometryCollectionElement =
+        | woosmap.map.Data.Point
+        | woosmap.map.Data.MultiPoint
+        | woosmap.map.Data.LineString
+        | woosmap.map.Data.MultiLineString
+        | woosmap.map.Data.Polygon
+        | woosmap.map.Data.MultiPolygon;
+}
+declare namespace woosmap.map {
+    type GeometryArray = woosmap.map.GeometryCollectionElement[];
+}
+declare namespace woosmap.map {
+    type GeometryClasses = woosmap.map.GeometryCollectionElement | woosmap.map.Data.GeometryCollection;
+}
+declare namespace woosmap.map {
+    interface IconSequence {
+        fixedRotation?: boolean | null;
+        icon?: woosmap.map.SymbolIcon | null;
+        offset?: string | null;
+        repeat?: string | null;
+    }
+}
+declare namespace woosmap.map {
+    interface MarkerLabel {
+        /**
+         * The color of the label. Default to: black.
+         */
+        color?: string;
+        /**
+         * The font size of the label in pixels. Default to: 14px.
+         */
+        fontSize?: string;
+        parsedFontSize: number;
+        /**
+         * The text to be displayed in the label.
+         */
+        text: string;
+    }
+}
+declare namespace woosmap.map.Data {
+    interface StyleOptions {
+        animation?: Animation;
+        clickable?: boolean;
+        cursor?: string;
+        draggable?: boolean;
+        editable?: boolean;
+        fillColor?: string;
+        fillOpacity?: number;
+        icon?: string | woosmap.map.Icon;
+        iconImage?: string;
+        icons?: woosmap.map.IconSequence[];
+        label?: string | woosmap.map.MarkerLabel;
+        opacity?: number;
+        strokeColor?: string;
+        strokeOpacity?: number;
+        strokeWeight?: number;
+        title?: string;
+        visible?: boolean;
+        zIndex?: number;
+    }
+}
+declare namespace woosmap.map.Data {
+    type StylingFunction = (feature: woosmap.map.Data.Feature) => woosmap.map.Data.StyleOptions;
+}
+declare namespace woosmap.map {
+    type GeoJSONPosition = [number, number];
+}
+declare namespace woosmap.map {
+    interface GeoJSONRawGeometry<T, C> {
+        coordinates: C;
+        type: T;
+    }
+}
+declare namespace woosmap.map {
+    type GeoJSONPoint = woosmap.map.GeoJSONRawGeometry<"Point", woosmap.map.GeoJSONPosition>;
+}
+declare namespace woosmap.map {
+    type GeoJSONMultiPoint = woosmap.map.GeoJSONRawGeometry<"MultiPoint", woosmap.map.GeoJSONPosition[]>;
+}
+declare namespace woosmap.map {
+    type GeoJSONLineString = woosmap.map.GeoJSONRawGeometry<"LineString", woosmap.map.GeoJSONPosition[]>;
+}
+declare namespace woosmap.map {
+    type GeoJSONMultiLineString = woosmap.map.GeoJSONRawGeometry<"MultiLineString", woosmap.map.GeoJSONPosition[][]>;
+}
+declare namespace woosmap.map {
+    type GeoJSONPolygon = woosmap.map.GeoJSONRawGeometry<"Polygon", woosmap.map.GeoJSONPosition[][]>;
+}
+declare namespace woosmap.map {
+    type GeoJSONMultiPolygon = woosmap.map.GeoJSONRawGeometry<"MultiPolygon", woosmap.map.GeoJSONPosition[][][]>;
+}
+declare namespace woosmap.map {
+    type GeoJSONGeometry =
+        | woosmap.map.GeoJSONPoint
+        | woosmap.map.GeoJSONMultiPoint
+        | woosmap.map.GeoJSONLineString
+        | woosmap.map.GeoJSONMultiLineString
+        | woosmap.map.GeoJSONPolygon
+        | woosmap.map.GeoJSONMultiPolygon
+        | woosmap.map.GeoJSONGeometryCollection;
+}
+declare namespace woosmap.map {
+    interface GeoJSONGeometryCollection {
+        geometries: woosmap.map.GeoJSONGeometry[];
+        type: "GeometryCollection";
+    }
+}
+declare namespace woosmap.map {
+    interface GeoJSONFeature {
+        geometry: woosmap.map.GeoJSONGeometry;
+        id?: number | string;
+        properties: {};
+        type: "Feature";
+    }
+}
+declare namespace woosmap.map {
+    interface GeoJSONFeatureCollection {
+        features: woosmap.map.GeoJSONFeature[];
+        type: "FeatureCollection";
+    }
+}
+declare namespace woosmap.map {
+    interface ImageMapTypeOptions {
+        alt?: string | null;
+        getTileUrl?: (point: woosmap.map.Point, zoom: number) => (string | null) | null;
+        /**
+         * The maximum zoom level at which the image map type should be visible.
+         */
+        maxZoom?: number | null;
+        /**
+         * The minimum zoom level at which the image map type should be visible.
+         */
+        minZoom?: number | null;
+        name?: string | null;
+        /**
+         * Opacity of the tile layer (between 0, 1).
+         */
+        opacity?: number | null;
+        /**
+         * The tile scheme to use `xyz` or `tms`.
+         */
+        scheme?: "xyz" | "tms";
+        tileSize?: woosmap.map.Size | null;
+        /**
+         * The tile url scheme use {x}, {y} and {z} url templates.
+         * Example: `https://tile.openstreetmap.org/{z}/{x}/{y}.png`
+         */
+        url?: string;
+    }
+}
+declare namespace woosmap.map {
+    interface GeometryOptions {
+        clickable?: boolean | null;
+        draggable?: boolean | null;
+        editable?: boolean | null;
+        geodesic?: boolean | null;
+        map?: woosmap.map.Map | null;
+        strokeColor?: string | null;
+        strokeOpacity?: number | null;
+        strokePosition?: string;
+        strokeWeight?: number | null;
+        /**
+         * Whether the Geometry is visible or not.
+         */
+        visible?: boolean | null;
+        zIndex?: number | null;
+    }
+}
+declare namespace woosmap.map {
+    interface PolygonFillOptions extends woosmap.map.GeometryOptions {
+        fillColor?: string | null;
+        fillOpacity?: number | null;
+    }
+}
+declare namespace woosmap.map {
+    interface PolylineOptions extends woosmap.map.GeometryOptions {
+        /**
+         * The path of the polyline.
+         */
+        path: (woosmap.map.MVCArray<woosmap.map.LatLng> | null) | woosmap.map.LatLng[] | woosmap.map.LatLngLiteral[];
+    }
+}
+declare namespace woosmap.map {
+    interface PolygonOptions extends woosmap.map.PolygonFillOptions {
+        /**
+         * The paths of the polygon.
+         */
+        paths:
+            | (woosmap.map.MVCArray<woosmap.map.MVCArray<woosmap.map.LatLng>> | null)
+            | woosmap.map.MVCArray<woosmap.map.LatLng>
+            | Array<Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>>
+            | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>;
+    }
+}
+declare namespace woosmap.map {
+    interface RectangleOptions extends woosmap.map.PolygonFillOptions {
+        /**
+         * The bounds of the Rectangle.
+         */
+        bounds: (woosmap.map.LatLngBounds | null) | (woosmap.map.LatLngBoundsLiteral | null);
+    }
+}
+declare namespace woosmap.map {
+    interface CircleOptions extends woosmap.map.PolygonFillOptions {
+        /**
+         * The center of the circle.
+         */
+        center: (woosmap.map.LatLng | null) | (woosmap.map.LatLngLiteral | null);
+        /**
+         * The radius of the circle.
+         */
+        radius?: number | null;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Object literal representing a circle, where `center` and `radius` are
+     * required. Accepted anywhere a `Circle` is, e.g. `geometry.spherical.computeArea`.
+     */
+    interface CircleLiteral extends woosmap.map.CircleOptions {
+        /**
+         * The center of the circle.
+         */
+        center: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * The radius of the circle, in metres.
+         */
+        radius: number;
+    }
+}
+declare namespace woosmap.map {
+    type Coordinates = [number, number];
+}
+declare namespace woosmap.map {
+    interface LatLngLiteral {
+        /**
+         * Latitude in degrees.
+         * Values will be clamped to the range [-90, 90].
+         * This means that if the value specified is less than -90, it will be set to -90.
+         * And if the value is greater than 90, it will be set to 90.
+         */
+        lat: number;
+        /**
+         * Longitude in degrees.
+         * Values outside the range [-180, 180] will be wrapped so that they fall within the range.
+         * For example, a value of -190 will be converted to 170. A value of 190 will be converted to -170.
+         * This reflects the fact that longitudes wrap around the globe.
+         */
+        lng: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * A `LatLngLiteral` with an optional `altitude` in metres above the ground.
+     */
+    interface LatLngAltitudeLiteral {
+        /**
+         * Distance in metres above the ground surface. Negative values are below the
+         * surface. Defaults to `0`.
+         */
+        altitude?: number;
+        /**
+         * Latitude in degrees. Clamped to [-90, 90].
+         */
+        lat: number;
+        /**
+         * Longitude in degrees. Wrapped to [-180, 180].
+         */
+        lng: number;
+    }
+}
+declare namespace woosmap.map {
+    interface LatLngBoundsLiteral {
+        east: number;
+        north: number;
+        south: number;
+        west: number;
+    }
+}
+declare namespace woosmap.map {
+    interface PointLiteral {
+        /**
+         * x coordinate *
+         */
+        x: number;
+        /**
+         * y coordinate *
+         */
+        y: number;
+    }
+}
+declare namespace woosmap.map {
+    interface SizeLiteral {
+        height: number;
+        width: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * An event listener, created by woosmap.map.event.addListener() and friends.
+     */
+    interface MapEventListener {
+        /**
+         * Calling `listener.remove()` is equivalent to `woosmap.map.event.removeListener(listener)`.
+         */
+        remove(): void;
+    }
+}
+declare namespace woosmap.map {
+    interface SymbolIcon {
+        /**
+         * The position of the symbol relative to the marker or polyline.
+         * The coordinates of the symbol's path are translated left and up by the anchor's x and y coordinates respectively.
+         * By default, a symbol is anchored at(0, 0).
+         * The position is expressed in the same coordinate system as the symbol's path.
+         */
+        anchor?: woosmap.map.Point | null;
+        /**
+         * The symbol's fill color. All CSS3 colors are supported except for extended named colors.
+         * For symbol markers, this defaults to 'black'.
+         * For symbols on polylines, this defaults to the stroke color of the corresponding polyline.
+         */
+        fillColor?: string | null;
+        /**
+         * The symbol's fill opacity. Defaults to 0.
+         */
+        fillOpacity?: number | null;
+        /**
+         * The origin of the label relative to the origin of the path, if label is supplied by the marker.
+         * By default, the origin is located at(0, 0).
+         * The origin is expressed in the same coordinate system as the symbol's path. `
+         * This property is unused for symbols on polylines.
+         */
+        labelOrigin?: woosmap.map.Point | null;
+        /**
+         * The symbol's path, which is a built-in symbol path, or a custom path expressed using SVG path notation.
+         */
+        path: string;
+        /**
+         * The angle by which to rotate the symbol, expressed clockwise in degrees.
+         * Defaults to 0.
+         * A symbol in an IconSequence where fixedRotation is false is rotated relative to the angle of the edge on which it lies.
+         */
+        rotation?: number | null;
+        /**
+         * The amount by which the symbol is scaled in size.
+         * For symbol markers, this defaults to 1; after scaling, the symbol may be of any size.
+         * For symbols on a polyline, this defaults to the stroke weight of the polyline; after scaling,
+         * the symbol must lie inside a square 22 pixels in size centered at the symbol's anchor.
+         */
+        scale?: number | null;
+        /**
+         * The symbol's stroke color.
+         * All CSS3 colors are supported except for extended named colors.
+         * For symbol markers, this defaults to 'black'.
+         * For symbols on a polyline, this defaults to the stroke color of the polyline.
+         */
+        strokeColor?: string | null;
+        /**
+         * The symbol's stroke opacity. For symbol markers, this defaults to 1.
+         * For symbols on a polyline, this defaults to the stroke opacity of the polyline.
+         */
+        strokeOpacity?: number | null;
+        /**
+         * The symbol's stroke weight. Defaults to the scale of the symbol.
+         */
+        strokeWeight?: number | null;
+    }
+}
+declare namespace woosmap.map {
+    interface DirectionsRendererOptions {
+        directions?: woosmap.map.DirectionResult;
+        draggable?: boolean;
+        map?: woosmap.map.Map;
+        markerOption?: object;
+        preserveViewport?: boolean;
+        routeIndex?: number;
+        suppressBicyclingLayer?: boolean;
+        suppressInfoWindows?: boolean;
+        suppressMarkers?: boolean;
+        suppressPolylines?: boolean;
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * A Distance Matrix request to be sent to `DistanceService.getDistanceMatrix` containing
+     * a list of origins and a list of destinations.
+     */
+    interface DistanceMatrixRequest {
+        /**
+         * If `true`, instructs the Distance service to avoid ferries
+         * where possible. Optional.
+         */
+        avoidFerries?: boolean;
+        /**
+         * If `true`, instructs the Distance service to avoid highways
+         * where possible. Optional.
+         */
+        avoidHighways?: boolean;
+        /**
+         * If `true`, instructs the Distance service to avoid toll
+         * roads where possible. Optional.
+         */
+        avoidTolls?: boolean;
+        /**
+         * If set, instructs the Distance service to avoid the specific polygons.
+         */
+        avoidZones?: woosmap.map.LatLng[][] | woosmap.map.LatLngLiteral[][];
+        /**
+         * By using this parameter, Distance will calculate the duration
+         * with traffic Specifies the date/time at which to base the calculations on for traffic purposes.
+         * Valid values are a `Date` or a string timestamp or "now".
+         */
+        departureTime?: Date | string;
+        /**
+         * An array containing destinations latlng to which to calculate distance and time.
+         * Required.
+         */
+        destinations: woosmap.map.LatLng[] | woosmap.map.LatLngLiteral[];
+        /**
+         * Defines element values that will be part of the response (distance and/or duration).
+         * if not specified default is distance
+         */
+        elements?: "distance" | "duration" | "duration_distance";
+        /**
+         * Defines in which language the results should be returned, if possible
+         */
+        language?: string;
+        /**
+         * Defines the method to compute the rpute between the start point and the end point.
+         * `time` for the fastest route and `distance` for the shortest route.
+         */
+        method?: "time" | "distance";
+        /**
+         * An array containing origins latlng from which to calculate distance and time.
+         * Required.
+         */
+        origins: woosmap.map.LatLng[] | woosmap.map.LatLngLiteral[];
+        travelMode?: string;
+        /**
+         * The unit system requested. see `UnitSystem`
+         */
+        unitSystem?: string;
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * A Distance Isochrone request to be sent to `DistanceService.getDistanceIsochrone` containing
+     * an origin and a distance value as minutes or kilometers.
+     */
+    interface DistanceIsochroneRequest {
+        /**
+         * If `true`, instructs the Distance service to avoid ferries
+         * where possible. Optional.
+         */
+        avoidFerries?: boolean;
+        /**
+         * If `true`, instructs the Distance service to avoid highways
+         * where possible. Optional.
+         */
+        avoidHighways?: boolean;
+        /**
+         * If `true`, instructs the Distance service to avoid toll
+         * roads where possible. Optional.
+         */
+        avoidTolls?: boolean;
+        /**
+         * If set, instructs the Distance service to avoid the specific polygons.
+         */
+        avoidZones?: woosmap.map.LatLng[][] | woosmap.map.LatLngLiteral[][];
+        /**
+         * Defines in which language the results should be returned, if possible
+         */
+        language?: string;
+        /**
+         * Defines the method to compute the rpute between the start point and the end point.
+         * `time` for the fastest route and `distance` for the shortest route.
+         */
+        method?: "time" | "distance";
+        /**
+         * The starting point.
+         */
+        origin: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * The travel mode requested. see `woosmap.map.TravelMode`
+         */
+        travelMode?: string;
+        /**
+         * The unit system requested. see `UnitSystem`
+         */
+        unitSystem?: string;
+        /**
+         * The value to use for isochrone contour.
+         * You can specify time in minutes or distance in kilometers (cf. method parameter).
+         * The maximum value that can be specified is 120 (120 minutes : 2 hours or 120 km).
+         */
+        value: number;
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * The response to a `DistanceService.getDistanceMatrix` request, consisting of
+     * a status, and a list of `DistanceMatrixResponseRow`s, one for each corresponding origin location.
+     */
+    interface DistanceMatrixResponse {
+        /**
+         * The message describing a Distance Matrix API request error. Present only if status is not OK.
+         */
+        error_message?: string;
+        /**
+         * The rows of the matrix, corresponding to the origin locations.
+         */
+        rows: woosmap.map.distance.DistanceMatrixResponseRow[];
+        /**
+         * The status returned. see `woosmap.map.distance.DistanceServiceStatus` {DistanceServiceStatus}
+         */
+        status: string;
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * The response to a `DistanceService.getDistanceIsochrone` request, consisting of
+     * a status, and a `DistanceIsoline` object.
+     */
+    interface DistanceIsochroneResponse {
+        /**
+         * The message describing a Distance Isochrone API request error. Present only if status is not OK.
+         */
+        error_message?: string;
+        /**
+         * Contains the properties of isoline
+         */
+        isoline: woosmap.map.distance.DistanceIsoline;
+        /**
+         * The status returned. see `woosmap.map.distance.DistanceServiceStatus` {DistanceServiceStatus}
+         */
+        status: string;
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * A row of the `DistanceMatrixResponse`,consisting of a list of `DistanceMatrixElement`s,
+     * one for each corresponding destination locations.
+     */
+    interface DistanceMatrixResponseRow {
+        /**
+         * The row's elements, corresponding to the destination locations.
+         */
+        elements: woosmap.map.distance.DistanceMatrixElement[];
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * A single Distance Matrix element which contains the status, duration and distance
+     * from one origin to one destination.
+     */
+    interface DistanceMatrixElement {
+        /**
+         * The total distance of this matrix element expressed in meters (value) and as text.
+         */
+        distance: woosmap.map.Distance;
+        /**
+         * The total duration of this matrix element, expressed in seconds (value) and as text.
+         */
+        duration: woosmap.map.Duration;
+        /**
+         * Status returned for Distance Matrix Element.
+         *
+         * -  `OK` indicates the response contains a valid result.
+         * -  `NOT_FOUND` indicates that the origin and/or destination of this pairing could not be matched to the network.
+         * -  `ZERO_RESULTS` indicates no route could be found between the origin and destination.
+         */
+        status: "OK" | "NOT_FOUND" | "ZERO_RESULTS";
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * The isochrone object which represents a line of points of equal travel time or distance around the given origin.
+     */
+    interface DistanceIsoline {
+        /**
+         * The distance of the isochrone (returned only if method=distance in parameters)
+         */
+        distance?: woosmap.map.Distance;
+        /**
+         * The encoded polyline of the isoline.
+         */
+        geometry: string;
+        /**
+         * An object describing the input location with Latitude and Longitude in decimal degrees.
+         */
+        origin: woosmap.map.LatLngLiteral;
+        /**
+         * The decoded polyline of the isoline.
+         */
+        path?: woosmap.map.LatLng[];
+        /**
+         * The time of the isochrone (returned as default or when specifying method=time in parameters)
+         */
+        time?: woosmap.map.Duration;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Stores Autocomplete request to be sent to `StoresService.autocomplete` containing
+     * a search query as string with `localized` field to autocomplete stores on `localizedNames`.
+     */
+    interface StoresAutocompleteRequest {
+        /**
+         * The preferred language to match against name (defaults on Accept-Language header)
+         */
+        language?: string;
+        /**
+         * Limits the number of autocomplete results (default 5, max 50).
+         */
+        limit?: number;
+        /**
+         * Example: `query=name:'My cool store'|type:'click_and_collect'`
+         * Search query combining one or more search clauses.
+         * Each search clause is made up of three parts structured as `field : operator value`.
+         * example: `name:="My cool store"`
+         */
+        query?: string;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Stores Search request to be sent to `StoresService.search` containing
+     * a search query as string to autocomplete stores on.
+     */
+    interface StoresSearchRequest {
+        /**
+         * To bias the results around a specific latlng
+         */
+        latLng?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * Page number when accessing paginated stores
+         */
+        page?: number;
+        /**
+         * Find stores nearby an encoded polyline and inside a defined radius.
+         * The polyline as string is expected to be a google-encoded polyline.
+         */
+        polyline?: string | woosmap.map.LatLng[] | woosmap.map.LatLngLiteral[];
+        /**
+         * Example: `query=name:'My cool store'|type:'click_and_collect'`
+         * Search query combining one or more search clauses.
+         * Each search clause is made up of three parts structured as `field : operator value`.
+         * example: `name:="My cool store"`
+         */
+        query?: string;
+        /**
+         * To bias the results within a given circular area.
+         * Unit in meters
+         */
+        radius?: number;
+        /**
+         * If your request returns a high number of stores, the result will be paginated.
+         * You can then request stores by page using `page` and `storesByPage` parameters (Default is 100, max is 300).
+         */
+        storesByPage?: number;
+        /**
+         * whether to search for stores intersecting a zone
+         */
+        zone?: boolean;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Stores Bounds request to be sent to `StoresService.getBounds`
+     */
+    interface StoresBoundsRequest {
+        /**
+         * To bias the results around a specific latlng
+         */
+        latLng?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * Example: `query=name:'My cool store'|type:'click_and_collect'`
+         * Search query combining one or more search clauses.
+         * Each search clause is made up of three parts structured as `field : operator value`.
+         * example: `name:="My cool store"`
+         */
+        query?: string;
+        /**
+         * To bias the results within a given circular area.
+         * Unit in meters
+         */
+        radius?: number;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Stores Autocomplete response returned by the call to
+     * `StoresService.autocomplete` containing a
+     * list of `StorePrediction`.
+     */
+    interface StoresAutocompleteResponse {
+        /**
+         * list of `StorePrediction`.
+         */
+        predictions: woosmap.map.stores.StorePrediction[];
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Store Response as a GeoJSON Feature Object returned by the call to
+     * `StoresService.getStoreById`
+     */
+    interface StoreResponse {
+        /**
+         * Defines the geometry of a store
+         */
+        geometry: woosmap.map.GeoJSONPoint;
+        /**
+         * Defines attributes of a Store
+         */
+        properties: woosmap.map.stores.Store;
+        type: "Feature";
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Stores Search response as a GeoJSON FeatureCollection Object returned by the call to
+     * `StoresService.search` and containing a list of `StoreResponse`.
+     */
+    interface StoresSearchResponse {
+        /**
+         * list of `StoreResponse` features
+         */
+        features: woosmap.map.stores.StoreResponse[];
+        /**
+         * Pagination to reach all returned assets. max 300 assets par page.
+         */
+        pagination: woosmap.map.Pagination;
+        type: "FeatureCollection";
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * A Stores Bounds response returned by the call to `StoresService.getBounds` and containing
+     * the bounds of searched stores.
+     */
+    interface StoresBoundsResponse {
+        bounds: woosmap.map.LatLngBoundsLiteral;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Represents a single store prediction.
+     */
+    interface StorePrediction {
+        highlighted?: number;
+        matched_substrings?: woosmap.map.AutocompleteMatchedSubstring[];
+        name: string;
+        store_id: string;
+        types: string[];
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines information about a Store.
+     */
+    interface Store {
+        /**
+         * Defines an object containing the separate components applicable to this address.
+         */
+        address: woosmap.map.stores.StoreAddress;
+        /**
+         * Defines an object containing the store's contact available information.
+         */
+        contact: woosmap.map.stores.StoreContact;
+        /**
+         * Defines the distance in meters from the position if you
+         * set `lat` and `lng` in your `StoresSearchRequest`.
+         */
+        distance?: number;
+        /**
+         * Defines the previous date timestamp when the store has been updated
+         */
+        lastUpdated: string | null;
+        /**
+         * the store's name
+         */
+        name: string;
+        /**
+         * The current opening status for a store
+         */
+        open: woosmap.map.stores.StoreOpen;
+        /**
+         * Defines the opening hours of a store.
+         */
+        opening_hours: woosmap.map.stores.StoreOpeningHours | null;
+        /**
+         * A textual identifier that uniquely identifies a store
+         */
+        store_id: string;
+        /**
+         * Contains an array of tags describing the store.
+         */
+        tags: string[];
+        /**
+         * Contains an array of types describing the store.
+         */
+        types: string[];
+        /**
+         * Contains all additional information relative to a store.
+         * No restriction regarding the types of data in it (Arrays, Object, Boolean, String, Numeric…)
+         * but you can only query for text matching, numerical comparison or boolean.
+         */
+        user_properties: any;
+        /**
+         * The current Weekly Opening taking into account the special hours
+         */
+        weekly_opening: woosmap.map.stores.StoreWeeklyOpening;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines information about a store address.
+     */
+    interface StoreAddress {
+        /**
+         * A city where belongs a store
+         */
+        city?: string;
+        /**
+         * An ISO_3166-1 Country Code where the store is located(see [https://en.wikipedia.org/wiki/ISO_3166-1](https://en.wikipedia.org/wiki/ISO_3166-1) for full list)
+         */
+        country_code?: string | null;
+        /**
+         * An array for lines of a store Address
+         */
+        lines?: string[];
+        /**
+         * A Zipcode / Postal code of a store address
+         */
+        zipcode?: string;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines information about a store contact.
+     */
+    interface StoreContact {
+        /**
+         * Contains the store's email contact.
+         */
+        email: string;
+        /**
+         * Contains the store's phone number in its local format.
+         */
+        phone: string;
+        /**
+         * The website contact for this store, such as a business' homepage.
+         */
+        website: string;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines the current opening status for a store
+     */
+    interface StoreOpen {
+        current_slice: woosmap.map.stores.StoreOpeningHoursPeriod;
+        next_opening?: woosmap.map.stores.StoreOpenNextOpening;
+        open_hours: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        /**
+         * Defines if the store is currently opened.
+         */
+        open_now: boolean;
+        /**
+         * Represents the day number of the week.
+         * possible values are: `1 | 2 | 3 | 4 | 5 | 6 | 7`
+         */
+        week_day?: number;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines the hours for an opening period.
+     * To set a slice of time when the asset is open you must define a `start` and `end` keys.
+     * `start` and `end` must belong to the same day (crossing midnight may result in `open_now` being always `false`.)
+     */
+    interface StoreOpeningHoursPeriod {
+        "all-day"?: boolean;
+        end: string;
+        start: string;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines the next opening hours period
+     */
+    interface StoreOpenNextOpening {
+        day: string;
+        end: string;
+        start: string;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines the current Weekly Opening taking into account the special hours.
+     * The key defines the day number. It can be from "1" for monday up to "7" for sunday.
+     */
+    interface StoreWeeklyOpening {
+        "1"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        "2"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        "3"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        "4"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        "5"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        "6"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        "7"?: woosmap.map.stores.StoreWeeklyOpeningHoursPeriod;
+        timezone: string;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines the weekly opening hours of a store.
+     */
+    interface StoreWeeklyOpeningHoursPeriod {
+        hours: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        /**
+         * Define if the hours comes from a special opening hours' day.
+         */
+        isSpecial: boolean;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Describes the opening hours of a store.
+     */
+    interface StoreOpeningHours {
+        /**
+         * Defines the special opening hours of a store.
+         * The format for defining opening and closing hours for a particular day is the same as the usual.
+         * Instead of using numeric week day for keys you must use a date YYYY-MM-DD like "2015-03-08"
+         * example: `special:{"2015-03-08": {start:"14:00", end:"16:00"}}
+         */
+        special: any;
+        /**
+         * Timezone for the Opening Hours of a store. It is used to compute the `open_now` property of an asset.
+         * see [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+         */
+        timezone: string;
+        /**
+         * Defines the usual opening hours of a store.
+         */
+        usual: woosmap.map.stores.StoreOpeningHoursUsual;
+    }
+}
+declare namespace woosmap.map.stores {
+    /**
+     * Defines the usual opening hours of a store.
+     * The key defines the day number. It can be from "1" for monday up to "7" for sunday.
+     */
+    interface StoreOpeningHoursUsual {
+        "1"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        "2"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        "3"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        "4"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        "5"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        "6"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        "7"?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+        default?: woosmap.map.stores.StoreOpeningHoursPeriod[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities autocompletion request to be sent to `LocalitiesService.autocomplete`
+     */
+    interface LocalitiesAutocompleteRequest {
+        /**
+         * Used to filter over countries. Countries must be passed as an
+         * ISO 3166-1 Alpha-2 or Alpha-3 compatible country code.
+         */
+        components?: woosmap.map.localities.LocalitiesComponentRestrictions;
+        /**
+         * To set the description format for all or some of the suggestion types selected.
+         * see [https://developers.woosmap.com/products/localities/autocomplete/#custom_description](https://developers.woosmap.com/products/localities/autocomplete/#custom_description)
+         */
+        customDescription?: string;
+        /**
+         * To open suggestions to worldwide postal codes in addition to postal codes for Western Europe.
+         */
+        data?: woosmap.map.localities.LocalitiesRequestData;
+        /**
+         * The types of suggestion to exclude. Multiple types can be passed using the pipe character (|) as a separator.
+         * Example: excluded_types=`suburb|quarter|neighbourhood`
+         */
+        excluded_types?: string | string[];
+        /**
+         * If set, this parameter allows a refined search over locality names that bears the same postal code.
+         * possible value is `extended=postal_code`
+         */
+        extended?: string;
+        /**
+         * The user entered input string.
+         */
+        input: string;
+        /**
+         * The language code, using ISO 3166-1 Alpha-2 country codes,
+         * indicating in which language the results should be returned, if possible.
+         * If language is not supplied, the Localities service will use english as default language.
+         * No language necessary for `postal_code` request.
+         */
+        language?: string;
+        /**
+         * Location for prediction biasing. The `location` defines the point around which
+         * to retrieve predictions in priority.
+         */
+        location?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * This parameter may be used in addition to the `location` parameter
+         * to define the distance in meters within which the API will return results in priority.
+         * Results outside the defined area may still be displayed.
+         * Default radius if this parameter is not set is 100 000.
+         */
+        radius?: number;
+        /**
+         * The types of predictions to be returned.
+         * By default, suggestions return types `locality` and `postal_code`.
+         * can be either a single type or a list of `LocalitiesTypes|LocalitiesTypesPoi|LocalitiesTypesPoiAlias`
+         * see [https://developers.woosmap.com/products/localities/concepts/locality-types/](https://developers.woosmap.com/products/localities/concepts/locality-types/)
+         */
+        types?: string | string[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities Geocode request to be sent to `LocalitiesService.geocode`
+     * Requires an `address` string to perform a geocode request or a `latlng` object for a reverse geocode request.
+     */
+    interface LocalitiesGeocodeRequest {
+        /**
+         * The input string to geocode. Can represent an address, a street, a locality or a postal code.
+         */
+        address?: string;
+        /**
+         * Used to filter over countries. Countries must be passed as an
+         * ISO 3166-1 Alpha-2 or Alpha-3 compatible country code.
+         */
+        components?: woosmap.map.localities.LocalitiesComponentRestrictions;
+        /**
+         * To specify the format for the short country code expected to be returned in the `address_components` field.
+         * Default is the format used to specify `components` or `alpha2` if no components are specified.
+         */
+        countryCodeFormat?: "alpha2" | "alpha3";
+        /**
+         * Whether to retrieve suggestions to worldwide postal codes in addition to postal codes for Western Europe.
+         */
+        data?: woosmap.map.localities.LocalitiesRequestData;
+        /**
+         * The types of suggestion to exclude. Multiple types can be passed using the pipe character (|) as a separator.
+         * Example: excluded_types=`suburb|quarter|neighbourhood`
+         */
+        excluded_types?: string | string[];
+        /**
+         * If set, it will limit the content of responses to the specified fields.
+         * This parameter can be any combination of geometry, address_components or shape (defaults to geometry|address_components).
+         */
+        fields?: string | string[];
+        /**
+         * The language code, using ISO 3166-1 Alpha-2 country codes,
+         * indicating in which language the results should be returned, if possible.
+         * If language is not supplied, the Localities service will use english as default language.
+         * No language necessary for `postal_code` request.
+         */
+        language?: string;
+        /**
+         * The latLng parameter is used for reverse geocoding, it’s required if the `address` parameter is missing.
+         */
+        latLng?: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * When latlng parameter is used for reverse geocoding, setting list_sub_building=true allows to retrieve all addresses at the same location for a common street number or building.
+         */
+        list_sub_buildings?: boolean;
+        /**
+         * The types of geocoding responses to be returned.
+         * By default, suggestions return types `locality`, `postal_code` and `address`
+         * can be either a single type or a list of `LocalitiesTypes|LocalitiesTypesPoi|LocalitiesTypesPoiAlias`
+         * see [https://developers.woosmap.com/products/localities/concepts/locality-types/](https://developers.woosmap.com/products/localities/concepts/locality-types/)
+         */
+        types?: string | string[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities details query to be sent to the `LocalitiesService`.
+     */
+    interface LocalitiesDetailsRequest {
+        /**
+         * To specify the format for the short country code expected to be returned in the `address_components` field.
+         * Default is the format used to specify `components` or `alpha2` if no components are specified.
+         */
+        countryCodeFormat?: "alpha2" | "alpha3";
+        /**
+         * If set, it will limit the content of responses to the specified fields.
+         * This parameter can be any combination of geometry, address_components or shape (defaults to geometry|address_components).
+         */
+        fields?: string | string[];
+        /**
+         * The language code, using ISO 3166-1 Alpha-2 country codes,
+         * indicating in which language the results should be returned, if possible.
+         * If language is not supplied, the Localities service will use english as default language.
+         * No language necessary for `postal_code` request.
+         */
+        language?: string;
+        /**
+         * A textual identifier that uniquely identifies a locality, returned from a `LocalitiesService.autocomplete`.
+         */
+        publicId: string;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities Nearby request to be sent to `LocalitiesService.nearby`
+     */
+    interface LocalitiesNearbyRequest {
+        categories?: string | string[];
+        /**
+         * POI types to exclude from results
+         * Example: `business.food_and_drinks.fast_food|business.food_and_drinks.pub`
+         */
+        excluded_types?: string | string[];
+        language?: string;
+        /**
+         * Limit of results per page. (Default is 10, max is 30)
+         */
+        limit?: number;
+        /**
+         * The center of the search circle.
+         */
+        location: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * Page number when accessing paginated results.
+         */
+        page?: number;
+        /**
+         * Define the distance in meters within which the API will return results.
+         * Default radius if this parameter is not set is 1000, allowed values are between 10 and 50 000.
+         */
+        radius?: number;
+        /**
+         * POI types to include (pipe-separated).
+         * Example: `business.shop|medical.pharmacy|bank`.
+         * To check common POI types refer [https://developers.woosmap.com/products/localities/features/nearby/#common-poi-types](https://developers.woosmap.com/products/localities/features/nearby/#common-poi-types)
+         */
+        types: string | string[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities Autocomplete response returned by the call to
+     * `LocalitiesService.autocomplete` containing a
+     * list of `LocalitiesPredictions`.
+     */
+    interface LocalitiesAutocompleteResponse {
+        localities: woosmap.map.localities.LocalitiesPredictions[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities Geocode response returned by the call to
+     * `LocalitiesService.geocode` containing a
+     * list of `LocalitiesGeocodeResult`.
+     */
+    interface LocalitiesGeocodeResponse {
+        results: woosmap.map.localities.LocalitiesGeocodeResult[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities Details response returned by the call to
+     * `LocalitiesService.getDetails` containing a
+     * `LocalitiesDetailsResult`.
+     */
+    interface LocalitiesDetailsResponse {
+        result: woosmap.map.localities.LocalitiesDetailsResult;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * A Localities Nearby response returned by the call to
+     * `LocalitiesService.nearby` containing a
+     * list of `LocalitiesNearbyResult`.
+     */
+    interface LocalitiesNearbyResponse {
+        /**
+         * Helps to navigate through paginated results.
+         */
+        pagination: woosmap.map.localities.LocalitiesNearbyPagination;
+        /**
+         * The array of nearby results.
+         */
+        results: woosmap.map.localities.LocalitiesNearbyResult[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines information about a Locality.
+     */
+    interface LocalitiesDetailsResult {
+        /**
+         * An array containing Address Components with additional information
+         */
+        address_components?: woosmap.map.localities.AddressComponents[];
+        /**
+         * Only available for admin_level suggestions, this contains the local english name of the administration level ("department" for France or "federal_state" for Germany).
+         */
+        administrative_area_label?: string;
+        /**
+         * Contains the readable text description of the result.
+         */
+        formatted_address: string;
+        /**
+         * The location of the result, in latitude and longitude, eventually associated with a Viewport.
+         * Accuracy is also provided for locality of type Address.
+         */
+        geometry?: woosmap.map.localities.LocalitiesDetailsGeometry;
+        /**
+         * The postal code name if locality is typeof postal_code
+         */
+        name?: string;
+        /**
+         * Contains a unique ID for each suggestion.
+         */
+        public_id: string;
+        /**
+         * This optional field is only available for UK addresses referenced as not yey built.
+         */
+        status?: "not_yet_built";
+        /**
+         * available localities types
+         */
+        types: Array<
+            | woosmap.map.localities.LocalitiesTypes
+            | woosmap.map.localities.LocalitiesTypesPoi
+            | woosmap.map.localities.LocalitiesTypesPoiAlias
+        >;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Restricts predictions to the specified country (ISO 3166-1 Alpha-2 or Alpha-3 compatible country code, case-insensitive).
+     * For example, 'FR', 'GB', or 'DE'. You can provide a single one, or an array of country code strings.
+     */
+    interface LocalitiesComponentRestrictions {
+        country: string | string[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Details geometry, contains a location and optionally bounds viewport.
+     */
+    interface LocalitiesDetailsGeometry {
+        accuracy: woosmap.map.localities.LocalitiesDetailsAccuracy;
+        location: woosmap.map.LatLngLiteral;
+        shape?: woosmap.map.GeoJSONFeature;
+        viewport?: woosmap.map.localities.LocalitiesBounds;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Human readable description of an address and the unique public_id of the address
+     */
+    interface LocalitiesDetailsSummary {
+        description: string;
+        public_id: string;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * For each component (street_name, postal_code, and locality), it indicates the degree of correspondence with the original query. This value ranges from 0 to 1, with 0 indicating no match with the original query, and enables you to assess the quality of the Geocode’s result.
+     */
+    interface LocalitiesScoresPerComponent {
+        locality: number;
+        postal_code: number;
+        street_name: number;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Represents a single locality prediction
+     */
+    interface LocalitiesPredictions {
+        /**
+         * Concatenation of `name`, `admin_1`, `admin_0` or requested `customDescription`.
+         * The description can vary depending on the type requested
+         */
+        description?: string;
+        /**
+         * On the specific territory of United Kingdom, Localities autocomplete request can return
+         * the additional attribute `has_addresses` for a postal code, which indicates if a postal code bears addresses.
+         * When `has_addresses` is `true`, it is possible to display a list of the available addresses
+         * by requesting details with the Localities `public_id`.
+         */
+        has_addresses?: boolean;
+        /**
+         * Contains a set of substrings for each field that match elements in the input.
+         * It can be used to highlight those substrings.
+         */
+        matched_substrings?: woosmap.map.MatchedSubstring;
+        /**
+         * Contains a unique ID for locality. This ID is required to perform `LocalitiesService.getDetails` request.
+         */
+        public_id: string;
+        /**
+         * Contains the related information for the prediction.
+         */
+        related?: woosmap.map.localities.LocalitiesRelated;
+        type?: woosmap.map.localities.LocalitiesTypes;
+        /**
+         * An array containing the types of the result.
+         */
+        types?: Array<
+            | woosmap.map.localities.LocalitiesTypes
+            | woosmap.map.localities.LocalitiesTypesPoi
+            | woosmap.map.localities.LocalitiesTypesPoiAlias
+        >;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines information about a Geocoded Locality.
+     */
+    interface LocalitiesGeocodeResult {
+        /**
+         * An array containing Address Components with additional information
+         */
+        address_components?: woosmap.map.localities.AddressComponents[];
+        /**
+         * Only available for admin_level suggestions, this contains the local english name of the administration level ("department" for France or "federal_state" for Germany).
+         */
+        administrative_area_label?: string;
+        /**
+         * When reverse geocoding, this field represents the distance (in meters) to the requested latlng
+         */
+        distance?: number;
+        /**
+         * Contains the readable text description of the result.
+         */
+        formatted_address: string;
+        /**
+         * The location of the result, in latitude and longitude, eventually associated with a Viewport.
+         * Accuracy is also provided for locality of type Address.
+         */
+        geometry?: woosmap.map.localities.LocalitiesGeocodeGeometry;
+        /**
+         * Contains a unique ID for geocoded locality.
+         */
+        public_id: string;
+        /**
+         * For each component (street_name, postal_code, and locality), it indicates the degree of correspondence with the original query. This value ranges from 0 to 1, with 0 indicating no match with the original query, and enables you to assess the quality of the Geocode’s result.
+         */
+        scores_per_components?: woosmap.map.localities.LocalitiesScoresPerComponent;
+        /**
+         * This optional field is only available for UK addresses referenced as not yey built.
+         */
+        status?: "not_yet_built";
+        /**
+         * When reverse geocoding with list_sub_buildings=true, this field will contain a list of precise addresses that can be found at that location, i.e. all flats within a building.
+         */
+        sub_buildings?: woosmap.map.localities.LocalitiesDetailsSummary[];
+        /**
+         * available localities types
+         */
+        types:
+            | woosmap.map.localities.LocalitiesTypes[]
+            | woosmap.map.localities.LocalitiesTypesPoi[]
+            | woosmap.map.localities.LocalitiesTypesPoiAlias[];
+    }
+}
+declare namespace woosmap.map.localities {
+    type DeprecatedLocalitiesTypes =
+        | "airport"
+        | "amusement_park"
+        | "art_gallery"
+        | "metro_station"
+        | "museum"
+        | "shopping"
+        | "tourist_attraction"
+        | "train_station"
+        | "zoo"
+        | "point_of_interest";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * The types of suggestion to return.
+     * By default, suggestions return types `locality` and `postal_code`.
+     * Check [full list of supported types](https://developers.woosmap.com/products/localities/autocomplete/#types)
+     */
+    type LocalitiesTypes =
+        | woosmap.map.localities.DeprecatedLocalitiesTypes
+        | "country"
+        | "admin_level"
+        | "admin_level_1"
+        | "admin_level_2"
+        | "admin_level_3"
+        | "postal_code"
+        | "address"
+        | "route"
+        | "locality"
+        | "city"
+        | "town"
+        | "village"
+        | "hamlet"
+        | "borough"
+        | "suburb"
+        | "quarter"
+        | "neighbourhood";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Categories of points of interest (POI) supported for detailed classification in geographic data queries.
+     * Refer [supported POI types][https://developers.woosmap.com/products/localities/concepts/locality-types/#point-of-interest-types](https://developers.woosmap.com/products/localities/concepts/locality-types/#point-of-interest-types)
+     */
+    type LocalitiesTypesPoi =
+        | "point_of_interest"
+        | "transit.station"
+        | "transit.station.airport"
+        | "transit.station.rail"
+        | "beach"
+        | "business"
+        | "business.car_repair"
+        | "business.car_rental"
+        | "business.cinema"
+        | "business.conference_centre"
+        | "business.exhibition_centre"
+        | "business.theatre"
+        | "business.nightclub"
+        | "business.finance"
+        | "business.finance.bank"
+        | "business.fuel"
+        | "business.parking"
+        | "business.mall"
+        | "business.food_and_drinks"
+        | "business.food_and_drinks.bar"
+        | "business.food_and_drinks.biergarten"
+        | "business.food_and_drinks.cafe"
+        | "business.food_and_drinks.fast_food"
+        | "business.food_and_drinks.pub"
+        | "business.food_and_drinks.restaurant"
+        | "business.food_and_drinks.food_court"
+        | "business.shop"
+        | "business.shop.mall"
+        | "business.shop.bakery"
+        | "business.shop.butcher"
+        | "business.shop.library"
+        | "business.shop.grocery"
+        | "business.shop.sports"
+        | "business.shop.toys"
+        | "business.shop.clothes"
+        | "business.shop.furniture"
+        | "business.shop.electronics"
+        | "business.shop.doityourself"
+        | "business.shop.craft"
+        | "education"
+        | "education.school"
+        | "education.kindergarten"
+        | "education.university"
+        | "education.college"
+        | "education.library"
+        | "hospitality"
+        | "hospitality.hotel"
+        | "hospitality.hostel"
+        | "hospitality.guest_house"
+        | "hospitality.bed_and_breakfast"
+        | "hospitality.motel"
+        | "medical"
+        | "medical.hospital"
+        | "medical.pharmacy"
+        | "medical.clinic"
+        | "tourism"
+        | "tourism.attraction"
+        | "tourism.attraction.amusement_park"
+        | "tourism.attraction.zoo"
+        | "tourism.attraction.aquarium"
+        | "tourism.monument"
+        | "tourism.monument.castle"
+        | "tourism.museum"
+        | "government"
+        | "park"
+        | "park.national"
+        | "place_of_worship"
+        | "police"
+        | "post_office"
+        | "sports"
+        | "sports.golf"
+        | "sports.winter";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * POI aliases
+     */
+    type LocalitiesTypesPoiAlias =
+        | "airport"
+        | "train_station"
+        | "transit.station"
+        | "metro_station"
+        | "shopping"
+        | "museum"
+        | "zoo"
+        | "amusement_park"
+        | "art_gallery"
+        | "tourist_attraction";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * The `advanced` value opens suggestions to worldwide postal codes in addition to postal codes for Western Europe.
+     * default to `standard`
+     */
+    type LocalitiesRequestData = "standard" | "advanced";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * This accuracy is present when type address is returned.
+     * `DISTRICT` and `POSTAL_CODE` are for UK only.
+     */
+    type LocalitiesDetailsAccuracy = "ROOFTOP" | "DISTRICT" | "POSTAL_CODE" | "ROUTE";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines the type of the returned geocoded element.
+     */
+    type LocalitiesGeocodeTypes = "address" | "locality" | "postal_code" | "route";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines the type of the returned geocoded element.
+     */
+    type LocalitiesGeocodeLocationType = "ROOFTOP" | "DISTRICT" | "POSTAL_CODE" | "ROUTE";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines information about the geometry of a Locality.
+     */
+    interface LocalitiesGeocodeGeometry {
+        location: woosmap.map.LatLngLiteral;
+        location_type: woosmap.map.localities.LocalitiesGeocodeLocationType;
+        shape?: woosmap.map.GeoJSONFeature;
+        viewport: woosmap.map.localities.LocalitiesBounds;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines a viewport by its geographical coordinates of North-East and South-West corners.
+     */
+    interface LocalitiesBounds {
+        northeast: woosmap.map.LatLngLiteral;
+        southwest: woosmap.map.LatLngLiteral;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Represents related components information for a prediction.
+     */
+    interface LocalitiesRelated {
+        /**
+         * Contains related Postal Codes information.
+         */
+        postal_codes?: woosmap.map.localities.LocalitiesRelatedPostalCode[];
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Represents a related postal code information for a prediction.
+     */
+    interface LocalitiesRelatedPostalCode {
+        /**
+         * Contains the related Postal Code formatted description string.
+         */
+        description: string;
+        /**
+         * Contains the related Postal Code public ID.
+         */
+        public_id: string;
+    }
+}
+declare namespace woosmap.map.localities {
+    type LocalitiesNearbyTypes = "point_of_interest";
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines information about a Nearby element.
+     */
+    interface LocalitiesNearbyResult {
+        /**
+         * An array containing Address Components with additional information
+         */
+        address_components: woosmap.map.localities.AddressComponents[];
+        categories: string[];
+        /**
+         * The location of the result, in latitude and longitude, eventually associated with a Viewport.
+         */
+        geometry: woosmap.map.localities.LocalitiesNearbyGeometry;
+        /**
+         * The name of the result.
+         */
+        name: string;
+        /**
+         * Contains a unique ID for each result. Please use this ID to give feedbacks on results.
+         */
+        public_id: string;
+        /**
+         * An array containing the types of the result.
+         */
+        types: Array<woosmap.map.localities.LocalitiesNearbyTypes | woosmap.map.localities.LocalitiesTypesPoi>;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines information about the geometry of a Locality.
+     */
+    interface LocalitiesNearbyGeometry {
+        location: woosmap.map.LatLngLiteral;
+        viewport?: woosmap.map.localities.LocalitiesBounds;
+    }
+}
+declare namespace woosmap.map.localities {
+    /**
+     * Defines information about the pagination of nearby results.
+     */
+    interface LocalitiesNearbyPagination {
+        /**
+         * If more results are available, this will contain the value to pass to the `page` parameter to get the next page.
+         */
+        next_page?: number;
+        /**
+         * If previous results are available, this will contain the value to pass to the `page` parameter to get the previous page.
+         */
+        previous_page?: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Summary feature response, part of DatasetsSearchResponse.
+     */
+    interface DatasetsFeatureSummary {
+        /**
+         * attributes table
+         */
+        attributes: {};
+        /**
+         * the feature extent can be a point geometry if the geometry has no area.
+         */
+        geometry: woosmap.map.GeoJSONPoint | woosmap.map.GeoJSONPolygon;
+        /**
+         * The feature identifier
+         */
+        id: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Pagination information for DatasetsSearchResponse
+     */
+    interface DatasetsPagination {
+        /**
+         * next page number if any.
+         */
+        next: number | null;
+        /**
+         * Current page number, starts at 1
+         */
+        page: number;
+        /**
+         * previous page number if any.
+         */
+        prev: number | null;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Full feature response, returned by Datasets get feature endpoint.
+     */
+    interface DatasetsFeature {
+        /**
+         * attributes of the feature.
+         */
+        attributes: {};
+        /**
+         * The feature geometry, as geojson.
+         */
+        geometry:
+            | woosmap.map.GeoJSONPoint
+            | woosmap.map.GeoJSONMultiPoint
+            | woosmap.map.GeoJSONLineString
+            | woosmap.map.GeoJSONMultiLineString
+            | woosmap.map.GeoJSONPolygon
+            | woosmap.map.GeoJSONMultiPolygon;
+        /**
+         * id of the feature (UUID).
+         */
+        id: string;
+    }
+}
+declare namespace woosmap.map {
+    interface DatasetsSearchResponse {
+        /**
+         * Matching features.
+         */
+        features: woosmap.map.DatasetsFeatureSummary[];
+        /**
+         * Pagination information.
+         */
+        pagination: woosmap.map.DatasetsPagination;
+    }
+}
+declare namespace woosmap.map {
+    interface DatasetsSearchRequest {
+        /**
+         * Filter abiding the Woosmap query format. Applies to feature attributes.
+         */
+        where?: string;
+    }
+}
+declare namespace woosmap.map {
+    interface DatasetsPaginationRequest {
+        /**
+         * request a specific page.
+         */
+        page?: number;
+        /**
+         * maximum feature count in the response.
+         */
+        per_page?: number;
+    }
+}
+declare namespace woosmap.map {
+    interface DatasetsSearchWithGeometryRequest<T> {
+        /**
+         * Applies a buffer operation on the request geometry.
+         * The value is the radius in meters.
+         */
+        buffer?: number;
+        /**
+         * Geometry used in the search operation.
+         */
+        geometry: T;
+        /**
+         * Filter abiding the Woosmap query format. Applies to feature attributes.
+         */
+        where?: string;
+    }
+}
+declare namespace woosmap.map {
+    type DatasetsSearchWithPolygonGeometryRequest = woosmap.map.DatasetsSearchWithGeometryRequest<
+        woosmap.map.GeoJSONPolygon
+    >;
+}
+declare namespace woosmap.map {
+    type DatasetsSearchWithInputGeometryRequest = woosmap.map.DatasetsSearchWithGeometryRequest<
+        woosmap.map.GeoJSONPolygon | woosmap.map.GeoJSONLineString | woosmap.map.GeoJSONPoint
+    >;
+}
+declare namespace woosmap.map {
+    interface TransitRendererOptions {
+        map?: woosmap.map.Map;
+        preserveViewport?: boolean;
+        routes?: woosmap.map.transit.TransitRoute[];
+        showDecorations?: boolean;
+    }
+}
+declare namespace woosmap.map.transit {
+    /**
+     * A Transit request to be sent to `TransitService.route`
+     * `arrivalTime` and `departureTime` are mutually exclusive, if both of them are valued only `departureTime` will be used.
+     */
+    interface TransitRouteRequest {
+        /**
+         * When the travel is expected to finish should be a string encoded timestamp or a string encoded date.
+         */
+        arrivalTime?: string;
+        /**
+         * When the travel is expected to start, should be a string encoded timestamp or a string encoded date.
+         */
+        departureTime?: string;
+        /**
+         * The destination of the trip
+         */
+        destination: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+        /**
+         * Transit mode filter used to determine which modes of transit to include in the response. By default, all supported transit modes are permitted.
+         * Supported modes: `highSpeedTrain` `intercityTrain` `interRegionalTrain` `regionalTrain` `cityTrain` `bus` `ferry` `subway` `lightRail` `privateBus` `inclined` `aerial` `busRapid` `monorail` `flight` `spaceship`
+         * This parameter also support an exclusion list: It's sufficient to specify each mode to exclude by prefixing it with -. Mixing of inclusive and exclusive transit modes is not allowed.
+         */
+        modes?: string[];
+        /**
+         * The origin of the trip
+         */
+        origin: woosmap.map.LatLng | woosmap.map.LatLngLiteral;
+    }
+}
+declare namespace woosmap.map.transit {
+    interface TransitPlace {
+        /**
+         * Location coordinates of the place
+         */
+        location: woosmap.map.LatLngLiteral;
+        /**
+         * Name of the place can be null if no place could be identified for the user-provided coordinates (origin or destination)
+         */
+        name: string | null;
+        /**
+         * Type of the place
+         */
+        type: string;
+    }
+}
+declare namespace woosmap.map.transit {
+    /**
+     * When TransitAttribution is valued it's content must be shown to the end user.
+     */
+    interface TransitAttribution {
+        /**
+         * A link to the transport network operator
+         */
+        href: string;
+        /**
+         * Identifier for the attribution
+         */
+        id: string;
+        /**
+         * The text to show to the user
+         */
+        text: string;
+        /**
+         * Type of attribution
+         */
+        type: string;
+    }
+}
+declare namespace woosmap.map.transit {
+    interface TransitTransport {
+        /**
+         * The attribution for this transport, when valued must be shown to user. This can be added at the end of the road book
+         */
+        attributions: woosmap.map.transit.TransitAttribution[] | null;
+        /**
+         * The category, rail, bus ...
+         */
+        category: string | null;
+        /**
+         * The color used to draw polylines.
+         */
+        color: string | null;
+        headsign: string | null;
+        long_name: string | null;
+        /**
+         * The mode of transportation
+         */
+        mode: "pedestrian";
+        /**
+         * Name of the transport (transit line name for example)
+         */
+        name: string | null;
+        short_name: string | null;
+        /**
+         * Color that can be used to draw line text
+         */
+        text_color: string | null;
+    }
+}
+declare namespace woosmap.map.transit {
+    /**
+     * A leg represents a part of the route using a single transport mode.
+     */
+    interface TransitLeg {
+        /**
+         * The bounds of the leg
+         */
+        bounds: woosmap.map.LatLngBounds;
+        /**
+         * The decoded polyline for the leg.
+         */
+        decodedPolyline: woosmap.map.LatLng[];
+        /**
+         * The leg length in meters
+         */
+        distance: number;
+        /**
+         * The leg duration in seconds.
+         */
+        duration: number;
+        /**
+         * The ending location of the leg
+         */
+        end_location: woosmap.map.transit.TransitPlace;
+        polyline: string | null;
+        /**
+         * The starting location of the leg
+         */
+        start_location: woosmap.map.transit.TransitPlace;
+        /**
+         * The transport used for the leg
+         */
+        transport: woosmap.map.transit.TransitTransport;
+        /**
+         * The travel mode for the leg
+         */
+        travel_mode: "pedestrian" | "transit";
+    }
+}
+declare namespace woosmap.map.transit {
+    /**
+     * A transit route composed of multiple TransitLeg, a leg represents a part of the route using a single transport mode.
+     * A list of transit and pedestrian list of the route.
+     */
+    interface TransitRoute {
+        /**
+         * The bounds for the route, union of the leg bounds.
+         */
+        bounds: woosmap.map.LatLngBounds;
+        /**
+         * Duration of the route in seconds
+         */
+        duration: number;
+        /**
+         * The legs for the route
+         */
+        legs: woosmap.map.transit.TransitLeg[];
+        notice: string;
+    }
+}
+declare namespace woosmap.map.transit {
+    interface TransitRouteResponse {
+        /**
+         * The routes.
+         */
+        routes: woosmap.map.transit.TransitRoute[];
+        /**
+         * The status of the response
+         */
+        status: "OK" | "NOT_FOUND";
+    }
+}
+declare namespace woosmap.map {
+    interface DatasetsOverlayOptions {
+        /**
+         * Sets the line stroke color.
+         */
+        defaultLineColor?: string;
+        /**
+         * Sets the point color.
+         */
+        defaultPointColor?: string;
+        /**
+         * Sets the fill stroke color.
+         */
+        defaultPolygonFillColor?: string;
+        /**
+         * Sets the polygon stroke color.
+         */
+        defaultPolygonStrokeColor?: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * How an `AdvancedMarkerElement` behaves when it collides with another marker.
+     */
+    enum CollisionBehavior {
+        OPTIONAL_AND_HIDES_LOWER_PRIORITY = "OPTIONAL_AND_HIDES_LOWER_PRIORITY",
+        REQUIRED = "REQUIRED",
+        REQUIRED_AND_HIDES_OPTIONAL = "REQUIRED_AND_HIDES_OPTIONAL",
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Identifiers for the placement of controls on the map. The numeric values match
+     * the well-known control-position constants, so code comparing against them keeps
+     * working. Woosmap does not render its own built-in controls, so these exist for
+     * API compatibility (e.g. indexing `map.controls`) rather than to move controls.
+     */
+    enum ControlPosition {
+        BLOCK_END_INLINE_CENTER = 24,
+        BLOCK_END_INLINE_END = 25,
+        BLOCK_END_INLINE_START = 23,
+        BLOCK_START_INLINE_CENTER = 15,
+        BLOCK_START_INLINE_END = 16,
+        BLOCK_START_INLINE_START = 14,
+        BOTTOM_CENTER = 11,
+        BOTTOM_LEFT = 10,
+        BOTTOM_RIGHT = 12,
+        INLINE_END_BLOCK_CENTER = 21,
+        INLINE_END_BLOCK_END = 22,
+        INLINE_END_BLOCK_START = 20,
+        INLINE_START_BLOCK_CENTER = 17,
+        INLINE_START_BLOCK_END = 19,
+        INLINE_START_BLOCK_START = 18,
+        LEFT_BOTTOM = 6,
+        LEFT_CENTER = 4,
+        LEFT_TOP = 5,
+        RIGHT_BOTTOM = 9,
+        RIGHT_CENTER = 8,
+        RIGHT_TOP = 7,
+        TOP_CENTER = 2,
+        TOP_LEFT = 1,
+        TOP_RIGHT = 3,
+    }
+}
+declare namespace woosmap.map {
+    enum DirectionStatus {
+        OK = "OK",
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Built-in symbol paths, usable as the `path` of a symbol icon.
+     */
+    enum SymbolPath {
+        BACKWARD_CLOSED_ARROW = "BACKWARD_CLOSED_ARROW",
+        BACKWARD_OPEN_ARROW = "BACKWARD_OPEN_ARROW",
+        CIRCLE = "CIRCLE",
+        FORWARD_CLOSED_ARROW = "FORWARD_CLOSED_ARROW",
+        FORWARD_OPEN_ARROW = "FORWARD_OPEN_ARROW",
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * The valid travel modes that can be specified in a
+     * `DistanceRouteRequest`, `DistanceMatrixRequest` or `DistanceIsochroneRequest`.
+     * Specify these by value, or by using the
+     * constant's name. For example, `'WALKING'` or
+     * `woosmap.map.TravelMode.WALKING`
+     */
+    enum TravelMode {
+        BICYCLING = "cycling",
+        DRIVING = "driving",
+        WALKING = "walking",
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * The valid unit systems that can be specified in a `DistanceRouteRequest`,
+     * `DistanceMatrixRequest` or `DistanceIsochroneRequest`.
+     */
+    enum UnitSystem {
+        IMPERIAL = "imperial",
+        METRIC = "metric",
+    }
+}
+declare namespace woosmap.map.distance {
+    /**
+     * The status returned by the `DistanceService` on the resolve of
+     * its searches. Specify these by value, or by using the constant's name.
+     * For example, `'OK'` or `woosmap.map.distance.DistanceServiceStatus.OK`.
+     */
+    enum DistanceServiceStatus {
+        BACKEND_ERROR = "BACKEND_ERROR",
+        INVALID_REQUEST = "INVALID_REQUEST",
+        MAX_ELEMENTS_EXCEEDED = "MAX_ELEMENTS_EXCEEDED",
+        MAX_ROUTE_LENGTH_EXCEEDED = "MAX_ROUTE_LENGTH_EXCEEDED",
+        OK = "OK",
+        OVER_QUERY_LIMIT = "OVER_QUERY_LIMIT",
+        REQUEST_DENIED = "REQUEST_DENIED",
+    }
+}
+declare namespace woosmap.map.query {
+    /**
+     * Represents Query Boolean operators.
+     */
+    enum BoolOperators {
+        AND = "AND",
+        NOT = "NOT",
+        OR = "OR",
+    }
+}
+declare namespace woosmap.map.query {
+    /**
+     * Represents Query operators.
+     */
+    enum Operators {
+        gt = ">",
+        gte = ">=",
+        lt = "<",
+        lte = "<=",
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Identifiers for common map types.
+     * Specify these by value, or by using the constant's name.
+     * For example, `'roadmap'` or `woosmap.map.MapTypeId.ROADMAP`.
+     */
+    enum MapTypeId {
+        HYBRID = "hybrid",
+        ROADMAP = "roadmap",
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Loads a library of the Map JS API and resolves with its exports. This is the
+     * recommended way to load the API and to access its classes.
+     *
+     * Take classes from the resolved value rather than from the global
+     * `woosmap.map` namespace: globals of on-demand libraries are only populated
+     * once their bundle has loaded.
+     *
+     * Libraries: `core`, `maps`, `geometry` (shipped in `map.js`, resolve
+     * immediately) and `marker`, `drawing` (separate bundles, fetched on first
+     * request). Any other name rejects.
+     *
+     * `importLibrary` is available before `map.js` loads only when the page includes
+     * the bootstrap loader below. Add it once, before the first call; it injects
+     * `map.js` with the requested libraries on the first `importLibrary` call. Do
+     * not also add a `<script src="https://sdk.woosmap.com/map/map.js">` tag.
+     *
+     * @example Bootstrap loader, added once in the page `<head>`
+     *
+     * ```html
+     * <script>
+     * ((g) => {
+     *   let p;
+     *   const w = window, d = document;
+     *   const L = "importLibrary", CB = "__ib__";
+     *   const E = "The Woosmap Maps JavaScript API";
+     *   const woosmap = w.woosmap || (w.woosmap = {});
+     *   const maps = woosmap.map || (woosmap.map = {});
+     *   const libs = new Set(), params = new URLSearchParams();
+     *   const load = () => p || (p = new Promise((res, rej) => {
+     *     const s = d.createElement("script");
+     *     params.set("libraries", [...libs].join(","));
+     *     for (const k in g) params.set(k, g[k]);
+     *     params.set("callback", "woosmap.map." + CB);
+     *     s.src = "https://sdk.woosmap.com/map/map.js?" + params;
+     *     maps[CB] = res;
+     *     s.onerror = () => rej(Error(E + " could not load."));
+     *     s.nonce = d.querySelector("script[nonce]")?.nonce || "";
+     *     d.head.append(s);
+     *   }));
+     *   if (maps[L]) { console.warn(E + " only loads once. Ignoring:", g); }
+     *   else {
+     *     maps[L] = (name, ...args) =>
+     *       libs.add(name) && load().then(() => maps[L](name, ...args));
+     *   }
+     * })({ key: "YOUR_API_KEY" });
+     * </script>
+     * ```
+     *
+     * @example Load each library you need and destructure its exports
+     *
+     * ```js
+     * const { Map } = await woosmap.map.importLibrary("maps");
+     * const { AdvancedMarkerElement } = await woosmap.map.importLibrary("marker");
+     *
+     * const map = new Map(document.getElementById("map"), {
+     *   center: { lat: 48.8566, lng: 2.3522 },
+     *   zoom: 12,
+     * });
+     * new AdvancedMarkerElement({ map, position: map.getCenter() });
+     * ```
+     */
+    function importLibrary(libraryName: "maps"): Promise<woosmap.map.MapsLibrary>;
+    /**
+     * Loads the `core` library.
+     */
+    function importLibrary(libraryName: "core"): Promise<woosmap.map.CoreLibrary>;
+    /**
+     * Loads the `marker` library (fetched on first request).
+     */
+    function importLibrary(libraryName: "marker"): Promise<woosmap.map.MarkerLibrary>;
+    /**
+     * Loads the `drawing` library (fetched on first request).
+     */
+    function importLibrary(libraryName: "drawing"): Promise<woosmap.map.DrawingLibrary>;
+    /**
+     * Loads the `geometry` library.
+     */
+    function importLibrary(libraryName: "geometry"): Promise<woosmap.map.GeometryLibrary>;
+    /**
+     * Loads a library by a name only known at runtime and resolves with one of the
+     * library interfaces. Prefer a literal name for a precise result type.
+     */
+    function importLibrary(
+        libraryName: string,
+    ): Promise<
+        | woosmap.map.CoreLibrary
+        | woosmap.map.MapsLibrary
+        | woosmap.map.MarkerLibrary
+        | woosmap.map.GeometryLibrary
+        | woosmap.map.DrawingLibrary
+    >;
+}
+declare namespace woosmap.map.event {
+    /**
+     * Adds the given listener function to the given event name for the given object instance.
+     * Returns an identifier for this listener that can be used with `removeListener()`.
+     */
+    function addListener(
+        instance: object,
+        eventName: string,
+        handler: (...args: any[]) => any,
+    ): woosmap.map.MapEventListener;
+    /**
+     * Like addListener, but the handler removes itself after handling the first event.
+     */
+    function addListenerOnce(
+        instance: object,
+        eventName: string,
+        handler: (...args: any[]) => any,
+    ): woosmap.map.MapEventListener;
+    function addDomListener(element: Element, eventName: string, handler: (...args: any[]) => any): void;
+    /**
+     * Removes the given listener, which should have been returned by addListener above.
+     * Equivalent to calling `listener.remove()`.
+     */
+    function removeListener(listener: woosmap.map.MapEventListener): void;
+    /**
+     * Removes all listeners for all events for the given instance.
+     */
+    function clearInstanceListeners(instance: object): void;
+    /**
+     * Removes all listeners for the given event for the given instance.
+     */
+    function clearListeners(instance: object, eventName: string): void;
+    /**
+     * Triggers the given event. All arguments after eventName are passed as arguments to the listeners.
+     */
+    function trigger(instance: object, eventName: string, eventArgs?: any[] | null): void;
+    /**
+     * Whether the given instance has any listener registered for the given event.
+     */
+    function hasListeners(instance: object, eventName: string): boolean;
+}
+declare namespace woosmap.map.geometry.poly {
+    /**
+     * Computes whether the given point lies inside the specified polygon.
+     */
+    function containsLocation(
+        point: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        polygon: woosmap.map.Polygon,
+    ): boolean;
+    /**
+     * Computes whether the given point lies on or near to a polyline, or the edge of a polygon,
+     * within a specified tolerance.
+     * Returns true when the difference between the latitude and longitude of the supplied point,
+     * and the closest point on the edge, is less than the tolerance. The tolerance defaults to 10-9 degrees.
+     */
+    function isLocationOnEdge(
+        point: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        poly: woosmap.map.Polygon | woosmap.map.Polyline,
+        tolerance?: number,
+    ): boolean;
+}
+declare namespace woosmap.map.geometry.encoding {
+    /**
+     * Decodes an encoded path string into a sequence of `LatLng`s.
+     */
+    function decodePath(encodedPath: string): woosmap.map.LatLng[];
+    /**
+     * Encodes a sequence of `LatLng`s into an encoded path string.
+     */
+    function encodePath(
+        path:
+            | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>
+            | woosmap.map.MVCArray<woosmap.map.LatLng | woosmap.map.LatLngLiteral>,
+    ): string;
+}
+declare namespace woosmap.map.geometry.spherical {
+    /**
+     * Returns the distance, in metres, between two `LatLng`s. The radius defaults to
+     * the Earth's radius.
+     */
+    function computeDistanceBetween(
+        from: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        to: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        radius?: number,
+    ): number;
+    /**
+     * Returns the heading from one `LatLng` to another, in degrees clockwise from
+     * north, within the range [-180, 180).
+     */
+    function computeHeading(
+        from: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        to: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+    ): number;
+    /**
+     * Returns the `LatLng` resulting from moving `distance` metres from `from` along
+     * `heading` (degrees clockwise from north).
+     */
+    function computeOffset(
+        from: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        distance: number,
+        heading: number,
+        radius?: number,
+    ): woosmap.map.LatLng;
+    /**
+     * Returns the origin you would have started from to arrive at `to` after
+     * travelling `distance` metres along `heading`. Returns `null` when no solution
+     * exists (the destination is unreachable on that heading).
+     */
+    function computeOffsetOrigin(
+        to: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        distance: number,
+        heading: number,
+        radius?: number,
+    ): woosmap.map.LatLng | null;
+    /**
+     * Returns the length of the given path, in metres.
+     */
+    function computeLength(
+        path:
+            | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>
+            | woosmap.map.MVCArray<woosmap.map.LatLng | woosmap.map.LatLngLiteral>,
+        radius?: number,
+    ): number;
+    /**
+     * Returns the signed area of a closed path, counterclockwise positive, in the
+     * range [-2×pi×radius², 2×pi×radius²].
+     *
+     * Computed by parallel transport rather than triangulation, so it is stable
+     * except where an edge spans 180 degrees.
+     */
+    function computeSignedArea(
+        loop:
+            | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>
+            | woosmap.map.MVCArray<woosmap.map.LatLng | woosmap.map.LatLngLiteral>,
+        radius?: number,
+    ): number;
+    /**
+     * Returns the unsigned area of a closed path, in the range [0, 2×pi×radius²],
+     * in the radius' units squared (square metres by default).
+     *
+     * Also accepts a `Circle` (which needs a non-negative `radius` and must not
+     * cover more than the whole sphere) or a `LatLngBounds`.
+     */
+    function computeArea(
+        path:
+            | Array<woosmap.map.LatLng | woosmap.map.LatLngLiteral>
+            | woosmap.map.MVCArray<woosmap.map.LatLng | woosmap.map.LatLngLiteral>
+            | woosmap.map.Circle
+            | woosmap.map.CircleLiteral
+            | woosmap.map.LatLngBounds
+            | woosmap.map.LatLngBoundsLiteral,
+        radiusOfSphere?: number,
+    ): number;
+    /**
+     * Returns the `LatLng` lying the given fraction of the way between two points,
+     * along the great circle joining them.
+     */
+    function interpolate(
+        from: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        to: woosmap.map.LatLng | woosmap.map.LatLngLiteral,
+        fraction: number,
+    ): woosmap.map.LatLng;
+}
+declare namespace woosmap.map.query {
+    /**
+     * Function helper to instantiate a Field or an array of Fields, used to form queries.
+     * If value is an array, it will create a Field for each item in the array.
+     */
+    function F(
+        key: string,
+        value: string | number | boolean | Array<string | number>,
+        operator?: woosmap.map.query.Operators | null,
+    ): woosmap.map.query.Field | woosmap.map.query.Field[];
+    /**
+     * Helper function to instantiate a Query with AND connector
+     *
+     * @example Example
+     * ```javascript
+     * var q = woosmap.map.query;
+     * var query = q.and([q.F('type', 'myType'), q.F('type', 'myOtherType')])
+     * ```
+     * `query.toString()` should return `'(type:"myType" AND type:"myOtherType")'`
+     *
+     * @example Example using arguments and value as an Array
+     * ```javascript
+     * let query = q.and(q.F('type', ['myType', 'myOtherType']))
+     * ```
+     */
+    function and(
+        ...children: Array<woosmap.map.query.Query | woosmap.map.query.Field | string>
+    ): woosmap.map.query.Query;
+    /**
+     * Helper function to instantiate a Query with OR connector
+     *
+     * @example Example
+     * ```javascript
+     * let q = woosmap.map.query;
+     * let query = q.or([q.F('type', 'myType'), q.F('type', 'myOtherType')])
+     * ```
+     * `query.toString()` should return `'(type:"myType" OR type:"myOtherType")'`
+     *
+     * @example Example using arguments and value as an Array
+     * ```javascript
+     * let query = q.or(q.F('type', ['myType', 'myOtherType']))
+     * ```
+     * Should return the same as previous example.
+     */
+    function or(
+        ...children: Array<woosmap.map.query.Query | woosmap.map.query.Field | string>
+    ): woosmap.map.query.Query;
+    /**
+     * Helper function to instantiate a negated Query
+     *
+     * @example Example
+     * ```javascript
+     * var q = woosmap.map.query;
+     * var query = q.not(q.F('type', 'myType'))
+     * ```
+     * `query.toString()` should return `'NOT type:"myType"'`
+     */
+    function not(child: woosmap.map.query.Query | woosmap.map.query.Field | string): woosmap.map.query.Query;
+}
+declare namespace woosmap.map {
+    class NavigationWidget {
+        /**
+         * Creates a new Indoor Navigation Wiget.
+         */
+        constructor(renderer: woosmap.map.IndoorRenderer, closeCb: () => void);
+
+        /**
+         * Sets the map where to render the Indoor navigation widget.
+         */
+        setMap(map?: woosmap.map.Map | null): void;
+    }
+}
+declare namespace woosmap.map {
+    class IndoorWidget {
+        /**
+         * Creates a new Indoor widget.
+         */
+        constructor(
+            widgetOptions?: woosmap.map.IndoorWidgetOptions,
+            rendererOptions?: woosmap.map.IndoorRendererOptions,
+        );
+
+        /**
+         * Sets the map where to render the Indoor widget.
+         */
+        setMap(map: Map): void;
+
+        /**
+         * Renders map with the selected venue
+         */
+        setVenue(venueId: string): void;
+
+        /**
+         * Renders a map with a POI highlighted by pk / id
+         * silent parameter will prevent the indoor_feature_selected event to trigger
+         * padding parameter will apply padding to the map container while highlighting the POI on map
+         */
+        highlightFeature(id: string, silent: boolean, padding?: Padding): void;
+
+        /**
+         * Renders a map with a POI highlighted by its ref
+         * padding parameter will apply padding to the map container while highlighting the POI on map
+         */
+        highlightFeatureByRef(ref: string, padding?: Padding): void;
+
+        /**
+         * Unselect a selected feature: it closes the widget and unhighlight the feature.
+         */
+        unselectFeature(): void;
+
+        /**
+         * Call this function to draw a polyline on map.
+         */
+        setDirections(directions?: woosmap.map.IndoorDirectionResult | null): void;
+
+        /**
+         * Sets the distance units.
+         */
+        setUnits(units: "imperial" | "metric"): void;
+
+        /**
+         * Gets the distance units.
+         */
+        getUnits(): "imperial" | "metric";
+
+        /**
+         * Sets the routing profile (or directions mode) ('security' | 'wheelchair') for way finding
+         */
+        setDirectionsMode(profile: string): void;
+
+        /**
+         * Gets the distance units.
+         */
+        getDirectionsMode(): string | null;
+
+        /**
+         * Sets the baseFilter.
+         */
+        setBaseFilter(filter?: string | null): void;
+
+        /**
+         * Gets the baseFilter
+         */
+        getBaseFilter(): string | null;
+
+        /**
+         * Sets the current user location.
+         */
+        setUserLocation(lat: number, lng: number, level: number, bearing?: number, forceFocus?: boolean): void;
+
+        /**
+         * Sets the navigation mode
+         */
+        setNavigationMode(allowNavigation: boolean): void;
+
+        /**
+         * Gets the navigates mode
+         */
+        getNavigationMode(): boolean;
+
+        /**
+         * Gets the autocompleteWithDistance option
+         */
+        getAutocompleteWithDistance(): boolean;
+
+        /**
+         * Gets the autocomplete's maxResponses option value if set to determine the number of search suggestions to retrieve. The default value is 5 and the maximum limit is 10.
+         */
+        getAutocompleteMaxResponses(): number;
+
+        /**
+         * Renders map with custom theme
+         */
+        setTheme(theme: string): void;
+
+        /**
+         * Sets the zones to avoid during routing. Argument expected in the format level;lat,lng;lat,lng;lat,lng...|level;lat,lng;lat,lng;lat,lng...
+         */
+        setZonesToAvoid(avoidZones: string): string | null;
+
+        /**
+         * Gets the zones to avoid while routing
+         */
+        getZonesToAvoid(): string | null;
+
+        /**
+         * Sets whether to disable the autofocus for the search input.
+         */
+        setIsAutofocusDisabled(disableFocus: boolean): boolean | null;
+
+        /**
+         * Gets whether auto focus on search input is enabled/disabled
+         */
+        getIsAutofocusDisabled(): boolean;
+
+        /**
+         * Sets the floor for the venue
+         */
+        setFloor(floor: number): void;
+
+        /**
+         * Gets the underlying instance of Indoor Renderer when using the Indoor Widget
+         */
+        getRenderer(): woosmap.map.IndoorRenderer;
+
+        /**
+         * Adds a listener for eventName.
+         */
+        addListener(eventName: string, handler: any): MapEventListener;
+
+        /**
+         * Triggers the given event. All arguments after eventName are passed as arguments to the listeners.
+         */
+        trigger(instance: object, eventName: string, eventArgs?: any[] | null): void;
+
+        /**
+         * Opens the widget's panel in itinerary mode.
+         */
+        showItinerary(origin?: GeoJSONFeature | object | string, destination?: GeoJSONFeature | object | string): any;
+    }
+}
+declare namespace woosmap.map {
+    class IndoorRenderer extends MVCObject {
+        /**
+         * Creates an Indoor renderer.
+         */
+        constructor(options?: woosmap.map.IndoorRendererOptions);
+
+        /**
+         * Sets the map where to render the Indoor map.
+         */
+        setMap(map?: woosmap.map.Map | null): void;
+
+        /**
+         * Get the displayed level.
+         */
+        getLevel(): number;
+
+        /**
+         * Get the selected feature.
+         */
+        getSelectedFeature(): GeoJSONFeature | null;
+
+        /**
+         * Get the displayed venue.
+         */
+        getVenue(): woosmap.map.Venue | null;
+
+        /**
+         * Gets view set for the renderer
+         */
+        getView(): "mobile" | "desktop" | "auto";
+
+        /**
+         * Call this function to draw a polyline on map.
+         */
+        setDirections(directions?: woosmap.map.IndoorDirectionResult | null, padding?: number | null): void;
+
+        /**
+         * Highlight the step of the directions
+         */
+        highlightStep(
+            stepToHighlight?: GeoJSONFeature | null,
+            fitBounds?: boolean,
+            tilt?: boolean,
+            soundEnabled?: boolean,
+        ): void;
+
+        /**
+         * Show or hide the routing path on the map
+         */
+        displayRoutingPath(show: boolean): void;
+
+        /**
+         * Unselect a selected feature
+         */
+        unselectFeature(): void;
+
+        /**
+         * Set the current user location. A blue dot is going to be displayed.
+         */
+        setUserLocation(
+            lat: number,
+            lng: number,
+            level: number,
+            bearing?: number,
+            forceFocus?: boolean,
+            adjusted?: boolean,
+        ): void;
+
+        /**
+         * Returns the current user location.
+         */
+        getUserLocation(): woosmap.map.IndoorPosition;
+
+        /**
+         * Detects whether user location is found inside venue's bounding box
+         */
+        isUserInsideVenue(lat: number, lng: number): boolean;
+
+        /**
+         * Sets the floor for the venue
+         */
+        setFloor(floor: number): void;
+
+        /**
+         * Renders map with the selected venue
+         */
+        setVenue(venueId: string): void;
+
+        /**
+         * Renders a map with a POI highlighted by pk or id
+         */
+        highlightFeature(featureid: string, silent: boolean, padding?: Padding): void;
+
+        /**
+         * Renders a map with a POI highlighted by ref
+         */
+        highlightFeatureByRef(ref: string, padding?: Padding): void;
+
+        /**
+         * Filter the map to display only labels and icons of POIs which are matching the filters
+         */
+        filterPois(advancedFilter: string, disableZoomMin: boolean): any;
+
+        /**
+         * Renders map with custom theme
+         */
+        setTheme(theme: string): void;
+
+        /**
+         * Sets the default filter applied
+         */
+        setBaseFilter(filter: string): void;
+
+        /**
+         * Resets the user marker
+         */
+        resetUserMarker(): void;
+
+        /**
+         * Triggers event to notify user has deviated from path during navigation
+         */
+        notifyUserDeviated(currentLocation: GeoJSONFeature): void;
+
+        /**
+         * Triggers event to notify user's proximity to destination
+         */
+        notifyProximityToDest(): void;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Service used to call the Indoor API.
+     */
+    class IndoorService {
+        /**
+         * Service used to call the Indoor API.
+         */
+        constructor();
+
+        /**
+         * Retrieve all the venues
+         */
+        venues(callback: (venues: woosmap.map.VenuesResult) => void): void;
+
+        /**
+         * Retrieve detailed venue data
+         */
+        venue(venueId: string, callback: (venue: woosmap.map.Venue) => void): void;
+
+        /**
+         * Search for features by their names
+         */
+        search(
+            venueId: string,
+            query: string,
+            callback: (featureCollection: GeoJSONFeatureCollection) => any,
+            ref?: string | null,
+            id?: string | null,
+            advancedFilter?: string | null,
+        ): void;
+
+        /**
+         * Gets indoor directions
+         */
+        directions(
+            request: woosmap.map.IndoorDirectionRequest,
+            callback: (directions: woosmap.map.IndoorDirectionResult) => void,
+        ): void;
+
+        /**
+         * Gets feature by feature id
+         */
+        feature(venueId: string, featureId: number, callback: (feature: GeoJSONFeature) => void): void;
+
+        /**
+         * Autocomplete for pois
+         */
+        autocomplete(
+            venueId: string,
+            query: string,
+            callback: (predictions: woosmap.map.Indoor.Predictions) => any,
+            ref?: string | null,
+            id?: string | null,
+            fromLocation?: string | null,
+            advancedFilter?: string | null,
+            maxResponses?: number | null,
+        ): void;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Defines the indoor venue information. An indoor venue consists of one or more buildings, geometry other information describing the venue.
+     */
+    interface Venue {
+        bbox: number[];
+        buildings?: woosmap.map.Building[] | null;
+        categories?: string[] | null;
+        levels: woosmap.map.Level[];
+        name?: string | null;
+        routing_profiles?: string[] | null;
+        venue_id: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Request to get directions between an origin and a destination.
+     */
+    interface IndoorDirectionRequest {
+        avoid?: string | null;
+        destination?: LatLng | null;
+        destinationId: (number | null) | string;
+        destinationLevel?: number | null;
+        language?: string | null;
+        mode?: string | null;
+        optimize?: boolean | null;
+        origin?: LatLng | null;
+        originId: (number | null) | string;
+        originLevel?: number | null;
+        units: "metric" | "imperial";
+        venueId: string;
+        waypoints?: string | null;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * UI Option of the Indoor widget.
+     */
+    interface IndoorWidgetOptionsui {
+        primaryColor: string;
+        secondaryColor: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Level of a Venue
+     */
+    interface Level {
+        bbox: number[];
+        level: number;
+        name?: string | null;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Widget's autocomplete options
+     */
+    interface IndoorWidgetAutocompleteOptions {
+        /**
+         * If set true, search responses will be retrived with distance from the user's location
+         */
+        autocompleteWithDistance: boolean;
+        /**
+         * Filter the map and the autocomplete to display/search only labels and icons of POIs which are matching the filters
+         */
+        baseFilter: string;
+        /**
+         * Sets whether to disable the autofocus for the search input.
+         */
+        disableAutoFocus?: boolean;
+        /**
+         * Number of search responses to retrieve. Default is 5 and the maximum limit is 10.
+         */
+        maxResponses: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Position indoor.
+     */
+    interface IndoorPosition {
+        adjusted?: boolean | null;
+        bearing?: number | null;
+        forceFocus?: boolean | null;
+        level: number;
+        position: LatLngLiteral;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor location composed of a latitude, a longitude and a level.
+     */
+    interface LatLngLevel {
+        lat: number;
+        level: number;
+        lng: number;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Array of lat, lon coordinates.
+     */
+    type PolylineCoords = GeoJSONPosition[];
+}
+declare namespace woosmap.map {
+    /**
+     * Options to configure the Indoor Renderer.
+     */
+    interface IndoorRendererOptions {
+        /**
+         * Filter the map to display only labels and icons of POIs which are matching the filters
+         */
+        baseFilter?: string;
+        /**
+         * Center the map on the venue when initializing.
+         */
+        centerMap?: boolean;
+        /**
+         * Set default floor for the venue
+         */
+        defaultFloor?: number;
+        /**
+         * Icons to indicate origin and destination on the route
+         */
+        directionsIcons?: woosmap.map.IndoorDirectionsIcons;
+        /**
+         * Force the extrusion to be always visible.
+         */
+        forceExtrusion?: boolean;
+        /**
+         * Hide the level selector
+         */
+        hideLevelSelector?: boolean;
+        /**
+         * Renders map with a POI selected by pk or id
+         */
+        highlightPOI?: string;
+        /**
+         * Renders map with a POI selected by ref
+         */
+        highlightPOIByRef?: string;
+        /**
+         * Sets custom icon for venue markers
+         */
+        icon?: woosmap.map.IndoorRendererOptionsIcon;
+        /**
+         * The position to place the level selector. Possible values are top(left) and right.
+         */
+        levelSelectorPosition?: "auto" | "top" | "right";
+        /**
+         * Customise the appearance of the indoor polyline/route.
+         * Acceptable values for custom colors are in in hexadecimal or RGB format.
+         *
+         * -  `color`: Define color of the polyline path.
+         * -  `highlightColor`: Set a custom color to highlight a step of a polyline.
+         * -  `strokeColor`:  Specify a custom color for the polyline stroke.
+         */
+        polylineOptions?: woosmap.map.IndoorPolylineOptions;
+        /**
+         * Enforces the view of the renderer.
+         */
+        responsive?: "mobile" | "desktop" | "auto";
+        /**
+         * Show the routing paths
+         */
+        showRoutingPaths?: boolean;
+        /**
+         * If the map pans out of the venue boundaries reset the map to venue bounds.
+         */
+        snapToVenueBounds?: boolean;
+        /**
+         * Renders map with the custom theme provided.
+         */
+        theme?: string;
+        /**
+         * Display an infowindow to highlight a selected POI
+         */
+        useInfoWindow?: boolean;
+        /**
+         * Set default venue
+         */
+        venue?: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Building of a venue.
+     */
+    interface Building {
+        cover?: string | null;
+        description?: string | null;
+        levels: woosmap.map.Level[];
+        localized_name?: {} | null;
+        logo?: string | null;
+        name?: string | null;
+        opening_hours?: string | null;
+        ref?: string | null;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * List of venues.
+     */
+    interface VenuesResult {
+        venues: woosmap.map.Venue[];
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Options of the Indoor widget.
+     */
+    interface IndoorWidgetOptions {
+        /**
+         * A set of optional autocomplete options to enrich the autocomplete backend request.
+         */
+        autocomplete?: woosmap.map.IndoorWidgetAutocompleteOptions;
+        autocompleteWithDistance?: boolean;
+        /**
+         * Areas to avoid while routing. Useful when certain areas of the venues are restricted or under maintenance.
+         * Expected format `level;lat,lng;lat,lng;lat,lng|level;lat,lng;lat,lng;lat,lng`
+         */
+        avoidZones?: string;
+        baseFilter?: string;
+        /**
+         * Set directions mode/routing profile
+         */
+        directionsMode?: string;
+        /**
+         * Sets whether to enable/disable navigation mode.
+         */
+        navigationMode?: boolean;
+        /**
+         * Set the custom colors of the indoor widget
+         */
+        ui?: woosmap.map.IndoorWidgetOptionsui;
+        /**
+         * Set units to use to show distance in directions itinerary
+         */
+        units?: "imperial" | "metric" | "";
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor distance object.
+     */
+    interface IndoorDistance {
+        text: string;
+        value: number;
+    }
+}
+declare namespace woosmap.map.Indoor {
+    /**
+     * Collection of poi predictions
+     */
+    interface Predictions {
+        predictions: woosmap.map.Indoor.Prediction[];
+        type: "Array";
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor duration object.
+     */
+    interface IndoorDuration {
+        text: string;
+        value: number;
+    }
+}
+declare namespace woosmap.map.Indoor {
+    /**
+     * Autocomplete predictions
+     */
+    interface Prediction {
+        building?: string | null;
+        distance?: number | null;
+        id: number;
+        level: number;
+        name: string;
+        ref?: string | null;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor instruction object.
+     */
+    interface IndoorInstruction {
+        instruction_type: string;
+        summary: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Icons to indicate origin and destination on route
+     */
+    interface IndoorDirectionsIcons {
+        destinationIcon?: woosmap.map.IndoorRendererOptionsIcon;
+        originIcon?: woosmap.map.IndoorRendererOptionsIcon;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor directions bounds.
+     */
+    type IndoorDirectionsBounds = number[];
+}
+declare namespace woosmap.map {
+    /**
+     * Icons to use to display venues on the map.
+     */
+    interface IndoorRendererOptionsIcon {
+        anchor?: { x: number; y: number };
+        scaledSize: { height: number; width: number };
+        url: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor directions route.
+     */
+    interface IndoorDirectionRoute {
+        bounds: woosmap.map.IndoorDirectionsBounds;
+        legs: woosmap.map.IndoorDirectionLeg[];
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor polyline customisation options
+     */
+    interface IndoorPolylineOptions {
+        color?: string;
+        highlightColor?: string;
+        strokeColor?: string;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor directions step.
+     */
+    interface IndoorStep {
+        bearing_end: number;
+        bearing_start: number;
+        distance: woosmap.map.IndoorDistance;
+        duration: woosmap.map.IndoorDuration;
+        end_location: woosmap.map.LatLngLevel;
+        instruction?: woosmap.map.IndoorInstruction | null;
+        polyline: woosmap.map.PolylineCoords;
+        start_location: woosmap.map.LatLngLevel;
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor directions leg.
+     */
+    interface IndoorDirectionLeg {
+        distance: woosmap.map.IndoorDistance;
+        duration: woosmap.map.IndoorDuration;
+        end_location: woosmap.map.LatLngLevel;
+        start_location: woosmap.map.LatLngLevel;
+        steps: woosmap.map.IndoorStep[];
+    }
+}
+declare namespace woosmap.map {
+    /**
+     * Indoor directions result.
+     */
+    interface IndoorDirectionResult {
+        routes: woosmap.map.IndoorDirectionRoute[];
+    }
+}

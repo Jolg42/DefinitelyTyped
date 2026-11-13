@@ -1,13 +1,13 @@
+//////////////////////////////////////////////////////
+// BEWARE: DO NOT EDIT MANUALLY! Changes will be lost!
+//////////////////////////////////////////////////////
+
+import { Events } from "./events";
+import { ExtensionTypes } from "./extensionTypes";
+
 /**
  * Namespace: browser.activityLog
- * Generated from Mozilla sources. Do not manually edit!
- *
- * Monitor extension activity
- * Permissions: "activityLog"
  */
-import { ExtensionTypes } from "./extensionTypes";
-import { Events } from "./events";
-
 export namespace ActivityLog {
     interface OnExtensionActivityDetailsType {
         /**
@@ -64,7 +64,7 @@ export namespace ActivityLog {
          * A list of arguments passed to the call.
          * Optional.
          */
-        args?: any[];
+        args?: unknown[];
 
         /**
          * The result of the call.
@@ -88,12 +88,11 @@ export namespace ActivityLog {
     /**
      * Receives an activityItem for each logging event.
      */
-    interface onExtensionActivityEvent extends Events.Event<(details: OnExtensionActivityDetailsType) => void> {
+    interface OnExtensionActivityEvent extends Events.Event<(details: OnExtensionActivityDetailsType) => void> {
         /**
          * Registers an event listener <em>callback</em> to an event.
          *
          * @param callback Called when an event occurs. The parameters of this function depend on the type of event.
-         * @param id
          */
         addListener(callback: (details: OnExtensionActivityDetailsType) => void, id: string): void;
     }
@@ -102,6 +101,6 @@ export namespace ActivityLog {
         /**
          * Receives an activityItem for each logging event.
          */
-        onExtensionActivity: onExtensionActivityEvent;
+        onExtensionActivity: OnExtensionActivityEvent;
     }
 }

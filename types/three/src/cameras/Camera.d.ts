@@ -1,39 +1,42 @@
-import { Matrix4 } from './../math/Matrix4';
-import { Vector3 } from './../math/Vector3';
-import { Object3D } from './../core/Object3D';
-
-// Cameras ////////////////////////////////////////////////////////////////////////////////////////
+import { CoordinateSystem } from "../constants.js";
+import { Object3D } from "../core/Object3D.js";
+import { Matrix4 } from "../math/Matrix4.js";
+import { Vector4 } from "../math/Vector4.js";
 
 /**
- * Abstract base class for cameras. This class should always be inherited when you build a new camera.
+ * Abstract base class for cameras. This class should always be inherited
+ * when you build a new camera.
  */
 export class Camera extends Object3D {
     /**
-     * This constructor sets following properties to the correct type: matrixWorldInverse, projectionMatrix and projectionMatrixInverse.
+     * This flag can be used for type testing.
+     *
+     * @default true
      */
-    constructor();
-
+    readonly isCamera: boolean;
     /**
-     * This is the inverse of matrixWorld. MatrixWorld contains the Matrix which has the world transform of the Camera.
-     * @default new THREE.Matrix4()
+     * The inverse of the camera's world matrix.
      */
     matrixWorldInverse: Matrix4;
-
     /**
-     * This is the matrix which contains the projection.
-     * @default new THREE.Matrix4()
+     * The camera's projection matrix.
      */
     projectionMatrix: Matrix4;
-
     /**
-     * This is the inverse of projectionMatrix.
-     * @default new THREE.Matrix4()
+     * The inverse of the camera's projection matrix.
      */
     projectionMatrixInverse: Matrix4;
-
-    readonly isCamera: true;
-
-    getWorldDirection(target: Vector3): Vector3;
-
-    updateMatrixWorld(force?: boolean): void;
+    /**
+     * The coordinate system in which the camera is used.
+     */
+    coordinateSystem: CoordinateSystem;
+    viewport?: Vector4;
+    /**
+     * The flag that indicates whether the camera uses a reversed depth buffer.
+     *
+     * @default false
+     */
+    get reversedDepth(): boolean;
+    clone(): this;
+    copy(source: Camera, recursive?: boolean): this;
 }

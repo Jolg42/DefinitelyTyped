@@ -1,14 +1,23 @@
 import formidable = require("formidable");
 import {
     defaultOptions,
-    plugins,
+    enabledPlugins,
+    errors as formidableErrors,
     File,
-    formidable as formidableAlias,
     Formidable,
+    formidable as formidableAlias,
+    FormidableError,
     IncomingForm,
+    json,
+    multipart,
     MultipartParser,
+    octetstream,
     Options,
+    Part,
     PersistentFile,
+    PluginFunction,
+    plugins,
+    querystring,
     VolatileFile,
 } from "formidable";
 import * as http from "http";
@@ -16,37 +25,46 @@ import * as http from "http";
 // arrange
 const options: Options = {
     allowEmptyFiles: true,
-    enabledPlugins: [],
+    enabledPlugins: [json, querystring],
     encoding: "utf-8",
     fileWriteStreamHandler: undefined,
-    hash: false,
+    hashAlgorithm: false,
     keepExtensions: false,
     maxFields: 1000,
     maxFieldsSize: 20 * 1024 * 1024,
+    maxFiles: Infinity,
     maxFileSize: 200 * 1024 * 1024,
+    maxTotalFileSize: 200 * 1024 * 1024,
     minFileSize: 1,
     multiples: false,
     uploadDir: "/dir",
+    createDirsFromUploads: false,
+    filter: (part) => {
+        // $ExpectType Part
+        part;
+        return true;
+    },
 };
 
 const file: File = {
-    hash: "sha1",
-    lastModifiedDate: new Date(),
-    name: "name",
-    path: "path",
+    hashAlgorithm: false,
+    hash: "hash",
+    mtime: new Date(),
+    originalFilename: "name",
+    newFilename: "newfilename",
+    filepath: "path",
     size: 20,
-    type: "json",
+    mimetype: "json",
     toJSON: () => ({
-        filename: file.name!,
+        newFilename: file.newFilename,
         length: 10,
-        mime: "string",
-        mtime: file.lastModifiedDate!,
-        name: file.name,
-        path: file.path,
+        mimetype: file.mimetype,
+        mtime: file.mtime!,
+        originalFilename: file.originalFilename,
+        filepath: file.filepath,
         size: file.size,
-        type: file.type,
     }),
-    toString: () => `File: ${file.name}`,
+    toString: () => `File: ${file.originalFilename}`,
 };
 
 // act/assert
@@ -65,10 +83,15 @@ Formidable.DEFAULT_OPTIONS;
 defaultOptions;
 defaultOptions.enabledPlugins; // $ExpectType EnabledPlugins
 
+options.fileWriteStreamHandler; // $ExpectType ((file?: VolatileFile | undefined) => Writable) | undefined
+
+// $ExpectType EnabledPlugins
+enabledPlugins;
+
 // $ExpectType EnabledPlugins
 plugins;
 
-// $ExpectType PersistentFile
+// $ExpectType VolatileFile
 new VolatileFile(file);
 
 // $ExpectType PersistentFile
@@ -102,51 +125,50 @@ form.on("data", data => {
     end;
     // $ExpectType string
     formname;
-});
+})
+    .on("fileBegin", (formname, file) => {
+        // $ExpectType string
+        formname;
+        // $ExpectType File
+        file;
 
-form.on("fileBegin", (formname, file) => {
-    // $ExpectType string
-    formname;
-    // $ExpectType File
-    file;
+        form.emit("data", { name: "fileBegin", formname, value: file });
+    })
+    .on("file", (formname, file) => {
+        // $ExpectType string
+        formname;
+        // $ExpectType File
+        file;
 
-    form.emit("data", { name: "fileBegin", formname, value: file });
-});
-form.on("file", (formname, file) => {
-    // $ExpectType string
-    formname;
-    // $ExpectType File
-    file;
+        form.emit("data", { name: "file", formname, value: file });
+    })
+    .on("progress", (bytesReceived, bytesExpected) => {
+        // $ExpectType number
+        bytesReceived;
+        // $ExpectType number
+        bytesExpected;
 
-    form.emit("data", { name: "file", formname, value: file });
-});
-
-form.on("progress", (bytesReceived, bytesExpected) => {
-    // $ExpectType number
-    bytesReceived;
-    // $ExpectType number
-    bytesExpected;
-});
-
-form.on("field", (name, value) => {
-    // $ExpectType string
-    name;
-    // $ExpectType string
-    value;
-});
-
-form.on("error", err => {
-    // $ExpectType any
-    err;
-});
-
-form.on("aborted", () => {});
-
-form.once("end", () => {});
-form.once("error", err => {
-    // $ExpectType any
-    err;
-});
+        form.emit(
+            "error",
+            new formidableErrors.default("bytes received exceeded", formidableErrors.biggerThanTotalMaxFileSize, 400),
+        );
+    })
+    .on("field", (name, value) => {
+        // $ExpectType string
+        name;
+        // $ExpectType string
+        value;
+    })
+    .on("error", err => {
+        // $ExpectType any
+        err;
+    })
+    .on("aborted", () => {})
+    .once("end", () => {})
+    .once("error", err => {
+        // $ExpectType any
+        err;
+    });
 
 form.use((self, options) => {
     // $ExpectType IncomingForm
@@ -164,21 +186,44 @@ form.onPart = part => {
         buffer;
     });
 
-    form.handlePart(part);
+    form._handlePart(part);
 };
 
-http.createServer(req => {
+http.createServer(async req => {
     // $ExpectType IncomingMessage
     req;
 
-    form.parse(req, (err, fields, files) => {
+    form.parse(req, (err, fields, files) => { // testing with callback
         // $ExpectType any
         err;
-        // $ExpectType Fields
+        // $ExpectType Fields<string>
         fields;
-        // $ExpectType Files
+        // $ExpectType Files<string>
         files;
     });
+
+    form.parse<"name" | "age", "avatar" | "document">(req, (err, fields, files) => { // testing with callback and type arguments
+        // $ExpectType any
+        err;
+        // $ExpectType Fields<"name" | "age">
+        fields;
+        // $ExpectType Files<"avatar" | "document"> || Files<"document" | "avatar">
+        files;
+    });
+
+    form.parse(req); // testing without callback
+
+    const [fields, files] = await form.parse(req); // testing with promise
+    // $ExpectType Fields<string>
+    fields;
+    // $ExpectType Files<string>
+    files;
+
+    const [newFields, newFiles] = await form.parse<"name" | "age", "avatar" | "document">(req); // testing with promise and type arguments
+    // $ExpectType Fields<"name" | "age">
+    newFields;
+    // $ExpectType Files<"avatar" | "document"> || Files<"document" | "avatar">
+    newFiles;
 });
 
 // $ExpectType IncomingForm
@@ -186,3 +231,53 @@ new IncomingForm();
 
 // $ExpectType IncomingForm
 formidable();
+
+// $ExpectType PluginFunction
+octetstream;
+// $ExpectType PluginFunction
+querystring;
+// $ExpectType PluginFunction
+multipart;
+// $ExpectType PluginFunction
+json;
+// $ExpectType number
+formidableErrors.missingPlugin;
+// $ExpectType number
+formidableErrors.pluginFunction;
+// $ExpectType number
+formidableErrors.aborted;
+// $ExpectType number
+formidableErrors.noParser;
+// $ExpectType number
+formidableErrors.uninitializedParser;
+// $ExpectType number
+formidableErrors.filenameNotString;
+// $ExpectType number
+formidableErrors.maxFieldsSizeExceeded;
+// $ExpectType number
+formidableErrors.maxFieldsExceeded;
+// $ExpectType number
+formidableErrors.maxFilesExceeded;
+// $ExpectType number
+formidableErrors.smallerThanMinFileSize;
+// $ExpectType number
+formidableErrors.biggerThanMaxFileSize;
+// $ExpectType number
+formidableErrors.noEmptyFiles;
+// $ExpectType number
+formidableErrors.missingContentType;
+// $ExpectType number
+formidableErrors.malformedMultipart;
+// $ExpectType number
+formidableErrors.missingMultipartBoundary;
+// $ExpectType number
+formidableErrors.unknownTransferEncoding;
+// $ExpectType number
+formidableErrors.biggerThanTotalMaxFileSize;
+// $ExpectType number
+formidableErrors.pluginFailed;
+// $ExpectType number
+formidableErrors.cannotCreateDir;
+
+// $ExpectType FormidableError
+new formidableErrors.default("invalid type", 0, 400);

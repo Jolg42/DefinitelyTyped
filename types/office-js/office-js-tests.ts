@@ -13,8 +13,8 @@ function test_excel() {
         return ctx.sync()
             .then(function () {
                 var vals = range.values;
-                for (var i = 0; i < vals.length; i++) {
-                    for (var j = 0; j < vals[i].length; j++) {
+                for (var i = 0; i < vals.length; i += 1) {
+                    for (var j = 0; j < vals[i].length; j += 1) {
                         vals[i][j] = vals[i][j].toUpperCase();
                     }
                 }
@@ -72,7 +72,7 @@ function test_excel() {
                 var largestRow = 0;
                 var largestValue = 0;
 
-                for (var i = 0; i < rows.items.length; i++) {
+                for (var i = 0; i < rows.items.length; i += 1) {
                     if (rows.items[i].values[0][1] > largestValue) {
                         largestRow = i;
                         largestValue = rows.items[i].values[0][1];
@@ -108,7 +108,146 @@ function test_excel() {
     }).catch(console.log);
 }
 
+function test_excel_chart_series_source_data(series: Excel.ChartSeries, range: Excel.Range) {
+    // $ExpectType void
+    series.setBubbleSizes(range);
+    // $ExpectType void
+    series.setBubbleSizes("=Sheet1!$C$2:$C$4");
+    // $ExpectType void
+    series.setValues(range);
+    // $ExpectType void
+    series.setValues("=Sheet1!$B$2:$B$4");
+    // $ExpectType void
+    series.setXAxisValues(range);
+    // $ExpectType void
+    series.setXAxisValues("=Sheet1!$A$2:$A$4");
+    series.setXAxisValues("");
+    series.setXAxisValues("=");
+
+    // @ts-expect-error
+    series.setBubbleSizes(42);
+    // @ts-expect-error
+    series.setBubbleSizes([1, 2]);
+    // @ts-expect-error
+    series.setValues(42);
+    // @ts-expect-error
+    series.setXAxisValues(["A", "B"]);
+}
+
+function test_excel_recent_apis(functions: Excel.Functions) {
+    const dateValueResult: Excel.FunctionResult<number> = functions.datevalue(1);
+
+    const linkedEntityEventType: Excel.EventType = Excel.EventType.linkedEntityDataDomainLinkedEntityCellValueLoaded;
+    const linkedEntityEventTypeValue: "LinkedEntityDataDomainLinkedEntityCellValueLoaded" =
+        Excel.EventType.linkedEntityDataDomainLinkedEntityCellValueLoaded;
+
+    const dirtySupportingFormulaErrorCode: Excel.ErrorCodes = Excel.ErrorCodes.dirtySupportingFormula;
+    const dirtySupportingFormulaErrorCodeValue: "DirtySupportingFormula" = Excel.ErrorCodes.dirtySupportingFormula;
+
+    const blockedError: Excel.BlockedErrorCellValue = {
+        type: "Error",
+        errorSubType: "PythonUnsupportedOnThisPlatform",
+    };
+    const busyError: Excel.BusyErrorCellValue = { type: "Error", errorSubType: "PlaceholderInFormula" };
+    const calcError: Excel.CalcErrorCellValue = { type: "Error", errorSubType: "UnexpectedReturnValue" };
+    const connectError: Excel.ConnectErrorCellValue = {
+        type: "Error",
+        errorSubType: "ExternalCodeServiceRuntimeNotFound",
+    };
+    const refError: Excel.RefErrorCellValue = { type: "Error", errorSubType: "CorruptCellRef" };
+    const valueError: Excel.ValueErrorCellValue = { type: "Error", errorSubType: "TranslateUnsupportedTargetLanguage" };
+}
+
+function test_word_line_format(line: Word.LineFormat) {
+    // @ts-expect-error
+    line.backgroundColor;
+    // @ts-expect-error
+    line.beginArrowheadLength = "Short";
+    // @ts-expect-error
+    line.beginArrowheadStyle = "Triangle";
+    // @ts-expect-error
+    line.beginArrowheadWidth = "Narrow";
+    // @ts-expect-error
+    line.endArrowheadLength = "Long";
+    // @ts-expect-error
+    line.endArrowheadStyle = "Oval";
+    // @ts-expect-error
+    line.endArrowheadWidth = "Wide";
+    // @ts-expect-error
+    line.pattern = "Cross";
+
+    const update: Word.Interfaces.LineFormatUpdateData = { weight: 1 };
+    // @ts-expect-error
+    update.backgroundColor = {};
+    // @ts-expect-error
+    update.beginArrowheadLength = "Short";
+    // @ts-expect-error
+    update.beginArrowheadStyle = "Triangle";
+    // @ts-expect-error
+    update.beginArrowheadWidth = "Narrow";
+    // @ts-expect-error
+    update.endArrowheadLength = "Long";
+    // @ts-expect-error
+    update.endArrowheadStyle = "Oval";
+    // @ts-expect-error
+    update.endArrowheadWidth = "Wide";
+    // @ts-expect-error
+    update.pattern = "Cross";
+    line.set(update);
+
+    // $ExpectType LineFormatData
+    const data = line.toJSON();
+    // @ts-expect-error
+    data.backgroundColor;
+    // @ts-expect-error
+    data.beginArrowheadLength;
+    // @ts-expect-error
+    data.beginArrowheadStyle;
+    // @ts-expect-error
+    data.beginArrowheadWidth;
+    // @ts-expect-error
+    data.endArrowheadLength;
+    // @ts-expect-error
+    data.endArrowheadStyle;
+    // @ts-expect-error
+    data.endArrowheadWidth;
+    // @ts-expect-error
+    data.pattern;
+
+    const options: Word.Interfaces.LineFormatLoadOptions = { weight: true };
+    // @ts-expect-error
+    options.backgroundColor = {};
+    // @ts-expect-error
+    options.beginArrowheadLength = true;
+    // @ts-expect-error
+    options.beginArrowheadStyle = true;
+    // @ts-expect-error
+    options.beginArrowheadWidth = true;
+    // @ts-expect-error
+    options.endArrowheadLength = true;
+    // @ts-expect-error
+    options.endArrowheadStyle = true;
+    // @ts-expect-error
+    options.endArrowheadWidth = true;
+    // @ts-expect-error
+    options.pattern = true;
+    // $ExpectType LineFormat
+    line.load(options);
+}
+
 function test_word() {
+    const annotationAddedEventType: Word.EventType = Word.EventType.annotationAdded;
+    const annotationAddedEventTypeValue: "AnnotationAdded" = Word.EventType.annotationAdded;
+    const annotationChangedEventType: Word.EventType = Word.EventType.annotationChanged;
+    const annotationChangedEventTypeValue: "AnnotationChanged" = Word.EventType.annotationChanged;
+    const annotationDeletedEventType: Word.EventType = Word.EventType.annotationDeleted;
+    const annotationDeletedEventTypeValue: "AnnotationDeleted" = Word.EventType.annotationDeleted;
+
+    const annotationEventArgs: Word.ContentControlAddedEventArgs = {
+        eventType: "AnnotationAdded",
+        ids: [],
+        source: "Local",
+    };
 
     // Search
     Word.run(function (context) {
@@ -133,7 +272,7 @@ function test_word() {
                 '; we highlighted the results.';
 
             // Queue a command to change the font for each found item. 
-            for (var i = 0; i < searchResults.items.length; i++) {
+            for (var i = 0; i < searchResults.items.length; i += 1) {
                 searchResults.items[i].font.color = '#FF0000'    // Change color to Red
                 searchResults.items[i].font.highlightColor = '#FFFF00';
                 searchResults.items[i].font.bold = true;
@@ -233,7 +372,7 @@ function test_word() {
                 if (this._calloutNumber > 0) {
                     var lastParagraph = insertedImage.insertParagraph('Here are your callout descriptions:', Word.InsertLocation.after) as Word.Paragraph;
 
-                    for (var i = 0; i < this._calloutNumber; i++) {
+                    for (var i = 0; i < this._calloutNumber; i += 1) {
                         lastParagraph = lastParagraph.insertParagraph((i + 1) + ') [enter callout description].', Word.InsertLocation.after);
                     }
                 }
@@ -316,5 +455,24 @@ async function testResumeExistingObject () {
     await Excel.run({delayForCellEdit: true, previousObjects: range}, async context => {
         range.clear();
         await context.sync();
+    });
+}
+
+/* Office direct API tests */
+async function testOfficeDirectApis() {
+    let supported = Office.isSetSupported('ExcelApi', '1.10');
+    Office.addin.setStartupBehavior(Office.StartupBehavior.load);
+    let startupBehavior = Office.addin.getStartupBehavior();
+    Office.ribbon.requestUpdate({
+        tabs: [
+            {
+                id: 'test-id',
+                controls: [
+                {
+                    id: 'button-1',
+                    enabled: true,
+                }]
+            },
+        ],
     });
 }

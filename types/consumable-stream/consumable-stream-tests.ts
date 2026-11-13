@@ -1,10 +1,10 @@
-import ConsumableStream = require('consumable-stream');
+import ConsumableStream = require("consumable-stream");
 
 // Simple, dummy implementation of the abstract class
 
 class DummyConsumer {
     async next() {
-        return { done: true, value: 'dummy' };
+        return { done: true, value: "dummy" };
     }
 
     return() {
@@ -36,14 +36,6 @@ const consumableStream = new DummyConsumableStream();
 (async () => {
     // $ExpectType string
     await consumableStream.once();
-})();
-
-(async () => {
-    const consumable = consumableStream.createConsumable(20);
-    for await (const data of consumable) {
-        // $ExpectType string
-        data;
-    }
 })();
 
 (async () => {

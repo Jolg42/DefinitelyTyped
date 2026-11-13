@@ -1,12 +1,11 @@
-import { Texture, ShaderMaterial } from '../../../src/Three';
+import { IUniform, ShaderMaterial, Texture } from "three";
 
-import { Pass } from './Pass';
+import { Pass } from "./Pass.js";
 
 export class TexturePass extends Pass {
-    constructor(map: Texture, opacity?: number);
-    map: Texture;
+    constructor(map?: Texture, opacity?: number);
+    map: Texture | undefined;
     opacity: number;
-    uniforms: object;
+    uniforms: Record<string, IUniform>;
     material: ShaderMaterial;
-    fsQuad: object;
 }

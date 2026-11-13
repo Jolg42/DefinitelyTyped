@@ -1,13 +1,3 @@
-// Type definitions for non-npm package geojson 7946.0
-// Project: https://geojson.org/
-// Definitions by: Jacob Bruun <https://github.com/cobster>
-//                 Arne Schubert <https://github.com/atd-schubert>
-//                 Jeff Jacobson <https://github.com/JeffJacobson>
-//                 Ilia Choly <https://github.com/icholy>
-//                 Dan Vanderkam <https://github.com/danvk>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-// TypeScript Version: 2.3
-
 // Note: as of the RFC 7946 version of GeoJSON, Coordinate Reference Systems
 // are no longer supported. (See https://tools.ietf.org/html/rfc7946#appendix-B)}
 
@@ -17,13 +7,13 @@ export as namespace GeoJSON;
  * The valid values for the "type" property of GeoJSON geometry objects.
  * https://tools.ietf.org/html/rfc7946#section-1.4
  */
-export type GeoJsonGeometryTypes = Geometry['type'];
+export type GeoJsonGeometryTypes = Geometry["type"];
 
 /**
  * The value values for the "type" property of GeoJSON Objects.
  * https://tools.ietf.org/html/rfc7946#section-1.4
  */
-export type GeoJsonTypes = GeoJSON['type'];
+export type GeoJsonTypes = GeoJSON["type"];
 
 /**
  * Bounding box
@@ -37,8 +27,42 @@ export type BBox = [number, number, number, number] | [number, number, number, n
  * Array should contain between two and three elements.
  * The previous GeoJSON specification allowed more elements (e.g., which could be used to represent M values),
  * but the current specification only allows X, Y, and (optionally) Z to be defined.
+ *
+ * Note: the type will not be narrowed down to `[number, number] | [number, number, number]` due to
+ * marginal benefits and the large impact of breaking change.
+ *
+ * See previous discussions on the type narrowing:
+ * - {@link https://github.com/DefinitelyTyped/DefinitelyTyped/pull/21590|Nov 2017}
+ * - {@link https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/67773|Dec 2023}
+ * - {@link https://github.com/DefinitelyTyped/DefinitelyTyped/discussions/71441| Dec 2024}
+ *
+ * One can use a
+ * {@link https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates|user-defined type guard that returns a type predicate}
+ * to determine if a position is a 2D or 3D position.
+ *
+ * @example
+ * import type { Position } from 'geojson';
+ *
+ * type StrictPosition = [x: number, y: number] | [x: number, y: number, z: number]
+ *
+ * function isStrictPosition(position: Position): position is StrictPosition {
+ *   return position.length === 2 || position.length === 3
+ * };
+ *
+ * let position: Position = [-116.91, 45.54];
+ *
+ * let x: number;
+ * let y: number;
+ * let z: number | undefined;
+ *
+ * if (isStrictPosition(position)) {
+ *   // `tsc` would throw an error if we tried to destructure a fourth parameter
+ * 	 [x, y, z] = position;
+ * } else {
+ * 	 throw new TypeError("Position is not a 2D or 3D point");
+ * }
  */
-export type Position = number[]; // [number, number] | [number, number, number];
+export type Position = number[];
 
 /**
  * The base GeoJSON object.
@@ -70,7 +94,10 @@ export interface GeoJsonObject {
 /**
  * Union of GeoJSON objects.
  */
-export type GeoJSON = Geometry | Feature | FeatureCollection;
+export type GeoJSON<G extends Geometry | null = Geometry, P = GeoJsonProperties> =
+    | G
+    | Feature<G, P>
+    | FeatureCollection<G, P>;
 
 /**
  * Geometry object.
@@ -137,12 +164,12 @@ export interface MultiPolygon extends GeoJsonObject {
  * Geometry Collection
  * https://tools.ietf.org/html/rfc7946#section-3.1.8
  */
-export interface GeometryCollection extends GeoJsonObject {
+export interface GeometryCollection<G extends Geometry = Geometry> extends GeoJsonObject {
     type: "GeometryCollection";
-    geometries: Geometry[];
+    geometries: G[];
 }
 
-export type GeoJsonProperties = { [name: string]: any; } | null;
+export type GeoJsonProperties = { [name: string]: any } | null;
 
 /**
  * A feature object which contains a geometry and associated properties.

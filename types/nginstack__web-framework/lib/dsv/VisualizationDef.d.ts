@@ -1,21 +1,26 @@
 export = VisualizationDef;
 declare function VisualizationDef(): void;
 declare class VisualizationDef {
-    filters: any[];
-    includes: Array<number | string>;
+    filters: Array<import("./VisualizationFilterDef")>;
+    includes: Array<string | number>;
     extraExportFormats: Array<{
         name: string;
         processKey: number;
-        useRawData: boolean;
+        useRawData: boolean | undefined;
     }>;
     header: VisualizationHeaderDef;
     footer: VisualizationFooterDef;
     canExport: boolean;
     help: string;
-    messageWhenEmpty: string;
-    onCreate: ((arg0: any) => any) | null;
+    noResultsMessage: string;
+    onCreate: ((arg0: Visualization) => any) | null;
     title: string;
     type: string;
 }
-import VisualizationHeaderDef = require('./VisualizationHeaderDef.js');
-import VisualizationFooterDef = require('./VisualizationFooterDef.js');
+declare namespace VisualizationDef {
+    export { Visualization, VisualizationFilterDef };
+}
+import VisualizationHeaderDef = require("./VisualizationHeaderDef.js");
+import VisualizationFooterDef = require("./VisualizationFooterDef.js");
+type Visualization = import("./Visualization");
+type VisualizationFilterDef = import("./VisualizationFilterDef");

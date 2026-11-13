@@ -1,11 +1,6 @@
-// Type definitions for pbf2json 6.6
-// Project: https://github.com/pelias/pbf2json
-// Definitions by: Kyle Hensel <https://github.com/k-yle>
-// Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
-
 /// <reference types="node" />
 
-import stream = require('stream');
+import stream = require("stream");
 
 /** A key-value pair of OSM tags */
 export type Tags = Record<string, string | undefined>;
@@ -14,38 +9,54 @@ export interface Coordinate {
     lat: number;
     lon: number;
 }
-export interface Centroid extends Coordinate {
-    type: 'entrance' | undefined;
+
+export interface CoordinateString {
+    lat: string;
+    lon: string;
+}
+export interface Centroid extends CoordinateString {
+    type: "entrance" | undefined;
+}
+
+export interface Metadata {
+    version?: number;
+    timestamp?: string;
+    user?: string;
+    uid?: number;
+    changeset?: number;
 }
 
 export interface Node extends Coordinate {
     id: number;
-    type: 'node';
+    type: "node";
+    meta?: Metadata;
     tags: Tags;
 }
 export interface Way {
     id: number;
-    type: 'way';
+    type: "way";
+    meta?: Metadata;
     tags: Tags;
     centroid: Centroid;
     bounds: {
-        n: number;
-        s: number;
-        e: number;
-        w: number;
+        n: string;
+        s: string;
+        e: string;
+        w: string;
     };
-    nodes: Coordinate[];
+    nodes: CoordinateString[];
 }
 export interface Relation {
     id: number;
-    type: 'relation';
+    type: "relation";
+    meta?: Metadata;
     tags: Tags;
     centroid: Centroid;
     bounds: {
-        n: number;
-        s: number;
-        e: number;
-        w: number;
+        n: string;
+        s: string;
+        e: string;
+        w: string;
     };
 }
 
@@ -59,6 +70,9 @@ export interface Options {
     /** Path to store temp files */
     leveldb?: string | undefined;
     waynodes?: string | undefined;
+    options?: {
+        metadata?: boolean;
+    };
 }
 
 export interface Decoder extends stream.Transform {

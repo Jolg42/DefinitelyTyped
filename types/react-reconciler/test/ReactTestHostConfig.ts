@@ -1,12 +1,14 @@
+// This file is pretty much a copy of https://github.com/facebook/react/blob/main/packages/react-test-renderer/src/ReactTestHostConfig.js
+
 /**
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- *
  */
 
-import { ReactFundamentalComponentInstance } from "./ReactTypes";
+import ReactReconcilerConstants = require("react-reconciler/constants");
+import { ReactContext } from "react-reconciler";
 
 export const REACT_OPAQUE_ID_TYPE: number | symbol = 0xeae0;
 
@@ -14,53 +16,80 @@ export type TimeoutID = number;
 
 export type Type = string;
 export interface Props {
-  [key: string]: any;
+    [key: string]: any;
 }
 export interface Container {
-  children: Array<Instance | TextInstance>;
-  createNodeMock: (...args: any[]) => any;
-  tag: "CONTAINER";
+    children: Array<Instance | TextInstance>;
+    createNodeMock: (...args: any[]) => any;
+    tag: "CONTAINER";
 }
 export interface Instance {
-  type: string;
-  props: {
-    [key: string]: any;
-  };
-  isHidden: boolean;
-  children: Array<Instance | TextInstance>;
-  internalInstanceHandle: {
-    [key: string]: any;
-  };
-  rootContainerInstance: Container;
-  tag: "INSTANCE";
+    type: string;
+    props: {
+        [key: string]: any;
+    };
+    isHidden: boolean;
+    children: Array<Instance | TextInstance>;
+    internalInstanceHandle: {
+        [key: string]: any;
+    };
+    rootContainerInstance: Container;
+    tag: "INSTANCE";
 }
 export interface TextInstance {
-  text: string;
-  isHidden: boolean;
-  tag: "TEXT";
+    text: string;
+    isHidden: boolean;
+    tag: "TEXT";
 }
 export type HydratableInstance = Instance | TextInstance;
-export type PublicInstance = (Instance | TextInstance) & { kind: 'PublicInstance' };
+export type FormInstance = Instance;
+export type PublicInstance = (Instance | TextInstance) & { kind: "PublicInstance" };
 export interface HostContext {
-  [key: string]: any;
-}
-export interface UpdatePayload {
-  [key: string]: any;
+    [key: string]: any;
 }
 export type ChildSet = undefined; // Unused
 export type TimeoutHandle = TimeoutID;
 export type NoTimeout = -1;
+export type TransitionStatus = any;
+export interface SuspendedState {
+    kind: "SuspendedState";
+}
 export type EventResponder = any;
-export type OpaqueIDType = string | {
-  $$typeof: number | symbol;
-  toString: () => string | void;
-  valueOf: () => string | void;
-};
+export type OpaqueIDType =
+    | string
+    | {
+        $$typeof: number | symbol;
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+        toString: () => string | void;
+        // eslint-disable-next-line @typescript-eslint/no-invalid-void-type
+        valueOf: () => string | void;
+    };
 
-export type RendererInspectionConfig = Readonly<{}>;
+export interface RendererInspectionConfig {
+    kind: "RendererInspectionConfig";
+}
 
-export * from "./ReactFiberHostConfigWithNoPersistence";
+export interface FormStateMarkerInstance {
+    kind: "FormStateMarkerInstance";
+}
+
+// This host config doesn't support Resources (supportsResources is left
+// unset), so these are never actually produced, but the generic parameters
+// still need concrete stand-in types.
+export interface HoistableRoot {
+    kind: "HoistableRoot";
+}
+export interface Resource {
+    kind: "Resource";
+}
+
+export const rendererVersion = "19.2.0";
+export const rendererPackageName = "react-test-renderer";
+export const extraDevToolsConfig: RendererInspectionConfig | null = null;
+
 export * from "./ReactFiberHostConfigWithNoHydration";
+export * from "./ReactFiberHostConfigWithNoMicrotasks";
+export * from "./ReactFiberHostConfigWithNoPersistence";
 export * from "./ReactFiberHostConfigWithNoTestSelectors";
 
 const NO_CONTEXT = {};
@@ -68,125 +97,140 @@ const UPDATE_SIGNAL = {};
 const nodeToInstanceMap = new WeakMap();
 
 export function getPublicInstance(inst: Instance | TextInstance): any {
-  switch (inst.tag) {
-    case 'INSTANCE':
-      const createNodeMock = inst.rootContainerInstance.createNodeMock;
-      const mockNode = createNodeMock({
-        type: inst.type,
-        props: inst.props
-      });
+    switch (inst.tag) {
+        case "INSTANCE":
+            const createNodeMock = inst.rootContainerInstance.createNodeMock;
+            const mockNode = createNodeMock({
+                type: inst.type,
+                props: inst.props,
+            });
 
-      if (typeof mockNode === 'object' && mockNode !== null) {
-        nodeToInstanceMap.set(mockNode, inst);
-      }
+            if (typeof mockNode === "object" && mockNode !== null) {
+                nodeToInstanceMap.set(mockNode, inst);
+            }
 
-      return mockNode;
-    default:
-      return inst;
-  }
+            return mockNode;
+        default:
+            return inst;
+    }
 }
 
 export function appendChild(parentInstance: Instance | Container, child: Instance | TextInstance): void {
-  const index = parentInstance.children.indexOf(child);
-  if (index !== -1) {
-    parentInstance.children.splice(index, 1);
-  }
-  parentInstance.children.push(child);
+    const index = parentInstance.children.indexOf(child);
+    if (index !== -1) {
+        parentInstance.children.splice(index, 1);
+    }
+    parentInstance.children.push(child);
 }
 
-export function insertBefore(parentInstance: Instance | Container, child: Instance | TextInstance, beforeChild: Instance | TextInstance): void {
-  const index = parentInstance.children.indexOf(child);
-  if (index !== -1) {
-    parentInstance.children.splice(index, 1);
-  }
-  const beforeIndex = parentInstance.children.indexOf(beforeChild);
-  parentInstance.children.splice(beforeIndex, 0, child);
+export function insertBefore(
+    parentInstance: Instance | Container,
+    child: Instance | TextInstance,
+    beforeChild: Instance | TextInstance,
+): void {
+    const index = parentInstance.children.indexOf(child);
+    if (index !== -1) {
+        parentInstance.children.splice(index, 1);
+    }
+    const beforeIndex = parentInstance.children.indexOf(beforeChild);
+    parentInstance.children.splice(beforeIndex, 0, child);
 }
 
 export function removeChild(parentInstance: Instance | Container, child: Instance | TextInstance): void {
-  const index = parentInstance.children.indexOf(child);
-  parentInstance.children.splice(index, 1);
+    const index = parentInstance.children.indexOf(child);
+    parentInstance.children.splice(index, 1);
 }
 
 export function clearContainer(container: Container): void {
-  container.children.splice(0);
+    container.children.splice(0);
 }
 
 export function getRootHostContext(rootContainerInstance: Container): HostContext {
-  return NO_CONTEXT;
+    return NO_CONTEXT;
 }
 
-export function getChildHostContext(parentHostContext: HostContext, type: string, rootContainerInstance: Container): HostContext {
-  return NO_CONTEXT;
+export function getChildHostContext(parentHostContext: HostContext, type: string): HostContext {
+    return NO_CONTEXT;
 }
 
 export function prepareForCommit(containerInfo: Container): null | {
-  [key: string]: any;
+    [key: string]: any;
 } {
-  // noop
-  return null;
+    // noop
+    return null;
 }
 
-export function resetAfterCommit(containerInfo: Container): void {// noop
+export function resetAfterCommit(containerInfo: Container): void {
+    // noop
 }
 
-export function createInstance(type: string, props: Props, rootContainerInstance: Container, hostContext: {
-  [key: string]: any;
-}, internalInstanceHandle: {
-  [key: string]: any;
-}): Instance {
-  return {
-    type,
-    props,
-    isHidden: false,
-    children: [],
-    internalInstanceHandle,
-    rootContainerInstance,
-    tag: 'INSTANCE'
-  };
+export function createInstance(
+    type: string,
+    props: Props,
+    rootContainerInstance: Container,
+    hostContext: {
+        [key: string]: any;
+    },
+    internalInstanceHandle: {
+        [key: string]: any;
+    },
+): Instance {
+    return {
+        type,
+        props,
+        isHidden: false,
+        children: [],
+        internalInstanceHandle,
+        rootContainerInstance,
+        tag: "INSTANCE",
+    };
 }
 
 export function appendInitialChild(parentInstance: Instance, child: Instance | TextInstance): void {
-  const index = parentInstance.children.indexOf(child);
-  if (index !== -1) {
-    parentInstance.children.splice(index, 1);
-  }
-  parentInstance.children.push(child);
+    const index = parentInstance.children.indexOf(child);
+    if (index !== -1) {
+        parentInstance.children.splice(index, 1);
+    }
+    parentInstance.children.push(child);
 }
 
-export function finalizeInitialChildren(testElement: Instance, type: string, props: Props, rootContainerInstance: Container, hostContext: {
-  [key: string]: any;
-}): boolean {
-  return false;
-}
-
-export function prepareUpdate(testElement: Instance, type: string, oldProps: Props, newProps: Props, rootContainerInstance: Container, hostContext: {
-  [key: string]: any;
-}): null | {} {
-  return UPDATE_SIGNAL;
+export function finalizeInitialChildren(
+    testElement: Instance,
+    type: string,
+    props: Props,
+    hostContext: {
+        [key: string]: any;
+    },
+): boolean {
+    return false;
 }
 
 export function shouldSetTextContent(type: string, props: Props): boolean {
-  return false;
+    return false;
 }
 
-export function createTextInstance(text: string, rootContainerInstance: Container, hostContext: {
-  [key: string]: any;
-}, internalInstanceHandle: {
-  [key: string]: any;
-}): TextInstance {
-  return {
-    text,
-    isHidden: false,
-    tag: 'TEXT'
-  };
+export function createTextInstance(
+    text: string,
+    rootContainerInstance: Container,
+    hostContext: {
+        [key: string]: any;
+    },
+    internalInstanceHandle: {
+        [key: string]: any;
+    },
+): TextInstance {
+    return {
+        text,
+        isHidden: false,
+        tag: "TEXT",
+    };
 }
 
 export const isPrimaryRenderer = false;
 export const warnsIfNotActing = true;
 
 export const scheduleTimeout = (_fn: () => void, _timeout: number): TimeoutID => noTimeout;
-export const cancelTimeout = (_id: TimeoutID) => { };
+export const cancelTimeout = (_id: TimeoutID) => {};
 
 export const noTimeout = -1;
 
@@ -196,23 +240,36 @@ export const noTimeout = -1;
 
 export const supportsMutation = true;
 
-export function commitUpdate(instance: Instance, updatePayload: {}, type: string, oldProps: Props, newProps: Props, internalInstanceHandle: {
-  [key: string]: any;
-}): void {
-  instance.type = type;
-  instance.props = newProps;
+export function commitUpdate(
+    instance: Instance,
+    type: string,
+    oldProps: Props,
+    newProps: Props,
+    internalInstanceHandle: {
+        [key: string]: any;
+    },
+): void {
+    instance.type = type;
+    instance.props = newProps;
 }
 
-export function commitMount(instance: Instance, type: string, newProps: Props, internalInstanceHandle: {
-  [key: string]: any;
-}): void {// noop
+export function commitMount(
+    instance: Instance,
+    type: string,
+    newProps: Props,
+    internalInstanceHandle: {
+        [key: string]: any;
+    },
+): void {
+    // noop
 }
 
 export function commitTextUpdate(textInstance: TextInstance, oldText: string, newText: string): void {
-  textInstance.text = newText;
+    textInstance.text = newText;
 }
 
-export function resetTextContent(testElement: Instance): void {// noop
+export function resetTextContent(testElement: Instance): void {
+    // noop
 }
 
 export const appendChildToContainer = appendChild;
@@ -220,136 +277,150 @@ export const insertInContainerBefore = insertBefore;
 export const removeChildFromContainer = removeChild;
 
 export function hideInstance(instance: Instance): void {
-  instance.isHidden = true;
+    instance.isHidden = true;
 }
 
 export function hideTextInstance(textInstance: TextInstance): void {
-  textInstance.isHidden = true;
+    textInstance.isHidden = true;
 }
 
 export function unhideInstance(instance: Instance, props?: Props): void {
-  instance.isHidden = false;
+    instance.isHidden = false;
 }
 
 export function unhideTextInstance(textInstance: TextInstance, text?: string): void {
-  textInstance.isHidden = false;
+    textInstance.isHidden = false;
 }
 
-export function getFundamentalComponentInstance(fundamentalInstance: ReactFundamentalComponentInstance<any, any>): Instance {
-  const {
-    impl,
-    props,
-    state
-  } = fundamentalInstance;
-  return impl.getInstance(null, props, state);
+export function getInstanceFromNode(mockNode: { [key: string]: any }) {
+    const instance = nodeToInstanceMap.get(mockNode);
+    if (instance !== undefined) {
+        return instance.internalInstanceHandle;
+    }
+    return null;
 }
 
-export function mountFundamentalComponent(fundamentalInstance: ReactFundamentalComponentInstance<any, any>): void {
-  const {
-    impl,
-    instance,
-    props,
-    state
-  } = fundamentalInstance;
-  const onMount = impl.onMount;
-  if (onMount !== undefined) {
-    onMount(null, instance, props, state);
-  }
+export function beforeActiveInstanceBlur() {
+    // noop
 }
 
-export function shouldUpdateFundamentalComponent(fundamentalInstance: ReactFundamentalComponentInstance<any, any>): boolean {
-  const {
-    impl,
-    prevProps,
-    props,
-    state
-  } = fundamentalInstance;
-  const shouldUpdate = impl.shouldUpdate;
-  if (shouldUpdate !== undefined) {
-    return shouldUpdate(null, prevProps, props, state);
-  }
-  return true;
+export function afterActiveInstanceBlur() {
+    // noop
 }
 
-export function updateFundamentalComponent(fundamentalInstance: ReactFundamentalComponentInstance<any, any>): void {
-  const {
-    impl,
-    instance,
-    prevProps,
-    props,
-    state
-  } = fundamentalInstance;
-  const onUpdate = impl.onUpdate;
-  if (onUpdate !== undefined) {
-    onUpdate(null, instance, prevProps, props, state);
-  }
+export function preparePortalMount(portalInstance: Container): void {
+    // noop
 }
 
-export function unmountFundamentalComponent(fundamentalInstance: ReactFundamentalComponentInstance<any, any>): void {
-  const {
-    impl,
-    instance,
-    props,
-    state
-  } = fundamentalInstance;
-  const onUnmount = impl.onUnmount;
-  if (onUnmount !== undefined) {
-    onUnmount(null, instance, props, state);
-  }
+export function prepareScopeUpdate(
+    scopeInstance: {
+        [key: string]: any;
+    },
+    inst: {
+        [key: string]: any;
+    },
+): void {
+    nodeToInstanceMap.set(scopeInstance, inst);
 }
 
-export function getInstanceFromNode(mockNode: {
-  [key: string]: any;
-}) {
-  const instance = nodeToInstanceMap.get(mockNode);
-  if (instance !== undefined) {
-    return instance.internalInstanceHandle;
-  }
-  return null;
+export function getInstanceFromScope(scopeInstance: { [key: string]: any }): null | Instance {
+    return nodeToInstanceMap.get(scopeInstance) || null;
 }
 
-let clientId = 0;
-export function makeClientId(): OpaqueIDType {
-  return 'c_' + (clientId++).toString(36);
+export function detachDeletedInstance(node: Instance): void {
+    // noop
 }
 
-export function isOpaqueHydratingObject(value: any): boolean {
-  return (value !== null && typeof value === 'object' && value.$$typeof === REACT_OPAQUE_ID_TYPE);
+export function logRecoverableError(error: any): void {
+    // noop
 }
 
-export function makeOpaqueHydratingObject(attemptToReadValue: () => void): OpaqueIDType {
-  return {
-    $$typeof: REACT_OPAQUE_ID_TYPE,
-    toString: attemptToReadValue,
-    valueOf: attemptToReadValue
-  };
+export const NotPendingTransition = null;
+
+export function shouldAttemptEagerTransition() {
+    return false;
 }
 
-export function beforeActiveInstanceBlur(internalInstanceHandle: {
-  [key: string]: any;
-}) {// noop
+export function startSuspendingCommit(): SuspendedState {
+    return { kind: "SuspendedState" };
 }
 
-export function afterActiveInstanceBlur() {// noop
+export function suspendInstance(state: SuspendedState, instance: Instance, type: Type, props: Props): void {
+    // noop
 }
 
-export function preparePortalMount(portalInstance: Container): void {// noop
+export function trackSchedulerEvent() {
+    // noop
 }
 
-export function prepareScopeUpdate(scopeInstance: {
-  [key: string]: any;
-}, inst: {
-  [key: string]: any;
-}): void {
-  nodeToInstanceMap.set(scopeInstance, inst);
+export function waitForCommitToBeReady(state: SuspendedState, timeoutOffset: number) {
+    return null;
 }
 
-export function getInstanceFromScope(scopeInstance: {
-  [key: string]: any;
-}): null | {
-  [key: string]: any;
-} {
-  return nodeToInstanceMap.get(scopeInstance) || null;
+export function getCurrentUpdatePriority() {
+    return ReactReconcilerConstants.DefaultEventPriority;
 }
 
-export const now = Date.now;
+export function resolveUpdatePriority() {
+    return ReactReconcilerConstants.DefaultEventPriority;
+}
+
+export function setCurrentUpdatePriority(newPriority: number) {
+    // noop
+}
+
+export function requestPostPaintCallback() {
+    // noop
+}
+
+export function resetFormInstance() {
+    // noop
+}
+
+export function resolveEventTimeStamp() {
+    return -1.1;
+}
+
+export function resolveEventType() {
+    return null;
+}
+
+export function maySuspendCommit() {
+    return false;
+}
+
+export function maySuspendCommitOnUpdate(type: Type, oldProps: Props, newProps: Props) {
+    return false;
+}
+
+export function maySuspendCommitInSyncRender(type: Type, props: Props) {
+    return false;
+}
+
+export function preloadInstance(instance: Instance, type: Type, props: Props) {
+    return true;
+}
+
+export function suspendOnActiveViewTransition(state: SuspendedState, rootContainer: Container): void {
+    // noop
+}
+
+export function getSuspendedCommitReason(state: SuspendedState, rootContainer: Container): null | string {
+    return null;
+}
+
+export function bindToConsole(methodName: string, args: any[], badgeName: string): () => any {
+    // noop — this test config doesn't replay Server console logs.
+    return () => undefined;
+}
+
+const REACT_CONTEXT_TYPE = Symbol.for("react.context");
+
+export const HostTransitionContext: ReactContext<TransitionStatus> = {
+    $$typeof: REACT_CONTEXT_TYPE,
+    Provider: null as any,
+    Consumer: null as any,
+    _currentValue: NotPendingTransition,
+    _currentValue2: NotPendingTransition,
+    _threadCount: 0,
+};

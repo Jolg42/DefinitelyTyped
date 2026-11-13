@@ -4,15 +4,17 @@ declare class Controller {
     protected actions_: any;
     moduleFileName: string;
     private newResult_;
-    ok(opt_content?: any): RouteResult;
-    created(opt_content?: any): RouteResult;
+    ok(content?: any): RouteResult;
+    created(content?: any): RouteResult;
     noContent(): RouteResult;
-    notFound(opt_content?: any): RouteResult;
-    forbidden(opt_content?: any): RouteResult;
-    badRequest(opt_content?: any): RouteResult;
+    notFound(content?: any): RouteResult;
+    forbidden(content?: any): RouteResult;
+    badRequest(content?: any): RouteResult;
     notModified(): RouteResult;
+    seeOther(url: string): RouteResult;
     temporaryRedirect(url: string): RouteResult;
     permanentRedirect(url: string): RouteResult;
+    internalServerError(content?: any): RouteResult;
     runAction(
         action: string,
         parameters: any[],
@@ -25,6 +27,6 @@ declare namespace Controller {
     export { wrap, Response, Request };
 }
 import RouteResult = require('./RouteResult.js');
-type Request = import('../http/Request');
-type Response = import('../http/Response');
 declare function wrap(object: any): Controller;
+type Response = import('../http/Response');
+type Request = import('../http/Request');

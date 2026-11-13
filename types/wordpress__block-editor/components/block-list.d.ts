@@ -1,4 +1,4 @@
-import { ComponentType } from 'react';
+import { ComponentType, JSX } from "react";
 
 declare namespace BlockList {
     interface Props {
@@ -6,7 +6,7 @@ declare namespace BlockList {
         /**
          * A 'render prop' function that can be used to customize the block's appender.
          */
-        renderAppender?(): JSX.Element;
+        renderAppender?: (() => JSX.Element) | ComponentType | false | undefined;
         rootClientId?: string | undefined;
     }
 }

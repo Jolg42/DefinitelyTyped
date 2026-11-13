@@ -1,25 +1,33 @@
-import { Plane } from './../math/Plane';
-import { LineSegments } from './../objects/LineSegments';
+import { ColorRepresentation } from "../math/Color.js";
+import { Plane } from "../math/Plane.js";
+import { Line } from "../objects/Line.js";
 
-export class PlaneHelper extends LineSegments {
+/**
+ * A helper object to visualize an instance of {@link Plane}.
+ *
+ * ```js
+ * const plane = new THREE.Plane( new THREE.Vector3( 1, 1, 0.2 ), 3 );
+ * const helper = new THREE.PlaneHelper( plane, 1, 0xffff00 );
+ * scene.add( helper );
+ * ```
+ */
+export class PlaneHelper extends Line {
     /**
-     * @param plane
-     * @param [size=1]
-     * @param [hex=0xffff00]
+     * Constructs a new plane helper.
+     *
+     * @param {Plane} plane - The plane to be visualized.
+     * @param {number} [size=1] - The side length of plane helper.
+     * @param {number|Color|string} [hex=0xffff00] - The helper's color.
      */
-    constructor(plane: Plane, size?: number, hex?: number);
-
+    constructor(plane: Plane, size?: number, hex?: ColorRepresentation);
     /**
-     * @default 'PlaneHelper'
+     * The plane being visualized.
      */
-    type: string;
-
     plane: Plane;
-
     /**
+     * The side length of plane helper.
+     *
      * @default 1
      */
     size: number;
-
-    updateMatrixWorld(force?: boolean): void;
 }

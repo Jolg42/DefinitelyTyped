@@ -112,7 +112,7 @@ function logInterfaceMember(member: webidl2.IDLInterfaceMemberType) {
 
         case "const":
             member; // $ExpectType ConstantMemberType
-            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType
+            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType | NamespaceType
             logInterfaceMixinMember(member);
             break;
 
@@ -178,7 +178,7 @@ function logInterfaceMixinMember(member: webidl2.IDLInterfaceMixinMemberType) {
 
         case "const":
             member; // $ExpectType ConstantMemberType
-            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType
+            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType | NamespaceType
             logCallbackInterfaceMember(member);
             break;
 
@@ -205,11 +205,10 @@ function logCallbackInterfaceMember(member: webidl2.IDLCallbackInterfaceMemberTy
 
         case "const":
             member; // $ExpectType ConstantMemberType
-            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType
+            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType | NamespaceType
             console.log(member.name);
             logIdlType(member.idlType);
             logValueDescription(member.value);
-            console.log(member.nullable);
             break;
 
         default:
@@ -240,6 +239,13 @@ function logNamespaceMember(member: webidl2.IDLNamespaceMemberType) {
             member.parent; // $ExpectType InterfaceMixinType | InterfaceType | NamespaceType
             console.log(member.name);
             console.log(member.special, member.readonly, member.inherit);
+            break;
+        case "const":
+            member; // $ExpectType ConstantMemberType
+            member.parent; // $ExpectType CallbackInterfaceType | InterfaceMixinType | InterfaceType | NamespaceType
+            console.log(member.name);
+            logIdlType(member.idlType);
+            logValueDescription(member.value);
             break;
 
         default:
@@ -316,7 +322,7 @@ function logIdlType(idlType: webidl2.IDLTypeDescription) {
         }
     } else if (idlType.generic) {
         idlType; // $ExpectType GenericTypeDescription || FrozenArrayTypeDescription | ObservableArrayTypeDescription | PromiseTypeDescription | RecordTypeDescription | SequenceTypeDescription
-        idlType.generic; // $ExpectType "FrozenArray" | "ObservableArray" | "Promise" | "record" | "sequence"
+        idlType.generic; // $ExpectType "FrozenArray" | "ObservableArray" | "Promise" | "record" | "sequence" || "record" | "sequence" | "FrozenArray" | "ObservableArray" | "Promise"
         console.log(idlType);
         switch (idlType.generic) {
             case "FrozenArray":
@@ -343,7 +349,7 @@ function logIdlType(idlType: webidl2.IDLTypeDescription) {
 }
 
 function logValueDescription(valueDesc: webidl2.ValueDescription) {
-    valueDesc.parent; // $ExpectType FieldType | ConstantMemberType | Argument
+    valueDesc.parent; // $ExpectType FieldType | ConstantMemberType | Argument || ConstantMemberType | Argument | FieldType
     console.log(valueDesc.type);
     switch (valueDesc.type) {
         case "string":
@@ -394,3 +400,9 @@ function logValueDescription(valueDesc: webidl2.ValueDescription) {
             break;
     }
 }
+
+// $ExpectType string
+const written = webidl2.write(parsed);
+
+// $ExpectType WebIDLErrorData[]
+const errors = webidl2.validate(parsed);

@@ -1,13 +1,12 @@
-/**
- * Namespace: browser.networkStatus
- * Generated from Mozilla sources. Do not manually edit!
- *
- * This API provides the ability to determine the status of and detect changes in the network connection.
- * This API can only be used in privileged extensions.
- * Permissions: "networkStatus"
- */
+//////////////////////////////////////////////////////
+// BEWARE: DO NOT EDIT MANUALLY! Changes will be lost!
+//////////////////////////////////////////////////////
+
 import { Events } from "./events";
 
+/**
+ * Namespace: browser.networkStatus
+ */
 export namespace NetworkStatus {
     interface NetworkLinkInfo {
         /**
@@ -39,14 +38,12 @@ export namespace NetworkStatus {
 
     interface Static {
         /**
-         * Returns the $(ref:NetworkLinkInfo} of the current network connection.
+         * Returns the $(ref:NetworkLinkInfo) of the current network connection.
          */
-        getLinkInfo(): void;
+        getLinkInfo(): Promise<void>;
 
         /**
          * Fired when the network connection state changes.
-         *
-         * @param details
          */
         onConnectionChanged: Events.Event<(details: NetworkLinkInfo) => void>;
     }

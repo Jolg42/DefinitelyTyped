@@ -1,13 +1,19 @@
 // This file was auto-generated. Please do not edit it.
 
-import * as p5 from '../../index';
+import p5 = require("../../index");
 
 declare module '../../index' {
     class Font {
         /**
+         *   Base class for font handling
+         *
+         *   @param [pInst] pointer to p5 instance
+         */
+        constructor(pInst?: p5);
+
+        /**
          *   Returns a tight bounding box for the given text
-         *   string using this font (currently only supports
-         *   single lines)
+         *   string using this font
          *   @param line a line of text
          *   @param x x-position
          *   @param y y-position

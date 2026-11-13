@@ -1,0 +1,27 @@
+{
+    "private": true,
+    "name": "@types/geobuf",
+    "version": "4.0.9999",
+    "type": "module",
+    "projects": [
+        "https://github.com/mapbox/geobuf"
+    ],
+    "exports": "./index.d.ts",
+    "dependencies": {
+        "@types/geojson": "*",
+        "pbf": "^4.0.1"
+    },
+    "devDependencies": {
+        "@types/geobuf": "workspace:."
+    },
+    "owners": [
+        {
+            "name": "Chad Burt",
+            "githubUsername": "underbluewaters"
+        },
+        {
+            "name": "Yue JIN",
+            "githubUsername": "kingyue737"
+        }
+    ]
+}

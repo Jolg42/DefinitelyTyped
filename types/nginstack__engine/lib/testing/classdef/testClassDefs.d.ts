@@ -1,6 +1,6 @@
 declare function _exports(
     testFn: (arg0: number) => any,
-    opt_options?:
+    options?:
         | {
               baseClass: number;
               products: number[];

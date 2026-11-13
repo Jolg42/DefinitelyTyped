@@ -5,10 +5,11 @@
         "test/constructor.ts",
         "test/default.ts",
         "test/settings.ts",
-        "test/typed-response-body.ts"
+        "test/typed-response-body.ts",
+        "test/augment-delegated.ts"
     ],
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "node16",
         "lib": [
             "es6"
         ],
@@ -16,13 +17,8 @@
         "noImplicitThis": true,
         "strictNullChecks": true,
         "strictFunctionTypes": true,
-        "baseUrl": "../",
-        "typeRoots": [
-            "../"
-        ],
         "types": [],
         "noEmit": true,
-        "forceConsistentCasingInFileNames": true,
-        "esModuleInterop": true
+        "forceConsistentCasingInFileNames": true
     }
 }

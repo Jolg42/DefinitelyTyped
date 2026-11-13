@@ -1,6 +1,23 @@
 {
     "private": true,
+    "name": "@types/migrate-mongo",
+    "version": "14.0.9999",
+    "type": "module",
+    "exports": {
+        ".": {
+            "import": "./index.d.ts",
+            "require": "./index.d.cts"
+        }
+    },
+    "projects": [
+        "https://github.com/seppevs/migrate-mongo#readme"
+    ],
     "dependencies": {
-        "@types/mongodb": "^3.6.20"
-    }
+        "@types/node": "*",
+        "mongodb": "^7.0.0"
+    },
+    "devDependencies": {
+        "@types/migrate-mongo": "workspace:."
+    },
+    "owners": []
 }

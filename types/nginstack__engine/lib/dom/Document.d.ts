@@ -10,7 +10,7 @@ declare class Document {
     createCDATASection(data: string): CDATASection;
     createProcessingInstruction(target: string, data: string): ProcessingInstruction;
     createAttribute(name: string): Attr;
-    createEntityReference(name: string): any;
+    createEntityReference(name: string): EntityReference;
     getElementsByTagName(tagName: string): NodeList;
     getElementById(elementId: string): Element;
     load(path: string): boolean;
@@ -27,8 +27,11 @@ declare namespace Document {
         Comment,
         CDATASection,
         ProcessingInstruction,
+        EntityReference,
     };
 }
+type Attr = import('./Attr');
+type NodeList = import('./NodeList');
 type DocumentType = import('./DocumentType');
 type Element = import('./Element');
 type DocumentFragment = import('./DocumentFragment');
@@ -36,5 +39,4 @@ type Text = import('./Text');
 type Comment = import('./Comment');
 type CDATASection = import('./CDATASection');
 type ProcessingInstruction = import('./ProcessingInstruction');
-type Attr = import('./Attr');
-type NodeList = import('./NodeList');
+type EntityReference = import('./EntityReference');

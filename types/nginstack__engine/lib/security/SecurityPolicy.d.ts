@@ -20,11 +20,13 @@ declare class SecurityPolicy {
     networkKeys: any[];
     private initialize;
     checkComputer(): boolean;
-    checkEnabledApplication(appId: any): boolean;
+    checkEnabledApplication(appId: SecurityPolicyApplication): boolean;
     validateLogin(appId: string): void;
     checkEngineRestartAllowed(): boolean;
 }
 declare namespace SecurityPolicy {
-    function userCanAccessRemotely(userKey: number): boolean;
+    export { userCanAccessRemotely, SecurityPolicyApplication };
 }
 import NetworkUtilities = require('../net/NetworkUtilities.js');
+declare function userCanAccessRemotely(userKey: number): boolean;
+type SecurityPolicyApplication = typeof import('./SecurityPolicyApplication');

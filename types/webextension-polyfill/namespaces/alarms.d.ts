@@ -1,16 +1,12 @@
-/**
- * Namespace: browser.alarms
- * Generated from Mozilla sources. Do not manually edit!
- *
- * Permissions: "alarms"
- *
- * Comments found in source JSON schema files:
- * Copyright (c) 2012 The Chromium Authors. All rights reserved.
- * Use of this source code is governed by a BSD-style license that can be
- * found in the LICENSE file.
- */
+//////////////////////////////////////////////////////
+// BEWARE: DO NOT EDIT MANUALLY! Changes will be lost!
+//////////////////////////////////////////////////////
+
 import { Events } from "./events";
 
+/**
+ * Namespace: browser.alarms
+ */
 export namespace Alarms {
     interface Alarm {
         /**
@@ -69,7 +65,7 @@ export namespace Alarms {
          * Users should never provide both 'when' and 'delayInMinutes'. If 'periodInMinutes' is provided,
          * then the alarm recurs repeatedly after that many minutes.
          */
-        create(name: string | undefined, alarmInfo: CreateAlarmInfoType): void;
+        create(name: string | undefined, alarmInfo: CreateAlarmInfoType): Promise<void>;
 
         /**
          * Creates an alarm. After the delay is expired, the onAlarm event is fired. If there is another alarm with the same name
@@ -81,14 +77,14 @@ export namespace Alarms {
          * Users should never provide both 'when' and 'delayInMinutes'. If 'periodInMinutes' is provided,
          * then the alarm recurs repeatedly after that many minutes.
          */
-        create(alarmInfo: CreateAlarmInfoType): void;
+        create(alarmInfo: CreateAlarmInfoType): Promise<void>;
 
         /**
          * Retrieves details about the specified alarm.
          *
          * @param name Optional. The name of the alarm to get. Defaults to the empty string.
          */
-        get(name?: string): Promise<Alarm>;
+        get(name?: string): Promise<Alarm | undefined>;
 
         /**
          * Gets an array of all the alarms.

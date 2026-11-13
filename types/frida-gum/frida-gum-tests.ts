@@ -1,7 +1,42 @@
 Frida.version; // $ExpectType string
 
-// $ExpectError
+const opts: HexdumpOptions = { address: ptr("0x1000") };
+// $ExpectType NativePointer | undefined
+opts.address;
+
+// @ts-expect-error
 SourceMap;
+
+// $ExpectType ScriptRuntime
+Script.runtime;
+
+// $ExpectType any
+Script.evaluate("/true.js", "true");
+
+const screenshot = Script.load(
+    "/plugins/screenshot.js",
+    `
+import { registerPlugin } from "/agent.js";
+
+registerPlugin({
+    name: "screenshot",
+    dispose() {
+        // TODO
+    }
+});
+
+export function screenshot() {
+    // TODO
+}
+`,
+) as Promise<ScreenshotPlugin>;
+
+interface ScreenshotPlugin {
+    screenshot(): void;
+}
+
+// $ExpectType void
+Script.registerSourceMap("/plugins/screenshot.js", "{}");
 
 // $ExpectType (target: any, callback: WeakRefCallback) => number
 Script.bindWeak;
@@ -21,22 +56,25 @@ p.toUInt32();
 p.sign();
 // $ExpectType NativePointer
 p.sign("ia", 42);
-// $ExpectError
+// @ts-expect-error
 p.sign("invalid", 42);
 
 // $ExpectType NativePointer
 p.strip();
 // $ExpectType NativePointer
 p.strip("ia");
-// $ExpectError
+// @ts-expect-error
 p.strip("invalid");
 
 // $ExpectType NativePointer
 p.blend(1337);
-// $ExpectError
+// @ts-expect-error
 p.blend(ptr(42));
-// $ExpectError
+// @ts-expect-error
 p.blend();
+
+// $ExpectType ArrayBuffer | null
+p.readVolatile(2);
 
 // $ExpectType NativePointer
 Memory.alloc(1);
@@ -44,10 +82,17 @@ Memory.alloc(1);
 Memory.alloc(1, {});
 // $ExpectType NativePointer
 Memory.alloc(1, { near: ptr(1234), maxDistance: 42 });
-// $ExpectError
+// @ts-expect-error
 Memory.alloc(1, { near: ptr(1234) });
-// $ExpectError
+// @ts-expect-error
 Memory.alloc(1, { maxDistance: 42 });
+// $ExpectType NativePointer
+Memory.alloc(Process.pageSize, { protection: "rwx" });
+// $ExpectType NativePointer
+Memory.alloc(Process.pageSize, { protection: "rx", near: ptr(1234), maxDistance: 42 });
+
+// $ExpectType string
+Memory.queryProtection(Process.mainModule.base);
 
 new NativeCallback(
     (a, b) => {
@@ -73,12 +118,12 @@ const otherPuts = new NativeCallback(
     ["pointer"],
 );
 
-// $ExpectError
+// @ts-expect-error
 new NativeFunction(NULL, "void", "pointer");
 
 // $ExpectType NativeFunction<void, []>
 const nf0 = new NativeFunction(NULL, "void", []);
-// $ExpectError
+// @ts-expect-error
 nf0({} as any);
 
 // $ExpectType NativeFunction<[number, number], [number | Int64, [number, [NativePointerValue, NativePointerValue]]]>
@@ -94,7 +139,7 @@ const nf2 = new NativeFunction(NULL, "void", ["long", "...", "pointer"]);
 nf2(34, NULL, nf2, { handle: ptr(0xbeef) });
 
 // $ExpectType NativeFunction<number, [NativePointerValue]>
-const puts = new NativeFunction(Module.getExportByName(null, "puts"), "int", ["pointer"]);
+const puts = new NativeFunction(Module.getGlobalExportByName("puts"), "int", ["pointer"]);
 
 // $ExpectType NativePointer
 const message = Memory.allocUtf8String("Hello!");
@@ -109,7 +154,7 @@ puts.apply(otherPuts, [message]);
 puts(message);
 
 // $ExpectType SystemFunction<number, [NativePointerValue, number]>
-const open = new SystemFunction(Module.getExportByName(null, "open"), "int", ["pointer", "int"]);
+const open = new SystemFunction(Module.getGlobalExportByName("open"), "int", ["pointer", "int"]);
 
 const path = Memory.allocUtf8String("/etc/hosts");
 
@@ -122,6 +167,152 @@ result.value;
 // $ExpectType number
 (result as UnixSystemFunctionResult<number>).errno;
 
+// $ExpectType Promise<void>
+Memory.scan(ptr("0x1234"), Process.pageSize, new MatchPattern("13 37"), {
+    onMatch(address, size) {
+    },
+});
+
+// $ExpectType MemoryPointerMatch[]
+Memory.findPointers({ base: ptr("0x1234"), size: Process.pageSize }, [ptr("0xdeadbeef")]);
+// $ExpectType MemoryPointerMatch[]
+const pointerMatches = Memory.findPointers(
+    [{ base: ptr("0x1234"), size: Process.pageSize }],
+    [ptr("0xdeadbeef")],
+    { mask: ptr("0x00007ffffffffff8") },
+);
+// $ExpectType NativePointer
+pointerMatches[0].address;
+// $ExpectType NativePointer
+pointerMatches[0].value;
+
+// $ExpectType Module
+Process.mainModule;
+
+// $ExpectType string | null
+Process.mainModule.version;
+
+// $ExpectType MemoryRange
+Process.getFunctionRange(Process.mainModule.base);
+
+// $ExpectType MemoryRange | null
+Process.findFunctionRange(Process.mainModule.base);
+
+const cfg = new ControlFlowGraph(Process.mainModule.base);
+// $ExpectType NativePointer
+cfg.entrypoint;
+// $ExpectType BasicBlock
+const entryBlock = cfg.entryBlock;
+// $ExpectType BasicBlock[]
+cfg.blocks;
+// $ExpectType BasicBlock | null
+cfg.findBlockContaining(Process.mainModule.base);
+// $ExpectType boolean
+cfg.dominates(Process.mainModule.base, Process.mainModule.base);
+// $ExpectType DominatingSite[]
+const sites = cfg.enumerateDominatingSites(Process.mainModule.base);
+// $ExpectType NativePointer
+sites[0].address;
+// $ExpectType number
+sites[0].capacity;
+// $ExpectType NativePointer
+entryBlock.start;
+// $ExpectType NativePointer
+entryBlock.end;
+// $ExpectType BasicBlock[]
+entryBlock.successors;
+// $ExpectType BasicBlock[]
+entryBlock.predecessors;
+// $ExpectType BasicBlock | null
+entryBlock.immediateDominator;
+// $ExpectType Instruction[]
+entryBlock.instructions;
+
+const art = Process.getModuleByName("libart.so");
+// $ExpectType NativePointer
+art.getSymbolByName("ExecuteNterpImpl");
+
+// $ExpectType ApiResolver
+const resolver = new ApiResolver("swift");
+
+// $ExpectType number
+File.SEEK_SET;
+// $ExpectType number
+File.SEEK_CUR;
+// $ExpectType number
+File.SEEK_END;
+
+// $ExpectType ArrayBuffer
+File.readAllBytes("/some/binary/blob");
+// $ExpectType string
+File.readAllText("/some/text/file");
+// $ExpectType void
+File.writeAllBytes("/some/binary/blob", new Uint8Array([1, 2, 3]).buffer);
+// $ExpectType void
+File.writeAllBytes("/some/binary/blob", [1, 2, 3]);
+// $ExpectType void
+File.writeAllText("/some/text/file", "Hello");
+
+const log = new File("/tmp/log.txt", "a");
+// $ExpectType void
+log.write("Some data");
+// $ExpectType void
+log.write(new Uint8Array([1, 2, 3]).buffer);
+// $ExpectType void
+log.write([1, 2, 3]);
+// $ExpectType void
+log.flush();
+// $ExpectType void
+log.close();
+
+const config = new File("/my/config", "r");
+// $ExpectType number
+config.seek(16);
+config.seek(1, File.SEEK_SET);
+config.seek(2, File.SEEK_CUR);
+config.seek(3, File.SEEK_END);
+// $ExpectType number
+config.tell();
+// $ExpectType ArrayBuffer
+config.readBytes();
+config.readBytes(1);
+// $ExpectType string
+config.readText();
+config.readText(2);
+// $ExpectType string
+config.readLine();
+
+// $ExpectType string
+Checksum.compute("md5", "some data");
+Checksum.compute("sha1", new Uint8Array([1, 2, 3]).buffer);
+Checksum.compute("sha256", [1, 2, 3]);
+Checksum.compute("sha384", [4, 5, 6]);
+const checksum = new Checksum("sha512");
+// $ExpectType Checksum
+checksum.update("abc");
+checksum.update(new Uint8Array([1, 2, 3]).buffer).update([4, 5, 6]);
+// $ExpectType Checksum
+checksum.copy();
+// $ExpectType string
+checksum.getString();
+// $ExpectType string
+checksum.peekString();
+// $ExpectType ArrayBuffer
+checksum.getDigest();
+// $ExpectType ArrayBuffer
+checksum.peekDigest();
+// @ts-expect-error
+new Checksum("unknown-type");
+
+const insn: X86Instruction = null as unknown as X86Instruction;
+// $ExpectType X86Register[]
+insn.regsAccessed.read;
+// $ExpectType X86Register[]
+insn.regsAccessed.written;
+const op = insn.operands[0];
+// $ExpectType boolean
+op.access.includes("r");
+
 Interceptor.attach(puts, {
     onEnter(args) {
         // $ExpectType NativePointer[] || InvocationArguments
@@ -133,7 +324,89 @@ Interceptor.attach(puts, {
     },
 });
 
+Interceptor.attach(puts, {
+    onEnter() {
+        const ia32 = this.context as Ia32CpuContext;
+        // $ExpectType ArrayBuffer
+        ia32.xmm0;
+        const ia32Xmm7: ArrayBuffer = ia32.xmm7;
+        void ia32Xmm7;
+
+        const x64 = this.context as X64CpuContext;
+        // $ExpectType ArrayBuffer
+        x64.xmm0;
+        const x64Xmm15: ArrayBuffer = x64.xmm15;
+        void x64Xmm15;
+    },
+});
+
+Interceptor.attach({
+    target: puts,
+    scratchRegister: "x15",
+    scenario: "online",
+    relocation: "checked",
+}, {
+    onEnter(args) {
+        // $ExpectType InvocationArguments
+        args;
+    },
+});
+
+Interceptor.attach({
+    target: puts,
+    writeRedirect(details) {
+        // $ExpectType DefaultInstructionWriter
+        details.writer;
+        // $ExpectType NativePointer
+        details.target;
+        // $ExpectType number
+        details.capacity;
+
+        // Same register type as carried by InstrumentationTarget.
+        const scratch: InstrumentationTarget["scratchRegister"] = details.scratchRegister;
+        void scratch;
+
+        const writer = details.writer as Arm64Writer;
+        writer.putBImm(details.target);
+    },
+    redirectSpaceHint: 16,
+}, {
+    onEnter(args) {
+        // $ExpectType InvocationArguments
+        args;
+    },
+});
+
+// $ExpectType InstrumentationOptions
+Interceptor.defaults;
+
+Interceptor.defaults = {
+    scratchRegister: "x15",
+    writeRedirect(details) {
+        details.writer.flush();
+    },
+    redirectSpaceHint: 256,
+};
+
 Interceptor.flush();
+
+// $ExpectType void
+Interceptor.replace(ptr("0x1234"), new NativeCallback(() => {}, "void", []));
+
+// $ExpectType void
+Interceptor.replace(
+    { target: ptr("0x1234"), scratchRegister: "x15", relocation: "unchecked" },
+    new NativeCallback(() => {}, "void", []),
+);
+
+// $ExpectType NativePointer
+Interceptor.replaceFast(ptr("0x1234"), new NativeCallback(() => {}, "void", []));
+
+// $ExpectType NativePointer
+Interceptor.replaceFast(
+    { target: ptr("0x1234"), scenario: "offline", relocation: "forced" },
+    new NativeCallback(() => {}, "void", []),
+);
 
 const ccode = `
 #include <gum/gumstalker.h>
@@ -158,7 +431,7 @@ const cm2 = new CModule(ccode, symbols, {});
 const cm3 = new CModule(ccode, {}, { toolchain: "any" });
 const cm4 = new CModule(ccode, {}, { toolchain: "internal" });
 const cm5 = new CModule(ccode, {}, { toolchain: "external" });
-// $ExpectError
+// @ts-expect-error
 const cmE = new CModule(ccode, {}, { toolchain: "nope" });
 
 const precompiledSharedLibrary = new ArrayBuffer(4 * Process.pageSize);
@@ -175,78 +448,162 @@ Stalker.follow(Process.getCurrentThreadId(), {
     events: {
         compile: true,
         call: true,
-        ret: true
+        ret: true,
     },
     onEvent: cm.process,
-    data: ptr(42)
+    data: ptr(42),
+    transform(iterator: StalkerX86Iterator) {
+        let instruction = iterator.next();
+
+        if (instruction == null) {
+            return;
+        }
+
+        const startAddress = instruction.address;
+        // $ExpectType X86Register
+        iterator.getUserDataReg();
+
+        do {
+            if (startAddress == ptr(0)) {
+                iterator.putChainingReturn();
+            }
+            iterator.keep();
+        } while ((instruction = iterator.next()) !== null);
+    },
 });
 
 const basicBlockStartAddress = ptr("0x400000");
 Stalker.invalidate(basicBlockStartAddress);
 Stalker.invalidate(Process.getCurrentThreadId(), basicBlockStartAddress);
 
-const obj = new ObjC.Object(ptr("0x42"));
+// $ExpectType boolean
+Cloak.hasCurrentThread();
 
-// $ExpectType Object
-obj;
+// $ExpectType ThreadDetails
+Process.getThreadById(Process.getCurrentThreadId());
 
-const b = new ObjC.Block(ptr(0x1234));
-b.declare({ retType: "void", argTypes: ["int"] });
-b.declare({ types: "v12@?0i8" });
+// $ExpectType ThreadDetails | null
+Process.findThreadById(Process.getCurrentThreadId());
 
-Java.enumerateClassLoadersSync()
-    .forEach(classLoader => {
-        // $ExpectType ClassFactory
-        const factory = Java.ClassFactory.get(classLoader);
-        interface Props {
-            myMethod: Java.MethodDispatcher;
-            myField: Java.Field<number>;
-        }
-        // $ExpectType Wrapper<Props>
-        const MyJavaClass = factory.use<Props>("my.java.class");
-        // $ExpectError
-        factory.use<{ illegal: string }>("");
-        // $ExpectType string
-        MyJavaClass.$className;
-        // $ExpectType MethodDispatcher<Props>
-        MyJavaClass.myMethod;
-        // $ExpectType Wrapper<Props>
-        MyJavaClass.myMethod.holder;
-        // $ExpectType Wrapper<Props>
-        MyJavaClass.myMethod.holder.myField.holder.myMethod.holder;
-        MyJavaClass.myMethod.implementation = function(...args) {
-            // $ExpectType MethodDispatcher<Props>
-            this.myMethod;
-            // $ExpectType Field<number, Props>
-            this.myField;
-            // $ExpectType number
-            this.myField.value;
-        };
-        // $ExpectType Wrapper<Props>
-        Java.retain(MyJavaClass);
-        interface AnotherProps {
-            anotherMethod: Java.MethodDispatcher;
-            anotherField: Java.Field<string>;
-        }
-        const MyAnotherJavaClass = factory.use<AnotherProps>("my.another.java.class");
-        // $ExpectType Wrapper<AnotherProps>
-        Java.cast(MyJavaClass, MyAnotherJavaClass);
-    });
-
-Java.perform(() => {
-    // $ExpectType void
-    Java.deoptimizeBootImage();
-
-    Java.enumerateMethods("*!*game*/i").forEach(group => {
-        const factory = Java.ClassFactory.get(group.loader);
-        group.classes.forEach(klass => {
-            const C = factory.use(klass.name);
-            klass.methods.forEach(methodName => {
-                const method: Java.MethodDispatcher = C[methodName];
-                method.implementation = function(...args) {
-                    return method.apply(this, args);
-                };
-            });
-        });
-    });
+Process.enumerateThreads().forEach(t => {
+    t.setHardwareBreakpoint(0, puts);
 });
+
+Process.enumerateThreads().forEach(t => {
+    t.unsetHardwareBreakpoint(0);
+});
+
+Process.enumerateThreads().forEach(t => {
+    t.setHardwareWatchpoint(0, puts, 4, "rw");
+});
+
+Process.enumerateThreads().forEach(t => {
+    t.unsetHardwareWatchpoint(0);
+});
+
+const threadObserver = Process.attachThreadObserver({
+    onAdded(thread) {
+        // $ExpectType StableThreadDetails
+        thread;
+    },
+    onRemoved(thread) {
+        // $ExpectType StableThreadDetails
+        thread;
+    },
+    onRenamed(thread, previousName) {
+        // $ExpectType StableThreadDetails
+        thread;
+        // $ExpectType string | null
+        previousName;
+    },
+});
+threadObserver.detach();
+
+// $ExpectType Promise<void>
+Process.runOnThread(1, () => {});
+
+// $ExpectType Promise<boolean>
+Process.runOnThread(1, () => true);
+
+const moduleObserver = Process.attachModuleObserver({
+    onAdded(module) {
+        // $ExpectType Module
+        module;
+    },
+    onRemoved(module) {
+        // $ExpectType Module
+        module;
+    },
+});
+moduleObserver.detach();
+
+const db = SqliteDatabase.openInline("AAAA");
+const stmt = db.prepare("SELECT * from tab;");
+// $ExpectType string[]
+stmt.columnNames;
+// $ExpectType SqliteColumnType[]
+stmt.columnTypes;
+// $ExpectType (string | null)[]
+stmt.declaredTypes;
+// $ExpectType number
+stmt.paramsCount;
+
+// $ExpectType Profiler
+const profiler = new Profiler();
+const sampler = new BusyCycleSampler();
+for (const e of Process.getModuleByName("libc.so").enumerateExports().filter(e => e.type === "function")) {
+    profiler.instrument(e.address, sampler);
+}
+
+for (const e of Process.getModuleByName("libc.so").enumerateExports()) {
+    // $ExpectType number | undefined
+    e.size;
+}
+
+const x86Writer = new X86Writer(Memory.alloc(Process.pageSize));
+x86Writer.putVmovdqu64RegOffsetPtrZmm("rax", 0, 0);
+x86Writer.putVmovdqu64ZmmRegOffsetPtr(0, "rax", 0);
+x86Writer.putVextracti64x4RegOffsetPtrZmm("rax", 0, 0, 1);
+x86Writer.putVinserti64x4ZmmRegOffsetPtr(0, "rax", 0, 1);
+x86Writer.putKmovqRegOffsetPtrKreg("rax", 0, 0);
+x86Writer.putKmovqKregRegOffsetPtr(0, "rax", 0);
+// $ExpectType void
+x86Writer.putEndbr();
+x86Writer.flush();
+
+const x86Relocator = new X86Relocator(ptr("0x1234"), x86Writer);
+x86Relocator.setScratchSpillSlot(Memory.alloc(8));
+
+const arm64Writer = new Arm64Writer(Memory.alloc(Process.pageSize));
+arm64Writer.putMovkRegImm("x0", 0x1234, 16);
+arm64Writer.putPaciaRegReg("x0", "x1");
+arm64Writer.putPacizaReg("x0");
+// $ExpectType void
+arm64Writer.putSvcImm(0x80);
+arm64Writer.flush();
+
+const arm64Relocator = new Arm64Relocator(ptr("0x1234"), arm64Writer);
+// $ExpectType boolean
+arm64Relocator.readUntilResumable("online");
+// $ExpectType Arm64Register | null
+arm64Relocator.pickExitReg(ptr("0x1234"));
+// $ExpectType boolean
+arm64Relocator.isIpRegLiveAt(ptr("0x1234"));
+
+const mipsWriter = new MipsWriter(Memory.alloc(Process.pageSize));
+mipsWriter.putLw32RegRegOffset("v0", "a0", 0);
+mipsWriter.flush();
+
+const record = Memory.alloc(16);
+// $ExpectType number
+record.readU32(4);
+// $ExpectType NativePointer
+record.writeU32(1337, 4);
+// $ExpectType ArrayBuffer | null
+record.readByteArray(4, 8);
+// $ExpectType string | null
+record.readUtf8String(-1, 8);
+// $ExpectType NativePointer
+record.writeUtf8String("abc", 8);
+// $ExpectType ArrayBuffer | null
+record.readVolatile(2, 9);

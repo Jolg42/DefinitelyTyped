@@ -1,35 +1,43 @@
-/**
- * Namespace: browser.geckoProfiler
- * Generated from Mozilla sources. Do not manually edit!
- *
- * Exposes the browser's profiler.
- * Permissions: "geckoProfiler"
- */
+//////////////////////////////////////////////////////
+// BEWARE: DO NOT EDIT MANUALLY! Changes will be lost!
+//////////////////////////////////////////////////////
+
 import { Events } from "./events";
 
+/**
+ * Namespace: browser.geckoProfiler
+ */
 export namespace GeckoProfiler {
     type ProfilerFeature =
         | "java"
         | "js"
-        | "leaf"
         | "mainthreadio"
-        | "responsiveness"
+        | "fileio"
+        | "fileioall"
+        | "nomarkerstacks"
         | "screenshots"
         | "seqstyle"
         | "stackwalk"
-        | "threads"
-        | "jstracer"
         | "jsallocations"
         | "nostacksampling"
         | "nativeallocations"
-        | "preferencereads"
         | "ipcmessages"
-        | "fileio"
-        | "fileioall"
-        | "noiostacks"
         | "audiocallbacktracing"
-        | "cpu"
-        | "notimerresolutionchange";
+        | "notimerresolutionchange"
+        | "cpuallthreads"
+        | "samplingallthreads"
+        | "markersallthreads"
+        | "unregisteredthreads"
+        | "processcpu"
+        | "power"
+        | "responsiveness"
+        | "cpufreq"
+        | "bandwidth"
+        | "memory"
+        | "tracing"
+        | "sandbox"
+        | "flows"
+        | "jssources";
 
     type supports = "windowLength";
 
@@ -68,25 +76,23 @@ export namespace GeckoProfiler {
     interface Static {
         /**
          * Starts the profiler with the specified settings.
-         *
-         * @param settings
          */
-        start(settings: StartSettingsType): void;
+        start(settings: StartSettingsType): Promise<void>;
 
         /**
          * Stops the profiler and discards any captured profile data.
          */
-        stop(): void;
+        stop(): Promise<void>;
 
         /**
          * Pauses the profiler, keeping any profile data that is already written.
          */
-        pause(): void;
+        pause(): Promise<void>;
 
         /**
          * Resumes the profiler with the settings that were initially used to start it.
          */
-        resume(): void;
+        resume(): Promise<void>;
 
         /**
          * Gathers the profile data from the current profiling session, and writes it to disk.
@@ -94,24 +100,24 @@ export namespace GeckoProfiler {
          *
          * @param fileName The name of the file inside the profile/profiler directory
          */
-        dumpProfileToFile(fileName: string): void;
+        dumpProfileToFile(fileName: string): Promise<void>;
 
         /**
          * Gathers the profile data from the current profiling session.
          */
-        getProfile(): void;
+        getProfile(): Promise<void>;
 
         /**
          * Gathers the profile data from the current profiling session. The returned promise resolves to an array buffer that
          * contains a JSON string.
          */
-        getProfileAsArrayBuffer(): void;
+        getProfileAsArrayBuffer(): Promise<void>;
 
         /**
          * Gathers the profile data from the current profiling session. The returned promise resolves to an array buffer that
          * contains a gzipped JSON string.
          */
-        getProfileAsGzippedArrayBuffer(): void;
+        getProfileAsGzippedArrayBuffer(): Promise<void>;
 
         /**
          * Gets the debug symbols for a particular library.
@@ -119,7 +125,7 @@ export namespace GeckoProfiler {
          * @param debugName The name of the library's debug file. For example, 'xul.pdb
          * @param breakpadId The Breakpad ID of the library
          */
-        getSymbols(debugName: string, breakpadId: string): void;
+        getSymbols(debugName: string, breakpadId: string): Promise<void>;
 
         /**
          * Fires when the profiler starts/stops running.

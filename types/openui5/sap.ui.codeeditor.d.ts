@@ -1,11 +1,9 @@
-// For Library Version: 1.95.0
+// For Library Version: 1.154.0
 
 declare module "sap/ui/codeeditor/library" {}
 
 declare module "sap/ui/codeeditor/CodeEditor" {
   import { default as Control, $ControlSettings } from "sap/ui/core/Control";
-
-  import Event from "sap/ui/base/Event";
 
   import { CSSSize } from "sap/ui/core/library";
 
@@ -13,12 +11,14 @@ declare module "sap/ui/codeeditor/CodeEditor" {
 
   import { PropertyBindingInfo } from "sap/ui/base/ManagedObject";
 
+  import Event from "sap/ui/base/Event";
+
   /**
-   * @SINCE 1.46
-   *
    * Allows to visualize source code of various types with syntax highlighting, line numbers in editable and
    * read only mode. Use this control in scenarios where the user should be able to inspect and edit source
    * code. The control currently uses the third-party code editor Ace.
+   *
+   * @since 1.46
    */
   export default class CodeEditor extends Control {
     /**
@@ -57,6 +57,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * the information contained in `oClassInfo`.
      *
      * `oClassInfo` might contain the same kind of information as described in {@link sap.ui.core.Control.extend}.
+     *
+     *
+     * @returns Created class / constructor function
      */
     static extend<T extends Record<string, unknown>>(
       /**
@@ -75,20 +78,25 @@ declare module "sap/ui/codeeditor/CodeEditor" {
     ): Function;
     /**
      * Returns a metadata object for class sap.ui.codeeditor.CodeEditor.
+     *
+     *
+     * @returns Metadata object describing this class
      */
     static getMetadata(): ElementMetadata;
     /**
-     * @SINCE 1.52
-     *
      * Defines custom completer - object implementing a getCompletions method. The method has two parameters
      * - fnCallback method and context object. Context object provides details about oPos and sPrefix as provided
      * by the third-party code editor.
+     *
+     * @since 1.52
      */
     addCustomCompleter(
       /**
        * Object with getCompletions method
        */
-      oCustomCompleter: object
+      oCustomCompleter: {
+        getCompletions: Function;
+      }
     ): void;
     /**
      * Attaches event handler `fnFunction` to the {@link #event:change change} event of this `sap.ui.codeeditor.CodeEditor`.
@@ -97,6 +105,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * otherwise it will be bound to this `sap.ui.codeeditor.CodeEditor` itself.
      *
      * Fired when the value has changed and the focus leaves the code editor.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     attachChange(
       /**
@@ -107,7 +118,7 @@ declare module "sap/ui/codeeditor/CodeEditor" {
       /**
        * The function to be called when the event occurs
        */
-      fnFunction: (p1: Event) => void,
+      fnFunction: (p1: CodeEditor$ChangeEvent) => void,
       /**
        * Context object to call the event handler with. Defaults to this `sap.ui.codeeditor.CodeEditor` itself
        */
@@ -120,12 +131,15 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * otherwise it will be bound to this `sap.ui.codeeditor.CodeEditor` itself.
      *
      * Fired when the value has changed and the focus leaves the code editor.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     attachChange(
       /**
        * The function to be called when the event occurs
        */
-      fnFunction: (p1: Event) => void,
+      fnFunction: (p1: CodeEditor$ChangeEvent) => void,
       /**
        * Context object to call the event handler with. Defaults to this `sap.ui.codeeditor.CodeEditor` itself
        */
@@ -138,6 +152,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * otherwise it will be bound to this `sap.ui.codeeditor.CodeEditor` itself.
      *
      * Fired when the value is changed by user interaction - each keystroke, delete, paste, etc.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     attachLiveChange(
       /**
@@ -148,7 +165,7 @@ declare module "sap/ui/codeeditor/CodeEditor" {
       /**
        * The function to be called when the event occurs
        */
-      fnFunction: (p1: Event) => void,
+      fnFunction: (p1: CodeEditor$LiveChangeEvent) => void,
       /**
        * Context object to call the event handler with. Defaults to this `sap.ui.codeeditor.CodeEditor` itself
        */
@@ -161,12 +178,15 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * otherwise it will be bound to this `sap.ui.codeeditor.CodeEditor` itself.
      *
      * Fired when the value is changed by user interaction - each keystroke, delete, paste, etc.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     attachLiveChange(
       /**
        * The function to be called when the event occurs
        */
-      fnFunction: (p1: Event) => void,
+      fnFunction: (p1: CodeEditor$LiveChangeEvent) => void,
       /**
        * Context object to call the event handler with. Defaults to this `sap.ui.codeeditor.CodeEditor` itself
        */
@@ -176,12 +196,15 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * Detaches event handler `fnFunction` from the {@link #event:change change} event of this `sap.ui.codeeditor.CodeEditor`.
      *
      * The passed function and listener object must match the ones used for event registration.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     detachChange(
       /**
        * The function to be called, when the event occurs
        */
-      fnFunction: (p1: Event) => void,
+      fnFunction: (p1: CodeEditor$ChangeEvent) => void,
       /**
        * Context object on which the given function had to be called
        */
@@ -191,12 +214,15 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * Detaches event handler `fnFunction` from the {@link #event:liveChange liveChange} event of this `sap.ui.codeeditor.CodeEditor`.
      *
      * The passed function and listener object must match the ones used for event registration.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     detachLiveChange(
       /**
        * The function to be called, when the event occurs
        */
-      fnFunction: (p1: Event) => void,
+      fnFunction: (p1: CodeEditor$LiveChangeEvent) => void,
       /**
        * Context object on which the given function had to be called
        */
@@ -204,58 +230,65 @@ declare module "sap/ui/codeeditor/CodeEditor" {
     ): this;
     /**
      * Fires event {@link #event:change change} to attached listeners.
+     *
+     * @ui5-protected Do not call from applications (only from related classes in the framework)
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     fireChange(
       /**
        * Parameters to pass along with the event
        */
-      mParameters?: {
-        /**
-         * The current value of the code editor.
-         */
-        value?: string;
-        /**
-         * The old value of the code editor.
-         */
-        oldValue?: string;
-      }
+      mParameters?: CodeEditor$ChangeEventParameters
     ): this;
     /**
      * Fires event {@link #event:liveChange liveChange} to attached listeners.
+     *
+     * @ui5-protected Do not call from applications (only from related classes in the framework)
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     fireLiveChange(
       /**
        * Parameters to pass along with the event
        */
-      mParameters?: {
-        /**
-         * The current value of the code editor.
-         */
-        value?: string;
-        /**
-         * The underlying change event of the third-party code editor.
-         */
-        editorEvent?: object;
-      }
+      mParameters?: CodeEditor$LiveChangeEventParameters
     ): this;
     /**
-     * Sets the focus to the code editor
+     * Returns the internal instance of the third-party Ace code editor.
+     *
+     * **Note:** This control is based on third-party open-source software, and there might be incompatible
+     * changes introduced by the code owner in their future releases.
+     *
+     * @since 1.121
+     *
+     * @returns the internal third-party Ace code editor instance
      */
-    focus(): this;
+    getAceEditor(): object;
     /**
      * Gets current value of property {@link #getColorTheme colorTheme}.
      *
-     * Sets the editor color theme. Possible values are: default, hcb, hcb_bright, hcb_blue, theme-ambiance,
-     * chaos, chrome, clouds, clouds_midnight, cobalt, crimson_editor, dawn, dreamweaver, eclipse, github, gob,
-     * gruvbox, idle_fingers, iplastic, katzenmilch, kr_theme, kuroir, merbivore, merbivore_soft, mono_industrial,
-     * monokai, pastel_on_dark, solarized_dark, solarized_light, sqlserver, terminal, textmate, tomorrow, tomorrow_night,
-     * tomorrow_night_blue, tomorrow_night_bright, tomorrow_night_eighties, twilight, dracula vibrant_ink, xcode
+     * Sets the editor color theme. Possible values are:
+     * 	 - default: best fitting to the current UI5 theme
+     * 	 - any light theme from the list: chrome, clouds, crimson_editor, dawn, dreamweaver, eclipse, github_light_default,
+     *     github, iplastic, solarized_light, textmate, tomorrow, xcode, kuroir, katzenmilch, sqlserver, cloud_editor
+     *
+     * 	 - any dark theme from the list: hcb, hcb_bright, hcb_blue, ambiance, chaos, clouds_midnight, dracula,
+     *     cobalt, gruvbox, gob, idle_fingers, kr_theme, merbivore, merbivore_soft, mono_industrial, monokai, nord_dark,
+     *     one_dark, pastel_on_dark, solarized_dark, terminal, tomorrow_night, tomorrow_night_blue, tomorrow_night_bright,
+     *     tomorrow_night_eighties, twilight, vibrant_ink, github_dark, cloud_editor_dark
      *
      * Default value is `"default"`.
+     *
+     *
+     * @returns Value of property `colorTheme`
      */
     getColorTheme(): string;
     /**
      * Returns the current value of the code editor
+     *
+     *
+     * @returns Returns the current value of the code editor
      */
     getCurrentValue(): string;
     /**
@@ -264,6 +297,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * Sets whether the code in the editor can be changed by the user.
      *
      * Default value is `true`.
+     *
+     *
+     * @returns Value of property `editable`
      */
     getEditable(): boolean;
     /**
@@ -273,19 +309,32 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * 20px.
      *
      * Default value is `"100%"`.
+     *
+     *
+     * @returns Value of property `height`
      */
     getHeight(): CSSSize;
+    /**
+     * Returns the DOMNode ID to be used for the "labelFor" attribute of the label.
+     *
+     * By default, this is the ID of the control itself.
+     *
+     *
+     * @returns ID to be used for the `labelFor`
+     */
+    getIdForLabel(): string;
     /**
      * Gets current value of property {@link #getLineNumbers lineNumbers}.
      *
      * Sets whether line numbers should be shown.
      *
      * Default value is `true`.
+     *
+     *
+     * @returns Value of property `lineNumbers`
      */
     getLineNumbers(): boolean;
     /**
-     * @SINCE 1.48.1
-     *
      * Gets current value of property {@link #getMaxLines maxLines}.
      *
      * Sets whether the editor height should auto expand to a maximum number of lines. After reaching the maximum
@@ -295,34 +344,58 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * set to `auto`.
      *
      * Default value is `0`.
+     *
+     * @since 1.48.1
+     *
+     * @returns Value of property `maxLines`
      */
     getMaxLines(): int;
     /**
      * Gets current value of property {@link #getSyntaxHints syntaxHints}.
      *
-     * Sets whether to show syntax hints in the editor. This flag is only available if line numbers are shown.
+     * Sets whether to show syntax hints in the editor. Those hints are visualized as value state icons in the
+     * line numbers area. The hint text is shown in tooltip of those icons.
+     *
+     * **Note:** This flag is only available if line numbers are shown.
+     *
+     * **Note:** Syntax hints highly depend on the underlying third-party ACE editor. Comprehensive hints may
+     * not be available for all editor types, and some types may not display any hints. Currently, syntax hints
+     * are supported for the following types: javascript, json, css, html, xml, php, coffee, lua, xquery, yaml.
      *
      * Default value is `true`.
+     *
+     *
+     * @returns Value of property `syntaxHints`
      */
     getSyntaxHints(): boolean;
     /**
      * Gets current value of property {@link #getType type}.
      *
-     * The type of the code in the editor used for syntax highlighting. Possible types are: abap, abc, actionscript,
-     * ada, apache_conf, applescript, asciidoc, assembly_x86, autohotkey, batchfile, bro, c9search, c_cpp, cirru,
-     * clojure, cobol, coffee, coldfusion, csharp, css, curly, d, dart, diff, django, dockerfile, dot, drools,
-     * eiffel, ejs, elixir, elm, erlang, forth, fortran, ftl, gcode, gherkin, gitignore, glsl, gobstones, golang,
-     * groovy, haml, handlebars, haskell, haskell_cabal, haxe, hjson, html, html_elixir, html_ruby, ini, io,
-     * jack, jade, java, javascript, json, jsoniq, jsp, jsx, julia, kotlin, latex, lean, less, liquid, lisp,
-     * live_script, livescript, logiql, lsl, lua, luapage, lucene, makefile, markdown, mask, matlab, mavens_mate_log,
-     * maze, mel, mips_assembler, mipsassembler, mushcode, mysql, nix, nsis, objectivec, ocaml, pascal, perl,
-     * pgsql, php, plain_text, powershell, praat, prolog, properties, protobuf, python, r, razor, rdoc, rhtml,
-     * rst, ruby, rust, sass, scad, scala, scheme, scss, sh, sjs, smarty, snippets, soy_template, space, sql,
-     * sqlserver, stylus, svg, swift, swig, tcl, tex, text, textile, toml, tsx, twig, typescript, vala, vbscript,
-     * velocity, verilog, vhdl, wollok, xml, xquery, yaml, terraform, slim, redshift, red, puppet, php_laravel_blade,
-     * mixal, jssm, fsharp, edifact, csp, cssound_score, cssound_orchestra, cssound_document
+     * The type of the code in the editor used for syntax highlighting.
+     *
+     * Possible types are: "abap", "abc", "actionscript", "ada", "alda", "apache_conf", "apex", "aql", "asciidoc",
+     * "asl", "assembly_arm32", "assembly_x86", "astro", "autohotkey", "batchfile", "basic", "bibtex", "c_cpp",
+     * "c9search", "cirru", "clojure", "cobol", "coffee", "coldfusion", "crystal", "csharp", "csound_document",
+     * "csound_orchestra", "csound_score", "css", "curly", "cuttlefish", "d", "dart", "diff", "django", "dockerfile",
+     * "dot", "drools", "edifact", "eiffel", "ejs", "elixir", "elm", "erlang", "flix", "forth", "fortran", "fsharp",
+     * "fsl", "ftl", "gcode", "gherkin", "gitignore", "glsl", "gobstones", "golang", "graphqlschema", "groovy",
+     * "haml", "handlebars", "haskell", "haskell_cabal", "haxe", "hjson", "html", "html_elixir", "html_ruby",
+     * "ini", "io", "ion", "jack", "jade", "java", "javascript", "jexl", "json", "json5", "jsoniq", "jsp", "jssm",
+     * "jsx", "julia", "kotlin", "latex", "latte", "less", "liquid", "lisp", "livescript", "log", "logiql",
+     * "logtalk", "lsl", "lua", "luapage", "lucene", "makefile", "markdown", "mask", "matlab", "maze", "mediawiki",
+     * "mel", "mips", "mixal", "mushcode", "mysql", "nasal", "nginx", "nim", "nix", "nsis", "nunjucks", "objectivec",
+     * "ocaml", "odin", "partiql", "pascal", "perl", "pgsql", "php", "php_laravel_blade", "pig", "plsql", "powershell",
+     * "praat", "prisma", "prolog", "properties", "protobuf", "prql", "puppet", "python", "qml", "r", "raku",
+     * "razor", "rdoc", "red", "rhtml", "robot", "rst", "ruby", "rust", "sac", "sass", "scad", "scala", "scheme",
+     * "scrypt", "scss", "sh", "sjs", "slim", "smarty", "smithy", "snippets", "soy_template", "space", "sparql",
+     * "sql", "sqlserver", "stylus", "svg", "swift", "tcl", "terraform", "tex", "text", "textile", "toml", "tsx",
+     * "turtle", "twig", "typescript", "vala", "vbscript", "velocity", "verilog", "vhdl", "visualforce", "vue",
+     * "wollok", "xml", "xquery", "yaml", "zeek", "zig"
      *
      * Default value is `"javascript"`.
+     *
+     *
+     * @returns Value of property `type`
      */
     getType(): string;
     /**
@@ -331,6 +404,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * The value displayed in the code editor.
      *
      * Default value is `empty string`.
+     *
+     *
+     * @returns Value of property `value`
      */
     getValue(): string;
     /**
@@ -339,6 +415,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * Sets whether the code is automatically selected if a value is set.
      *
      * Default value is `false`.
+     *
+     *
+     * @returns Value of property `valueSelection`
      */
     getValueSelection(): boolean;
     /**
@@ -347,16 +426,25 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * The width of the code editor.
      *
      * Default value is `"100%"`.
+     *
+     *
+     * @returns Value of property `width`
      */
     getWidth(): CSSSize;
     /**
-     * @SINCE 1.54.1
+     * Pretty-prints the content of the editor.
      *
-     * Pretty-prints the content of the editor
+     * **Note:** Works well for PHP. For other editor types (modes), the content might not be formatted well.
+     * In such cases it is recommended to use your own formatting.
+     *
+     * @since 1.54.1
      */
     prettyPrint(): void;
     /**
      * Sets the color theme of the code editor
+     *
+     *
+     * @returns Returns `this` to allow method chaining
      */
     setColorTheme(
       /**
@@ -372,6 +460,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `true`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setEditable(
       /**
@@ -388,6 +479,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `"100%"`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setHeight(
       /**
@@ -403,6 +497,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `true`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setLineNumbers(
       /**
@@ -411,8 +508,6 @@ declare module "sap/ui/codeeditor/CodeEditor" {
       bLineNumbers?: boolean
     ): this;
     /**
-     * @SINCE 1.48.1
-     *
      * Sets a new value for property {@link #getMaxLines maxLines}.
      *
      * Sets whether the editor height should auto expand to a maximum number of lines. After reaching the maximum
@@ -424,6 +519,10 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `0`.
+     *
+     * @since 1.48.1
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setMaxLines(
       /**
@@ -434,11 +533,21 @@ declare module "sap/ui/codeeditor/CodeEditor" {
     /**
      * Sets a new value for property {@link #getSyntaxHints syntaxHints}.
      *
-     * Sets whether to show syntax hints in the editor. This flag is only available if line numbers are shown.
+     * Sets whether to show syntax hints in the editor. Those hints are visualized as value state icons in the
+     * line numbers area. The hint text is shown in tooltip of those icons.
+     *
+     * **Note:** This flag is only available if line numbers are shown.
+     *
+     * **Note:** Syntax hints highly depend on the underlying third-party ACE editor. Comprehensive hints may
+     * not be available for all editor types, and some types may not display any hints. Currently, syntax hints
+     * are supported for the following types: javascript, json, css, html, xml, php, coffee, lua, xquery, yaml.
      *
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `true`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setSyntaxHints(
       /**
@@ -449,23 +558,33 @@ declare module "sap/ui/codeeditor/CodeEditor" {
     /**
      * Sets a new value for property {@link #getType type}.
      *
-     * The type of the code in the editor used for syntax highlighting. Possible types are: abap, abc, actionscript,
-     * ada, apache_conf, applescript, asciidoc, assembly_x86, autohotkey, batchfile, bro, c9search, c_cpp, cirru,
-     * clojure, cobol, coffee, coldfusion, csharp, css, curly, d, dart, diff, django, dockerfile, dot, drools,
-     * eiffel, ejs, elixir, elm, erlang, forth, fortran, ftl, gcode, gherkin, gitignore, glsl, gobstones, golang,
-     * groovy, haml, handlebars, haskell, haskell_cabal, haxe, hjson, html, html_elixir, html_ruby, ini, io,
-     * jack, jade, java, javascript, json, jsoniq, jsp, jsx, julia, kotlin, latex, lean, less, liquid, lisp,
-     * live_script, livescript, logiql, lsl, lua, luapage, lucene, makefile, markdown, mask, matlab, mavens_mate_log,
-     * maze, mel, mips_assembler, mipsassembler, mushcode, mysql, nix, nsis, objectivec, ocaml, pascal, perl,
-     * pgsql, php, plain_text, powershell, praat, prolog, properties, protobuf, python, r, razor, rdoc, rhtml,
-     * rst, ruby, rust, sass, scad, scala, scheme, scss, sh, sjs, smarty, snippets, soy_template, space, sql,
-     * sqlserver, stylus, svg, swift, swig, tcl, tex, text, textile, toml, tsx, twig, typescript, vala, vbscript,
-     * velocity, verilog, vhdl, wollok, xml, xquery, yaml, terraform, slim, redshift, red, puppet, php_laravel_blade,
-     * mixal, jssm, fsharp, edifact, csp, cssound_score, cssound_orchestra, cssound_document
+     * The type of the code in the editor used for syntax highlighting.
+     *
+     * Possible types are: "abap", "abc", "actionscript", "ada", "alda", "apache_conf", "apex", "aql", "asciidoc",
+     * "asl", "assembly_arm32", "assembly_x86", "astro", "autohotkey", "batchfile", "basic", "bibtex", "c_cpp",
+     * "c9search", "cirru", "clojure", "cobol", "coffee", "coldfusion", "crystal", "csharp", "csound_document",
+     * "csound_orchestra", "csound_score", "css", "curly", "cuttlefish", "d", "dart", "diff", "django", "dockerfile",
+     * "dot", "drools", "edifact", "eiffel", "ejs", "elixir", "elm", "erlang", "flix", "forth", "fortran", "fsharp",
+     * "fsl", "ftl", "gcode", "gherkin", "gitignore", "glsl", "gobstones", "golang", "graphqlschema", "groovy",
+     * "haml", "handlebars", "haskell", "haskell_cabal", "haxe", "hjson", "html", "html_elixir", "html_ruby",
+     * "ini", "io", "ion", "jack", "jade", "java", "javascript", "jexl", "json", "json5", "jsoniq", "jsp", "jssm",
+     * "jsx", "julia", "kotlin", "latex", "latte", "less", "liquid", "lisp", "livescript", "log", "logiql",
+     * "logtalk", "lsl", "lua", "luapage", "lucene", "makefile", "markdown", "mask", "matlab", "maze", "mediawiki",
+     * "mel", "mips", "mixal", "mushcode", "mysql", "nasal", "nginx", "nim", "nix", "nsis", "nunjucks", "objectivec",
+     * "ocaml", "odin", "partiql", "pascal", "perl", "pgsql", "php", "php_laravel_blade", "pig", "plsql", "powershell",
+     * "praat", "prisma", "prolog", "properties", "protobuf", "prql", "puppet", "python", "qml", "r", "raku",
+     * "razor", "rdoc", "red", "rhtml", "robot", "rst", "ruby", "rust", "sac", "sass", "scad", "scala", "scheme",
+     * "scrypt", "scss", "sh", "sjs", "slim", "smarty", "smithy", "snippets", "soy_template", "space", "sparql",
+     * "sql", "sqlserver", "stylus", "svg", "swift", "tcl", "terraform", "tex", "text", "textile", "toml", "tsx",
+     * "turtle", "twig", "typescript", "vala", "vbscript", "velocity", "verilog", "vhdl", "visualforce", "vue",
+     * "wollok", "xml", "xquery", "yaml", "zeek", "zig"
      *
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `"javascript"`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setType(
       /**
@@ -481,6 +600,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `empty string`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setValue(
       /**
@@ -496,6 +618,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `false`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setValueSelection(
       /**
@@ -511,6 +636,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
      * When called with a value of `null` or `undefined`, the default value of the property will be restored.
      *
      * Default value is `"100%"`.
+     *
+     *
+     * @returns Reference to `this` in order to allow method chaining
      */
     setWidth(
       /**
@@ -519,7 +647,9 @@ declare module "sap/ui/codeeditor/CodeEditor" {
       sWidth?: CSSSize
     ): this;
   }
-
+  /**
+   * Describes the settings that can be provided to the CodeEditor constructor.
+   */
   export interface $CodeEditorSettings extends $ControlSettings {
     /**
      * The value displayed in the code editor.
@@ -527,83 +657,147 @@ declare module "sap/ui/codeeditor/CodeEditor" {
     value?: string | PropertyBindingInfo;
 
     /**
-     * The type of the code in the editor used for syntax highlighting. Possible types are: abap, abc, actionscript,
-     * ada, apache_conf, applescript, asciidoc, assembly_x86, autohotkey, batchfile, bro, c9search, c_cpp, cirru,
-     * clojure, cobol, coffee, coldfusion, csharp, css, curly, d, dart, diff, django, dockerfile, dot, drools,
-     * eiffel, ejs, elixir, elm, erlang, forth, fortran, ftl, gcode, gherkin, gitignore, glsl, gobstones, golang,
-     * groovy, haml, handlebars, haskell, haskell_cabal, haxe, hjson, html, html_elixir, html_ruby, ini, io,
-     * jack, jade, java, javascript, json, jsoniq, jsp, jsx, julia, kotlin, latex, lean, less, liquid, lisp,
-     * live_script, livescript, logiql, lsl, lua, luapage, lucene, makefile, markdown, mask, matlab, mavens_mate_log,
-     * maze, mel, mips_assembler, mipsassembler, mushcode, mysql, nix, nsis, objectivec, ocaml, pascal, perl,
-     * pgsql, php, plain_text, powershell, praat, prolog, properties, protobuf, python, r, razor, rdoc, rhtml,
-     * rst, ruby, rust, sass, scad, scala, scheme, scss, sh, sjs, smarty, snippets, soy_template, space, sql,
-     * sqlserver, stylus, svg, swift, swig, tcl, tex, text, textile, toml, tsx, twig, typescript, vala, vbscript,
-     * velocity, verilog, vhdl, wollok, xml, xquery, yaml, terraform, slim, redshift, red, puppet, php_laravel_blade,
-     * mixal, jssm, fsharp, edifact, csp, cssound_score, cssound_orchestra, cssound_document
+     * The type of the code in the editor used for syntax highlighting.
+     *
+     * Possible types are: "abap", "abc", "actionscript", "ada", "alda", "apache_conf", "apex", "aql", "asciidoc",
+     * "asl", "assembly_arm32", "assembly_x86", "astro", "autohotkey", "batchfile", "basic", "bibtex", "c_cpp",
+     * "c9search", "cirru", "clojure", "cobol", "coffee", "coldfusion", "crystal", "csharp", "csound_document",
+     * "csound_orchestra", "csound_score", "css", "curly", "cuttlefish", "d", "dart", "diff", "django", "dockerfile",
+     * "dot", "drools", "edifact", "eiffel", "ejs", "elixir", "elm", "erlang", "flix", "forth", "fortran", "fsharp",
+     * "fsl", "ftl", "gcode", "gherkin", "gitignore", "glsl", "gobstones", "golang", "graphqlschema", "groovy",
+     * "haml", "handlebars", "haskell", "haskell_cabal", "haxe", "hjson", "html", "html_elixir", "html_ruby",
+     * "ini", "io", "ion", "jack", "jade", "java", "javascript", "jexl", "json", "json5", "jsoniq", "jsp", "jssm",
+     * "jsx", "julia", "kotlin", "latex", "latte", "less", "liquid", "lisp", "livescript", "log", "logiql",
+     * "logtalk", "lsl", "lua", "luapage", "lucene", "makefile", "markdown", "mask", "matlab", "maze", "mediawiki",
+     * "mel", "mips", "mixal", "mushcode", "mysql", "nasal", "nginx", "nim", "nix", "nsis", "nunjucks", "objectivec",
+     * "ocaml", "odin", "partiql", "pascal", "perl", "pgsql", "php", "php_laravel_blade", "pig", "plsql", "powershell",
+     * "praat", "prisma", "prolog", "properties", "protobuf", "prql", "puppet", "python", "qml", "r", "raku",
+     * "razor", "rdoc", "red", "rhtml", "robot", "rst", "ruby", "rust", "sac", "sass", "scad", "scala", "scheme",
+     * "scrypt", "scss", "sh", "sjs", "slim", "smarty", "smithy", "snippets", "soy_template", "space", "sparql",
+     * "sql", "sqlserver", "stylus", "svg", "swift", "tcl", "terraform", "tex", "text", "textile", "toml", "tsx",
+     * "turtle", "twig", "typescript", "vala", "vbscript", "velocity", "verilog", "vhdl", "visualforce", "vue",
+     * "wollok", "xml", "xquery", "yaml", "zeek", "zig"
      */
     type?: string | PropertyBindingInfo;
 
     /**
      * The width of the code editor.
      */
-    width?: CSSSize | PropertyBindingInfo;
+    width?: CSSSize | PropertyBindingInfo | `{${string}}`;
 
     /**
      * The height of the code editor. A minimal height of 3rem will be applied in case the height is less than
      * 20px.
      */
-    height?: CSSSize | PropertyBindingInfo;
+    height?: CSSSize | PropertyBindingInfo | `{${string}}`;
 
     /**
      * Sets whether the code in the editor can be changed by the user.
      */
-    editable?: boolean | PropertyBindingInfo;
+    editable?: boolean | PropertyBindingInfo | `{${string}}`;
 
     /**
      * Sets whether line numbers should be shown.
      */
-    lineNumbers?: boolean | PropertyBindingInfo;
+    lineNumbers?: boolean | PropertyBindingInfo | `{${string}}`;
 
     /**
      * Sets whether the code is automatically selected if a value is set.
      */
-    valueSelection?: boolean | PropertyBindingInfo;
+    valueSelection?: boolean | PropertyBindingInfo | `{${string}}`;
 
     /**
-     * @SINCE 1.48.1
-     *
      * Sets whether the editor height should auto expand to a maximum number of lines. After reaching the maximum
      * number of lines specified, the content of the `CodeEditor` will become scrollable.
      *
      * **Note:** Keep in mind that the auto expand `CodeEditor` behavior requires the `height` property to be
      * set to `auto`.
+     *
+     * @since 1.48.1
      */
-    maxLines?: int | PropertyBindingInfo;
+    maxLines?: int | PropertyBindingInfo | `{${string}}`;
 
     /**
-     * Sets the editor color theme. Possible values are: default, hcb, hcb_bright, hcb_blue, theme-ambiance,
-     * chaos, chrome, clouds, clouds_midnight, cobalt, crimson_editor, dawn, dreamweaver, eclipse, github, gob,
-     * gruvbox, idle_fingers, iplastic, katzenmilch, kr_theme, kuroir, merbivore, merbivore_soft, mono_industrial,
-     * monokai, pastel_on_dark, solarized_dark, solarized_light, sqlserver, terminal, textmate, tomorrow, tomorrow_night,
-     * tomorrow_night_blue, tomorrow_night_bright, tomorrow_night_eighties, twilight, dracula vibrant_ink, xcode
+     * Sets the editor color theme. Possible values are:
+     * 	 - default: best fitting to the current UI5 theme
+     * 	 - any light theme from the list: chrome, clouds, crimson_editor, dawn, dreamweaver, eclipse, github_light_default,
+     *     github, iplastic, solarized_light, textmate, tomorrow, xcode, kuroir, katzenmilch, sqlserver, cloud_editor
+     *
+     * 	 - any dark theme from the list: hcb, hcb_bright, hcb_blue, ambiance, chaos, clouds_midnight, dracula,
+     *     cobalt, gruvbox, gob, idle_fingers, kr_theme, merbivore, merbivore_soft, mono_industrial, monokai, nord_dark,
+     *     one_dark, pastel_on_dark, solarized_dark, terminal, tomorrow_night, tomorrow_night_blue, tomorrow_night_bright,
+     *     tomorrow_night_eighties, twilight, vibrant_ink, github_dark, cloud_editor_dark
      */
     colorTheme?: string | PropertyBindingInfo;
 
     /**
-     * Sets whether to show syntax hints in the editor. This flag is only available if line numbers are shown.
+     * Sets whether to show syntax hints in the editor. Those hints are visualized as value state icons in the
+     * line numbers area. The hint text is shown in tooltip of those icons.
+     *
+     * **Note:** This flag is only available if line numbers are shown.
+     *
+     * **Note:** Syntax hints highly depend on the underlying third-party ACE editor. Comprehensive hints may
+     * not be available for all editor types, and some types may not display any hints. Currently, syntax hints
+     * are supported for the following types: javascript, json, css, html, xml, php, coffee, lua, xquery, yaml.
      */
-    syntaxHints?: boolean | PropertyBindingInfo;
+    syntaxHints?: boolean | PropertyBindingInfo | `{${string}}`;
 
     /**
      * Fired when the value is changed by user interaction - each keystroke, delete, paste, etc.
      */
-    liveChange?: (oEvent: Event) => void;
+    liveChange?: (oEvent: CodeEditor$LiveChangeEvent) => void;
 
     /**
      * Fired when the value has changed and the focus leaves the code editor.
      */
-    change?: (oEvent: Event) => void;
+    change?: (oEvent: CodeEditor$ChangeEvent) => void;
   }
+
+  /**
+   * Parameters of the CodeEditor#change event.
+   */
+  export interface CodeEditor$ChangeEventParameters {
+    /**
+     * The current value of the code editor.
+     */
+    value?: string;
+
+    /**
+     * The old value of the code editor.
+     */
+    oldValue?: string;
+  }
+
+  /**
+   * Event object of the CodeEditor#change event.
+   */
+  export type CodeEditor$ChangeEvent = Event<
+    CodeEditor$ChangeEventParameters,
+    CodeEditor
+  >;
+
+  /**
+   * Parameters of the CodeEditor#liveChange event.
+   */
+  export interface CodeEditor$LiveChangeEventParameters {
+    /**
+     * The current value of the code editor.
+     */
+    value?: string;
+
+    /**
+     * The underlying change event of the third-party code editor.
+     */
+    editorEvent?: object;
+  }
+
+  /**
+   * Event object of the CodeEditor#liveChange event.
+   */
+  export type CodeEditor$LiveChangeEvent = Event<
+    CodeEditor$LiveChangeEventParameters,
+    CodeEditor
+  >;
 }
 
 declare namespace sap {

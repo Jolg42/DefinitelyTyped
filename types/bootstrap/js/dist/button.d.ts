@@ -1,4 +1,10 @@
-import BaseComponent, { GetInstanceFactory, GetOrCreateInstanceFactory } from './base-component';
+import BaseComponent, { GetInstanceFactory, GetOrCreateInstanceFactory } from "./base-component";
+
+declare global {
+    interface JQuery {
+        button: Button.jQueryInterface;
+    }
+}
 
 declare class Button extends BaseComponent {
     /**
@@ -12,7 +18,7 @@ declare class Button extends BaseComponent {
 }
 
 declare namespace Button {
-    type jQueryInterface = (config?: 'toggle' | 'dispose') => void;
+    type jQueryInterface = (config?: "toggle" | "dispose") => JQuery;
 }
 
 export default Button;

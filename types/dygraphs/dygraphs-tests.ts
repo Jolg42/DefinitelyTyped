@@ -1,11 +1,11 @@
-import Dygraph from 'dygraphs';
+import Dygraph from "dygraphs";
 
 Dygraph.Plotters;
 
 Dygraph.PointType;
 
 // $ExpectType Dygraph
-const d = new Dygraph(new HTMLDivElement(), 'data', {
+const d = new Dygraph(new HTMLDivElement(), "data", {
     animatedZooms: true,
     axes: {
         x: {
@@ -29,7 +29,7 @@ const d = new Dygraph(new HTMLDivElement(), 'data', {
                 // $ExpectType Readonly<Dygraph>
                 dygraph;
 
-                return 'label';
+                return "label";
             },
             valueFormatter: (v, opts, seriesName, dygraph, row, col) => {
                 // $ExpectType number
@@ -50,7 +50,7 @@ const d = new Dygraph(new HTMLDivElement(), 'data', {
                 // $ExpectType number
                 col;
 
-                return 'value';
+                return "value";
             },
         },
     },
@@ -63,11 +63,13 @@ const d = new Dygraph(new HTMLDivElement(), 'data', {
         strokeBorderWidth: 1,
         strokeWidth: 3,
     },
-    labels: ['Date', 'Y1', 'Y2', 'Y3', 'Y4'],
+    labels: ["Date", "Y1", "Y2", "Y3", "Y4"],
     labelsDiv: new HTMLElement(),
     labelsKMB: true,
     labelsSeparateLines: true,
-    legend: 'always',
+    legend: "always",
+    rangeSelectorForegroundStrokeColor: "white",
+    resizable: "both",
     rollPeriod: 14,
     series: {
         y: {
@@ -76,7 +78,7 @@ const d = new Dygraph(new HTMLDivElement(), 'data', {
             highlightCircleSize: 10,
             drawPoints: true,
             pointSize: 1.5,
-            axis: 'y2',
+            axis: "y2",
         },
     },
     showRoller: true,
@@ -84,8 +86,8 @@ const d = new Dygraph(new HTMLDivElement(), 'data', {
     strokeBorderWidth: 1,
     strokeWidth: 2,
     width: 480,
-    y2label: 'Secondary y-axis',
-    ylabel: 'Primary y-axis',
+    y2label: "Secondary y-axis",
+    ylabel: "Primary y-axis",
     underlayCallback: (canvas, area, dygraph) => {
         // $ExpectType CanvasRenderingContext2D
         canvas;
@@ -152,6 +154,15 @@ const d = new Dygraph(new HTMLDivElement(), 'data', {
     },
 });
 
+// $ExpectType Dygraph
+const dygraphWithErrorBars = new Dygraph(new HTMLDivElement(), [
+    [0, [1, 1], [3, 2]],
+    [1, [0, 2], [3, 1]],
+    [2, [5, 4], [3, 5]],
+], {
+    errorBars: true,
+});
+
 // $ExpectType void
 d.resize();
 
@@ -195,20 +206,20 @@ d.toDomCoords(0, -20);
 d.toDomCoords(1, 20);
 
 // $ExpectType void
-d.setSelection(false, 's005');
+d.setSelection(false, "s005");
 
 // $ExpectType void
 d.setAnnotations([
     {
-        cssClass: 'annotation',
+        cssClass: "annotation",
         height: 23,
-        icon: 'dollar.png',
-        series: 'sine wave',
-        shortText: '',
-        text: 'Stock Market Crash',
+        icon: "dollar.png",
+        series: "sine wave",
+        shortText: "",
+        text: "Stock Market Crash",
         tickHeight: 4,
         width: 18,
-        x: '200610',
+        x: "200610",
         clickHandler: (anotation, point, dygraph, event) => {
             // $ExpectType Readonly<Annotation>
             anotation;
@@ -222,6 +233,10 @@ d.setAnnotations([
             // $ExpectType MouseEvent
             event;
         },
+    },
+    {
+        series: "sine wave",
+        xval: 20700,
     },
 ]);
 
@@ -294,3 +309,6 @@ d.updateOptions({
         event;
     },
 });
+
+// $ExpectType number
+Dygraph.Granularity.MINUTELY;

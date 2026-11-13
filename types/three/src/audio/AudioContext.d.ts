@@ -1,8 +1,19 @@
 /**
- * see {@link https://github.com/mrdoob/three.js/blob/master/src/audio/AudioContext.js|src/audio/AudioContext.js}
+ * Manages the global audio context in the engine.
+ *
+ * @hideconstructor
  */
-export namespace AudioContext {
-    function getContext(): AudioContext;
-
-    function setContext(): void;
+export class AudioContext {
+    /**
+     * Returns the global native audio context.
+     *
+     * @return {Window.AudioContext} The native audio context.
+     */
+    static getContext(): AudioContext;
+    /**
+     * Allows to set the global native audio context from outside.
+     *
+     * @param {Window.AudioContext} value - The native context to set.
+     */
+    static setContext(value: AudioContext): void;
 }

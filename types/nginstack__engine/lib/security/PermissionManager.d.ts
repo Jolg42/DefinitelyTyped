@@ -3,6 +3,7 @@ declare function PermissionManager(): void;
 declare class PermissionManager {
     private schema_;
     private classDefManager_;
+    private mimeTypesWithPermissionControl_;
     private logger_;
     private NON_PERMISSION_FIELDS_LIST_;
     private checkIfUserCanManagePermissions_;
@@ -22,20 +23,22 @@ declare class PermissionManager {
     private checkIfPermissionWasNotInherited_;
     private checkDuplicates_;
     private checkExtraFiltersUsageOnRolePermissions_;
-    replicateToDescendants(key: number): number;
+    replicateToDescendants(
+        key: number,
+        options: {
+            classKeys?: number[];
+        }
+    ): number;
     insert(assignment: PermissionAssignment): number;
     update(key: number, assignment: PermissionAssignment): number;
     remove(key: number): number;
     removeOrphans(): number;
-    fixClasses(): void;
-    fixInheritance(
-        opt_options?:
-            | Record<any, any>
-            | {
-                  resources: number[];
-                  transaction: any;
-              }
-    ): number | null;
+    fixClasses(): number;
+    fixInheritance(options?: {
+        transaction?: Transaction;
+        resources?: number[];
+        ignoredKeys?: number[];
+    }): number | null;
     copyPermissions(
         source: number,
         target: number,
@@ -48,7 +51,9 @@ declare class PermissionManager {
     getOrphans(): DataSet;
 }
 declare namespace PermissionManager {
-    function getInstance(): PermissionManager;
+    export { getInstance, Transaction };
 }
 import DataSet = require('../dataset/DataSet.js');
 import PermissionAssignment = require('./PermissionAssignment.js');
+declare function getInstance(): PermissionManager;
+type Transaction = import('../dataset/Transaction');

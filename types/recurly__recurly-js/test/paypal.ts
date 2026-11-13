@@ -1,4 +1,4 @@
-export default function paypal() {
+export default function paypal () {
   const paypal = window.recurly.PayPal();
 
   window.recurly.PayPal({
@@ -13,20 +13,25 @@ export default function paypal() {
     }
   });
 
-  // $ExpectError
+  window.recurly.PayPal({
+    gatewayCode: 'gateway-code',
+    payPalComplete: true,
+  });
+
+  // @ts-expect-error
   window.recurly.PayPal('string');
 
   paypal.on('token', () => {});
   paypal.on('error', () => {});
   paypal.on('cancel', () => {});
   paypal.on('ready', () => {});
-  // $ExpectError
+  // @ts-expect-error
   paypal.on('fake-event', () => {});
 
   paypal.start();
   paypal.start({
     options: {
-      description: "description"
+      description: 'description'
     }
   });
   paypal.destroy();
